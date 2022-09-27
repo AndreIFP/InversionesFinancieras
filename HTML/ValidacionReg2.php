@@ -18,7 +18,7 @@ $n 			= mysqli_num_rows($queryemail);
 
 if ($nr == 0 AND $n == 0 )
 {
-	$queryregistrar = "INSERT INTO TBL_USUARIO (Usuario,Nombre_Usuario, Contraseña, Correo_Electronico,Estado_Usuario,Rol) values ('$usuario','$nombre','$pass','$email','INACTIVO','4')";
+	$queryregistrar = "INSERT INTO TBL_USUARIO (Usuario,Nombre_Usuario, Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja) values ('$usuario','$nombre','$pass','$email','INACTIVO','4','0')";
 	//$queryregistrare = "INSERT INTO TBL_PREGUNTAS (pregunta) values ('$pregunta')";
 if(mysqli_query($conn,$queryregistrar))
 {
