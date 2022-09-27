@@ -1,3 +1,7 @@
+<?php
+//validacion Login
+ include('../conexion.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -436,7 +440,7 @@ color: var(--text-color);
           
               <li class="" class="fa fa-caret-down"  >
             
-                <a href="../index.php" style="align-items: center; height: 50px;"  >
+              <a href="../index.php" style="align-items: center; height: 50px;"  >
                     <i class='bx bx-home-alt icon' ></i>
                     <span class="text nav-text">Inicio</span>
                 </a>
@@ -447,115 +451,197 @@ color: var(--text-color);
             
               </li>
              
-            
+            <?php
+              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2){
+             ?>
               <li class="" style="height: 50px;">
                   <a href="../demo.php" style="align-items: center;">
                       <i class='bx bx-detail icon' ></i>
                       <span class="text nav-text">Facturacion</span>
                   </a>
               </li>
+            <?php } ?>
 
+            <?php
+              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2 || $_SESSION['rol'] == 6){
+             ?>
               <li class="" style="height: 50px;">
                   <a href="../gestiones/Gestion_Inventario.php" style="align-items: center;">
                       <i class='bx bx-pie-chart-alt icon' ></i>
                       <span class="text nav-text">Inventarios</span>
                   </a>
               </li>
+              <?php } ?>
 
+              <?php
+              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2){
+             ?>
               <li class="" style="height: 50px;">
                   <a href="validacionlibro.php" style="align-items: center;">
                       <i class='bx bx-book icon'></i>
                       <span class="text nav-text">Libro Diario</span>
                   </a>
               </li>
+              <?php } ?>
 
+              <?php
+              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2){
+             ?>
               <li class="" style="height: 50px;">
                   <a href="validacionbalance.php" style="align-items: center;">
                       <i class='bx bx-book icon'></i>
                       <span class="text nav-text">Reporte Bal. General</span>
                   </a>
               </li>
+              <?php } ?>
 
+              <?php
+              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2){
+             ?>
               <li class="" style="height: 50px;">
                   <a href="validacionestado.php" style="align-items: center;">
                       <i class='bx bx-book icon'></i>
                       <span class="text nav-text">Estado de Resultado</span>
                   </a>
               </li>
+              <?php } ?>
 
+              <?php
+              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2){
+             ?>
               <li class="" style="height: 50px;">
                   <a href="validacionresultado.php" style="align-items: center;">
                       <i class='bx bx-book icon'></i>
                       <span class="text nav-text">Reporte Est. Resultado</span>
                   </a>
               </li>
+              <?php } ?>
 
-              </li>
+              <?php
+              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3 || $_SESSION['rol'] == 6){
+             ?>
               <li class="" class="fa fa-caret-down"   >
             
                 <a href="../index.php" style="align-items: center; height: 50px;  "  >
                     <i class='bx bx-cog icon' ></i>
                     <span class="text nav-text">Gestiones</span>
                 </a>
-                
-               
+                <?php
+              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3 || $_SESSION['rol'] == 6){
+             ?>
                   <ul style="position: relative;  display: none; "  >
-                  <a href="../gestiones/Gestion_Bitacora.php" style="align-items: center;" >
+                  <a href="gestiones/Gestion_Bitacora.php" style="align-items: center;" >
                     <span class="text nav-text"  >Gestion Bitacora </span>
                 </a>
-                  <a href="../gestiones/Gestion_CatalogoCuenta.php" style="align-items: center;"  >
+                <?php } ?>
+
+                <?php 
+                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+             ?>
+                  <a href="gestiones/Gestion_CatalogoCuenta.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Catalogo Cuentas</span>
                 </a>
-                  <a href="../gestiones/Gestion_Clientes.php" style="align-items: center;"  >
+                <?php } ?>
+
+                <?php 
+                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+             ?>
+                  <a href="gestiones/Gestion_Clientes.php" style="align-items: center;"  >
                       <span class="text nav-text">Gestion Clientes</span>
-                  </a>                  
-                <a href="../gestiones/Gestion_Factura.php" style="align-items: center; ">
+                  </a>     
+                  <?php } ?>
+                     
+                  <?php 
+                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+             ?>
+                <a href="gestiones/Gestion_Factura.php" style="align-items: center; ">
                     <span class="text nav-text" >Gestion Facturas</span>
                 </a>
-                  <a href="../gestiones/Gestion_Inventario.php" style="align-items: center;"  >
+                <?php } ?>
+
+                <?php 
+                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+             ?>
+                  <a href="gestiones/Gestion_Inventario.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Inventario</span>
                 </a>
-                <a href="../gestiones/Gestion_LibroMayor.php" style="align-items: center;"  >
+                <?php } ?>
+
+                <?php 
+                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+             ?>
+                <a href="gestiones/Gestion_LibroMayor.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Libro Mayor</span>
                 </a>
-                <a href="../gestiones/Gestion_parametros.php" style="align-items: center;"  >
+                <?php } ?>
+                
+                <?php 
+                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+             ?>
+                <a href="gestiones/Gestion_parametros.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Parametros</span>
                 </a>
-                <a href="../gestiones/Gestion_Preguntas.php" style="align-items: center;"  >
+                <?php } ?>
+
+                <?php 
+                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+             ?>
+                <a href="gestiones/Gestion_Preguntas.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Preguntas</span>
                 </a>
-                <a href="../gestiones/Gestion_PreguntasUsuarios.php" style="align-items: center;"  >
+                <?php } ?>
+
+                <?php 
+                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+             ?>
+                <a href="gestiones/Gestion_PreguntasUsuarios.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Preguntas Usuario</span>
                 </a>
-                  <a href="../gestiones/Gestion_Usuarios.php" style="align-items: center;" >
+                <?php } ?>
+
+                <?php 
+                if($_SESSION['rol'] == 1){
+             ?>
+                  <a href="gestiones/Gestion_Usuarios.php" style="align-items: center;" >
                     <span class="text nav-text"  >Gestion Usuarios </span>
                 </a>
-                <a href="../gestiones/GestionRoles.php" style="align-items: center;" >
+                <?php } ?>
+
+                <?php 
+                if($_SESSION['rol'] == 1){
+             ?>
+                <a href="gestiones/GestionRoles.php" style="align-items: center;" >
                     <span class="text nav-text"  >Gestion Roles </span>
                 </a>   
+                <?php } ?>
                           
             </ul>
-        </li>  
+        </li> 
+        <?php } ?>
 
 
           
 
       
       <div class="bottom-content">
-        
+      <?php
+              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3){
+             ?>
         <li class="" style="height: 50px;">
             <a href="../backupr.php" style="align-items: center;">
                 <i class='bx bx-data icon' ></i>
                 <span class="text nav-text">Backup</span>
             </a>
         </li>
+
+        <?php } ?>
         <li class="" style="height: 50px; display: flex;">
-            <a href="../login.php" style="align-items: center;">
+        <a href="../login.php" style="align-items: center;">
                 <i class='bx bx-log-out icon' ></i>
                 <span class="text nav-text">Cerra Sesion</span>
             </a>
         </li>
-
+        
 
 
         <li class="mode" style="height: 50px; display: flex;">

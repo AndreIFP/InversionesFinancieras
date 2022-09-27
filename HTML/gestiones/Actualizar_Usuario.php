@@ -81,7 +81,9 @@
                   <input type="text" Class="form-contorl mb-3" name="Nombre_Usuario" placeholder="Nombre Usuario" value ="<?php echo $Nombre_Usuario ?>" maxlength="20" style="text-transform:uppercase;"  required size="30"><br>
                   </br>
                   <div class="ub1">Estado Usuario</div>
-                  <select name="Estado_Usuario">
+                  
+                  <select name="Estado_Usuario" required>
+                  <option value ="">Seleccione Una Opción</option>
                   <option value="ACTIVO">ACTIVO</option>
                   <option value="INACTIVO">INACTIVO</option>
                   </select>

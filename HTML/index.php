@@ -7,6 +7,7 @@ include("conexion.php");
 session_start();
 $_SESSION['id'];
 $_SESSION['user'];
+$_SESSION['rol'];
 
 
 ?>
@@ -30,7 +31,11 @@ $_SESSION['user'];
               </div>
               <!-- /.row -->
               <br>
+              
               <div class="row">
+              <?php
+              if($_SESSION['rol'] == 1){
+             ?>
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary" >
                       <div class="panel-heading" style="background:rgb(226, 62, 62);">
@@ -53,6 +58,11 @@ $_SESSION['user'];
                       </a>
                     </div>
                   </div>
+                  <?php } ?>
+
+                  <?php
+              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2 || $_SESSION['rol'] == 6){
+             ?>
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary">
                       <div class="panel-heading">
@@ -75,6 +85,11 @@ $_SESSION['user'];
                       </a>
                     </div>
                 </div>
+                <?php } ?>
+
+                <?php
+              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2){
+             ?>
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary" >
                       <div class="panel-heading" style="background:rgb(62, 226, 130);">
@@ -97,6 +112,11 @@ $_SESSION['user'];
                       </a>
                     </div>
                   </div>
+                  <?php } ?>
+
+                  <?php
+              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3){
+             ?>
                   <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary" >
                       <div class="panel-heading" style="background:rgb(226, 215, 62);">
@@ -119,6 +139,7 @@ $_SESSION['user'];
                       </a>
                     </div>
                   </div>
+                  <?php } ?>
                 
               </div>
         </div>
