@@ -20,10 +20,10 @@ $mensaje			= $enviarpass;
 
 if($paracorreo =$correo)
 {
-	echo "<script> alert('Contraseña enviada');window.location= 'Gestion_Usuarios.php' </script>";
+	echo "<script> alert('Contraseña enviada');window.location= 'gestiones/Gestion_Usuarios.php' </script>";
 }else
 {
-	echo "<script> alert('Error');window.location= 'Gestion_Usuarios.php' </script>";
+	echo "<script> alert('Error');window.location= 'gestiones/Nuevo_Usuario.php' </script>";
 }
 }
 
