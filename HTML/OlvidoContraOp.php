@@ -7,6 +7,7 @@
 <body>
     <div class="login-page">
         <div class="form">
+        <a type="submit" href="login.php">Atras</a>
             <label for="text" class="per"> Olvido de Contraseña</label>
              <p   id="pa">Seleccione alguna opción:</p>
              

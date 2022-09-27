@@ -111,7 +111,9 @@ select::-ms-expand {
         <br/>
 
  <!--preguntas-->
-
+ <h6><a  href="OlvidoContra.php" class="btn btn-primary ">Atrás</a></h6>
+ <br/>
+ <br/>
  <label>Pregunta de seguridad</label>
  <form class="login-form" action="validacionpregseguri.php" method="post">
      <div class="select">
@@ -263,7 +265,7 @@ select::-ms-expand {
             <p class="lead">Con el consentimiento del usuario para que los términos y condiciones y la privacidad se agreguen más adelante aquí</p>
            
             <!-- SUBMIT BUTTON -->
-            <button  type="submit" name="btnregistrarx" class="btn btn-primary">Guardar</button>
+            <button  type="submit" name="btnregistrarx" class="btn btn-success">Guardar</button>
 </form>
         </div>
 
