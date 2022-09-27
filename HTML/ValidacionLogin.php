@@ -43,7 +43,9 @@ try{
     				</script>
             </form>
 		</tr>	
+        
 	<?php
+    echo "<script> alert('Bienvenido')</script>";
     }
     else 
     {
@@ -55,7 +57,7 @@ try{
     $nr2 = mysqli_num_rows($query2);
     echo "<script> window.location= 'preguntasReg.php' </script>";
     }
-    echo "<script> window.location= 'bienvenido.php' </script>";
+    echo "<script> alert('Bienvenido');window.location= 'bienvenido.php' </script>";
     }
 }
 
