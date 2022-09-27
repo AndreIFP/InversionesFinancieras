@@ -1,6 +1,3 @@
-//HOLA MUNDO//
-//123//
-
 <!DOCTYPE html 5>
 <html lang="en">
 <head>
