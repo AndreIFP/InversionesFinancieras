@@ -19,7 +19,7 @@ if ($nr == 0 )
 {
 
 	
-	$queryregistrar = "INSERT INTO TBL_USUARIO (Usuario, Contraseña, Correo_Electronico,Estado_Usuario,Rol) values ('$nombre','$pass','$email','INACTIVO','4')";
+	$queryregistrar = "INSERT INTO TBL_USUARIO (Usuario, Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja) values ('$nombre','$pass','$email','INACTIVO','4','0')";
 	//$queryregistrare = "INSERT INTO TBL_PREGUNTAS (pregunta) values ('$pregunta')";
 if(mysqli_query($conn,$queryregistrar))
 {
