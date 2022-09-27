@@ -7,6 +7,7 @@
 <body>
     <div class="login-page">
         <div class="form">
+        <p class="message"  ><a type="submit" href="login.php">Atras</a></p>
             <label for="text" class="per"> Olvido de Contraseña</label>
              <p   id="pa">Ingresa tu nombre de usuario </p>
              
