@@ -83,7 +83,7 @@ try {
 
     ?>
     
-    <form  method="post" action="login.php" name="miformulario" >
+    <form  method="post" action="contratemp.php" name="miformulario" >
             <input type="text" value=<?php echo $idusuario ?> name="txtidususario" style="visibility: hidden;"/>
 					<script>
     				window.onload=function(){
