@@ -3,9 +3,23 @@
 include('conexion.php');
 
 $nombre = $_POST["txtusuario"];
+$idusuario = $_POST["txtusuario"];
+$name = $nombre;
 $mensaje = $_POST["txtusuario"];
 
-$query = mysqli_query($conn,"SELECT Usuario, Correo_Electronico,Contraseña  FROM TBL_USUARIO WHERE Usuario like '$nombre'  order by Id_Usuario desc");
+function tokenG($len){
+	$cadena ="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz";
+	$token = "";
+
+	for ($i=0; $i < $len; $i++) {
+		$token .= $cadena[rand(0,$len)];
+	} 
+	return $token;
+}
+
+$passtoken = tokenG(20);
+
+$query = mysqli_query($conn,"SELECT Usuario, Correo_Electronico,Id_Usuario  FROM TBL_USUARIO WHERE Usuario like '$nombre'  order by Id_Usuario desc");
 $nr = mysqli_num_rows($query);
 
 if($nr == 1)
@@ -16,9 +30,11 @@ if($nr == 1)
 		<tr>
 
 			<form  method="post" action="index1.php" name="miformulario" >
+			<input type="text" value=<?php echo $nombre[0] ?> name="txtusuario" style="visibility: hidden;"/>
             <input type="text" value=<?php echo $nombre[1] ?> name="txtcorreo" style="visibility: hidden;"/>
-			<input type="text" value=<?php echo $nombre[2] ?> name="txtpassword" style="visibility: hidden;"/>
-			
+			<input type="text" value=<?php echo $nombre[2] ?> name="txtidusuario" style="visibility: hidden;"/>
+			<input type="text" value=<?php echo $passtoken ?> name="txttoken" style="visibility: hidden;"/>
+
 					<script>
     				window.onload=function(){
                 	// Una vez cargada la página, el formulario se enviara automáticamente.
@@ -33,7 +49,6 @@ if($nr == 1)
 	}
 	
 	echo "<script> alert('Usuario $mensaje Valido'); </script>";
-
 }
 
 else if ($nr == 0) 

@@ -5,7 +5,14 @@
 include('conexion.php');
 
 $correo = $_POST['txtcorreo'];
-$password = $_POST['txtpassword'];
+$idusuario = $_POST['txtidusuario'];
+$usuario = $_POST['txtusuario'];
+$token = $_POST['txttoken'];
+
+mysqli_query($conn,"SELECT * FROM TBL_PARAMETROS ");
+$queryregistro = "INSERT INTO TBL_PARAMETROS (Parametro,Valor,Id_Usuario) 
+                   values ('Recupera_Usuario','$token','$idusuario')";
+mysqli_query($conn,$queryregistro);
 
 $queryusuario 	= mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Correo_Electronico = '$correo'");
 $nr 			= mysqli_num_rows($queryusuario); 
@@ -20,7 +27,7 @@ $mensaje			= $enviarpass;
 
 if($paracorreo =$correo)
 {
-	echo "<script> alert('Contraseña enviada');window.location= 'Login.php' </script>";
+	echo "<script> alert('Correo Verificado') </script>";
 }else
 {
 	echo "<script> alert('Error');window.location= 'olvidoCorreo.php' </script>";
@@ -65,12 +72,29 @@ try {
 
 
     //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->isHTML(true); 
+    $mail->CharSet = 'UTF-8';                                 //Set email format to HTML
     $mail->Subject = 'Sistema de Recuperacion de Constraseña';
-    $mail->Body    = "Su Contraseña de seguridad es: $password";
-
+    $mail->Body    = "$usuario Su token de seguridad es: $token";
+    $mail->AltBody ="";
     $mail->send();
-    echo "<script> alert('Correo Enviado');window.location= 'Login.php' </script>";
+    
+    echo "<script> alert('Token de seguridad enviado a su correo Exitosamente') </script>";
+
+    ?>
+    
+    <form  method="post" action="login.php" name="miformulario" >
+            <input type="text" value=<?php echo $idusuario ?> name="txtidususario" style="visibility: hidden;"/>
+					<script>
+    				window.onload=function(){
+                	// Una vez cargada la página, el formulario se enviara automáticamente.
+					document.forms["miformulario"].submit();
+    				}
+    				</script>
+            </form>
+<?php
+include('conexion.php');
+
 } catch (Exception $e) {
     echo "Mensaje: {$mail->ErrorInfo}";
 }
