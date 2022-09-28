@@ -16,14 +16,15 @@
             
           <form class="register-form" action="ValidacionReg.php" method="post">
           <label for="text"> Registro</label>
-            <input type="text" placeholder="Nombre de Usuario"  name="txtusuario" maxlength="15" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
+            <input type="text" placeholder="Nombre de Usuario"  name="Nombre_Usuario" maxlength="30" style="text-transform:uppercase;"required size="40">
+            <input type="text" placeholder="Usuario"  name="txtusuario" maxlength="15" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
             
             <div class="container">
             <div class="row">
             <div class="col s12 m12 l6">
-            <input  id="inpucontra2"  type="password" placeholder="Contraseña" name="txtpassword" maxlength="30" required pattern="[A-Za-z0-9/@]{8,30}"
+            <input  id="inpucontra2"  type="password" placeholder="Contraseña" name="txtpassword" maxlength="30" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}"
             title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. "/>
-            <input  id="inpucontracon"  type="password" placeholder="Confirmar Contraseña"  maxlength="16" required pattern="[A-Za-z0-9/@]{8,30}"
+            <input  id="inpucontracon"  type="password" placeholder="Confirmar Contraseña"  maxlength="16" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}"
              title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. "  onblur="verificar()"  />
             </div>
             <div class="col s12">
