@@ -2,6 +2,7 @@
 include('conexion.php');
 
 $nombre = $_POST["txtusuario"];
+$nombreu= $_POST["Nombre_Usuario"];
 $pass = $_POST["txtpassword"];
 $email=$_POST["txtcorreo"];
 
@@ -13,13 +14,15 @@ if(isset($_POST["btnregistrarx"]))
 $queryusuario 	= mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '$nombre'");
 $nr 			= mysqli_num_rows($queryusuario); 
 
+$querycorreo 	= mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Correo_Electronico= '$email'");
+$nr 			= mysqli_num_rows($querycorreo); 
 
 
 if ($nr == 0 )
 {
 
 	
-	$queryregistrar = "INSERT INTO TBL_USUARIO (Usuario, Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja) values ('$nombre','$pass','$email','INACTIVO','4','0')";
+	$queryregistrar = "INSERT INTO TBL_USUARIO (Usuario, Nombre_Usuario,Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja) values ('$nombre','$nombreu','$pass','$email','INACTIVO','4','0')";
 	//$queryregistrare = "INSERT INTO TBL_PREGUNTAS (pregunta) values ('$pregunta')";
 if(mysqli_query($conn,$queryregistrar))
 {
@@ -46,6 +49,7 @@ if($nr2 == 1)
 
 			<form  method="post" action="index3.php" name="miformulario" >
             <input type="text" value=<?php echo $nombrec[1] ?> name="txtcorreo" style="visibility: hidden;"/>
+				<input type="text" value=<?php echo $nombreu ?> name="Nombre_Usuario" style="visibility: hidden;"/>
 			<input type="text" value=<?php echo $nombre ?> name="txtususario" style="visibility: hidden;"/>
 			
 					<script>
@@ -74,7 +78,7 @@ else
 
 }else
 {
-		echo "<script> alert('No puedes registrar a este usuario: $nombre');window.location= 'Login.php' </script>";
+		echo "<script> alert('Error Usuario o Correo Electronico Ya Existe: $nombre');window.location= 'Login.php' </script>";
 }
 
 } 
