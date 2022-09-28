@@ -12,7 +12,7 @@
              <p   id="pa">Ingresa tu nombre de usuario </p>
              
              <form  method="post" name="txtusuario" action="OlvidoContraOp.php">
-             <input type="text" placeholder="Nombre de Usuario" name="txtusuario" maxlength="15" required style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+            <input type="text" placeholder="Nombre de Usuario" name="txtusuario" maxlength="15" required style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
              <button type="submit" name="btnrlogin" > Continuar </button>
              
             </form>
@@ -171,6 +171,26 @@ body {
 }
  </style>
 <script>
+function blockSpecialCharacters(e) {
+            let key = e.key;
+            let keyCharCode = key.charCodeAt(0);
+            
+            // A-Z
+            if(keyCharCode >= 65 && keyCharCode <= 90) {
+                return key;
+            }
+            // a-z
+            if(keyCharCode >= 97 && keyCharCode <= 122) {
+                return key;
+            }
+
+            return false;
+    }
+
+    $('#theInput').keypress(function(e) {
+        blockSpecialCharacters(e);
+    });
+
 $('.message a').click(function(){
   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
 });
