@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title> Recuperacion de contraseña</title>
+<title>RECUPERACION</title>
 </head>
 <body>
 
@@ -12,27 +12,48 @@
         <a href="http://localhost/login2/HTML/login.php">
           <img src="login.png" alt="Logo de Login">
         </a>
-
-          <form  id="frmregistrar" class="login-form" action="Validaciontemp.php" method="post">
-          <label for="text">Recuperacion de contraseña</label>
-            <input   type="text" placeholder="Ingrese su Token" name="txtcont" maxlength="20" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
-            <!--contra 1--->
-            <br><br>
-            <div class="container">
-            <div class="row">
-            <div class="col s12">
-            <input   type="password" placeholder="Ingrese su nueva contraseña" name="txtcontra" maxlength="16" required pattern="[A-Za-z0-9/@]{8,30}"/>
-            <!--contra 1--->
+            
+            
+          <form class="register-form" action="ValidacionReg.php" method="post">
+          <label for="text"> Registro</label>
+            <input type="text" placeholder="Nombre de Usuario"  name="txtusuario" maxlength="15" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
+            
             <div class="container">
             <div class="row">
             <div class="col s12 m12 l6">
-            <input id="inpucontra" type="password" placeholder="CONFIRMAR CONTRASEÑA" name="txtpassword" maxlength="16" required pattern="[A-Za-z0-9/@]{8,30}" />
+            <input  id="inpucontra2"  type="password" placeholder="Contraseña" name="txtpassword" maxlength="30" required pattern="[A-Za-z0-9/@]{8,30}"
+            title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. "/>
+            <input  id="inpucontracon"  type="password" placeholder="Confirmar Contraseña"  maxlength="16" required pattern="[A-Za-z0-9/@]{8,30}"
+             title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. "  onblur="verificar()"  />
             </div>
             <div class="col s12">
             <a id="viewPassword" class="mover"  >Mostrar contraseña</a>
             </div>
             </div>
             </div>
+            
+            <input type="email" placeholder="Direccion de correo" name="txtcorreo" maxlength="50" required required />
+            <br>
+            <button type="submit" name="btnregistrarx">Registrar</button>
+            <p class="message">¿Ya te registraste? <a href="#">Iniciar Sesión</a></p>
+          </form>
+
+          <form  id="frmregistrar" class="login-form" action="Validaciontemp.php" method="post">
+          <label for="text">RECUPERACION DE CONTRASEÑA</label>
+          <input type="text" placeholder="INGRESE SU TOKEN" name="txtcont" maxlength="20" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
+          <br><br>  
+          <!--contra 1--->
+            <div class="container">
+            <div class="row">
+            <div class="col s12 m12 l6">
+            <input type="password" id="inputcontraing" placeholder="INGRESE SU NUEVA CONTRASEÑA" name="txtcontra" maxlength="16" required pattern="[A-Za-z0-9/@]{8,30}"
+            title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. "/>
+            <br>
+            <input id="inpucontra" type="password" placeholder="CONFIRMAR CONTRASEÑA" name="txtpassword" maxlength="16" required pattern="[A-Za-z0-9/@]{8,30}" 
+            title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. "/>
+            </div>
+            <div class="col s12">
+            <a id="viewPasswordee" class="mover">Mostrar contraseña</a>
             </div>
             </div>
             </div>
@@ -46,6 +67,8 @@
            <br> -->
            <br>
             <button type="submit" name="btnrlogin">Continuar</button>
+          
+          
           </form>
           </form>
         </div>
@@ -215,15 +238,11 @@ $('.message a').click(function(){
 var y = document.getElementById("frmregistrar");
 
 //validacion no espacios en contraseña
-var input = document.getElementById('inpucontra2');
+var input = document.getElementById('inputcontraing');
 input.addEventListener('input',function(){
      this.value = this.value.trim();
 }) 
 
-var input = document.getElementById('inpucontracon');
-input.addEventListener('input',function(){
-     this.value = this.value.trim();
-}) 
 var input = document.getElementById('inpucontra');
 input.addEventListener('input',function(){
      this.value = this.value.trim();
@@ -273,14 +292,16 @@ viewPassword.addEventListener('click', (e)=>{
 
 let viewPasswordee = document.getElementById('viewPasswordee');
 let password3 = document.getElementById("inpucontra");
-
+let password4 = document.getElementById("inputcontraing");
 
 viewPasswordee.addEventListener('click', (e)=>{
   if(!click){
     password3.type = 'text'
+    password4.type = 'text'
     click = true
   }else if(click){
     password3.type = 'password'
+    password4.type = 'password'
     click = false
   }
 })
