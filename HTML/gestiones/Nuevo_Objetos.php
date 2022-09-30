@@ -55,11 +55,11 @@ include("../conexion.php");
 			<h1>Registro Objetos</h1>
 			<hr>
 				<label for="Objetos">Objetos</label>
-				<input type="text" name="Objetos" maxlength="50" id="Objetos" placeholder="Objeto">
+				<input type="text" name="Objetos" maxlength="50" id="Objetos" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required placeholder="Objeto">
 				<label for="Descripcion">Descripcion</label>
-				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripcion">
+				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripcion" required>
 				<label for="Objetos">Tipo</label>
-				<input type="text" name="Tipo_Objeto" maxlength="50" id="Tipo_Objeto" placeholder="Tipo">
+				<input type="text" name="Tipo_Objeto" maxlength="50" id="Tipo_Objeto" placeholder="Tipo" required>
 				<br>
 				<input type="submit" value="Registrar Objetos" class="btn_save">
 			</form>
@@ -127,4 +127,38 @@ label{
 	padding: 10px;
 }
 </style>
+<script>
+//validacion no espacios en contraseña
+var input = document.getElementById('inpucontra2');
+input.addEventListener('input',function(){
+     this.value = this.value.trim();
+}) 
+
+var input = document.getElementById('inpucontracon');
+input.addEventListener('input',function(){
+     this.value = this.value.trim();
+}) 
+//validacion bloqueo de caracteres especiales
+function blockSpecialCharacters(e) {
+            let key = e.key;
+            let keyCharCode = key.charCodeAt(0);
+            
+            // A-Z
+            if(keyCharCode >= 65 && keyCharCode <= 90) {
+                return key;
+            }
+            // a-z
+            if(keyCharCode >= 97 && keyCharCode <= 122) {
+                return key;
+            }
+
+            return false;
+    }
+
+    $('#theInput').keypress(function(e) {
+        blockSpecialCharacters(e);
+    });
+
+//
+</script>
 <?php include 'barralateralfinal.php';?>

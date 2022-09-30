@@ -14,9 +14,11 @@
 			$Tipo_Objeto          = $_POST['Tipo_Objeto'];
             if(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$Descripcion)){
                     $alert='<p class="msg_error">La descripcion solo recibe letras.</p>';
-            }else{
+			}elseif(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$Tipo_Objeto)){
+				$alert='<p class="msg_error">El Tipo de Objeto solo recibe letras.</p>';
+			}else{
 
-            $query = mysqli_query($conn,"UPDATE TBL_OBJETOS SET Descripcion='$Descripcion' WHERE Id_Objetos ='$Id_Objetos'");
+            $query = mysqli_query($conn,"UPDATE TBL_OBJETOS SET Descripcion='$Descripcion', Tipo_Objeto='$Tipo_Objeto' WHERE Id_Objetos ='$Id_Objetos'");
 
 				if($query){
 					echo "<script> alert('Objeto Actualizado Exitosamente');window.location= 'Gestion_Objetos.php' </script>";
@@ -71,11 +73,11 @@ include("../conexion.php");
 			<hr>
                 <input type="hidden" name="Id_Objetos" value="<?php echo $Id_Objetos  ?>">
 				<label for="Objetos">Nombre Objetos</label>
-				<input type="text" name="Objetos" maxlength="50" id="Objetos" placeholder="Nombre" readonly= "true" value ="<?php echo $Objetos?>">
+				<input type="text" name="Objetos" maxlength="50" id="Objetos" placeholder="Nombre" readonly= "true" value ="<?php echo $Objetos?>" required>
 				<label for="Descripcion">Descripcion</label>
-				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripcion" value ="<?php echo $Descripcion ?>">
-				<label for="Tipo">Tipo</label>
-				<input type="text" name="Tipo" maxlength="50" id="Tipo" placeholder="Tipo" readonly= "true" value ="<?php echo $Tipo_Objeto?>">
+				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripcion" value ="<?php echo $Descripcion ?>" required>
+				<label for="Tipo_Objeto">Tipo</label>
+				<input type="text" name="Tipo_Objeto" maxlength="50" id="Tipo_Objeto" placeholder="Tipo" value ="<?php echo $Tipo_Objeto?>" required>
 				<br>
 				<input type="submit" value="Actualizar Objetos" class="btn_save">
 			</form>

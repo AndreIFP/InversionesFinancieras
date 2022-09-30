@@ -6,8 +6,13 @@
 		
 		$Id_Objetos = $_POST['Id_Objetos'];
 
-		echo "<script> alert('No se puede eliminar un Objeto');window.location= 'Gestion_Objetos.php' </script>";
-
+		$query_delete = mysqli_query($conn,"DELETE FROM TBL_OBJETOS WHERE Id_Objetos =$Id_Objetos");
+		if($query_delete){
+			header("location: Gestion_Objetos.php");
+			
+		}else{
+			echo "Error al eliminar";
+		}
 	}
 
   if(empty($_REQUEST['Id']))
@@ -42,11 +47,17 @@
 			<form method="post" action="">
 				<input type="hidden" name="Id_Objetos" value="<?php echo $Id_Objetos; ?>">
 				<a href="Gestion_Objetos.php" class="btn_cancel">Cancelar</a>
-				<input type="submit" value="Aceptar" class="btn_ok">
+
+				<script>
+                    function alerta(){
+                    window.alert('Eliminacion Exitosa!');
+                                     }
+                </script>
+				
+                <th><input type="submit" value="Aceptar" class="btn_ok" onclick="alerta()"></th>
 			</form>
 		</div>
-
-
+		
 	</section>
 </body>
 <style type="text/css">
