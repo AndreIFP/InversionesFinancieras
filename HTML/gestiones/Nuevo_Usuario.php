@@ -19,10 +19,10 @@ include("../conexion.php");
             <label for="">Nombre Del Usuario</label>
             <input type="text" placeholder="Nombre de Usuario"  name="Nombre_Usuario" maxlength="30" style="text-transform:uppercase;" required size="40">
             <label for="Password"> Contraseña</label>
-            <input  id="inpucontra2"  type="password" placeholder="Contraseña" name="txtpassword" maxlength="30" required size="40" pattern="[A-Za-z0-9/@]{8,30}"
+            <input  id="inpucontra2"  type="password" placeholder="Contraseña" name="txtpassword" maxlength="30" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}"
             title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. "/>
             <label for="Password"> Confirmar Contraseña</label>
-            <input  id="inpucontracon"  type="password" placeholder="Confirmar Contraseña"  maxlength="16" required size="40" pattern="[A-Za-z0-9/@]{8,30}"
+              <input  id="inpucontracon"  type="password" placeholder="Confirmar Contraseña"  maxlength="16" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}"
             title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. "  onblur="verificar()"  />
             <div class="col s12">
             <a id="viewPassword" class="mover" >Mostrar contraseña</a>
