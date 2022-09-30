@@ -530,7 +530,7 @@ color: var(--text-color);
               if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3 || $_SESSION['rol'] == 6){
              ?>
                   <ul style="position: relative;  display: none; "  >
-                  <a href="gestiones/Gestion_Bitacora.php" style="align-items: center;" >
+                  <a href="../gestiones/Gestion_Bitacora.php" style="align-items: center;" >
                     <span class="text nav-text"  >Gestion Bitacora </span>
                 </a>
                 <?php } ?>
@@ -538,7 +538,7 @@ color: var(--text-color);
                 <?php 
                 if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
              ?>
-                  <a href="gestiones/Gestion_CatalogoCuenta.php" style="align-items: center;"  >
+                  <a href="../gestiones/Gestion_CatalogoCuenta.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Catalogo Cuentas</span>
                 </a>
                 <?php } ?>
@@ -546,7 +546,7 @@ color: var(--text-color);
                 <?php 
                 if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
              ?>
-                  <a href="gestiones/Gestion_Clientes.php" style="align-items: center;"  >
+                  <a href="../gestiones/Gestion_Clientes.php" style="align-items: center;"  >
                       <span class="text nav-text">Gestion Clientes</span>
                   </a>     
                   <?php } ?>
@@ -554,7 +554,7 @@ color: var(--text-color);
                   <?php 
                 if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
              ?>
-                <a href="gestiones/Gestion_Factura.php" style="align-items: center; ">
+                <a href="../gestiones/Gestion_Factura.php" style="align-items: center; ">
                     <span class="text nav-text" >Gestion Facturas</span>
                 </a>
                 <?php } ?>
@@ -562,7 +562,7 @@ color: var(--text-color);
                 <?php 
                 if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
              ?>
-                  <a href="gestiones/Gestion_Inventario.php" style="align-items: center;"  >
+                  <a href="../gestiones/Gestion_Inventario.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Inventario</span>
                 </a>
                 <?php } ?>
@@ -570,7 +570,7 @@ color: var(--text-color);
                 <?php 
                 if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
              ?>
-                <a href="gestiones/Gestion_LibroMayor.php" style="align-items: center;"  >
+                <a href="../gestiones/Gestion_LibroMayor.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Libro Mayor</span>
                 </a>
                 <?php } ?>
@@ -578,7 +578,7 @@ color: var(--text-color);
                 <?php 
                 if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
              ?>
-                <a href="gestiones/Gestion_parametros.php" style="align-items: center;"  >
+                <a href="../gestiones/Gestion_parametros.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Parametros</span>
                 </a>
                 <?php } ?>
@@ -586,7 +586,7 @@ color: var(--text-color);
                 <?php 
                 if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
              ?>
-                <a href="gestiones/Gestion_Preguntas.php" style="align-items: center;"  >
+                <a href="../gestiones/Gestion_Preguntas.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Preguntas</span>
                 </a>
                 <?php } ?>
@@ -594,7 +594,7 @@ color: var(--text-color);
                 <?php 
                 if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
              ?>
-                <a href="gestiones/Gestion_PreguntasUsuarios.php" style="align-items: center;"  >
+                <a href="../gestiones/Gestion_PreguntasUsuarios.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Preguntas Usuario</span>
                 </a>
                 <?php } ?>
@@ -602,7 +602,7 @@ color: var(--text-color);
                 <?php 
                 if($_SESSION['rol'] == 1){
              ?>
-                  <a href="gestiones/Gestion_Usuarios.php" style="align-items: center;" >
+                  <a href="../gestiones/Gestion_Usuarios.php" style="align-items: center;" >
                     <span class="text nav-text"  >Gestion Usuarios </span>
                 </a>
                 <?php } ?>
@@ -610,7 +610,7 @@ color: var(--text-color);
                 <?php 
                 if($_SESSION['rol'] == 1){
              ?>
-                <a href="gestiones/GestionRoles.php" style="align-items: center;" >
+                <a href="../gestiones/GestionRoles.php" style="align-items: center;" >
                     <span class="text nav-text"  >Gestion Roles </span>
                 </a>   
                 <?php } ?>
