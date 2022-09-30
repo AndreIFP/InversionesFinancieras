@@ -10,21 +10,24 @@
 			$alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
 		}else{
 
-			$Rol       = $_POST['Rol'];
-			$Descripcion          = $_POST['Descripcion'];
+			$Rol         = $_POST['Rol'];
+			$Descripcion = $_POST['Descripcion'];
             if(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$Rol)){
                 $alert='<p class="msg_error"> El Nombre Solo Recibe Letras.</p>';
             }elseif(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$Descripcion)){
-                    $alert='<p class="msg_error">La descripcion solo recibe letras.</p>';
+				echo "<script> alert('La descripción solo recibe letras');window.location= 'Nuevo_Roles.php' </script>";
             }else{
-			
+				$queryrol 	= mysqli_query($conn,"SELECT * FROM TBL_ROLES WHERE Rol = '$Rol'");
+				$nr 			= mysqli_num_rows($queryrol); 
+			if($nr == 0){
 			$query_insert = mysqli_query($conn,"INSERT INTO TBL_ROLES(Rol,Descripcion)
 										VALUES('$Rol','$Descripcion')");
 			    if($query_insert){
-					echo "<script> alert('Rol Registrado Exitosamente');window.location= 'GestionRoles.php' </script>";
-				}else{
-					$alert='<p class="msg_error">Error al registrar el Roles.</p>';
+					echo "<script> alert('El Rol se ha registrado exitosamente');window.location= 'GestionRoles.php' </script>";
 				}
+			}else{
+				echo "<script> alert('No se puede registrar este Rol, ya que este existe');window.location= 'Nuevo_Roles.php' </script>";
+			}
             }
 		}
 	}
@@ -52,9 +55,9 @@ include("../conexion.php");
 			<h1>Registro Roles</h1>
 			<hr>
 				<label for="Rol">Nombre Roles</label>
-				<input type="text" name="Rol" maxlength="50" id="Rol" placeholder="Nombre completo">
-				<label for="Descripcion">Descripcion</label>
-				<input type="text" name="Descripcion" maxlength="20" id="Descripcion" placeholder="Descripcion">
+				<input type="text" name="Rol" maxlength="20" id="Rol" placeholder="Nombre completo" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required>
+				<label for="Descripcion">Descripción</label>
+				<input type="text" name="Descripcion" maxlength="20" id="Descripcion" placeholder="Descripción" required>
 				<br>
 				<input type="submit" value="Registrar Roles" class="btn_save">
 			</form>
@@ -122,4 +125,26 @@ label{
 	padding: 10px;
 }
 </style>
+
+<script>
+	function blockSpecialCharacters(e) {
+            let key = e.key;
+            let keyCharCode = key.charCodeAt(0);
+            
+            // A-Z
+            if(keyCharCode >= 65 && keyCharCode <= 90) {
+                return key;
+            }
+            // a-z
+            if(keyCharCode >= 97 && keyCharCode <= 122) {
+                return key;
+            }
+
+            return false;
+    }
+
+    $('#theInput').keypress(function(e) {
+        blockSpecialCharacters(e);
+    });
+</script>
 <?php include 'barralateralfinal.php';?>

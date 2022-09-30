@@ -11,8 +11,7 @@ include("../conexion.php");
                         $busqueda = strtolower($_REQUEST['busqueda']);
                         if(empty($busqueda))
                         {
-                            header("location: GestionRoles.php");
-                            mysqli_close($conn);
+                            echo "<script> alert('Dejo En Blanco El Buscador');window.location= 'GestionRoles.php' </script>";
                         }
                     ?>
                      <h1>Gestión Roles</h1> 
@@ -36,7 +35,8 @@ include("../conexion.php");
                                     $result_register = mysqli_fetch_array($sql_registe);
                                     $total_registro = $result_register['total_registro'];
 
-                                    $por_pagina = 10;
+                                    $mostrar_datos = $_GET['datos'];
+                                    $por_pagina = $mostrar_datos;
 
                                     if(empty($_GET['pagina']))
                                     {
@@ -64,6 +64,8 @@ include("../conexion.php");
                                             </tr>
                                         <?php
                                                }
+                                            }else{
+                                                echo "<script> alert('No se encontro registros');window.location= 'GestionRoles.php' </script>";
                                             }
                                         ?>
                             </tbody>
