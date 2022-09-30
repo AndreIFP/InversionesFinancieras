@@ -1,32 +1,35 @@
 <?php
 //validacion Login
+
 session_start();
- include('conexion.php');
+
+include('conexion.php');
 
 if(isset($_REQUEST["btnrlogin"])){
     $nombre = $_POST["txtusuario"];
     $_SESSION['user']=$_POST["txtusuario"];
     $pass = $_POST["txtpassword"];
-
+    
     try {
         $query = mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '".$nombre."' and Contraseña = '".$pass."'");
         $nr = mysqli_num_rows($query);
+
         if ($nr > 0){
             $sqlc = "SELECT * FROM TBL_USUARIO WHERE Usuario = '".$nombre."' and Contraseña = '".$pass."' and Estado_Usuario = 'ACTIVO'";
             $extr = $conn->query($sqlc);
             $fila = $extr->fetch_array(MYSQLI_NUM);
             $valor1 = $fila[3];
-            
+
             if($valor1 == 'ACTIVO'){
                 $data = mysqli_fetch_array($query);
                 $_SESSION['rol']=$data["Rol"];
                 header("Location: index.php");
             }else {
-                echo"<script>alert('Ingreso invalido, EL USUARIO SE ENCUENTRA BLOQUEADO');window.location= 'login.php'</script>";
+                echo"<script>alert('Ingreso invalido, EL USUARIO SE ENCUENTRA BLOQUEADO');window.location= 'http://localhost/InversionesFinancieras-master/HTML/login.php'</script>";
             }
         }
         } catch (Exception $e) {
-            echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'list.php' </script>";
+            echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
         }
 try{
     if($nr == 1)
@@ -75,12 +78,12 @@ try{
     echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
 }
 if(isset($_COOKIE["block".$nombre])){
-    echo "<script> alert('El usuario ha sido bloqueado. PORFAVOR PONGASE EN CONTACTO CON EL ADMINISTRADOR');window.location= 'login.php' </script>";
+    echo "<script> alert('El usuario ha sido bloqueado. PORFAVOR PONGASE EN CONTACTO CON EL ADMINISTRADOR');window.location= 'http://localhost/InversionesFinancieras-master/HTML/login.php' </script>";
 }else{
         if(isset($_COOKIE["$nombre"])){          
             $cont =$_COOKIE["$nombre"];
             $cont++;
-            setcookie($nombre,$cont,time()+60);             
+            setcookie($nombre,$cont,time()+500);             
             try{
             $sql2 = "SELECT Valor FROM TBL_PARAMETROS;";
             $ext = $conn->query($sql2);
@@ -99,18 +102,18 @@ if(isset($_COOKIE["block".$nombre])){
             $sql = "UPDATE TBL_USUARIO SET Estado_Usuario='BLOQUEADO' WHERE Id_Usuario='$iduser'";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql);
-            setcookie("block".$nombre,$cont,time()+60);
+            setcookie("block".$nombre,$cont,time()+500);
             }catch(Exception $e ){
                 echo "<script> alert('ERR-004: Error en la proceso de actualizacion del estado en la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
             }
         }  
-        echo"<script>alert('Error al iniciar sesion');window.location= 'login.php'</script>"; 
+        echo"<script>alert('Error al iniciar sesion');window.location= 'http://localhost/InversionesFinancieras-master/HTML/login.php'</script>"; 
         }else{
-            setcookie($nombre,1,time()+20);
+            setcookie($nombre,1,time()+30);
         }  
+        
     }
 }   
-
 /*
 if($nr == 1)
 {
@@ -141,7 +144,7 @@ if($nr == 1)
 else if ($nr == 0) 
 {
     //header("Location: login.php");
-    echo "<script> alert('Nombre o Contraseña incorrecto');window.location= 'login.php' </script>";
+    echo "<script> alert('Nombre o Contraseña incorrecto');window.location= 'http://localhost/InversionesFinancieras-master/HTML/login.php' </script>";
 
      if(isset($_COOKIE["$nombre"])){
         $cont =$_COOKIE["$nombre"];
