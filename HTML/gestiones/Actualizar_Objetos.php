@@ -16,9 +16,12 @@
                     $alert='<p class="msg_error">La descripcion solo recibe letras.</p>';
 			}elseif(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$Tipo_Objeto)){
 				$alert='<p class="msg_error">El Tipo de Objeto solo recibe letras.</p>';
+			}elseif(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$Objetos)){
+				$alert='<p class="msg_error">El Objetos solo recibe letras.</p>';
+		
 			}else{
 
-            $query = mysqli_query($conn,"UPDATE TBL_OBJETOS SET Descripcion='$Descripcion', Tipo_Objeto='$Tipo_Objeto' WHERE Id_Objetos ='$Id_Objetos'");
+            $query = mysqli_query($conn,"UPDATE TBL_OBJETOS SET Objetos='$Objetos', Descripcion='$Descripcion', Tipo_Objeto='$Tipo_Objeto' WHERE Id_Objetos ='$Id_Objetos'");
 
 				if($query){
 					echo "<script> alert('Objeto Actualizado Exitosamente');window.location= 'Gestion_Objetos.php' </script>";
@@ -73,7 +76,7 @@ include("../conexion.php");
 			<hr>
                 <input type="hidden" name="Id_Objetos" value="<?php echo $Id_Objetos  ?>">
 				<label for="Objetos">Nombre Objetos</label>
-				<input type="text" name="Objetos" maxlength="50" id="Objetos" placeholder="Nombre" readonly= "true" value ="<?php echo $Objetos?>" required>
+				<input type="text" name="Objetos" maxlength="50" id="Objetos" placeholder="Nombre" value ="<?php echo $Objetos?>" style="text-transform:uppercase;" required style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required>
 				<label for="Descripcion">Descripcion</label>
 				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripcion" value ="<?php echo $Descripcion ?>" required>
 				<label for="Tipo_Objeto">Tipo</label>
@@ -145,4 +148,39 @@ label{
 	padding: 10px;
 }
 </style>
+
+<script>
+//validacion no espacios en contraseña
+var input = document.getElementById('inpucontra2');
+input.addEventListener('input',function(){
+     this.value = this.value.trim();
+}) 
+
+var input = document.getElementById('inpucontracon');
+input.addEventListener('input',function(){
+     this.value = this.value.trim();
+}) 
+//validacion bloqueo de caracteres especiales
+function blockSpecialCharacters(e) {
+            let key = e.key;
+            let keyCharCode = key.charCodeAt(0);
+            
+            // A-Z
+            if(keyCharCode >= 65 && keyCharCode <= 90) {
+                return key;
+            }
+            // a-z
+            if(keyCharCode >= 97 && keyCharCode <= 122) {
+                return key;
+            }
+
+            return false;
+    }
+
+    $('#theInput').keypress(function(e) {
+        blockSpecialCharacters(e);
+    });
+
+//
+</script>
 <?php include 'barralateralfinal.php';?>

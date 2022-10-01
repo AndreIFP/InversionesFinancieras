@@ -30,12 +30,19 @@ include("../conexion.php");
                             </thead>
                             <tbody>
                                     <?php
+                                    //NO Existe
+
                                     //Paginador
                                     $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_OBJETOS
                                             WHERE ( Id_Objetos LIKE '%$busqueda%' OR
                                             Objetos LIKE '%$busqueda%' )");
                                     $result_register = mysqli_fetch_array($sql_registe);
                                     $total_registro = $result_register['total_registro'];
+
+                                    if ($total_registro == 0){
+                                        echo "<script> alert('No se encontró resultado: $busqueda');window.location= 'Gestion_Objetos.php' </script>";
+                                        }
+
 
                                     $por_pagina = 10;
 

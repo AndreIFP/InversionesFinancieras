@@ -35,6 +35,8 @@ include("../conexion.php");
 
 			                    $por_pagina = 10;
 
+
+
                                 if(empty($_GET['pagina']))
                                 {
                                     $pagina = 1;
