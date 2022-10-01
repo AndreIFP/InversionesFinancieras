@@ -69,13 +69,41 @@ try {
 
 
     //Attachments
-
+//Attachments
 
     //Content
     $mail->isHTML(true); 
     $mail->CharSet = 'UTF-8';                                 //Set email format to HTML
     $mail->Subject = 'Sistema de Recuperacion de Constraseña';
-    $mail->Body    = "$usuario Su token de seguridad es: $token";
+    $mail->Body    = '
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+
+</head>
+<body style="background-color:#D0C8C6; width:400px;
+    margin:10px 10px;
+    padding:20px; " ><header style="
+    padding:15px;
+    font-size:italic;
+    background-color:#cfc;
+    color:#000;">
+    <center><h1>Cambio de Contraseña</h1></center>
+    </header><header style="
+    padding:15px;
+    font-size:italic;
+    background-color:#FFFFFF ;
+    color:#000;"><p style="color: #000000 ;">Hola</p>
+    <p style="color: #000000 ;">ha solicitado el cambio de contraseña para el usuario '.$usuario.'</p> 
+    <p style="color: #000000 ;">Tu Token de Acceso es: '.$token.'</p>
+    <p style="color: #000000 ;">Ingresa al siguiente enlace para cambiar su contraseña:</p>
+    <a href="http://localhost/Login2/HTML/contratemp.php"><button style="background-color: #93DEC7 ; width:200px;
+    margin:10px 40px;
+    border-radius: 40px;
+    padding:20px;" > Cambiar contraseña</button></a>
+    </header>
+    </body> 
+</html>';
     $mail->AltBody ="";
     $mail->send();
     
