@@ -25,11 +25,11 @@ if(isset($_REQUEST["btnrlogin"])){
                 $_SESSION['rol']=$data["Rol"];
                 header("Location: index.php");
             }elseif($valor1 == '')  {
-                echo"<script>alert('Ingreso invalido, EL USUARIO SE ENCUENTRA BLOQUEADO O ESTA INACTIVO. CONSULTE CON SU ADMINISTRADOR');window.location= 'http://localhost/InversionesFinancieras-master/HTML/login.php'</script>";
+                echo"<script>alert('Ingreso invalido, EL USUARIO SE ENCUENTRA BLOQUEADO O ESTA INACTIVO. CONSULTE CON SU ADMINISTRADOR');window.location= 'Login.php'</script>";
             }
         }
         } catch (Exception $e) {
-            echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
+            echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'Login.php' </script>";
         }
 try{
     if($nr == 1)
@@ -75,10 +75,10 @@ try{
 }
 
 }catch (Exception $e){
-    echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
+    echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'Login.php' </script>";
 }
 if(isset($_COOKIE["block".$nombre])){
-    echo "<script> alert('El usuario ha sido bloqueado. PORFAVOR PONGASE EN CONTACTO CON EL ADMINISTRADOR');window.location= 'http://localhost/InversionesFinancieras-master/HTML/login.php' </script>";
+    echo "<script> alert('El usuario ha sido bloqueado. PORFAVOR PONGASE EN CONTACTO CON EL ADMINISTRADOR');window.location= 'Login.php' </script>";
 }else{
         if(isset($_COOKIE["$nombre"])){          
             $cont =$_COOKIE["$nombre"];
@@ -90,7 +90,7 @@ if(isset($_COOKIE["block".$nombre])){
             $fila = $ext->fetch_array(MYSQLI_NUM);
             $valor = $fila[0];
             }catch(Exception $e){
-                echo "<script> alert('ERR-003: Error en la consulta hacia la tabla TBL_PARAMETROS. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
+                echo "<script> alert('ERR-003: Error en la consulta hacia la tabla TBL_PARAMETROS. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'Login.php' </script>";
             }
              
             if($cont==$valor){
@@ -104,10 +104,10 @@ if(isset($_COOKIE["block".$nombre])){
             $exito = mysqli_query($con,$sql);
             setcookie("block".$nombre,$cont,time()+500);
             }catch(Exception $e ){
-                echo "<script> alert('ERR-004: Error en la proceso de actualizacion del estado en la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
+                echo "<script> alert('ERR-004: Error en la proceso de actualizacion del estado en la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'Login.php' </script>";
             }
         }  
-        echo"<script>alert('Error al iniciar sesion');window.location= 'http://localhost/InversionesFinancieras-master/HTML/login.php'</script>"; 
+        echo"<script>alert('Error al iniciar sesion');window.location= 'Login.php'</script>"; 
         }else{
             setcookie($nombre,1,time()+30);
         }  
@@ -144,7 +144,7 @@ if($nr == 1)
 else if ($nr == 0) 
 {
     //header("Location: login.php");
-    echo "<script> alert('Nombre o Contraseña incorrecto');window.location= 'http://localhost/InversionesFinancieras-master/HTML/login.php' </script>";
+    echo "<script> alert('Nombre o Contraseña incorrecto');window.location= 'Login.php' </script>";
 
      if(isset($_COOKIE["$nombre"])){
         $cont =$_COOKIE["$nombre"];
