@@ -13,13 +13,14 @@ include("../conexion.php");
                      
                      <a href="Nuevo_Roles.php"><input type="submit" class="btn btn-success" Value="Crear Nuevo Rol"></a><p>
                      <form action="Buscador_Roles.php" method="get" class="form_search">
-                            <div class="ub1">Datos a mostrar al buscar</div>
-                            <select name="datos" required>
+                           
+                            <select name="datos" style="padding-top:50px 20px ;" required >
                             <option value ="">Seleccione</option>
                             <option value="2">2</option>
                             <option value="4">4</option>
                             <option value="100">100</option>
                             </select>
+                           
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
                             <input type="submit" value="Buscar" class="btn_search">
                      </form>

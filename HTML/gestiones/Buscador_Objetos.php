@@ -73,6 +73,8 @@ include("../conexion.php");
                                             </tr>
                                         <?php
                                                }
+                                            }else{
+                                                echo "<script> alert('No se encontro registros');window.location= 'GestionRoles.php' </script>";
                                             }
                                         ?>
                             </tbody>

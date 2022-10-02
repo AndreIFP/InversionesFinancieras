@@ -52,6 +52,8 @@
 			<p>Usuario: <span><?php echo $Usuario; ?></span></p>
 			<p>Nombre: <span><?php echo $Nombre_Usuario; ?></span></p>
 			<p>Tipo Usuario: <span><?php echo $Rol; ?></span></p>
+			<p>¡Recuerda que solo el rol: nuevo se puede eliminar, </p>
+			<p>en otro rol  la accion no surgira efecto!</p>
 
 			<form method="post" action="">
 				<input type="hidden" name="Id_Usuario" value="<?php echo $Id_Usuario; ?>">

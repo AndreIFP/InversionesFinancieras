@@ -69,7 +69,7 @@ else
 
 }else
 {
-		echo "<script> alert('No puedes registrar usuario o correo ya existe');window.location= 'Nuevo_Usuarios.php' </script>";
+		echo "<script> alert('No puedes registrar usuario o correo ya existe');window.location= './gestiones/Nuevo_Usuario.php' </script>";
 }
 
 } 
