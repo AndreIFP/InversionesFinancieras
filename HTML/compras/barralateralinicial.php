@@ -694,6 +694,18 @@ color: var(--text-color);
             </a>
         </li>
         <?php } ?>
+	      
+	<?php
+              if($_SESSION['rol'] == 1){
+             ?>
+        <li class="" style="height: 50px;">
+            <a href="../permisos.php" style="align-items: center;">
+                <i class='bx bx-lock icon' ></i>
+                <span class="text nav-text">Permisos Roles</span>
+            </a>
+        </li>
+        <?php } ?>
+	      
         <li class="" style="height: 50px; display: flex;">
             <a href="../login.php" style="align-items: center;">
                 <i class='bx bx-log-out icon' ></i>
