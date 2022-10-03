@@ -12,14 +12,26 @@
 			$Objetos       = $_POST['Objetos'];
 			$Descripcion          = $_POST['Descripcion'];
 			$Tipo_Objeto          = $_POST['Tipo_Objeto'];
+
+			echo "<script> alert('Si se encontró resultado: $Objetos') </script>";
+
             if(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$Descripcion)){
                     $alert='<p class="msg_error">La descripcion solo recibe letras.</p>';
 			}elseif(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$Tipo_Objeto)){
 				$alert='<p class="msg_error">El Tipo de Objeto solo recibe letras.</p>';
 			}elseif(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$Objetos)){
 				$alert='<p class="msg_error">El Objetos solo recibe letras.</p>';
-		
 			}else{
+
+				$sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_OBJETOS
+                                            WHERE ( Objetos )");
+                                    $result_register = mysqli_fetch_array($sql_registe);
+                                    $total_registro = $result_register['total_registro'];
+
+                                    if ($total_registro == 1){
+									echo "<script> alert('Si se encontró resultado: $total_registro');window.location= 'Gestion_Objetos.php'  </script>";
+									}
+
 
             $query = mysqli_query($conn,"UPDATE TBL_OBJETOS SET Objetos='$Objetos', Descripcion='$Descripcion', Tipo_Objeto='$Tipo_Objeto' WHERE Id_Objetos ='$Id_Objetos'");
 

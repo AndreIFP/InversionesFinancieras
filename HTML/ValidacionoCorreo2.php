@@ -7,12 +7,12 @@ $idusuario = $_POST["txtusuario"];
 $name = $nombre;
 $mensaje = $_POST["txtusuario"];
 
-function tokenG($len){
+function tokenG($len=10){
 	$cadena ="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz";
 	$token = "";
 
 	for ($i=0; $i < $len; $i++) {
-		$token .= $cadena[rand(0,$len)];
+		$token .= $cadena[rand(0,61)];
 	} 
 	return $token;
 }
