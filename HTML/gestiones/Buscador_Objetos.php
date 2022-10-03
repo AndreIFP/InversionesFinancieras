@@ -43,8 +43,12 @@ include("../conexion.php");
                                         echo "<script> alert('No se encontró resultado: $busqueda');window.location= 'Gestion_Objetos.php' </script>";
                                         }
 
-
-                                    $por_pagina = 10;
+                                     $mostrar_datos = $_GET['datos'];
+                                    if($mostrar_datos > 0){
+                                        $por_pagina = $mostrar_datos;
+                                    }else{
+                                        $por_pagina = 10;
+                                    }
 
                                     if(empty($_GET['pagina']))
                                     {
@@ -74,7 +78,7 @@ include("../conexion.php");
                                         <?php
                                                }
                                             }else{
-                                                echo "<script> alert('No se encontro registros');window.location= 'GestionRoles.php' </script>";
+                                                echo "<script> alert('No se encontro registros');window.location= 'Gestion_Objetos.php' </script>";
                                             }
                                         ?>
                             </tbody>
