@@ -594,6 +594,14 @@ color: var(--text-color);
                     <span class="text nav-text"  >Gestion Roles </span>
                 </a>   
                 <?php } ?>
+
+                <?php 
+                if($_SESSION['rol'] == 1){
+             ?>
+                <a href="gestiones/Gestion_Objetos.php" style="align-items: center;" >
+                    <span class="text nav-text"  >Gestion Objetos </span>
+                </a>   
+                <?php } ?>
                           
             </ul>
         </li> 
