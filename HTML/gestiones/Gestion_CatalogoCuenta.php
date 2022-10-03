@@ -12,7 +12,28 @@ include("../conexion.php");
                      <h1>Gestión Catálogo Cuentas</h1> 
                      <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
                      <a href="Nuevo_Catalogo.php"><input type="submit" class="btn btn-success" Value="Crear Nueva Cuenta"></a><p>
+                     <?php
+                        $mostrar_datos = 0;
+                        ?>
+                     <form action="" method="get">
+                            <label for="datos_mostrar">Datos A Mostrar En El Formulario</label>
+                            <select name="mostrar" onchange='submit();'>
+                            <option ></option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="100">100</option>
+                                <?php
+                                $mostrar_datos = $_GET['mostrar'];
+                                ?>
+                            </select>
+                     </form>
                      <form action="Buscador_Catalogo.php" method="get" class="form_search">
+                            <select name="datos">
+                            <option value ="">Seleccione</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="100">100</option>
+                            </select>
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
                             <input type="submit" value="Buscar" class="btn_search">
                      </form>
@@ -34,7 +55,11 @@ include("../conexion.php");
 			                    $result_register = mysqli_fetch_array($sql_registe);
 			                    $total_registro = $result_register['total_registro'];
 
-			                    $por_pagina = 10;
+			        if($mostrar_datos > 0){
+                                    $por_pagina = $mostrar_datos;
+                                }else{
+                                    $por_pagina = 10;
+                                }
 
                                 if(empty($_GET['pagina']))
                                 {
