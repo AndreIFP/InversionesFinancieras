@@ -102,7 +102,7 @@ include("../conexion.php");
                                                }
 
                                             }else{
-                                                echo "<script> alert('No se encontro registros');window.location= 'GestionRoles.php' </script>";
+                                                echo "<script> alert('No se encontro registros');window.location= 'Gestion_Usuarios.php' </script>";
                                             }
                                         ?>
                             </tbody>
