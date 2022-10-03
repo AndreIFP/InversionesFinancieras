@@ -90,9 +90,9 @@ include("../conexion.php");
 				<label for="Objetos">Nombre Objetos</label>
 				<input type="text" name="Objetos" maxlength="50" id="Objetos" placeholder="Nombre" value ="<?php echo $Objetos?>" style="text-transform:uppercase;" required style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required>
 				<label for="Descripcion">Descripcion</label>
-				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripcion" value ="<?php echo $Descripcion ?>" required>
+				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripcion" value ="<?php echo $Descripcion ?>" required onkeypress="return blockSpecialCharacters(event)">
 				<label for="Tipo_Objeto">Tipo</label>
-				<input type="text" name="Tipo_Objeto" maxlength="50" id="Tipo_Objeto" placeholder="Tipo" value ="<?php echo $Tipo_Objeto?>" required>
+				<input type="text" name="Tipo_Objeto" maxlength="50" id="Tipo_Objeto" placeholder="Tipo" value ="<?php echo $Tipo_Objeto?>" required onkeypress="return blockSpecialCharacters(event)">
 				<br>
 				<input type="submit" value="Actualizar Objetos" class="btn_save">
 			</form>

@@ -22,7 +22,7 @@
             }else{
 			
 			$query_insert = mysqli_query($conn,"INSERT INTO TBL_OBJETOS(Objetos,Descripcion,Tipo_Objeto)
-										VALUES('$Objetos','$Descripcion','$Tipo_Objeto')");
+										VALUES('$Objetos','$Descripcion','$Tipo_Objeto')"); 
 			    if($query_insert){
 					echo "<script> alert('Objetos Registrado Exitosamente');window.location= 'Gestion_Objetos.php' </script>";
 				}else{
@@ -57,9 +57,9 @@ include("../conexion.php");
 				<label for="Objetos">Objetos</label>
 				<input type="text" name="Objetos" maxlength="50" id="Objetos" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required placeholder="Objeto">
 				<label for="Descripcion">Descripcion</label>
-				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripcion" required>
+				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripcion" required onkeypress="return blockSpecialCharacters(event)">
 				<label for="Objetos">Tipo</label>
-				<input type="text" name="Tipo_Objeto" maxlength="50" id="Tipo_Objeto" placeholder="Tipo" required>
+				<input type="text" name="Tipo_Objeto" maxlength="50" id="Tipo_Objeto" placeholder="Tipo" required onkeypress="return blockSpecialCharacters(event)">
 				<br>
 				<input type="submit" value="Registrar Objetos" class="btn_save">
 			</form>
