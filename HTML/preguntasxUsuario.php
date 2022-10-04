@@ -195,7 +195,7 @@ select::-ms-expand {
       <!--PASSWORD -->
     <div class="form-group">
     <form id="frmregistrar" class="login-form" action="validacionpregseguri.php" method="post">
-                <input type="text" class="form-control" placeholder="Respuesta" name="tpregunta" />
+                <input type="text" class="form-control" placeholder="Respuesta" name="tpregunta"  maxlength="15" required style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
                 <input type="text" value=<?php echo $tusuario ?> name="tusuario" style="visibility: hidden;"/>
                 
               <div class="input-group">
