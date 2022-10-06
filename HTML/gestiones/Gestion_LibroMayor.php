@@ -10,9 +10,7 @@ include("../conexion.php");
                   <div class="col-md-12">
                      <h1>Gestión Libro Mayor</h1> 
                      <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
-                     ?php
-                        $mostrar_datos = 0;
-                        ?>
+                     
                      <form action="" method="get">
                             <label for="datos_mostrar">Datos A Mostrar En El Formulario</label>
                             <select name="mostrar" onchange='submit();'>
