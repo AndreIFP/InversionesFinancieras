@@ -84,8 +84,8 @@ $_SESSION['temporada']="10";
                       <div class="form-group">
           <label for="date" class="col-sm-3 control-label">Cuenta</label>
           <div class="select">
-          <select name="txtpregunta" id="format" id="txtpregunta" >
-          <option selected disabled>seleccione una Cuenta</option>
+          <select name="txtpregunta" id="format" id="txtpregunta" required>
+          <option value="">seleccione una Cuenta</option>
              <?php 
               include('../conexion.php');
                 
@@ -118,7 +118,7 @@ $_SESSION['temporada']="10";
                                </div>
            
                                <div class="col-md-12 btn-print">
-                        <label for="date" class="col-sm-3 control-label">Descripcion</label>
+                        <label for="date" class="col-sm-3 control-label">Descripción</label>
                         <div class="input-group col-sm-8">
                           <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required >
                         </div><!-- /.input group -->
@@ -128,7 +128,7 @@ $_SESSION['temporada']="10";
                       <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Monto a depositar</label>
                         <div class="input-group col-sm-8">
-                          <input type="text" class="form-control pull-right" id="monto" name="monto" required >
+                          <input type="text" class="form-control pull-right" id="monto" name="monto" required pattern="^[0-9]*$">
                         </div><!-- /.input group -->
                       </div><!-- /.form group -->
                     </div>
