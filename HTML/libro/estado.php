@@ -120,7 +120,7 @@ $_SESSION['temporada']="10";
                                <div class="col-md-12 btn-print">
                         <label for="date" class="col-sm-3 control-label">Descripción</label>
                         <div class="input-group col-sm-8">
-                          <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required >
+                          <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required pattern="^[A-Z a-z áóíéúñ \s]*$" >
                         </div><!-- /.input group -->
                       </div><!-- /.form group -->
                     </div>
