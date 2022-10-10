@@ -205,7 +205,7 @@ $_SESSION['temporada']="10";
                     //  if ($eliminar=="si") {
                     
                       ?>
-   <a class="small-box-footer btn-print"  href="<?php  echo "eliminar_estado.php?monto=$monto&id_libro=$id_libro&debe_haber=$debe_haber&id_usuario=$id_usuario";?>" onClick="return confirm('¿Está seguro de que quieres eliminar transaccion??');"><i class="glyphicon glyphicon-remove"></i></a>
+   <a class="small-box-footer btn-print"  href="<?php  echo "eliminar_estado.php?monto=$monto&id_libro=$id_libro&debe_haber=$debe_haber&id_usuario=$id_usuario";?>" onClick="return confirm('¿Está seguro de que quieres eliminar transacción??');"><i class="glyphicon glyphicon-remove"></i></a>
    <?php
                   //    }
                       ?>
