@@ -175,11 +175,11 @@ $_SESSION['temporada']="10";
                         
                           
 
-                          <th> fecha </th>
-                          <th> cuenta </th>
-                          <th> Descripcion </th>
-                  <th> monto </th>
-                       <th class="btn-print"> Accion </th>
+                          <th> Fecha </th>
+                          <th> Cuenta </th>
+                          <th> Descripción </th>
+                  <th> Monto </th>
+                       <th class="btn-print"> Acción </th>
 
                       </tr>
                     </thead>
@@ -205,7 +205,7 @@ $_SESSION['temporada']="10";
                     //  if ($eliminar=="si") {
                     
                       ?>
-   <a class="small-box-footer btn-print"  href="<?php  echo "eliminar_estado.php?monto=$monto&id_libro=$id_libro&debe_haber=$debe_haber&id_usuario=$id_usuario";?>" onClick="return confirm('¿Está seguro de que quieres eliminar transacción??');"><i class="glyphicon glyphicon-remove"></i></a>
+   <a class="small-box-footer btn-print"  href="<?php  echo "eliminar_estado.php?monto=$monto&id_libro=$id_libro&debe_haber=$debe_haber&id_usuario=$id_usuario";?>" onClick="return confirm('¿Está seguro de que quieres eliminar transacción?');"><i class="glyphicon glyphicon-remove"></i></a>
    <?php
                   //    }
                       ?>
