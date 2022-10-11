@@ -26,6 +26,6 @@ while($row=mysqli_fetch_array($consultas)){
 
 			
 
-	echo "<script>document.location='../libro/estado.php'</script>";	
+	echo "<script> alert('Transacción registrada correctamente');window.location= '../libro/estado.php' </script>";	
 
 ?>
