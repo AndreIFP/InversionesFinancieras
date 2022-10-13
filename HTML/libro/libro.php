@@ -122,7 +122,7 @@ $_SESSION['temporada']="10";
                                <div class="col-md-12 btn-print">
                         <label for="date" class="col-sm-3 control-label">Descripcion</label>
                         <div class="input-group col-sm-8">
-                          <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required >
+                          <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required onkeypress="return blockSpecialCharacters(event)" >
                         </div><!-- /.input group -->
                       </div><!-- /.form group -->
                     </div>
@@ -130,16 +130,20 @@ $_SESSION['temporada']="10";
                       <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Monto a depositar</label>
                         <div class="input-group col-sm-8">
-                          <input type="text" class="form-control pull-right" id="monto" name="monto" required >
+                          <input type="number" class="form-control pull-right" id="monto" name="monto" required >
                         </div><!-- /.input group -->
                       </div><!-- /.form group -->
                     </div>
 
-
+                    <script>
+  function deposito(){
+    alert("Deposito Ingresado correctamente");
+     }
+    </script>
 
                     <div class="col-md-12">
                        <div class="col-md-12">
-                        <button class="btn btn-lg btn-primary btn-print" id="daterange-btn"  name="">DEPOSITAR</button>
+                        <button class="btn btn-lg btn-primary btn-print" onclick="deposito()" id="daterange-btn"  name="">DEPOSITAR</button>
                           <button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
                          </div>
 
@@ -220,7 +224,7 @@ $_SESSION['temporada']="10";
                       <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Descripcion</label>
                         <div class="input-group col-sm-8">
-                          <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required >
+                          <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required onkeypress="return blockSpecialCharacters(event)">
                         </div><!-- /.input group -->
                       </div><!-- /.form group -->
                     </div>
@@ -229,16 +233,20 @@ $_SESSION['temporada']="10";
                       <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Monto a gastar</label>
                         <div class="input-group col-sm-8">
-                          <input type="text" class="form-control pull-right" id="monto" name="monto" required >
+                          <input type="number" class="form-control pull-right" id="monto" name="monto" required >
                         </div><!-- /.input group -->
                       </div><!-- /.form group -->
                     </div>
 
-
+                    <script>
+  function retiro(){
+    alert("Retiro Ingresado correctamente");
+     }
+    </script>
 
                     <div class="col-md-12">
                        <div class="col-md-12">
-                        <button class="btn btn-lg btn-primary btn-print" id="daterange-btn"  name="">RETIRAR GASTO</button>
+                        <button class="btn btn-lg btn-primary btn-print" onclick="retiro()" id="daterange-btn"  name="">RETIRAR GASTO</button>
                           <button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
                          </div>
 
@@ -368,6 +376,48 @@ function Buscar() {
                 }
             }
         }
+
+//validacion
+        $('.message a').click(function(){
+  $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+var y = document.getElementById("frmregistrar");
+
+//validacion no espacios en contraseña
+var input = document.getElementById('inpucontra2');
+input.addEventListener('input',function(){
+     this.value = this.value.trim();
+}) 
+
+var input = document.getElementById('inpucontracon');
+input.addEventListener('input',function(){
+     this.value = this.value.trim();
+}) 
+var input = document.getElementById('inpucontra');
+input.addEventListener('input',function(){
+     this.value = this.value.trim();
+}) 
+
+//validacion bloqueo de caracteres especiales
+function blockSpecialCharacters(e) {
+            let key = e.key;
+            let keyCharCode = key.charCodeAt(0);
+            
+            // A-Z
+            if(keyCharCode >= 65 && keyCharCode <= 90) {
+                return key;
+            }
+            // a-z
+            if(keyCharCode >= 97 && keyCharCode <= 122) {
+                return key;
+            }
+
+            return false;
+    }
+
+    $('#theInput').keypress(function(e) {
+        blockSpecialCharacters(e);
+    });
 // ]]></script>
                 </div><!-- /.box-body -->
 

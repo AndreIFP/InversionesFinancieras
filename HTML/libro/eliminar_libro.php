@@ -1,7 +1,10 @@
 <?php session_start();
+$_SESSION['cliente'];
 if(empty($_SESSION['id'])):
 header('Location:../index.php');
 endif;
+
+$cliente=$_SESSION['cliente'];
 
 include('../../dist/includes/dbcon.php');
 
@@ -42,11 +45,7 @@ include('../../dist/includes/dbcon.php');
           }
   mysqli_query($con,"delete from libro where id_libro='$id_libro'")or die(mysqli_error());
 if ($debe_haber=="haber") {
-       $update=mysqli_query($con,"update TBL_LIBROS set caja=caja+'$monto' where Id_cliente='$cliente' and Id_Libro='$temporada' ");
-}
-
-if ($debe_haber=="debe") {
-       $update=mysqli_query($con,"update TBL_LIBROS set caja=caja-'$monto' Id_cliente='$cliente' and Id_Libro='$temporada' ");
+       $update=mysqli_query($con,"update TBL_LIBROS set caja=caja+'$monto' where Id_cliente='$cliente' ");
 }
 
 
