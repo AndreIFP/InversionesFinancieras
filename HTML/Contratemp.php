@@ -40,7 +40,7 @@
 
           <form  id="frmregistrar" class="login-form" action="Validaciontemp.php" method="post">
           <label for="text">RECUPERACION DE CONTRASEÑA</label>
-          <input type="text" placeholder="INGRESE SU TOKEN" name="txtcont" maxlength="20" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
+          <input type="text" placeholder="INGRESE SU TOKEN" name="txtcont" maxlength="20" required/>
           <br><br>  
           <!--contra 1--->
             <div class="container">
