@@ -47,6 +47,30 @@
 
  ?>
 
+<?php
+//FUNCION DE PERMISOS
+
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_GESTION_PREGUNTAS]['u']==0 or !isset($_SESSION['permisos'][M_GESTION_PREGUNTAS]['u'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
+?>
+
 <?php include 'barralateralinicial.php';?>
 
   </div>
