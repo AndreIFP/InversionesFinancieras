@@ -4,13 +4,13 @@
  const USER = "root";
 
 //Servidor de mysql
- const SERVER = "localhost"; 
+ const SERVER = "localhost:3307"; 
 
 //Nombre de la base de datos
 const BD = "2w4GSUinHO";
 
 //Contraseña de myqsl
-const PASS = "";
+const PASS = "3214";
 
 //Carpeta donde se almacenaran las copias de seguridad
 const BACKUP_PATH =  "./backup/";

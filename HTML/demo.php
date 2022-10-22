@@ -106,7 +106,7 @@ function multiplicar(){
 <h3>Descripcion de servicios</h3>
 
 <?php
-$mysqli = mysqli_connect("localhost","root","","2w4GSUinHO");
+$mysqli = mysqli_connect("localhost:3307","root","3214","2w4GSUinHO");
 $query = mysqli_query($mysqli,"SELECT CODIGO_CUENTA, CUENTA FROM TBL_CATALAGO_CUENTAS ORDER BY FIELD (CLASIFICACION, 'ACTIVO', 'PASIVO', 'CAPITAL', 'INGRESOS','COSTOS','GASTOS') ASC, CODIGO_CUENTA, CLASIFICACION");
 ?>
 <table>

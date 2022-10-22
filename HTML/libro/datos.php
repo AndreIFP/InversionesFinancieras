@@ -1,5 +1,5 @@
 <?php 
-$conexion=mysqli_connect('localhost','root','','2w4GSUinHO');
+$conexion=mysqli_connect('localhost:3307','root','3214','2w4GSUinHO');
 $cliente=$_POST['cliente'];
 ?>
 

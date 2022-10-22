@@ -48,7 +48,7 @@ if (!isset($_SESSION['rol'])) {
 <br><br>
 <table cellpadding="5" border="1">
 <?php
-$mysqli = mysqli_connect("localhost","root","","2w4GSUinHO");
+$mysqli = mysqli_connect("localhost:3307","root","3214","2w4GSUinHO");
 $query = mysqli_query($mysqli,"SELECT proname FROM product");
 ?>
 <tr>
