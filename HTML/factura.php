@@ -55,6 +55,7 @@ if(isset($_REQUEST["Credito"])){
 <body>
 
     <div class="container">
+  <img src="Log.png" WIDTH=150 HEIGHT=75>
         <div class="invoice">
             <div class="row">
                 <div class="col-7">
@@ -66,11 +67,8 @@ if(isset($_REQUEST["Credito"])){
                             
                             <h2>INVERSIONES FINANCIERAS S.A</h2>
                             <h5>Tegucigalpa, Honduras</h5><br>
-                            
-                            <b><?php
-                            $identificacion_fiscal = $_POST["identificacion_fiscal"];
-                            echo "RTN. Empresa: " .$identificacion_fiscal;
-                            ?></b><br>
+
+                            <h5>RTN: 08015896135674</h5><br>
                             
                             <h5> <?php
                             $factura = $_POST["id_factura"];
@@ -111,8 +109,10 @@ if(isset($_REQUEST["Credito"])){
                         <td><?php $isv = $_POST["impto"];
                          echo $isv;
                         ?></td>
-                        <td><?php $total = $_POST["total"];
-                         echo $total;
+                        <td><?php $grav = $_POST["gravado"];
+                            $isv = $_POST["impto"];
+                            $result = $grav + $isv;
+                         echo $result;
                         ?></td>
                     </tr>
                 </tbody>
@@ -130,7 +130,7 @@ if(isset($_REQUEST["Credito"])){
                         ?></td>
                         </tr>
                         <tr>
-                            <td class="table-success">ISV 15%</td>
+                            <td class="table-success">Impuesto</td>
                             <td class="text-right"><?php $isv = $_POST["impto"];
                          echo $isv;?></td>
                         </tr>
