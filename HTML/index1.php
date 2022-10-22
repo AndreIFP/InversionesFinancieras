@@ -97,7 +97,7 @@ try {
     <p style="color: #000000 ;">ha solicitado el cambio de contraseña para el usuario '.$usuario.'</p> 
     <p style="color: #000000 ;">Tu Token de Acceso es: '.$token.'</p>
     <p style="color: #000000 ;">Ingresa al siguiente enlace para cambiar su contraseña:</p>
-    <a href="http://localhost/Login2/HTML/contratemp.php"><button style="background-color: #93DEC7 ; width:200px;
+    <a href="http://localhost/InversionesFinancieras/HTML/contratemp.php"><button style="background-color: #93DEC7 ; width:200px;
     margin:10px 40px;
     border-radius: 40px;
     padding:20px;" > Cambiar contraseña</button></a>
