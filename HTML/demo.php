@@ -8,6 +8,23 @@ session_start();
 $_SESSION['id'];
 $_SESSION['user'];
 
+require_once("helpers/helpers.php");
+
+// si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos2($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_FACTURACION]['r']==0 or !isset($_SESSION['permisos'][M_FACTURACION]['r'])) {
+       header("Location: index.php");
+       die();
+   }
+}
+
 
 ?>
 
@@ -91,7 +108,7 @@ $_SESSION['user'];
 <h3>Descripcion de servicios</h3>
 
 <?php
-$mysqli = mysqli_connect("LOCALHOST:3307","root","3214","2w4GSUinHO");
+$mysqli = mysqli_connect("localhost","root","","2w4GSUinHO");
 $query = mysqli_query($mysqli,"SELECT CODIGO_CUENTA, CUENTA FROM TBL_CATALAGO_CUENTAS ORDER BY FIELD (CLASIFICACION, 'ACTIVO', 'PASIVO', 'CAPITAL', 'INGRESOS','COSTOS','GASTOS') ASC, CODIGO_CUENTA, CLASIFICACION");
 ?>
 <table>

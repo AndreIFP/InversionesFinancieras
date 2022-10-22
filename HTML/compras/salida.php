@@ -1,3 +1,27 @@
+<?php
+include("../conexion.php");
+
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_INVENTARIOS]['u']==0 or !isset($_SESSION['permisos'][M_INVENTARIOS]['u'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
+?>
+
 <?php include 'barralateralinicial.php';?>
 <!DOCTYPE HTML>
 <html>
@@ -24,7 +48,7 @@
 <br><br>
 <table cellpadding="5" border="1">
 <?php
-$mysqli = mysqli_connect("LOCALHOST:3307","root","3214","2w4GSUinHO");
+$mysqli = mysqli_connect("localhost","root","","2w4GSUinHO");
 $query = mysqli_query($mysqli,"SELECT proname FROM product");
 ?>
 <tr>
@@ -60,7 +84,7 @@ echo $DateAndTime2;
 ?>" size="20"></td>
       </table>
 <?php
-/*$mysqli = mysqli_connect("LOCALHOST:3307","root","3214","2w4GSUinHO");
+/*$mysqli = mysqli_connect("localhost","root","","2w4GSUinHO");
 $query = mysqli_query($mysqli,"SELECT CODIGO_CUENTA, CUENTA FROM TBL_CATALAGO_CUENTAS ORDER BY FIELD (CLASIFICACION, 'ACTIVO', 'PASIVO', 'CAPITAL', 'INGRESOS','COSTOS','GASTOS') ASC, CODIGO_CUENTA, CLASIFICACION");
 ?>
 <table>

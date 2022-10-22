@@ -1,8 +1,35 @@
 <?php
 include("../conexion.php");
 
+//incluir las funciones de helpers
+include("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
 ?>
-<?php include 'barralateralinicial.php';?>
+<?php 
+// si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+    header("Location: ../login.php"); 
+    die();
+}else{
+    //actualiza los permisos
+    updatePermisos($_SESSION['rol']);
+    
+    //si no tiene permiso de visualización redirige al index
+    if ($_SESSION['permisos'][M_GESTION_USUARIOS]['r']==0 or !isset($_SESSION['permisos'][M_GESTION_USUARIOS]['r'])) {
+        header("Location: ../index.php");
+        die();
+    }
+}
+
+
+include 'barralateralinicial.php';
+/* dep($_SESSION['permisos'][M_GESTION_USUARIOS]['r']); */
+
+
+
+?>
 
   </div>
   <title>Gestión Usuarios</title>
@@ -11,7 +38,11 @@ include("../conexion.php");
                   <div class="col-md-12">
                      <h1>Gestión Usuarios</h1> 
                      <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
+                     <?php  if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['w'] == 1) {
+                                            
+                     ?>
                      <a href="Nuevo_Usuario.php"><input type="submit" class="btn btn-success" Value="Nuevo"></a><p>
+                        <?php } ?>
 		     <?php
                         $mostrar_datos = 0;
                         ?>
@@ -87,8 +118,19 @@ include("../conexion.php");
                                         <th><?php echo $row['Estado_Usuario']?></th>
                                         <th><?php echo $row['Correo_Electronico']?></th>
                                         <th><?php echo $row['Rol']?></th>
-                                        <th><a href="Actualizar_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>"class="btn btn-primary" >Editar</a></th><p>
-                                        <th><a href="Delete_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>"class="btn btn-danger">Eliminar</a></th><p>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['u'] == 1) {
+                                            
+                                         ?>
+                                        <th><a href="Actualizar_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>"class="btn btn-primary" >Editar</a></th>
+                                        <?php } ?>
+                                        <p>
+                                        
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['d'] == 1) {
+                                            
+                                            ?>
+                                        <th><a href="Delete_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>"class="btn btn-danger">Eliminar</a></th>
+                                        <?php } ?>
+                                        <p>
                                     </tr>
                                 <?php
                                        }

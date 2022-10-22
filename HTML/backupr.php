@@ -1,6 +1,25 @@
 <?php
 include("conexion.php");
+
+//incluir las funciones de helpers
+include_once("helpers/helpers.php");
+
+//iniciar las sesiones
 session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos2($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_BACKUP]['r']==0 or !isset($_SESSION['permisos'][M_BACKUP]['r'])) {
+       header("Location: index.php");
+       die();
+   }
+}
 ?>
 <?php include 'barralateralinicial.php';?>
 
@@ -38,8 +57,13 @@ session_start();
                                     
                                 
                                    
-
-	<center><a href="./Backup.php">Realizar copia de seguridad</a></center>
+	<?php  if ($_SESSION['permisos'][M_BACKUP] and $_SESSION['permisos'][M_BACKUP]['w'] == 1) {                      
+	?>
+		<center><a href="./Backup.php">Realizar copia de seguridad</a></center>
+	<?php } ?>
+    
+	<?php  if ($_SESSION['permisos'][M_BACKUP] and $_SESSION['permisos'][M_BACKUP]['u'] == 1) {                      
+	?>
 	<form action="./Restore.php" method="POST">
 	<h1><center>Restauración base de datos</center></p></h1>
 		<select name="restorePoint">
@@ -68,6 +92,7 @@ session_start();
 		</select>
 		<center><button type="submit" >Restaurar</button></center>
 	</form>
+	<?php } ?>
 </body>
                                     
     <script src="/JS/bitacora.js"></script>

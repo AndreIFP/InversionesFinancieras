@@ -1,6 +1,25 @@
 <?php
 include("../conexion.php");
 
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['r']==0 or !isset($_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['r'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
 ?>
 <?php include 'barralateralinicial.php';?>
   </div>
@@ -42,7 +61,7 @@ include("../conexion.php");
                                 <th>Id Usuario</th>
                                 <th>Preguntas</th>
                                 <th>Respuestas</th>
-                                <th></th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,8 +103,14 @@ include("../conexion.php");
                                                 window.alert('No es posible hacer esta Accion');
                                             }
                                         </script>
+                                          <?php  if ($_SESSION['permisos'][M_GESTION_PREG_USUARIOS] and $_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['u'] == 1) {                      
+                                        ?> 
                                         <th><a type="button" class="btn btn-primary" onclick="alerta()" >Editar</a></th>
+                                        <?php } ?>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_PREG_USUARIOS] and $_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['d'] == 1) {                      
+                                        ?> 
                                         <th><a type="button" class="btn btn-danger" onclick="alerta()" >Eliminar</a></th>
+                                        <?php } ?>
                                     </tr>
                                 <?php
                                        }

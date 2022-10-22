@@ -27,6 +27,21 @@ if(isset($_REQUEST["btnrlogin"])){
             if($valor1 == 'ACTIVO'){
                 $data = mysqli_fetch_array($query);
                 $_SESSION['rol']=$data["Rol"];
+
+                $permisos = mysqli_query($conn,"select p.Id_Rol,r.Rol,p.Id_Objetos, o.Objetos,p.Permiso_Creacion as w, p.Permiso_Visualizacion as r, p.Permiso_Eliminacion as d, p.Permiso_Actualizacion as u from tbl_roles_objetos p 
+                INNER JOIN tbl_roles r on p.Id_Rol=r.Id_Rol
+                INNER JOIN tbl_objetos o on p.Id_Objetos = o.Id_Objetos where r.Id_Rol=".$data["Rol"]."");
+                $result_register = mysqli_fetch_all($permisos,1);
+                $row=$result_register;
+                
+                
+                for ($i=0; $i < count($row); $i++) { 
+                    $arrPermisos[$row[$i]['Id_Objetos']] = $row[$i];
+
+                   
+                }
+                $_SESSION['permisos']=$arrPermisos;
+
                 header("Location: index.php");
 
             }elseif(($valor1 == 'INACTIVO' AND $valor2 == '4') or ($valor1 == 'INACTIVO' AND $valor2 == '2') or ($valor1 == 'INACTIVO' AND $valor2 == '3')){

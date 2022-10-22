@@ -1,7 +1,27 @@
 <?php
 include("../conexion.php");
 
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_GESTION_OBJETOS]['r']==0 or !isset($_SESSION['permisos'][M_GESTION_OBJETOS]['r'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
 ?>
+
 <?php include 'barralateralinicial.php';?>
   </div>
   <title>Gestión Objetos</title>
@@ -10,8 +30,10 @@ include("../conexion.php");
                   <div class="col-md-12">
                      <h1>Gestión Objetos</h1> 
                      <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
-                     
+                     <?php  if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['w'] == 1) {                      
+                    ?>
                      <a href="Nuevo_Objetos.php"><input type="submit" class="btn btn-success" Value="Crear Nuevo Objeto"></a><p>
+                        <?php } ?>
                      <?php
                         $mostrar_datos = 0;
                         ?>
@@ -81,8 +103,15 @@ include("../conexion.php");
                                         <th><?php echo $row['Objetos']?></th>
                                         <th><?php echo $row['Descripcion']?></th>
                                         <th><?php echo $row['Tipo_Objeto']?></th>
+
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['u'] == 1) {                      
+                                        ?>
                                         <th><a href="Actualizar_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-primary" >Editar</a></th>
+                                        <?php } ?>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['d'] == 1) {                      
+                                        ?>
                                         <th><a href="Delete_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-danger">Eliminar</a></th><p>
+                                        <?php } ?>
                                     </tr>
                                 <?php
                                        }

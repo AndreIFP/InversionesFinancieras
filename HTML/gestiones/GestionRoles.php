@@ -1,6 +1,25 @@
 <?php
 include("../conexion.php");
 
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_GESTION_ROLES]['r']==0 or !isset($_SESSION['permisos'][M_GESTION_ROLES]['r'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
 ?>
 <?php include 'barralateralinicial.php';?>
   </div>
@@ -10,8 +29,11 @@ include("../conexion.php");
                   <div class="col-md-12">
                      <h1>Gestión Roles</h1> 
                      <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
-                     
+                     <?php  if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['w'] == 1) {
+                                            
+                        ?>
                      <a href="Nuevo_Roles.php"><input type="submit" class="btn btn-success" Value="Crear Nuevo Rol"></a><p>
+                        <?php } ?>
 			<?php
                      $mostrar_datos = 0;
                      ?>
@@ -81,8 +103,17 @@ include("../conexion.php");
                                         <th><?php echo $row['Id_Rol']?></th>
                                         <th><?php echo $row['Rol']?></th>
                                         <th><?php echo $row['Descripcion']?></th>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['u'] == 1) {
+                                            
+                                        ?>
                                         <th><a href="Actualizar_Roles.php?Id=<?php echo $row['Id_Rol'] ?>"class="btn btn-primary" >Editar</a></th>
+                                        <th><a href="Actualizar_Permisos.php?Id=<?php echo $row['Id_Rol'] ?>"class="btn btn-success" >Permisos</a></th>
+                                        <?php } ?>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['d'] == 1) {
+                                            
+                                            ?>
                                         <th><a href="Delete_Roles.php?Id=<?php echo $row['Id_Rol'] ?>"class="btn btn-danger">Eliminar</a></th><p>
+                                        <?php } ?>
                                     </tr>
                                 <?php
                                        }
