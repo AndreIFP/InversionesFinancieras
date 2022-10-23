@@ -86,7 +86,7 @@ if (!isset($_SESSION['rol'])) {
 
                                 $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select * FROM TBL_PREGUNTAS_X_USUARIO LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select * FROM TBL_PREGUNTAS_X_USUARIO ORDER BY Id_Usuario DESC LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);
