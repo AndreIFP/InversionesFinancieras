@@ -8,23 +8,6 @@ session_start();
 $_SESSION['id'];
 $_SESSION['user'];
 
-require_once("helpers/helpers.php");
-
-// si no existe la variable rol, el usuario no esta logueado y redirige al Login
-if (!isset($_SESSION['rol'])) {
-   header("Location: login.php"); 
-   die();
-}else{
-   //actualiza los permisos
-   updatePermisos2($_SESSION['rol']);
-   
-   //si no tiene permiso de visualización redirige al index
-   if ($_SESSION['permisos'][M_FACTURACION]['r']==0 or !isset($_SESSION['permisos'][M_FACTURACION]['r'])) {
-       header("Location: index.php");
-       die();
-   }
-}
-
 
 ?>
 
@@ -103,31 +86,6 @@ function multiplicar(){
 <br><br>
 <h1>Descripción de servicios</h1>
 
-<h3>Descripcion de servicios</h3>
-
-<?php
-$mysqli = mysqli_connect("localhost:3307","root","3214","2w4GSUinHO");
-$query = mysqli_query($mysqli,"SELECT CODIGO_CUENTA, CUENTA FROM TBL_CATALAGO_CUENTAS ORDER BY FIELD (CLASIFICACION, 'ACTIVO', 'PASIVO', 'CAPITAL', 'INGRESOS','COSTOS','GASTOS') ASC, CODIGO_CUENTA, CLASIFICACION");
-?>
-<table>
-   <tr>
-      <th>Cuenta</th>
-   </tr>
-   <tr>
-     <td>
-      <select name ="Cuenta" >
-         <?php
-         while ($fila = $query->fetch_assoc()):
-         $id = $fila['CODIGO_CUENTA'];
-         $nombre = $fila['CUENTA'];
-         echo "<option value='$nombre                              '>$id,   $nombre</option>";
-         endwhile;
-         ?>
-         </select>
-     </td>
-   </tr>
-        </center>
-</table>
 <br><br>
 
 <form id="multiplicar">

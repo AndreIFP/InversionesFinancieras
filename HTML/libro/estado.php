@@ -120,7 +120,7 @@ $_SESSION['temporada']="10";
                                <div class="col-md-12 btn-print">
                         <label for="date" class="col-sm-3 control-label">Descripción</label>
                         <div class="input-group col-sm-8">
-                          <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required pattern="^[A-Z a-z áóíéúñ \s]*$" >
+                          <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required pattern="^[A-Z a-z áóíéúñÁÉÍÓÚÑ \s]*$" maxlength="50">
                         </div><!-- /.input group -->
                       </div><!-- /.form group -->
                     </div>
@@ -128,7 +128,7 @@ $_SESSION['temporada']="10";
                       <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Monto a depositar</label>
                         <div class="input-group col-sm-8">
-                          <input type="text" class="form-control pull-right" id="monto" name="monto" required pattern="^[0-9]*$">
+                          <input type="text" class="form-control pull-right" id="monto" name="monto" required pattern="^[0-9]*$" maxlength="20">
                         </div><!-- /.input group -->
                       </div><!-- /.form group -->
                     </div>
@@ -205,7 +205,7 @@ $_SESSION['temporada']="10";
                     //  if ($eliminar=="si") {
                     
                       ?>
-   <a class="small-box-footer btn-print"  href="<?php  echo "eliminar_estado.php?monto=$monto&id_libro=$id_libro&debe_haber=$debe_haber&id_usuario=$id_usuario";?>" onClick="return confirm('¿Está seguro de que quieres eliminar transacción?');"><i class="glyphicon glyphicon-remove"></i></a>
+   <a class="small-box-footer btn-print"  href="<?php  echo "eliminar_estado.php?monto=$monto&id_libro=$id_libro&debe_haber=$debe_haber&id_usuario=$id_usuario";?>" onClick="return confirm('¿Está seguro de que quieres eliminar la transacción?');"><i class="glyphicon glyphicon-remove"></i></a>
    <?php
                   //    }
                       ?>

@@ -160,7 +160,7 @@ echo "FECHA DE GENERACION DE SU FACTURA: $DateAndTime2.";
 
             <center><br><br>
                 <h5>¡GRACIAS POR PREFERIR NUESTROS SERVICIOS!</h5>
-                <h5>Presione CTRL + P para imprimir su factura</h5>
+                
             </center>
 
             <br>
