@@ -54,8 +54,9 @@ if($nr == 1)
 else if ($nr == 0) 
 {
 	//header("Location: login.php");
+//==========================REDIRIGE A LOGIN ===============================
 	echo "No ingreso"; 
-	echo "<script> alert('Usuario No Valido: ');window.location= 'OlvidoContra.php' </script>";
+	echo "<script> alert('Usuario No Valido: ');window.location= 'Login.php' </script>";
 }
 	
 //Validacion registro

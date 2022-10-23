@@ -1,3 +1,9 @@
+<?php  
+  include('conexion.php');
+  
+  date_default_timezone_set("America/Tegucigalpa");
+ 
+?>
 <!DOCTYPE html 5>
 <html lang="en">
 <head>
@@ -14,11 +20,56 @@
              
          <?php
              $usuario = $_POST["txtusuario"];
+             $date = date('Y-m-d H:i:s');
+
+             $queryUser=mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '$usuario'");
+             $userResult = mysqli_fetch_array($queryUser,1);
+             $filaUser=mysqli_num_rows($queryUser);
+            
+
+             if ($filaUser<1) {
+              echo "<script> alert('Usuario no Encontrado');window.location= 'OlvidoContra.php' </script>";
+              exit;
+             }else{
+              $idUsuario=$userResult['Id_Usuario'];
+             }
+             
+
+             $queryToken=mysqli_query($conn,"SELECT * FROM tbl_token WHERE Id_usuario = $idUsuario");
+             $fila=mysqli_num_rows($queryToken);
+
+             if ($fila>=1) {
+              $tokenResult = mysqli_fetch_array($queryToken,1);
+            
+              $fechaFinal=$tokenResult['Fecha_final'];
+             }else{
+              $fechaFinal=0;
+             }
+           
+          
+           
           ?>
+             
 
              <form  id="frmregistrar" class="login-form" action="ValidacionoCorreo2.php" method="post">
-            <input id="txtususario" value=<?php echo $usuario ?> name="txtusuario" type="hidden" />
-           <button type="submit" name="btnrlogin" >contraseña via Correo Electronico  </button>
+
+
+            <?php 
+            
+              if ($date  > $fechaFinal ) {
+
+              ?>
+
+               <input id="txtususario" value=<?php echo $usuario ?> name="txtusuario" type="hidden" />
+              <button type="submit" name="btnrlogin" >contraseña via Correo Electronico  </button>
+
+              <?php  
+                }else{
+            ?>
+           
+           <button type="button" onclick="valida()" name="" style="background-color: gray;" >contraseña via Correo Electronico  </button>
+
+           <?php } ?>
           </form>
 
           <form  id="frmregistrar" class="login-form" action="preguntasxUsuario.php" method="post">
@@ -180,6 +231,12 @@ body {
 }
  </style>
 <script>
+
+function valida() {
+  alert("Tiene un Token vigente, Por favor revise su correo electronico")
+}
+
+
 $('.message a').click(function(){
   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
 });
