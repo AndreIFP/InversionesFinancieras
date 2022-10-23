@@ -63,7 +63,7 @@ if (!isset($_SESSION['rol'])) {
                                 <th>Acción</th>
                                 <th>Descripcion</th>
                                 <th>Usuario</th>
-                                <th>Acciones</th>
+                     
                                 <th></th>
                             </tr>
                         </thead>
@@ -89,7 +89,7 @@ if (!isset($_SESSION['rol'])) {
 
                                 $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select * FROM TBL_MS_BITACORA LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select * FROM TBL_MS_BITACORA ORDER BY Id_Bitacora DESC LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);
