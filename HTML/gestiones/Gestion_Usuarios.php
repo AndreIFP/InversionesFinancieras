@@ -1,8 +1,35 @@
 <?php
 include("../conexion.php");
 
+//incluir las funciones de helpers
+include("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
 ?>
-<?php include 'barralateralinicial.php';?>
+<?php 
+// si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+    header("Location: ../login.php"); 
+    die();
+}else{
+    //actualiza los permisos
+    updatePermisos($_SESSION['rol']);
+    
+    //si no tiene permiso de visualización redirige al index
+    if ($_SESSION['permisos'][M_GESTION_USUARIOS]['r']==0 or !isset($_SESSION['permisos'][M_GESTION_USUARIOS]['r'])) {
+        header("Location: ../index.php");
+        die();
+    }
+}
+
+
+include 'barralateralinicial.php';
+/* dep($_SESSION['permisos'][M_GESTION_USUARIOS]['r']); */
+
+
+
+?>
 
   </div>
   <title>Gestión Usuarios</title>
@@ -10,17 +37,21 @@ include("../conexion.php");
   <div class="container mt-12">
                   <div class="col-md-12">
                      <h1>Gestión Usuarios</h1> 
-                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
+                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
+                     <?php  if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['w'] == 1) {
+                                            
+                     ?>
                      <a href="Nuevo_Usuario.php"><input type="submit" class="btn btn-success" Value="Nuevo"></a><p>
+                        <?php } ?>
 		     <?php
                         $mostrar_datos = 0;
                         ?>
-                     <form action="" method="get">
-                            <label for="datos_mostrar">Datos A Mostrar En El Formulario</label>
+                     <form action="" method="get" class="form_datos">
+                            <label for="datos_mostrar">Datos A mostrar</label>
                             <select name="mostrar" onchange='submit();'>
                             <option ></option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
                             <option value="100">100</option>
                                 <?php
                                 $mostrar_datos = $_GET['mostrar'];
@@ -28,13 +59,7 @@ include("../conexion.php");
                             </select>
                      </form>
                      <form action="Buscador_Usuario.php" method="get" class="form_search">
-                            <select name="datos">
-                                <option value ="">Seleccione</option>
-                                <option value="2">2</option>
-                                <option value="4">4</option>
-                                <option value="100">100</option>
-                            </select>
-                            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
+                            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
                             <input type="submit" value="Buscar" class="btn_search">
                      </form>
 
@@ -45,7 +70,7 @@ include("../conexion.php");
                                 <th>Usuario</th>
                                 <th>Nombre Usuario</th>
                                 <th>Estado</th>
-                                <th>Correo Electronico</th>
+                                <th>Correo Electrónico</th>
                                 <th>Rol</th>
                                 <th>Acciones</th>
                                 <th></th>
@@ -73,7 +98,7 @@ include("../conexion.php");
 
                                 $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol ORDER BY u.Id_Usuario ASC LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);
@@ -87,8 +112,19 @@ include("../conexion.php");
                                         <th><?php echo $row['Estado_Usuario']?></th>
                                         <th><?php echo $row['Correo_Electronico']?></th>
                                         <th><?php echo $row['Rol']?></th>
-                                        <th><a href="Actualizar_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>"class="btn btn-primary" >Editar</a></th><p>
-                                        <th><a href="Delete_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>"class="btn btn-danger">Eliminar</a></th><p>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['u'] == 1) {
+                                            
+                                         ?>
+                                        <th><a href="Actualizar_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>"class="btn btn-primary" >Editar</a></th>
+                                        <?php } ?>
+                                        <p>
+                                        
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['d'] == 1) {
+                                            
+                                            ?>
+                                        <th><a href="Delete_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>"class="btn btn-danger">Eliminar</a></th>
+                                        <?php } ?>
+                                        <p>
                                     </tr>
                                 <?php
                                        }
@@ -169,6 +205,17 @@ include("../conexion.php");
 	display: -o-flex;
 	display: flex;
 	float: right;
+	background: initial;
+	padding: 10px;
+	border-radius: 10px;
+}
+.form_datos{
+display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	float: left;
 	background: initial;
 	padding: 10px;
 	border-radius: 10px;

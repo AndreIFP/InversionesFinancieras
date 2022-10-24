@@ -7,17 +7,18 @@
 		{ 
 			$alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
 		}else{
-  $Id_Usuario=$_POST['Id_Usuario'];
-  $Usuario=$_POST['Usuario'];
-  $Nombre_Usuario=$_POST['Nombre_Usuario'];
-  $Estado_Usuario=$_POST['Estado_Usuario'];
-  $Correo_Electronico=$_POST['Correo_Electronico'];
-  $Rol=$_POST['Rol'];
+            $Id_Usuario         = $_POST['Id_Usuario'];
+            $Usuario            = $_POST['Usuario'];
+            $Nombre_Usuario     = $_POST['Nombre_Usuario'];
+            $Estado_Usuario     = $_POST['Estado_Usuario'];
+            $contra             = $_POST['Contraseña'];
+            $Correo_Electronico = $_POST['Correo_Electronico'];
+            $Rol                = $_POST['Rol'];
 
   if(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$Nombre_Usuario)){
     $alert='<p class="msg_error"> El Nombre Solo Recibe Letras.</p>';
   }else{
-  $sql = "UPDATE TBL_USUARIO SET Nombre_Usuario='$Nombre_Usuario',Estado_Usuario='$Estado_Usuario',Correo_Electronico='$Correo_Electronico' ,Rol='$Rol' WHERE Id_Usuario='$Id_Usuario'";
+  $sql = "UPDATE TBL_USUARIO SET Nombre_Usuario='$Nombre_Usuario',Estado_Usuario='$Estado_Usuario', Contraseña='$contra', Correo_Electronico='$Correo_Electronico' ,Rol='$Rol' WHERE Id_Usuario='$Id_Usuario'";
   $query=mysqli_query($conn,$sql);
      if($query){
          echo "<script> alert('Usuario: $Usuario Actualizado');window.location= 'Gestion_Usuarios.php' </script>";
@@ -26,7 +27,7 @@
   }
   }
    $Id=$_GET['Id'];
-   $sql = "SELECT u.Id_Usuario,u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, (u.Rol) as IdRol, (r.Rol) as Rol 
+   $sql = "SELECT u.Id_Usuario,u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Contraseña, u.Correo_Electronico, (u.Rol) as IdRol, (r.Rol) as Rol 
              FROM TBL_USUARIO u
              INNER JOIN TBL_ROLES r
              ON u.Rol = r.Id_Rol
@@ -39,13 +40,14 @@
    }else{
     $option = '';
     while($row=mysqli_fetch_array($query)) {
-        $Id_Usuario = $row['Id_Usuario'];
-        $Usuario = $row['Usuario'];
-        $Nombre_Usuario = $row['Nombre_Usuario'];
-        $Estado_Usuario = $row['Estado_Usuario'];
+        $Id_Usuario         = $row['Id_Usuario'];
+        $Usuario            = $row['Usuario'];
+        $Nombre_Usuario     = $row['Nombre_Usuario'];
+        $Estado_Usuario     = $row['Estado_Usuario'];
+        $contra             = $row['Contraseña'];
         $Correo_Electronico = $row['Correo_Electronico'];
-        $Id_Rol = $row['IdRol'];
-        $Rol = $row['Rol'];
+        $Id_Rol             = $row['IdRol'];
+        $Rol                = $row['Rol'];
         if($Id_Rol == 1){
             $option = '<option value="'.$Id_Rol.'" select>'.$Rol.'</option>';
         }else if($Id_Rol == 2){
@@ -62,7 +64,29 @@
     header('location: Gestion_Usuarios.php');
    }
 ?>
+<?php
 
+
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_GESTION_USUARIOS]['u']==0 or !isset($_SESSION['permisos'][M_GESTION_USUARIOS]['u'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
+?>
 <?php include 'barralateralinicial.php';?>
 
   </div>
@@ -78,27 +102,26 @@
                   <label for="">Usuario</label>
                   <input type="text" Class="form-contorl mb-3" name="Usuario" readonly= "true" placeholder="Usuario" value ="<?php echo $Usuario ?>" maxlength="10" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" required size="30">
                   <label for="">Nombre Usuario</label>
-                  <input type="text" Class="form-contorl mb-3" name="Nombre_Usuario" placeholder="Nombre Usuario" value ="<?php echo $Nombre_Usuario ?>" maxlength="20" style="text-transform:uppercase;"  required size="30"><br>
-                  </br>
-                  <div class="ub1">Estado Usuario</div>
-                  
+                  <input type="text" Class="form-contorl mb-3" name="Nombre_Usuario" placeholder="Nombre Usuario" value ="<?php echo $Nombre_Usuario ?>" maxlength="20" style="text-transform:uppercase;"  required size="30">
+                  <label for="Password">Contraseña</label>
+                  <input  id="inpucontracon"  type="password" Class="form-contorl mb-3" name="Contraseña" placeholder="Contraseña" value ="<?php echo $contra ?>"  maxlength="16" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}"
+                  title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. "/>
+                  <label for="">Estado Usuario</label>
                   <select name="Estado_Usuario" required>
                   <option value ="">Seleccione Una Opción</option>
                   <option value="ACTIVO">ACTIVO</option>
                   <option value="INACTIVO">INACTIVO</option>
                   </select>
-                  <label for="">Correo Electronico</label>
-                  <input type="email" Class="form-contorl mb-3" name="Correo_Electronico" placeholder="Correo Electronico" value ="<?php echo $Correo_Electronico ?>" maxlength="50" required size="30"></br>
-                  </br>
-                  <div class="ub1">Rol</div>
+                  <label for="">Correo Electrónico</label>
+                  <input type="email" Class="form-contorl mb-3" name="Correo_Electronico" placeholder="Correo Electronico" value ="<?php echo $Correo_Electronico ?>" maxlength="50" required size="30">
+                  <label for="">Rol</label>
                   <?php 
 					include("../conexion.php");
-					$query_rol = mysqli_query($conn,"SELECT * FROM TBL_ROLES");
+					$query_rol = mysqli_query($conn,"SELECT * FROM TBL_ROLES WHERE Estado = 'ACTIVO'");
 					mysqli_close($conn);
 					$result_rol = mysqli_num_rows($query_rol);
 
 				 ?>
-
 				<select name="Rol" id="Rol" class="notItemOne">
 					<?php
 						echo $option; 
@@ -187,4 +210,11 @@ label{
 	padding: 10px;
 }
 </style>
+<script>
+//validacion no espacios en contraseña
+var input = document.getElementById('inpucontracon');
+input.addEventListener('input',function(){
+     this.value = this.value.trim();
+})
+</script>
 <?php include 'barralateralfinal.php';?>

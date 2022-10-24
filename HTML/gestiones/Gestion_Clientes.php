@@ -1,6 +1,25 @@
 <?php
 include("../conexion.php");
 
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_GESTION_CLIENTE]['r']==0 or !isset($_SESSION['permisos'][M_GESTION_CLIENTE]['r'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
 ?>
 
 <?php include 'barralateralinicial.php';?>
@@ -11,7 +30,10 @@ include("../conexion.php");
                   <div class="col-md-12">
                      <h1>Gestión Clientes</h1> 
                      <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
+                     <?php  if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['w'] == 1) {                    
+                    ?>
                      <a href="Nuevo_Cliente.php"><input type="submit" class="btn btn-success" Value="Crear Nuevo Cliente"></a><p>
+                    <?php } ?>
                      <?php
                         $mostrar_datos = 0;
                         ?>
@@ -76,7 +98,7 @@ include("../conexion.php");
 
                                 $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select * FROM TBL_CLIENTES LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select * FROM TBL_CLIENTES ORDER BY Fecha_Dato DESC LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);
@@ -93,8 +115,14 @@ include("../conexion.php");
                                         <th><?php echo $row['Tipo_Cliente']?></th>
                                         <th><?php echo $row['Ciudad']?></th>
                                         <th><?php echo $row['Fecha_Dato']?></th>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {                    
+                                        ?>
                                         <th><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>"class="btn btn-primary" >Editar</a></th><p>
+                                        <?php } ?>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['d'] == 1) {                    
+                                        ?>
                                         <th><a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>"class="btn btn-danger">Eliminar</a></th><p>
+                                        <?php } ?>
                                     </tr>
                                 <?php
                                        }

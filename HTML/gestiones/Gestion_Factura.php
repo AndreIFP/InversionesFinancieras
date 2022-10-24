@@ -1,6 +1,25 @@
 <?php
 include("../conexion.php");
 
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_GESTION_FACTURAS]['r']==0 or !isset($_SESSION['permisos'][M_GESTION_FACTURAS]['r'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
 ?>
 
 <?php include 'barralateralinicial.php';?>
@@ -71,7 +90,7 @@ include("../conexion.php");
 
                                 $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select * FROM FACTURA LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select * FROM FACTURA ORDER BY NFACTURA DESC LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);
@@ -89,8 +108,16 @@ include("../conexion.php");
                                                 window.alert('No es posible hacer esta Accion');
                                             }
                                         </script>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_FACTURAS] and $_SESSION['permisos'][M_GESTION_FACTURAS]['u'] == 1) {
+                                            
+                                            ?>
                                         <th><a type="button" class="btn btn-primary" onclick="alerta()" >Editar</a></th>
+                                        <?php } ?>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_FACTURAS] and $_SESSION['permisos'][M_GESTION_FACTURAS]['d'] == 1) {
+                                            
+                                            ?>
                                         <th><a type="button" class="btn btn-danger" onclick="alerta()" >Eliminar</a></th>
+                                        <?php } ?>
                                     
                                     </tr>
                                 <?php

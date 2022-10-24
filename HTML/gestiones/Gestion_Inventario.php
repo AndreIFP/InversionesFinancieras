@@ -1,5 +1,26 @@
 <?php
 include("../conexion.php");
+session_start();
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+// si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+    header("Location: ../login.php"); 
+    die();
+ }else{
+    //actualiza los permisos
+    updatePermisos($_SESSION['rol']);
+    
+    //si no tiene permiso de visualización redirige al index
+    if ($_SESSION['permisos'][M_INVENTARIOS]['r']==0 or !isset($_SESSION['permisos'][M_INVENTARIOS]['r'])) {
+        header("Location: ../index.php");
+        die();
+    }
+ }
+
+
+
 
 ?>
 <?php include 'barralateralinicial.php';?>
@@ -11,7 +32,10 @@ include("../conexion.php");
                   
                      <h1>Gestión Bodega - Inventario</h1> 
                      <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
+                    <?php  if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {                     
+                     ?>
                      <a href="../compras/compra.php"><input type="submit" class="btn btn-success" Value="Nuevo Producto"></a><p>
+                        <?php } ?>
                      <?php
                         $mostrar_datos = 0;
                         ?>
@@ -71,7 +95,7 @@ include("../conexion.php");
 
                                 $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select * FROM product LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select * FROM product ORDER BY time DESC LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);
@@ -82,14 +106,23 @@ include("../conexion.php");
                                         <th><?php echo $row['id']?></th>
                                         <th><?php echo $row['proname']?></th>
                                         <th><?php echo $row['amount']?></th>
-                                        <th><?php echo $row['time']?></th>                                 
+                                        <th><?php echo $row['time']?></th>
+
+                                        <?php  if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['u'] == 1) {
+                                        
+                                            ?>                                 
                                         <th><a href="../Compras/salida.php?Id=<?php echo $row['id'] ?>"class="btn btn-primary" >Retirar</a></th>
+                                        <?php } ?>
                                         <script>
                                             function alerta(){
                                                 window.alert('No es posible hacer esta Accion');
                                             }
                                         </script>
+                                         <?php  if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['d'] == 1) {
+                                            
+                                            ?>
                                         <th><a type="button" class="btn btn-danger" onclick="alerta()" >Eliminar</a></th>
+                                        <?php } ?>
                                     </tr>
                                 <?php
                                        }

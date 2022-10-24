@@ -1,7 +1,27 @@
 <?php
 include("../conexion.php");
 
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_GESTION_PARAMETROS]['r']==0 or !isset($_SESSION['permisos'][M_GESTION_PARAMETROS]['r'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
 ?>
+
 <?php include 'barralateralinicial.php';?>
   </div>
   <title>Gestión Parametros</title>
@@ -9,7 +29,10 @@ include("../conexion.php");
                   <div class="col-md-12">
                      <h1>Gestión Parametros</h1> 
                      <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
+                     <?php  if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['w'] == 1) {                      
+                    ?>
                      <a href="Nuevo_Parametro.php"><input type="submit" class="btn btn-success" Value="Crear Parametro"></a><p>
+                    <?php } ?>
                      <?php
                         $mostrar_datos = 0;
                         ?>
@@ -70,7 +93,7 @@ include("../conexion.php");
 
                                 $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select * FROM TBL_PARAMETROS LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select * FROM TBL_PARAMETROS ORDER BY Fecha_Creacion DESC LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);
@@ -88,8 +111,16 @@ include("../conexion.php");
                                                 window.alert('No es posible hacer esta Accion');
                                             }
                                         </script>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['u'] == 1) {
+                                            
+                                            ?>
                                         <th><a type="button" class="btn btn-primary" onclick="alerta()" >Editar</a></th>
+                                        <?php } ?>
+
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['d'] == 1) {
+                                        ?>
                                         <th><a type="button" class="btn btn-danger" onclick="alerta()" >Eliminar</a></th>
+                                        <?php } ?>
                                     </tr>
                                 <?php
                                        }

@@ -22,7 +22,7 @@
 <br><br>
 <table cellpadding="5" border="1">
 <?php
-$mysqli = mysqli_connect("LOCALHOST:3307","root","3214","2w4GSUinHO");
+$mysqli = mysqli_connect("localhost:3307","root","3214","2w4GSUinHO");
 $query = mysqli_query($mysqli,"SELECT nproducto FROM TBL_KARDEX");
 ?>
 <tr>
@@ -58,7 +58,7 @@ echo $DateAndTime2;
 ?>" size="20"></td>
       </table>
 <?php
-/*$mysqli = mysqli_connect("LOCALHOST:3307","root","3214","2w4GSUinHO");
+/*$mysqli = mysqli_connect("localhost","root","","2w4GSUinHO");
 $query = mysqli_query($mysqli,"SELECT CODIGO_CUENTA, CUENTA FROM TBL_CATALAGO_CUENTAS ORDER BY FIELD (CLASIFICACION, 'ACTIVO', 'PASIVO', 'CAPITAL', 'INGRESOS','COSTOS','GASTOS') ASC, CODIGO_CUENTA, CLASIFICACION");
 ?>
 <table>

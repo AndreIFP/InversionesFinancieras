@@ -109,8 +109,10 @@ if(isset($_REQUEST["Credito"])){
                         <td><?php $isv = $_POST["impto"];
                          echo $isv;
                         ?></td>
-                        <td><?php $total = $_POST["total"];
-                         echo $total;
+                        <td><?php $grav = $_POST["gravado"];
+                            $isv = $_POST["impto"];
+                            $result = $grav + $isv;
+                         echo $result;
                         ?></td>
                     </tr>
                 </tbody>
@@ -128,7 +130,7 @@ if(isset($_REQUEST["Credito"])){
                         ?></td>
                         </tr>
                         <tr>
-                            <td class="table-success">ISV 15%</td>
+                            <td class="table-success">Impuesto</td>
                             <td class="text-right"><?php $isv = $_POST["impto"];
                          echo $isv;?></td>
                         </tr>
@@ -158,7 +160,7 @@ echo "FECHA DE GENERACION DE SU FACTURA: $DateAndTime2.";
 
             <center><br><br>
                 <h5>¡GRACIAS POR PREFERIR NUESTROS SERVICIOS!</h5>
-                <h5>Presione CTRL + P para imprimir su factura</h5>
+                
             </center>
 
             <br>

@@ -1,4 +1,9 @@
 
+<?php
+
+require_once("helpers/helpers.php");
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -431,19 +436,20 @@ color: var(--text-color);
             
               </li>
              
-            <?php
-              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2){
+              <?php
+               
+                if(isset($_SESSION['permisos'][M_FACTURACION]) and $_SESSION['permisos'][M_FACTURACION]['r'] == 1){
              ?>
               <li class="" style="height: 50px;">
                   <a href="demo.php" style="align-items: center;">
                       <i class='bx bx-detail icon' ></i>
-                      <span class="text nav-text">Facturacion</span>
+                      <span class="text nav-text">Facturación</span>
                   </a>
               </li>
             <?php } ?>
 
-            <?php
-              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2 || $_SESSION['rol'] == 6){
+            <?php 
+                if(isset($_SESSION['permisos'][M_INVENTARIOS]) and $_SESSION['permisos'][M_INVENTARIOS]['r'] == 1){
              ?>
               <li class="" style="height: 50px;">
                   <a href="gestiones/Gestion_Inventario.php" style="align-items: center;">
@@ -453,8 +459,8 @@ color: var(--text-color);
               </li>
               <?php } ?>
 
-              <?php
-              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2){
+              <?php 
+                if(isset($_SESSION['permisos'][M_LIBRO_DIARIO]) and $_SESSION['permisos'][M_LIBRO_DIARIO]['r'] == 1){
              ?>
               <li class="" style="height: 50px;">
                   <a href="libro/validacionlibro.php" style="align-items: center;">
@@ -464,8 +470,8 @@ color: var(--text-color);
               </li>
               <?php } ?>
 
-              <?php
-              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2){
+              <?php 
+                if(isset($_SESSION['permisos'][M_BALGENERAL]) and $_SESSION['permisos'][M_BALGENERAL]['r'] == 1){
              ?>
               <li class="" style="height: 50px;">
                   <a href="libro/validacionbalance.php" style="align-items: center;">
@@ -475,8 +481,8 @@ color: var(--text-color);
               </li>
               <?php } ?>
 
-              <?php
-              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2){
+              <?php 
+                if(isset($_SESSION['permisos'][M_ESTADORESULTADO]) and $_SESSION['permisos'][M_ESTADORESULTADO]['r'] == 1){
              ?>
               <li class="" style="height: 50px;">
                   <a href="libro/validacionestado.php" style="align-items: center;">
@@ -486,8 +492,8 @@ color: var(--text-color);
               </li>
               <?php } ?>
 
-              <?php
-              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2){
+              <?php 
+                if(isset($_SESSION['permisos'][M_REP_ESTADORESULTADO]) and $_SESSION['permisos'][M_REP_ESTADORESULTADO]['r'] == 1){
              ?>
               <li class="" style="height: 50px;">
                   <a href="libro/validacionresultado.php" style="align-items: center;">
@@ -496,18 +502,29 @@ color: var(--text-color);
                   </a>
               </li>
               <?php } ?>
-
-              <?php
-              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3 || $_SESSION['rol'] == 6){
+                <!-- DESPUES -->
+                <?php 
+                if((isset($_SESSION['permisos'][M_GESTION_BITACORA]) and $_SESSION['permisos'][M_GESTION_BITACORA]['r'] == 1) ||
+                (isset($_SESSION['permisos'][M_GESTION_CAT_CUENTA]) and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['r'] == 1) ||
+                (isset($_SESSION['permisos'][M_GESTION_CLIENTE]) and $_SESSION['permisos'][M_GESTION_CLIENTE]['r'] == 1) ||
+                (isset($_SESSION['permisos'][M_GESTION_FACTURAS]) and $_SESSION['permisos'][M_GESTION_FACTURAS]['r'] == 1 )||
+                (isset($_SESSION['permisos'][M_INVENTARIOS]) and $_SESSION['permisos'][M_INVENTARIOS]['r'] == 1) ||
+                (isset($_SESSION['permisos'][M_LIBRO_MAYOR]) and $_SESSION['permisos'][M_LIBRO_MAYOR]['r'] == 1) ||
+                (isset($_SESSION['permisos'][M_GESTION_PARAMETROS]) and $_SESSION['permisos'][M_GESTION_PARAMETROS]['r'] == 1) ||
+                (isset($_SESSION['permisos'][M_GESTION_PREGUNTAS]) and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['r'] == 1) || 
+                (isset($_SESSION['permisos'][M_GESTION_PREG_USUARIOS]) and $_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['r'] == 1 )||
+                (isset($_SESSION['permisos'][M_GESTION_USUARIOS]) and $_SESSION['permisos'][M_GESTION_USUARIOS]['r'] == 1) ||
+                (isset($_SESSION['permisos'][M_GESTION_ROLES]) and $_SESSION['permisos'][M_GESTION_ROLES]['r'] == 1 )||
+                (isset($_SESSION['permisos'][M_GESTION_OBJETOS]) and $_SESSION['permisos'][M_GESTION_OBJETOS]['r']) == 1){
              ?>
               <li class="" class="fa fa-caret-down"   >
             
-                <a href="index.php" style="align-items: center; height: 50px;  "  >
+                <a  style="align-items: center; height: 50px;  "  >
                     <i class='bx bx-cog icon' ></i>
                     <span class="text nav-text">Gestiones</span>
                 </a>
-                <?php
-              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3 || $_SESSION['rol'] == 6){
+                <?php 
+                if(isset($_SESSION['permisos'][M_GESTION_BITACORA]) and $_SESSION['permisos'][M_GESTION_BITACORA]['r'] == 1){
              ?>
                   <ul style="position: relative;  display: none; "  >
                   <a href="gestiones/Gestion_Bitacora.php" style="align-items: center;" >
@@ -516,7 +533,7 @@ color: var(--text-color);
                 <?php } ?>
 
                 <?php 
-                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+                if(isset($_SESSION['permisos'][M_GESTION_CAT_CUENTA]) and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['r'] == 1){
              ?>
                   <a href="gestiones/Gestion_CatalogoCuenta.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Catalogo Cuentas</span>
@@ -524,7 +541,7 @@ color: var(--text-color);
                 <?php } ?>
 
                 <?php 
-                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+                if(isset($_SESSION['permisos'][M_GESTION_CLIENTE]) and $_SESSION['permisos'][M_GESTION_CLIENTE]['r'] == 1){
              ?>
                   <a href="gestiones/Gestion_Clientes.php" style="align-items: center;"  >
                       <span class="text nav-text">Gestion Clientes</span>
@@ -532,7 +549,7 @@ color: var(--text-color);
                   <?php } ?>
                      
                   <?php 
-                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+                if(isset($_SESSION['permisos'][M_GESTION_FACTURAS]) and $_SESSION['permisos'][M_GESTION_FACTURAS]['r'] == 1){
              ?>
                 <a href="gestiones/Gestion_Factura.php" style="align-items: center; ">
                     <span class="text nav-text" >Gestion Facturas</span>
@@ -540,7 +557,7 @@ color: var(--text-color);
                 <?php } ?>
 
                 <?php 
-                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+                if(isset($_SESSION['permisos'][M_INVENTARIOS]) and $_SESSION['permisos'][M_INVENTARIOS]['r'] == 1){
              ?>
                   <a href="gestiones/Gestion_Inventario.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Inventario</span>
@@ -548,7 +565,7 @@ color: var(--text-color);
                 <?php } ?>
 
                 <?php 
-                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+                if(isset($_SESSION['permisos'][M_LIBRO_MAYOR]) and $_SESSION['permisos'][M_LIBRO_MAYOR]['r'] == 1){
              ?>
                 <a href="gestiones/Gestion_LibroMayor.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Libro Mayor</span>
@@ -556,7 +573,7 @@ color: var(--text-color);
                 <?php } ?>
                 
                 <?php 
-                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+                if(isset($_SESSION['permisos'][M_GESTION_PARAMETROS]) and $_SESSION['permisos'][M_GESTION_PARAMETROS]['r'] == 1){
              ?>
                 <a href="gestiones/Gestion_parametros.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Parametros</span>
@@ -564,7 +581,7 @@ color: var(--text-color);
                 <?php } ?>
 
                 <?php 
-                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+                if(isset($_SESSION['permisos'][M_GESTION_PREGUNTAS]) and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['r'] == 1){
              ?>
                 <a href="gestiones/Gestion_Preguntas.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Preguntas</span>
@@ -572,7 +589,7 @@ color: var(--text-color);
                 <?php } ?>
 
                 <?php 
-                if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 6){
+                if(isset($_SESSION['permisos'][M_GESTION_PREG_USUARIOS]) and $_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['r'] == 1){
              ?>
                 <a href="gestiones/Gestion_PreguntasUsuarios.php" style="align-items: center;"  >
                     <span class="text nav-text">Gestion Preguntas Usuario</span>
@@ -580,7 +597,7 @@ color: var(--text-color);
                 <?php } ?>
 
                 <?php 
-                if($_SESSION['rol'] == 1){
+                if(isset($_SESSION['permisos'][M_GESTION_USUARIOS]) and $_SESSION['permisos'][M_GESTION_USUARIOS]['r'] == 1){
              ?>
                   <a href="gestiones/Gestion_Usuarios.php" style="align-items: center;" >
                     <span class="text nav-text"  >Gestion Usuarios </span>
@@ -588,7 +605,7 @@ color: var(--text-color);
                 <?php } ?>
 
                 <?php 
-                if($_SESSION['rol'] == 1){
+                if(isset($_SESSION['permisos'][M_GESTION_ROLES]) and $_SESSION['permisos'][M_GESTION_ROLES]['r'] == 1){
              ?>
                 <a href="gestiones/GestionRoles.php" style="align-items: center;" >
                     <span class="text nav-text"  >Gestion Roles </span>
@@ -596,7 +613,7 @@ color: var(--text-color);
                 <?php } ?>
 
                 <?php 
-                if($_SESSION['rol'] == 1){
+                if(isset($_SESSION['permisos'][M_GESTION_OBJETOS]) and $_SESSION['permisos'][M_GESTION_OBJETOS]['r'] == 1){
              ?>
                 <a href="gestiones/Gestion_Objetos.php" style="align-items: center;" >
                     <span class="text nav-text"  >Gestion Objetos </span>
@@ -612,8 +629,8 @@ color: var(--text-color);
 
       
       <div class="bottom-content">
-      <?php
-              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3){
+      <?php 
+                if(isset($_SESSION['permisos'][M_BACKUP]) and $_SESSION['permisos'][M_BACKUP]['r'] == 1){
              ?>
         <li class="" style="height: 50px;">
             <a href="backupr.php" style="align-items: center;">
@@ -622,20 +639,11 @@ color: var(--text-color);
             </a>
         </li>
         <?php } ?>
-	<?php
-              if($_SESSION['rol'] == 1){
-             ?>
-        <li class="" style="height: 50px;">
-            <a href="permisos.php" style="align-items: center;">
-                <i class='bx bx-lock icon' ></i>
-                <span class="text nav-text">Permisos Roles</span>
-            </a>
-        </li>
-        <?php } ?>
+	
         <li class="" style="height: 50px; display: flex;">
-            <a href="login.php" style="align-items: center;">
+            <a href="cerrarSesion.php" style="align-items: center;">
                 <i class='bx bx-log-out icon' ></i>
-                <span class="text nav-text">Cerra Sesion</span>
+                <span class="text nav-text">Cerra Sesión</span>
             </a>
         </li>
         

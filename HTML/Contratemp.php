@@ -1,3 +1,25 @@
+<?php  
+
+include('conexion.php');
+  $token=$_GET['token'];
+  date_default_timezone_set("America/Tegucigalpa");
+  $queryToken=mysqli_query($conn,"SELECT * FROM tbl_token WHERE Token = '$token'");
+  $tokenResult = mysqli_fetch_array($queryToken,1);
+
+
+  //fecha actual
+  $date = date('Y-m-d H:i:s');
+  $fechaFinal=$tokenResult['Fecha_final'];
+
+
+  if ($date  > $fechaFinal ) {
+    echo "<script> alert('EL TOKEN HA EXPIRADO, POR FAVOR SOLICITE UNO NUEVO');window.location= 'Login.php' </script>";
+
+  }else{
+    
+
+?>
+
 <!DOCTYPE html 5>
 <html lang="en">
 <head>
@@ -40,8 +62,8 @@
 
           <form  id="frmregistrar" class="login-form" action="Validaciontemp.php" method="post">
           <label for="text">RECUPERACION DE CONTRASEÑA</label>
-          <input type="text" placeholder="INGRESE SU TOKEN" name="txtcont" maxlength="20" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
-          <br><br>  
+          <input type="hidden" value='<?php echo empty($token) ? '' : $token; ?>' placeholder="INGRESE SU TOKEN" name="txtcont" maxlength="20" required/>
+          <br>
           <!--contra 1--->
             <div class="container">
             <div class="row">
@@ -325,3 +347,4 @@ function verificar() {
     
 </body>
 </html>
+<?php } ?>

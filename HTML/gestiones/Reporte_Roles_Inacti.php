@@ -61,7 +61,7 @@ function Footer()
 }
 
 // Creación del objeto de la clase heredada
-$sql = "SELECT * FROM TBL_ROLES WHERE Estado = 'ACTIVO'";
+$sql = "SELECT * FROM TBL_ROLES WHERE Estado = 'INACTIVO'";
 $resultado = mysqli_query($conn,$sql);
 
 

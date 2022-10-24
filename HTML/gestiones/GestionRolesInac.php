@@ -1,6 +1,5 @@
 <?php
 include("../conexion.php");
-
 //incluir las funciones de helpers
 include_once("../helpers/helpers.php");
 
@@ -28,13 +27,7 @@ if (!isset($_SESSION['rol'])) {
   <div class="container mt-12">
                   <div class="col-md-12">
                      <h1>Gestión Roles</h1> 
-                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
-                     <?php  if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['w'] == 1) {
-                                            
-                        ?>
-                     <a href="Nuevo_Roles.php"><input type="submit" class="btn btn-success" Value="Crear Nuevo Rol"></a>
-                        <?php } ?>
-                     <p align="right"><a href="GestionRolesInac.php"><input type="submit" class="btn btn-success" Value="Mostrar Roles Inactivos"></a></p>
+                     <h6><a  class="btn btn-primary"  href="GestionRoles.php ">Volver Atrás</a></h6>
 			         <?php
                         $mostrar_datos = 0;
                      ?>
@@ -42,17 +35,13 @@ if (!isset($_SESSION['rol'])) {
                             <label for="datos_mostrar">Datos A Mostrar</label>
                             <select name="mostrar" onchange='submit();'>
                             <option ></option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
                             <option value="100">100</option>
                                 <?php
                                 $mostrar_datos = $_GET['mostrar'];
                                 ?>
                             </select>
-                     </form>
-                     <form action="Buscador_Roles.php" method="get" class="form_search">
-                            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                            <input type="submit" value="Buscar" class="btn_search">
                      </form>
 
                      <table class="table">
@@ -73,7 +62,7 @@ if (!isset($_SESSION['rol'])) {
 			                    $result_register = mysqli_fetch_array($sql_registe);
 			                    $total_registro = $result_register['total_registro'];
 
-			                    if($mostrar_datos > 0){
+			        if($mostrar_datos > 0){
                                     $por_pagina = $mostrar_datos;
                                 }else{
                                     $por_pagina = 10;
@@ -88,7 +77,7 @@ if (!isset($_SESSION['rol'])) {
 
                                 $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"SELECT * FROM TBL_ROLES WHERE Estado = 'ACTIVO' LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select * FROM TBL_ROLES WHERE Estado = 'INACTIVO' LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);
@@ -100,20 +89,13 @@ if (!isset($_SESSION['rol'])) {
                                         <th><?php echo $row['Rol']?></th>
                                         <th><?php echo $row['Estado']?></th>
                                         <th><?php echo $row['Descripcion']?></th>
-                                        <?php  if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['u'] == 1) {
-                                            
-                                        ?>
                                         <th><a href="Actualizar_Roles.php?Id=<?php echo $row['Id_Rol'] ?>"class="btn btn-primary" >Editar</a></th>
-                                        <th><a href="Actualizar_Permisos.php?Id=<?php echo $row['Id_Rol'] ?>"class="btn btn-success" >Permisos</a></th>
-                                        <?php } ?>
-                                        <?php  if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['d'] == 1) {
-                                            
-                                            ?>
                                         <th><a href="Delete_Roles.php?Id=<?php echo $row['Id_Rol'] ?>"class="btn btn-danger">Eliminar</a></th><p>
-                                        <?php } ?>
                                     </tr>
                                 <?php
                                        }
+                                    }else{
+                                        echo "<script> alert('No hay Registros');window.location= 'GestionRoles.php' </script>";
                                     }
                                 ?>
                         </tbody>
@@ -147,7 +129,7 @@ if (!isset($_SESSION['rol'])) {
 			            </ul>
 		                </div>
                         <div class="reportes">
-                            <a class="btn btn-warning" href="reporte_roles.php" >Reporte</a>
+                            <a class="btn btn-warning" href="Reporte_Roles_Inacti.php" >Reporte</a>
                         </div>
                   </div>
            </div>
@@ -209,7 +191,7 @@ if (!isset($_SESSION['rol'])) {
 .form_search .btn_search{
 	background: #1faac8;
 	color: #FFF;
-	padding: 0 30px;
+	padding: 0 20px;
 	border: 0;
 	cursor: pointer;
 	margin-left: 10px;

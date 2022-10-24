@@ -24,7 +24,13 @@ if(isset($_REQUEST["btnrlogin"])){
             $_SESSION["intentos"] = 0;
            //echo "<script> alert('ERR-002: ".$valor1." ".$valor2."'  );window.location= 'login.php' </script>";
            // echo "<script> alert('ERR-002:".$valor1."' )</script>";
-            if($valor1 == 'ACTIVO'){
+            if($valor1 == 'ACTIVO' and $valor2 == '4'){
+                $data = mysqli_fetch_array($query);
+                $_SESSION['rol']=$data["Rol"];
+                //header("Location: index.php");
+                echo "<script>alert('EL usuario esta identificado como Nuevo. PORFAVOR CONTACTE CON EL ADMINISTRADOR');window.location= 'index.php'</script>";  
+
+            }elseif ($valor1 == 'ACTIVO') {
                 $data = mysqli_fetch_array($query);
                 $_SESSION['rol']=$data["Rol"];
                 header("Location: index.php");

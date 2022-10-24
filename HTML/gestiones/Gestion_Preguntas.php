@@ -1,6 +1,25 @@
 <?php
 include("../conexion.php");
 
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_GESTION_PREGUNTAS]['r']==0 or !isset($_SESSION['permisos'][M_GESTION_PREGUNTAS]['r'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
 ?>
 <?php include 'barralateralinicial.php';?>
   </div>
@@ -9,7 +28,10 @@ include("../conexion.php");
                   <div class="col-md-12">
                      <h1>Gestión Preguntas</h1> 
                      <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
+                     <?php  if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['w'] == 1) {                      
+                    ?>
                      <a href="Nueva_Preguntas.php"><input type="submit" class="btn btn-success" Value="Crear Preguntas"></a><p>
+                        <?php } ?>
                      <?php
                         $mostrar_datos = 0;
                         ?>
@@ -82,8 +104,14 @@ include("../conexion.php");
                                                 window.alert('No es posible hacer esta Accion');
                                             }
                                         </script>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['u'] == 1) {                      
+                                        ?>  
                                         <th><a type="button" class="btn btn-primary" onclick="alerta()" >Editar</a></th>
+                                        <?php } ?>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['d'] == 1) {                      
+                                        ?>
                                         <th><a type="button" class="btn btn-danger" onclick="alerta()" >Eliminar</a></th>
+                                        <?php } ?>
                                     </tr>
                                 <?php
                                        }

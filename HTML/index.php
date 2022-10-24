@@ -3,16 +3,32 @@
 //These must be at the top of your script, not inside a function
 
 include("conexion.php");
+include("../HTML/helpers/helpers.php");
+//incluir las funciones de helpers
+
 
 session_start();
+
 $_SESSION['id'];
 $_SESSION['user'];
 $_SESSION['rol'];
 
+;
+
+// si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+  header("Location: ../HTML/login.php"); 
+  die();
+}else{
+   include 'barralateralinicial.php';
+  //actualiza los permisos
+  updatePermisos2($_SESSION['rol']);
+  
+}
 
 ?>
 
-<?php include 'barralateralinicial.php';?>
+
 
 <title>Inicio</title>
 <body data-ng-app="validationApp">
@@ -34,7 +50,7 @@ $_SESSION['rol'];
               
               <div class="row">
               <?php
-              if($_SESSION['rol'] == 1){
+              if(isset($_SESSION['permisos'][M_GESTION_USUARIOS]) and $_SESSION['permisos'][M_GESTION_USUARIOS]['r'] == 1){
              ?>
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary" >
@@ -61,7 +77,7 @@ $_SESSION['rol'];
                   <?php } ?>
 
                   <?php
-              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2 || $_SESSION['rol'] == 6){
+              if(isset($_SESSION['permisos'][M_INVENTARIOS]) and $_SESSION['permisos'][M_INVENTARIOS]['r'] == 1){
              ?>
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary">
@@ -88,7 +104,7 @@ $_SESSION['rol'];
                 <?php } ?>
 
                 <?php
-              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == 2){
+              if(isset($_SESSION['permisos'][M_FACTURACION]) and $_SESSION['permisos'][M_FACTURACION]['r'] == 1){
              ?>
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary" >
@@ -115,7 +131,7 @@ $_SESSION['rol'];
                   <?php } ?>
 
                   <?php
-              if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3){
+              if(isset($_SESSION['permisos'][M_BACKUP]) and $_SESSION['permisos'][M_BACKUP]['r'] == 1){
              ?>
                   <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary" >

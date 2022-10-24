@@ -6,16 +6,18 @@
 		$alert='';
 		if(empty($_POST['Rol']) || empty($_POST['Descripcion']))
 		{ 
+			$alert='';
 			$alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
 		}else{
-            $Id_Rol   = $_POST['Id_Rol'];
-			$Rol       = $_POST['Rol'];
-			$Descripcion          = $_POST['Descripcion'];
+			$Id_Rol       = $_POST['Id_Rol'];
+			$Rol          = $_POST['Rol'];
+			$Estado       = $_POST['Estado'];
+			$Descripcion  = $_POST['Descripcion'];
             if(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$Descripcion)){
-                    $alert='<p class="msg_error">La descripcion solo recibe letras.</p>';
+				echo "<script> alert('La descripción solo recibe letras');window.location= 'Actualizar_Roles.php' </script>";
             }else{
 
-            $query = mysqli_query($conn,"UPDATE TBL_ROLES SET Descripcion='$Descripcion' WHERE Id_Rol ='$Id_Rol'");
+            $query = mysqli_query($conn,"UPDATE TBL_ROLES SET Estado='$Estado', Descripcion='$Descripcion' WHERE Id_Rol ='$Id_Rol'");
 
 				if($query){
 					echo "<script> alert('Rol Actualizado Exitosamente');window.location= 'GestionRoles.php' </script>";
@@ -41,8 +43,9 @@
 	}else{
 		while ($data = mysqli_fetch_array($sql)) {
 			# code...
-			$Id_Rol   = $data['Id_Rol'];
-			$Rol       = $data['Rol'];
+			$Id_Rol       = $data['Id_Rol'];
+			$Rol          = $data['Rol'];
+			$Estado       = $data['Estado'];
 			$Descripcion  = $data['Descripcion'];
 		}
 	}
@@ -50,9 +53,29 @@
  ?>
 
 <?php
-include("../conexion.php");
+//FUNCION DE PERMISOS
 
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_GESTION_ROLES]['u']==0 or !isset($_SESSION['permisos'][M_GESTION_ROLES]['u'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
 ?>
+
 <?php include 'barralateralinicial.php';?>
   </div>
   <div class="container mt-12">
@@ -70,8 +93,14 @@ include("../conexion.php");
                 <input type="hidden" name="Id_Rol" value="<?php echo $Id_Rol  ?>">
 				<label for="Rol">Nombre Rol</label>
 				<input type="text" name="Rol" maxlength="50" id="Rol" placeholder="Nombre" readonly= "true" value ="<?php echo $Rol?>">
-				<label for="Descripcion">Descripcion</label>
-				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripcion" value ="<?php echo $Descripcion ?>">
+				<label for="Estado">Estado</label>
+                  <select name="Estado" required>
+                  <option value ="">Seleccione Una Opción</option>
+                  <option value="ACTIVO">ACTIVO</option>
+                  <option value="INACTIVO">INACTIVO</option>
+                  </select>
+				<label for="Descripcion">Descripción</label>
+				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripción" value ="<?php echo $Descripcion ?>" size = 50 required>
 				<br>
 				<input type="submit" value="Actualizar Rol" class="btn_save">
 			</form>

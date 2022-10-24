@@ -1,8 +1,26 @@
 <?php
 include("../conexion.php");
 
-?>
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
 
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_GESTION_BITACORA]['r']==0 or !isset($_SESSION['permisos'][M_GESTION_BITACORA]['r'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
+?>
 <?php include 'barralateralinicial.php';?>
 
   </div>
@@ -45,7 +63,7 @@ include("../conexion.php");
                                 <th>Acción</th>
                                 <th>Descripcion</th>
                                 <th>Usuario</th>
-                                <th>Acciones</th>
+                     
                                 <th></th>
                             </tr>
                         </thead>
@@ -71,7 +89,7 @@ include("../conexion.php");
 
                                 $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select * FROM TBL_MS_BITACORA LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select * FROM TBL_MS_BITACORA ORDER BY Id_Bitacora DESC LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);
@@ -90,8 +108,17 @@ include("../conexion.php");
                                                 window.alert('No es posible hacer esta Accion');
                                             }
                                         </script>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_BITACORA] and $_SESSION['permisos'][M_GESTION_BITACORA]['u'] == 1) {
+                                            
+                                        ?>
                                         <th><a type="button" class="btn btn-primary" onclick="alerta()" >Editar</a></th>
+                                        <?php } ?>
+
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_BITACORA] and $_SESSION['permisos'][M_GESTION_BITACORA]['d'] == 1) {
+                                            
+                                            ?>
                                         <th><a type="button" class="btn btn-danger" onclick="alerta()" >Eliminar</a></th>
+                                        <?php } ?>
                                     </tr>
                                 <?php
                                        }

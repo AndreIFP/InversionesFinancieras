@@ -11,6 +11,7 @@
 		}else{
 
 			$Rol         = $_POST['Rol'];
+			$Estado      = $_POST['Estado'];
 			$Descripcion = $_POST['Descripcion'];
             if(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$Rol)){
                 $alert='<p class="msg_error"> El Nombre Solo Recibe Letras.</p>';
@@ -20,8 +21,8 @@
 				$queryrol 	= mysqli_query($conn,"SELECT * FROM TBL_ROLES WHERE Rol = '$Rol'");
 				$nr 			= mysqli_num_rows($queryrol); 
 			if($nr == 0){
-			$query_insert = mysqli_query($conn,"INSERT INTO TBL_ROLES(Rol,Descripcion)
-										VALUES('$Rol','$Descripcion')");
+			$query_insert = mysqli_query($conn,"INSERT INTO TBL_ROLES(Rol,Estado,Descripcion)
+										VALUES('$Rol','$Estado','$Descripcion')");
 			    if($query_insert){
 					echo "<script> alert('El Rol se ha registrado exitosamente');window.location= 'GestionRoles.php' </script>";
 				}
@@ -34,8 +35,27 @@
  ?>
 
 <?php
-include("../conexion.php");
 
+
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
+session_start();
+   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+   header("Location: ../login.php"); 
+   die();
+}else{
+   //actualiza los permisos
+   updatePermisos($_SESSION['rol']);
+   
+   //si no tiene permiso de visualización redirige al index
+   if ($_SESSION['permisos'][M_GESTION_ROLES]['w']==0 or !isset($_SESSION['permisos'][M_GESTION_ROLES]['w'])) {
+       header("Location: ../index.php");
+       die();
+   }
+}
 ?>
 <?php include 'barralateralinicial.php';?>
   </div>
@@ -56,8 +76,14 @@ include("../conexion.php");
 			<hr>
 				<label for="Rol">Nombre Roles</label>
 				<input type="text" name="Rol" maxlength="20" id="Rol" placeholder="Nombre completo" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required>
+				<label for="Estado">Estado</label>
+                  <select name="Estado" required>
+                  <option value ="">Seleccione Una Opción</option>
+                  <option value="ACTIVO">ACTIVO</option>
+                  <option value="INACTIVO">INACTIVO</option>
+                  </select>
 				<label for="Descripcion">Descripción</label>
-				<input type="text" name="Descripcion" maxlength="20" id="Descripcion" placeholder="Descripción" required>
+				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripción" required size=50>
 				<br>
 				<input type="submit" value="Registrar Roles" class="btn_save">
 			</form>
