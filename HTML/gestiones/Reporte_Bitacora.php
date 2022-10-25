@@ -57,6 +57,12 @@ function Footer()
     $Object->setTimezone(new DateTimeZone('America/Guatemala'));
     $DateAndTime = $Object->format("d-m-Y h:i:s a");
     $this->Cell(0,15,$DateAndTime,0,1,'R');
+    
+     $this->Ln(-2);
+    $this->SetFont('Arial','',8);
+    $this->Cell(227);
+    $this->Cell(8,0, utf8_decode('Impreso por: ADMIN' ),0,8);
+
 }
 }
 
@@ -78,8 +84,8 @@ $pdf->setX(3);
 $pdf->SetFillColor(108, 250, 254 );
 $pdf->Cell(10,5, utf8_decode('Id'),1,0,'C',1);
 $pdf->Cell(30,5, utf8_decode('Fecha'),1,0,'C',1);
-$pdf->Cell(15,5, utf8_decode('Accion'),1,0,'C',1);
-$pdf->Cell(200,5, utf8_decode('Descripcion'),1,0,'C',1);
+$pdf->Cell(30,5, utf8_decode('Accion'),1,0,'C',1);
+$pdf->Cell(185,5, utf8_decode('Descripcion'),1,0,'C',1);
 $pdf->Cell(20,5, utf8_decode('Id Usuario'),1,1,'C',1);
 
 
@@ -88,8 +94,8 @@ while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(3);
     $pdf->Cell(10, 5, $fila['Id_Bitacora'], 1, 0, "C",0);
     $pdf->Cell(30, 5, utf8_decode($fila['Fecha']), 1, 0, "C",0);
-    $pdf->Cell(15, 5, utf8_decode($fila['Accion']), 1, 0, "C",0);
-    $pdf->Cell(200, 5, utf8_decode($fila['Descripcion']), 1, 0, "C",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Accion']), 1, 0, "C",0);
+    $pdf->Cell(185, 5, utf8_decode($fila['Descripcion']), 1, 0, "C",0);
     $pdf->Cell(20, 5, utf8_decode($fila['Id_Usuario']), 1, 1, "C",0);
     
 }
