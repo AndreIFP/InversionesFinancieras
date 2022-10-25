@@ -62,7 +62,7 @@ if (!isset($_SESSION['rol'])) {
                                 <th>Id</th>
                                 <th>No. Factura</th>
                                 <th>Cliente</th>
-                                <th>Descripcion</th>
+                                <th>Descripción</th>
                                 <th>Total</th>
                                 <th>Acciones</th>
                                 <th></th>
