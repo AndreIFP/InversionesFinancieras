@@ -84,8 +84,8 @@ $pdf->setX(3);
 $pdf->SetFillColor(108, 250, 254 );
 $pdf->Cell(10,5, utf8_decode('Id'),1,0,'C',1);
 $pdf->Cell(30,5, utf8_decode('Fecha'),1,0,'C',1);
-$pdf->Cell(30,5, utf8_decode('Accion'),1,0,'C',1);
-$pdf->Cell(185,5, utf8_decode('Descripcion'),1,0,'C',1);
+$pdf->Cell(30,5, utf8_decode('Acción'),1,0,'C',1);
+$pdf->Cell(185,5, utf8_decode('Descripción'),1,0,'C',1);
 $pdf->Cell(20,5, utf8_decode('Id Usuario'),1,1,'C',1);
 
 
