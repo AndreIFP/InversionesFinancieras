@@ -66,7 +66,7 @@ if (!isset($_SESSION['rol'])) {
                         <thead class="table-succees table-striped">
                             <tr>
                                 <th>Id</th>
-                                <th>Pronducto</th>
+                                <th>Producto</th>
                                 <th>Cantidad</th>
                                 <th>Fecha</th>
                                 <th>Acciones</th>
