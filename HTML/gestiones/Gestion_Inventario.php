@@ -30,7 +30,7 @@ if (!isset($_SESSION['rol'])) {
                   <div class="col-md-12">
                   <br>
                   
-                     <h1>Gestión Bodega - Inventario</h1> 
+                     <h1>Gestión Inventario</h1> 
                      <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
                     <?php  if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {                     
                      ?>
