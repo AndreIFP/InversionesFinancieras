@@ -51,10 +51,12 @@ session_start();
                                         $pagina = $_GET['pagina'];
                                     }
 
-                                    $desde = ($pagina-1) * $por_pagina;
+                                     $desde = ($pagina-1) * $por_pagina;
                                     $total_paginas = ceil($total_registro / $por_pagina);
                                     $sql = mysqli_query($conn,"select * FROM TBL_MS_BITACORA WHERE ( Id_Bitacora LIKE '%$busqueda%' OR
-                                                                Accion LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
+                                                                Accion LIKE '%$busqueda%' OR
+                                                                Descripcion LIKE '%$busqueda%' OR
+                                                                Fecha LIKE '%$busqueda%'  ) LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
                                         $result = mysqli_num_rows($sql);
