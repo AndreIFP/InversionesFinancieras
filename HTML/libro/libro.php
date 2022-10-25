@@ -58,9 +58,12 @@ $_SESSION['temporada']="10";
                     
                       ?>
 </head>
+ 
+                  
 <h6><a  class="btn btn-primary"  href="validacionlibro.php ">Volver Atrás</a></h6>
 
 </head>
+
 
  <button type="button" class="btn btn-primary btn-lg btn-print" data-toggle="modal" data-target="#miModal">
   DEPOSITAR
@@ -86,8 +89,8 @@ $_SESSION['temporada']="10";
                       <div class="form-group">
           <label for="date" class="col-sm-3 control-label">Cuenta</label>
           <div class="select">
-          <select name="txtpregunta" id="format" id="txtpregunta" >
-          <option selected disabled>seleccione una Cuenta</option>
+          <select name="txtpregunta" id="format" id="txtpregunta" required>
+          <option value="">seleccione una Cuenta</option>
              <?php 
               include('../conexion.php');
                 
@@ -122,7 +125,7 @@ $_SESSION['temporada']="10";
                                <div class="col-md-12 btn-print">
                         <label for="date" class="col-sm-3 control-label">Descripcion</label>
                         <div class="input-group col-sm-8">
-                          <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required onkeypress="return blockSpecialCharacters(event)" >
+                          <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required >
                         </div><!-- /.input group -->
                       </div><!-- /.form group -->
                     </div>
@@ -134,16 +137,9 @@ $_SESSION['temporada']="10";
                         </div><!-- /.input group -->
                       </div><!-- /.form group -->
                     </div>
-
-                    <script>
-  function deposito(){
-    alert("Deposito Ingresado correctamente");
-     }
-    </script>
-
                     <div class="col-md-12">
                        <div class="col-md-12">
-                        <button class="btn btn-lg btn-primary btn-print" onclick="deposito()" id="daterange-btn"  name="">DEPOSITAR</button>
+                        <button class="btn btn-lg btn-primary btn-print" id="daterange-btn"  name="">DEPOSITAR</button>
                           <button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
                          </div>
 
@@ -186,8 +182,8 @@ $_SESSION['temporada']="10";
                       <div class="form-group">
           <label for="date" class="col-sm-3 control-label">Cuenta</label>
           <div class="select">
-          <select name="txtpregunta" id="format" id="txtpregunta" >
-          <option selected disabled>seleccione una Cuenta</option>
+          <select name="txtpregunta" id="format" id="txtpregunta" required>
+          <option value="">seleccione una Cuenta</option>
              <?php 
               include('../conexion.php');
                 
@@ -224,7 +220,7 @@ $_SESSION['temporada']="10";
                       <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Descripcion</label>
                         <div class="input-group col-sm-8">
-                          <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required onkeypress="return blockSpecialCharacters(event)">
+                          <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" required >
                         </div><!-- /.input group -->
                       </div><!-- /.form group -->
                     </div>
@@ -237,16 +233,9 @@ $_SESSION['temporada']="10";
                         </div><!-- /.input group -->
                       </div><!-- /.form group -->
                     </div>
-
-                    <script>
-  function retiro(){
-    alert("Retiro Ingresado correctamente");
-     }
-    </script>
-
                     <div class="col-md-12">
                        <div class="col-md-12">
-                        <button class="btn btn-lg btn-primary btn-print" onclick="retiro()" id="daterange-btn"  name="">RETIRAR GASTO</button>
+                        <button class="btn btn-lg btn-primary btn-print" id="daterange-btn"  name="">RETIRAR GASTO</button>
                           <button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
                          </div>
 

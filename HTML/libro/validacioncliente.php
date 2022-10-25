@@ -6,12 +6,6 @@ $fechaf=$_POST['fecha_final'];
 include('../conexion.php');
                 
                 #consulta de todos los paises
-				
-                        if(empty($cliente))
-                        {
-                            echo "<script> alert('Seleccione un Cliente para Continuar');window.location= 'validacionlibro.php' </script>";
-                        }
-
 				$consulta=mysqli_query($conn,"SELECT * FROM TBL_CLIENTES where Id_Cliente='$cliente'; " );
                 while($row=mysqli_fetch_array($consulta)){
                     $nombree=$row['Nombre_Empresa']; 

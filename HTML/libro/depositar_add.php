@@ -2,7 +2,7 @@
 session_start();
 include('../../dist/includes/dbcon.php');
 	//$branch=$_SESSION['branch'];
-	
+		
 	$id_usuario = $_SESSION['id'];
 	$cliente = $_SESSION['cliente'];
 	$temporada = $_SESSION['temporada'];
@@ -16,10 +16,14 @@ $monto = $_POST['monto'];
 
 $caja=0;
 
+
+
 $consultas=mysqli_query($con,"SELECT CUENTA FROM TBL_CATALAGO_CUENTAS where CODIGO_CUENTA='$idcuenta' ;");
 while($row=mysqli_fetch_array($consultas)){
  $idpreg=$row['CUENTA'];
 }
+
+
 
 $consultas2=mysqli_query($con,"SELECT Deuda_Cuenta_Total FROM CUENTAS_POR_COBRAR  where Id_Cliente='$cliente ';");
 while($row=mysqli_fetch_array($consultas2)){
@@ -42,6 +46,6 @@ $queryregistro = "UPDATE CUENTAS_POR_COBRAR SET  Cuentas='$idpreg',Descripcion='
 
 			
 
-	echo "<script>document.location='../libro/libro.php'</script>";	
+	echo "<script> alert('Se Ingreso el deposito correctamente');document.location='../libro/libro.php'</script>";	
 
 ?>

@@ -81,7 +81,7 @@ try{
     {
         ?>
 		<tr>
-			<form  method="post" action="index.php" name="miformulario" >
+			<form  method="post" action="login.php" name="miformulario" >
             <input type="text" value=<?php echo $idusus ?> name="txtuser" style="visibility: hidden;"/>
 					<script>
     				window.onload=function(){

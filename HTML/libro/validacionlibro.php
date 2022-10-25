@@ -42,8 +42,8 @@ if (!isset($_SESSION['rol'])) {
                     <div class="form-group">
                     
           <div class="select">
-          <select name="Idcliente" id="Idcliente" style="font-size:18px">
-          <option value="0" >Selecciona una opcion</option>
+          <select name="Idcliente" id="Idcliente" style="font-size:18px" required>
+          <option value="" >Selecciona una opcion</option>
              <?php 
               include('../conexion.php');
                 
