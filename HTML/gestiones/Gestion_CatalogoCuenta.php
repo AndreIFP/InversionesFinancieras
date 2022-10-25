@@ -63,7 +63,7 @@ if (!isset($_SESSION['rol'])) {
                      <table class="table">
                         <thead class="table-succees table-striped">
                             <tr>
-                                <th>Codigo</th>
+                                <th>Código</th>
                                 <th>Cuenta</th>
                                 <th>Clasificación</th>
                                 <th>Acciones</th>
