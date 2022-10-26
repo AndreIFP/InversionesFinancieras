@@ -67,7 +67,7 @@ function Footer()
 }
 
 // Creación del objeto de la clase heredada
-$sql = "SELECT * FROM TBL_MS_BITACORA";
+$sql = "SELECT * FROM TBL_MS_BITACORA ORDER BY Id_Bitacora DESC";
 $resultado = mysqli_query($conn,$sql);
 
 
@@ -95,7 +95,7 @@ while ($fila = $resultado->fetch_assoc()) {
     $pdf->Cell(10, 5, $fila['Id_Bitacora'], 1, 0, "C",0);
     $pdf->Cell(30, 5, utf8_decode($fila['Fecha']), 1, 0, "C",0);
     $pdf->Cell(30, 5, utf8_decode($fila['Accion']), 1, 0, "C",0);
-    $pdf->Cell(185, 5, utf8_decode($fila['Descripcion']), 1, 0, "C",0);
+    $pdf->Cell(185, 5, utf8_decode($fila['Descripcion']), 1, 0, "B",0);
     $pdf->Cell(20, 5, utf8_decode($fila['Id_Usuario']), 1, 1, "C",0);
     
 }
