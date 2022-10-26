@@ -56,7 +56,7 @@ if (!isset($_SESSION['rol'])) {
                                 <th>Id</th>
                                 <th>Fecha</th>
                                 <th>Acción</th>
-                                <th>Descripcion</th>
+                                <th>Descripción</th>
                                 <th>Usuario</th>
                      
                                 <th></th>

@@ -64,18 +64,25 @@ if (!isset($_SESSION['rol'])) {
   <div class="col-md-12">
   <h6><a  class="btn btn-primary"  href="Gestion_CatalogoCuenta.php ">Volver Atrás</a></h6>
     		<div class="form_register">
-			
-			<form action="" method="post">
-			<h1>Registro Cuenta</h1>
+
+			<form action="agregarcuenta.php" method="post">
+				
+			<h1>Registro de Cuenta</h1>
 			<hr>
-            <label for="CUENTA">Cuenta</label>
-				<input type="text" name="CUENTA" maxlength="50" id="CUENTA" placeholder="Cuenta" pattern = "[a-z A-Z]+">
-				<label for="CLASIFICACION">Clasificación</label>
-				<input type="text" name="CLASIFICACION" maxlength="50" id="CLASIFICACION" placeholder="Clasificación">
+			<label for="CUENTA">Codigo Cuenta</label>
+				<input type="text" name="CUENTA" maxlength="10" id="CUENTA" placeholder="Cuenta" oninput="this.value = this.value.replace(/[^0-9]/,'')" required>
+				<label for="CLASIFICACION">Descripcion de la cuenta</label>
+				<input type="text" name="CLASIFICACION" maxlength="50" id="CLASIFICACION" placeholder="Descripción" size="35" oninput="this.value = this.value.replace(/[^a-zA-Z]/,'')" required>
 				<label for="TIPO_CUENTA">Tipo Cuenta</label>
-				<input type="text" name="TIPO_CUENTA" maxlength="60" id="TIPO_CUENTA" placeholder="Tipo Cuenta">
-				<br>
-				<input type="submit" value="Registrar Cuenta" class="btn_save">
+				<select name="TIPO CUENTA" required>
+                  <option value ="">Seleccione Una Opción</option>
+                  <option value="ACTIVO">ACTIVO</option>
+                  <option value="PASIVO">PASIVO</option>
+				  <option value="INGRESO">INGRESO</option>
+				  <option value="GASTO">GASTO</option>
+				  <option value="PATRIMONIO">PATRIMONIO</option>
+                  </select>
+				<input type="submit" value="Registrar Cuenta" class="btn_save"></center></p>
 			</form>
 		</div>
 	</section>

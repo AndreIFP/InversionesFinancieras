@@ -75,28 +75,34 @@ if (!isset($_SESSION['rol'])) {
   <div class="col-md-12">
   <h6><a  class="btn btn-primary"  href="Gestion_Clientes.php ">Volver Atrás</a></h6>
   <div class="form_register">
+	
                   <div class="col-md-12">
-			<form action="" method="post">
+				  <form action="agregado_cliente.php" method="post">
 				
-			<h1>Registro Cliente</h1>
-			<hr>
-				<label for="Nombre_Empresa">Nombre Empresa</label>
-				<input type="text" name="Nombre_Empresa" maxlength="50" id="Nombre_Empresa" placeholder="Nombre completo" size="40">
-				<label for="Nombre_Cliente">Nombre Cliente</label>
-				<input type="text" name="Nombre_Cliente" maxlength="50" id="Nombre_Cliente" placeholder="Nombre completo" size="40">
-				<label for="RTN_Cliente">RTN</label>
-				<input type="text" name="RTN_Cliente" maxlength="20" id="RTN_Cliente" placeholder="RTN"size="40">
-				<label for="Direccion">Dirección</label>
-				<input type="Direccion" name="Direccion" maxlength="60" id="Direccion" placeholder="Dirección"size="40">
-				<label for="Teléfono">Teléfono</label>
-				<input type="tex" name="Telefono" maxlength="10" id="Telefono" placeholder="Teléfono"size="40">
-                <label for="Tipo_Cliente">Tipo Cliente</label>
-				<input type="text" name="Tipo_Cliente" maxlength="20" id="Tipo_Cliente" placeholder="Tipo Cliente" size="40">
-                <label for="Ciudad">Ciudad</label>
-				<input type="text" name="Ciudad" maxlength="25" id="Ciudad" placeholder="Ciudad" size="40">
-				<br>
-				<input type="submit" value="Registrar Cliente" class="btn_save"></center></p>
-			</form>
+				<h1>Registro Cliente</h1>
+				<hr>
+					<label for="Nombre_Empresa">Nombre Empresa</label>
+					<input type="text" name="Nombre_Empresa" maxlength="50" id="Nombre_Empresa" placeholder="Nombre completo" size="40" oninput="this.value = this.value.replace(/[^a-zA-Z]/,'')" required>
+					<label for="Nombre_Cliente">Nombre Cliente</label>
+					<input type="text" name="Nombre_Cliente" maxlength="50" id="Nombre_Cliente" placeholder="Nombre completo" size="40" oninput="this.value = this.value.replace(/[^a-zA-Z]/,'')" required> 
+					<label for="RTN_Cliente">RTN</label>
+					<input type="text" name="RTN_Cliente" maxlength="13" id="RTN_Cliente" placeholder="RTN"size="40" oninput="this.value = this.value.replace(/[^0-9]/,'')" required>
+					<label for="Direccion">Dirección</label>
+					<input type="Direccion" name="Direccion" maxlength="60" id="Direccion" placeholder="Dirección"size="40" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" required>
+					<label for="Teléfono">Teléfono</label>
+					<input type="tex" name="Telefono" maxlength="10" id="Telefono" placeholder="Teléfono"size="40" oninput="this.value = this.value.replace(/[^0-9]/,'')" required>
+					<label for="Tipo_Cliente">Tipo Cliente</label>
+					<select name="Tipo_Cliente" required>
+					  <option value ="">Seleccione Una Opción</option>
+					  <option value="ACTIVO">ACTIVO</option>
+					  <option value="PASIVO">INACTIVO</option>
+					  </select>
+					<br>
+					<label for="Ciudad">Ciudad</label>
+					<input type="text" name="Ciudad" maxlength="25" id="Ciudad" placeholder="Ciudad" size="40" oninput="this.value = this.value.replace(/[^a-zA-Z]/,'')" required>
+					<br>
+					<input type="submit" value="Registrar Cliente" class="btn_save"></center></p>
+				</form>
 		</div>
 	</section>
   </body>

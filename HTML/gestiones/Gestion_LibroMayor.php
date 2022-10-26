@@ -175,7 +175,7 @@ if (!isset($_SESSION['rol'])) {
         display: inline-block;
         font-size: 14px;
         text-align: center;
-        width: 35px;
+        width: 30px;
       }
       .paginador a:hover{
         background: #ddd;

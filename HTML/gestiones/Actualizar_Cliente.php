@@ -112,8 +112,12 @@ if (!isset($_SESSION['rol'])) {
 				<input type="Direccion" name="Direccion" maxlength="60" id="Direccion" placeholder="Dirección"  value ="<?php echo $Direccion ?>"size="40">
 				<label for="Teléfono">Teléfono</label>
 				<input type="tex" name="Telefono" maxlength="10" id="Telefono" placeholder="Teléfono"value ="<?php echo $Telefono ?>"size="40">
-                <label for="Tipo_Cliente">Tipo Cliente</label>
-				<input type="text" name="Tipo_Cliente" maxlength="20" id="Tipo_Cliente" placeholder="Tipo Cliente" value ="<?php echo $Tipo_Cliente ?>"size="40">
+                <label for="Tipo_Cliente">Tipo Cliente</label><label for="Tipo_Cliente">Tipo Cliente</label><select name="Tipo_Cliente" required>
+                  <option value ="">Seleccione Una Opción</option>
+                  <option value="ACTIVO">ACTIVO</option>
+                  <option value="INACTIVO">INACTIVO</option>
+				  </select>
+				<br>
                 <label for="Ciudad">Ciudad</label>
 				<input type="text" name="Ciudad" maxlength="25" id="Ciudad" placeholder="Ciudad"  value ="<?php echo $Ciudad ?>"size="40">
 				<br>
