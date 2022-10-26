@@ -83,7 +83,7 @@ include("../conexion.php");
                      <h1>MOSTRAR USUARIOS</h1> 
                      <a href="nuevo.php"><input type="submit" class="btn btn-primary btn-block" Value="Nuevo"></a><p>
                      <form action="Buscador.php" method="get" class="form_search">
-                            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
+                            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
                             <input type="submit" value="Buscar" class="btn_search">
                      </form>
 

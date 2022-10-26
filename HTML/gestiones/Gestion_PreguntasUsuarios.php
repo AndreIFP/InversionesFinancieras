@@ -31,12 +31,12 @@ if (!isset($_SESSION['rol'])) {
 		     <?php
                         $mostrar_datos = 0;
                         ?>
-                     <form action="" method="get">
-                            <label for="datos_mostrar">Datos A Mostrar En El Formulario</label>
+                     <form action="" method="get" class="form_datos" >
+                            <label for="datos_mostrar">Datos A Mostrarㅤ</label>
                             <select name="mostrar" onchange='submit();'>
                             <option ></option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
                             <option value="100">100</option>
                                 <?php
                                 $mostrar_datos = $_GET['mostrar'];
@@ -44,13 +44,8 @@ if (!isset($_SESSION['rol'])) {
                             </select>
                      </form>
                      <form action="Buscador_preguntas_usuario.php" method="get" class="form_search">
-                            <select name="datos">
-                            <option value ="">Seleccione</option>
-                            <option value="2">2</option>
-                            <option value="4">4</option>
-                            <option value="100">100</option>
-                            </select>
-                            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
+                             
+                            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
                             <input type="submit" value="Buscar" class="btn_search">
                      </form>
 
@@ -202,6 +197,17 @@ if (!isset($_SESSION['rol'])) {
 	border: 0;
 	cursor: pointer;
 	margin-left: 10px;
+}
+.form_datos{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	float: left;
+	background: initial;
+	padding: 10px;
+	border-radius: 10px;
 }
 </style>
 

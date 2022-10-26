@@ -35,7 +35,7 @@ include 'barralateralinicial.php';
   <title>Gestión Usuarios</title>
 
   <div class="container mt-12">
-                  <div class="col-md-12">
+                  <div class="col-md-24">
                      <h1>Gestión Usuarios</h1> 
                      <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
                      <?php  if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['w'] == 1) {

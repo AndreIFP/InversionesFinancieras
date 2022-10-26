@@ -54,7 +54,8 @@ $query = mysqli_query($mysqli,"SELECT proname FROM product");
 <tr>
  <td>Articulo:</td>
  <td>
-      <select name ="product" >
+      <select name ="product" required> 
+      <option value="" >Selecciona una opcion</option>
          <?php
          while ($fila = $query->fetch_assoc()):
          $nombre = $fila['proname'];
@@ -64,7 +65,7 @@ $query = mysqli_query($mysqli,"SELECT proname FROM product");
  </tr>
  <tr>
     <td>Unidades:</td>
-    <td><input type="number" name="cant" value="" size="20"></td>
+    <td><input type="number" required name="cant" value="" size="20"></td>
  </tr>
  <tr>
     <td>Estado del producto recibido:</td>
@@ -77,7 +78,7 @@ $query = mysqli_query($mysqli,"SELECT proname FROM product");
  </tr>
  <tr>
     <td>Fecha y hora:</td>
-    <td><input type="text" name="fech" value="<?php
+    <td><input type="text" readonly name="fech" value="<?php
 date_default_timezone_set('America/Tegucigalpa');    
 $DateAndTime2 = date('m-d-Y h:i:s a', time());  
 echo $DateAndTime2;

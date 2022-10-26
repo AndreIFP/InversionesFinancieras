@@ -32,11 +32,11 @@ if (!isset($_SESSION['rol'])) {
                         $mostrar_datos = 0;
                      ?>
                      <form action="" method="get" class="form_datos">
-                            <label for="datos_mostrar">Datos A Mostrar</label>
+                            <label for="datos_mostrar">Datos A mostrar</label>
                             <select name="mostrar" onchange='submit();'>
                             <option ></option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
                             <option value="100">100</option>
                                 <?php
                                 $mostrar_datos = $_GET['mostrar'];

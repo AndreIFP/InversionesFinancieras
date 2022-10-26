@@ -14,7 +14,7 @@ session_start();
                             echo "<script> alert('Dejo En Blanco El Buscador');window.location= 'Gestion_parametros.php' </script>";
                         }
                     ?>
-                     <h1>GGestión Parametros</h1> 
+                     <h1>Gestión Parametros</h1> 
                      <h6><a  class="btn btn-primary"  href="Gestion_parametros.php ">Volver Atrás</a></h6>
 
                      <table class="table">
@@ -38,12 +38,7 @@ session_start();
                                     $result_register = mysqli_fetch_array($sql_registe);
                                     $total_registro = $result_register['total_registro'];
 
-                                    $mostrar_datos = $_GET['datos'];
-                                    if($mostrar_datos > 0){
-                                        $por_pagina = $mostrar_datos;
-                                    }else{
-                                        $por_pagina = 10;
-                                    }
+                                     $por_pagina = 10;
 
                                     if(empty($_GET['pagina']))
                                     {

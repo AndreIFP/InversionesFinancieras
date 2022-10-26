@@ -10,7 +10,7 @@ include("../conexion.php");
                      <h1>PREGUNTAS</h1> 
                      <a href="Nueva_Preguntas.php"><input type="submit" class="btn btn-primary btn-block" Value="Crear Preguntas"></a><p>
                      <form action="Buscador_Preguntas.php" method="get" class="form_search">
-                            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
+                            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
                             <input type="submit" value="Buscar" class="btn_search">
                      </form>
 

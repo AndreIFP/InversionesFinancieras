@@ -36,11 +36,7 @@ session_start();
 			                    $result_register = mysqli_fetch_array($sql_registe);
 			                    $total_registro = $result_register['total_registro'];
 
-                                     $mostrar_datos = $_GET['datos'];
-                                    if($mostrar_datos > 0){
-                                        $por_pagina = $mostrar_datos;
-                                    }else{
-                                        $por_pagina = 10;
+                                      $por_pagina = 10;
                                     }
 
                                     if(empty($_GET['pagina']))
