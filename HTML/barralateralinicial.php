@@ -1,8 +1,10 @@
 
 <?php
-
 require_once("helpers/helpers.php");
-    
+
+
+
+$user=$_SESSION['user'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -407,15 +409,35 @@ color: var(--text-color);
               
              <span class="name" >Inversiones Financieras </span>
               <span class="profession">I. S de Honduras</span>
+              
           </div>
+          
+
+         
+ 
+
+</div>
+
       </i>
+      
       </div>
 
       <i class='bx bx-chevron-right toggle'></i>
+      <div class='admin-header'>
+
+      
+
   </header>
 
   <div class="menu-bar">
       <div class="menu">
+       
+      <li class="" class="fa fa-caret-down"  >
+      <a href="#" style="align-items: center; height: 50px;"  >
+      <i class='bx bxs-user bx-tada icon' ></i>
+      <span style="align-items:center; color:#18191a" ><?php echo $user;?></span>
+      </a>
+      </li>
 
      <li class="search-box" style="display:flex; height: 50px;" >
             <i class='bx bx-search icon'></i>
@@ -668,8 +690,9 @@ color: var(--text-color);
 
 <section class="home" >
 <div class="text"> 
-  <section  style=" background-color:cornflowerblue;
-padding: 15px;
+<section  style=" background-color:transparent;
+padding: 8px;
+heigth: 200px;
 color:black;
 font-size: 20px; ">
     <div id="header">
@@ -679,11 +702,49 @@ font-size: 20px; ">
         </div>
       </div>
     </div>
+    <div class="content" >
+      <div class="content-header"  >
+    
+      </div>
+    </div>
     <div class="content">
-      <div class="content-header" >
-          <h3  style><center>INVERSIONES FINANCIERAS - IS DE HONDURAS S.A</center></h3>
-          <p><center>Trabajando Juntos Hoy Forjamos Nuestro Patrimononio del Mañana</center></p>
+      <div class="content-header"  >
+     
+
+
+        
         </div>
         </div>
         </section>
+
+ 
+
   
+  <section  style=" background-color:cornflowerblue;
+padding: 15px;
+color:black;
+
+font-size: 20px; ">
+    <div id="header">
+      <div class="header-nav">
+        <div class="menu-button">
+          <!--<i class="fa fa-navicon"></i>-->
+        </div>
+      </div>
+    </div>
+    <div class="content" style="background: red;">
+      <div class="content-header"  >
+      
+      </div>
+    </div>
+    <div class="content">
+      <div class="content-header"  >
+     
+
+
+          <h3  style><center>INVERSIONES FINANCIERAS - IS DE HONDURAS S.A</center></h3>
+          <p><center>Trabajando Juntos Hoy Forjamos Nuestro Patrimononio del Mañana</center></p>
+          
+        </div>
+        </div>
+        </section>
