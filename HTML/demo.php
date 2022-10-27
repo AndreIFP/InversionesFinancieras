@@ -12,14 +12,14 @@ $_SESSION['user'];
 ?>
 
 <?php include 'barralateralinicial.php';?>
-
-<!DOCTYPE html>
-<html>
-<head>   
-<meta charset="ISO-8859-1">
 <title>Factura</title>
 <a href="index.php"><input type="submit" class="btn btn-primary" Value=" Regresar "></a>
-<br>
+<br>  
+<body>
+<section  style=" background-color:rgb(240,248,255);
+    padding: 15px;
+    color:black;
+    font-size: 25px; " >
 <script>
 function multiplicar(){
 	m1 = document.getElementById("multiplicando").value;
@@ -28,19 +28,12 @@ function multiplicar(){
 	document.getElementById("resultado").value = r;
 	}
 </script>
-</head>
-<body>
 
-<div class="content" >
-        <div class="content-header" >
-            <div class="row">
               <CENTER>
                 <b><h1>FACTURA</h1></b>
                 <b><h3>Barrio el centro edificio el centro 3er nivel cubículo 308</h3></b>
                 <b><h3>RTN: 08015896135674</h3></b>
                 <b><h3>Telefono: +(504) 8839-8891</h3></b>
-                <br>
-                La factura es un beneficio de todos. ¡Exijala!
               </CENTER>
 
 
@@ -54,11 +47,14 @@ function multiplicar(){
  <tr>
     <td>ID de factura:</td>
     <td><input type="text" name="id_factura" value="" placeholder="Ingrese el numero de su factura" size="30" maxlength="20" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" required></td> 
- </tr>
-
+   </tr>
  <tr>
     <td>Fecha emisión de factura:</td>
-    <td><input type="text" name="fecha_factura" value="<?php echo date("d-m-Y"); ?>" maxlength="10" size = "10" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" required></td>
+    <td><input type="date" name="fecha_factura"
+       value=""
+       min="<?php date_default_timezone_set("America/Tegucigalpa"); 
+       $hoy=date("Y-m-d");
+            echo $hoy; ?>" required></td>
  </tr>
     <td><hr></td>
     <td><hr></td>
@@ -74,7 +70,7 @@ function multiplicar(){
  </tr>
  <tr>
     <td>Dirección del cliente:</td>
-    <td><input type="text" name="direccion_cliente" placeholder="Direccion" value="" size="71" maxlength="70" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" required></td>
+    <td><input type="text" name="direccion_cliente" placeholder="INgrese su dirección" value="" size="71" maxlength="70" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" required></td>
  </tr>
  <tr>
     <td>RTN de cliente:</td>
@@ -83,10 +79,10 @@ function multiplicar(){
 </table>
 
 <center>
-<br><br>
+<br>
 <h1>Descripción de servicios</h1>
 
-<br><br>
+<br>
 
 <form id="multiplicar">
 <table cellpadding="" border="5">
@@ -113,6 +109,6 @@ function multiplicar(){
 <br><br>
 
 <button type="submit" class="btn btn-success btn-lg">PRESIONE PARA GENERAR SU FACTURA TOTAL</button>
-
+</section>
 </body>
-</html>
+<?php include 'barralateralfinal.php';?>
