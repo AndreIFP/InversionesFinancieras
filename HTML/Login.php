@@ -1,9 +1,3 @@
-<?php 
-session_start();
-if (isset($_SESSION['rol'])) {
-    header('location: index.php');
-}
-?>
 <!DOCTYPE html 5>
 <html lang="en">
 <head>
@@ -40,6 +34,11 @@ if (isset($_SESSION['rol'])) {
             </div>
             
             <input type="email" placeholder="Direccion de correo" name="txtcorreo" maxlength="50" required required />
+            <br>
+            <a id="viewPassword" class="mover"  >Fecha de creación</a>
+            <br>
+            <input type="text" name="fecha_creacion" value="<?php date_default_timezone_set("America/Tegucigalpa");
+            echo date("d-m-Y - h:i"); ?>" size="10" readonly required>
             <br>
             <button type="submit" name="btnregistrarx">Registrar</button>
             <p class="message">¿Ya te registraste? <a href="#">Iniciar Sesión</a></p>
