@@ -9,7 +9,7 @@ include("../HTML/helpers/helpers.php");
 
 session_start();
 
-$_SESSION['id'];
+
 $_SESSION['user'];
 $_SESSION['rol'];
 

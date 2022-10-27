@@ -8,6 +8,7 @@ if(isset($_REQUEST["btnregistrarx"])){
   $_SESSION['user']=$_POST["tusuario"];
   $passw=$_POST['userpassword'];
   $_SESSION["intentos"] = isset($_SESSION["intentos"]) ? $_SESSION["intentos"] : 0;
+  $trespuesta ="";
 
   try {
     $query = mysqli_query($conn,"SELECT * FROM tbl_preguntas_x_usuario WHERE Respuestas = '".$trespuesta."'");

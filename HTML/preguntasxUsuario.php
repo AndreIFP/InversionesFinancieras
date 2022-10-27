@@ -201,7 +201,7 @@ select::-ms-expand {
               <div class="input-group">
               
                <input type="{{typeForFirstPassword}}" name="userpassword" class="form-control" placeholder="Contraseña" data-ng-model="user.password" data-ng-change="checkPasswordCriteria(user.password)" data-ng-focus="isCollapsed = !isCollapsed" data-ng-blur="isCollapsed = !isCollapsed" required style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
-                />
+            
                 <span class="input-group-addon white-background">
                                         <i class="fa fa-eye" data-ng-click="changeInputType(0,$event)"></i>
                                     </span>
