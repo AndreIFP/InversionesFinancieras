@@ -52,8 +52,8 @@ if (!isset($_SESSION['rol'])) {
                      </form>
                      <form action="Buscador_Roles.php" method="get" class="form_search">
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                            <input type="submit" value="Buscar" class="btn_search">
-                     </form>
+<input type="submit" value="Buscar" class="btn btn-primary">
+			  </form>
 
                      <table class="table">
                         <thead class="table-succees table-striped">
@@ -147,7 +147,7 @@ if (!isset($_SESSION['rol'])) {
 			            </ul>
 		                </div>
                         <div class="reportes">
-                            <a class="btn btn-warning" href="reporte_roles.php" >Reporte</a>
+                            <a class="btn btn-warning" href="reporte_roles.php" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;">Reporte</a>
                         </div>
                   </div>
            </div>
