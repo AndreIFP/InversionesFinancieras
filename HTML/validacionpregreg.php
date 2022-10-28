@@ -22,7 +22,7 @@ $respuesta=$_POST['txtrespuesta'];
     if(mysqli_query($conn,$queryregistro))
   {
 
-    $queryregistro = "UPDATE TBL_USUARIO SET Rol = 2, Estado_Usuario = 'ACTIVO' where Id_Usuario='$idusus';";
+    $queryregistro = "UPDATE TBL_USUARIO SET Rol = 4, Estado_Usuario = 'ACTIVO' where Id_Usuario='$idusus';";
     
     if(mysqli_query($conn,$queryregistro))
     {
