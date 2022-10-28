@@ -1,23 +1,15 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+         $('#some')[0].click();
+    });
+</script>
+<a id="some" href="javascript:window.print()"></a>
+
 <?php
  include('conexion.php');
 
- if(empty($_POST["telefono_empresa"])OR(empty($_POST["id_factura"]))OR(empty($_POST["cant"]))OR(empty($_POST["producto"]))OR(empty($_POST["gravado"]))OR(empty($_POST["impto"]))OR(empty($_POST["total"]))){
-    echo"<script>alert('Faltan campos por rellenar');window.location= './compra.php'</script>";
-}
 
-
-if(isset($_REQUEST["Credito"])){
-
-    $idcliente = $_REQUEST["id_cliente"];
-    $cuenta = $_REQUEST['Cuenta'];
-    $descripcion = $_REQUEST["Descripcion"];
-    $total = $_REQUEST["total"];
-
-    $sql = "INSERT INTO CUENTAS_POR_COBRAR (id_cliente, CUENTA, DESCRIPCION, DEUDA_CUENTA_TOTAL) VALUES ('$idcliente','$cuenta','$descripcion','$total')";
-            $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
-            $exito = mysqli_query($con,$sql);
-            echo"<script>alert('Los datos de la factura a credito han sido cargados correctamente');window.location= '../demo.php'</script>";
-}
 
 ?>
 
@@ -77,7 +69,6 @@ if(isset($_REQUEST["Credito"])){
                         <th>ESTADO DEL PRODUCTO</th>
                         <th>Subtotal</th>
                         <th>ISV</th>
-                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,9 +90,6 @@ if(isset($_REQUEST["Credito"])){
                         ?></td>
                         <td><?php $isv = $_POST["impto"];
                          echo $isv;
-                        ?></td>
-                        <td><?php $total = $_POST["total"];
-                         echo $total;
                         ?></td>
                     </tr>
                 </tbody>
@@ -168,7 +156,7 @@ echo "FECHA A DIA DE HOY DE LA FICHA : $DateAndTime2.";
                $fila = $ext->fetch_array(MYSQLI_NUM);
                $id = $fila[0];
 
-    $sql = "INSERT INTO TBL_KARDEX (fecha, detalle, nproducto, cant_entrada, total_cante) VALUES ('$fecha','ENTRADA','$art','$ent','$total')";
+    $sql = "INSERT INTO TBL_KARDEX (fecha, detalle, nproducto, cant_entrada, total_cante) VALUES ('$fecha','ENTRADA','$art','$ent','$result')";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql);
 
@@ -177,7 +165,7 @@ echo "FECHA A DIA DE HOY DE LA FICHA : $DateAndTime2.";
             $exito = mysqli_query($con,$sql1);
  
         }elseif ($nr == 0) {
-            $sql = "INSERT INTO TBL_KARDEX (fecha, detalle, nproducto, cant_entrada, total_cante) VALUES ('$fecha','ENTRADA','$art','$ent','$total')";
+            $sql = "INSERT INTO TBL_KARDEX (fecha, detalle, nproducto, cant_entrada, total_cante) VALUES ('$fecha','ENTRADA','$art','$ent','$result')";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql);
 

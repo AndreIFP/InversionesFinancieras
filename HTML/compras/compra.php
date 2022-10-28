@@ -23,61 +23,79 @@ if (!isset($_SESSION['rol'])) {
 }
 ?>
 <?php include 'barralateralinicial.php';?>
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta charset="ISO-8859-1">
-    <title>INVERSIONES FINANCIERAS S.A</title>
-    <style>
-        body {
-            font-family: sans-serif, verdana, arial;
-        } 
-        
-        table tr td:first-child
-        {
-            text-align: right;
-        }
-    </style>
-  <h6><a  class="btn btn-primary"  href="../gestiones/Gestion_Inventario.php ">Volver Atrás</a></h6>
-</head>
+<title>Nuevo Producto</title>
+<a href="index.php"><input type="submit" class="btn btn-primary" Value=" Regresar "></a>
+<br>  
 <body>
-<center>
-<br>
-<h3></h3> 
+<section  style=" background-color:rgb(240,248,255);
+    padding: 15px;
+    color:black;
+    font-size: 30px; " >
+<script>
+function multiplicar(){
+	m1 = document.getElementById("multiplicando").value;
+	m2 = document.getElementById("multiplicador").value;
+	r = m1*m2;
+	document.getElementById("resultado").value = r;
+	}
+</script>
 
-<form method="post" action="fichacompra.php"> 
-<table>
- <tr>
-    <td>ID de factura:</td>
-    <td><input type="number" name="id_factura" value="" size="16"></td>
- </tr>
- <tr>
-    <td>Fecha emisión de factura:</td>
-    <td><input type="text" name="fecha_factura" value="<?php echo date("d-m-Y"); ?>" size="15"></td>
- </tr>
- <tr>
-    <td>Empresa emisora:</td>
-    <td><input type="text" name="nombre_empresa" value="" size="25"></td>
- </tr>
- <tr>
-    <td>Teléfono de la empresa:</td>
-    <td><input type="text" name="telefono_empresa" value="" size="15"></td>
- </tr>
-</table>
+<script>
+	function validar(e) {
+		tecla = (document.all) ? e.keyCode : e.which;
+		if (tecla == 8) return true; //Tecla de retroceso (para poder borrar)
+		// dejar la línea de patron que se necesite y borrar el resto
+		patron = /[A-Za-z\s]/; // Solo acepta letras y espacios
+		
+		te = String.fromCharCode(tecla);
+		return patron.test(te);
+	}
+</script>
+<CENTER>
+                <b><h1>NUEVO PRODUCTO</h1></b>
+</CENTER>
+
+<form method="post" action="fichacompra.php">
+
+<CENTER>
 
 <br><br>
-<table cellpadding="5" border="1">
-<?php
-$mysqli = mysqli_connect("localhost:3307","root","3214","2w4GSUinHO");
-$query = mysqli_query($mysqli,"SELECT proname FROM product");
-?>
+
+<table class="default">
  <tr>
-    <td>Articulo/item:</td>
-    <td><input type="text" name="producto" value="" size="20"></td>
+    <td>ID de factura:</td>
+    <td><input type="text" name="id_factura" value="" placeholder="Ingrese el numero de su factura" size="30" maxlength="20" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" required></td> 
+   </tr>
+ <tr>
+    <td>Fecha emisión de factura:</td>
+    <td><input type="date" name="fecha_factura"
+       value=""
+       min="<?php date_default_timezone_set("America/Tegucigalpa"); 
+       $hoy=date("Y-m-d");
+            echo $hoy; ?>" required></td>
+ <tr>
+    <td>Empresa Emisora:</td>
+    <td><input type="text" name="nombre_empresa" value="" placeholder="Ingrese el nombre de la empresa" size="30" maxlength="29" onkeypress="return validar(event)" required></td> 
  </tr>
  <tr>
+    <td>Telefono de la empresa:</td>
+    <td><input type="text" name="telefono_empresa" placeholder="Telefono" maxlength="12" value="" size="15" oninput="this.value = this.value.replace(/[^0-9]/,'')" required></td>
+ </tr>
+</table>
+<br><br>
+<table cellpadding="5" border="1">
+<center>
+<h1>Detalles del Producto</h1>
+
+<form id="multiplicar">
+<table cellpadding="" border="5">
+ <tr>
+    <td>Articulo/item:</td>
+    <td><input type="text" name="producto" placeholder="Ingrese el nombre del articulo" maxlength="30" size="35" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" required></td>
+ </tr>
+ <tr><br>
     <td>Unidades:</td>
-    <td><input type="number" name="cant" value="" size="20"></td>
+    <td><input type="text" name="cant" placeholder="Ingrese cantidad" maxlength="6" size="15" oninput="this.value = this.value.replace(/[^0-9]/,'')" required></td>
  </tr>
  <tr>
     <td>Estado del producto recibido:</td>
@@ -88,53 +106,25 @@ $query = mysqli_query($mysqli,"SELECT proname FROM product");
       </select>
       </td>
  </tr>
- <tr>
+ <tr><br>
     <td>Importe gravado:</td>
-    <td><input type="number" name="gravado" value="" size="10"> L</td>
- </tr>
+  <td><input type="text" name="gravado" id="multiplicando" onkeyup="multiplicar();" maxlength="9" step="0.001" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" required onkeyup="sumar();"></td>
+  </tr>
  <tr>
-    <td>Impuesto(15%):</td>
-    <td><input type="number" name="impto" value="" size="10"> L</td>
- </tr>
+    <td>Impuesto():</td>
+    <td><input type="text" name="impuesto" id="multiplicador" placeholder="Ej.(0.15, 0.18, 0.21)" onkeyup="multiplicar();" maxlength="9" step="0.001" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" required onkeyup="sumar();"></td>
+    </tr>
  <tr>
-    <td>Total:</td>
-    <td><input type="number" name="total" value="" size="10"> L</td>
- </tr>
-      </table>
-<?php
-/*$mysqli = mysqli_connect("localhost","root","","2w4GSUinHO");
-$query = mysqli_query($mysqli,"SELECT CODIGO_CUENTA, CUENTA FROM TBL_CATALAGO_CUENTAS ORDER BY FIELD (CLASIFICACION, 'ACTIVO', 'PASIVO', 'CAPITAL', 'INGRESOS','COSTOS','GASTOS') ASC, CODIGO_CUENTA, CLASIFICACION");
-?>
-<table>
-   <tr>
-      <th>Cuenta</th>
-   </tr>
-   <tr>
-     <td>
-      <select name ="Cuenta" >
-         <?php
-         while ($fila = $query->fetch_assoc()):
-         $id = $fila['CODIGO_CUENTA'];
-         $nombre = $fila['CUENTA'];
-         echo "<option value='$nombre                                    '>$id,   $nombre</option>";
-         endwhile;*/
-         ?>
-         </select>
-     </td>
-   </tr>
+    <td>Total impuesto:</td>
+    <td><input type="text" readonly name="impto" id="resultado" step="0.001"  required>
+    </tr>
+    <tr>
 </table>
-<br>
-
- 
-</table>
-<br>
-
-<button type="submit" class="btn btn-info">GENERAR FICHA DE ENTRADA DE INVENTARIO</button>
-
-
 </form>
-<br><br><br><br>
-</center>
+
+<br><br>
+
+<button type="submit" class="btn btn-success btn-lg">PRESIONE PARA GENERAR SU FACTURA TOTAL</button>
+</section>
 </body>
 <?php include 'barralateralfinal.php';?>
-</html>

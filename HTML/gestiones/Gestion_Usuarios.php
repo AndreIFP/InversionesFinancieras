@@ -60,7 +60,7 @@ include 'barralateralinicial.php';
                      </form>
                      <form action="Buscador_Usuario.php" method="get" class="form_search">
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                            <input type="submit" value="Buscar" class="btn_search">
+                            <input type="submit" value="Buscar" class="btn btn-primary">
                      </form>
 
                      <table class="table">
@@ -161,7 +161,7 @@ include 'barralateralinicial.php';
 			            </ul>
 		                </div>
                         <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_Usuario.php" >Reporte</a>
+                            <a class="btn btn-warning" href="Reporte_Usuario.php" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;">Reporte</a>
                         </div>
                   </div>
            </div>
@@ -230,5 +230,3 @@ display: -webkit-flex;
 }
 </style>
 <?php include 'barralateralfinal.php';?>
-
-

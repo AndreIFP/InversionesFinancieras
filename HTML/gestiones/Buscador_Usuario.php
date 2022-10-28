@@ -56,7 +56,8 @@ session_start();
                                     $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_USUARIO
                                             WHERE ( Id_Usuario LIKE '%$busqueda%' OR 
                                                     Usuario LIKE '%$busqueda%' OR
-                                                    Nombre_Usuario LIKE '%$busqueda%'
+                                                    Nombre_Usuario LIKE '%$busqueda%' OR
+                                                    Estado_Usuario LIKE '%$busqueda%'
                                                     $rol  )");
                                     $result_register = mysqli_fetch_array($sql_registe);
                                     $total_registro = $result_register['total_registro'];
@@ -76,7 +77,8 @@ session_start();
                                                                         WHERE ( u.Id_Usuario LIKE '%$busqueda%' OR 
                                                                                 u.Usuario LIKE '%$busqueda%' OR
                                                                                 u.Nombre_Usuario LIKE '%$busqueda%' OR
-                                                                                r.rol LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
+                                                                                u.Estado_Usuario LIKE '%$busqueda%' OR
+                                                                                r.rol LIKE '%$busqueda%') ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
                                         mysqli_close($conn);
 
                                         $result = mysqli_num_rows($sql);
@@ -137,7 +139,7 @@ session_start();
                             <?php } ?>
                   </div>
                   <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_Usuario_Buscador.php?variable=<?php echo $busqueda;?>" >Reporte</a>
+                            <a class="btn btn-warning" href="Reporte_Usuario_Buscador.php?variable=<?php echo $busqueda;?>" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;">Reporte</a>
                         </div>
            </div>
     </body>
