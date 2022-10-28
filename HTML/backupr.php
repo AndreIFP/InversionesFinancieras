@@ -38,6 +38,13 @@ if (!isset($_SESSION['rol'])) {
     <?php
      include ("Connet.php");
      ?>
+	  
+ <body>
+<section  style=" background-color:rgb(240,248,255);
+    padding: 15px;
+    color:black;
+    font-size: 25px; " >
+    
 
 
     <body data-ng-app="validationApp">
@@ -53,7 +60,8 @@ if (!isset($_SESSION['rol'])) {
                                 <div class="branding">
                                     <br>
                                     <h1><center>Respaldo base de datos</center></p></h1>
-                                    <img src ="https://img2.freepng.es/20181125/uzh/kisspng-computer-icons-backup-and-restore-clip-art-databas-5bfae2143ce388.5626160015431685322494.jpg"   alt="Logo" title="Home page" class="logo1"  width="200" height="200"  />
+				       <table cellpadding="" border="3">
+                                    <td><img src ="https://img2.freepng.es/20181125/uzh/kisspng-computer-icons-backup-and-restore-clip-art-databas-5bfae2143ce388.5626160015431685322494.jpg"   alt="Logo" title="Home page" class="logo1"  width="200" height="200"  /> <td>
                                     
                                 
                                    
@@ -65,7 +73,14 @@ if (!isset($_SESSION['rol'])) {
 	<?php  if ($_SESSION['permisos'][M_BACKUP] and $_SESSION['permisos'][M_BACKUP]['u'] == 1) {                      
 	?>
 	<form action="./Restore.php" method="POST">
+		   <br> <br>
+		 </table>
+		<br>
 	<h1><center>Restauración base de datos</center></p></h1>
+				    <table cellpadding="" border="3">
+		<td><img src ="https://img2.freepng.es/20181125/uzh/kisspng-computer-icons-backup-and-restore-clip-art-databas-5bfae2143ce388.5626160015431685322494.jpg"   alt="Logo" title="Home page" class="logo1"  width="200" height="200"  /> 
+			
+					    
 		<select name="restorePoint">
     <option value="" disabled="" selected="">Selecciona un punto de restauración<option>
 			<?php
