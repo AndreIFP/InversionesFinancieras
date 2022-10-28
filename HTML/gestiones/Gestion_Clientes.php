@@ -20,6 +20,8 @@ if (!isset($_SESSION['rol'])) {
        die();
    }
 }
+
+$numero = 99999.99;
 ?>
 
 <?php include 'barralateralinicial.php';?>
@@ -28,15 +30,23 @@ if (!isset($_SESSION['rol'])) {
   <title>Gestión Clientes</title>
            <div class="container mt-12">
                   <div class="col-md-12">
+                    
+                    
+                     <div class="reportes">
                      <h1>Gestión Clientes</h1> 
-                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
+                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
                      <?php  if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['w'] == 1) {                    
                     ?>
-                     <a href="Nuevo_Cliente.php"><input type="submit" class="btn btn-success" Value="Crear Nuevo Cliente"></a><p>
+                     <a href="Nuevo_Cliente.php"><input type="submit" class="btn btn-success" Value="Crear Nuevo Cliente"></a>
+                            <a class="btn btn-warning" href="reporte_cliente.php" >Reporte</a>
+                    </div> 
+                     
                     <?php } ?>
+                    
                      <?php
                         $mostrar_datos = 0;
                         ?>
+                        <br>
                      <form action="" method="get" class="form_datos" >
                             <label for="datos_mostrar">Datos A Mostrarㅤ</label>
                             <select name="mostrar" onchange='submit();'>
@@ -49,8 +59,9 @@ if (!isset($_SESSION['rol'])) {
                                 ?>
                             </select>
                      </form>
+                     
                      <form action="Buscador_Cliente.php" method="get" class="form_search">
-                             
+                   
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
                             <input type="submit" value="Buscar" class="btn_search">
                      </form>
@@ -65,8 +76,6 @@ if (!isset($_SESSION['rol'])) {
                                 <th>Dirección</th>
                                 <th>Teléfono</th>
                                 <th>Estado</th>
-                                <th>Ciudad</th>
-                                <th>Fecha Creación</th>
                                 <th>Acciones</th>
                                 <th></th>
                             </tr>
@@ -108,8 +117,7 @@ if (!isset($_SESSION['rol'])) {
                                         <th><?php echo $row['Direccion']?></th>
                                         <th><?php echo $row['Telefono']?></th>
                                         <th><?php echo $row['Tipo_Cliente']?></th>
-                                        <th><?php echo $row['Ciudad']?></th>
-                                        <th><?php echo $row['Fecha_Dato']?></th>
+                                       
                                         <?php  if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {                    
                                         ?>
                                         <th><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>"class="btn btn-primary" >Editar</a></th><p>
@@ -153,9 +161,7 @@ if (!isset($_SESSION['rol'])) {
 			            <?php } ?>
 			            </ul>
 		                </div>
-                        <div class="reportes">
-                            <a class="btn btn-warning" href="reporte_cliente.php" >Reporte</a>
-                        </div>
+                     
                   </div>
            </div>
     </body>
@@ -221,6 +227,8 @@ if (!isset($_SESSION['rol'])) {
 	padding: 10px;
 	border-radius: 10px;
 }
+
+
 </style>
 
 <?php include 'barralateralfinal.php';?>

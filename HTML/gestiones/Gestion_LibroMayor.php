@@ -20,18 +20,26 @@ if (!isset($_SESSION['rol'])) {
        die();
    }
 }
+
+$numero = 99999.99;
+
 ?>
 
 <?php include 'barralateralinicial.php';?>
 <title>Gestión Libro Mayor</title>
   </div>
+  
            <div class="container mt-12">
                   <div class="col-md-12">
                      <h1>Gestión Libro Mayor</h1> 
-                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
-                     
+                    
+                     <div class="reportes">
+                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
+                            <a class="btn btn-warning" href="Reporte_LibroMayor.php" >Reporte</a>
+                        </div>
                      <form action="" method="get" class="form_datos" >
-                            <label for="datos_mostrar">Datos A Mostrarㅤ</label>
+                        
+                            <p for="datos_mostrar">Datos a Mostrarㅤ</p>
                             <select name="mostrar" onchange='submit();'>
                             <option ></option>
                             <option value="25">25</option>
@@ -39,6 +47,7 @@ if (!isset($_SESSION['rol'])) {
                             <option value="100">100</option>
                                 <?php
                                 $mostrar_datos = $_GET['mostrar'];
+                                
                                 ?>
                             </select>
                      </form>
@@ -94,7 +103,10 @@ if (!isset($_SESSION['rol'])) {
                                         <th><?php echo $row['ID_CLIENTE']?></th>
                                         <th><?php echo $row['FECHA']?></th>
                                         <th><?php echo $row['CUENTA']?></th>
-                                        <th><?php echo $row['TOTAL_CUENTA']?></th>                                        
+                                   
+                                        <th><?php echo 'L '.number_format( $row['TOTAL_CUENTA'],2)?></th>
+                                        
+
                                         <script>
                                             function alerta(){
                                                 window.alert('No es posible hacer esta Accion');
@@ -123,34 +135,32 @@ if (!isset($_SESSION['rol'])) {
                       <div class="paginador">
 			            <ul>
 			            <?php 
-				        if($pagina != 1)
-				        {
-			            ?>
-				        <li><a href="?pagina=<?php echo 1; ?>">|<</a></li>
-				        <li><a href="?pagina=<?php echo $pagina-1; ?>"><<</a></li>
-			            <?php 
-				        }
-				        for ($i=1; $i <= $total_paginas; $i++) { 
-					    # code...
-					    if($i == $pagina)
-					    {
-						echo '<li class="pageSelected">'.$i.'</li>';
-					    }else{
-						echo '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
-					    }
-				        }
-
-				        if($pagina != $total_paginas)
-				        {  
-			            ?>
-				        <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
-				        <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
-			            <?php } ?>
+				          if($pagina != 1)
+                          {
+                          ?>
+                          <li><a href="?pagina=<?php echo 1; ?>">|<</a></li>
+                          <li><a href="?pagina=<?php echo $pagina-1; ?>"><<</a></li>
+                          <?php 
+                          }
+                          for ($i=1; $i <= $total_paginas; $i++) { 
+                          # code...
+                          if($i == $pagina)
+                          {
+                          echo '<li class="pageSelected">'.$i.'</li>';
+                          }else{
+                          echo '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+                          }
+                          }
+  
+                          if($pagina != $total_paginas)
+                          {  
+                          ?>
+                          <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
+                          <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
+                          <?php } ?>
 			            </ul>
 		                </div>
-                        <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_LibroMayor.php" >Reporte</a>
-                        </div>
+                       
                   </div>
            </div>
     </body>

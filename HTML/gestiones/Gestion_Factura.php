@@ -20,6 +20,7 @@ if (!isset($_SESSION['rol'])) {
        die();
    }
 }
+$numero = 99999.99;
 ?>
 
 <?php include 'barralateralinicial.php';?>
@@ -29,7 +30,11 @@ if (!isset($_SESSION['rol'])) {
            <div class="container mt-12">
                   <div class="col-md-12">
                      <h1>Gestión Facturas</h1> 
-                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
+                     
+                     <div class="reportes">
+                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
+                            <a class="btn btn-warning" href="Reporte_Factura.php" >Reporte</a>
+                        </div>
                      <?php
                         $mostrar_datos = 0;
                         ?>
@@ -97,7 +102,7 @@ if (!isset($_SESSION['rol'])) {
                                         <th><?php echo $row['NFACTURA']?></th>
                                         <th><?php echo $row['CLIENTE']?></th>
                                         <th><?php echo $row['DESCRIPCION']?></th> 
-                                        <th><?php echo $row['TOTAL']?></th>                                        
+                                        <th><?php echo 'L '.number_format(  $row['TOTAL'],2)?></th>                                       
                                         <script>
                                             function alerta(){
                                                 window.alert('No es posible hacer esta Accion');
@@ -149,9 +154,7 @@ if (!isset($_SESSION['rol'])) {
 			            <?php } ?>
 			            </ul>
 		                </div>
-                        <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_Factura.php" >Reporte</a>
-                        </div>
+                       
                   </div>
            </div>
     </body>
