@@ -12,7 +12,8 @@ session_start();
 
 $_SESSION['user'];
 $_SESSION['rol'];
-
+//actualiza los permisos
+updatePermisos2($_SESSION['rol']);
 ;
 
 // si no existe la variable rol, el usuario no esta logueado y redirige al Login
@@ -21,8 +22,7 @@ if (!isset($_SESSION['rol'])) {
   die();
 }else{
    include 'barralateralinicial.php';
-  //actualiza los permisos
-  updatePermisos2($_SESSION['rol']);
+  
   
 }
 
