@@ -26,12 +26,16 @@ if (!isset($_SESSION['rol'])) {
   <title>Gestión Preguntas</title>
            <div class="container mt-12">
                   <div class="col-md-12">
-                     <h1>Gestión Preguntas</h1> 
-                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
-                     <?php  if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['w'] == 1) {                      
-                    ?>
-                     <a href="Nueva_Preguntas.php"><input type="submit" class="btn btn-success" Value="Crear Preguntas"></a><p>
-                        <?php } ?>
+                      <div>
+                     <h1>Gestión Usuarios</h1> 
+                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
+                     <?php  if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['w'] == 1) {
+                                            
+                     ?>
+                     <a href="Nuevo_Usuario.php"><input type="submit" class="btn btn-success" Value="Nuevo"></a>
+                     <a class="btn btn-warning" href="Reporte_Usuario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;" >Reporte</a> 
+                    </div>
+			  <?php } ?>
                      <?php
                         $mostrar_datos = 0;
                         ?>
@@ -142,9 +146,7 @@ if (!isset($_SESSION['rol'])) {
 			            <?php } ?>
 			            </ul>
 		                </div>
-                        <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_Preguntas.php" >Reporte</a>
-                        </div>
+                        
                   </div>
            </div>
     </body>
