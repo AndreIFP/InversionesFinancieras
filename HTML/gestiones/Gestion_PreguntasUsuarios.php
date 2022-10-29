@@ -26,9 +26,12 @@ if (!isset($_SESSION['rol'])) {
   <title>Gestión Preguntas Usuarios</title>
            <div class="container mt-12">
                   <div class="col-md-12">
+                     <div>
                      <h1>Gestión Preguntas por Usuarios</h1> 
-                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
-		     <?php
+                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
+                     <a class="btn btn-warning" href="Reporte_Preg_Usu.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;" >Reporte</a>
+			</div>
+			  <?php
                         $mostrar_datos = 0;
                         ?>
                      <form action="" method="get" class="form_datos" >
@@ -141,9 +144,7 @@ if (!isset($_SESSION['rol'])) {
 			            <?php } ?>
 			            </ul>
 		                </div>
-                        <div class="reportes">
-            <a class="btn btn-warning" href="reporte_preg_usu.php" >Reporte</a>
-           </div>
+                        
                   </div>
            </div>
     </body>
