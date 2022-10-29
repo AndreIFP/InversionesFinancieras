@@ -31,7 +31,7 @@ if (!isset($_SESSION['rol'])) {
                   <br>
                   
                      <h1>Gestión Inventario</h1> 
-                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
+                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
                     <?php  if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {                     
                      ?>
                      <a href="../compras/compra.php"><input type="submit" class="btn btn-success" Value="Nuevo Producto"></a>

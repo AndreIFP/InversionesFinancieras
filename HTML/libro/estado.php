@@ -57,10 +57,10 @@ $_SESSION['temporada']="10";
                     
                       ?>
 </head>
-<h6><a  class="btn btn-primary"  href="validacionestado.php" >Volver Atrás</a></h6>
-</head>
 
- <button type="button" class="btn btn-primary btn-lg btn-print" data-toggle="modal" data-target="#miModal">
+</head>
+<a  class="btn btn-primary"  href="validacionestado.php" >Volver Atrás</a>
+ <button type="button" class="btn btn-primary btn-print" data-toggle="modal" data-target="#miModal">
   INGRESAR
 </button>
      <?php
@@ -153,12 +153,12 @@ $_SESSION['temporada']="10";
 </div>
  <!--end of modal-->
 
-<br>
+
 
  <a class = "btn btn-success btn-print" href = "../gestiones/Reporte_Estado_Resultado.php"><i class ="glyphicon glyphicon-print"></i> Generar Estado de Resulado</a>
  <a class = "btn btn-success btn-print" href = "../gestiones/Reporte_Resultado.php"><i class ="glyphicon glyphicon-print"></i> Imprimir</a>
-<br>
->
+
+
 
 
                   <div class="box-header btn btn-primary" >
