@@ -8,7 +8,7 @@
 		{ 
 			$alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
 		}else{
-            $Id_Parametro = $_POST['Id_Parametro'];
+           		$Id_Parametro = $_POST['Id_Parametro'];
 			$nombre       = $_POST['Parametro'];
 			$Valor        = $_POST['Valor'];
 			if(!is_numeric($Valor)){
@@ -60,8 +60,10 @@
 			<hr>
 			<form action="" method="post">
                 <input type="hidden" name="Id_Parametro" value="<?php echo $Id_Parametro  ?>">
-				<label for="Parametro">Nombre Parametro</label>
-				<input type="text" name="Parametro" maxlength="30" id="Parametro" placeholder="Parametro" value ="<?php echo $Nombre ?>" size="40">
+				<input type="hidden" name="Id_Parametro" value="<?php echo $Id_Parametro  ?>">
+				<label for="">Nombre Parametro</label>				
+				<input type="text" Class="form-contorl mb-3" name="Parametro" readonly= "true" placeholder="Nombre Parametro" value ="<?php echo $Id_Parametro ?>" maxlength="20" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" required size="30">
+             
 				<label for="Valor">Valor</label>
 				<input type="text" name="Valor" maxlength="40" id="Valor" placeholder="Valor Parametro" value ="<?php echo $Valor ?>" size="40">
 				<br>
