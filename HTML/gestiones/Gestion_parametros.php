@@ -27,12 +27,16 @@ if (!isset($_SESSION['rol'])) {
   <title>Gestión Parametros</title>
            <div class="container mt-12">
                   <div class="col-md-12">
-                     <h1>Gestión Parametros</h1> 
-                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
+			  
+                     <div class="reportes">
+                    <h1>Gestión Parametros</h1> 
+                    <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
                      <?php  if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['w'] == 1) {                      
                     ?>
-                     <a href="Nuevo_Parametro.php"><input type="submit" class="btn btn-success" Value="Crear Parametro"></a><p>
-                    <?php } ?>
+                     <a href="Nuevo_Parametro.php"><input type="submit" class="btn btn-success" Value="Crear Parametro"></a>
+                        <a class="btn btn-warning" href="Reporte_Parametro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;" >Reporte</a>
+                     </div>
+			  <?php } ?>
                      <?php
                         $mostrar_datos = 0;
                         ?>
@@ -151,9 +155,7 @@ if (!isset($_SESSION['rol'])) {
 			            <?php } ?>
 			            </ul>
 		                </div>
-                        <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_Parametro.php" >Reporte</a>
-                        </div>
+                       
                   </div>
            </div>
     </body>
