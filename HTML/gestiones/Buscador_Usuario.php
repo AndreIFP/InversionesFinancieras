@@ -15,7 +15,8 @@ session_start();
                         }
                     ?>
                     <h1>Gestión Usuarios</h1> 
-                    <h6><a  class="btn btn-primary"  href="Gestion_Usuarios.php ">Volver Atrás</a></h6>
+                    <a  class="btn btn-primary"  href="Gestion_Usuarios.php ">Volver Atrás</a>
+			    <a class="btn btn-warning" href="Reporte_Usuario_Buscador.php?variable=<?php echo $busqueda;?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" >Reporte</a>
                     
                         <p>
                      
@@ -138,9 +139,7 @@ session_start();
                                     </div>
                             <?php } ?>
                   </div>
-                  <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_Usuario_Buscador.php?variable=<?php echo $busqueda;?>" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;">Reporte</a>
-                        </div>
+                 
            </div>
     </body>
 <style type="text/css">
