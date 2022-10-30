@@ -57,6 +57,7 @@ if (!isset($_SESSION['rol'])) {
                                 <th>Fecha</th>
                                 <th>Acción</th>
                                 <th>Descripción</th>
+				<th>Versión Anterior</th>
                                 <th>Usuario</th>
                      
                                 <th></th>
@@ -95,7 +96,8 @@ if (!isset($_SESSION['rol'])) {
                                         <th><?php echo $row['Id_Bitacora']?></th>
                                         <th><?php echo $row['Fecha']?></th>
                                         <th><?php echo $row['Accion']?></th>
-                                        <th><?php echo $row['Descripcion']?></th> 
+                                        <th><?php echo $row['Descripcion']?></th>
+					 <th><?php echo $row['Version_ant']?></th>
                                         <th><?php echo $row['Id_Usuario']?></th>                                        
                                         
                                         <script>
