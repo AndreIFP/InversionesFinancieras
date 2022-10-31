@@ -27,8 +27,8 @@ if (!isset($_SESSION['rol'])) {
   <title>Gestión Parametros</title>
            <div class="container mt-12">
                   <div class="col-md-12">
-			  
-                     <div class="reportes">
+
+                    <div class="reportes">
                     <h1>Gestión Parametros</h1> 
                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
                      <?php  if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['w'] == 1) {                      
@@ -36,7 +36,8 @@ if (!isset($_SESSION['rol'])) {
                      <a href="Nuevo_Parametro.php"><input type="submit" class="btn btn-success" Value="Crear Parametro"></a>
                         <a class="btn btn-warning" href="Reporte_Parametro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;" >Reporte</a>
                      </div>
-			  <?php } ?>
+
+                        <?php } ?>
                      <?php
                         $mostrar_datos = 0;
                         ?>
@@ -110,10 +111,9 @@ if (!isset($_SESSION['rol'])) {
                                                 window.alert('No es posible hacer esta Accion');
                                             }
                                         </script>
-                                        <?php  if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['u'] == 1) {
-                                            
-                                            ?>
-                                        <th><a type="button" class="btn btn-primary" onclick="alerta()" >Editar</a></th>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['u'] == 1) {                    
+                                        ?>
+                                        <th><a href="Actualizar_Parametro.php?Id=<?php echo $row['Id_Parametro'] ?>"class="btn btn-primary" >Editar</a></th><p>
                                         <?php } ?>
 
                                         <?php  if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['d'] == 1) {
@@ -155,7 +155,7 @@ if (!isset($_SESSION['rol'])) {
 			            <?php } ?>
 			            </ul>
 		                </div>
-                       
+                        
                   </div>
            </div>
     </body>

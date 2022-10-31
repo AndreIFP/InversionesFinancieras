@@ -3,18 +3,15 @@
 
 	if(!empty($_POST))
 	{
-		$alert='';
-		if(empty($_POST['Parametro']) || empty($_POST['Valor']))
+				if(empty($_POST['Parametro']) || empty($_POST['Valor']))
 		{ 
 			$alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
 		}else{
-           		$Id_Parametro = $_POST['Id_Parametro'];
+            $Id_Parametro = $_POST['Id_Parametro'];
 			$nombre       = $_POST['Parametro'];
 			$Valor        = $_POST['Valor'];
 			if(!is_numeric($Valor)){
 				$alert='<p class="msg_error">Error El Valor Solo Números.</p>';
-			}elseif(!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/" ,$nombre)){
-				$alert='<p class="msg_error"> El Nombre Del Parametro Solo Recibe Letras.</p>';
 			}else{
 				$query = mysqli_query($conn,"UPDATE TBL_PARAMETROS SET Parametro='$nombre',Valor='$Valor' WHERE Id_Parametro ='$Id_Parametro'");
 
@@ -58,9 +55,8 @@
 		<div class="form_register">
 			<h1>Actualizar Parametro</h1>
 			<hr>
-			<form action="" method="post">
+			<form action="" method="post">			
                 <input type="hidden" name="Id_Parametro" value="<?php echo $Id_Parametro  ?>">
-				<input type="hidden" name="Id_Parametro" value="<?php echo $Id_Parametro  ?>">
 				<label for="">Nombre Parametro</label>				
 				<input type="text" Class="form-contorl mb-3" name="Parametro" readonly= "true" placeholder="Nombre Parametro" value ="<?php echo $Id_Parametro ?>" maxlength="20" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" required size="30">
              

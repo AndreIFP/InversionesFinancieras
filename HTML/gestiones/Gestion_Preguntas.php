@@ -26,7 +26,8 @@ if (!isset($_SESSION['rol'])) {
   <title>Gestión Preguntas</title>
            <div class="container mt-12">
                   <div class="col-md-12">
-                      <div class="reportes">
+
+                  <div class="reportes">
                      <h1>Gestión Preguntas</h1> 
                      <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
                      <?php  if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['w'] == 1) {                      
@@ -34,7 +35,7 @@ if (!isset($_SESSION['rol'])) {
                      <a href="Nueva_Preguntas.php"><input type="submit" class="btn btn-success" Value="Crear Preguntas"></a>
                      <a class="btn btn-warning" href="Reporte_Preguntas.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;" >Reporte</a>
                      </div>
-			  <?php } ?>
+                     <?php } ?>
                      <?php
                         $mostrar_datos = 0;
                         ?>

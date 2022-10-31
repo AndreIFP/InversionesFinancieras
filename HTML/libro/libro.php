@@ -60,22 +60,14 @@ $_SESSION['temporada']="10";
 </head>
  
                   
-
+<h6><a  class="btn btn-primary"  href="validacionlibro.php ">Volver Atrás</a></h6>
 
 </head>
 
-<a  class="btn btn-primary"  href="validacionlibro.php ">Volver Atrás</a>
- <button type="button" class="btn btn-primary  btn-print" data-toggle="modal" data-target="#miModal">
+
+ <button type="button" class="btn btn-primary btn-lg btn-print" data-toggle="modal" data-target="#miModal">
   DEPOSITAR
 </button>
-<button type="button" class="btn btn-warning  btn-print" data-toggle="modal" data-target="#miModalenviar">
-  RETIRAR
-</button>
-
-<a  class = "btn btn-success btn-print" href = "Libro_Mayor.php"><i class ="glyphicon glyphicon-print"></i> Generar Libro Mayor</a>
- <a  class = "btn btn-success btn-print" href = "../gestiones/Reporte_libro.php"><i class ="glyphicon glyphicon-print"></i> Imprimir</a>
-              
-
      <?php
                  //     }
                       ?>
@@ -165,7 +157,9 @@ $_SESSION['temporada']="10";
 
 
 
-
+ <button type="button" class="btn btn-warning btn-lg btn-print" data-toggle="modal" data-target="#miModalenviar">
+  RETIRAR
+</button>
      <?php
                  //     }
                       ?>
@@ -258,7 +252,8 @@ $_SESSION['temporada']="10";
 
 <br>
  
-
+ <a class = "btn btn-success btn-print" href = "Libro_Mayor.php"><i class ="glyphicon glyphicon-print"></i> Generar Libro Mayor</a>
+ <a class = "btn btn-success btn-print" href = "../gestiones/Reporte_libro.php"><i class ="glyphicon glyphicon-print"></i> Imprimir</a>
 <br>
 
 

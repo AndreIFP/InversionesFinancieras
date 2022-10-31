@@ -36,7 +36,8 @@ include 'barralateralinicial.php';
 
   <div class="container mt-12">
                   <div class="col-md-24">
-                      <div>
+
+                  <div>
                      <h1>Gestión Usuarios</h1> 
                      <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
                      <?php  if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['w'] == 1) {
@@ -45,7 +46,7 @@ include 'barralateralinicial.php';
                      <a href="Nuevo_Usuario.php"><input type="submit" class="btn btn-success" Value="Nuevo"></a>
                      <a class="btn btn-warning" href="Reporte_Usuario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;" >Reporte</a> 
                     </div>
-			  <?php } ?>
+                        <?php } ?>
 		     <?php
                         $mostrar_datos = 0;
                         ?>
@@ -163,7 +164,7 @@ include 'barralateralinicial.php';
 			            <?php } ?>
 			            </ul>
 		                </div>
-                        
+                       
                   </div>
            </div>
     </body>
