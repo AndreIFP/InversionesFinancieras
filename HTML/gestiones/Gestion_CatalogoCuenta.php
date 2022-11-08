@@ -36,14 +36,18 @@ if (!isset($_SESSION['rol'])) {
        ?>
             <a href="Nuevo_Catalogo.php"><input type="submit" class="btn btn-success" Value="Crear Nueva Cuenta"></a>
                 <a class="btn btn-warning" href="Reporte_Catalogo.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;">Reporte</a>
-            </div>
+            </div><br>
             <?php } ?>
             <?php
             $mostrar_datos = 0;
             ?>
-            <br>
+            <section  style=" background-color:rgb(255,255,255);
+    padding: 25px;
+    width: 1100px;
+    color:black;
+    font-size: 15px; " >
             <form action="" method="get" class="form_datos">
-                <p for="datos_mostrar">Datos a Mostrarㅤ</p>
+                <b><p for="datos_mostrar">Datos a Mostrarㅤ</p></b>
                 <select name="mostrar" onchange='submit();'>
                     <option></option>
                     <option value="25">25</option>
