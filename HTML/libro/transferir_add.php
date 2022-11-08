@@ -7,7 +7,7 @@ include('../../dist/includes/dbcon.php');
 	$cliente = $_SESSION['cliente'];
 	$temporada = $_SESSION['temporada'];
 	$idcuenta=$_POST['txtpregunta'];
-	$cuenta = $_SESSION['cuenta'];
+
 	// $id_usuario = $_POST['id_usuario'];
 	$fecha = $_POST['fechax'];
 
@@ -22,8 +22,8 @@ while($row=mysqli_fetch_array($consultas)){
 
 		$update=mysqli_query($con,"update TBL_LIBROS set caja=caja-'$monto' where Id_cliente='$cliente' and Id_Libro=$temporada ");
 
-		mysqli_query($con,"INSERT INTO libro(fecha,cuenta,descripcion,monto,debe_haber,id_cliente,temporada,id_usuario)
-				VALUES('$fecha','$idpreg','$descripcion','$monto','$debe_haber','$cliente','$temporada','$id_usuario')")or die(mysqli_error($con));
+		
+		mysqli_query($con, "CALL 	validar('$idpreg','$descripcion','$monto','$debe_haber','$cliente','$fecha','$id_usuario')"); 
 
 			
 

@@ -284,7 +284,7 @@ $_SESSION['temporada']="10";
 <?php
 
    // $branch=$_SESSION['branch'];
-    $query=mysqli_query($con,"select * from libro where id_cliente='$cliente' and fecha >='$fechai' and fecha <='$fechaf' ")or die(mysqli_error());
+    $query=mysqli_query($con,"select * from libro where id_cliente='$cliente' and fecha >='$fechai' and fecha <='$fechaf' ")or die(mysqli_error($con));
     $i=1;
     while($row=mysqli_fetch_array($query)){
       $monto_haber=0;

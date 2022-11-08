@@ -10,11 +10,11 @@ include('../../dist/includes/dbcon.php');
 	$fecha = $_POST['fechax'];
 	$idcuenta=$_POST['txtpregunta'];
 	$debe_haber = $_POST['debe_haber'];
-	$cuenta = $_POST['cuenta'];
-	$descripcion = $_POST['descripcion'];
-$monto = $_POST['monto'];
 
-$caja=0;
+	$descripcion = $_POST['descripcion'];
+    $monto = $_POST['monto'];
+
+
 
 
 
@@ -30,7 +30,7 @@ while($row=mysqli_fetch_array($consultas2)){
  $deudacuent=$row['Deuda_Cuenta_Total'];
 }
 
-$deudaactual=$deudacuent - $monto;
+//$deudaactual=$deudacuent - $monto;
 $queryregistro = "UPDATE CUENTAS_POR_COBRAR SET  Cuentas='$idpreg',Descripcion='$descripcion', Deposito='$monto',Deuda_Actual='$deudaactual' where Id_Cliente='$cliente';";
     
     if(mysqli_query($con,$queryregistro))
@@ -41,10 +41,8 @@ $queryregistro = "UPDATE CUENTAS_POR_COBRAR SET  Cuentas='$idpreg',Descripcion='
 
 		$update=mysqli_query($con,"update TBL_LIBROS set caja=caja+'$monto' where Id_cliente='$cliente' and Id_Libro=$temporada ");
 
-		mysqli_query($con,"INSERT INTO libro(fecha,cuenta,descripcion,monto,debe_haber,id_cliente,temporada,id_usuario)
-				VALUES('$fecha','$idpreg','$descripcion','$monto','$debe_haber','$cliente','$temporada','$id_usuario')")or die(mysqli_error($con));
-
-			
+		
+				mysqli_query($con, "CALL 	validar('$idpreg','$descripcion','$monto','$debe_haber','$cliente','$fecha','$id_usuario')"); 
 
 	echo "<script> alert('Se Ingreso el deposito correctamente');document.location='../libro/libro.php'</script>";	
 
