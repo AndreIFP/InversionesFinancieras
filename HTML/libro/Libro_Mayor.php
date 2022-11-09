@@ -96,9 +96,10 @@ footer {
  <section align="right">
  <a  class="btn btn-primary" href="../gestiones/Reporte_Balance.php" target="_blank" role="button">Generar Balance</a>
  <section align="left">
- <a class="btn btn-primary" href="libro.php" role="button">Atras</a></section>
+ <a class="btn btn-primary" href="libro.php" role="button">Atras</a>
+   <a class="btn btn-success btn-print" href="../gestiones/Reporte_libro_mayor.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class ="glyphicon glyphicon-print"></i> Imprimir</a> 
 </section>
-<a class = "btn btn-success btn-print" href = "../gestiones/Reporte_libro_mayor.php"><i class ="glyphicon glyphicon-print"></i> Imprimir</a>
+ </section>
  
 
 <table id="ejemplo" class="gridview">
