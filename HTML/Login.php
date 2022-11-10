@@ -16,14 +16,18 @@
             
           <form class="register-form" action="ValidacionReg.php" method="post">
           <label for="text"> Registro</label>
+          <label5 for="text"> Nombre de Usuario</label5>
             <input type="text" placeholder="Nombre de Usuario"  name="Nombre_Usuario" maxlength="30" style="text-transform:uppercase;"required size="40">
+            <label5 for="text"> Usuario</label5>
             <input type="text" placeholder="Usuario"  name="txtusuario" maxlength="15" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
             
             <div class="container">
             <div class="row">
             <div class="col s12 m12 l6">
+            <label5 for="text"> Contraseña</label5>
             <input  id="inpucontra2"  type="password" placeholder="Contraseña" name="txtpassword" maxlength="30" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}"
             title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. "/>
+            <label5 for="text"> Confirmar Contraseña</label5>
             <input  id="inpucontracon"  type="password" placeholder="Confirmar Contraseña"  maxlength="16" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}"
              title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. "  onblur="verificar()"  />
             </div>
@@ -32,7 +36,7 @@
             </div>
             </div>
             </div>
-            
+            <label5 for="text"> Correo</label5>
             <input type="email" placeholder="Direccion de correo" name="txtcorreo" maxlength="50" required required />
             <br>
             <a id="viewPassword" class="mover"  >Fecha de creación</a>
@@ -110,6 +114,7 @@
 	text-align:left;
 	
 }
+
 
 .ub1
 {
@@ -224,6 +229,16 @@ body {
     display: block;
     top: 20px;
     margin: 15px auto;
+}
+.form label5{
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-align: left;
+    text-decoration: none;
+    -moz-osx-font-smoothing: grayscale; 
+    color:#4d4d4d;
+    display: block;
 }
 
 #viewPassword{
