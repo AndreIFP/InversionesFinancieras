@@ -25,7 +25,16 @@ $numero = 99999.99;
 ?>
 
 <?php include 'barralateralinicial.php'; ?><p></p>
+
+
+<!DOCTYPE html>
+<html lang="en">
 <title>Gestión Clientes</title>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+</head>
 <section style=" background-color:rgb(255, 255, 255);
     padding: 15px;
     color:black;
@@ -118,12 +127,16 @@ $numero = 99999.99;
                             ?>
                                 <th><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-primary btn-xs">Editar</a>
                                 <?php } ?>
+
                                 <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['d'] == 1) {
                                 ?>
                                     <a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-danger btn-xs">Eliminar</a>
                                 </th>
                                 <p>
                                 <?php } ?>
+
+                                <td><button type="button" class="btn btn-warning" onclick="editar(this.id)" id="<?php echo $row['Id_Cliente']?>">Ver</button></td>
+                                
                         </tr>
                 <?php
                     }
@@ -167,6 +180,74 @@ $numero = 99999.99;
 
     </div>
 
+    <div class="modal" tabindex="-1" id="EditModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Informacion del cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+<form>
+<div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Id Cliente:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Nombre Empresa:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Nombre Cliente:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >RTN Cliente:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Direccion:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Telefono:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Tipo Cliente:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+
+
+          <p id="variable"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+                </form>
+  <script>
+    function editar(este) {
+      var ModalEdit = new bootstrap.Modal(EditModal, {}).show();
+      variable.innerHTML = "El id es : " + este;
+    }
+  </script>
+    
 </section>
 
 </body>
