@@ -2,11 +2,15 @@
 include("../conexion.php");
 session_start();
 ?>
-<?php include 'barralateralinicial.php';?>
-  </div>
+<?php include 'barralateralinicial.php';?><p></p>
+<section style=" background-color:rgb(255, 255, 255);
+    padding: 15px;
+    color:black;
+    font-size: 12px; ">
   <title>Gestión Preguntas</title>
-           <div class="container mt-12">
+  <div class="container-fluid">
                   <div class="col-md-12">
+                  <div class="box-body table-responsive">
                     <?php 
                         $busqueda = strtolower($_REQUEST['busqueda']);
                         if(empty($busqueda))
@@ -14,17 +18,17 @@ session_start();
                             echo "<script> alert('Dejo En Blanco El Buscador');window.location= 'Gestion_Preguntas.php' </script>";
                         }
                     ?>
-                     <h1>Gestión Preguntas</h1> 
-                     <a  class="btn btn-primary"  href="Gestion_Preguntas.php ">Volver Atrás</a>
-                     <a class="btn btn-warning" href="Reporte_Preguntas_Buscador.php?variable=<?php echo $busqueda;?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" >Reporte</a>
+                     <h2><strong>Gestión Preguntas</strong> </h2> 
+                     <a  class="btn btn-primary"  href="Gestion_Preguntas.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                     <a class="btn btn-warning" href="Reporte_Preguntas_Buscador.php?variable=<?php echo $busqueda;?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
 
                      <table class="table">
-                            <thead class="table-succees table-striped">
+                            <thead class="table-primary"><br><br>
                                 <tr>
                                     <th>Id</th>
                                     <th>Preguntas</th>
                                     <th>Acciones</th>
-                                    <th></th>
+                              
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,8 +62,8 @@ session_start();
                                              <tr>
                                               <th><?php echo $row['Id_Preguntas']?></th>
                                               <th><?php echo $row['Preguntas']?></th>
-                                              <th><a href="Actualizar_Preguntas.php?Id=<?php echo $row['Id_Preguntas'] ?>"class="btn btn-primary" >Editar</a></th><p>
-                                              <th><a href="Delete_Preguntas.php?Id=<?php echo $row['Id_Preguntas'] ?>"class="btn btn-danger">Eliminar</a></th><p>
+                                              <th><a href="Actualizar_Preguntas.php?Id=<?php echo $row['Id_Preguntas'] ?>"class="btn btn-primary btn-xs" >Editar</a>
+                                              <a href="Delete_Preguntas.php?Id=<?php echo $row['Id_Preguntas'] ?>"class="btn btn-danger btn-xs">Eliminar</a></th>
                                              </tr>
                                         <?php
                                                }
@@ -73,6 +77,7 @@ session_start();
                             if($total_registro != 0)
                                 {
                        ?>
+                        </div>
                                 <div class="paginador">
                                         <ul>
                                             <?php 
@@ -105,6 +110,8 @@ session_start();
                   
            </div>
     </section>
+  </div>
+
     </body>
 <style type="text/css">
      /*============ Paginador =============*/

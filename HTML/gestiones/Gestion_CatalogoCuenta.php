@@ -21,150 +21,161 @@ if (!isset($_SESSION['rol'])) {
     }
 }
 ?>
-<?php include 'barralateralinicial.php';?>
-</div>
-<title>Gestión Catálogo Cuentas</title>
-<div class="container mt-12">
-    <div class="col-md-12">
-        <h1>Gestión Catálogo Cuentas</h1>
-        
-            
-            <div class="reportes">
-            <a class="btn btn-primary" href="../index.php ">Volver Atrás</a>
-        <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['w'] == 1) {
-       
-       ?>
-            <a href="Nuevo_Catalogo.php"><input type="submit" class="btn btn-success" Value="Crear Nueva Cuenta"></a>
-                <a class="btn btn-warning" href="Reporte_Catalogo.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;">Reporte</a>
-            </div><br>
-            <?php } ?>
-            <?php
-            $mostrar_datos = 0;
-            ?>
-            <section  style=" background-color:rgb(255,255,255);
-    padding: 25px;
-    width: 1100px;
+<?php include 'barralateralinicial.php'; ?>
+<p></p>
+<section style=" background-color:rgb(255, 255, 255);
+    padding: 15px;
     color:black;
-    font-size: 15px; " >
-            <form action="" method="get" class="form_datos">
-                <b><p for="datos_mostrar">Datos a Mostrarㅤ</p></b>
-                <select name="mostrar" onchange='submit();'>
-                    <option></option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <?php
-                    $mostrar_datos = $_GET['mostrar'];
-                    ?>
-                </select>
-            </form>
-            <form action="Buscador_Catalogo.php" method="get" class="form_search">
+    font-size: 12px; ">
+    <div class="container-fluid">
+        <h2><strong>Gestión Catálogo Cuentas</strong></h2>
+        <div class="col-md-12">
 
-                <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                <input type="submit" value="Buscar" class="btn btn-primary">
-            </form>
+            <div class="box-body table-responsive">
+                    <div class="reportes">
+                        <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                        <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['w'] == 1) {
 
-            <table class="table">
-                <thead class="table-succees table-striped">
-                    <tr>
-                        <th>Código</th>
-                        <th>Cuenta</th>
-                        <th>Clasificación</th>
-                        <th>Acciones</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    //Paginador
-                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA = CODIGO_CUENTA ");
-                    $result_register = mysqli_fetch_array($sql_registe);
-                    $total_registro = $result_register['total_registro'];
+                        ?>
+                            <a href="Nuevo_Catalogo.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Nueva cuenta</a>
+                            <a class="btn btn-warning" href="Reporte_Catalogo.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                    </div>
+                <?php } ?>
+                <?php
+                $mostrar_datos = 0;
+                ?>
+                <form action="" method="get" class="form_datos">
+                    <b>
+                        <p for="datos_mostrar">Datos a Mostrarㅤ</p>
+                    </b>
+                    <select name="mostrar" onchange='submit();'>
+                        <option></option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <?php
+                        $mostrar_datos = $_GET['mostrar'];
+                        ?>
+                    </select>
+                </form>
+                <form action="Buscador_Catalogo.php" method="get" class="form_search">
 
-                    if ($mostrar_datos > 0) {
-                        $por_pagina = $mostrar_datos;
-                    } else {
-                        $por_pagina = 10;
-                    }
+                    <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
+                    <input type="submit" value="Buscar" class="btn btn-primary">
+                </form>
 
-                    if (empty($_GET['pagina'])) {
-                        $pagina = 1;
-                    } else {
-                        $pagina = $_GET['pagina'];
-                    }
+                <table class="table">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Código</th>
+                            <th>Cuenta</th>
+                            <th>Clasificación</th>
+                            <th>Acciones</th>
 
-                    $desde = ($pagina - 1) * $por_pagina;
-                    $total_paginas = ceil($total_registro / $por_pagina);
-                    $sql = mysqli_query($conn, "select * FROM TBL_CATALAGO_CUENTAS LIMIT $desde,$por_pagina ");
-                    mysqli_close($conn);
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        //Paginador
+                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA = CODIGO_CUENTA ");
+                        $result_register = mysqli_fetch_array($sql_registe);
+                        $total_registro = $result_register['total_registro'];
 
-                    $result = mysqli_num_rows($sql);
-                    if ($result > 0) {
-                        while ($row = mysqli_fetch_array($sql)) {
-                    ?>
-                            <tr>
-                                <th><?php echo $row['CODIGO_CUENTA'] ?></th>
-                                <th><?php echo $row['CUENTA'] ?></th>
-                                <th><?php echo $row['CLASIFICACION'] ?></th>
-                                <script>
-                                    function alerta() {
-                                        window.alert('No es posible hacer esta Accion');
-                                    }
-                                </script>
-
-                                <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['u'] == 1) {
-
-                                ?>
-                                    <th><a type="button" class="btn btn-primary" onclick="alerta()">Editar</a></th>
-                                <?php } ?>
-
-                                <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['d'] == 1) {
-
-                                ?>
-                                    <th><a type="button" class="btn btn-danger" onclick="alerta()">Eliminar</a></th>
-                                <?php } ?>
-                            </tr>
-                    <?php
+                        if ($mostrar_datos > 0) {
+                            $por_pagina = $mostrar_datos;
+                        } else {
+                            $por_pagina = 10;
                         }
-                    }
-                    ?>
-                </tbody>
-            </table>
+
+                        if (empty($_GET['pagina'])) {
+                            $pagina = 1;
+                        } else {
+                            $pagina = $_GET['pagina'];
+                        }
+
+                        $desde = ($pagina - 1) * $por_pagina;
+                        $total_paginas = ceil($total_registro / $por_pagina);
+                        $sql = mysqli_query($conn, "select * FROM TBL_CATALAGO_CUENTAS LIMIT $desde,$por_pagina ");
+                        mysqli_close($conn);
+
+                        $result = mysqli_num_rows($sql);
+                        if ($result > 0) {
+                            while ($row = mysqli_fetch_array($sql)) {
+                        ?>
+                                <tr>
+                                    <th><?php echo $row['CODIGO_CUENTA'] ?></th>
+                                    <th><?php echo $row['CUENTA'] ?></th>
+                                    <th><?php echo $row['CLASIFICACION'] ?></th>
+                                    <script>
+                                        function alerta() {
+                                            window.alert('No es posible hacer esta Accion');
+                                        }
+                                    </script>
+
+                                    <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['u'] == 1) {
+
+                                    ?>
+                                        <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a>
+                                        <?php } ?>
+
+                                        <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['d'] == 1) {
+
+                                        ?>
+                                            <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
+                                        </th>
+                                    <?php } ?>
+                                </tr>
+                        <?php
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+
+            </div>
             <div class="paginador">
                 <ul>
                     <?php
-                     if($pagina != 1)
-                     {
-                     ?>
-                     <li><a href="?pagina=<?php echo 1; ?>">|<</a></li>
-                     <li><a href="?pagina=<?php echo $pagina-1; ?>"><<</a></li>
-                     <?php 
-                     }
-                     for ($i=1; $i <= $total_paginas; $i++) { 
-                     # code...
-                     if($i == $pagina)
-                     {
-                     echo '<li class="pageSelected">'.$i.'</li>';
-                     }else{
-                     echo '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
-                     }
-                     }
+                    if ($pagina != 1) {
+                    ?>
+                        <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                        </li>
+                        <li><a href="?pagina=<?php echo $pagina - 1; ?>">
+                                <<< /a>
+                        </li>
+                    <?php
+                    }
+                    for ($i = 1; $i <= $total_paginas; $i++) {
+                        # code...
+                        if ($i == $pagina) {
+                            echo '<li class="pageSelected">' . $i . '</li>';
+                        } else {
+                            echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
+                        }
+                    }
 
-                     if($pagina != $total_paginas)
-                     {  
-                     ?>
-                     <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
-                     <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
-                     <?php } ?>
-                    
+                    if ($pagina != $total_paginas) {
+                    ?>
+                        <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
+                        <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
+                    <?php } ?>
+
                 </ul>
             </div>
-            
+        </div>
     </div>
+
+</section>
 </div>
+
+
 </body>
 
 <style type="text/css">
+    table {
+        border-collapse: collapse;
+    }
+
     .paginador ul {
         padding: 15px;
         list-style: none;

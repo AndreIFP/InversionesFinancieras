@@ -3,121 +3,129 @@ include("../conexion.php");
 session_start();
 ?>
 <?php include 'barralateralinicial.php';?>
-</div>
-<title>Gestión Inventario</title>
-           <div class="container mt-12">
-                  <div class="col-md-12">
-                    <?php 
-                        $busqueda = strtolower($_REQUEST['busqueda']);
-                        if(empty($busqueda))
-                        {
-                            header("location: Gestion_Inventario.php");
-                            mysqli_close($conn);
-                        }
-                    ?>
-                     <h1>Gestión Inventario</h1> 
-                     <a  class="btn btn-primary"  href="Gestion_Inventario.php ">Volver Atrás</a>
-                     <a class="btn btn-warning" href="Reporte_Inventario_Buscador.php?variable=<?php echo $busqueda;?>" <a class="btn btn-warning" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" >Reporte</a>
+<p></p>
+<section style=" background-color:rgb(255, 255, 255);
+    padding: 15px;
+    color:black;
+    font-size: 12px; ">
+      <title>Gestión Inventario</title>
+           
+      <div class="box-body table-responsive">
+             <?php 
+                 $busqueda = strtolower($_REQUEST['busqueda']);
+                 if(empty($busqueda))
+                 {
+                     header("location: Gestion_Inventario.php");
+                     mysqli_close($conn);
+                 }
+             ?>
+              <h2><strong> Gestión Inventario</strong></h2> 
+              <div class="box-body table-responsive">
+              <a  class="btn btn-primary"  href="Gestion_Inventario.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+              <a class="btn btn-warning" href="Reporte_Inventario_Buscador.php?variable=<?php echo $busqueda;?>" <a class="btn btn-warning"
+               href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  Reporte</a>
 
-                     <table class="table">
-                            <thead class="table-succees table-striped">
-                                <tr>
-                                <th>Id</th>
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>Fecha</th>
-                                <th>Acciones</th>
-                                <th></th>         
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    <?php
-                                    //Paginador
-                                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM product
-                                            WHERE ( id LIKE '%$busqueda%' OR
-                                            proname LIKE '%$busqueda%' )");
-                                    $result_register = mysqli_fetch_array($sql_registe);
-                                    $total_registro = $result_register['total_registro'];
+              <table class="table"><br>
+                     <thead class="table-primary"><br>
+                         <tr>
+                         <th>Id</th>
+                         <th>Producto</th>
+                         <th>Cantidad</th>
+                         <th>Fecha</th>
+                         <th>Acciones</th>
+                               
+                         </tr>
+                     </thead>
+                     <tbody>
+                             <?php
+                             //Paginador
+                             $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM product
+                                     WHERE ( id LIKE '%$busqueda%' OR
+                                     proname LIKE '%$busqueda%' )");
+                             $result_register = mysqli_fetch_array($sql_registe);
+                             $total_registro = $result_register['total_registro'];
 
-                                    $por_pagina = 10;
-                                    
-                                    if(empty($_GET['pagina']))
-                                    {
-                                        $pagina = 1;
-                                    }else{
-                                        $pagina = $_GET['pagina'];
-                                    }
+                             $por_pagina = 10;
+                             
+                             if(empty($_GET['pagina']))
+                             {
+                                 $pagina = 1;
+                             }else{
+                                 $pagina = $_GET['pagina'];
+                             }
 
-                                    $desde = ($pagina-1) * $por_pagina;
-                                    $total_paginas = ceil($total_registro / $por_pagina);
-                                        $sql = mysqli_query($conn,"select * from product WHERE ( id LIKE '%$busqueda%' OR
-                                        proname LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
-                                        mysqli_close($conn);
+                             $desde = ($pagina-1) * $por_pagina;
+                             $total_paginas = ceil($total_registro / $por_pagina);
+                                 $sql = mysqli_query($conn,"select * from product WHERE ( id LIKE '%$busqueda%' OR
+                                 proname LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
+                                 mysqli_close($conn);
 
-                                        $result = mysqli_num_rows($sql);
-                                        if($result > 0){
-                                            while($row=mysqli_fetch_array($sql)){
-                                        ?>
-                                            <tr>
-                                            <th><?php echo $row['id']?></th>
-                                        <th><?php echo $row['proname']?></th>
-                                        <th><?php echo $row['amount']?></th>
-                                        <th><?php echo $row['time']?></th>    
-                                        <th><a href="../Compras/salida.php?Id=<?php echo $row['id'] ?>"class="btn btn-primary" >Retirar</a></th>
-                                        <script>
-                                            function alerta(){
-                                                window.alert('No es posible hacer esta Accion');
-                                            }
-                                        </script>
-                                        <th><a type="button" class="btn btn-danger" onclick="alerta()" >Eliminar</a></th>
-                                            </tr>
-                                        <?php
-                                               }
-                                            }else{
-                                                echo "<script> alert('No se encontro registros');window.location= 'Gestion_Inventario.php' </script>";
-                                            }
-                                        ?>
-                            </tbody>
-                      </table>
-                      <?php
-                            if($total_registro != 0)
-                                {
-                       ?>
-                                <div class="paginador">
-                                        <ul>
-                                            <?php 
-                                                if($pagina != 1)
-                                                {
-                                                    ?>
-                                                    <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<</a></li>
-                                                    <li><a href="?pagina=<?php echo $pagina-1; ?>&busqueda=<?php echo $busqueda; ?>"><<</a></li>
-                                                    <?php 
-                                                    }
-                                                for ($i=1; $i <= $total_paginas; $i++) { 
-                                                # code...
-                                                if($i == $pagina)
-                                                {
-                                                    echo '<li class="pageSelected">'.$i.'</li>';
-                                                }else{
-                                                    echo '<li><a href="?pagina='.$i.'&busqueda='.$busqueda.'">'.$i.'</a></li>';
-                                                }
-                                                }
+                                 $result = mysqli_num_rows($sql);
+                                 if($result > 0){
+                                     while($row=mysqli_fetch_array($sql)){
+                                 ?>
+                                     <tr>
+                                     <th><?php echo $row['id']?></th>
+                                 <th><?php echo $row['proname']?></th>
+                                 <th><?php echo $row['amount']?></th>
+                                 <th><?php echo $row['time']?></th>    
+                                 <th><a href="../Compras/salida.php?Id=<?php echo $row['id'] ?>"class="btn btn-primary btn-xs" >Retirar</a>
+                                 <script>
+                                     function alerta(){
+                                         window.alert('No es posible hacer esta Accion');
+                                     }
+                                 </script>
+                                 <a type="button" class="btn btn-danger btn-xs" onclick="alerta()" >Eliminar</a></th>
+                                     </tr>
+                                 <?php
+                                        }
+                                     }else{
+                                         echo "<script> alert('No se encontro registros');window.location= 'Gestion_Inventario.php' </script>";
+                                     }
+                                 ?>
+                     </tbody>
+               </table>
 
-                                                if($pagina != $total_paginas)
-                                                {  
-                                            ?>
-                                                    <li><a href="?pagina=<?php echo $pagina + 1; ?>&busqueda=<?php echo $busqueda; ?>">>></a></li>
-                                                    <li><a href="?pagina=<?php echo $total_paginas; ?>&busqueda=<?php echo $busqueda; ?> ">>|</a></li>
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
-                                    
-                            <?php } ?>
-                  </div>
-                  <div class="reportes">
-                  
-                  </div>
+                                 </div>
+               <?php
+                     if($total_registro != 0)
+                         {
+                ?>
+                         <div class="paginador">
+                                 <ul>
+                                     <?php 
+                                         if($pagina != 1)
+                                         {
+                                             ?>
+                                             <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<</a></li>
+                                             <li><a href="?pagina=<?php echo $pagina-1; ?>&busqueda=<?php echo $busqueda; ?>"><<</a></li>
+                                             <?php 
+                                             }
+                                         for ($i=1; $i <= $total_paginas; $i++) { 
+                                         # code...
+                                         if($i == $pagina)
+                                         {
+                                             echo '<li class="pageSelected">'.$i.'</li>';
+                                         }else{
+                                             echo '<li><a href="?pagina='.$i.'&busqueda='.$busqueda.'">'.$i.'</a></li>';
+                                         }
+                                         }
+
+                                         if($pagina != $total_paginas)
+                                         {  
+                                     ?>
+                                             <li><a href="?pagina=<?php echo $pagina + 1; ?>&busqueda=<?php echo $busqueda; ?>">>></a></li>
+                                             <li><a href="?pagina=<?php echo $total_paginas; ?>&busqueda=<?php echo $busqueda; ?> ">>|</a></li>
+                                     <?php } ?>
+                                 </ul>
+                             </div>
+                             
+                     <?php } ?>
            </div>
+  
+           
+</section>
+</div>
     </body>
 <style type="text/css">
      /*============ Paginador =============*/

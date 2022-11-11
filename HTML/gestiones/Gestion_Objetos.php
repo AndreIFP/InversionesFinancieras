@@ -22,29 +22,27 @@ if (!isset($_SESSION['rol'])) {
 }
 ?>
 
-<?php include 'barralateralinicial.php';?>
-  </div>
+<?php include 'barralateralinicial.php';?><p></p>
+<section style=" background-color:rgb(255, 255, 255);
+padding: 15px;
+color:black;
+font-size: 12px; ">
   <title>Gestión Objetos</title>
-
-  <div class="container mt-12">
-                  <div class="col-md-12">
+  <div class="container-fluid">
+ <div class="box-body table-responsive">
                   <div>   
-                  <h1>Gestión Objetos</h1> 
-                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
+                  <h2><strong> Gestión Objetos</strong> </h2> 
+                     <a  class="btn btn-primary"  href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                      <?php  if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['w'] == 1) {                      
                     ?>
-                     <a href="Nuevo_Objetos.php"><input type="submit" class="btn btn-success" Value="Crear Nuevo Objeto"></a>
-                     <a class="btn btn-warning" href="Reporte_Objetos.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;" >Reporte</a> 
-                     </div><br>
+                     <a href="Nuevo_Objetos.php" input type="submit" class="btn btn-success" Value="Crear Nuevo Objeto"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Objeto</a>
+                     <a class="btn btn-warning" href="Reporte_Objetos.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a> 
+                     </div>
                         <?php } ?>
                      <?php
                         $mostrar_datos = 0;
                         ?>
-                        <section  style=" background-color:rgb(255,255,255);
-    padding: 25px;
-    width: 1100px;
-    color:black;
-    font-size: 15px; " >
+
                      <form action="" method="get" class="form_datos" >
                             <label for="datos_mostrar">Datos A Mostrarㅤ</label>
                             <select name="mostrar" onchange='submit();'>
@@ -60,11 +58,11 @@ if (!isset($_SESSION['rol'])) {
                      <form action="Buscador_Objetos.php" method="get" class="form_search">
                              
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                            <input type="submit" value="Buscar" class="btn_search">
+                            <input type="submit" value="Buscar" class="btn btn-primary">
                      </form>
 
                      <table class="table">
-                        <thead class="table-succees table-striped">
+                        <thead class="table-primary">
                             <tr>
                                 <th>Id</th>
                                 <th>Objeto</th>
@@ -109,11 +107,11 @@ if (!isset($_SESSION['rol'])) {
 
                                         <?php  if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['u'] == 1) {                      
                                         ?>
-                                        <th><a href="Actualizar_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-primary" >Editar</a></th>
+                                        <th><a href="Actualizar_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-primary btn-xs" >Editar</a>
                                         <?php } ?>
                                         <?php  if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['d'] == 1) {                      
                                         ?>
-                                        <th><a href="Delete_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-danger">Eliminar</a></th><p>
+                                        <a href="Delete_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-danger btn-xs">Eliminar</a></th>
                                         <?php } ?>
                                     </tr>
                                 <?php
@@ -121,7 +119,7 @@ if (!isset($_SESSION['rol'])) {
                                     }
                                 ?>
                         </tbody>
-                      </table>
+                      </table>      </div>
                       <div class="paginador">
 			            <ul>
 			            <?php 
@@ -150,9 +148,10 @@ if (!isset($_SESSION['rol'])) {
 			            <?php } ?>
 			            </ul>
 		                </div>
-                        
-                  </div>
-           </div>
+                        </div>           
+          
+           </section>
+  </div>
     </body>
 
 <style type="text/css">

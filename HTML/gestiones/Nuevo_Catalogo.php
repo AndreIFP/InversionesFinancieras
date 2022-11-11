@@ -93,10 +93,10 @@ if (!isset($_SESSION['rol'])) {
 						<label for="TIPO_CUENTA">Tipo Cuenta</label>
 						<select name="TIPO CUENTA" required>
 							<option value="">Seleccione Una Opción</option>
-							<option value="ACTIVO CORRIENTE">ACTIVO CORRIENTE</option>
-							<option value="ACTIVO NO CORRIENTE">ACTIVO NO CORRIENTE</option>
-							<option value="PASIVO CORRIENTE">PASIVO CORRIENTE</option>
-							<option value="PASIVO NO CORRIENTE">PASIVO NO CORRIENTE</option>
+							<option value="ACTIVO">ACTIVO</option>
+							<option value="PASIVO">PASIVO</option>
+							<option value="INGRESO">INGRESO</option>
+							<option value="GASTO">GASTO</option>
 							<option value="PATRIMONIO">PATRIMONIO</option>
 						</select>
 						<input type="submit" value="Registrar Cuenta" class="btn_save"></center>

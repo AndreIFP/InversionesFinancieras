@@ -2,11 +2,14 @@
 include("../conexion.php");
 session_start();
 ?>
-<?php include 'barralateralinicial.php';?>
-  </div>
-  <title>Gestión Usuarios</title>
-           <div class="container mt-12">
-                  <div class="col-md-12">
+<?php include 'barralateralinicial.php';?><p></p>
+<section style=" background-color:rgb(255, 255, 255);
+    padding: 15px;
+    color:black;
+    font-size: 12px; ">
+ <title>Gestión Usuarios</title>
+ <div class="container-fluid">
+ <div class="box-body table-responsive">
                     <?php 
                         $busqueda = strtolower($_REQUEST['busqueda']);
                         if(empty($busqueda))
@@ -14,13 +17,14 @@ session_start();
                             echo "<script> alert('Dejo En Blanco El Buscador');window.location= 'Gestion_Usuarios.php' </script>";
                         }
                     ?>
-                    <h1>Gestión Usuarios</h1> 
-                    <a  class="btn btn-primary"  href="Gestion_Usuarios.php ">Volver Atrás</a>
-                    <a class="btn btn-warning" href="Reporte_Usuario_Buscador.php?variable=<?php echo $busqueda;?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" >Reporte</a>
+                    <h2><strong> Gestión Usuarios</strong></h2> 
+                    <a  class="btn btn-primary"  href="Gestion_Usuarios.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                    <a class="btn btn-warning" href="Reporte_Usuario_Buscador.php?variable=<?php echo $busqueda;?>
+                    " onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
                     
 
                      <table class="table">
-                            <thead class="table-succees table-striped">
+                            <thead class="table-primary">
                                 <tr>
                                     <th>Id</th>
                                     <th>Usuario</th>
@@ -102,7 +106,7 @@ session_start();
                                             }
                                         ?>
                             </tbody>
-                      </table>
+                      </table>   </div>
                       <?php
                             if($total_registro != 0)
                                 {
@@ -136,9 +140,11 @@ session_start();
                                         </ul>
                                     </div>
                             <?php } ?>
-                  </div>
+               
                   
            </div>
+</section>
+  </div>
     </body>
 <style type="text/css">
      /*============ Paginador =============*/
