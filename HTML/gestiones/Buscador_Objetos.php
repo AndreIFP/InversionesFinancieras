@@ -2,11 +2,14 @@
 include("../conexion.php");
 session_start();
 ?>
-<?php include 'barralateralinicial.php';?>
-</div>
+<?php include 'barralateralinicial.php';?><p></p>
+<section style=" background-color:rgb(255, 255, 255);
+padding: 15px;
+color:black;
+font-size: 12px; ">
 <title>Gestión Objetos</title>
-           <div class="container mt-12">
-                  <div class="col-md-12">
+<div class="container-fluid">
+ <div class="box-body table-responsive">
                     <?php 
                         $busqueda = strtolower($_REQUEST['busqueda']);
                         if(empty($busqueda))
@@ -15,11 +18,13 @@ session_start();
                             mysqli_close($conn);
                         }
                     ?>
-                     <h1>Gestión Objetos</h1> 
-                     <h6><a  class="btn btn-primary"  href="Gestion_Objetos.php ">Volver Atrás</a></h6>
+                     <h2><strong> Gestión Objetos</strong></h2> 
+                     <a  class="btn btn-primary"  href="Gestion_Objetos.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                     <a class="btn btn-warning" href="Reporte_Objetos_Buscador.php?variable=<?php echo $busqueda;?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" >
+                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
 
                      <table class="table">
-                            <thead class="table-succees table-striped">
+                            <thead class="table-primary"><br><br>
                                 <tr>
                                 <th>Id</th>
                                 <th>Objetos</th>
@@ -68,8 +73,8 @@ session_start();
                                             <th><?php echo $row['Objetos']?></th>
                                             <th><?php echo $row['Descripcion']?></th>
                                             <th><?php echo $row['Tipo_Objeto']?></th>
-                                                <th><a href="Actualizar_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-primary" >Editar</a></th><p>
-                                                <th><a href="Delete_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-danger">Eliminar</a></th><p>
+                                                <th><a href="Actualizar_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-primary btn-xs" >Editar</a>
+                                                <a href="Delete_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-danger btn-xs">Eliminar</a></th>
                                             </tr>
                                         <?php
                                                }
@@ -78,7 +83,7 @@ session_start();
                                             }
                                         ?>
                             </tbody>
-                      </table>
+                      </table> </div>
                       <?php
                             if($total_registro != 0)
                                 {
@@ -112,11 +117,12 @@ session_start();
                                         </ul>
                                     </div>
                             <?php } ?>
-                  </div>
-                  <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_Objetos_Buscador.php?variable=<?php echo $busqueda;?>" >Reporte</a>
-                        </div>
+                 
+                 
            </div>
+</section>
+</div>
+
     </body>
 <style type="text/css">
      /*============ Paginador =============*/

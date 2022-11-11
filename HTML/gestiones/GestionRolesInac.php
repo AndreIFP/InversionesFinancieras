@@ -20,14 +20,17 @@ if (!isset($_SESSION['rol'])) {
    }
 }
 ?>
-<?php include 'barralateralinicial.php';?>
-  </div>
+<?php include 'barralateralinicial.php';?><p></p>
+<section style=" background-color:rgb(255, 255, 255);
+padding: 15px;
+color:black;
+font-size: 12px; ">
   <title>Gestión Roles</title>
+                  <a  class="btn btn-primary"  href="GestionRoles.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                  <a class="btn btn-warning" href="Reporte_Roles_Inacti.php" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;">Reporte</a>
 
-  <div class="container mt-12">
-                  <div class="col-md-12">
-                     <h1>Gestión Roles</h1> 
-                     <h6><a  class="btn btn-primary"  href="GestionRoles.php ">Volver Atrás</a></h6>
+                     <h2><strong> Gestión Roles</strong></h2> 
+                    
 			         <?php
                         $mostrar_datos = 0;
                      ?>
@@ -45,14 +48,14 @@ if (!isset($_SESSION['rol'])) {
                      </form>
 
                      <table class="table">
-                        <thead class="table-succees table-striped">
+                        <thead class="table-primary table-striped">
                             <tr>
                                 <th>Id</th>
                                 <th>Rol</th>
                                 <th>Estado</th>
                                 <th>Descripción</th>
                                 <th>Acciones</th>
-                                <th></th>
+                                
                         </thead>
                         <tbody>
                                 <?php
@@ -89,8 +92,8 @@ if (!isset($_SESSION['rol'])) {
                                         <th><?php echo $row['Rol']?></th>
                                         <th><?php echo $row['Estado']?></th>
                                         <th><?php echo $row['Descripcion']?></th>
-                                        <th><a href="Actualizar_Roles.php?Id=<?php echo $row['Id_Rol'] ?>"class="btn btn-primary" >Editar</a></th>
-                                        <th><a href="Delete_Roles.php?Id=<?php echo $row['Id_Rol'] ?>"class="btn btn-danger">Eliminar</a></th><p>
+                                        <th><a href="Actualizar_Roles.php?Id=<?php echo $row['Id_Rol'] ?>"class="btn btn-primary" >Editar</a>
+                                        <a href="Delete_Roles.php?Id=<?php echo $row['Id_Rol'] ?>"class="btn btn-danger">Eliminar</a></th><p>
                                     </tr>
                                 <?php
                                        }
@@ -129,10 +132,10 @@ if (!isset($_SESSION['rol'])) {
 			            </ul>
 		                </div>
                         <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_Roles_Inacti.php" >Reporte</a>
                         </div>
-                  </div>
-           </div>
+           
+           </section>
+  </div>
     </body>
 
 <style type="text/css">

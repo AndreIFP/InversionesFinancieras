@@ -3,6 +3,7 @@
 
  include('../conexion.php');
  include_once("../helpers/helpers.php");
+ $user=$_SESSION['user'];
 /*  updatePermisos($_SESSION['rol']) */
 ?>
 <!DOCTYPE html>
@@ -347,6 +348,10 @@ width: calc(100% - 78px);
 body.dark .home .text{
 color: var(--text-color);
 }
+
+#Hola{
+    line-height: 75%;
+}
 /* 
 #menu ul{
 	list-style:none;
@@ -417,6 +422,13 @@ color: var(--text-color);
 
   <div class="menu-bar">
       <div class="menu">
+
+      <li class="" class="fa fa-caret-down"  >
+      <a href="#" style="align-items: center; height: 50px;"  >
+      <i class='bx bxs-user bx-tada icon' ></i>
+      <span style="align-items:center; color:#18191a" ><?php echo $user;?></span>
+      </a>
+      </li>
 
      <li class="search-box" style="display:flex; height: 50px;" >
             <i class='bx bx-search icon'></i>
@@ -669,9 +681,9 @@ color: var(--text-color);
 <section class="home" >
 <div class="text"> 
   <section  style=" background-color:cornflowerblue;
-padding: 15px;
+padding: 1px;
 color:black;
-font-size: 20px; ">
+font-size: 12px; ">
     <div id="header">
       <div class="header-nav">
         <div class="menu-button">
@@ -679,9 +691,9 @@ font-size: 20px; ">
         </div>
       </div>
     </div>
-    <div class="content">
-      <div class="content-header" >
-          <h3  style><center>INVERSIONES FINANCIERAS - IS DE HONDURAS S.A</center></h3>
+    <div class="content" id="Hola">
+      <div class="content-header"   >
+          <h3 style><center><strong>INVERSIONES FINANCIERAS - IS DE HONDURAS S.A</strong> </center></h3>
           <p><center>Trabajando Juntos Hoy Forjamos Nuestro Patrimononio del Mañana</center></p>
         </div>
         </div>
