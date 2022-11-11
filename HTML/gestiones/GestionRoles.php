@@ -33,17 +33,11 @@ if (!isset($_SESSION['rol'])) {
                                             
                         ?>
                      <a href="Nuevo_Roles.php"><input type="submit" class="btn btn-success" Value="Crear Nuevo Rol"></a>
-                     <a class="btn btn-warning" href="reporte_roles.php" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;">Reporte</a>
                         <?php } ?>
                      <p align="right"><a href="GestionRolesInac.php"><input type="submit" class="btn btn-success" Value="Mostrar Roles Inactivos"></a></p>
 			         <?php
                         $mostrar_datos = 0;
                      ?>
-                     <section  style=" background-color:rgb(255,255,255);
-    padding: 25px;
-    width: 1100px;
-    color:black;
-    font-size: 15px; " >
                      <form action="" method="get" class="form_datos">
                             <label for="datos_mostrar">Datos A Mostrar</label>
                             <select name="mostrar" onchange='submit();'>
@@ -58,7 +52,7 @@ if (!isset($_SESSION['rol'])) {
                      </form>
                      <form action="Buscador_Roles.php" method="get" class="form_search">
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                            <input type="submit" value="Buscar" class="btn btn-primary">
+                            <input type="submit" value="Buscar" class="btn_search">
                      </form>
 
                      <table class="table">
@@ -152,6 +146,9 @@ if (!isset($_SESSION['rol'])) {
 			            <?php } ?>
 			            </ul>
 		                </div>
+                        <div class="reportes">
+                            <a class="btn btn-warning" href="reporte_roles.php" >Reporte</a>
+                        </div>
                   </div>
            </div>
     </body>

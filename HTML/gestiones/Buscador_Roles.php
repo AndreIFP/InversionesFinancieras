@@ -22,7 +22,6 @@ include("../conexion.php");
                                 <tr>
                                 <th>Id</th>
                                 <th>Rol</th>
-                                <th>Estado</th>
                                 <th>Descripcion</th>
                                 <th></th>
                                 </tr>
@@ -32,8 +31,7 @@ include("../conexion.php");
                                     //Paginador
                                     $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_ROLES
                                             WHERE ( Id_Rol LIKE '%$busqueda%' OR
-                                                    Rol LIKE '%$busqueda%' OR
-                                                    Estado LIKE '%$busqueda%')");
+                                                    Rol LIKE '%$busqueda%' )");
                                     $result_register = mysqli_fetch_array($sql_registe);
                                     $total_registro = $result_register['total_registro'];
 
@@ -49,8 +47,7 @@ include("../conexion.php");
                                     $desde = ($pagina-1) * $por_pagina;
                                     $total_paginas = ceil($total_registro / $por_pagina);
                                         $sql = mysqli_query($conn,"SELECT * from TBL_ROLES WHERE ( Id_Rol LIKE '%$busqueda%' OR
-                                                                                Rol LIKE '%$busqueda%' OR
-                                                                                Estado LIKE '%$busqueda%' ) LIMIT $desde,$por_pagina ");
+                                                                                Rol LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
                                         mysqli_close($conn);
 
                                         $result = mysqli_num_rows($sql);
@@ -60,7 +57,6 @@ include("../conexion.php");
                                              <tr>
                                              <th><?php echo $row['Id_Rol']?></th>
                                             <th><?php echo $row['Rol']?></th>
-                                            <th><?php echo $row['Estado']?></th>
                                             <th><?php echo $row['Descripcion']?></th>
                                                 <th><a href="Actualizar_Roles.php?Id=<?php echo $row['Id_Rol'] ?>"class="btn btn-primary" >Editar</a></th><p>
                                                 <th><a href="Delete_Roles.php?Id=<?php echo $row['Id_Rol'] ?>"class="btn btn-danger">Eliminar</a></th><p>
@@ -107,8 +103,8 @@ include("../conexion.php");
                                     </div>
                             <?php } ?>
                   </div>
-                        <div class="reportes">
-                           <a class="btn btn-warning" href="Reporte_Roles_Buscador.php?variable=<?php echo $busqueda;?>" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;">Reporte</a>
+                  <div class="reportes">
+                            <a class="btn btn-warning" href="Reporte_Roles_Buscador.php?variable=<?php echo $busqueda;?>" >Reporte</a>
                         </div>
            </div>
     </body>

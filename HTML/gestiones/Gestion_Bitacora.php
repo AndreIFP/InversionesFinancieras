@@ -27,20 +27,11 @@ if (!isset($_SESSION['rol'])) {
   <title>Gestión Bitacora</title>
            <div class="container mt-12">
                   <div class="col-md-12">
-
-                  <div class="reportes">
                      <h1>Gestión Bitacora</h1> 
-                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
-                     <a class="btn btn-warning" href="Reporte_Bitacora.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;" >Reporte</a>
-                     </div><br>
+                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
                      <?php
                         $mostrar_datos = 0;
                         ?>
-                        <section  style=" background-color:rgb(255,255,255);
-    padding: 25px;
-    width: 1100px;
-    color:black;
-    font-size: 15px; " >
                      <form action="" method="get" class="form_datos" >
                             <label for="datos_mostrar">Datos A Mostrarㅤ</label>
                             <select name="mostrar" onchange='submit();'>
@@ -158,7 +149,9 @@ if (!isset($_SESSION['rol'])) {
 			            <?php } ?>
 			            </ul>
 		                </div>
-                        
+                        <div class="reportes">
+                            <a class="btn btn-warning" href="Reporte_Bitacora.php" >Reporte</a>
+                        </div>
                   </div>
            </div>
     </body>

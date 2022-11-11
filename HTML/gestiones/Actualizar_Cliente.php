@@ -91,47 +91,35 @@ if (!isset($_SESSION['rol'])) {
 }
 ?>
 <?php include 'barralateralinicial.php';?>
-<script>
-	function validar(e) {
-		tecla = (document.all) ? e.keyCode : e.which;
-		if (tecla == 8) return true; //Tecla de retroceso (para poder borrar)
-		// dejar la línea de patron que se necesite y borrar el resto
-		patron = /[A-Za-z\s]/; // Solo acepta letras y espacios
-		
-		te = String.fromCharCode(tecla);
-		return patron.test(te);
-	}
-	</script>
 <title>Actualizar Cliente</title>
   </div>
   <br>
   <div class="container mt-12">
-		
-
+  <h6><a  class="btn btn-primary"  href="Gestion_Clientes.php ">Volver Atrás</a></h6>
 		<div class="form_register">
-		<h6><a  class="btn btn-primary"  href="Gestion_Clientes.php ">Volver Atrás</a></h6>
+			
 			<form action="" method="post">
-			<h1><strong>Actualizar Cliente</strong> </h1>
+			<h1>Actualizar Cliente</h1>
 			<hr>
                 <input type="hidden" name="Id_Cliente" value="<?php echo $Id_Cliente  ?>">
 				<label for="Nombre_Empresa">Nombre Empresa</label>
-				<input type="text" name="Nombre_Empresa" maxlength="35" id="Nombre_Empresa" placeholder="Nombre completo" value ="<?php echo $Nombree ?>" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"   required>
+				<input type="text" name="Nombre_Empresa" maxlength="35" id="Nombre_Empresa" placeholder="Nombre completo" value ="<?php echo $Nombree ?>" size="40">
 				<label for="Nombre_Cliente">Nombre Cliente</label>
-				<input type="text" name="Nombre_Cliente" maxlength="35" id="Nombre_Cliente" placeholder="Nombre completo" value ="<?php echo $Nombre ?>" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)"  required>>
+				<input type="text" name="Nombre_Cliente" maxlength="35" id="Nombre_Cliente" placeholder="Nombre completo" value ="<?php echo $Nombre ?>" size="40">
 				<label for="RTN_Cliente">RTN</label>
-				<input type="text" name="RTN_Cliente" maxlength="20" id="RTN_Cliente" placeholder="RTN"value ="<?php echo $RTN_Cliente ?>" size="40" oninput="this.value = this.value.replace(/[^0-9]/,'')" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+				<input type="text" name="RTN_Cliente" maxlength="20" id="RTN_Cliente" placeholder="RTN"value ="<?php echo $RTN_Cliente ?>" size="40">
 				<label for="Direccion">Dirección</label>
-				<input type="Direccion" name="Direccion" maxlength="60" id="Direccion" placeholder="Dirección"  value ="<?php echo $Direccion ?>"size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"   required>
+				<input type="Direccion" name="Direccion" maxlength="60" id="Direccion" placeholder="Dirección"  value ="<?php echo $Direccion ?>"size="40">
 				<label for="Teléfono">Teléfono</label>
 				<input type="tex" name="Telefono" maxlength="10" id="Telefono" placeholder="Teléfono"value ="<?php echo $Telefono ?>"size="40">
-               <label for="Tipo_Cliente">Tipo Cliente</label><select name="Tipo_Cliente" required>
+                <label for="Tipo_Cliente">Tipo Cliente</label><label for="Tipo_Cliente">Tipo Cliente</label><select name="Tipo_Cliente" required>
                   <option value ="">Seleccione Una Opción</option>
                   <option value="ACTIVO">ACTIVO</option>
                   <option value="INACTIVO">INACTIVO</option>
 				  </select>
 				<br>
                 <label for="Ciudad">Ciudad</label>
-				<input type="text" name="Ciudad" maxlength="25" id="Ciudad" placeholder="Ciudad"  value ="<?php echo $Ciudad ?>"size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"   required>
+				<input type="text" name="Ciudad" maxlength="25" id="Ciudad" placeholder="Ciudad"  value ="<?php echo $Ciudad ?>"size="40">
 				<br>
 				<input type="submit" value="Actualizar Cliente" class="btn_save">
 			</form>

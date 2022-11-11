@@ -20,31 +20,18 @@ if (!isset($_SESSION['rol'])) {
        die();
    }
 }
-
-$numero = 99999.99;
-
 ?>
 
 <?php include 'barralateralinicial.php';?>
 <title>Gestión Libro Mayor</title>
   </div>
-  
            <div class="container mt-12">
                   <div class="col-md-12">
                      <h1>Gestión Libro Mayor</h1> 
-                    
-                     <div class="reportes">
-                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
-                            <a class="btn btn-warning" href="Reporte_LibroMayor.php" <a class="btn btn-warning" href="Reporte_Inventario_Buscador.php?variable=<?php echo $busqueda;?>" <a class="btn btn-warning" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" >Reporte</a>
-                        </div><br>
-                        <section  style=" background-color:rgb(255,255,255);
-    padding: 25px;
-    width: 1100px;
-    color:black;
-    font-size: 15px; " >
+                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
+                     
                      <form action="" method="get" class="form_datos" >
-                        
-                            <b><p for="datos_mostrar">Datos a Mostrarㅤ</p></b>
+                            <label for="datos_mostrar">Datos A Mostrarㅤ</label>
                             <select name="mostrar" onchange='submit();'>
                             <option ></option>
                             <option value="25">25</option>
@@ -52,20 +39,20 @@ $numero = 99999.99;
                             <option value="100">100</option>
                                 <?php
                                 $mostrar_datos = $_GET['mostrar'];
-                                
                                 ?>
                             </select>
                      </form>
                      <form action="Buscador_LibroMayor.php" method="get" class="form_search">
                              
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                            <input type="submit" value="Buscar" class="btn btn-primary">
+                            <input type="submit" value="Buscar" class="btn_search">
                      </form>
 
                      <table class="table">
                         <thead class="table-succees table-striped">
                             <tr>
                                 <th>Id</th>
+                                <th>Cliente</th>
                                 <th>Fecha</th>
                                 <th>Cuenta</th>
                                 <th>Total Cuenta</th>
@@ -104,12 +91,10 @@ $numero = 99999.99;
                                 ?>
                                     <tr>
                                         <th><?php echo $row['ID_LIBRO_MAYOR']?></th>
+                                        <th><?php echo $row['ID_CLIENTE']?></th>
                                         <th><?php echo $row['FECHA']?></th>
                                         <th><?php echo $row['CUENTA']?></th>
-                                   
-                                        <th><?php echo 'L '.number_format( $row['TOTAL_CUENTA'],2)?></th>
-                                        
-
+                                        <th><?php echo $row['TOTAL_CUENTA']?></th>                                        
                                         <script>
                                             function alerta(){
                                                 window.alert('No es posible hacer esta Accion');
@@ -138,32 +123,34 @@ $numero = 99999.99;
                       <div class="paginador">
 			            <ul>
 			            <?php 
-				          if($pagina != 1)
-                          {
-                          ?>
-                          <li><a href="?pagina=<?php echo 1; ?>">|<</a></li>
-                          <li><a href="?pagina=<?php echo $pagina-1; ?>"><<</a></li>
-                          <?php 
-                          }
-                          for ($i=1; $i <= $total_paginas; $i++) { 
-                          # code...
-                          if($i == $pagina)
-                          {
-                          echo '<li class="pageSelected">'.$i.'</li>';
-                          }else{
-                          echo '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
-                          }
-                          }
-  
-                          if($pagina != $total_paginas)
-                          {  
-                          ?>
-                          <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
-                          <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
-                          <?php } ?>
+				        if($pagina != 1)
+				        {
+			            ?>
+				        <li><a href="?pagina=<?php echo 1; ?>">|<</a></li>
+				        <li><a href="?pagina=<?php echo $pagina-1; ?>"><<</a></li>
+			            <?php 
+				        }
+				        for ($i=1; $i <= $total_paginas; $i++) { 
+					    # code...
+					    if($i == $pagina)
+					    {
+						echo '<li class="pageSelected">'.$i.'</li>';
+					    }else{
+						echo '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+					    }
+				        }
+
+				        if($pagina != $total_paginas)
+				        {  
+			            ?>
+				        <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
+				        <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
+			            <?php } ?>
 			            </ul>
 		                </div>
-                       
+                        <div class="reportes">
+                            <a class="btn btn-warning" href="Reporte_LibroMayor.php" >Reporte</a>
+                        </div>
                   </div>
            </div>
     </body>

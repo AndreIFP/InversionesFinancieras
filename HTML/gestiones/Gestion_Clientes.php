@@ -20,8 +20,6 @@ if (!isset($_SESSION['rol'])) {
        die();
    }
 }
-
-$numero = 99999.99;
 ?>
 
 <?php include 'barralateralinicial.php';?>
@@ -30,27 +28,15 @@ $numero = 99999.99;
   <title>Gestión Clientes</title>
            <div class="container mt-12">
                   <div class="col-md-12">
-                    
-                    
-                     <div class="reportes">
                      <h1>Gestión Clientes</h1> 
-                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
+                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
                      <?php  if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['w'] == 1) {                    
                     ?>
-                     <a href="Nuevo_Cliente.php"><input type="submit" class="btn btn-success" Value="Crear Nuevo Cliente"></a>
-                            <a class="btn btn-warning" href="reporte_cliente.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;" >Reporte</a>
-                    </div><br>
-                     
+                     <a href="Nuevo_Cliente.php"><input type="submit" class="btn btn-success" Value="Crear Nuevo Cliente"></a><p>
                     <?php } ?>
-                    
                      <?php
                         $mostrar_datos = 0;
                         ?>
-                        <section  style=" background-color:rgb(255,255,255);
-    padding: 25px;
-    width: 1100px;
-    color:black;
-    font-size: 15px; " >
                      <form action="" method="get" class="form_datos" >
                             <label for="datos_mostrar">Datos A Mostrarㅤ</label>
                             <select name="mostrar" onchange='submit();'>
@@ -63,11 +49,10 @@ $numero = 99999.99;
                                 ?>
                             </select>
                      </form>
-                     
                      <form action="Buscador_Cliente.php" method="get" class="form_search">
-                   
+                             
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                            <input type="submit" value="Buscar" class="btn btn-primary">
+                            <input type="submit" value="Buscar" class="btn_search">
                      </form>
 
                      <table class="table">
@@ -77,7 +62,11 @@ $numero = 99999.99;
                                 <th>Nombre Empresa</th>
                                 <th>Nombre Cliente</th>
                                 <th>RTN</th>
+                                <th>Dirección</th>
+                                <th>Teléfono</th>
                                 <th>Estado</th>
+                                <th>Ciudad</th>
+                                <th>Fecha Creación</th>
                                 <th>Acciones</th>
                                 <th></th>
                             </tr>
@@ -116,9 +105,12 @@ $numero = 99999.99;
                                         <th><?php echo $row['Nombre_Empresa']?></th>
                                         <th><?php echo $row['Nombre_Cliente']?></th>
                                         <th><?php echo $row['RTN_Cliente']?></th>
+                                        <th><?php echo $row['Direccion']?></th>
+                                        <th><?php echo $row['Telefono']?></th>
                                         <th><?php echo $row['Tipo_Cliente']?></th>
-                                       
-                                         <?php  if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {                    
+                                        <th><?php echo $row['Ciudad']?></th>
+                                        <th><?php echo $row['Fecha_Dato']?></th>
+                                        <?php  if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {                    
                                         ?>
                                         <th><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>"class="btn btn-primary" >Editar</a></th><p>
                                         <?php } ?>
@@ -126,7 +118,6 @@ $numero = 99999.99;
                                         ?>
                                         <th><a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>"class="btn btn-danger">Eliminar</a></th><p>
                                         <?php } ?>
-                                        <td><button type="button" class="btn btn-warning" onclick="editar(this.id)" id="<?php echo $row['Id_Cliente']?>">Ver</button></td>
                                     </tr>
                                 <?php
                                        }
@@ -162,81 +153,12 @@ $numero = 99999.99;
 			            <?php } ?>
 			            </ul>
 		                </div>
-                     
+                        <div class="reportes">
+                            <a class="btn btn-warning" href="reporte_cliente.php" >Reporte</a>
+                        </div>
                   </div>
            </div>
-		   
-		   <div class="modal" tabindex="-1" id="EditModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Informacion del cliente</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-<form>
-<div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Id Cliente:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Nombre Empresa:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Nombre Cliente:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >RTN Cliente:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Direccion:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Telefono:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Tipo Cliente:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-
-
-          <p id="variable"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          
-        </div>
-      </div>
-    </div>
-  </div>
-                </form>
-  <script>
-    function editar(este) {
-      var ModalEdit = new bootstrap.Modal(EditModal, {}).show();
-      variable.innerHTML = "El id es : " + este;
-    }
-  </script>
-    </body> 
-		   
-		   
-		  
+    </body>
 
      <style type="text/css">
         .paginador ul{
@@ -299,8 +221,6 @@ $numero = 99999.99;
 	padding: 10px;
 	border-radius: 10px;
 }
-
-
 </style>
 
 <?php include 'barralateralfinal.php';?>

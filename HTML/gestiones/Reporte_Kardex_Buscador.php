@@ -8,7 +8,6 @@ class PDF extends FPDF
 // Cabecera de página
 function Header()
 {
-    require ('../conexion.php');
     // Logo
     $this->Image('logO.PNG',119,32,41);
     // Arial bold 15
@@ -19,40 +18,20 @@ function Header()
     $this->Cell(22,10,'Inversiones Financieras IS',2,0,'C');
     $this->Ln(5);
     
-    // Llamado del parametro dirección
-    $sqldireccion = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '4'";
-    $resultadodir = mysqli_query($conn,$sqldireccion);
-    while ($fila = $resultadodir->fetch_assoc()) {
-        $Direccion = $fila["Valor"];
-    }
-
     $this->SetFont('Arial','',8);
     $this->Cell(95);
-    $this->Cell(8,10, utf8_decode($Direccion),0,7, 45);
+    $this->Cell(8,10, utf8_decode('Barrio el centro edificio el centro 3er nivel cubículo 308' ),0,7, 45);
     $this->Ln(0);
-
-    // Llamado del parametro telefono
-    $sqlTelefono = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '3'";
-    $resultadotel = mysqli_query($conn,$sqlTelefono);
-    while ($fila = $resultadotel->fetch_assoc()) {
-        $Telefono = $fila["Valor"];
-    }
 
     $this->SetFont('Arial','',8);
     $this->Cell(110);
-    $this->Cell(8,0, utf8_decode('Teléfono: ' .$Telefono ),0,7);
+    $this->Cell(8,0, utf8_decode('Teléfono: +(504) 8839-8891' ),0,7);
     $this->Ln(4);
 
-    // Llamado del parametro correo
-    $sqlCorreo = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '2'";
-    $resultadocorreo = mysqli_query($conn,$sqlCorreo);
-    while ($fila = $resultadocorreo->fetch_assoc()) {
-        $Correo = $fila["Valor"];
-    }
 
     $this->SetFont('Arial','',8);
     $this->Cell(106);
-    $this->Cell(8,0, utf8_decode('Email: '.$Correo),0,7);
+    $this->Cell(8,0, utf8_decode('Email: : Edgard_issa7@yahoo.com' ),0,7);
   
 
     // Salto de línea

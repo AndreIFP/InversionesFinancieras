@@ -9,17 +9,11 @@ include("../conexion.php");
                   <div class="col-md-12">
                   <br>
                   
-                     <h1>KARDEX</h1> 
-                     <h6><a  class="btn btn-primary"  href="index.php ">Volver Atrás</a>
-                     <a class="btn btn-warning" href="Reporte_Kardex.php" >Reporte</a></h6>
+                     <h1>Kardex</h1> 
+                     <h6><a  class="btn btn-primary"  href="Gestion_Inventario.php ">Volver Atrás</a></h6>
                      <?php
                         $mostrar_datos = 0;
                         ?>
-                        <section  style=" background-color:rgb(255,255,255);
-    padding: 25px;
-    width: 1100px;
-    color:black;
-    font-size: 15px; " >
                      <form action="" method="get" class="form_datos" >
                             <label for="datos_mostrar">Datos A Mostrarㅤ</label>
                             <select name="mostrar" onchange='submit();'>
@@ -134,6 +128,9 @@ include("../conexion.php");
 			            </ul>
                         
 		                </div>
+                        <div class="reportes">
+                            <a class="btn btn-warning" href="Reporte_Kardex.php" >Reporte</a>
+                        </div>
                   </div>
            </div>
     </body>

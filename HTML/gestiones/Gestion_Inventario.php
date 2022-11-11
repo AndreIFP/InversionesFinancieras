@@ -31,20 +31,14 @@ if (!isset($_SESSION['rol'])) {
                   <br>
                   
                      <h1>Gestión Inventario</h1> 
-                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
+                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
                     <?php  if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {                     
                      ?>
-                     <a href="../compras/compra.php"><input type="submit" class="btn btn-success" Value="Nuevo Producto"></a>
-                     <a class="btn btn-warning" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" >Reporte</a><p>
+                     <a href="../compras/compra.php"><input type="submit" class="btn btn-success" Value="Nuevo Producto"></a><p>
                         <?php } ?>
                      <?php
                         $mostrar_datos = 0;
                         ?>
-                        <section  style=" background-color:rgb(255,255,255);
-    padding: 25px;
-    width: 1100px;
-    color:black;
-    font-size: 15px; " >
                      <form action="" method="get" class="form_datos" >
                             <label for="datos_mostrar">Datos A Mostrarㅤ</label>
                             <select name="mostrar" onchange='submit();'>
@@ -60,7 +54,7 @@ if (!isset($_SESSION['rol'])) {
                      <form action="Buscador_Inventario.php" method="get" class="form_search">
                            
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                            <input type="submit" value="Buscar" class="btn btn-primary">
+                            <input type="submit" value="Buscar" class="btn_search">
                      </form>
 
                      <table class="table">
@@ -163,7 +157,7 @@ if (!isset($_SESSION['rol'])) {
 		                </div>
                         <div class="reportes">
                             <a class="btn btn-secondary" href="kardex.php" >Revisar Kardex</a>
-                            
+                            <a class="btn btn-warning" href="Reporte_Inventario.php" >Reporte</a>
                         </div>
                         
                   </div>

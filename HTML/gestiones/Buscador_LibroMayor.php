@@ -16,12 +16,12 @@ session_start();
                     ?>
                      <h1>Gestión Libro Mayor</h1>                      
                      <h6><a  class="btn btn-primary"  href="Gestion_LibroMayor.php ">Volver Atrás</a></h6>
-                     <a class="btn btn-warning" href="Reporte_LibroMayor_Buscador.php?variable=<?php echo $busqueda;?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" >Reporte</a>
 
                      <table class="table">
                             <thead class="table-succees table-striped">
                                 <tr>
                                 <th>Id</th>
+                                <th>Cliente</th>
                                 <th>Cuenta</th>
                                 <th>Total Cuenta</th>
                                 </tr>
@@ -56,6 +56,7 @@ session_start();
                                         ?>
                                         <tr>
                                         <th><?php echo $row['ID_LIBRO_MAYOR']?></th>
+                                        <th><?php echo $row['ID_CLIENTE']?></th>
                                         <th><?php echo $row['CUENTA']?></th>
                                         <th><?php echo $row['TOTAL_CUENTA']?></th>   
                                         </tr>
@@ -102,7 +103,7 @@ session_start();
                             <?php } ?>
                   </div>
                   <div class="reportes">
-                 
+                  <a class="btn btn-warning" href="Reporte_LibroMayor_Buscador.php?variable=<?php echo $busqueda;?>" >Reporte</a>
                         </div>
            </div>
     </section>

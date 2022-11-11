@@ -3,7 +3,6 @@
 
  include('../conexion.php');
  include_once("../helpers/helpers.php");
- $user=$_SESSION['user'];
 /*  updatePermisos($_SESSION['rol']) */
 ?>
 <!DOCTYPE html>
@@ -418,13 +417,6 @@ color: var(--text-color);
 
   <div class="menu-bar">
       <div class="menu">
-
-      <li class="" class="fa fa-caret-down"  >
-      <a href="#" style="align-items: center; height: 50px;"  >
-      <i class='bx bxs-user bx-tada icon' ></i>
-      <span style="align-items:center; color:#18191a" ><?php echo $user;?></span>
-      </a>
-      </li>
 
      <li class="search-box" style="display:flex; height: 50px;" >
             <i class='bx bx-search icon'></i>

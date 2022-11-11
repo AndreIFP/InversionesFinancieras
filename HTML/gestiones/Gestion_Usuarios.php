@@ -36,25 +36,16 @@ include 'barralateralinicial.php';
 
   <div class="container mt-12">
                   <div class="col-md-24">
-
-                  <div>
                      <h1>Gestión Usuarios</h1> 
                      <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
                      <?php  if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['w'] == 1) {
                                             
                      ?>
-                     <a href="Nuevo_Usuario.php"><input type="submit" class="btn btn-success" Value="Nuevo"></a>
-                     <a class="btn btn-warning" href="Reporte_Usuario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;" >Reporte</a> 
-                    </div><br>
+                     <a href="Nuevo_Usuario.php"><input type="submit" class="btn btn-success" Value="Nuevo"></a><p>
                         <?php } ?>
 		     <?php
                         $mostrar_datos = 0;
                         ?>
-                        <section  style=" background-color:rgb(255,255,255);
-    padding: 25px;
-    width: 1200px;
-    color:black;
-    font-size: 15px; " >
                      <form action="" method="get" class="form_datos">
                             <label for="datos_mostrar">Datos A mostrar</label>
                             <select name="mostrar" onchange='submit();'>
@@ -69,7 +60,7 @@ include 'barralateralinicial.php';
                      </form>
                      <form action="Buscador_Usuario.php" method="get" class="form_search">
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                            <input type="submit" value="Buscar" class="btn btn-primary">
+                            <input type="submit" value="Buscar" class="btn_search">
                      </form>
 
                      <table class="table">
@@ -169,7 +160,9 @@ include 'barralateralinicial.php';
 			            <?php } ?>
 			            </ul>
 		                </div>
-                       
+                        <div class="reportes">
+                            <a class="btn btn-warning" href="Reporte_Usuario.php" >Reporte</a>
+                        </div>
                   </div>
            </div>
     </body>
@@ -237,3 +230,5 @@ display: -webkit-flex;
 }
 </style>
 <?php include 'barralateralfinal.php';?>
+
+

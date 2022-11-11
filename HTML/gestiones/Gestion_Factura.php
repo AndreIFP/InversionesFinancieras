@@ -20,7 +20,6 @@ if (!isset($_SESSION['rol'])) {
        die();
    }
 }
-$numero = 99999.99;
 ?>
 
 <?php include 'barralateralinicial.php';?>
@@ -30,19 +29,10 @@ $numero = 99999.99;
            <div class="container mt-12">
                   <div class="col-md-12">
                      <h1>Gestión Facturas</h1> 
-                     
-                     <div class="reportes">
-                     <a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a>
-                            <a class="btn btn-warning" href="Reporte_Factura.php" <a class="btn btn-warning" href="Reporte_Catalogo_Buscador.php?variable=<?php echo $busqueda;?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" >Reporte</a>
-                        </div><br>
+                     <h6><a  class="btn btn-primary"  href="../index.php ">Volver Atrás</a></h6>
                      <?php
                         $mostrar_datos = 0;
                         ?>
-                        <section  style=" background-color:rgb(255,255,255);
-    padding: 25px;
-    width: 1100px;
-    color:black;
-    font-size: 15px; " >
                      <form action="" method="get" class="form_datos" >
                             <label for="datos_mostrar">Datos A Mostrarㅤ</label>
                             <select name="mostrar" onchange='submit();'>
@@ -58,7 +48,7 @@ $numero = 99999.99;
                      <form action="Buscador_Factura.php" method="get" class="form_search">
                              
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                            <input type="submit" value="Buscar" class="btn btn-primary">
+                            <input type="submit" value="Buscar" class="btn_search">
                      </form>
 
                      <table class="table">
@@ -107,7 +97,7 @@ $numero = 99999.99;
                                         <th><?php echo $row['NFACTURA']?></th>
                                         <th><?php echo $row['CLIENTE']?></th>
                                         <th><?php echo $row['DESCRIPCION']?></th> 
-                                        <th><?php echo 'L '.number_format(  $row['TOTAL'],2)?></th>                                       
+                                        <th><?php echo $row['TOTAL']?></th>                                        
                                         <script>
                                             function alerta(){
                                                 window.alert('No es posible hacer esta Accion');
@@ -159,7 +149,9 @@ $numero = 99999.99;
 			            <?php } ?>
 			            </ul>
 		                </div>
-                       
+                        <div class="reportes">
+                            <a class="btn btn-warning" href="Reporte_Factura.php" >Reporte</a>
+                        </div>
                   </div>
            </div>
     </body>

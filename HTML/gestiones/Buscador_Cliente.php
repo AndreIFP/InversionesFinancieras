@@ -16,8 +16,8 @@ session_start();
                         }
                     ?>
                      <h1>Gestión Clientes</h1> 
-                     <a  class="btn btn-primary"  href="Gestion_Clientes.php ">Volver Atrás</a>
-                     <a class="btn btn-warning" href="Reporte_Cliente_Buscador.php?variable=<?php echo $busqueda;?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" >Reporte</a>
+                     <h6><a  class="btn btn-primary"  href="Gestion_Clientes.php ">Volver Atrás</a></h6>
+
                      <table class="table">
                             <thead class="table-succees table-striped">
                                 <tr>
@@ -25,6 +25,10 @@ session_start();
                                 <th>Nombre Empresa</th>
                                 <th>Nombre Cliente</th>
                                 <th>RTN</th>
+                                <th>Dirección</th>
+                                <th>Teléfono</th>
+                                <th>Tipo_Clienta</th>
+                                <th>Ciudad</th>
                                 <th>Fecha Creación</th>
                                 <th>Acciones</th>
                                 <th></th>
@@ -63,6 +67,10 @@ session_start();
                                                 <th><?php echo $row['Nombre_Empresa']?></th>
                                                 <th><?php echo $row['Nombre_Cliente']?></th>
                                                 <th><?php echo $row['RTN_Cliente']?></th>
+                                                <th><?php echo $row['Direccion']?></th>
+                                                <th><?php echo $row['Telefono']?></th>
+                                                <th><?php echo $row['Tipo_Cliente']?></th>
+                                                <th><?php echo $row['Ciudad']?></th>
                                                 <th><?php echo $row['Fecha_Dato']?></th>
                                                 <th><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>"class="btn btn-primary" >Editar</a></th><p>
                                                 <th><a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>"class="btn btn-danger">Eliminar</a></th><p>
@@ -110,7 +118,7 @@ session_start();
                             <?php } ?>
                   </div>
                   <div class="reportes">
-                  
+                  <a class="btn btn-warning" href="Reporte_Cliente_Buscador.php?variable=<?php echo $busqueda;?>" >Reporte</a>
                   </div>
            </div>
     </section>

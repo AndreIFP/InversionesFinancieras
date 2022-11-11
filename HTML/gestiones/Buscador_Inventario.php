@@ -16,14 +16,13 @@ session_start();
                         }
                     ?>
                      <h1>Gestión Inventario</h1> 
-                     <a  class="btn btn-primary"  href="Gestion_Inventario.php ">Volver Atrás</a>
-                     <a class="btn btn-warning" href="Reporte_Inventario_Buscador.php?variable=<?php echo $busqueda;?>" <a class="btn btn-warning" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" >Reporte</a>
+                     <h6><a  class="btn btn-primary"  href="Gestion_Inventario.php ">Volver Atrás</a></h6>
 
                      <table class="table">
                             <thead class="table-succees table-striped">
                                 <tr>
                                 <th>Id</th>
-                                <th>Producto</th>
+                                <th>Pronducto</th>
                                 <th>Cantidad</th>
                                 <th>Fecha</th>
                                 <th>Acciones</th>
@@ -115,7 +114,7 @@ session_start();
                             <?php } ?>
                   </div>
                   <div class="reportes">
-                  
+                  <a class="btn btn-warning" href="Reporte_Inventario_Buscador.php?variable=<?php echo $busqueda;?>" >Reporte</a>
                   </div>
            </div>
     </body>

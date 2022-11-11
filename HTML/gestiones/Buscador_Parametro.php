@@ -15,8 +15,8 @@ session_start();
                         }
                     ?>
                      <h1>Gestión Parametros</h1> 
-                     <a  class="btn btn-primary"  href="Gestion_parametros.php ">Volver Atrás</a>
-                     <a class="btn btn-warning" href="Reporte_Parametro_Buscador.php?variable=<?php echo $busqueda;?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" >Reporte</a>
+                     <h6><a  class="btn btn-primary"  href="Gestion_parametros.php ">Volver Atrás</a></h6>
+
                      <table class="table">
                             <thead class="table-succees table-striped">
                                 <tr>
@@ -108,7 +108,9 @@ session_start();
                                     </div>
                             <?php } ?>
                   </div>
-                 
+                  <div class="reportes">
+                  <a class="btn btn-warning" href="Reporte_Parametro_Buscador.php?variable=<?php echo $busqueda;?>" >Reporte</a>
+                        </div>
            </div>
     </section>
     </body>

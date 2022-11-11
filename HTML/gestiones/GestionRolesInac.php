@@ -129,7 +129,7 @@ if (!isset($_SESSION['rol'])) {
 			            </ul>
 		                </div>
                         <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_Roles_Inacti.php" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;">Reporte</a>
+                            <a class="btn btn-warning" href="Reporte_Roles_Inacti.php" >Reporte</a>
                         </div>
                   </div>
            </div>
