@@ -118,7 +118,7 @@ $numero = 99999.99;
                                         <th><?php echo $row['RTN_Cliente']?></th>
                                         <th><?php echo $row['Tipo_Cliente']?></th>
                                        
-                                        <?php  if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {                    
+                                         <?php  if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {                    
                                         ?>
                                         <th><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>"class="btn btn-primary" >Editar</a></th><p>
                                         <?php } ?>
@@ -126,6 +126,7 @@ $numero = 99999.99;
                                         ?>
                                         <th><a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>"class="btn btn-danger">Eliminar</a></th><p>
                                         <?php } ?>
+                                        <td><button type="button" class="btn btn-warning" onclick="editar(this.id)" id="<?php echo $row['Id_Cliente']?>">Ver</button></td>
                                     </tr>
                                 <?php
                                        }
@@ -164,7 +165,78 @@ $numero = 99999.99;
                      
                   </div>
            </div>
-    </body>
+		   
+		   <div class="modal" tabindex="-1" id="EditModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Informacion del cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+<form>
+<div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Id Cliente:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Nombre Empresa:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Nombre Cliente:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >RTN Cliente:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Direccion:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Telefono:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Tipo Cliente:</label>
+  <input type="text" class="form-control" id="recipient-name">
+  </div>
+
+
+
+          <p id="variable"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+                </form>
+  <script>
+    function editar(este) {
+      var ModalEdit = new bootstrap.Modal(EditModal, {}).show();
+      variable.innerHTML = "El id es : " + este;
+    }
+  </script>
+    </body> 
+		   
+		   
+		  
 
      <style type="text/css">
         .paginador ul{
