@@ -71,7 +71,8 @@ if (!isset($_SESSION['rol'])) {
                             <th>Código</th>
                             <th>Cuenta</th>
                             <th>Clasificación</th>
-                            <th>Acciones}</th><th></th>
+                            <th>Acciones}</th>
+                            <th></th>
 
                         </tr>
                     </thead>
@@ -117,12 +118,12 @@ if (!isset($_SESSION['rol'])) {
 
                                     ?>
                                         <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a></th>
-                                        <?php } ?>
+                                    <?php } ?>
 
-                                        <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['d'] == 1) {
+                                    <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['d'] == 1) {
 
-                                        ?>
-                                         <th>   <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
+                                    ?>
+                                        <th> <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
                                         </th>
                                     <?php } ?>
                                 </tr>
@@ -139,10 +140,10 @@ if (!isset($_SESSION['rol'])) {
                     <?php
                     if ($pagina != 1) {
                     ?>
-                        <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                        <li><a href="?pagina=<?php echo 1; ?>">|<</a>
                         </li>
                         <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                                <<< /a>
+                                <<</a>
                         </li>
                     <?php
                     }

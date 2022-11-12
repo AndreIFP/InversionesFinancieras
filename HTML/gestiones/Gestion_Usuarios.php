@@ -43,109 +43,109 @@ font-size: 12px; ">
 
                 ?>
                     <a href="Nuevo_Usuario.php" input type="submit" class="btn btn-success" Value="Nuevo"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo usuario</a>
-               <?php } ?>
-                    <a class="btn btn-warning" href="Reporte_Usuario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                <?php } ?>
+                <a class="btn btn-warning" href="Reporte_Usuario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
             </div>
-        <?php
-        $mostrar_datos = 0;
-        ?>
+            <?php
+            $mostrar_datos = 0;
+            ?>
 
-        <form action="" method="get" class="form_datos">
-            <label for="datos_mostrar">Datos A mostrar</label>
-            <select name="mostrar" onchange='submit();'>
-                <option></option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-                <?php
-                $mostrar_datos = $_GET['mostrar'];
-                ?>
-            </select>
-        </form>
-        <form action="Buscador_Usuario.php" method="get" class="form_search">
-            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-            <input type="submit" value="Buscar" class="btn btn-primary">
-        </form>
+            <form action="" method="get" class="form_datos">
+                <label for="datos_mostrar">Datos A mostrar</label>
+                <select name="mostrar" onchange='submit();'>
+                    <option></option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <?php
+                    $mostrar_datos = $_GET['mostrar'];
+                    ?>
+                </select>
+            </form>
+            <form action="Buscador_Usuario.php" method="get" class="form_search">
+                <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
+                <input type="submit" value="Buscar" class="btn btn-primary">
+            </form>
 
-        <table class="table">
-            <thead class="table-primary">
-                <tr>
-                    <th>Id</th>
-                    <th>Usuario</th>
-                    <th>Nombre Usuario</th>
-                    <th>Estado</th>
-                    <th>Correo Electrónico</th>
-                    <th>Rol</th>
-                    <th>Acciones</th>
-                    <th></th>
+            <table class="table">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Id</th>
+                        <th>Usuario</th>
+                        <th>Nombre Usuario</th>
+                        <th>Estado</th>
+                        <th>Correo Electrónico</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+                        <th></th>
 
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                //Paginador
-                $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_USUARIO WHERE Id_Usuario = Id_Usuario ");
-                $result_register = mysqli_fetch_array($sql_registe);
-                $total_registro = $result_register['total_registro'];
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    //Paginador
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_USUARIO WHERE Id_Usuario = Id_Usuario ");
+                    $result_register = mysqli_fetch_array($sql_registe);
+                    $total_registro = $result_register['total_registro'];
 
-                if ($mostrar_datos > 0) {
-                    $por_pagina = $mostrar_datos;
-                } else {
-                    $por_pagina = 10;
-                }
+                    if ($mostrar_datos > 0) {
+                        $por_pagina = $mostrar_datos;
+                    } else {
+                        $por_pagina = 10;
+                    }
 
-                if (empty($_GET['pagina'])) {
-                    $pagina = 1;
-                } else {
-                    $pagina = $_GET['pagina'];
-                }
+                    if (empty($_GET['pagina'])) {
+                        $pagina = 1;
+                    } else {
+                        $pagina = $_GET['pagina'];
+                    }
 
-                $desde = ($pagina - 1) * $por_pagina;
-                $total_paginas = ceil($total_registro / $por_pagina);
-                $sql = mysqli_query($conn, "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
-                mysqli_close($conn);
+                    $desde = ($pagina - 1) * $por_pagina;
+                    $total_paginas = ceil($total_registro / $por_pagina);
+                    $sql = mysqli_query($conn, "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
+                    mysqli_close($conn);
 
-                $result = mysqli_num_rows($sql);
-                if ($result > 0) {
-                    while ($row = mysqli_fetch_array($sql)) {
-                ?>
-                        <tr>
-                            <th><?php echo $row['Id_Usuario'] ?></th>
-                            <th><?php echo $row['Usuario'] ?></th>
-                            <th><?php echo $row['Nombre_Usuario'] ?></th>
-                            <th><?php echo $row['Estado_Usuario'] ?></th>
-                            <th><?php echo $row['Correo_Electronico'] ?></th>
-                            <th><?php echo $row['Rol'] ?></th>
-                            
-                            <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['u'] == 1) {
+                    $result = mysqli_num_rows($sql);
+                    if ($result > 0) {
+                        while ($row = mysqli_fetch_array($sql)) {
+                    ?>
+                            <tr>
+                                <th><?php echo $row['Id_Usuario'] ?></th>
+                                <th><?php echo $row['Usuario'] ?></th>
+                                <th><?php echo $row['Nombre_Usuario'] ?></th>
+                                <th><?php echo $row['Estado_Usuario'] ?></th>
+                                <th><?php echo $row['Correo_Electronico'] ?></th>
+                                <th><?php echo $row['Rol'] ?></th>
 
-                            ?>
-                                <th><a href="Actualizar_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-primary btn-xs">Editar</a></th>
+                                <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['u'] == 1) {
+
+                                ?>
+                                    <th><a href="Actualizar_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-primary btn-xs">Editar</a></th>
                                 <?php } ?>
 
                                 <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['d'] == 1) {
 
                                 ?>
                                     <th><a href="Delete_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-danger btn-xs">Eliminar</a></th>
-                            <?php } ?>
+                                <?php } ?>
 
-                        </tr>
-                <?php
+                            </tr>
+                    <?php
+                        }
                     }
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+            </table>
         </div>
         <div class="paginador">
             <ul>
                 <?php
                 if ($pagina != 1) {
                 ?>
-                    <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                    <li><a href="?pagina=<?php echo 1; ?>">|<</a>
                     </li>
                     <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                            <<< /a>
+                            <<</a>
                     </li>
                 <?php
                 }

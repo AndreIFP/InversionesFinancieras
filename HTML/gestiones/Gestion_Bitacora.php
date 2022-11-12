@@ -26,9 +26,9 @@ if (!isset($_SESSION['rol'])) {
     padding: 15px;
     color:black;
     font-size: 12px; ">
-    
+
     <div class="container-fluid">
-    <h2><strong>Gestión Bitacora</strong> </h2>
+        <h2><strong>Gestión Bitacora</strong> </h2>
         <div class="box-body table-responsive">
             <div class="reportes">
                 <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
@@ -115,12 +115,12 @@ if (!isset($_SESSION['rol'])) {
 
                                 ?>
                                     <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a></th>
-                                    <?php } ?>
+                                <?php } ?>
 
-                                    <?php if ($_SESSION['permisos'][M_GESTION_BITACORA] and $_SESSION['permisos'][M_GESTION_BITACORA]['d'] == 1) {
+                                <?php if ($_SESSION['permisos'][M_GESTION_BITACORA] and $_SESSION['permisos'][M_GESTION_BITACORA]['d'] == 1) {
 
-                                    ?>
-                                        <th> <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
+                                ?>
+                                    <th> <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
                                     </th>
                                 <?php } ?>
                             </tr>
@@ -137,10 +137,10 @@ if (!isset($_SESSION['rol'])) {
                 <?php
                 if ($pagina != 1) {
                 ?>
-                    <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                    <li><a href="?pagina=<?php echo 1; ?>">|<</a>
                     </li>
                     <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                            <<< /a>
+                            <<</a>
                     </li>
                 <?php
                 }

@@ -133,7 +133,7 @@ $numero = 99999.99;
 
                                         <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['d'] == 1) {
                                         ?>
-                                            <th><a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-danger btn-xs">Eliminar</a></td>
+                                        <th><a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-danger btn-xs">Eliminar</a></td>
 
                                         <?php } ?>
 
@@ -153,10 +153,10 @@ $numero = 99999.99;
                     <?php
                     if ($pagina != 1) {
                     ?>
-                        <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                        <li><a href="?pagina=<?php echo 1; ?>">|<</a>
                         </li>
                         <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                                <<< /a>
+                                <<</a>
                         </li>
                     <?php
                     }
