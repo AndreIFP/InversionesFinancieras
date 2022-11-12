@@ -74,7 +74,7 @@ function Footer()
     // Arial italic 8
     $this->SetFont('Arial','I',8);
     // Número de página
-    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+    $this->Cell(0,15,'Page '.$this->PageNo().'/{nb}',0,0,'C');
     $Object = new DateTime();  
     $Object->setTimezone(new DateTimeZone('America/Guatemala'));
     $DateAndTime = $Object->format("d-m-Y h:i:s a");
@@ -84,7 +84,7 @@ function Footer()
 
 $bitacora=$_GET['variable'];
 // Creación del objeto de la clase heredada
-$sql = "SELECT * FROM TBL_MS_BITACORA where Accion LIKE '%$bitacora%'";
+$sql = "SELECT * FROM TBL_MS_BITACORA where Id_Bitacora LIKE '%$bitacora%' OR Accion LIKE '%$bitacora%' OR Descripcion LIKE '%$bitacora%'";
 $resultado = mysqli_query($conn,$sql);
 
 
@@ -109,11 +109,11 @@ $pdf->Cell(20,5, utf8_decode('Id Usuario'),1,1,'C',1);
 
 while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(3);
-    $pdf->Cell(10, 5, $fila['Id_Bitacora'], 1, 0, "C",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Fecha']), 1, 0, "C",0);
-    $pdf->Cell(15, 5, utf8_decode($fila['Accion']), 1, 0, "C",0);
-    $pdf->Cell(200, 5, utf8_decode($fila['Descripcion']), 1, 0, "C",0);
-    $pdf->Cell(20, 5, utf8_decode($fila['Id_Usuario']), 1, 1, "C",0);
+    $pdf->Cell(10, 5, $fila['Id_Bitacora'], 1, 0, "L",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Fecha']), 1, 0, "L",0);
+    $pdf->Cell(15, 5, utf8_decode($fila['Accion']), 1, 0, "L",0);
+    $pdf->Cell(200, 5, utf8_decode($fila['Descripcion']), 1, 0, "L",0);
+    $pdf->Cell(20, 5, utf8_decode($fila['Id_Usuario']), 1, 1, "L",0);
     
 }
 

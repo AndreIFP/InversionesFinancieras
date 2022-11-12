@@ -35,7 +35,7 @@ session_start();
                                     <?php
                                     //Paginador
                                     $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_KARDEX
-                                            WHERE ( nproducto LIKE '%$busqueda%' )");
+                                            WHERE ( proname LIKE '%$busqueda%' )");
                                     $result_register = mysqli_fetch_array($sql_registe);
                                     $total_registro = $result_register['total_registro'];
 
@@ -50,7 +50,7 @@ session_start();
 
                                     $desde = ($pagina-1) * $por_pagina;
                                     $total_paginas = ceil($total_registro / $por_pagina);
-                                        $sql = mysqli_query($conn,"select * from TBL_KARDEX WHERE ( nproducto LIKE '%$busqueda%' ) LIMIT $desde,$por_pagina ");
+                                        $sql = mysqli_query($conn,"select * from TBL_KARDEX WHERE ( proname LIKE '%$busqueda%' ) LIMIT $desde,$por_pagina ");
                                         mysqli_close($conn);
 
                                         $result = mysqli_num_rows($sql);
@@ -60,7 +60,7 @@ session_start();
                                             <tr>
                                             <th><?php echo $row['fecha']?></th>
                                         <th><?php echo $row['detalle']?></th>
-                                        <th><?php echo $row['nproducto']?></th>
+                                        <th><?php echo $row['proname']?></th>
                                         <th><?php echo $row['cant_entrada']?></th> 
                                         <th><?php echo $row['total_cante']?></th>
                                         <th><?php echo $row['cant_salida']?></th>
@@ -117,7 +117,7 @@ session_start();
                                     
                             <?php } ?>
                             <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_Kardex_Buscador.php?variable=<?php echo $busqueda;?>" >Reporte</a>
+                            <a class="btn btn-warning" href="Reporte_Kardex_Buscador.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>Reporte</a>
                         </div>
                             </div>
                             

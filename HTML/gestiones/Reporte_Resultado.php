@@ -149,10 +149,10 @@ $pdf->Cell(30,5, utf8_decode('Monto'),1,1,'C',1);
 while ($fila = $resultado->fetch_assoc()) {
     
     $pdf->setX(15);
-    $pdf->Cell(40, 5, utf8_decode($fila['fecha']), 1, 0, "C",0);
+    $pdf->Cell(40, 5, utf8_decode($fila['fecha']), 1, 0, "L",0);
     $pdf->Cell(50, 5, utf8_decode($fila['cuenta']), 1, 0, "B",0);
     $pdf->Cell(60, 5, utf8_decode($fila['descripcion']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, utf8_decode( $fila['monto']), 1, 1, "C",0);
+    $pdf->Cell(30, 5, utf8_decode( $fila['monto']), 1, 1, "L",0);
 
 }
 

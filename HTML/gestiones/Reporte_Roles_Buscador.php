@@ -112,7 +112,7 @@ $pdf->Cell(100,5, utf8_decode('Descripción'),1,1,'C',1);
 
 while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(15);
-    $pdf->Cell(18, 5, utf8_decode($fila['Id_Rol']), 1, 0, "C",0);
+    $pdf->Cell(18, 5, utf8_decode($fila['Id_Rol']), 1, 0, "L",0);
     $pdf->Cell(40, 5, utf8_decode($fila['Rol']), 1, 0, "B",0);
     $pdf->Cell(25, 5, utf8_decode($fila['Estado']), 1, 0, "B",0);
     $pdf->Cell(100, 5, utf8_decode($fila['Descripcion']), 1, 1, "B",0);

@@ -105,7 +105,7 @@ session_start();
                             <?php } ?>
                   </div>
                   <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_Factura.php" >Reporte</a>
+                            <a class="btn btn-warning" href="Reporte_Factura.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>Reporte</a>
                         </div>
            </div>
     </section>

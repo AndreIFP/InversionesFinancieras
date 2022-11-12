@@ -116,9 +116,9 @@ while ($fila = $resultado->fetch_assoc()) {
     $pdf->Cell(30, 5, utf8_decode($fila['detalle']), 1, 0, "L",0);
     $pdf->Cell(50, 5, utf8_decode($fila['proname']), 1, 0, "L",0);
     $pdf->Cell(45, 5, utf8_decode($fila['cant_entrada']), 1, 0, "C",0);
-    $pdf->Cell(35, 5, utf8_decode($fila['total_cante']), 1, 0, "C",0);
+    $pdf->Cell(35, 5, utf8_decode($fila['total_cante']), 1, 0, "R",0);
     $pdf->Cell(45, 5, utf8_decode($fila['cant_salida']), 1, 0, "C",0);
-    $pdf->Cell(35, 5, utf8_decode($fila['total_cants']), 1, 1, "C",0);
+    $pdf->Cell(35, 5, utf8_decode($fila['total_cants']), 1, 1, "R",0);
 }
 
 

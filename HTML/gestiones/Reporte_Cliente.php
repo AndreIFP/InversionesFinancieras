@@ -80,7 +80,7 @@ function Footer()
     // Arial italic 8
     $this->SetFont('Arial','I',8);
     // Número de página
-    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+    $this->Cell(0,15,'Page '.$this->PageNo().'/{nb}',0,0,'C');
     $Object = new DateTime();  
     $Object->setTimezone(new DateTimeZone('America/Guatemala'));
     $DateAndTime = $Object->format("d-m-Y h:i:s a");
@@ -118,14 +118,14 @@ $pdf->Cell(30,5, utf8_decode('Fecha Creación'),1,1,'C',1);
 while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(2);
     $pdf->Cell(20, 5, $fila['Id_Cliente'], 1, 0, "C",0);
-    $pdf->Cell(35, 5, utf8_decode($fila['Nombre_Empresa']), 1, 0, "C",0);
-    $pdf->Cell(40, 5, utf8_decode($fila['Nombre_Cliente']), 1, 0, "C",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['RTN_Cliente']), 1, 0, "C",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Direccion']), 1, 0, "C",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Telefono']), 1, 0, "C",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Tipo_Cliente']), 1, 0, "C",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Ciudad']), 1, 0, "C",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Fecha_Dato']), 1, 1, "C",0);
+    $pdf->Cell(35, 5, utf8_decode($fila['Nombre_Empresa']), 1, 0, "L",0);
+    $pdf->Cell(40, 5, utf8_decode($fila['Nombre_Cliente']), 1, 0, "L",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['RTN_Cliente']), 1, 0, "L",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Direccion']), 1, 0, "L",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Telefono']), 1, 0, "L",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Tipo_Cliente']), 1, 0, "L",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Ciudad']), 1, 0, "L",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Fecha_Dato']), 1, 1, "L",0);
 }
 
 

@@ -40,7 +40,7 @@ session_start();
                              <?php
                              //Paginador
                              $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM product
-                                     WHERE ( id LIKE '%$busqueda%' OR
+                                     WHERE ( id_product LIKE '%$busqueda%' OR
                                      proname LIKE '%$busqueda%' )");
                              $result_register = mysqli_fetch_array($sql_registe);
                              $total_registro = $result_register['total_registro'];
@@ -56,7 +56,7 @@ session_start();
 
                              $desde = ($pagina-1) * $por_pagina;
                              $total_paginas = ceil($total_registro / $por_pagina);
-                                 $sql = mysqli_query($conn,"select * from product WHERE ( id LIKE '%$busqueda%' OR
+                                 $sql = mysqli_query($conn,"select * from product WHERE ( id_product LIKE '%$busqueda%' OR
                                  proname LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
                                  mysqli_close($conn);
 
@@ -65,11 +65,11 @@ session_start();
                                      while($row=mysqli_fetch_array($sql)){
                                  ?>
                                      <tr>
-                                     <th><?php echo $row['id']?></th>
+                                     <th><?php echo $row['id_product']?></th>
                                  <th><?php echo $row['proname']?></th>
                                  <th><?php echo $row['amount']?></th>
                                  <th><?php echo $row['time']?></th>    
-                                 <th><a href="../Compras/salida.php?Id=<?php echo $row['id'] ?>"class="btn btn-primary btn-xs" >Retirar</a>
+                                 <th><a href="../Compras/salida.php?Id=<?php echo $row['id_product'] ?>"class="btn btn-primary btn-xs" >Retirar</a>
                                  <script>
                                      function alerta(){
                                          window.alert('No es posible hacer esta Accion');

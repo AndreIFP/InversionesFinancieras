@@ -147,7 +147,7 @@ $pdf->Cell(30,5, utf8_decode('Total Cuenta'),1,1,'C',1);
 while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(40);
     $pdf->Cell(95, 5, utf8_decode($fila['cuenta']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['total_cuenta']), 1, 1, "C",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['total_cuenta']), 1, 1, "R",0);
 }
 
 $pdf->Output();

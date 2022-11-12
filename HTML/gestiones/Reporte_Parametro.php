@@ -80,7 +80,7 @@ function Footer()
     // Arial italic 8
     $this->SetFont('Arial','I',8);
     // Número de página
-    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+    $this->Cell(0,15,'Page '.$this->PageNo().'/{nb}',0,0,'C');
     $Object = new DateTime();  
     $Object->setTimezone(new DateTimeZone('America/Guatemala'));
     $DateAndTime = $Object->format("d-m-Y h:i:s a");
@@ -114,12 +114,12 @@ $pdf->Cell(35,5, utf8_decode('Fecha Modificacion'),1,1,'C',1);
 
 while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(10);
-    $pdf->Cell(11, 5, $fila['Id_Parametro'], 1, 0, "C",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['Parametro']), 1, 0, "C",0);
-    $pdf->Cell(80, 5, utf8_decode($fila['Valor']), 1, 0, "C",0);
-    $pdf->Cell(35, 5, utf8_decode($fila['Id_Usuario']), 1, 0, "C",0);
-    $pdf->Cell(35, 5, utf8_decode($fila['Fecha_Creacion']), 1, 0, "C",0);
-    $pdf->Cell(35, 5, utf8_decode($fila['Fecha_Modificacion']), 1, 1, "C",0);
+    $pdf->Cell(11, 5, $fila['Id_Parametro'], 1, 0, "L",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Parametro']), 1, 0, "L",0);
+    $pdf->Cell(80, 5, utf8_decode($fila['Valor']), 1, 0, "L",0);
+    $pdf->Cell(35, 5, utf8_decode($fila['Id_Usuario']), 1, 0, "L",0);
+    $pdf->Cell(35, 5, utf8_decode($fila['Fecha_Creacion']), 1, 0, "L",0);
+    $pdf->Cell(35, 5, utf8_decode($fila['Fecha_Modificacion']), 1, 1, "L",0);
 }
 
 

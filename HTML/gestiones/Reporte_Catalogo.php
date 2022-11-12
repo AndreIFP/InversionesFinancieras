@@ -109,9 +109,9 @@ $pdf->Cell(35,5, utf8_decode('Clasificación'),1,1,'C',1);
 
 while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(20);
-    $pdf->Cell(15, 5, utf8_decode($fila['CODIGO_CUENTA']), 1, 0, "C",0);
-    $pdf->Cell(115, 5, utf8_decode($fila['CUENTA']), 1, 0, "C",0);
-    $pdf->Cell(35, 5, utf8_decode($fila['CLASIFICACION']), 1, 1, "C",0);
+    $pdf->Cell(15, 5, utf8_decode($fila['CODIGO_CUENTA']), 1, 0, "L",0);
+    $pdf->Cell(115, 5, utf8_decode($fila['CUENTA']), 1, 0, "L",0);
+    $pdf->Cell(35, 5, utf8_decode($fila['CLASIFICACION']), 1, 1, "L",0);
 }
 
 

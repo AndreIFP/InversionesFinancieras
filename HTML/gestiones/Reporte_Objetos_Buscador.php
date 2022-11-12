@@ -72,7 +72,7 @@ function Footer()
     // Arial italic 8
     $this->SetFont('Arial','I',8);
     // Número de página
-    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+    $this->Cell(0,15,'Page '.$this->PageNo().'/{nb}',0,0,'C');
     $Object = new DateTime();  
     $Object->setTimezone(new DateTimeZone('America/Guatemala'));
     $DateAndTime = $Object->format("d-m-Y h:i:s a");
@@ -106,10 +106,10 @@ $pdf->Cell(40,5, utf8_decode('Tipo'),1,1,'C',1);
 
 while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(28);
-    $pdf->Cell(18, 5, utf8_decode($fila['Id_Objetos']), 1, 0, "C",0);
-    $pdf->Cell(40, 5, utf8_decode($fila['Objetos']), 1, 0, "C",0);
-    $pdf->Cell(60, 5, utf8_decode($fila['Descripcion']), 1, 0, "C",0);
-    $pdf->Cell(40, 5, utf8_decode($fila['Tipo_Objeto']), 1, 1, "C",0);
+    $pdf->Cell(18, 5, utf8_decode($fila['Id_Objetos']), 1, 0, "L",0);
+    $pdf->Cell(40, 5, utf8_decode($fila['Objetos']), 1, 0, "L",0);
+    $pdf->Cell(60, 5, utf8_decode($fila['Descripcion']), 1, 0, "L",0);
+    $pdf->Cell(40, 5, utf8_decode($fila['Tipo_Objeto']), 1, 1, "L",0);
  
     
 }
