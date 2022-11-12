@@ -4,12 +4,12 @@ include('conexion.php');
 $user=$_SESSION['user'];
 if(isset($_REQUEST["btnregistrarx"])){
   $tpregunta=$_POST['tpregunta'];
-  $preguntas=$_POST['txtpregunta'];
-  $tusuario=$_POST['tusuario'];
+  $preguntas=$_POST['tpregunta'];
+  $nombre=$_POST['tusuario'];
   $_SESSION['user']=$_POST["tusuario"];
   $passw=$_POST['userpassword'];
   $_SESSION["intentos"] = isset($_SESSION["intentos"]) ? $_SESSION["intentos"] : 0;
-  
+  $trespuesta ="";
 
   try {
 
@@ -24,27 +24,18 @@ if(isset($_REQUEST["btnregistrarx"])){
 	}
     
 
-    
-
     $conecsul	= mysqli_query($conn,"SELECT Respuestas FROM TBL_PREGUNTAS_X_USUARIO WHERE Id_Usuario = '$idusus'");
 	while($row=mysqli_fetch_array($conecsul)){
     $idrespuest=$row['Respuestas'];
 	}
 
 
-    if($preguntas != $idpregunta or $tpregunta != $idrespuest  ){
-   
-        echo "<script> alert('Datos icorrectos');window.location= 'Login.php' </script>"; 
-    }
-   
     $conecsul	= mysqli_query($conn,"SELECT Contraseña FROM TBL_USUARIO WHERE Usuario = '$user'");
     while($row=mysqli_fetch_array($conecsul)){
     $contras=$row['Contraseña'];
     }
 
-
-
-   /* $query = mysqli_query($conn,"SELECT * FROM tbl_preguntas_x_usuario WHERE Respuestas = '".$trespuesta."'");
+    $query = mysqli_query($conn,"SELECT * FROM tbl_preguntas_x_usuario WHERE Respuestas = '".$trespuesta."'");
     $nr = mysqli_num_rows($query);
 
        if ($nr > 0){
@@ -61,6 +52,7 @@ if(isset($_REQUEST["btnregistrarx"])){
             $_SESSION['rol']=$data["Rol"];
             //header("Location: index.php");
             echo "<script>alert('EL usuario esta identificado como Nuevo. PORFAVOR CONTACTE CON EL ADMINISTRADOR');window.location= 'index.php'</script>";  
+            header("Location: index_nuevo.php");
 
         }elseif ($valor1 == 'ACTIVO') {
             $data = mysqli_fetch_array($query);
@@ -79,11 +71,10 @@ if(isset($_REQUEST["btnregistrarx"])){
     $fila = $ext->fetch_array(MYSQLI_NUM);
     $param = $fila[0];
 
-
     if($_SESSION["intentos"] >= $param){
         
         // actualizamos el campo mostrar para que no se puede iniciar session
-        $sql1="SELECT Id_usuario from TBL_USUARIO WHERE Usuario='$tusuario'";
+        $sql1="SELECT Id_usuario from TBL_USUARIO WHERE Usuario='$nombre'";
                     $res1 = $conn->query($sql1);
                     $fila = $res1->fetch_array(MYSQLI_NUM);
                     $iduser = $fila[0];    
@@ -91,12 +82,12 @@ if(isset($_REQUEST["btnregistrarx"])){
                     $sql = "UPDATE TBL_USUARIO SET Estado_Usuario='BLOQUEADO' WHERE Id_Usuario='$iduser'";
                     $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
                     $exito = mysqli_query($con,$sql);
-                    echo "<script>alert('DEMASIADOS INTENTOS EL USUARIO ".$tusuario." SE HA BLOQUEADO');window.location= 'login.php'</script>";
+                    echo "<script>alert('DEMASIADOS INTENTOS EL USUARIO ".$nombre." SE HA BLOQUEADO');window.location= 'login.php'</script>";
     }else{
         $_SESSION["intentos"]++; // aumentamos en 1 los intentos
         echo "<script>alert('Ingreso invalido, PORFAVOR REVISE SUS CREDENCIALES DE INICIO DE SESION);window.location= 'login.php'</script>";
         //header("location:Login.php");
-    }*/
+    }
 
     
     }catch (Exception $e) {
@@ -107,46 +98,33 @@ $query = mysqli_query($conn,"SELECT Respuestas FROM TBL_PREGUNTAS_X_USUARIO WHER
 $nr = mysqli_num_rows($query);
 
 
-
 try{
 if($nr == 1)
 {
   
 	//header("Location: OlvidoContra.html");
-    
-   
 
-    if($contras!=$passw){
-    
-        
-        $consulta=mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario");
-        while($row=mysqli_fetch_array($consulta)){
-          $tusuario=$row['Usuario'];
-        }
-        $queryregistro = "UPDATE TBL_USUARIO SET Contraseña = '$passw' where Usuario='$tusuario'";
-      
-        if(mysqli_query($conn,$queryregistro))
-       {
-          echo "<script> alert('Contraseña Actualizada del Usuario: $tusuario');window.location= 'Login.php' </script>"; 
-       }
-   
-    }else{
-        echo "<script> alert('Su contraseña actual no puede ser la nueva');window.location= 'Login.php' </script>"; 
-    
+    $consulta=mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario");
+      while($row=mysqli_fetch_array($consulta)){
+        $nombre=$row['Usuario'];
+      }
+      $queryregistro = "UPDATE TBL_USUARIO SET Contraseña = '$passw' where Usuario='$nombre'";
+	 //}
+	  if(mysqli_query($conn,$queryregistro))
+     {
+		echo "<script> alert('Contraseña Actualizada del Usuario: $nombre');window.location= 'Login.php' </script>"; 
+     }
     }
-    }
-
 
     
 
 else if ($nr == 0) 
 {
 	//header("Location: login.php");
-	echo "No ingreso"; 
-	echo "<script> alert('Respuesta Incorrecta: $idrespuest ');window.location= 'OlvidoContra.php' </script>";
+	echo "<script> alert('Datos incorrectos ');window.location= 'OlvidoContra.php' </script>";
 } 
 }catch (Exception $e){
   echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
 }
-  }
-
+}
+?>
