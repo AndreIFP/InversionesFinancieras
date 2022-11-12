@@ -12,15 +12,15 @@ $nr 			= mysqli_num_rows($queryusuario);
 if ($nr == 1)
 {
 $mostrar		= mysqli_fetch_array($queryusuario); 
-$enviarpass 	= $mostrar['pass'];
+
 
 $paracorreo 		= $correo;
 $titulo				= "Recuperar contraseña";
-$mensaje			= $enviarpass;
+
 
 if($paracorreo =$correo)
 {
-	echo "<script> alert('Contraseña enviada');window.location= 'gestiones/Gestion_Usuarios.php' </script>";
+	echo "<script> alert('Registrado');window.location= 'gestiones/Gestion_Usuarios.php' </script>";
 }else
 {
 	echo "<script> alert('Error');window.location= 'gestiones/Nuevo_Usuario.php' </script>";

@@ -64,128 +64,308 @@ if (!isset($_SESSION['rol'])) {
 }
 ?>
 <?php include 'barralateralinicial.php'; ?>
-<script>
-	function validar(e) {
-		tecla = (document.all) ? e.keyCode : e.which;
-		if (tecla == 8) return true; //Tecla de retroceso (para poder borrar)
-		// dejar la línea de patron que se necesite y borrar el resto
-		patron = /[A-Za-z\s]/; // Solo acepta letras y espacios
-		
-		te = String.fromCharCode(tecla);
-		return patron.test(te);
-	}
-</script>
-</div>
-<title>Gestion Cliente</title>
-<div class="col-md-12">
-	<div class="col-md-12">
-		<div class="col-md-12">
-			<div class="col-md-12">
-				<div class="form_register">
+<p></p>
+<section style=" background-color:rgb(255, 255, 255);
+    padding: 15px;
+    color:black;
+    font-size: 12px; ">
 
-					<div class="col-md-12">
-					<h6><a class="btn btn-primary" href="Gestion_Clientes.php ">Volver Atrás</a></h6>
+	<script>
+		function validar(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8) return true; //Tecla de retroceso (para poder borrar)
+			// dejar la línea de patron que se necesite y borrar el resto
+			patron = /[A-Za-z\s]/; // Solo acepta letras y espacios
 
-						<form action="agregado_cliente.php" method="post">
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+	</script>
 
-							<h1><strong> Registro Cliente</strong></h1>
-							<hr>
-							<label for="Nombre_Empresa">Nombre Empresa</label>
-							<input type="text" name="Nombre_Empresa" maxlength="50" id="Nombre_Empresa" placeholder="Nombre completo" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"   required>
-							<label for="Nombre_Cliente">Nombre Cliente</label>
-							<input type="text" name="Nombre_Cliente" maxlength="50" id="Nombre_Cliente" placeholder="Nombre completo" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)"  required>
-							<label for="RTN_Cliente">RTN</label>
-							<input type="text" name="RTN_Cliente" maxlength="13" id="RTN_Cliente" placeholder="RTN" size="40" oninput="this.value = this.value.replace(/[^0-9]/,'')" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-							<label for="Direccion">Dirección</label>
-							<input type="Direccion" name="Direccion" maxlength="60" id="Direccion" placeholder="Dirección" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"   required>
-							<label for="Teléfono">Teléfono</label>
-							<input type="tex" name="Telefono" maxlength="10" id="Telefono" placeholder="Teléfono" size="40" oninput="this.value = this.value.replace(/[^0-9]/,'')" required>
-							<label for="Tipo_Cliente">Tipo Cliente</label>
-							<select name="Tipo_Cliente" required>
-								<option value="">Seleccione Una Opción</option>
-								<option value="ACTIVO">ACTIVO</option>
-								<option value="PASIVO">INACTIVO</option>
-							</select>
-							<br>
-							<label for="Ciudad">Ciudad</label>
-							<input type="text" name="Ciudad" maxlength="25" id="Ciudad" placeholder="Ciudad" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"  onkeypress="return validar(event)" required>
-							<br>
-							<input type="submit" value="Registrar Cliente" class="btn_save"></center>
-							</p>
-						</form>
+	<title>Gestion Cliente</title>
+
+	<a class="btn btn-primary" href="Gestion_Clientes.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+
+	<hr>
+
+	<div clas="row ">
+
+		<div class="box-header with-border">
+
+			<div class="box-body">
+				<form action="agregado_cliente.php" method="post">
+
+					<center>
+						<h2><strong> Registro Cliente</strong></h2>
+					</center>
+					<hr>
+					<div class="row">
+
+						<div class="col-xs-14 pull-right">
+
+							<table class="table">
+								<thead class="table-primary">
+									<tr>
+
+										<th>
+											<center>Nombre de la empresa </center>
+										</th>
+
+
+										<th>
+											<center>Nombre del Cliente</center>
+										</th>
+
+										<th>
+											<center>RTN / DNI</center>
+										</th>
+
+
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr>
+
+										<td style="width: 40%">
+
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-building"></i></span>
+												<input type="text" class="form-control" name="Nombre_Empresa" maxlength="50" id="Nombre_Empresa" placeholder="Nombre Empresa" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+
+											</div>
+
+										</td>
+
+										<td style="width: 35%">
+
+											<div class="input-group">
+
+												<span class="input-group-addon"><i class="fa fa-user"></i></span>
+												<input type="text" class="form-control" name="Nombre_Cliente" maxlength="50" id="Nombre_Cliente" placeholder="Nombre Cliente" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)" required>
+
+
+											</div>
+
+										</td>
+
+
+										<td style="width: 25%">
+
+											<div class="input-group">
+
+												<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+												<input type="text" class="form-control" name="RTN_Cliente" maxlength="13" id="RTN_Cliente" placeholder="RTN" size="40" oninput="this.value = this.value.replace(/[^0-9]/,'')" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+
+											</div>
+
+										</td>
+
+									</tr>
+
+								</tbody>
+							</table>
+
+						</div>
+
 					</div>
-					</section>
-					</body>
-					<style type="text/css">
-						.btn-atras {
-							background: #1faac8;
-							color: #FFF;
-							padding: 0 20px;
-							border: 0;
-							cursor: pointer;
-							margin-left: 20px;
-						}
 
-						.form_register {
-							width: 450px;
-							margin: auto;
-						}
+					<div class="row">
 
-						.form_register h1 {
-							color: #3c93b0;
-						}
+						<div class="col-xs-14 pull-right">
 
-						hr {
-							border: 0;
-							background: #CCC;
-							height: 1px;
-							margin: 10px 0;
-							display: block;
-						}
+							<table class="table">
+								<thead class="table-primary">
+									<tr>
 
-						form {
-							background: #FFF;
-							margin: auto;
-							padding: 20px 50px;
-							border: 1px solid #d1d1d1;
-						}
+										<th>
+											<center>Teléfono </center>
+										</th>
 
-						label {
-							display: block;
-							font-size: 12pt;
-							font-family: 'GothamBook';
-							margin: 15px auto 5px auto;
-						}
 
-						.btn_save {
-							font-size: 12pt;
-							background: #12a4c6;
-							padding: 10px;
-							color: #FFF;
-							letter-spacing: 1px;
-							border: 0;
-							cursor: pointer;
-							margin: 15px auto;
-						}
+										<th>
+											<center>Estado del Cliente</center>
+										</th>
 
-						.alert {
-							width: 100%;
-							background: #66e07d66;
-							border-radius: 6px;
-							margin: 20px auto;
-						}
+										<th>
+											<center>Ciudad</center>
+										</th>
 
-						.msg_error {
-							color: #e65656;
-						}
 
-						.msg_save {
-							color: #126e00;
-						}
+									</tr>
+								</thead>
 
-						.alert p {
-							padding: 10px;
-						}
-					</style>
+								<tbody>
 
-					<?php include 'barralateralfinal.php'; ?>
+									<tr>
+
+										<td style="width: 40%">
+
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-phone"></i></span>
+												<input type="tex" class="form-control" name="Telefono" maxlength="10" id="Telefono" placeholder="Teléfono" size="40" oninput="this.value = this.value.replace(/[^0-9]/,'')" required>
+
+											</div>
+
+										</td>
+
+										<td style="width: 35%">
+
+											<div class="input-group">
+
+												<span class="input-group-addon"><i class="fa fa-check"></i></span>
+												<select class="form-control" name="Tipo_Cliente" required>
+													<option value="">Seleccione una opción</option>
+													<option value="ACTIVO">ACTIVO</option>
+													<option value="PASIVO">INACTIVO</option>
+												</select>
+											</div>
+
+										</td>
+
+
+										<td style="width: 25%">
+
+											<div class="input-group">
+
+												<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+												<input type="text"class="form-control"  name="Ciudad" maxlength="25" id="Ciudad" placeholder="Ciudad" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)" required>
+					
+											</div>
+
+										</td>
+
+									</tr>
+
+								</tbody>
+							</table>
+
+						</div>
+
+					</div>
+
+					<div class="row">
+
+						<div class="col-xs-14 pull-right">
+
+							<table class="table">
+								<thead class="table-primary">
+									<tr>
+
+										<th>
+											<center>Dirección</center>
+										</th>
+
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr>
+
+										<td style="width: 100%">
+
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-question-circle"></i></span>
+												<input type="Direccion" class="form-control"  name="Direccion" maxlength="60" id="Direccion" placeholder="Dirección" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+					
+											</div>
+
+										</td>
+
+
+									</tr>
+
+								</tbody>
+							</table>
+
+						</div>
+
+					</div>
+					<hr>
+					<center><input type="submit" value="Registrar Cliente" class="btn btn-primary"></center>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	</secction>
+	</div>
+
+
+
+	</body>
+	<style type="text/css">
+		.btn-atras {
+			background: #1faac8;
+			color: #FFF;
+			padding: 0 20px;
+			border: 0;
+			cursor: pointer;
+			margin-left: 20px;
+		}
+
+		.form_register {
+			width: 450px;
+			margin: auto;
+		}
+
+		.form_register h1 {
+			color: #3c93b0;
+		}
+
+		hr {
+			border: 0;
+			background: #CCC;
+			height: 1px;
+			margin: 10px 0;
+			display: block;
+		}
+
+		form {
+			background: #FFF;
+			margin: auto;
+			padding: 20px 50px;
+			border: 1px solid #d1d1d1;
+		}
+
+		label {
+			display: block;
+			font-size: 12pt;
+			font-family: 'GothamBook';
+			margin: 15px auto 5px auto;
+		}
+
+		.btn_save {
+			font-size: 12pt;
+			background: #12a4c6;
+			padding: 10px;
+			color: #FFF;
+			letter-spacing: 1px;
+			border: 0;
+			cursor: pointer;
+			margin: 15px auto;
+		}
+
+		.alert {
+			width: 100%;
+			background: #66e07d66;
+			border-radius: 6px;
+			margin: 20px auto;
+		}
+
+		.msg_error {
+			color: #e65656;
+		}
+
+		.msg_save {
+			color: #126e00;
+		}
+
+		.alert p {
+			padding: 10px;
+		}
+	</style>
+
+	<?php include 'barralateralfinal.php'; ?>

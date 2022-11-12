@@ -115,16 +115,17 @@ font-size: 12px; ">
                             <th><?php echo $row['Estado_Usuario'] ?></th>
                             <th><?php echo $row['Correo_Electronico'] ?></th>
                             <th><?php echo $row['Rol'] ?></th>
+                            
                             <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['u'] == 1) {
 
                             ?>
-                                <th><a href="Actualizar_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-primary">Editar</a></th>
+                                <th><a href="Actualizar_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-primary">Editar</a>
                                 <?php } ?>
 
                                 <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['d'] == 1) {
 
                                 ?>
-                                    <th><a href="Delete_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-danger">Eliminar</a></th>
+                                    <a href="Delete_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-danger">Eliminar</a></th>
                             <?php } ?>
 
                         </tr>
