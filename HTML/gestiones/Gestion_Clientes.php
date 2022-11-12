@@ -85,7 +85,9 @@ $numero = 99999.99;
                             <th>Nombre Cliente</th>
                             <th>RTN</th>
                             <th>Estado</th>
-                            <th>Acciones</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
 
                         </tr>
                     </thead>
@@ -126,16 +128,16 @@ $numero = 99999.99;
 
                                     <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {
                                     ?>
-                                        <th><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-primary btn-xs">Editar</a>
+                                        <th><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-primary btn-xs">Editar</a></td>
                                         <?php } ?>
 
                                         <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['d'] == 1) {
                                         ?>
-                                            <a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-danger btn-xs">Eliminar</a>
+                                            <th><a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-danger btn-xs">Eliminar</a></td>
 
                                         <?php } ?>
 
-                                        <button type="button" class="btn btn-xs" onclick="editar(this.id)" id="<?php echo $row['Id_Cliente'] ?>">Ver</button></td>
+                                        <th><button type="button" class="btn btn-xs" onclick="editar(this.id)" id="<?php echo $row['Id_Cliente'] ?>">Ver</button></td>
 
                                 </tr>
                         <?php

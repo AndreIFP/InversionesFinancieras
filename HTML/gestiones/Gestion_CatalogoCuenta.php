@@ -71,7 +71,7 @@ if (!isset($_SESSION['rol'])) {
                             <th>Código</th>
                             <th>Cuenta</th>
                             <th>Clasificación</th>
-                            <th>Acciones</th>
+                            <th>Acciones}</th><th></th>
 
                         </tr>
                     </thead>
@@ -116,13 +116,13 @@ if (!isset($_SESSION['rol'])) {
                                     <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['u'] == 1) {
 
                                     ?>
-                                        <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a>
+                                        <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a></th>
                                         <?php } ?>
 
                                         <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['d'] == 1) {
 
                                         ?>
-                                            <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
+                                         <th>   <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
                                         </th>
                                     <?php } ?>
                                 </tr>

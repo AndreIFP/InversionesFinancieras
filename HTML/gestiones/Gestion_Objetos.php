@@ -69,6 +69,8 @@ font-size: 12px; ">
                                 <th>Descripcion</th>
                                 <th>Tipo</th>
                                 <th></th>
+                                <th></th>
+                               
                         </thead>
                         <tbody>
                                 <?php
@@ -107,11 +109,11 @@ font-size: 12px; ">
 
                                         <?php  if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['u'] == 1) {                      
                                         ?>
-                                        <th><a href="Actualizar_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-primary btn-xs" >Editar</a>
+                                        <th><a href="Actualizar_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-primary btn-xs" >Editar</a></th>
                                         <?php } ?>
                                         <?php  if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['d'] == 1) {                      
                                         ?>
-                                        <a href="Delete_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-danger btn-xs">Eliminar</a></th>
+                                       <th> <a href="Delete_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-danger btn-xs">Eliminar</a></th>
                                         <?php } ?>
                                     </tr>
                                 <?php

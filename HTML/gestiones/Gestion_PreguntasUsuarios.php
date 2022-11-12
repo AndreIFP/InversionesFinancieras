@@ -66,6 +66,7 @@ if (!isset($_SESSION['rol'])) {
                 <th>Preguntas</th>
                 <th>Respuestas</th>
                 <th>Acciones</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -108,11 +109,11 @@ if (!isset($_SESSION['rol'])) {
                         </script>
                         <?php if ($_SESSION['permisos'][M_GESTION_PREG_USUARIOS] and $_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['u'] == 1) {
                         ?>
-                            <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a>
+                            <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a></th>
                         <?php } ?>
                         <?php if ($_SESSION['permisos'][M_GESTION_PREG_USUARIOS] and $_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['d'] == 1) {
                         ?>
-                    <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a></th>
+                    <th><a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a></th>
                         <?php } ?>
                     </tr>
             <?php

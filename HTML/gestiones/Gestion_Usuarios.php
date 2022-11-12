@@ -77,6 +77,7 @@ font-size: 12px; ">
                     <th>Correo Electrónico</th>
                     <th>Rol</th>
                     <th>Acciones</th>
+                    <th></th>
 
                 </tr>
             </thead>
@@ -119,13 +120,13 @@ font-size: 12px; ">
                             <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['u'] == 1) {
 
                             ?>
-                                <th><a href="Actualizar_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-primary">Editar</a>
+                                <th><a href="Actualizar_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-primary btn-xs">Editar</a></th>
                                 <?php } ?>
 
                                 <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['d'] == 1) {
 
                                 ?>
-                                    <a href="Delete_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-danger">Eliminar</a></th>
+                                    <th><a href="Delete_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-danger btn-xs">Eliminar</a></th>
                             <?php } ?>
 
                         </tr>
