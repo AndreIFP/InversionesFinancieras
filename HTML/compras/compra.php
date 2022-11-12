@@ -24,7 +24,7 @@ if (!isset($_SESSION['rol'])) {
 ?>
 <?php include 'barralateralinicial.php';?>
 <title>Nuevo Producto</title>
-<a href="index.php"><input type="submit" class="btn btn-primary" Value=" Regresar "></a>
+<a href="../gestiones/gestion_Inventario.php"><input type="submit" class="btn btn-primary" Value=" Regresar "></a>
 <br>  
 <body>
 <section  style=" background-color:rgb(240,248,255);

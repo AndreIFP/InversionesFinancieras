@@ -1,16 +1,22 @@
 <?php
 include("../conexion.php");
-
+session_start();
 ?>
 <?php include 'barralateralinicial.php';?>
-</div>
+<p></p>
 <title>Kardex</title>
-           <div class="container mt-12">
-                  <div class="col-md-12">
-                  <br>
-                  
-                     <h1>Kardex</h1> 
-                     <h6><a  class="btn btn-primary"  href="Gestion_Inventario.php ">Volver Atrás</a></h6>
+<section style=" background-color:rgb(255, 255, 255);
+    padding: 15px;
+    color:black;
+    font-size: 12px; ">
+
+
+    <h2><strong>Kardex</strong> </h2>
+    <div class="box-body table-responsive">
+    <div class="reportes">
+
+    <a class="btn btn-primary"  href="Gestion_Inventario.php "><i class="fa fa-arrow-circle-left"></i>Volver Atrás</a>
+    <p>
                      <?php
                         $mostrar_datos = 0;
                         ?>
@@ -33,7 +39,7 @@ include("../conexion.php");
                      </form>
 
                      <table class="table">
-                        <thead class="table-succees table-striped">
+                     <thead class="table-primary">
                             <tr>
                                 <th>Fecha</th>
                                 <th>Detalle</th>
@@ -78,7 +84,7 @@ include("../conexion.php");
                                      <tr>
                                         <th><?php echo $row['fecha']?></th>
                                         <th><?php echo $row['detalle']?></th>
-                                        <th><?php echo $row['nproducto']?></th>
+                                        <th><?php echo $row['proname']?></th>
                                         <th><?php echo $row['cant_entrada']?></th> 
                                         <th><?php echo $row['total_cante']?></th>
                                         <th><?php echo $row['cant_salida']?></th>

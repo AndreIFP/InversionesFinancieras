@@ -9,7 +9,7 @@
 
 <?php
 $art = $_POST["product"];
-$sql9 = "SELECT id,amount FROM product WHERE proname = '".$art."'";
+$sql9 = "SELECT id_product,amount FROM product WHERE proname = '".$art."'";
     $ext = $conn->query($sql9);
                $fila = $ext->fetch_array(MYSQLI_NUM);
                $id = $fila[0];
@@ -114,14 +114,14 @@ $sql9 = "SELECT id,amount FROM product WHERE proname = '".$art."'";
  $nr = mysqli_num_rows($query);
 
  
-    $sql2 = "SELECT id,amount FROM product WHERE proname = '".$art."'";
+    $sql2 = "SELECT id_product,amount FROM product WHERE proname = '".$art."'";
     $ext = $conn->query($sql2);
                $fila = $ext->fetch_array(MYSQLI_NUM);
                $id = $fila[0];
                $exist = $fila[1];
 
                
-               $sql4 = "SELECT total_cante, cant_entrada FROM TBL_KARDEX WHERE nproducto = '".$art."'";
+               $sql4 = "SELECT total_cante, cant_entrada FROM TBL_KARDEX WHERE proname = '".$art."'";
                $ext = $conn->query($sql4);
                $fila = $ext->fetch_array(MYSQLI_NUM);
                $tsal = $fila[0];
@@ -131,11 +131,11 @@ $sql9 = "SELECT id,amount FROM product WHERE proname = '".$art."'";
                $res1 = $res * $cant;
                   
                if($cantidad > 0){
-                  $sql5 = "UPDATE product SET amount=amount-$cant where id='$id'";
+                  $sql5 = "UPDATE product SET amount=amount-$cant where id_product='$id'";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql5);
             
-            $sql = "INSERT INTO TBL_KARDEX (fecha, detalle, nproducto, cant_salida, total_cants) VALUES ('$fechaa','SALIDA','$art','$cant','$res1')";
+            $sql = "INSERT INTO TBL_KARDEX (Id_Usuario,fecha, detalle, id_product, proname, cant_salida, total_cants) VALUES (1,'$fechaa','SALIDA',1,'$art',$cant,$res1)";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql);
                }else{    

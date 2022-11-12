@@ -112,10 +112,10 @@ $pdf->Cell(40,5, utf8_decode('Rol'),1,1,'C',1);
 
 while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(40);
-    $pdf->Cell(20, 5, utf8_decode($fila['Id_Usuario']), 1, 0, "C",0);
+    $pdf->Cell(20, 5, utf8_decode($fila['Id_Usuario']), 1, 0, "L",0);
     $pdf->Cell(40, 5, utf8_decode($fila['Usuario']), 1, 0, "B",0);
     $pdf->Cell(65, 5, utf8_decode($fila['Nombre_Usuario']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Estado_Usuario']), 1, 0, "C",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Estado_Usuario']), 1, 0, "L",0);
     $pdf->Cell(40, 5, utf8_decode($fila['Rol']), 1, 1, "B",0);
 
 }

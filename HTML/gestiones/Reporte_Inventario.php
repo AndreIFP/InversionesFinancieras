@@ -109,7 +109,7 @@ $pdf->Cell(50,5, utf8_decode('Fecha'),1,1,'C',1);
 
 while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(60);
-    $pdf->Cell(20, 5, utf8_decode($fila['id']), 1, 0, "C",0);
+    $pdf->Cell(20, 5, utf8_decode($fila['id_product']), 1, 0, "C",0);
     $pdf->Cell(50, 5, utf8_decode($fila['proname']), 1, 0, "C",0);
     $pdf->Cell(50, 5, utf8_decode($fila['amount']), 1, 0, "C",0);
     $pdf->Cell(50, 5, utf8_decode($fila['time']), 1, 1, "C",0);

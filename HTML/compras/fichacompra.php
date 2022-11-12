@@ -151,21 +151,21 @@ echo "FECHA A DIA DE HOY DE LA FICHA : $DateAndTime2.";
  $nr = mysqli_num_rows($query);
 
  if($nr == 1){
-    $sql2 = "SELECT id FROM product WHERE proname = '".$art."'";
+    $sql2 = "SELECT id_product FROM product WHERE proname = '".$art."'";
     $ext = $conn->query($sql2);
                $fila = $ext->fetch_array(MYSQLI_NUM);
                $id = $fila[0];
 
-    $sql = "INSERT INTO TBL_KARDEX (fecha, detalle, nproducto, cant_entrada, total_cante) VALUES ('$fecha','ENTRADA','$art','$ent','$result')";
+    $sql = "INSERT INTO TBL_KARDEX (Id_Usuario,fecha, detalle, id_product, proname, cant_entrada, total_cante,cant_salida, total_cants) VALUES (1,'$fecha','ENTRADA',1,'$art',$ent,$result,null,null)";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql);
 
-            $sql1 = "UPDATE product SET amount=amount+$ent where id='$id'";
+            $sql1 = "UPDATE product SET amount=amount+$ent where id_product='$id'";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql1);
  
         }elseif ($nr == 0) {
-            $sql = "INSERT INTO TBL_KARDEX (fecha, detalle, nproducto, cant_entrada, total_cante) VALUES ('$fecha','ENTRADA','$art','$ent','$result')";
+            $sql = "INSERT INTO TBL_KARDEX (Id_Usuario,fecha, detalle, id_product, proname, cant_entrada, total_cante,cant_salida, total_cants) VALUES (1,'$fecha','ENTRADA',1,'$art',$ent,$result,null,null)";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql);
 

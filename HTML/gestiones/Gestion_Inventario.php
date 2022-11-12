@@ -40,9 +40,11 @@ if (!isset($_SESSION['rol'])) {
         ?>
             <a class="btn btn-secondary" href="kardex.php"><i class="fa fa-check" aria-hidden="true"></i> Revisar Kardex</a>
             <a href="../compras/compra.php"input type="submit" class="btn btn-success" Value="Nuevo Producto"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Producto</a>
+            
+            <?php } ?>
+            
             <a class="btn btn-warning" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
             <p>
-            <?php } ?>
             <?php
             $mostrar_datos = 0;
             ?>
@@ -74,6 +76,7 @@ if (!isset($_SESSION['rol'])) {
                 <th>Cantidad</th>
                 <th>Fecha</th>
                 <th>Acciones</th>
+                <th> </th>
 
             </tr>
         </thead>
@@ -106,7 +109,7 @@ if (!isset($_SESSION['rol'])) {
                 while ($row = mysqli_fetch_array($sql)) {
             ?>
                     <tr>
-                        <th><?php echo $row['id'] ?></th>
+                        <th><?php echo $row['id_product'] ?></th>
                         <th><?php echo $row['proname'] ?></th>
                         <th><?php echo $row['amount'] ?></th>
                         <th><?php echo $row['time'] ?></th>
@@ -114,7 +117,7 @@ if (!isset($_SESSION['rol'])) {
                         <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['u'] == 1) {
 
                         ?>
-                            <th><a href="../Compras/salida.php?Id=<?php echo $row['id'] ?>" class="btn btn-primary btn-xs">Retirar</a>
+                            <th><a href="../Compras/salida.php?Id=<?php echo $row['id_product'] ?>" class="btn btn-primary btn-xs">Retirar</a></th>
                             <?php } ?>
                             <script>
                                 function alerta() {
@@ -124,6 +127,7 @@ if (!isset($_SESSION['rol'])) {
                             <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['d'] == 1) {
 
                             ?>
+                            <th>
                                 <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
                             </th>
                         <?php } ?>
@@ -140,10 +144,10 @@ if (!isset($_SESSION['rol'])) {
             <?php
             if ($pagina != 1) {
             ?>
-                <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                <li><a href="?pagina=<?php echo 1; ?>">|<</a>
                 </li>
                 <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                        <<< /a>
+                        <<</a>
                 </li>
 
 
