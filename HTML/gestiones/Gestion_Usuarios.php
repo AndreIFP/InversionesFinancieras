@@ -43,9 +43,9 @@ font-size: 12px; ">
 
                 ?>
                     <a href="Nuevo_Usuario.php" input type="submit" class="btn btn-success" Value="Nuevo"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo usuario</a>
+               <?php } ?>
                     <a class="btn btn-warning" href="Reporte_Usuario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
             </div>
-        <?php } ?>
         <?php
         $mostrar_datos = 0;
         ?>
@@ -118,15 +118,13 @@ font-size: 12px; ">
                             <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['u'] == 1) {
 
                             ?>
-                                <th><a href="Actualizar_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-primary">Editar</a>
+                                <th><a href="Actualizar_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-primary">Editar</a></th>
                                 <?php } ?>
-
 
                                 <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['d'] == 1) {
 
                                 ?>
-                                    <a href="Delete_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-danger">Eliminar</a>
-                                </th>
+                                    <th><a href="Delete_Usuario.php?Id=<?php echo $row['Id_Usuario'] ?>" class="btn btn-danger">Eliminar</a></th>
                             <?php } ?>
 
                         </tr>
