@@ -73,7 +73,9 @@ font-size: 12px; ">
                 <th>Rol</th>
                 <th>Estado</th>
                 <th>Descripción</th>
-                <th>Acciones</th>
+                <th></th>
+                <th></th>
+                <th></th>
                 
         </thead>
         <tbody>
@@ -113,13 +115,13 @@ font-size: 12px; ">
                         <?php if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['u'] == 1) {
 
                         ?>
-                            <th><a href="Actualizar_Roles.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-primary">Editar</a>
-                            <a href="Actualizar_Permisos.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-success">Permisos</a>
+                            <th><a href="Actualizar_Roles.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-primary btn-xs">Editar</a></th>
+                            <th><a href="Actualizar_Permisos.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-success btn-xs">Permisos</a></th>
                         <?php } ?>
                         <?php if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['d'] == 1) {
 
                         ?>
-                            <a href="Delete_Roles.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-danger">Eliminar</a></th>
+                            <th><a href="Delete_Roles.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-danger btn-xs">Eliminar</a></th>
                             
                             <?php } ?>
                     </tr>
@@ -134,10 +136,10 @@ font-size: 12px; ">
             <?php
             if ($pagina != 1) {
             ?>
-                <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                <li><a href="?pagina=<?php echo 1; ?>">|<</a>
                 </li>
                 <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                        <<< /a>
+                        <<</a>
                 </li>
             <?php
             }

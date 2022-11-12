@@ -37,99 +37,102 @@ if (!isset($_SESSION['rol'])) {
                 <?php if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['w'] == 1) {
                 ?>
                     <a href="Nueva_Preguntas.php" input type="submit" class="btn btn-success" Value="Crear Preguntas"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Pregunta</a>
-                    <a class="btn btn-warning" href="Reporte_Preguntas.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;">
+
+                <?php } ?>
+                <a class="btn btn-warning" href="Reporte_Preguntas.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;">
                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
             </div>
-        <?php } ?>
-        <?php
-        $mostrar_datos = 0;
-        ?>
+            <?php
+            $mostrar_datos = 0;
+            ?>
 
-        <form action="" method="get" class="form_datos">
-            <label for="datos_mostrar">Datos A Mostrarㅤ</label>
-            <select name="mostrar" onchange='submit();'>
-                <option></option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-                <?php
-                $mostrar_datos = $_GET['mostrar'];
-                ?>
-            </select>
-        </form>
-        <form action="Buscador_Preguntas.php" method="get" class="form_search">
+            <form action="" method="get" class="form_datos">
+                <label for="datos_mostrar">Datos A Mostrarㅤ</label>
+                <select name="mostrar" onchange='submit();'>
+                    <option></option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <?php
+                    $mostrar_datos = $_GET['mostrar'];
+                    ?>
+                </select>
+            </form>
+            <form action="Buscador_Preguntas.php" method="get" class="form_search">
 
-            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-            <input type="submit" value="Buscar" class="btn btn-primary">
-        </form>
+                <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
+                <input type="submit" value="Buscar" class="btn btn-primary">
+            </form>
 
-        <table class="table ">
-            <thead class="table-primary">
-                <tr>
-                    <th>Id</th>
-                    <th>Preguntas</th>
-                    <th>Acciones</th>
-                
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                //Paginador
-                $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_PREGUNTAS WHERE Id_Preguntas = Id_Preguntas ");
-                $result_register = mysqli_fetch_array($sql_registe);
-                $total_registro = $result_register['total_registro'];
+            <table class="table ">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Id</th>
+                        <th>Preguntas</th>
+                        <th>Acciones</th>
+                        <th></th>
 
-                if ($mostrar_datos > 0) {
-                    $por_pagina = $mostrar_datos;
-                } else {
-                    $por_pagina = 10;
-                }
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    //Paginador
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_PREGUNTAS WHERE Id_Preguntas = Id_Preguntas ");
+                    $result_register = mysqli_fetch_array($sql_registe);
+                    $total_registro = $result_register['total_registro'];
 
-                if (empty($_GET['pagina'])) {
-                    $pagina = 1;
-                } else {
-                    $pagina = $_GET['pagina'];
-                }
-
-                $desde = ($pagina - 1) * $por_pagina;
-                $total_paginas = ceil($total_registro / $por_pagina);
-                $sql = mysqli_query($conn, "select * FROM TBL_PREGUNTAS LIMIT $desde,$por_pagina ");
-                mysqli_close($conn);
-
-                $result = mysqli_num_rows($sql);
-                if ($result > 0) {
-                    while ($row = mysqli_fetch_array($sql)) {
-                ?>
-                        <tr>
-                            <th><?php echo $row['Id_Preguntas'] ?></th>
-                            <th><?php echo $row['Preguntas'] ?></th>
-                            <script>
-                                function alerta() {
-                                    window.alert('No es posible hacer esta Accion');
-                                }
-                            </script>
-                            <?php if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['u'] == 1) {
-                            ?>
-                                <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a>
-                            <?php } ?>
-                            <?php if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['d'] == 1) {
-                            ?>
-                                <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a></th>
-                            <?php } ?>
-                        </tr>
-                <?php
+                    if ($mostrar_datos > 0) {
+                        $por_pagina = $mostrar_datos;
+                    } else {
+                        $por_pagina = 10;
                     }
-                }
-                ?>
-            </tbody>
-        </table>
+
+                    if (empty($_GET['pagina'])) {
+                        $pagina = 1;
+                    } else {
+                        $pagina = $_GET['pagina'];
+                    }
+
+                    $desde = ($pagina - 1) * $por_pagina;
+                    $total_paginas = ceil($total_registro / $por_pagina);
+                    $sql = mysqli_query($conn, "select * FROM TBL_PREGUNTAS LIMIT $desde,$por_pagina ");
+                    mysqli_close($conn);
+
+                    $result = mysqli_num_rows($sql);
+                    if ($result > 0) {
+                        while ($row = mysqli_fetch_array($sql)) {
+                    ?>
+                            <tr>
+                                <th><?php echo $row['Id_Preguntas'] ?></th>
+                                <th><?php echo $row['Preguntas'] ?></th>
+                                <script>
+                                    function alerta() {
+                                        window.alert('No es posible hacer esta Accion');
+                                    }
+                                </script>
+                                <?php if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['u'] == 1) {
+                                ?>
+                                    <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a>  </th>
+                                    <?php } ?>
+                                    <?php if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['d'] == 1) {
+                                    ?>
+                                         <th> <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
+                                    </th>
+                                <?php } ?>
+                            </tr>
+                    <?php
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
         </div>
         <div class="paginador">
             <ul>
                 <?php
                 if ($pagina != 1) {
                 ?>
-                    <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                    <li><a href="?pagina=<?php echo 1; ?>">|<</a>
                     </li>
                     <li><a href="?pagina=<?php echo $pagina - 1; ?>">Ant</a></li>
                 <?php

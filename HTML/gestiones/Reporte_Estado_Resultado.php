@@ -94,12 +94,17 @@ function Header()
 // Pie de página
 function Footer()
 {
+    // Mostrar el usuario que impime el reporte
+    $this->SetY(-15);
+    $this->SetFont('Arial','I',8);
+    // Movernos a la derecha
+    $this->Cell(0,15,utf8_decode('Reporte creado por: '.$user=$_SESSION['user']),2,0,'T');
     // Posición: a 1,5 cm del final
     $this->SetY(-15);
     // Arial italic 8
     $this->SetFont('Arial','I',8);
     // Número de página
-    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+    $this->Cell(0,15,'Page '.$this->PageNo().'/{nb}',0,0,'C');
     $Object = new DateTime();  
     $Object->setTimezone(new DateTimeZone('America/Guatemala'));
     $DateAndTime = $Object->format("d-m-Y h:i:s a");
@@ -128,11 +133,11 @@ while ($fila = $resultado->fetch_assoc()) {
   if(empty($Venta)){
     $Venta = $fila['0'];
   }
-  $pdf->setX(25); 
+  $pdf->setX(40); 
   }
   $pdf->SetFont('Arial','',14);
 $pdf->Ln(5);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Ventas"), 1, 0, "L",0);
 $pdf->Cell(30, 5, utf8_decode($Venta), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
@@ -145,10 +150,10 @@ while ($fila = $resultado->fetch_assoc()) {
   if(empty($costo)){
     $costo = $fila['0'];
   }
-  $pdf->setX(25); 
+  $pdf->setX(40); 
   }
   $pdf->SetFont('Arial','',14);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Costo de ventas"), 1, 0, "L",0);
 $pdf->Cell(30, 5, utf8_decode($costo), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
@@ -156,7 +161,7 @@ $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
 $Utilidad_Bruta = 0;
 $Utilidad_Bruta = $Venta- $costo ;
 $pdf->SetFont('Arial','',14);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Utilidad Bruta"), 1, 0, "L",1);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode($Utilidad_Bruta), 1, 1, "C",1);
@@ -164,11 +169,11 @@ $pdf->Cell(30, 5, utf8_decode($Utilidad_Bruta), 1, 1, "C",1);
 
 $pdf->SetFont('Arial','','14');
 $pdf->Ln(0);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Gastos De Operacion"), 1, 0, "L",0);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-$pdf->setX(25); 
+$pdf->setX(40); 
 
 
 $GV = 0;
@@ -179,10 +184,10 @@ while ($fila = $resultado->fetch_assoc()) {
   if(empty($GV)){
     $GV = $GV['0'];
   }
-  $pdf->setX(15); 
+  $pdf->setX(40); 
   }
   $pdf->SetFont('Arial','',14);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Gasto de ventas"), 1, 0, "L",0);
 $pdf->Cell(30, 5, utf8_decode($GV), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
@@ -192,13 +197,13 @@ $sql="SELECT Monto FROM libro2 where  Id_Cliente = $cliente AND fecha >='$fechai
 $resultado = mysqli_query($conn,$sql);
 while ($fila = $resultado->fetch_assoc()) {
   $GA = $fila['Monto'];
-  if(empty($GV)){
-    $GA = $GV['0'];
+  if(empty($GA)){
+    $GA = $GA['0'];
   }
-  $pdf->setX(15); 
+  $pdf->setX(40); 
   }
   $pdf->SetFont('Arial','',14);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Gastos De Administración"), 1, 0, "L",0);
 $pdf->Cell(30, 5, utf8_decode($GA), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
@@ -209,12 +214,12 @@ $resultado = mysqli_query($conn,$sql);
 while ($fila = $resultado->fetch_assoc()) {
   $GF = $fila['Monto'];
   if(empty($GF)){
-    $GA = $GF['0'];
+    $GF = $GF['0'];
   }
-  $pdf->setX(15); 
+  $pdf->setX(40); 
   }
   $pdf->SetFont('Arial','',14);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Gastos Financieros"), 1, 0, "L",0);
 $pdf->Cell(30, 5, utf8_decode($GF), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
@@ -222,7 +227,7 @@ $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
 $Total_Gastos = 0;
 $Total_Gastos= $GV + $GA + $GF;
 $pdf->SetFont('Arial','',14);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Total Gastos Operación"), 1, 0, "L",1);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode($Total_Gastos), 1, 1, "C",1);
@@ -231,7 +236,7 @@ $pdf->Cell(30, 5, utf8_decode($Total_Gastos), 1, 1, "C",1);
 $Utilidad_Op = 0;
 $Utilidad_Op= $Utilidad_Bruta - $Total_Gastos;
 $pdf->SetFont('Arial','',14);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Utilidad Operación"), 1, 0, "L",1);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode($Utilidad_Op), 1, 1, "C",1);
@@ -245,10 +250,10 @@ while ($fila = $resultado->fetch_assoc()) {
   if(empty($OI)){
     $OI = $OI['0'];
   }
-  $pdf->setX(15); 
+  $pdf->setX(40); 
   }
   $pdf->SetFont('Arial','',14);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Otros Ingresos"), 1, 0, "L",0);
 $pdf->Cell(30, 5, utf8_decode($OI), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
@@ -258,14 +263,14 @@ $OG = 0;
 $sql="SELECT Monto FROM libro2 where  Id_Cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' And Cuenta = 'Otros Gastos';";
 $resultado = mysqli_query($conn,$sql);
 while ($fila = $resultado->fetch_assoc()) {
-  $OI = $fila['Monto'];
+  $OG = $fila['Monto'];
   if(empty($OG)){
     $OG = $OG['0'];
   }
-  $pdf->setX(15); 
+  $pdf->setX(40); 
   }
   $pdf->SetFont('Arial','',14);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Otros Gastos"), 1, 0, "L",0);
 $pdf->Cell(30, 5, utf8_decode($OG), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
@@ -274,34 +279,35 @@ $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
 $UAI = 0;
 $UAI = $Utilidad_Op - $OG +$OI;
 $pdf->SetFont('Arial','',14);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Utilidad Antes De Impuesto"), 1, 0, "L",1);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode($UAI), 1, 1, "C",1);
 
-$Imp = 0;
-$sql="SELECT Monto FROM libro2 where  Id_Cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' And Cuenta = 'Impuesto';";
-$resultado = mysqli_query($conn,$sql);
-while ($fila = $resultado->fetch_assoc()) {
-  $Imp = $fila['Monto'];
-  if(empty($Imp)){
-    $Imp = $Imp['0'];
-  }
-  $pdf->setX(15); 
-  }
-  $pdf->SetFont('Arial','',14);
-$pdf->setX(15);
+ // Llamado del parametro correo
+ $Imp = 0;
+ $sqlISR = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '5'";
+ $resultadoISR = mysqli_query($conn,$sqlISR);
+ while ($fila = $resultadoISR->fetch_assoc()) {
+     $ISR = $fila["Valor"];
+     $Imp = ($ISR/100);
+ }
+ $pdf->setX(40); 
+ $ImpT = 0;
+ $ImpT = $Imp * $UAI;
+
+
+$pdf->SetFont('Arial','',14);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Impuestos"), 1, 0, "L",0);
-$pdf->Cell(30, 5, utf8_decode($Imp), 1, 0, "C",0);
+$pdf->Cell(30, 5, utf8_decode($ImpT), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
 
 
-
-
 $Utilidad_Neta = 0;
-$Utilidad_Neta = $UAI + $Imp;
+$Utilidad_Neta = $UAI - $ImpT;
 $pdf->SetFont('Arial','',14);
-$pdf->setX(15);
+$pdf->setX(40);
 $pdf->Cell(70, 5, utf8_decode("Utilidad Neta"), 1, 0, "L",1);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
 $pdf->Cell(30, 5, utf8_decode($Utilidad_Neta), 1, 1, "C",1);

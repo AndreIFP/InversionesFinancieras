@@ -92,12 +92,17 @@ function Header()
 // Pie de página
 function Footer()
 {
+    // Mostrar el usuario que impime el reporte
+    $this->SetY(-15);
+    $this->SetFont('Arial','I',8);
+    // Movernos a la derecha
+    $this->Cell(0,15,utf8_decode('Reporte creado por: '.$user=$_SESSION['user']),2,0,'T');
     // Posición: a 1,5 cm del final
     $this->SetY(-15);
     // Arial italic 8
     $this->SetFont('Arial','I',8);
     // Número de página
-    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+    $this->Cell(0,15,'Page '.$this->PageNo().'/{nb}',0,0,'C');
     $Object = new DateTime();  
     $Object->setTimezone(new DateTimeZone('America/Guatemala'));
     $DateAndTime = $Object->format("d-m-Y h:i:s a");
@@ -131,16 +136,16 @@ $pdf->AddPage();
 
 
 $pdf->SetFont('Times','B',8);
-$pdf->setX(25);
+$pdf->setX(10);
 
 
 
 $pdf->SetFillColor(108, 250, 254 );
 $pdf->Cell(40,5, utf8_decode('Fecha'),1,0,'C',1);
-$pdf->Cell(45,5, utf8_decode('Cuenta'),1,0,'C',1);
-$pdf->Cell(40,5, utf8_decode('Descripcion'),1,0,'C',1);
-$pdf->Cell(20,5, utf8_decode('Debe'),1,0,'C',1);
-$pdf->Cell(20,5, utf8_decode('Haber'),1,1,'C',1);
+$pdf->Cell(50,5, utf8_decode('Cuenta'),1,0,'C',1);
+$pdf->Cell(50,5, utf8_decode('Descripción'),1,0,'C',1);
+$pdf->Cell(25,5, utf8_decode('Debe'),1,0,'C',1);
+$pdf->Cell(25,5, utf8_decode('Haber'),1,1,'C',1);
 
 
 
@@ -159,12 +164,12 @@ while ($fila = $resultado->fetch_assoc()) {
     $monto_haber=$fila['monto'];
 
       }
-    $pdf->setX(25);
+    $pdf->setX(10);
     $pdf->Cell(40, 5, utf8_decode($fila['fecha']), 1, 0, "C",0);
-    $pdf->Cell(45, 5, utf8_decode($fila['cuenta']), 1, 0, "C",0);
-    $pdf->Cell(40, 5, utf8_decode($fila['descripcion']), 1, 0, "C",0);
-    $pdf->Cell(20, 5, utf8_decode( $monto_debe), 1, 0, "C",0);
-    $pdf->Cell(20, 5, utf8_decode($monto_haber), 1, 1, "C",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['cuenta']), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['descripcion']), 1, 0, "B",0);
+    $pdf->Cell(25, 5, utf8_decode( $monto_debe), 1, 0, "C",0);
+    $pdf->Cell(25, 5, utf8_decode($monto_haber), 1, 1, "C",0);
    
 
 

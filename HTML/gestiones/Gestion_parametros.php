@@ -36,10 +36,11 @@ if (!isset($_SESSION['rol'])) {
             <?php if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['w'] == 1) {
             ?>
                 <a href="Nuevo_Parametro.php" input type="submit" class="btn btn-success" Value="Crear Parametro"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo parametro</a>
-                <a class="btn btn-warning" href="Reporte_Parametro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-        </div>
+       
 
     <?php } ?>
+    <a class="btn btn-warning" href="Reporte_Parametro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+    </div>
     <?php
     $mostrar_datos = 0;
     ?>
@@ -135,7 +136,7 @@ if (!isset($_SESSION['rol'])) {
             <?php
             if ($pagina != 1) {
             ?>
-                <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                <li><a href="?pagina=<?php echo 1; ?>">|<</a>
                 </li>
                 <li><a href="?pagina=<?php echo $pagina - 1; ?>">Ant</a></li>
             <?php

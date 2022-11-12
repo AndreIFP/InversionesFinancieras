@@ -32,15 +32,16 @@ if (!isset($_SESSION['rol'])) {
         <div class="col-md-12">
 
             <div class="box-body table-responsive">
-                    <div class="reportes">
-                        <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-                        <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['w'] == 1) {
+                <div class="reportes">
+                    <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                    <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['w'] == 1) {
 
-                        ?>
-                            <a href="Nuevo_Catalogo.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Nueva cuenta</a>
-                            <a class="btn btn-warning" href="Reporte_Catalogo.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-                    </div>
-                <?php } ?>
+                    ?>
+                        <a href="Nuevo_Catalogo.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Nueva cuenta</a>
+
+                    <?php } ?>
+                    <a class="btn btn-warning" href="Reporte_Catalogo.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                </div>
                 <?php
                 $mostrar_datos = 0;
                 ?>
@@ -70,7 +71,8 @@ if (!isset($_SESSION['rol'])) {
                             <th>Código</th>
                             <th>Cuenta</th>
                             <th>Clasificación</th>
-                            <th>Acciones</th>
+                            <th>Acciones}</th>
+                            <th></th>
 
                         </tr>
                     </thead>
@@ -115,13 +117,13 @@ if (!isset($_SESSION['rol'])) {
                                     <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['u'] == 1) {
 
                                     ?>
-                                        <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a>
-                                        <?php } ?>
+                                        <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a></th>
+                                    <?php } ?>
 
-                                        <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['d'] == 1) {
+                                    <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['d'] == 1) {
 
-                                        ?>
-                                            <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
+                                    ?>
+                                        <th> <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
                                         </th>
                                     <?php } ?>
                                 </tr>
@@ -138,10 +140,10 @@ if (!isset($_SESSION['rol'])) {
                     <?php
                     if ($pagina != 1) {
                     ?>
-                        <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                        <li><a href="?pagina=<?php echo 1; ?>">|<</a>
                         </li>
                         <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                                <<< /a>
+                                <<</a>
                         </li>
                     <?php
                     }

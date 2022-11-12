@@ -4,11 +4,10 @@ include("../conexion.php");
 
 if (!empty($_POST)) {
 	$alert = '';
-	if (empty($_POST['CUENTA']) || empty($_POST['CLASIFICACION']) || empty($_POST['TIPO_CUENTA'])) {
+	if (empty($_POST['CLASIFICACION']) || empty($_POST['TIPO_CUENTA'])) {
 		$alert = '<p class="msg_error">Todos los campos son obligatorios.</p>';
 	} else {
-		$CODIGO_CUENTA   = $_POST['CODIGO_CUENTA'];
-		$CUENTA       = $_POST['CUENTA'];
+
 		$CLASIFICACION          = $_POST['CLASIFICACION'];
 		$TIPO_CUENTA    = $_POST['TIPO_CUENTA'];
 
@@ -19,8 +18,8 @@ if (!empty($_POST)) {
 		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $TIPO_CUENTA)) {
 			$alert = '<p class="msg_error"> El Tipo de Cuenta Solo Recibe Letras.</p>';
 		} else {
-			$query_insert = mysqli_query($conn, "INSERT INTO TBL_CATALAGO_CUENTAS (CODIGO_CUENTA,CUENTA,CLASIFICACION,TIPO_CUENTA)
-																	VALUES('$CODIGO_CUENTA','$CUENTA','$CLASIFICACION','$TIPO_CUENTA')");
+			$query_insert = mysqli_query($conn, "INSERT INTO TBL_CATALAGO_CUENTAS (CLASIFICACION,TIPO_CUENTA)
+																	VALUES('$CLASIFICACION','$TIPO_CUENTA')");
 			if ($query_insert) {
 				echo "<script> alert('Cuenta Registrado Exitosamente');window.location= 'Gestion_CatalogoCuenta.php' </script>";
 			} else {
@@ -78,29 +77,40 @@ if (!isset($_SESSION['rol'])) {
 						return patron.test(te);
 					}
 				</script>
-				<div class="form_register"  >
-					<h6><a class="btn btn-primary " href="Gestion_CatalogoCuenta.php ">Volver Atrás</a></h6>
+				<div class="form_register">
+					<h6><a class="btn btn-primary " href="Gestion_CatalogoCuenta.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a></h6>
 					<form action="agregarcuenta.php" method="post">
 
-						<h1><strong>Registro de Cuenta</strong> </h1>
+						<center><h2><strong>Registro de Cuenta</strong> </h2></center>
 						<hr>
-						<label for="CUENTA">Código Cuenta</label>
-						<input type="text" name="CUENTA" maxlength="10" size="35" id="CUENTA" placeholder="Cuenta" oninput="this.value = this.value.replace(/[^0-9]/,'')" required>
-						
-						<label for="CLASIFICACION">Descripcion de la cuenta</label>
-						<input type="text" name="CLASIFICACION" maxlength="50" id="CLASIFICACION" placeholder="Descripción" size="35" onkeyup="javascript:this.value=this.value.toUpperCase();"  onkeypress="return validar(event)" required>
+						<div class="form-group">
 
-						<label for="TIPO_CUENTA">Tipo Cuenta</label>
-						<select name="TIPO CUENTA" required>
-							<option value="">Seleccione Una Opción</option>
-							<option value="ACTIVO">ACTIVO</option>
-							<option value="PASIVO">PASIVO</option>
-							<option value="INGRESO">INGRESO</option>
-							<option value="GASTO">GASTO</option>
-							<option value="PATRIMONIO">PATRIMONIO</option>
-						</select>
-						<input type="submit" value="Registrar Cuenta" class="btn_save"></center>
-						</p>
+							<div class="input-group">
+
+								<span class="input-group-addon"><i class="fa fa-book"></i></span>
+								<input type="text" class="form-control" name="CLASIFICACION" maxlength="50" id="CLASIFICACION" placeholder="Nombre de la Cuenta" size="35" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)" required>
+
+							</div>
+
+						</div>
+
+						<div class="form-group">
+
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-tags "></i></span>
+								<select class="form-control" name="TIPO CUENTA" required>
+									<option value="">Seleccione el tipo de cuenta</option>
+									<option value="ACTIVO CORRIENTE">ACTIVO CORRIENTE</option>
+									<option value="ACTIVO NO CORRIENTE">ACTIVO NO CORRIENTE</option>
+									<option value="PASIVO CORRIENTE">PASIVO CORRIENTE</option>
+									<option value="PASIVO NO CORRIENTE">PASIVO NO CORRIENTE</option>
+									<option value="PATRIMONIO">PATRIMONIO</option>
+								</select>
+								
+							</div>
+						</div>
+
+						<center><input type="submit" value="Registrar Cuenta" class="btn btn-primary"></center>
 
 					</form>
 

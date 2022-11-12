@@ -6,156 +6,159 @@ include_once("../helpers/helpers.php");
 
 //iniciar las sesiones
 session_start();
-   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+// si no existe la variable rol, el usuario no esta logueado y redirige al Login
 if (!isset($_SESSION['rol'])) {
-   header("Location: ../login.php"); 
-   die();
-}else{
-   //actualiza los permisos
-   updatePermisos($_SESSION['rol']);
-   
-   //si no tiene permiso de visualización redirige al index
-   if ($_SESSION['permisos'][M_GESTION_OBJETOS]['r']==0 or !isset($_SESSION['permisos'][M_GESTION_OBJETOS]['r'])) {
-       header("Location: ../index.php");
-       die();
-   }
+    header("Location: ../login.php");
+    die();
+} else {
+    //actualiza los permisos
+    updatePermisos($_SESSION['rol']);
+
+    //si no tiene permiso de visualización redirige al index
+    if ($_SESSION['permisos'][M_GESTION_OBJETOS]['r'] == 0 or !isset($_SESSION['permisos'][M_GESTION_OBJETOS]['r'])) {
+        header("Location: ../index.php");
+        die();
+    }
 }
 ?>
 
-<?php include 'barralateralinicial.php';?><p></p>
+<?php include 'barralateralinicial.php'; ?><p></p>
 <section style=" background-color:rgb(255, 255, 255);
 padding: 15px;
 color:black;
 font-size: 12px; ">
-  <title>Gestión Objetos</title>
-  <div class="container-fluid">
- <div class="box-body table-responsive">
-                  <div>   
-                  <h2><strong> Gestión Objetos</strong> </h2> 
-                     <a  class="btn btn-primary"  href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-                     <?php  if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['w'] == 1) {                      
+    <title>Gestión Objetos</title>
+    <div class="container-fluid">
+        <div class="box-body table-responsive">
+            <div>
+                <h2><strong> Gestión Objetos</strong> </h2>
+                <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                <?php if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['w'] == 1) {
+                ?>
+                    <a href="Nuevo_Objetos.php" input type="submit" class="btn btn-success" Value="Crear Nuevo Objeto"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Objeto</a>
+                <?php } ?>
+                <a class="btn btn-warning" href="Reporte_Objetos.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+            </div>
+
+            <?php
+            $mostrar_datos = 0;
+            ?>
+
+            <form action="" method="get" class="form_datos">
+                <label for="datos_mostrar">Datos A Mostrarㅤ</label>
+                <select name="mostrar" onchange='submit();'>
+                    <option></option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <?php
+                    $mostrar_datos = $_GET['mostrar'];
                     ?>
-                     <a href="Nuevo_Objetos.php" input type="submit" class="btn btn-success" Value="Crear Nuevo Objeto"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Objeto</a>
-                     <a class="btn btn-warning" href="Reporte_Objetos.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a> 
-                     </div>
-                        <?php } ?>
-                     <?php
-                        $mostrar_datos = 0;
-                        ?>
+                </select>
+            </form>
+            <form action="Buscador_Objetos.php" method="get" class="form_search">
 
-                     <form action="" method="get" class="form_datos" >
-                            <label for="datos_mostrar">Datos A Mostrarㅤ</label>
-                            <select name="mostrar" onchange='submit();'>
-                            <option ></option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                                <?php
-                                $mostrar_datos = $_GET['mostrar'];
-                                ?>
-                            </select>
-                     </form>
-                     <form action="Buscador_Objetos.php" method="get" class="form_search">
-                             
-                            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                            <input type="submit" value="Buscar" class="btn btn-primary">
-                     </form>
+                <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
+                <input type="submit" value="Buscar" class="btn btn-primary">
+            </form>
 
-                     <table class="table">
-                        <thead class="table-primary">
+            <table class="table">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Id</th>
+                        <th>Objeto</th>
+                        <th>Descripcion</th>
+                        <th>Tipo</th>
+                        <th></th>
+                        <th></th>
+
+                </thead>
+                <tbody>
+                    <?php
+                    //Paginador
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_OBJETOS WHERE Id_Objetos = Id_Objetos ");
+                    $result_register = mysqli_fetch_array($sql_registe);
+                    $total_registro = $result_register['total_registro'];
+
+                    if ($mostrar_datos > 0) {
+                        $por_pagina = $mostrar_datos;
+                    } else {
+                        $por_pagina = 10;
+                    }
+
+                    if (empty($_GET['pagina'])) {
+                        $pagina = 1;
+                    } else {
+                        $pagina = $_GET['pagina'];
+                    }
+
+                    $desde = ($pagina - 1) * $por_pagina;
+                    $total_paginas = ceil($total_registro / $por_pagina);
+                    $sql = mysqli_query($conn, "select * FROM TBL_OBJETOS LIMIT $desde,$por_pagina ");
+                    mysqli_close($conn);
+
+                    $result = mysqli_num_rows($sql);
+                    if ($result > 0) {
+                        while ($row = mysqli_fetch_array($sql)) {
+                    ?>
                             <tr>
-                                <th>Id</th>
-                                <th>Objeto</th>
-                                <th>Descripcion</th>
-                                <th>Tipo</th>
-                                <th></th>
-                        </thead>
-                        <tbody>
-                                <?php
-                                //Paginador
-			                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_OBJETOS WHERE Id_Objetos = Id_Objetos ");
-			                    $result_register = mysqli_fetch_array($sql_registe);
-			                    $total_registro = $result_register['total_registro'];
+                                <th><?php echo $row['Id_Objetos'] ?></th>
+                                <th><?php echo $row['Objetos'] ?></th>
+                                <th><?php echo $row['Descripcion'] ?></th>
+                                <th><?php echo $row['Tipo_Objeto'] ?></th>
 
-			        if($mostrar_datos > 0){
-                                    $por_pagina = $mostrar_datos;
-                                }else{
-                                    $por_pagina = 10;
-                                }
-
-                                if(empty($_GET['pagina']))
-                                {
-                                    $pagina = 1;
-                                }else{
-                                    $pagina = $_GET['pagina'];
-                                }
-
-                                $desde = ($pagina-1) * $por_pagina;
-                                $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select * FROM TBL_OBJETOS LIMIT $desde,$por_pagina ");
-                                    mysqli_close($conn);
-
-			                        $result = mysqli_num_rows($sql);
-                                    if($result > 0){
-                                    while($row=mysqli_fetch_array($sql)){
+                                <?php if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['u'] == 1) {
                                 ?>
-                                     <tr>
-                                        <th><?php echo $row['Id_Objetos']?></th>
-                                        <th><?php echo $row['Objetos']?></th>
-                                        <th><?php echo $row['Descripcion']?></th>
-                                        <th><?php echo $row['Tipo_Objeto']?></th>
-
-                                        <?php  if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['u'] == 1) {                      
-                                        ?>
-                                        <th><a href="Actualizar_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-primary btn-xs" >Editar</a>
-                                        <?php } ?>
-                                        <?php  if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['d'] == 1) {                      
-                                        ?>
-                                        <a href="Delete_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-danger btn-xs">Eliminar</a></th>
-                                        <?php } ?>
-                                    </tr>
-                                <?php
-                                       }
-                                    }
+                                    <th><a href="Actualizar_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>" class="btn btn-primary btn-xs">Editar</a></th>
+                                <?php } ?>
+                                <?php if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['d'] == 1) {
                                 ?>
-                        </tbody>
-                      </table>      </div>
-                      <div class="paginador">
-			            <ul>
-			            <?php 
-				        if($pagina != 1)
-				        {
-			            ?>
-				        <li><a href="?pagina=<?php echo 1; ?>">|<</a></li>
-				        <li><a href="?pagina=<?php echo $pagina-1; ?>"><<</a></li>
-			            <?php 
-				        }
-				        for ($i=1; $i <= $total_paginas; $i++) { 
-					    # code...
-					    if($i == $pagina)
-					    {
-						echo '<li class="pageSelected">'.$i.'</li>';
-					    }else{
-						echo '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
-					    }
-				        }
+                                    <th> <a href="Delete_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>" class="btn btn-danger btn-xs">Eliminar</a></th>
+                                <?php } ?>
+                            </tr>
+                    <?php
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="paginador">
+            <ul>
+                <?php
+                if ($pagina != 1) {
+                ?>
+                    <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                    </li>
+                    <li><a href="?pagina=<?php echo $pagina - 1; ?>">
+                            <<< /a>
+                    </li>
+                <?php
+                }
+                for ($i = 1; $i <= $total_paginas; $i++) {
+                    # code...
+                    if ($i == $pagina) {
+                        echo '<li class="pageSelected">' . $i . '</li>';
+                    } else {
+                        echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
+                    }
+                }
 
-				        if($pagina != $total_paginas)
-				        {  
-			            ?>
-				        <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
-				        <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
-			            <?php } ?>
-			            </ul>
-		                </div>
-                        </div>           
-          
-           </section>
-  </div>
-    </body>
+                if ($pagina != $total_paginas) {
+                ?>
+                    <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
+                    <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
+                <?php } ?>
+            </ul>
+        </div>
+    </div>
+
+</section>
+</div>
+</body>
 
 <style type="text/css">
-        .paginador ul{
+    .paginador ul {
         padding: 15px;
         list-style: none;
         background: #FFF;
@@ -166,8 +169,10 @@ font-size: 12px; ">
         display: -o-flex;
         display: flex;
         justify-content: flex-end;
-        }
-    .paginador a, .pageSelected{
+    }
+
+    .paginador a,
+    .pageSelected {
         color: #428bca;
         border: 1px solid #ddd;
         padding: 5px;
@@ -176,44 +181,49 @@ font-size: 12px; ">
         text-align: center;
         width: 35px;
     }
-    .paginador a:hover{
+
+    .paginador a:hover {
         background: #ddd;
     }
-    .pageSelected{
+
+    .pageSelected {
         color: #FFF;
         background: #428bca;
         border: 1px solid #428bca;
     }
+
     /*============ Buscador ============*/
-.form_search{
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flex;
-	display: -o-flex;
-	display: flex;
-	float: right;
-	background: initial;
-	padding: 10px;
-	border-radius: 10px;
-}
-.form_search .btn_search{
-	background: #1faac8;
-	color: #FFF;
-	padding: 0 20px;
-	border: 0;
-	cursor: pointer;
-	margin-left: 10px;
-}
-.form_datos{
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flex;
-	display: -o-flex;
-	display: flex;
-	float: left;
-	background: initial;
-	padding: 10px;
-	border-radius: 10px;
-}
+    .form_search {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        float: right;
+        background: initial;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .form_search .btn_search {
+        background: #1faac8;
+        color: #FFF;
+        padding: 0 20px;
+        border: 0;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .form_datos {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        float: left;
+        background: initial;
+        padding: 10px;
+        border-radius: 10px;
+    }
 </style>
-<?php include 'barralateralfinal.php';?>
+<?php include 'barralateralfinal.php'; ?>

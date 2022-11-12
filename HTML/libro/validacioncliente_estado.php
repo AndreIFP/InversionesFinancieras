@@ -4,7 +4,9 @@ $fechai=$_POST['fecha_inicio'];
 $fechaf=$_POST['fecha_final'];
 
 include('../conexion.php');
-
+if($fechaf < $fechai){
+	echo "<script> alert('La fecha final no debe ser menor a la inicial');window.location= 'validacionestado.php' </script>";
+}
 
 				$consulta=mysqli_query($conn,"SELECT * FROM TBL_CLIENTES where Id_Cliente='$cliente'; " );
                 while($row=mysqli_fetch_array($consulta)){
@@ -29,6 +31,4 @@ include('../conexion.php');
 					document.forms["miformulario"].submit();
     				}
     				</script>
-            </form>
-
-	
+            </form>	

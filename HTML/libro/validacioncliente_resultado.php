@@ -4,6 +4,9 @@ $fechai=$_POST['fecha_inicio'];
 $fechaf=$_POST['fecha_final'];
 
 include('../conexion.php');
+if($fechaf < $fechai){
+	echo "<script> alert('La fecha final no debe ser menor a la inicial');window.location= 'validacionresultado.php' </script>";
+}
                 
                 #consulta de todos los paises
                 $consulta=mysqli_query($conn,"SELECT * FROM TBL_CLIENTES where Id_Cliente='$cliente'; " );

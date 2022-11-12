@@ -30,10 +30,11 @@ $numero = 99999.99;
 <!DOCTYPE html>
 <html lang="en">
 <title>Gestión Clientes</title>
+
 <head>
-  <meta charset="UTF-8">
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 </head>
 <section style=" background-color:rgb(255, 255, 255);
     padding: 15px;
@@ -41,138 +42,140 @@ $numero = 99999.99;
     font-size: 12px; ">
     <div class="container-fluid">
         <div class="col-md-12">
-        <div class="box-body table-responsive">
-            <div class="reportes">
-                <h2><strong>Gestión Clientes</strong> </h2>
-            
-                <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-                <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['w'] == 1) {
-                ?>
-                    <a href="Nuevo_Cliente.php" input type="submit" class="btn btn-success" Value="Crear Nuevo Cliente"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Cliente</a>
+            <div class="box-body table-responsive">
+                <div class="reportes">
+                    <h2><strong>Gestión Clientes</strong> </h2>
+
+                    <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                    <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['w'] == 1) {
+                    ?>
+                        <a href="Nuevo_Cliente.php" input type="submit" class="btn btn-success" Value="Crear Nuevo Cliente"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Cliente</a>
+
+
+                    <?php } ?>
                     <a class="btn btn-warning" href="reporte_cliente.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-            </div>
-
-        <?php } ?>
-
-        <?php
-        $mostrar_datos = 0;
-        ?>
-        <form action="" method="get" class="form_datos">
-            <label for="datos_mostrar">Datos A Mostrarㅤ</label>
-            <select name="mostrar" onchange='submit();'>
-                <option></option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
+                </div>
                 <?php
-                $mostrar_datos = $_GET['mostrar'];
+                $mostrar_datos = 0;
                 ?>
-            </select>
-        </form>
+                <form action="" method="get" class="form_datos">
+                    <label for="datos_mostrar">Datos A Mostrarㅤ</label>
+                    <select name="mostrar" onchange='submit();'>
+                        <option></option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <?php
+                        $mostrar_datos = $_GET['mostrar'];
+                        ?>
+                    </select>
+                </form>
 
-        <form action="Buscador_Cliente.php" method="get" class="form_search">
+                <form action="Buscador_Cliente.php" method="get" class="form_search">
 
-            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-            <input type="submit" value="Buscar" class="btn btn-primary">
-        </form>
+                    <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
+                    <input type="submit" value="Buscar" class="btn btn-primary">
+                </form>
 
-        <table class="table ">
-            <thead class="table-primary">
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre Empresa</th>
-                    <th>Nombre Cliente</th>
-                    <th>RTN</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                //Paginador
-                $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CLIENTES WHERE Id_Cliente = Id_Cliente ");
-                $result_register = mysqli_fetch_array($sql_registe);
-                $total_registro = $result_register['total_registro'];
-
-                if ($mostrar_datos > 0) {
-                    $por_pagina = $mostrar_datos;
-                } else {
-                    $por_pagina = 10;
-                }
-
-                if (empty($_GET['pagina'])) {
-                    $pagina = 1;
-                } else {
-                    $pagina = $_GET['pagina'];
-                }
-
-                $desde = ($pagina - 1) * $por_pagina;
-                $total_paginas = ceil($total_registro / $por_pagina);
-                $sql = mysqli_query($conn, "select * FROM TBL_CLIENTES ORDER BY Fecha_Dato DESC LIMIT $desde,$por_pagina ");
-                mysqli_close($conn);
-
-                $result = mysqli_num_rows($sql);
-                if ($result > 0) {
-                    while ($row = mysqli_fetch_array($sql)) {
-                ?>
+                <table class="table ">
+                    <thead class="table-primary">
                         <tr>
-                            <th><?php echo $row['Id_Cliente'] ?></th>
-                            <th><?php echo $row['Nombre_Empresa'] ?></th>
-                            <th><?php echo $row['Nombre_Cliente'] ?></th>
-                            <th><?php echo $row['RTN_Cliente'] ?></th>
-                            <th><?php echo $row['Tipo_Cliente'] ?></th>
+                            <th>Id</th>
+                            <th>Nombre Empresa</th>
+                            <th>Nombre Cliente</th>
+                            <th>RTN</th>
+                            <th>Estado</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
 
-                            <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {
-                            ?>
-                                <th><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-primary btn-xs">Editar</a>
-                                <?php } ?>
-
-                                <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['d'] == 1) {
-                                ?>
-                                    <a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-danger btn-xs">Eliminar</a>
-                                                   
-                                <?php } ?>
-
-                                <button type="button" class="btn btn-xs" onclick="editar(this.id)" id="<?php echo $row['Id_Cliente']?>">Ver</button></td>
-                                
                         </tr>
-                <?php
-                    }
-                }
-                ?>
-            </tbody>
-        </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        //Paginador
+                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CLIENTES WHERE Id_Cliente = Id_Cliente ");
+                        $result_register = mysqli_fetch_array($sql_registe);
+                        $total_registro = $result_register['total_registro'];
 
-        </div>
-        <div class="paginador">
-            <ul>
-                <?php
-                if ($pagina != 1) {
-                ?>
-                    <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
-                    </li>
-                    <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                            <<< /a>
-                    </li>
-                <?php
-                }
-                for ($i = 1; $i <= $total_paginas; $i++) {
-                    # code...
-                    if ($i == $pagina) {
-                        echo '<li class="pageSelected">' . $i . '</li>';
-                    } else {
-                        echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
-                    }
-                }
+                        if ($mostrar_datos > 0) {
+                            $por_pagina = $mostrar_datos;
+                        } else {
+                            $por_pagina = 10;
+                        }
 
-                if ($pagina != $total_paginas) {
-                ?>
-                    <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
-                    <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
-                <?php } ?>
-            </ul>
-        </div>
+                        if (empty($_GET['pagina'])) {
+                            $pagina = 1;
+                        } else {
+                            $pagina = $_GET['pagina'];
+                        }
+
+                        $desde = ($pagina - 1) * $por_pagina;
+                        $total_paginas = ceil($total_registro / $por_pagina);
+                        $sql = mysqli_query($conn, "select * FROM TBL_CLIENTES ORDER BY Fecha_Dato DESC LIMIT $desde,$por_pagina ");
+                        mysqli_close($conn);
+
+                        $result = mysqli_num_rows($sql);
+                        if ($result > 0) {
+                            while ($row = mysqli_fetch_array($sql)) {
+                        ?>
+                                <tr>
+                                    <th><?php echo $row['Id_Cliente'] ?></th>
+                                    <th><?php echo $row['Nombre_Empresa'] ?></th>
+                                    <th><?php echo $row['Nombre_Cliente'] ?></th>
+                                    <th><?php echo $row['RTN_Cliente'] ?></th>
+                                    <th><?php echo $row['Tipo_Cliente'] ?></th>
+
+                                    <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {
+                                    ?>
+                                        <th><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-primary btn-xs">Editar</a></td>
+                                        <?php } ?>
+
+                                        <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['d'] == 1) {
+                                        ?>
+                                        <th><a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-danger btn-xs">Eliminar</a></td>
+
+                                        <?php } ?>
+
+                                        <th><button type="button" class="btn btn-xs" onclick="editar(this.id)" id="<?php echo $row['Id_Cliente'] ?>">Ver</button></td>
+
+                                </tr>
+                        <?php
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="paginador">
+                <ul>
+                    <?php
+                    if ($pagina != 1) {
+                    ?>
+                        <li><a href="?pagina=<?php echo 1; ?>">|<</a>
+                        </li>
+                        <li><a href="?pagina=<?php echo $pagina - 1; ?>">
+                                <<</a>
+                        </li>
+                    <?php
+                    }
+                    for ($i = 1; $i <= $total_paginas; $i++) {
+                        # code...
+                        if ($i == $pagina) {
+                            echo '<li class="pageSelected">' . $i . '</li>';
+                        } else {
+                            echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
+                        }
+                    }
+
+                    if ($pagina != $total_paginas) {
+                    ?>
+                        <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
+                        <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
+                    <?php } ?>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -180,73 +183,73 @@ $numero = 99999.99;
     </div>
 
     <div class="modal" tabindex="-1" id="EditModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Informacion del cliente</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Informacion del cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form group">
+                            <label for="recipient-name" class="col-form-label">Id Cliente:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+
+                        <div class="form group">
+                            <label for="recipient-name" class="col-form-label">Nombre Empresa:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+
+
+                        <div class="form group">
+                            <label for="recipient-name" class="col-form-label">Nombre Cliente:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+
+
+                        <div class="form group">
+                            <label for="recipient-name" class="col-form-label">RTN Cliente:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+
+
+                        <div class="form group">
+                            <label for="recipient-name" class="col-form-label">Direccion:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+
+
+                        <div class="form group">
+                            <label for="recipient-name" class="col-form-label">Telefono:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+
+
+                        <div class="form group">
+                            <label for="recipient-name" class="col-form-label">Tipo Cliente:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+
+
+
+                        <p id="variable"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-<form>
-<div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Id Cliente:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Nombre Empresa:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Nombre Cliente:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >RTN Cliente:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Direccion:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Telefono:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Tipo Cliente:</label>
-  <input type="text" class="form-control" id="recipient-name">
-  </div>
-
-
-
-          <p id="variable"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          
-        </div>
-      </div>
     </div>
-  </div>
-                </form>
-  <script>
-    function editar(este) {
-      var ModalEdit = new bootstrap.Modal(EditModal, {}).show();
-      variable.innerHTML = "El id es : " + este;
-    }
-  </script>
-    
+    </form>
+    <script>
+        function editar(este) {
+            var ModalEdit = new bootstrap.Modal(EditModal, {}).show();
+            variable.innerHTML = "El id es : " + este;
+        }
+    </script>
+
 </section>
 
 </body>

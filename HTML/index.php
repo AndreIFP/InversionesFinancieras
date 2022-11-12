@@ -32,7 +32,7 @@ if (!isset($_SESSION['rol'])) {
 
 <title>Inicio</title>
 <body data-ng-app="validationApp">
-<br>
+  <p></p>
     <section  style=" background-color:rgb(255, 255, 255);
     padding: 15px;
     color:black;
@@ -41,7 +41,7 @@ if (!isset($_SESSION['rol'])) {
       <div class="content" >
         <div class="content-header" >
             <div class="row">
-                <h2>Acceso Directo</h2>
+                <center><h2><strong> Acceso Directo </strong></h2></center>
                
                 <!-- /.col-lg-12 -->
               </div>
@@ -115,7 +115,7 @@ if (!isset($_SESSION['rol'])) {
                           </div>
                           <div class="col-xs-9 text-right">
                             <div class="huge"><h1></h1></div>
-                            <div>Facturacion</div>
+                            <div>Facturación</div>
                           </div>
                         </div>
                       </div>

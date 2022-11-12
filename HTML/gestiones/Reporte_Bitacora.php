@@ -9,9 +9,7 @@ class PDF extends FPDF
     var $tablewidths;
     var $footerset;
     
-    function _beginpage($orientation, $size) {
-     $this->page++;
-    }
+   
 // Cabecera de página
 function Header()
 {

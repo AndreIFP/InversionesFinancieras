@@ -23,6 +23,13 @@ if (!isset($_SESSION['rol'])) {
 ?>
 <?php include 'barralateralinicial.php';?>
 
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+
+
   <title>Respaldo</title>
   <a href="index.php"><input type="submit" class="btn btn-primary" Value=" Regresar "></a>
   <div class="container mt-12">
@@ -105,7 +112,27 @@ if (!isset($_SESSION['rol'])) {
 				}
 			?>
 		</select>
-		<center><button type="submit" >Restaurar</button></center>
+
+		<center><button type="submit" onclick="editar(this.id)">Restaurar</button></center>
+        
+
+        <div class="modal" tabindex="-1" id="EditModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Por favor espere se restaura su base...</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+        
+        <script>
+    function editar(este) {
+      var ModalEdit = new bootstrap.Modal(EditModal, {}).show();
+      variable.innerHTML = "El id es : " + este;
+    }
+  </script>
+
 	</form>
 	<?php } ?>
 </body>
