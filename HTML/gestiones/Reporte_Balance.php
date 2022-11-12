@@ -61,7 +61,7 @@ function Header()
   
 
   $this->SetFont('Arial','',8);
-  $this->Cell(76);
+  $this->Cell(78);
   $this->Cell(8,0, utf8_decode('Email: '.$Correo),0,7);
   $this->Ln(5);
 
