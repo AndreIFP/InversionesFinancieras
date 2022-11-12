@@ -115,7 +115,7 @@ select::-ms-expand {
  <br/>
  <br/>
  <label>Pregunta de seguridad</label>
- <form class="login-form" action="validacionpregseguri.php" method="post">
+ <form id="frmregistrar" class="login-form" action="validacionpregseguri.php" method="post">
      <div class="select">
      <select name="txtpregunta" id="format" >
         <option selected disabled>seleccione la pregunta</option>
@@ -172,7 +172,7 @@ select::-ms-expand {
                 ?>
 
      </div>
-                </form>
+                
  <br>
 
 
@@ -194,13 +194,13 @@ select::-ms-expand {
 
       <!--PASSWORD -->
     <div class="form-group">
-    <form id="frmregistrar" class="login-form" action="validacionpregseguri.php" method="post">
-                <input type="text" class="form-control" placeholder="Respuesta" name="tpregunta"  maxlength="15" required style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
+    
+                <input type="text" class="form-control" placeholder="Respuesta" name="tpregunta"  maxlength="15" required  onkeypress="return blockSpecialCharacters(event)" required/>
                 <input type="text" value=<?php echo $tusuario ?> name="tusuario" style="visibility: hidden;"/>
                 
               <div class="input-group">
               
-               <input type="{{typeForFirstPassword}}" name="userpassword" class="form-control" placeholder="Contraseña" data-ng-model="user.password" data-ng-change="checkPasswordCriteria(user.password)" data-ng-focus="isCollapsed = !isCollapsed" data-ng-blur="isCollapsed = !isCollapsed" required style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
+               <input type="{{typeForFirstPassword}}" name="userpassword" class="form-control" placeholder="Contraseña" data-ng-model="user.password" data-ng-change="checkPasswordCriteria(user.password)" data-ng-focus="isCollapsed = !isCollapsed" data-ng-blur="isCollapsed = !isCollapsed" required   onkeypress="return blockSpecialCharacters(event)" required/>
             
                 <span class="input-group-addon white-background">
                                         <i class="fa fa-eye" data-ng-click="changeInputType(0,$event)"></i>
@@ -247,7 +247,7 @@ select::-ms-expand {
   <!-- ONE MORE TIME-->
   <div class="form-group">
   <div class="input-group">
-    <input type="{{typeForSecondPassword}}" name="confirmedUserPassword" class="form-control" placeholder="Confirmar contraseña" data-ng-model="user.confirmedPassword" data-ng-change="confirmEnteredPassword(user.confirmedPassword)" maxlength="16"  <input type="{{typeForSecondPassword}}" name="confirmedUserPassword" class="form-control" placeholder="Confirmar contraseña" data-ng-model="user.confirmedPassword" data-ng-change="confirmEnteredPassword(user.confirmedPassword)" maxlength="16" required style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required/>
+    <input type="{{typeForSecondPassword}}" name="confirmedUserPassword" class="form-control" placeholder="Confirmar contraseña" data-ng-model="user.confirmedPassword" data-ng-change="confirmEnteredPassword(user.confirmedPassword)" maxlength="16"  <input type="{{typeForSecondPassword}}" name="confirmedUserPassword" class="form-control" placeholder="Confirmar contraseña" data-ng-model="user.confirmedPassword" data-ng-change="confirmEnteredPassword(user.confirmedPassword)" maxlength="16" required  onkeypress="return blockSpecialCharacters(event)" required/>
     <span class="input-group-addon white-background"><i class="fa fa-eye"
                                                                     data-ng-click="changeInputType(1)"></i></span>
   </div>

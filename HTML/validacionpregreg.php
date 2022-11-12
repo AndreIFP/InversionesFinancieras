@@ -1,9 +1,9 @@
 <?php
-
+session_start();
 include('conexion.php');
 $pregunta=$_POST['txtpregunta'];
 $respuesta=$_POST['txtrespuesta'];
-
+$user=$_SESSION['user'];
     if(isset($_POST["btnregistro"])){
 
       $consultas=mysqli_query($conn,"SELECT Preguntas FROM TBL_PREGUNTAS where Id_Preguntas=$pregunta  ;");
@@ -13,12 +13,15 @@ $respuesta=$_POST['txtrespuesta'];
       }
 
  
-      $consulta=mysqli_query($conn,"SELECT * FROM TBL_PREGUNTAS_X_USUARIO p INNER JOIN TBL_USUARIO u  where p.Preguntas= 'aaaa' ;");
-      while($row=mysqli_fetch_array($consulta)){
-        $idusus=$row['Id_Usuario'];
+      $conecsul	= mysqli_query($conn,"SELECT Id_Usuario FROM TBL_USUARIO WHERE Usuario = '$user'");
+      while($row=mysqli_fetch_array($conecsul)){
+      $idusus=$row['Id_Usuario'];
       }
-      //echo($idusus);
-    $queryregistro = "UPDATE TBL_PREGUNTAS_X_USUARIO SET  Preguntas = '$idpreg', Respuestas='$respuesta' where Id_Usuario='$idusus';";
+
+  
+      mysqli_query($conn,"SELECT * FROM TBL_PREGUNTAS_X_USUARIO ");
+      $queryregistro = "INSERT INTO TBL_PREGUNTAS_X_USUARIO (Id_Preguntas,Id_Usuario,Preguntas,Respuestas) values ('$pregunta','$idusus','$idpreg','$respuesta');";
+    
     if(mysqli_query($conn,$queryregistro))
   {
 

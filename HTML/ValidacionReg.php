@@ -21,14 +21,7 @@ if ($nr == 0 )
 	//$queryregistrare = "INSERT INTO TBL_PREGUNTAS (pregunta) values ('$pregunta')";
 if(mysqli_query($conn,$queryregistrar))
 {
-	$conecsul	= mysqli_query($conn,"SELECT Id_Usuario FROM TBL_USUARIO WHERE Usuario = '$nombre'");
-	while($row=mysqli_fetch_array($conecsul)){
-	$idusus=$row['Id_Usuario'];
-	}
-	mysqli_query($conn,"SELECT * FROM TBL_PREGUNTAS_X_USUARIO ");
-	$queryregistro = "INSERT INTO TBL_PREGUNTAS_X_USUARIO (Id_Usuario,Preguntas,Respuestas) values ('$idusus','aaaa','eweer');";
-	mysqli_query($conn,$queryregistro);
-
+	
 /////////////////
 
 
