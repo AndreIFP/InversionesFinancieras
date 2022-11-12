@@ -28,7 +28,7 @@ function Header()
     $this->Cell(22,10,'Inversiones Financieras IS',2,0,'C');
     $this->Ln(5);
     
-   // Llamado del parametro dirección
+    // Llamado del parametro dirección
    $sqldireccion = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '4'";
    $resultadodir = mysqli_query($conn,$sqldireccion);
    while ($fila = $resultadodir->fetch_assoc()) {
@@ -36,7 +36,7 @@ function Header()
    }
   
   $this->SetFont('Arial','',8);
-  $this->Cell(62);
+  $this->Cell(89);
   $this->Cell(8,10, utf8_decode($Direccion),0,7, 45);
   $this->Ln(0);
 
@@ -48,7 +48,7 @@ function Header()
   }
 
   $this->SetFont('Arial','',8);
-  $this->Cell(79);
+  $this->Cell(86);
   $this->Cell(8,0, utf8_decode('Teléfono: ' .$Telefono ),0,7);
   $this->Ln(4);
 
