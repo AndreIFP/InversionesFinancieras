@@ -17,7 +17,7 @@ $fechaFinal=$tokenResult['Fecha_final'];
 /* $ext = $conn->query($sql);
 $fila = $ext->fetch_array(MYSQLI_NUM); */
 $valor = $tokenResult['Token'];
-$id_user = $tokenResult['Id_usuario'];
+$id_user = $tokenResult['Id_Usuario'];
 
 if($tok == $valor){
     if ($date < $fechaFinal ) {      
