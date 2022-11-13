@@ -113,20 +113,26 @@ if($nr == 1)
       while($row=mysqli_fetch_array($consulta)){
         $nombre=$row['Usuario'];
       }
-      $queryregistro = "UPDATE TBL_USUARIO SET Contraseña = '$passw' where Usuario='$nombre'";
+      $queryregistro = "UPDATE TBL_USUARIO SET Contraseña = '$passw' where Usuario='tusuario'";
 	 //}
 	  if(mysqli_query($conn,$queryregistro))
      {
 		echo "<script> alert('Contraseña Actualizada del Usuario: $nombre');window.location= 'Login.php' </script>"; 
      }
+    }else{
+        echo "<script> alert('Su contraseña actual no puede ser la nueva');window.location= 'Login.php' </script>"; 
+    
     }
+    }
+	
 
     
 
 else if ($nr == 0) 
 {
 	//header("Location: login.php");
-	echo "<script> alert('Datos incorrectos ');window.location= 'OlvidoContra.php' </script>";
+	echo "No ingreso"; 
+	echo "<script> alert('Respuesta Incorrecta: $idrespuest ');window.location= 'OlvidoContra.php' </script>";
 } 
 }catch (Exception $e){
   echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
