@@ -137,5 +137,5 @@ else if ($nr == 0)
 }catch (Exception $e){
   echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
 }
-}
+
 ?>
