@@ -1,8 +1,43 @@
 <?php
 include("../conexion.php");
+
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
 session_start();
+// si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+    header("Location: ../login.php");
+    die();
+} else {
+    //actualiza los permisos
+    updatePermisos($_SESSION['rol']);
+
+    //si no tiene permiso de visualización redirige al index
+    if ($_SESSION['permisos'][M_GESTION_CLIENTE]['r'] == 0 or !isset($_SESSION['permisos'][M_GESTION_CLIENTE]['r'])) {
+        header("Location: ../index.php");
+        die();
+    }
+}
+
+$numero = 99999.99;
 ?>
+
+
 <?php include 'barralateralinicial.php';?>
+
+<!DOCTYPE html>
+<html lang="en">
+<title>Gestión Clientes</title>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+</head>
+
+
+
 <p></p>
 <title>Kardex</title>
 <section style=" background-color:rgb(255, 255, 255);
@@ -45,9 +80,7 @@ session_start();
                                 <th>Detalle</th>
                                 <th>Producto</th>
                                 <th>Cantidad de Inventario Entrante</th>
-                                <th>Total Inventario Entrante</th>
                                 <th>Cantidad de Inventario Saliente</th>
-                                <th>Total Inventario Saliente</th>
                                 <th>Acciones</th>
                                 <th></th>
                             </tr>   
@@ -80,15 +113,26 @@ session_start();
 			                        $result = mysqli_num_rows($sql);
                                     if($result > 0){
                                     while($row=mysqli_fetch_array($sql)){
+
+
+                                        $_SESSION['Id_Mauri']= $row ['Id_kardex'];;
+                                        $fecha      = $row ['fecha'];
+                                        $detalle       = $row ['detalle'];
+                                        $proname  = $row ['proname'];
+                                         $cant_entrada    = $row ['cant_entrada'];
+                                         $total_cante       = $row ['total_cante'];
+                                         $cant_salida     = $row ['cant_salida'];
+                                         $total_cants       = $row ['total_cants'];  
+                                        $Id_kardex =$_SESSION['Id_Mauri'];
+
                                 ?>
                                      <tr>
-                                        <th><?php echo $row['fecha']?></th>
-                                        <th><?php echo $row['detalle']?></th>
-                                        <th><?php echo $row['proname']?></th>
-                                        <th><?php echo $row['cant_entrada']?></th> 
-                                        <th><?php echo $row['total_cante']?></th>
-                                        <th><?php echo $row['cant_salida']?></th>
-                                        <th><?php echo $row['total_cants']?></th>
+                                        <th><?php echo $fecha?></th>
+                                        <th><?php echo $detalle?></th>
+                                        <th><?php echo $proname?></th>
+                                        <th><?php echo $cant_entrada?></th>   
+                                        <th><?php echo $cant_salida?></th>
+                                     
                                         <script>
                                             function alerta(){
                                                 window.alert('No es posible hacer esta Accion');
@@ -96,6 +140,7 @@ session_start();
                                         </script>
                                         <th><a type="button" class="btn btn-primary" onclick="alerta()" >Editar</a></th>
                                         <th><a type="button" class="btn btn-danger" onclick="alerta()" >Eliminar</a></th>
+                                        <th><a href="kardex2.php?Id_kardex2=<?php echo $Id_kardex ?>" class="btn btn-success btn-xs">Ver</a></th>
                                     </tr>
                                 <?php
                                        }
@@ -135,7 +180,7 @@ session_start();
                         
 		                </div>
                         <div class="reportes">
-                            <a class="btn btn-warning" href="Reporte_Kardex.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>Reporte</a>
+                            <a class="btn btn-warning" href="Reporte_Kardex.php" >Reporte</a>
                         </div>
                   </div>
            </div>
