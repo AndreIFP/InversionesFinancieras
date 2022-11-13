@@ -233,7 +233,7 @@ $resultadop_n_c = mysqli_query($conn,$sqlP_N_C);
     $pdf->Cell(95, 5, utf8_decode($fila['cuenta']), 1, 0, "B",0);
     $pdf->Cell(30, 5, utf8_decode($fila['total_cuenta']), 1, 0, "C",0);
     $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-    $Total_Pasivo_No_Corriente = $Total_Pasivo_Corriente + $total_cuenta_p_n_c;
+    $Total_Pasivo_No_Corriente = $Total_Pasivo_No_Corriente + $total_cuenta_p_n_c;
   }
 
 $pdf->SetFont('Arial','',14);
