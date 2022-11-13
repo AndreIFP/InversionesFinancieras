@@ -108,6 +108,8 @@ if($nr == 1)
 {
   
 	//header("Location: OlvidoContra.html");
+	
+	   if($contras!=$passw){
 
     $consulta=mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario");
       while($row=mysqli_fetch_array($consulta)){
@@ -137,5 +139,5 @@ else if ($nr == 0)
 }catch (Exception $e){
   echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
 }
-
+}
 ?>
