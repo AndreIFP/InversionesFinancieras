@@ -4,7 +4,7 @@ include('conexion.php');
 $user=$_SESSION['user'];
 if(isset($_REQUEST["btnregistrarx"])){
   $tpregunta=$_POST['tpregunta'];
-  $preguntas=$_POST['tpregunta'];
+  $preguntas=$_POST['txtpregunta'];
   $nombre=$_POST['tusuario'];
   $_SESSION['user']=$_POST["tusuario"];
   $passw=$_POST['userpassword'];
@@ -29,6 +29,11 @@ if(isset($_REQUEST["btnregistrarx"])){
     $idrespuest=$row['Respuestas'];
 	}
 
+         if($preguntas != $idpregunta or $tpregunta != $idrespuest  ){
+   
+        echo "<script> alert('Datos icorrectos');window.location= 'Login.php' </script>"; 
+    }
+   
 
     $conecsul	= mysqli_query($conn,"SELECT Contraseña FROM TBL_USUARIO WHERE Usuario = '$user'");
     while($row=mysqli_fetch_array($conecsul)){
