@@ -87,7 +87,7 @@ if(isset($_REQUEST["btnregistrarx"])){
                     $sql = "UPDATE TBL_USUARIO SET Estado_Usuario='BLOQUEADO' WHERE Id_Usuario='$iduser'";
                     $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
                     $exito = mysqli_query($con,$sql);
-                    echo "<script>alert('DEMASIADOS INTENTOS EL USUARIO ".$nombre." SE HA BLOQUEADO');window.location= 'login.php'</script>";
+                    echo "<script>alert('USUARIO ".$nombre." SE HA BLOQUEADO CONSULTE CON SU ADMINISTRADOR');window.location= 'login.php'</script>";
     }else{
         $_SESSION["intentos"]++; // aumentamos en 1 los intentos
         echo "<script>alert('Ingreso invalido, PORFAVOR REVISE SUS CREDENCIALES DE INICIO DE SESION);window.location= 'login.php'</script>";
