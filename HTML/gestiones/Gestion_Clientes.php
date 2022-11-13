@@ -116,7 +116,7 @@ $numero = 99999.99;
                 if ($result > 0) {
                     while ($row = mysqli_fetch_array($sql)) {
 
-                        $_SESSION['Id_Mauri']= $row ['Id_Cliente'];
+                        $_SESSION['Id_Mauri']= $row ['Id_Cliente'];;
 			            $Nombree      = $row ['Nombre_Empresa'];
 			            $Nombre       = $row ['Nombre_Cliente'];
 			            $RTN_Cliente  = $row ['RTN_Cliente'];
@@ -128,7 +128,7 @@ $numero = 99999.99;
                         $Id_Cliente=$_SESSION['Id_Mauri'];
                 ?>
                         <tr>
-                            <th><?php  echo  $Id_Cliente  ?></th>
+                            <th><?php echo  $Id_Cliente  ?></th>
                             <th><?php echo  $Nombree ?></th>
                             <th><?php echo  $Nombre   ?></th>
                             <th><?php echo  $RTN_Cliente?></th>
@@ -145,8 +145,7 @@ $numero = 99999.99;
                                                    
                                 <?php } ?>
 
-                                <button type="button" class="btn btn-danger btn-xs" onclick="editar(this.id)" id="<?php echo $Id_Cliente?>" value=" <?php echo $Id_Cliente?>">Ver</button></td>
-                                
+                                <a href="Gestion_Clientes2.php?Id_Cliente2=<?php echo $Id_Cliente ?>" class="btn btn-success btn-xs">Ver</a>
                         </tr>
                 <?php
                     }
@@ -166,7 +165,7 @@ $numero = 99999.99;
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Informacion del cliente</h5>
+          <h3 class="modal-title">Información del cliente</h3>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
