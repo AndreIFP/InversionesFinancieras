@@ -141,7 +141,7 @@ $numero = 99999.99;
                                         </script>
                                         <th><a type="button" class="btn btn-primary" onclick="alerta()" >Editar</a></th>
                                         <th><a type="button" class="btn btn-danger" onclick="alerta()" >Eliminar</a></th>
-                                        <th><a href="kardex2.php?Id_kardex2=<?php echo $Id_Cliente ?>" class="btn btn-success btn-xs">Ver</a></th>
+                                        <th><a href="kardex2.php?Id_kardex2=<?php echo $Id_Kardex ?>" class="btn btn-success btn-xs">Ver</a></th>
                                   
                                         <form method="post" action="Kardex.php" name="miformulario">
                                 <script>

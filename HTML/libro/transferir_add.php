@@ -27,6 +27,6 @@ while($row=mysqli_fetch_array($consultas)){
 
 			
 
-	echo "<script>document.location='../libro/libro.php'</script>";	
+		echo "<script> alert('Se Ingreso el Retiro correctamente');document.location='../libro/libro.php'</script>";
 
 ?>
