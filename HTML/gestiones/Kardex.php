@@ -79,8 +79,8 @@ $numero = 99999.99;
                                 <th>Fecha</th>
                                 <th>Detalle</th>
                                 <th>Producto</th>
-                                <th>Cantidad de Inventario Entrante</th>
-                                <th>Cantidad de Inventario Saliente</th>
+                                <th>Cantidad Ingresada</th>
+                                <th>Cantidad Retirada</th>
                                 <th>Acciones</th>
                                 <th></th>
                             </tr>   
