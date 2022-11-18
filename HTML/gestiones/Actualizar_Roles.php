@@ -94,10 +94,10 @@ if (!isset($_SESSION['rol'])) {
 				<label for="Rol">Nombre Rol</label>
 				<input type="text" name="Rol" maxlength="50" id="Rol" placeholder="Nombre" readonly= "true" value ="<?php echo $Rol?>">
 				<label for="Estado">Estado</label>
-                  <select name="Estado" required>
-                  <option value ="">Seleccione Una Opción</option>
-                  <option value="ACTIVO">ACTIVO</option>
-                  <option value="INACTIVO">INACTIVO</option>
+                  <select name="Estado" class="notItemOne" required>
+					<option value="<?php echo $Estado ?>"><?php echo $Estado ?></option>
+					<option value="ACTIVO">ACTIVO</option>
+					<option value="INACTIVO">INACTIVO</option>
                   </select>
 				<label for="Descripcion">Descripción</label>
 				<input type="text" name="Descripcion" maxlength="50" id="Descripcion" placeholder="Descripción" value ="<?php echo $Descripcion ?>" size = 50 required>
@@ -151,6 +151,9 @@ label{
 	border: 0;
 	cursor: pointer;
 	margin: 15px auto;
+}
+.notItemOne option:first-child{
+	display: none;
 }
 .alert{
 	width: 100%;
