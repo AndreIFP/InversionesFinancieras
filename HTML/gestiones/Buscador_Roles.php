@@ -1,6 +1,6 @@
 <?php
 include("../conexion.php");
-
+session_start();
 ?>
 <?php include 'barralateralinicial.php'; ?><p></p>
 <section style=" background-color:rgb(255, 255, 255);
