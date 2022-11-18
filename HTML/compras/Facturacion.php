@@ -128,7 +128,7 @@
 
 
 <div class="invoicelist-footer">
-  <table contenteditable>
+  <table>
     <tr class="taxrelated">
       <td>IVA:</td>
       <td id="total_tax"></td>
