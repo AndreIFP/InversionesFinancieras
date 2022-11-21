@@ -20,8 +20,8 @@ if (!isset($_SESSION['rol'])) {
         die();
     }
 
-    if (empty($_REQUEST['Id_Usuario2'])){
-        header("location: Gestion_Usuarios.php");
+    if (empty($_REQUEST['Id_Cliente2'])){
+        header("location: Gestion_Clientes.php");
         die();
 
     } else{
