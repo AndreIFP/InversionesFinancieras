@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear facturas con HTML, CSS y JavaScript</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<div class="control-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-2-4">
+        <div class="slogan">Facturación </div>
+
+        <label for="config_tax">IVA:
+          <input type="checkbox" id="config_tax" />
+        </label>
+        <label for="config_tax_rate" class="taxrelated">Tasa:
+          <input type="text" id="config_tax_rate" value="13"/>%
+        </label>
+        
+      </div>
+      <div class="col-4 text-right">
+        <a href="javascript:window.print()">Imprimir</a>
+      </div><!--.col-->
+    </div><!--.row-->
+  </div><!--.container-->
+</div><!--.control-bar-->
+
+<header class="row">
+  <div class="logoholder text-center" >
+    <img src="assets/img/login.png">
+  </div><!--.logoholder-->
+
+  <div class="me">
+      <strong>Edgard Aquiles Ortiz Maradiaga</strong><br>
+      <strong>PERITO CONTABLE</strong><br>
+      Barrio el Centro, Calle Principal, Casa N.308 Esquina opuesta a Pollo Campero, 
+      Frente a Punto Farma Comayaguela. M.D.C. Honduras.<br>
+  </div><!--.me-->
+
+  <div class="info">
+      Web: <a href="http://volkerotto.net">www.InversionesFinancieras.com</a><br>
+      E-mail: <a href="edgard_issa7@yahoo.com">edgard_issa7@yahoo.com</a><br>
+      Tel: 2227-9327 ; Cel: 9776-9891<br>
+  </div><!-- .info -->
+
+  <!-- <div class="bank">
+    <p contenteditable>
+      Datos bacarios: <br>
+      Titular de la cuenta: <br>
+      IBAN: <br>
+      BIC:
+    </p>
+  </div>.bank -->
+
+</header>
+
+
+<div class="row section">
+  
+	<div class="col-2">
+    <h1 >FACTURA POR HONORARIOS</h1>
+  </div><!--.col-->
+
+  <div class="col-2 text-right details">
+     Fecha: <input type="text" class="datePicker" readonly/><br>
+     Factura #: <input type="text" value="0000000" readonly/>
+     
+  </div><!--.col-->
+  
+  
+  
+  <div class="col-2">
+    
+    <br>
+      <strong>Facturar a</strong><br>
+      <td><input type="text" name="Nombre_Cliente" value="" placeholder="Nombre del Cliente" size="30" maxlength="30"  required></td>
+      <br>
+      <td><input type="text" name="RTN_Cliente" value="" placeholder="Numero de R.T.N." size="15" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/,'')" required></td> 
+      </div><!--.col-->
+  
+  
+  <div class="col-2">
+    <br>
+    <p contenteditable class="client">
+      <strong>Enviar a</strong><br>
+      [Nombre cliente]<br>
+      [Nombre emmpresa]<br>
+	  [Dirección empresa]<br>
+	  [Tel empresa]
+    </p>
+  </div><!--.col-->
+
+  
+
+</div><!--.row-->
+
+<div class="invoicelist-body">
+  <table>
+    <thead >
+      <th width="5%">Código</th>
+      <th width="60%">Descripción</th>
+      
+      <th width="10%">Cant.</th>
+      <th width="15%">Precio</th>
+      <th class="taxrelated">IVA</th>
+      <th width="10%">Total</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td width='5%'><a class="control removeRow" href="#">x</a> <span contenteditable>12345</span></td>
+        <td width='60%'><span contenteditable>Descripción</span></td>
+        <td class="amount"><input type="text" value="1"/></td>
+        <td class="rate"><input type="text" value="99" /></td>
+        <td class="tax taxrelated"></td>
+        <td class="sum"></td>
+      </tr>
+    </tbody>
+  </table>
+  <a class="control newRow" href="#">+ Nueva fila</a>
+</div><!--.invoice-body-->
+
+<div class="invoicelist-footer">
+  <table contenteditable>
+    <tr class="taxrelated">
+      <td>IVA:</td>
+      <td id="total_tax"></td>
+    </tr>
+    <tr>
+      <td><strong>Total:</strong></td>
+      <td id="total_price"></td>
+    </tr>
+  </table>
+</div>
+
+<div class="note" contenteditable>
+  <h2>Nota:</h2>
+</div><!--.note-->
+
+<footer class="row">
+  <div class="col-1 text-center">
+    <p class="notaxrelated" contenteditable>El monto de la factura no incluye el impuesto sobre las ventas.</p>
+    
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="assets/bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
