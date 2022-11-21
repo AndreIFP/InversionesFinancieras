@@ -15,10 +15,15 @@ if (!isset($_SESSION['rol'])) {
     updatePermisos($_SESSION['rol']);
 
     //si no tiene permiso de visualización redirige al index
-    if ($_SESSION['permisos'][M_GESTION_CLIENTE]['r'] == 0 or !isset($_SESSION['permisos'][M_GESTION_CLIENTE]['r'])) {
+    if ($_SESSION['permisos'][ M_KARDEX]['r'] == 0 or !isset($_SESSION['permisos'][M_KARDEX]['r'])) {
         header("Location: ../index.php");
         die();
     }
+
+
+
+
+    
 }
 
 $numero = 99999.99;
@@ -79,8 +84,8 @@ $numero = 99999.99;
                                 <th>Fecha</th>
                                 <th>Detalle</th>
                                 <th>Producto</th>
-                                <th>Cantidad Ingresada</th>
-                                <th>Cantidad Retirada</th>
+                                <th>Entradas</th>
+                                <th>Salidas</th>
                                 <th>Acciones</th>
                                 <th></th>
                             </tr>   
@@ -138,9 +143,9 @@ $numero = 99999.99;
                                                 window.alert('No es posible hacer esta Accion');
                                             }
                                         </script>
-                                        <th><a type="button" class="btn btn-primary" onclick="alerta()" >Editar</a></th>
-                                        <th><a type="button" class="btn btn-danger" onclick="alerta()" >Eliminar</a></th>
-                                        <th><a href="kardex2.php?Id_kardex2=<?php echo $Id_kardex ?>" class="btn btn-success btn-xs">Ver</a></th>
+                                        <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()" >Editar</a>
+                                        <a type="button" class="btn btn-danger btn-xs" onclick="alerta()" >Eliminar</a>
+                                        <a href="kardex2.php?Id_kardex2=<?php echo $Id_kardex ?>" class="btn btn-success btn-xs">Ver</a>
                                     </tr>
                                 <?php
                                        }
