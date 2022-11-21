@@ -19,6 +19,20 @@ if (!isset($_SESSION['rol'])) {
         header("Location: ../index.php");
         die();
     }
+
+    if (empty($_REQUEST['Id_kardex2'])){
+      header("location: Kardex.php");
+      die();
+
+  } else{
+
+
+      $Id_kardex2 = $_REQUEST['Id_kardex2'];
+
+  }
+
+
+    
 }
 
 $numero = 99999.99;
@@ -37,7 +51,6 @@ $numero = 99999.99;
 </head>
 
 
-
 <p></p>
 <title>Kardex</title>
 <section style=" background-color:rgb(255, 255, 255);
@@ -54,10 +67,10 @@ $numero = 99999.99;
     <p>
                      <?php
                         $mostrar_datos = 0;
-                        $Id_kardex2 = $_REQUEST['Id_kardex2'];
+                       
                         ?>
                      <form action="" method="get" class="form_datos" >
-                            <label for="datos_mostrar">Datos A Mostrarㅤ</label>
+                            <label for="datos_mostrar">Datos A mostrar</label>
                             <select name="mostrar" onchange='submit();'>
                             <option ></option>
                             <option value="25">25</option>
@@ -68,8 +81,7 @@ $numero = 99999.99;
                                 ?>
                             </select>
                      </form>
-                     <form action="Buscador_Kardex.php" method="get" class="form_search">
-                             
+                     <form action="Buscador_Kardex.php" method="get" class="form_search">    
                             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
                             <input type="submit" value="Buscar" class="btn_search">
                      </form>
@@ -80,8 +92,8 @@ $numero = 99999.99;
                                 <th>Fecha</th>
                                 <th>Detalle</th>
                                 <th>Producto</th>
-                                <th>Cantidad de Inventario Entrante</th>
-                                <th>Cantidad de Inventario Saliente</th>
+                                <th>Entradas</th>
+                                <th>Salidas</th>
                                 <th>Acciones</th>
                                 <th></th>
                             </tr>   
@@ -89,11 +101,11 @@ $numero = 99999.99;
                         <tbody>
                                 <?php
                                 //Paginador
-			                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_KARDEX");
+			                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_KARDEX WHERE Id_kardex = Id_kardex");
 			                    $result_register = mysqli_fetch_array($sql_registe);
 			                    $total_registro = $result_register['total_registro'];
 
-			         if($mostrar_datos > 0){
+			                          if($mostrar_datos > 0){
                                     $por_pagina = $mostrar_datos;
                                 }else{
                                     $por_pagina = 10;
@@ -108,7 +120,7 @@ $numero = 99999.99;
 
                                 $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select * FROM TBL_KARDEX LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select * FROM TBL_KARDEX ORDER BY fecha DESC LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);
@@ -128,6 +140,7 @@ $numero = 99999.99;
 
                                 ?>
                                      <tr>
+                                      
                                         <th><?php echo $fecha?></th>
                                         <th><?php echo $detalle?></th>
                                         <th><?php echo $proname?></th>
@@ -139,9 +152,9 @@ $numero = 99999.99;
                                                 window.alert('No es posible hacer esta Accion');
                                             }
                                         </script>
-                                        <th><a type="button" class="btn btn-primary" onclick="alerta()" >Editar</a></th>
-                                        <th><a type="button" class="btn btn-danger" onclick="alerta()" >Eliminar</a></th>
-                                        <th><a href="kardex2.php?Id_kardex2=<?php echo $Id_Kardex ?>" class="btn btn-success btn-xs">Ver</a></th>
+                                        <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()" >Editar</a>
+                                        <a type="button" class="btn btn-danger btn-xs" onclick="alerta()" >Eliminar</a>
+                                        <a href="kardex2.php?Id_kardex2=<?php echo $Id_kardex ?>" class="btn btn-success btn-xs">Ver</a>
                                   
                                         <form method="post" action="Kardex.php" name="miformulario">
                                 <script>
@@ -199,7 +212,7 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_KARDEX WHERE Id_kardex = '$poll' 
 ?>
                   
 <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Id Cliente:</label>
+  <label for="recipient-name" class="col-form-label" >Id kardex:</label>
   <input type="text" class="form-control" Readonly  id="recipient-name" value="  <?php echo $Id_kardex ?>">
   </div>
 
@@ -228,7 +241,7 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_KARDEX WHERE Id_kardex = '$poll' 
 
 
   <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Total entrada:</label>
+  <label for="recipient-name" class="col-form-label" >stock entrada:</label>
   <input type="text" class="form-control"  Readonly id="recipient-name" value=" <?php echo $total_cante ?> ">
   </div>
 
@@ -240,7 +253,7 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_KARDEX WHERE Id_kardex = '$poll' 
 
 
   <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Total cantidad salida:</label>
+  <label for="recipient-name" class="col-form-label" >stock salida:</label>
   <input type="text" class="form-control" Readonly  id="recipient-name" value=" <?php echo $total_cants?> ">
   </div>
 
