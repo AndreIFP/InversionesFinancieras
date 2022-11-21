@@ -19,6 +19,20 @@ if (!isset($_SESSION['rol'])) {
         header("Location: ../index.php");
         die();
     }
+
+    if (empty($_REQUEST['Id_Usuario2'])){
+        header("location: Gestion_Usuarios.php");
+        die();
+
+    } else{
+
+
+        $Id_Usuario2 = $_REQUEST['Id_Usuario2'];
+
+    }
+
+
+
 }
 
 $numero = 99999.99;
