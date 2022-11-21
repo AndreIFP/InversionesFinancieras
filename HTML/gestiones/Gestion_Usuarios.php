@@ -82,12 +82,13 @@ $numero = 99999.99;
             <table class="table">
                 <thead class="table-primary">
                     <tr>
-                        <th>Id</th>
-                        <th>Usuario</th>
-                        <th>Nombre Usuario</th>
-                        <th>Estado</th>
-                        <th>Rol</th>
-                        <th>Acciones</th>
+                        <th> <center> Id </center></th>
+                        <th> <center> Usuario </center></th>
+                        <th> <center> Nombre Usuario </center></th>
+                        <th> <center> Estado </center></th>
+                        <th> <center> Rol </center></th>
+                        <th colspan="3"> <center> Acciones </center> </th>
+                        
                        
 
                     </tr>
@@ -134,25 +135,25 @@ $numero = 99999.99;
 
                     ?>
                             <tr>
-                                <th><?php echo $Id_Usuario?></th>
-                                <th><?php echo $Usuario ?></th>
-                                <th><?php echo $Nombre_Usuario ?></th>
-                                <th><?php echo $Estado_Usuario?></th>
-                                <th><?php echo $Rol?></th>
+                                <th> <center><?php echo $Id_Usuario?> </center></th>
+                                <th> <center><?php echo $Usuario ?> </center></th>
+                                <th> <center><?php echo $Nombre_Usuario ?> </center></th>
+                                <th> <center><?php echo $Estado_Usuario?> </center></th>
+                                <th> <center><?php echo $Rol?></th>
 
                                 <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['u'] == 1) {
 
                                 ?>
-                                    <th><a href="Actualizar_Usuario.php?Id=<?php echo $Id_Usuario ?>" class="btn btn-primary btn-xs">Editar</a>
+                                    <th><center><a href="Actualizar_Usuario.php?Id=<?php echo $Id_Usuario ?>" class="btn btn-primary btn-xs"> <i class="fa fa-pencil" aria-hidden="true"></i> </a> </center> </th>
                                 <?php } ?>
 
                                 <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['d'] == 1) {
                                 ?>
 
-                                <a href="Delete_Usuario.php?Id=<?php echo $Id_Usuario ?>" class="btn btn-danger btn-xs">Eliminar</a>
+                                <th><center> <a href="Delete_Usuario.php?Id=<?php echo $Id_Usuario ?>" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o" aria-hidden="true"></i> </a> </center> </th>
                                 <?php } ?>
 
-                                <a href="Gestion_Usuarios2.php?Id_Usuario2=<?php echo $Id_Usuario?>" class="btn btn-success btn-xs">Ver</a>
+                                <th><center> <a href="Gestion_Usuarios2.php?Id_Usuario2=<?php echo $Id_Usuario?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center> </th>
 
                             </tr>
                     <?php
@@ -200,6 +201,8 @@ $numero = 99999.99;
 
 </div>
 </body>
+
+
 
 <style type="text/css">
     .paginador ul {
