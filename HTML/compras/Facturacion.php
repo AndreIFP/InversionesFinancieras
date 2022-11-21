@@ -51,8 +51,8 @@
 
   <div class="col-2 text-center details">
       Fecha: <input type="date" name="Fecha" style="width:90px;" name="Fechaini" required><br>
-      Factura #: <input type="text" placeholder="000-001-01-000000" style="width:120px;" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
-      CAI: <input type="text" value="" placeholder="00000000000" style="width:120px;" oninput="this.value = this.value.replace(/[^0-9\s]/,'')" required/><br>
+      Factura #: <input type="text" name="factura" placeholder="000-001-01-000000" maxlength="15" style="width:120px;" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
+      CAI: <input type="text" value="" placeholder="00000000000" maxlength="17" style="width:120px;" oninput="this.value = this.value.replace(/[^0-9\s]/,'')" required/><br>
      Vence: <input type="date" style="width:90px;" name="Fechaven" required/>
   </div><!--.col-->
   
@@ -89,7 +89,7 @@
     </thead>
     <tbody contenteditable>
 	<tr class="invoice_detail">
-      <td width="25%" style="text-align"> <input type="text" name="Proveedor" style="width:250px;height:20px;border:0" maxlength="50"  placeholder="Nombre de proveedor" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/></td>
+      <td width="25%" style="text-align"> <input type="text" name="proveedor" style="width:250px;height:20px;border:0" maxlength="50"  placeholder="Nombre de proveedor" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/></td>
       <td width="30%"><input type="text" name="Terminos" style="width:200px;height:20px;border:0" maxlength="30"  placeholder="Terminos y condiciones" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/></td>
 	 </tr>
 	</tbody>
