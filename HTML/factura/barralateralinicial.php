@@ -1,6 +1,5 @@
 <?php
 //validacion Login
-session_start();
  include('../conexion.php');
  $user=$_SESSION['user'];
 ?>
