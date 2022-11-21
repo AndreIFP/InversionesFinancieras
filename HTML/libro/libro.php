@@ -126,6 +126,7 @@ $fecha = date('Y-m-d h:i:s');
                 </div>
                 <hr>
                 <div class="form-group">
+                <div class="invoicelist-body">
                 <table>
     <thead>
       <th width="10%">Debito</th>
@@ -133,17 +134,16 @@ $fecha = date('Y-m-d h:i:s');
       <th width="15%">Codigó de Cuenta</th>
       <th width="60%">Nombre Cuenta</th>
       <th width="40%">Descripción</th>
-      
     </thead>
     <tbody>
       <tr>
-        <td width='10%'><a class="control removeRow" href="#">x</a><input type="text" name="Codigo" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/><br> </td>
-        <td width='10%'><input type="text" name="Codigo" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/><br> </td>
-        <td width='15%'><input type="text" name="Codigo" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo Cuenta" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/><br> </td>
+        <td width='10%'><a class="control removeRow" href="#">x</a><input type="text" name="debito" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/><br> </td>
+        <td width='10%'><input type="text" name="credito" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/><br> </td>
+        <td width='15%'><input type="text" name="codig_cuenta" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo Cuenta" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/><br> </td>
         <td width='60%'> 
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                      <select class="form-control" name="txtpregunta" id="format" id="txtpregunta" required>
+                      <select class="form-control" name="cuenta" id="cuenta" required>
                         <option value="">Seleccione una Cuenta</option>
                         <?php
                         include('../conexion.php');
@@ -160,13 +160,12 @@ $fecha = date('Y-m-d h:i:s');
                       </select>
                     </div>
                   </td>
-        <td width='40%'><input type="text" name="Descripcion" style="width:250px;height:20px;border:0" maxlength="50"  placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/><br></td>
-        <td class="tax taxrelated"></td>
-        <td class="sum"></td>
+        <td width='40%'><input type="text" name="descripcion" style="width:250px;height:20px;border:0" maxlength="50"  placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/><br></td>
       </tr>
     </tbody>
   </table>
   <a class="control newRow" href="#">+ Nueva fila</a>
+  </div>
   </div>
              
                 <div class="col-md-12">
@@ -441,6 +440,10 @@ $fecha = date('Y-m-d h:i:s');
       );
     });
   </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="assets/bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
+<script src="assets/js/main1.js"></script>
 
   <?php
   # code...
