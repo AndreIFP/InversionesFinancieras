@@ -61,11 +61,11 @@ if (!isset($_SESSION['rol'])) {
             <table class="table table-condensed">
                 <thead class=" table-primary">
                     <tr>
-                        <th>Id</th>
-                        <th>Fecha</th>
-                        <th>Acción</th>
-                        <th>Descripción</th>
-                        <th>Usuario</th>
+                        <th><center> Id </center></th>
+                        <th><center> Fecha </center></th>
+                        <th><center> Acción </center></th>
+                        <th><center> Descripción </center></th>
+                        <th><center> Usuario </center></th>
 
                         <th></th>
                         <th></th>
@@ -100,29 +100,12 @@ if (!isset($_SESSION['rol'])) {
                         while ($row = mysqli_fetch_array($sql)) {
                     ?>
                             <tr>
-                                <th><?php echo $row['Id_Bitacora'] ?></th>
-                                <th><?php echo $row['Fecha'] ?></th>
-                                <th><?php echo $row['Accion'] ?></th>
-                                <th><?php echo $row['Descripcion'] ?></th>
-                                <th><?php echo $row['Id_Usuario'] ?></th>
-
-                                <script>
-                                    function alerta() {
-                                        window.alert('No es posible hacer esta Accion');
-                                    }
-                                </script>
-                                <?php if ($_SESSION['permisos'][M_GESTION_BITACORA] and $_SESSION['permisos'][M_GESTION_BITACORA]['u'] == 1) {
-
-                                ?>
-                                    <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a></th>
-                                <?php } ?>
-
-                                <?php if ($_SESSION['permisos'][M_GESTION_BITACORA] and $_SESSION['permisos'][M_GESTION_BITACORA]['d'] == 1) {
-
-                                ?>
-                                    <th> <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
-                                    </th>
-                                <?php } ?>
+                                <th><center> <?php echo $row['Id_Bitacora'] ?> </center></th>
+                                <th><center> <?php echo $row['Fecha'] ?> </center></th>
+                                <th><center> <?php echo $row['Accion'] ?> </center></th>
+                                <th><center> <?php echo $row['Descripcion'] ?> </center></th>
+                                <th><center> <?php echo $row['Id_Usuario'] ?> </center></th>
+                               
                             </tr>
                     <?php
                         }
