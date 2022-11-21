@@ -29,136 +29,133 @@ font-size: 12px; ">
 
     <title>Gestión Roles</title>
     <div class="container-fluid">
-    <div class="box-body table-responsive">
-    <h2><strong>Gestión Roles</strong> </h2>
-    <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-    <?php if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['w'] == 1) {
+        <div class="box-body table-responsive">
+            <h2><strong>Gestión Roles</strong> </h2>
+            <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+            <?php if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['w'] == 1) {
 
-    ?>
-        <a href="Nuevo_Roles.php"input type="submit" class="btn btn-success " Value="Crear Nuevo Rol"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Rol</a>
-    <?php } ?>
-
-    <a class="btn btn-warning" href="reporte_roles.php" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  Reporte</a>
-
-        <a align="rigth" href="GestionRolesInac.php"><input type="submit" class="btn btn-success" Value="Mostrar Roles Inactivos"></a><p></p>
-
-
-
-
-    <?php
-    $mostrar_datos = 0;
-    ?>
-
-    <form action="" method="get" class="form_datos">
-        <label for="datos_mostrar">Datos A Mostrar</label>
-        <select name="mostrar" onchange='submit();'>
-            <option></option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <?php
-            $mostrar_datos = $_GET['mostrar'];
             ?>
-        </select>
-    </form>
-    <form action="Buscador_Roles.php" method="get" class="form_search">
-        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-        <input type="submit" value="Buscar" class="btn btn-primary">
-    </form>
-
-    <table class="table">
-        <thead class="table-primary">
-            <tr><center>
-                <th>Id</th>
-                <th>Rol</th>
-                <th>Estado</th>
-                <th>Descripción</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                
-        </thead>
-        <tbody>
-            <?php
-
-            //Paginador
-            $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_ROLES WHERE Id_Rol = Id_Rol ");
-            $result_register = mysqli_fetch_array($sql_registe);
-            $total_registro = $result_register['total_registro'];
-
-            if ($mostrar_datos > 0) {
-                $por_pagina = $mostrar_datos;
-            } else {
-                $por_pagina = 10;
-            }
-
-            if (empty($_GET['pagina'])) {
-                $pagina = 1;
-            } else {
-                $pagina = $_GET['pagina'];
-            }
-
-            $desde = ($pagina - 1) * $por_pagina;
-            $total_paginas = ceil($total_registro / $por_pagina);
-            $sql = mysqli_query($conn, "SELECT * FROM TBL_ROLES WHERE Estado = 'ACTIVO' LIMIT $desde,$por_pagina ");
-            mysqli_close($conn);
-
-            $result = mysqli_num_rows($sql);
-            if ($result > 0) {
-                while ($row = mysqli_fetch_array($sql)) {
-            ?>
-                    <tr>
-                        <th><?php echo $row['Id_Rol'] ?></th>
-                        <th><?php echo $row['Rol'] ?></th>
-                        <th><?php echo $row['Estado'] ?></th>
-                        <th><?php echo $row['Descripcion'] ?></th>
-                        <?php if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['u'] == 1) {
-
-                        ?>
-                            <th><a href="Actualizar_Roles.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-primary btn-xs">Editar</a></th>
-                            <th><a href="Actualizar_Permisos.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-success btn-xs">Permisos</a></th>
-                        <?php } ?>
-                        <?php if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['d'] == 1) {
-
-                        ?>
-                            <th><a href="Delete_Roles.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-danger btn-xs">Eliminar</a></th>
-                            
-                            <?php } ?>
-                    </tr>
-            <?php
-                }
-            }
-            ?>
-        </tbody>
-    </table></div>
-    <div class="paginador">
-        <ul>
-            <?php
-            if ($pagina != 1) {
-            ?>
-                <li><a href="?pagina=<?php echo 1; ?>">|<</a>
-                </li>
-                <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                        <<</a>
-                </li>
-            <?php
-            }
-            for ($i = 1; $i <= $total_paginas; $i++) {
-                # code...
-                if ($i == $pagina) {
-                    echo '<li class="pageSelected">' . $i . '</li>';
-                } else {
-                    echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
-                }
-            }
-
-            if ($pagina != $total_paginas) {
-            ?>
-                <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
-                <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
+                <a href="Nuevo_Roles.php" input type="submit" class="btn btn-success " Value="Crear Nuevo Rol"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Rol</a>
             <?php } ?>
-        </ul>
-    </div>
+
+            <a class="btn btn-warning" href="reporte_roles.php" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+
+            <a align="rigth" href="GestionRolesInac.php"><button type="submit" class="btn btn-info"><i class="fa fa-times" aria-hidden="true"></i> Roles Inactivos</button></a>
+            <p></p>
+
+
+
+
+            <?php
+            $mostrar_datos = 0;
+            ?>
+
+            <form action="" method="get" class="form_datos">
+                <label for="datos_mostrar">Datos A Mostrar</label>
+                <select name="mostrar" onchange='submit();'>
+                    <option></option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <?php
+                    $mostrar_datos = $_GET['mostrar'];
+                    ?>
+                </select>
+            </form>
+            <form action="Buscador_Roles.php" method="get" class="form_search">
+                <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
+                <input type="submit" value="Buscar" class="btn btn-primary">
+            </form>
+
+            <table class="table">
+                <thead class="table-primary">
+                    <tr>
+                        <center>
+                            <th><center>Id</center></th>
+                            <th><center>Rol</center></th>
+                            <th><center>Estado</center></th>
+                            <th><center>Descripción</center></th>
+                            <th colspan="3"><center>Acciones</center></th>
+                            
+
+                </thead>
+                <tbody>
+                    <?php
+
+                    //Paginador
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_ROLES WHERE Id_Rol = Id_Rol ");
+                    $result_register = mysqli_fetch_array($sql_registe);
+                    $total_registro = $result_register['total_registro'];
+
+                    if ($mostrar_datos > 0) {
+                        $por_pagina = $mostrar_datos;
+                    } else {
+                        $por_pagina = 10;
+                    }
+
+                    if (empty($_GET['pagina'])) {
+                        $pagina = 1;
+                    } else {
+                        $pagina = $_GET['pagina'];
+                    }
+
+                    $desde = ($pagina - 1) * $por_pagina;
+                    $total_paginas = ceil($total_registro / $por_pagina);
+                    $sql = mysqli_query($conn, "SELECT * FROM TBL_ROLES WHERE Estado = 'ACTIVO' LIMIT $desde,$por_pagina ");
+                    mysqli_close($conn);
+
+                    $result = mysqli_num_rows($sql);
+                    if ($result > 0) {
+                        while ($row = mysqli_fetch_array($sql)) {
+                    ?>
+                            <tr>
+                                <th><center><?php echo $row['Id_Rol'] ?></center></th>
+                                <th><center><?php echo $row['Rol'] ?></center></th>
+                                <th><center><?php echo $row['Estado'] ?></center></th>
+                                <th><center><?php echo $row['Descripcion'] ?></center></th>
+                                <?php if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['u'] == 1) {
+
+                                ?>
+                                    <th><center><a href="Actualizar_Roles.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i></a></center></th>
+                                    <th><center><a href="Actualizar_Permisos.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-success btn-xs"><i class="fa fa-key" aria-hidden="true"></i></a></center></th>
+                                <?php } ?>
+                                
+                            </tr>
+                    <?php
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="paginador">
+            <ul>
+                <?php
+                if ($pagina != 1) {
+                ?>
+                    <li><a href="?pagina=<?php echo 1; ?>">|<</a>
+                    </li>
+                    <li><a href="?pagina=<?php echo $pagina - 1; ?>">
+                            <<</a>
+                    </li>
+                <?php
+                }
+                for ($i = 1; $i <= $total_paginas; $i++) {
+                    # code...
+                    if ($i == $pagina) {
+                        echo '<li class="pageSelected">' . $i . '</li>';
+                    } else {
+                        echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
+                    }
+                }
+
+                if ($pagina != $total_paginas) {
+                ?>
+                    <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
+                    <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
+                <?php } ?>
+            </ul>
+        </div>
 
     </div>
 </section>
