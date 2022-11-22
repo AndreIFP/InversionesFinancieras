@@ -134,6 +134,8 @@ if (!isset($_SESSION['rol'])) {
                                 </tr>
                         <?php
                             }
+                        }else {
+                            echo "<script> alert('No hay Registros');window.location= 'Gestion_CatalogoCuenta.php' </script>";
                         }
                         ?>
                     </tbody>
