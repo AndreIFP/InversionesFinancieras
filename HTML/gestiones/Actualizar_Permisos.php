@@ -135,91 +135,95 @@ font-size: 12px; ">
 	<title>ACTUALIZAR PERMISOS</title>
 	<h6><a class="btn btn-primary" href="GestionRoles.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a></h6>
 
-			<form action="" method="post">
-				<input type="hidden" id="idrol" name="idrol" value="<?= $arrPermisoRol['idrol']; ?>" required="">
-				<h1>Actualizar Permisos de <?= $arrPermisoRol['nomRol'];  ?></h1>
-				<hr>
-				<table class="table">
-					<thead class="table-primary">
-						<tr>
-							<th>#</th>
-							<th>Módulo</th>
-							<th>Ver</th>
-							<th>Crear</th>
-							<th>Actualizar</th>
-							<th>Eliminar</th>
-						</tr>
-					</thead>
-					<tbody>
+	<form action="" method="post">
+		<input type="hidden" id="idrol" name="idrol" value="<?= $arrPermisoRol['idrol']; ?>" required="">
+		<center><h3><strong> ACTUALIZAR PERMISOS DEL <?= $arrPermisoRol['nomRol'];  ?> </strong></h3></center>
+		<hr>
+		<table class="table">
+			<thead class="table-primary">
+				<tr>
+					<th>#</th>
+					<th>Módulo</th>
+					<th>Ver</th>
+					<th>Crear</th>
+					<th>Actualizar</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
 
-						<?php
-						$no = 1;
-						$modulos = $arrPermisoRol['modulos'];
-						/* dep($modulos);
+				<?php
+				$no = 1;
+				$modulos = $arrPermisoRol['modulos'];
+				/* dep($modulos);
 						 exit; */
-						for ($i = 0; $i < count($modulos); $i++) {
-							$permisos = $modulos[$i]['permisos'];
-							$rCheck = $permisos['r'] == 1 ? " checked " : "";
-							$wCheck = $permisos['w'] == 1 ? " checked " : "";
-							$uCheck = $permisos['u'] == 1 ? " checked " : "";
-							$dCheck = $permisos['d'] == 1 ? " checked " : "";
+				for ($i = 0; $i < count($modulos); $i++) {
+					$permisos = $modulos[$i]['permisos'];
+					$rCheck = $permisos['r'] == 1 ? " checked " : "";
+					$wCheck = $permisos['w'] == 1 ? " checked " : "";
+					$uCheck = $permisos['u'] == 1 ? " checked " : "";
+					$dCheck = $permisos['d'] == 1 ? " checked " : "";
 
-							$idmod = $modulos[$i]['Id_Objetos'];
+					$idmod = $modulos[$i]['Id_Objetos'];
 
 
-						?>
-							<td> <?= $no; ?>
-								<input type="hidden" name="modulos[<?= $i; ?>][Id_Objetos]" value="<?= $idmod ?>" required>
-							</td>
-							<td><?= $modulos[$i]['Objetos'];  ?></td>
+				?>
+					<td> <?= $no; ?>
+						<input type="hidden" name="modulos[<?= $i; ?>][Id_Objetos]" value="<?= $idmod ?>" required>
+					</td>
+					<td><?= $modulos[$i]['Objetos'];  ?></td>
 
-							<td>
-								<div class="toggle-flip">
-									<label class="switch">
-										<input type="checkbox" id="unchecked" class="deschecar" name="modulos[<?= $i; ?>][r]" <?= $rCheck ?>><span class="slider round" data-toggle-on="ON" data-toggle-off="OFF"></span>
-									</label>
-								</div>
-							</td>
-							<!-- Codigo para solo mostrar leer en calendario -->
-							<?php
-							//if ($idmod==7) {
-							//break;
-							//}
-							?>
-							<td>
-								<div class="toggle-flip">
-									<label class="switch">
-										<input type="checkbox" class="selectAll" onclick="checkBoxes('modulos[<?= $i; ?>][r]')" name="modulos[<?= $i; ?>][w]" <?= $wCheck ?>><span class="slider round" data-toggle-on="ON" data-toggle-off="OFF"></span>
-									</label>
-								</div>
-							</td>
-							<td>
-								<div class="toggle-flip">
-									<label class="switch">
-										<input type="checkbox" class="selectAll" onClick="checkBoxes('modulos[<?= $i; ?>][r]')" name="modulos[<?= $i; ?>][u]" <?= $uCheck ?>><span class="slider round" data-toggle-on="ON" data-toggle-off="OFF"></span>
-									</label>
-								</div>
-							</td>
-							<td>
-								<div class="toggle-flip">
-									<label class="switch">
-										<input type="checkbox" class="selectAll" onClick="checkBoxes('modulos[<?= $i; ?>][r]')" name="modulos[<?= $i; ?>][d]" <?= $dCheck ?>><span class="slider round" data-toggle-on="ON" data-toggle-off="OFF"></span>
-									</label>
-								</div>
-							</td>
+					<td>
+						<div class="toggle-flip">
+							<label class="switch">
+								<input type="checkbox" id="unchecked" class="deschecar" name="modulos[<?= $i; ?>][r]" <?= $rCheck ?>><span class="slider round" data-toggle-on="ON" data-toggle-off="OFF"></span>
+							</label>
+						</div>
+					</td>
+					<!-- Codigo para solo mostrar leer en calendario -->
+					<?php
+					//if ($idmod==7) {
+					//break;
+					//}
+					?>
+					<td>
+						<div class="toggle-flip">
+							<label class="switch">
+								<input type="checkbox" class="selectAll" onclick="checkBoxes('modulos[<?= $i; ?>][r]')" name="modulos[<?= $i; ?>][w]" <?= $wCheck ?>><span class="slider round" data-toggle-on="ON" data-toggle-off="OFF"></span>
+							</label>
+						</div>
+					</td>
+					<td>
+						<div class="toggle-flip">
+							<label class="switch">
+								<input type="checkbox" class="selectAll" onClick="checkBoxes('modulos[<?= $i; ?>][r]')" name="modulos[<?= $i; ?>][u]" <?= $uCheck ?>><span class="slider round" data-toggle-on="ON" data-toggle-off="OFF"></span>
+							</label>
+						</div>
+					</td>
+					<td>
+						<div class="toggle-flip">
+							<label class="switch">
+								<input type="checkbox" class="selectAll" onClick="checkBoxes('modulos[<?= $i; ?>][r]')" name="modulos[<?= $i; ?>][d]" <?= $dCheck ?>><span class="slider round" data-toggle-on="ON" data-toggle-off="OFF"></span>
+							</label>
+						</div>
+					</td>
 
-							</tr>
-						<?php
-							$no++;
-						}
-						?>
-					</tbody>
-				</table>
-				<a href="GestionRoles.php" class="btn btn-danger" style="margin-right: 20px;">Cancelar</a>
-				<input type="submit" value="Guardar Permisos" class="btn btn-success">
-			</form>
-		
+					</tr>
+				<?php
+					$no++;
+				}
+				?>
+			</tbody>
+		</table>
+		<hr>
+		<div align="right">
+		<a href="GestionRoles.php" class="btn btn-danger" style="margin-right: 20px;"> <i class="fa fa-times" aria-hidden="true"></i> Cancelar</a>
+		<button type="submit" class="btn btn-success"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar Permisos</button>
+	
 		</div>
+	</form>
+
+	</div>
 
 	</body>
 	<style type="text/css">
