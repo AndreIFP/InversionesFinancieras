@@ -81,7 +81,7 @@ if (!isset($_SESSION['rol'])) {
                     <tbody>
                         <?php
                         //Paginador
-                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA = CODIGO_CUENTA ");
+                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CATALAGO_CUENTAS WHERE Estado = 'ACTIVO ");
                         $result_register = mysqli_fetch_array($sql_registe);
                         $total_registro = $result_register['total_registro'];
 
