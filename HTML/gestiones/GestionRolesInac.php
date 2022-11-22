@@ -62,7 +62,7 @@ font-size: 12px; ">
             <?php
 
             //Paginador
-            $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_ROLES WHERE Id_Rol = Id_Rol ");
+            $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_ROLES WHERE Estado = 'INACTIVO' ");
             $result_register = mysqli_fetch_array($sql_registe);
             $total_registro = $result_register['total_registro'];
 
