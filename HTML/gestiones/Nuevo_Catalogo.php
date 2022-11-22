@@ -4,33 +4,33 @@ include("../conexion.php");
 
 
 if (!empty($_POST)) {
-	    $alert = '';
-	    session_start();
-	    $user              = $_SESSION['user'];
-		$consultas=mysqli_query($conn,"SELECT Id_Usuario FROM TBL_USUARIO where Usuario='$user' ;");
-		while($row=mysqli_fetch_array($consultas)){
-		   $iduser=$row['Id_Usuario'];
-		}
+	$alert = '';
+	session_start();
+	$user              = $_SESSION['user'];
+	$consultas = mysqli_query($conn, "SELECT Id_Usuario FROM TBL_USUARIO where Usuario='$user' ;");
+	while ($row = mysqli_fetch_array($consultas)) {
+		$iduser = $row['Id_Usuario'];
+	}
 
-		$CODIGO_CUENTA     = $_POST['CODIGO_CUENTA'];
-		$CUENTA            = $_POST['CUENTA'];
-		$CLASIFICACION     = $_POST['CLASIFICACION'];
-		$ESTADO_CUENTA     = $_POST['Estado_Cuenta'];
+	$CODIGO_CUENTA     = $_POST['CODIGO_CUENTA'];
+	$CUENTA            = $_POST['CUENTA'];
+	$CLASIFICACION     = $_POST['CLASIFICACION'];
+	$ESTADO_CUENTA     = $_POST['Estado_Cuenta'];
 
-		$querycodigo 	= mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA = '$CODIGO_CUENTA'");
-		$nr = mysqli_num_rows($querycodigo);
+	$querycodigo 	= mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA = '$CODIGO_CUENTA'");
+	$nr = mysqli_num_rows($querycodigo);
 
-		$querynombre 	= mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE CUENTA = '$CUENTA'");
-		$nr1 = mysqli_num_rows($querynombre);
-		if($nr == 0 AND $nr1 == 0){
-			$query_insert = mysqli_query($conn, "INSERT INTO TBL_CATALAGO_CUENTAS (CODIGO_CUENTA,Id_Usuario,CUENTA,CLASIFICACION,Estado_Cuenta)
+	$querynombre 	= mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE CUENTA = '$CUENTA'");
+	$nr1 = mysqli_num_rows($querynombre);
+	if ($nr == 0 and $nr1 == 0) {
+		$query_insert = mysqli_query($conn, "INSERT INTO TBL_CATALAGO_CUENTAS (CODIGO_CUENTA,Id_Usuario,CUENTA,CLASIFICACION,Estado_Cuenta)
 																	VALUES('$CODIGO_CUENTA','$iduser','$CUENTA','$CLASIFICACION','$ESTADO_CUENTA')");
-			if ($query_insert) {
-				echo "<script> alert('Cuenta Registrado Exitosamente');window.location= 'Gestion_CatalogoCuenta.php' </script>";
-			}
-		} else {
-			echo "<script> alert('No se puede registrar este número de cuenta o nombre de la cuenta, ya que este existe');window.location= 'Nuevo_Catalogo.php' </script>";
+		if ($query_insert) {
+			echo "<script> alert('Cuenta Registrado Exitosamente');window.location= 'Gestion_CatalogoCuenta.php' </script>";
 		}
+	} else {
+		echo "<script> alert('No se puede registrar este número de cuenta o nombre de la cuenta, ya que este existe');window.location= 'Nuevo_Catalogo.php' </script>";
+	}
 }
 ?>
 <?php
@@ -57,182 +57,225 @@ if (!isset($_SESSION['rol'])) {
 }
 ?>
 
-
-
 <?php include 'barralateralinicial.php'; ?>
+
+<p></p>
+<section style=" background-color:rgb(255, 255, 255); padding: 15px; color:black; font-size: 12px; ">
+
+	<title>Registrar Cuentas</title>
+	<a class="btn btn-primary" href="Gestion_CatalogoCuenta.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+	<hr>
+	<div clas="row ">
+
+		<div class="box-header with-border">
+
+			<div class="box-body">
+
+				<form class="" method="post">
+					<center>
+						<h2><strong>Registro de Cuentas</strong></h2>
+					</center>
+					<hr>
+
+					<div class="row">
+
+						<div class="col-xs-14 pull-right">
+
+							<table class="table">
+								<thead class="table-primary">
+									<tr>
+
+										<th>
+											<center>Código de cuenta</center>
+										</th>
+
+
+										<th>
+											<center>Nombre de Cuenta</center>
+										</th>
+
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr>
+
+										<td style="width: 50%">
+
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-key"></i></span>
+												<input type="text" class="form-control" name="CODIGO_CUENTA" minlength="2" maxlength="50" id="CODIGO_CUENTA" placeholder="Codigo de la cuenta" size="35" onkeypress="return validarn(event)" required>
+
+											</div>
+
+										</td>
+
+										<td style="width: 50%">
+
+											<div class="input-group">
+
+												<span class="input-group-addon"><i class="fa fa-book"></i></span>
+												<input type="text" class="form-control" name="CUENTA" maxlength="50" id="CUENTA" placeholder="Nombre de la Cuenta" size="35" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)" required>
+
+											</div>
+
+										</td>
+
+									</tr>
+
+								</tbody>
+							</table>
+
+						</div>
+
+					</div>
+
+					<div class="row">
+
+						<div class="col-xs-14 pull-right">
+
+							<table class="table">
+								<thead class="table-primary">
+									<tr>
+
+										<th>
+											<center>Clasificación</center>
+										</th>
+
+
+										<th>
+											<center>Estado de la Cuenta</center>
+										</th>
+
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr>
+
+										<td style="width: 50%">
+
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-tags"></i></span>
+												<select class="form-control" name="CLASIFICACION" required>
+													<option value="">Seleccione el tipo de cuenta</option>
+													<option value="ACTIVO CORRIENTE">ACTIVO CORRIENTE</option>
+													<option value="ACTIVO NO CORRIENTE">ACTIVO NO CORRIENTE</option>
+													<option value="PASIVO CORRIENTE">PASIVO CORRIENTE</option>
+													<option value="PASIVO NO CORRIENTE">PASIVO NO CORRIENTE</option>
+													<option value="PATRIMONIO">PATRIMONIO</option>
+												</select>
+											</div>
+
+										</td>
+
+										<td style="width: 50%">
+
+											<div class="input-group">
+
+												<span class="input-group-addon"><i class="fa fa-check"></i></span>
+												<select class="form-control" name="Estado_Cuenta" required>
+													<option value="">Seleccione el estado de la cuenta</option>
+													<option value="ACTIVO">ACTIVO</option>
+													<option value="INACTIVO">INACTIVO</option>
+												</select>
+											</div>
+
+										</td>
+
+									</tr>
+
+								</tbody>
+							</table>
+
+						</div>
+
+					</div>
+
+
+					<hr>
+					<center><button type="submit" class="btn btn-primary"> <i class="fa fa-check" aria-hidden="true"></i> Registrar Cuenta</button></center>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
 </div>
 
-<title>Gestion Catalogo Cuentas</title>
-<div class="col-md-12">
-	<div class="col-md-12">
-		<div class="col-md-12">
-			<div class="col-md-12">
-				<script>
-					function validar(e) {
-						tecla = (document.all) ? e.keyCode : e.which;
-						if (tecla == 8) return true; //Tecla de retroceso (para poder borrar)
-						// dejar la línea de patron que se necesite y borrar el resto
-						patron = /[A-Za-z\s]/; // Solo acepta letras y espacios
-						//patron = /\d/; // Solo acepta números
-						//patron = /\w/; // Acepta números y letras
-						//patron = /\D/; // No acepta números
-						//
-						te = String.fromCharCode(tecla);
-						return patron.test(te);
-					}
-				</script>
-				<script>
-					function validarn(n) {
-						tecla = (document.all) ? n.keyCode : n.which;
-						if (tecla == 8) return true; //Tecla de retroceso (para poder borrar)
-						// dejar la línea de patron que se necesite y borrar el resto
-						//patron = /[A-Za-z\s]/; // Solo acepta letras y espacios
-						patron = /\d/; // Solo acepta números
-						//patron = /\w/; // Acepta números y letras
-						//patron = /\D/; // No acepta números
-						//
-						te = String.fromCharCode(tecla);
-						return patron.test(te);
-					}
-				</script>
-				<div class="form_register">
-					<h6><a class="btn btn-primary " href="Gestion_CatalogoCuenta.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a></h6>
-					<form action="" method="post">
-
-						<center><h2><strong>Registro de Cuenta</strong> </h2></center>
-						<hr>
-						<div class="form-group">
-						   <label for="CODIGO_CUENTA">Codigo De Cuenta</label>
-
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-book"></i></span>
-								<input type="text" class="form-control" name="CODIGO_CUENTA" minlength="2" maxlength="50" id="CODIGO_CUENTA" placeholder="Codigo de la cuenta" size="35" onkeypress="return validarn(event)" required>
-
-							</div>
-
-						</div>
-
-						<div class="form-group">
-						   <label for="CUENTA">Nombre De La Cuenta</label>
-
-							<div class="input-group">
-
-								<span class="input-group-addon"><i class="fa fa-book"></i></span>
-								<input type="text" class="form-control" name="CUENTA" maxlength="50" id="CUENTA" placeholder="Nombre de la Cuenta" size="35" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)" required>
-
-							</div>
-
-						</div>
-
-						<div class="form-group">
-						    <label for="CLASIFICACION">Clasificación</label>
-
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-tags "></i></span>
-								<select class="form-control" name="CLASIFICACION" required>
-									<option value="">Seleccione el tipo de cuenta</option>
-									<option value="ACTIVO CORRIENTE">ACTIVO CORRIENTE</option>
-									<option value="ACTIVO NO CORRIENTE">ACTIVO NO CORRIENTE</option>
-									<option value="PASIVO CORRIENTE">PASIVO CORRIENTE</option>
-									<option value="PASIVO NO CORRIENTE">PASIVO NO CORRIENTE</option>
-									<option value="PATRIMONIO">PATRIMONIO</option>
-								</select>
-								
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="Estado_Cuenta">Estado Cuenta</label>
-
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-tags "></i></span>
-								<select class="form-control" name="Estado_Cuenta" required>
-									<option value="">Seleccione el estado de la cuenta</option>
-									<option value="ACTIVO">ACTIVO</option>
-									<option value="INACTIVO">INACTIVO</option>
-								</select>
-								
-							</div>
-						</div>
-
-						<center><input type="submit" value="Registrar Cuenta" class="btn btn-primary"></center>
-
-					</form>
-
-				</div>
 
 
-				</section>
-				</body>
-				<style type="text/css">
-					.btn-atras {
-						background: #1faac8;
-						color: #FFF;
-						padding: 0 20px;
-						border: 0;
-						cursor: pointer;
-						margin-left: 20px;
-					}
 
-					.form_register {
-						width: 450px;
-						margin: auto;
-					}
+<style type="text/css">
+	.btn-atras {
+		background: #1faac8;
+		color: #FFF;
+		padding: 0 20px;
+		border: 0;
+		cursor: pointer;
+		margin-left: 20px;
+	}
 
-					.form_register h1 {
-						color: #3c93b0;
-					}
+	.form_register {
+		width: 450px;
+		margin: auto;
+	}
 
-					hr {
-						border: 0;
-						background: #CCC;
-						height: 1px;
-						margin: 10px 0;
-						display: block;
-					}
+	.form_register h1 {
+		color: #3c93b0;
+	}
 
-					form {
-						background: #FFF;
-						margin: auto;
-						padding: 20px 50px;
-						border: 1px solid #d1d1d1;
-					}
+	hr {
+		border: 0;
+		background: #CCC;
+		height: 1px;
+		margin: 10px 0;
+		display: block;
+	}
 
-					label {
-						display: block;
-						font-size: 12pt;
-						font-family: 'GothamBook';
-						margin: 15px auto 5px auto;
-					}
+	form {
+		background: #FFF;
+		margin: auto;
+		padding: 20px 50px;
+		border: 1px solid #d1d1d1;
+	}
 
-					.btn_save {
-						font-size: 12pt;
-						background: #12a4c6;
-						padding: 10px;
-						color: #FFF;
-						letter-spacing: 1px;
-						border: 0;
-						cursor: pointer;
-						margin: 15px auto;
-					}
+	label {
+		display: block;
+		font-size: 12pt;
+		font-family: 'GothamBook';
+		margin: 15px auto 5px auto;
+	}
 
-					.alert {
-						width: 100%;
-						background: #66e07d66;
-						border-radius: 6px;
-						margin: 20px auto;
-					}
+	.btn_save {
+		font-size: 12pt;
+		background: #12a4c6;
+		padding: 10px;
+		color: #FFF;
+		letter-spacing: 1px;
+		border: 0;
+		cursor: pointer;
+		margin: 15px auto;
+	}
 
-					.msg_error {
-						color: #e65656;
-					}
+	.alert {
+		width: 100%;
+		background: #66e07d66;
+		border-radius: 6px;
+		margin: 20px auto;
+	}
 
-					.msg_save {
-						color: #126e00;
-					}
+	.msg_error {
+		color: #e65656;
+	}
 
-					.alert p {
-						padding: 10px;
-					}
-				</style>
-				<?php include 'barralateralfinal.php'; ?>
+	.msg_save {
+		color: #126e00;
+	}
+
+	.alert p {
+		padding: 10px;
+	}
+</style>
+<?php include 'barralateralfinal.php'; ?>

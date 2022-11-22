@@ -57,12 +57,22 @@ if (!isset($_SESSION['rol'])) {
                 <table class="table">
                     <thead class="table-primary">
                         <tr>
-                            <th>Código</th>
-                            <th>Cuenta</th>
-                            <th>Clasificación</th>
-                            <th>Estado Cuenta</th>
-                            <th>Acciones</th>
-                            <th></th>
+                            <th>
+                                <center>Código</center>
+                            </th>
+                            <th>
+                                <center>Cuenta</center>
+                            </th>
+                            <th>
+                                <center>Clasificación</center>
+                            </th>
+                            <th>
+                                <center>Estado Cuenta</center>
+                            </th>
+                            <th colspan="2">
+                                <center>Acciones</center>
+                            </th>
+
 
                         </tr>
                     </thead>
@@ -95,10 +105,17 @@ if (!isset($_SESSION['rol'])) {
                             while ($row = mysqli_fetch_array($sql)) {
                         ?>
                                 <tr>
-                                    <th><?php echo $row['CODIGO_CUENTA'] ?></th>
-                                    <th><?php echo $row['CUENTA'] ?></th>
-                                    <th><?php echo $row['CLASIFICACION'] ?></th>
-                                    <th><?php echo $row['Estado_Cuenta'] ?></th>
+                                    <th>
+                                        <center><?php echo $row['CODIGO_CUENTA'] ?></center></th>
+                                    <th>
+                                        <center><?php echo $row['CUENTA'] ?></center>
+                                    </th>
+                                    <th>
+                                        <center><?php echo $row['CLASIFICACION'] ?></center>
+                                    </th>
+                                    <th>
+                                        <center><?php echo $row['Estado_Cuenta'] ?></center>
+                                    </th>
                                     <script>
                                         function alerta() {
                                             window.alert('No es posible hacer esta Acción');
@@ -108,15 +125,12 @@ if (!isset($_SESSION['rol'])) {
                                     <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['u'] == 1) {
 
                                     ?>
-                                        <th><a href="Actualizar_Catalogo.php?Id=<?php echo $row['CODIGO_CUENTA'] ?>" class="btn btn-primary btn-xs">Editar</a></th>
-                                    <?php } ?>
-
-                                    <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['d'] == 1) {
-
-                                    ?>
-                                        <th> <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
+                                        <th>
+                                            <center><a href="Actualizar_Catalogo.php?Id=<?php echo $row['CODIGO_CUENTA'] ?>" class="btn btn-primary btn-xs"> <i class="fa fa-pencil" aria-hidden="true"></i></a></center>
                                         </th>
                                     <?php } ?>
+
+
                                 </tr>
                         <?php
                             }
