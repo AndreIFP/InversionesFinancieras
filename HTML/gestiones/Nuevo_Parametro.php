@@ -50,115 +50,161 @@ if (!isset($_SESSION['rol'])) {
 }
 ?>
 
-<?php include 'barralateralinicial.php'; ?>
-</div>
 <title>Gestion Parametro</title>
-<div class="col-md-12">
-	<div class="col-md-12">
-		<div class="col-md-12">
-			<div class="col-md-12">
-				<h6><a class="btn btn-primary" href="Gestion_Parametros.php"> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a></h6>
-				<div class="form_register">
 
-					<form action="" method="post">
-						<center><h2><strong> Registro Parametro </strong></h2></center>
-						<hr>
-						<div class="form-group">
+<?php include 'barralateralinicial.php'; ?>
 
-							<div class="input-group">
+<p></p>
+<section style=" background-color:rgb(255, 255, 255); padding: 15px;  color:black; font-size: 12px; ">
 
-								<span class="input-group-addon"><i class="fa fa-check"></i></span>
-								<input type="text" class="form-control" name="Parametro" maxlength="30" id="Parametro" placeholder="Nombre Parametro" size="40">
-						
-							</div>
+	<a class="btn btn-primary" href="Gestion_parametros.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+	<hr>
+	<div clas="row ">
+
+		<div class="box-header with-border">
+
+			<div class="box-body">
+
+				<form class="" method="post">
+					<center>
+						<h2><strong>Registro Parametro</strong></h2>
+					</center>
+					<hr>
+
+					<div class="row">
+
+						<div class="col-xs-14 pull-right">
+
+							<table class="table">
+								<input type="hidden" name="Id_Parametro" value="<?php echo $Id_Parametro  ?>">
+								<thead class="table-primary">
+									<tr>
+
+										<th>
+											<center>Nombre del parametro</center>
+										</th>
+
+
+										<th>
+											<center>Valor</center>
+										</th>
+
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr>
+
+										<td style="width: 50%">
+
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+												<input type="text" class="form-control" name="Parametro" maxlength="30" id="Parametro" placeholder="Nombre Parametro" size="40">
+
+											</div>
+
+										</td>
+
+										<td style="width: 50%">
+
+											<div class="input-group">
+
+												<span class="input-group-addon"><i class="fa fa-key"></i></span>
+												<input type="text" class="form-control" name="Valor" maxlength="40" id="Valor" placeholder="Valor" size="40">
+
+											</div>
+
+										</td>
+
+									</tr>
+
+								</tbody>
+							</table>
 
 						</div>
 
-						<div class="form-group">
+					</div>
 
-							<div class="input-group">
+					<hr>
+					<center><button type="submit" class="btn btn-primary btn-lg"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Registrar </button></center>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+</div>
 
-								<span class="input-group-addon"><i class="fa fa-info-circle"></i></span>
-								<input type="text" class="form-control" name="Valor" maxlength="40" id="Valor" placeholder="Valor" size="40">
-						
-							</div>
 
-						</div>
-						<hr>
-						<center><input type="submit" value="Registrar Parametro" class="btn btn-primary"></center>
-					</form>
-				</div>
-				</section>
-				</body>
-				<style type="text/css">
-					.btn-atras {
-						background: #1faac8;
-						color: #FFF;
-						padding: 0 20px;
-						border: 0;
-						cursor: pointer;
-						margin-left: 20px;
-					}
+<style type="text/css">
+	.btn-atras {
+		background: #1faac8;
+		color: #FFF;
+		padding: 0 20px;
+		border: 0;
+		cursor: pointer;
+		margin-left: 20px;
+	}
 
-					.form_register {
-						width: 450px;
-						margin: auto;
-					}
+	.form_register {
+		width: 450px;
+		margin: auto;
+	}
 
-					.form_register h1 {
-						color: #3c93b0;
-					}
+	.form_register h1 {
+		color: #3c93b0;
+	}
 
-					hr {
-						border: 0;
-						background: #CCC;
-						height: 1px;
-						margin: 10px 0;
-						display: block;
-					}
+	hr {
+		border: 0;
+		background: #CCC;
+		height: 1px;
+		margin: 10px 0;
+		display: block;
+	}
 
-					form {
-						background: #FFF;
-						margin: auto;
-						padding: 20px 50px;
-						border: 1px solid #d1d1d1;
-					}
+	form {
+		background: #FFF;
+		margin: auto;
+		padding: 20px 50px;
+		border: 1px solid #d1d1d1;
+	}
 
-					label {
-						display: block;
-						font-size: 12pt;
-						font-family: 'GothamBook';
-						margin: 15px auto 5px auto;
-					}
+	label {
+		display: block;
+		font-size: 12pt;
+		font-family: 'GothamBook';
+		margin: 15px auto 5px auto;
+	}
 
-					.btn_save {
-						font-size: 12pt;
-						background: #12a4c6;
-						padding: 10px;
-						color: #FFF;
-						letter-spacing: 1px;
-						border: 0;
-						cursor: pointer;
-						margin: 15px auto;
-					}
+	.btn_save {
+		font-size: 12pt;
+		background: #12a4c6;
+		padding: 10px;
+		color: #FFF;
+		letter-spacing: 1px;
+		border: 0;
+		cursor: pointer;
+		margin: 15px auto;
+	}
 
-					.alert {
-						width: 100%;
-						background: #66e07d66;
-						border-radius: 6px;
-						margin: 20px auto;
-					}
+	.alert {
+		width: 100%;
+		background: #66e07d66;
+		border-radius: 6px;
+		margin: 20px auto;
+	}
 
-					.msg_error {
-						color: #e65656;
-					}
+	.msg_error {
+		color: #e65656;
+	}
 
-					.msg_save {
-						color: #126e00;
-					}
+	.msg_save {
+		color: #126e00;
+	}
 
-					.alert p {
-						padding: 10px;
-					}
-				</style>
-				<?php include 'barralateralfinal.php'; ?>
+	.alert p {
+		padding: 10px;
+	}
+</style>
+<?php include 'barralateralfinal.php'; ?>
