@@ -79,10 +79,6 @@ $fechaf = $_SESSION['fechaf'];
 $empresa = $_SESSION['empresa'];
 $fecha = date('Y-m-d h:i:s');
 
-require ('conexion.php');
-
-$queryz = "SELECT CLASIFICACION FROM tbl_catalago_cuentas";
-	$resultadoz=$mysqli->query($queryz);
 ?>
 
 <?php include '../layout/header.php'; ?>
@@ -99,6 +95,7 @@ $queryz = "SELECT CLASIFICACION FROM tbl_catalago_cuentas";
   <div class="box-header">
     <center>
       <h3><strong> Libro diario de <?php echo $empresa  ?></strong></h3>
+      <h3><strong> del <?php echo $fechai  ?> al  <?php echo $fechaf  ?></strong></h3>
     </center>
   </div><!-- /.box-header -->
 
@@ -167,20 +164,21 @@ $queryz = "SELECT CLASIFICACION FROM tbl_catalago_cuentas";
                       <div>Selecciona Tipo de Cuenta : 
                       <select name="cbx_estado" id="cbx_estado">
         <option > </option>
-				<option value="Activo Corriente">Activo Corriente</option>
-				<option value="Activo No Corriente">Activo No Corriente</option>
-				<option value="Pasivo Corriente">Pasivo Corriente</option>
-				<option value="Pasivo No Corriente">Pasivo No Corriente</option>
-				<option value="Patrimonio">Patrimonio</option>
+				<option value="110_">Activo</option>
+				<option value="210_">Pasivo</option>
+				<option value="310_">Capital y Patrimonio</option>
+        <option value="410_">Ingresos</option>
+				<option value="510_">Costos</option>
+				<option value="610_">Gastos</option>
 			</select></div>
 			
 			<br />
 			
-			<div>Seleccione Cuenta: <select name="cbx_municipio" id="cbx_municipio"></select></div>
+			<div>Seleccione Cuenta 2: <select name="cbx_municipio" id="cbx_municipio"></select></div>
 
       <br />
 			
-			<div>Seleccione Cuenta 2: <select name="cbx_casa" id="cbx_casa"></select></div>
+			<div>Seleccione Cuenta 3: <select name="cbx_casa" id="cbx_casa"></select></div>
 			
 			<br />
 			
