@@ -63,6 +63,53 @@ if (!isset($_SESSION['rol'])) {
 <section style=" background-color:rgb(255, 255, 255); padding: 15px; color:black; font-size: 12px; ">
 
 	<title>Registrar Cuentas</title>
+
+	<!-- script CUENTA -->
+<script language="javascript" src="js/jquery-3.1.1.min.js"></script>
+		
+		<script language="javascript">
+					$(document).ready(function(){
+						$("#cbx_estado").change(function () {
+		
+							$('#cbx_casa').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+							$('#cbx_localidad').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+				  
+							$("#cbx_estado option:selected").each(function () {
+								id_estado = $(this).val();
+								$.post("includes/getMunicipio.php", { id_estado: id_estado }, function(data){
+									$("#cbx_municipio").html(data);
+								});            
+							});
+						})
+					});
+		
+			  $(document).ready(function(){
+						$("#cbx_municipio").change(function () {
+		
+				  
+		
+							$("#cbx_municipio option:selected").each(function () {
+								id_municipio = $(this).val();
+								$.post("includes/getCasa.php", { id_municipio: id_municipio }, function(data){
+									$("#cbx_casa").html(data);
+								});            
+							});
+						})
+					});
+		
+			  $(document).ready(function(){
+						$("#cbx_casa").change(function () {
+							$("#cbx_casa option:selected").each(function () {
+								id_casa = $(this).val();
+								$.post("includes/getLocalidad.php", { id_casa: id_casa}, function(data){
+									$("#cbx_localidad").html(data);
+								});            
+							});
+						})
+					});
+		
+				</script>
+
 	<a class="btn btn-primary" href="Gestion_CatalogoCuenta.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
 	<hr>
 	<div clas="row ">
@@ -75,6 +122,42 @@ if (!isset($_SESSION['rol'])) {
 					<center>
 						<h2><strong>Registro de Cuentas</strong></h2>
 					</center>
+
+						<!-- ENTRADA PARA LA CUENTA -->
+							<div class="form-group">
+                            <h5> <strong> Cuenta principal </strong></h5>
+
+                      <!-- ENTRADA PARA LA CUENTA -->
+                      <form id="combo" name="combo" action="guarda.php" method="POST">
+                      <div>Selecciona Tipo de Cuenta : 
+                      <select name="cbx_estado" id="cbx_estado">
+        <option > </option>
+				<option value="110_">Activo</option>
+				<option value="210_">Pasivo</option>
+				<option value="310_">Capital y Patrimonio</option>
+        <option value="410_">Ingresos</option>
+				<option value="510_">Costos</option>
+				<option value="610_">Gastos</option>
+			</select></div>
+			
+			<br />
+			
+			<div>Seleccione Cuenta 2: <select name="cbx_municipio" id="cbx_municipio"></select></div>
+
+      <br />
+			
+			<div>Seleccione Cuenta 3: <select name="cbx_casa" id="cbx_casa"></select></div>
+			
+			<br />
+			
+			<div>Selecciona Cuenta Final: <select name="cbx_localidad" id="cbx_localidad"></select></div>
+			
+			<br />
+			<input type="submit" id="enviar" name="enviar" value="Guardar" />
+		</form>
+
+			<br>
+
 					<hr>
 
 					<div class="row">
