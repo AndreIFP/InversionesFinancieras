@@ -67,10 +67,10 @@ if (!isset($_SESSION['rol'])) {
             <table class="table ">
                 <thead class="table-primary">
                     <tr>
-                        <th>Id</th>
-                        <th>Preguntas</th>
-                        <th>Acciones</th>
-                        <th></th>
+                        <th><center>Id</center></th>
+                        <th><center>Preguntas</center></th>
+                        <th colspan="2"><center>Acciones</center></th>
+                     
 
                     </tr>
                 </thead>
@@ -103,8 +103,8 @@ if (!isset($_SESSION['rol'])) {
                         while ($row = mysqli_fetch_array($sql)) {
                     ?>
                             <tr>
-                                <th><?php echo $row['Id_Preguntas'] ?></th>
-                                <th><?php echo $row['Preguntas'] ?></th>
+                                <th><center><?php echo $row['Id_Preguntas'] ?></center></th>
+                                <th><center><?php echo $row['Preguntas'] ?></center></th>
                                 <script>
                                     function alerta() {
                                         window.alert('No es posible hacer esta Accion');
@@ -112,13 +112,9 @@ if (!isset($_SESSION['rol'])) {
                                 </script>
                                 <?php if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['u'] == 1) {
                                 ?>
-                                    <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a>  </th>
-                                    <?php } ?>
-                                    <?php if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['d'] == 1) {
-                                    ?>
-                                         <th> <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
-                                    </th>
+                                    <th><center><a type="button" class="btn btn-primary btn-xs" onclick="alerta()"><i class="fa fa-pencil" aria-hidden="true"></i></a></center> </th>
                                 <?php } ?>
+                               
                             </tr>
                     <?php
                         }

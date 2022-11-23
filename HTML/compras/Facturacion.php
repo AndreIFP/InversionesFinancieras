@@ -1,10 +1,45 @@
+<?php
+////////////////// CONEXION A LA BASE DE DATOS //////////////////
+session_start();
+$host = 'localhost:3307';
+$basededatos = '2w4GSUinHO';
+$usuario = 'root';
+$contraseña = '3214';
 
+
+
+$conexion = new mysqli($host, $usuario,$contraseña, $basededatos);
+if ($conexion -> connect_errno) {
+die( "Fallo la conexión : (" . $conexion -> mysqli_connect_errno() 
+. ") " . $conexion -> mysqli_connect_error());
+}
+  ///////////////////CONSULTA DE LOS ALUMNOS///////////////////////
+
+$alumnos="SELECT * FROM product order by id_product";
+$queryAlumnos= $conexion->query($alumnos);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Nuevo Producto</title>
     <link rel="stylesheet" href="assets/css/main.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+    <script>
+			
+      $(function(){
+      // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
+      $("#newRow").on('click', function(){
+        $("#tabla tbody tr:eq(0)").clone().removeClass('fila-fija').appendTo("#tabla");
+      });
+     
+      // Evento que selecciona la fila y la elimina 
+     
+      
+    });
+  </script>
 </head>
 <body>
 <div class="control-bar">
@@ -34,7 +69,7 @@
 
 <header class="row">
 
-<form method="post" action="../factura1.php">
+<form method="post">
   <div class="me">
     <div class="col-2">
     <h1>Factura Inventario</h1>
@@ -45,28 +80,28 @@
 
 <div class="row section">
 
-	<div class="col-2">
-  <input type="text" style="width:400px;height:35px;border:0;text-transform:uppercase"  placeholder="Ingrese el nombre del proveedor" size="50" value="" /><br>
-  </div><!--.col-->
+	<<div class="col-2">
+  <input type="text" style="width:400px;height:35px;border:0;text-transform:uppercase"  placeholder="Ingrese el nombre del proveedor" name="nameProveedor" size="50" value="" /><br>
+  </div><!--.col--> 
 
-  <div class="col-2 text-center details">
+   <div class="col-2 text-center details">
       Fecha: <input type="date" name="Fecha" style="width:90px;" name="Fechaini" required><br>
       Factura #: <input type="text" name="factura" placeholder="000-001-01-000000" maxlength="15" style="width:120px;" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
-      CAI: <input type="text" value="" placeholder="00000000000" maxlength="17" style="width:120px;" oninput="this.value = this.value.replace(/[^0-9\s]/,'')" required/><br>
+      CAI: <input type="text" name="CAI" value="" placeholder="000000-000000-000000-000000-000000-00" maxlength="50" style="width:300px;" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
      Vence: <input type="date" style="width:90px;" name="Fechaven" required/>
   </div><!--.col-->
   
   
   
-  <div class="col-2">
+ <div class="col-2">
     
 
     <p class="client">
       <strong>Datos</strong><br>
-      <input type="text" style="width:400px;height:35px;border:0"  placeholder="Direccion del Proveedor" size="150" value="" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" required /><br><br>
-      <input type="text" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Telefono" size="15" value="" oninput="this.value = this.value.replace(/[^0-9\s]/,'')" required/><br>
+      <input type="text" style="width:400px;height:35px;border:0"  placeholder="Direccion del Proveedor" size="150" value="" name="dirProveedor" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" required /><br><br>
+      <input type="text" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Telefono" size="15" name="telefono" value="" oninput="this.value = this.value.replace(/[^0-9\s]/,'')" required/><br>
     </p>
-  </div><!--.col-->
+  </div><!--.col--> 
   
   
   <div class="col-2">
@@ -95,52 +130,98 @@
 	</tbody>
 	</table>
 </div>
-
 </div><!--.row-->
+<center>
+<div class="invoicelist-footer">
 
-<div class="invoicelist-body">
-  <table>
-    <thead>
-      <th width="5%">Código</th>
-      <th width="60%">Descripción</th>
-      
-      <th width="10%">Cant.</th>
-      <th width="15%">Precio</th>
-      <th class="taxrelated">IVA</th>
-      <th width="10%">Total</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td width='5%'><a class="control removeRow" href="#">x</a><input type="text" name="Codigo" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/><br> </td>
-        <td width='60%'><input type="text" name="Descripcion" style="width:250px;height:20px;border:0" maxlength="50"  placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/><br></td>
-        <td class="amount"><input type="number" name="cantidad" style="width:50px;height:20px;border:0" value="1" required/></td>
-        <td class="rate"><input type="number" name="precio" style="width:60px;height:20px;border:0" Placeholder="Precio" step=00.01 required/></td>
-        <td class="tax taxrelated"></td>
-        <td class="sum"></td>
-      </tr>
-    </tbody>
-  </table>
-  <a class="control newRow" href="#">+ Nueva fila</a>
-</div><!--.invoice-body-->
+  <button type="submit" name="insertar" class="btn btn-success btn-lg">Registrar Productos</button>
+</div>
+</form>
+
 <center>
 
 
 
 
-<div class="invoicelist-footer">
-  <table>
-    <tr class="taxrelated">
-      <td>IVA:</td>
-      <td id="total_tax"></td>
-    </tr>
-    <tr>
-      <td><strong>Total:</strong></td>
-      <td id="total_price"></td>
-    </tr>
-  </table>
-</div>
-<button type="submit" class="btn btn-success btn-lg">Registrar su factura</button>
+
+
 </form>
+
+<?php
+
+				//////////////////////// PRESIONAR EL BOTÓN //////////////////////////
+				if(isset($_POST['insertar']))
+
+				{
+
+       
+
+          
+          $_SESSION['productos']['nameProveedor']=$_POST['nameProveedor'];
+          $_SESSION['productos']['Fecha']=$_POST['Fecha'];
+          $_SESSION['productos']['factura']=$_POST['factura'];
+          $_SESSION['productos']['CAI']=$_POST['CAI'];
+          $_SESSION['productos']['Fechaven']=$_POST['Fechaven'];
+          $_SESSION['productos']['dirProveedor']=$_POST['dirProveedor'];
+          $_SESSION['productos']['telefono']=$_POST['telefono'];
+          $_SESSION['productos']['proveedor']=$_POST['proveedor'];
+          $_SESSION['productos']['Terminos']=$_POST['Terminos'];
+          
+          
+
+
+        echo '<script type="text/javascript">window.location.href = "FacturacionProductos.php";</script>';
+        /* print_r('<pre>');
+        print_r($_POST);
+        print_r('</pre>');
+        exit;
+				$items1 = ($_POST['factura']);
+				$items2 = ($_POST['proveedor']);
+				$items3 = ($_POST['Descripcion']);
+				$items4 = ($_POST['cantidad']);
+				///////////// SEPARAR VALORES DE ARRAYS, EN ESTE CASO SON 4 ARRAYS UNO POR CADA INPUT (ID, NOMBRE, CARRERA Y GRUPO////////////////////)
+				while(true) {
+
+				    //// RECUPERAR LOS VALORES DE LOS ARREGLOS ////////
+				    $item1 = current($items1);
+				    $item2 = current($items2);
+				    $item3 = current($items3);
+				    $item4 = current($items4);
+				    
+				    ////// ASIGNARLOS A VARIABLES ///////////////////
+				    $id=(( $item1 !== false) ? $item1 : ", &nbsp;");
+				    $nom=(( $item2 !== false) ? $item2 : ", &nbsp;");
+				    $carr=(( $item3 !== false) ? $item3 : ", &nbsp;");
+				    $gru=(( $item4 !== false) ? $item4 : ", &nbsp;");
+
+				    //// CONCATENAR LOS VALORES EN ORDEN PARA SU FUTURA INSERCIÓN ////////
+				    $valores='('.$id.',"'.$nom.'","'.$carr.'","'.$gru.'"),';
+
+				    //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
+				    $valoresQ= substr($valores, 0, -1);
+				    
+				    ///////// QUERY DE INSERCIÓN ////////////////////////////
+				    $sql = "INSERT INTO product (Nfactura,Proveedor,proname,amount) 
+					VALUES $valoresQ";
+
+					
+					$sqlRes=$conexion->query($sql) or mysql_error();
+
+				    
+				    // Up! Next Value
+				    $item1 = next( $items1 );
+				    $item2 = next( $items2 );
+				    $item3 = next( $items3 );
+				    $item4 = next( $items4 );
+				    
+				    // Check terminator
+            if($item1 === false && $item2 === false && $item3 === false && $item4 === false) break;
+    
+				} */
+		
+				}
+
+			?>
 <div class="note" contenteditable>
   <h2>Nota:</h2>
 </div><!--.note-->

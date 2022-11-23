@@ -28,135 +28,146 @@ if (!isset($_SESSION['rol'])) {
     padding: 15px;
     color:black;
     font-size: 12px; ">
-<title>Gestión parametros</title>
-<div class="box-body table-responsive">
+    <title>Gestión parametros</title>
+    <div class="box-body table-responsive">
         <div class="reportes">
             <h2><strong>Gestión Parametros</strong> </h2>
             <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
             <?php if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['w'] == 1) {
             ?>
                 <a href="Nuevo_Parametro.php" input type="submit" class="btn btn-success" Value="Crear Parametro"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo parametro</a>
-       
 
-    <?php } ?>
-    <a class="btn btn-warning" href="Reporte_Parametro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-    </div>
-    <?php
-    $mostrar_datos = 0;
-    ?>
 
-    <form action="" method="get" class="form_datos">
-        <label for="datos_mostrar">Datos A Mostrarㅤ</label>
-        <select name="mostrar" onchange='submit();'>
-            <option></option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <?php
-            $mostrar_datos = $_GET['mostrar'];
-            ?>
-        </select>
-    </form>
-    <form action="Buscador_Parametro.php" method="get" class="form_search">
-
-        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-        <input type="submit" value="Buscar" class="btn btn-primary">
-    </form>
-
-    <table class="table">
-        <thead class="table-primary">
-            <tr>
-                <th>Id</th>
-                <th>Nombre Parametro</th>
-                <th>Valor</th>
-                <th>Fecha Creación</th>
-                <th>Fecha Modificación</th>
-                <th>Acciones</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            //Paginador
-            $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_PARAMETROS WHERE Id_Parametro = Id_Parametro ");
-            $result_register = mysqli_fetch_array($sql_registe);
-            $total_registro = $result_register['total_registro'];
-
-            if ($mostrar_datos > 0) {
-                $por_pagina = $mostrar_datos;
-            } else {
-                $por_pagina = 10;
-            }
-
-            if (empty($_GET['pagina'])) {
-                $pagina = 1;
-            } else {
-                $pagina = $_GET['pagina'];
-            }
-
-            $desde = ($pagina - 1) * $por_pagina;
-            $total_paginas = ceil($total_registro / $por_pagina);
-            $sql = mysqli_query($conn, "select * FROM TBL_PARAMETROS ORDER BY Fecha_Creacion DESC LIMIT $desde,$por_pagina ");
-            mysqli_close($conn);
-
-            $result = mysqli_num_rows($sql);
-            if ($result > 0) {
-                while ($row = mysqli_fetch_array($sql)) {
-            ?>
-                    <tr>
-                        <th><?php echo $row['Id_Parametro'] ?></th>
-                        <th><?php echo $row['Parametro'] ?></th>
-                        <th><?php echo $row['Valor'] ?></th>
-                        <th><?php echo $row['Fecha_Creacion'] ?></th>
-                        <th><?php echo $row['Fecha_Modificacion'] ?></th>
-                        <script>
-                            function alerta() {
-                                window.alert('No es posible hacer esta Accion');
-                            }
-                        </script>
-                        <?php if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['u'] == 1) {
-                        ?>
-                            <th><a href="Actualizar_Parametro.php?Id=<?php echo $row['Id_Parametro'] ?>" class="btn btn-primary btn-xs">Editar</a></th>
-                            <p>
-                            <?php } ?>
-
-                            <?php if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['d'] == 1) {
-                            ?>
-                                <th><a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a></th>
-                            <?php } ?>
-                    </tr>
-            <?php
-                }
-            }
-            ?>
-        </tbody>
-    </table>
-    <div class="paginador">
-        <ul>
-            <?php
-            if ($pagina != 1) {
-            ?>
-                <li><a href="?pagina=<?php echo 1; ?>">|<</a>
-                </li>
-                <li><a href="?pagina=<?php echo $pagina - 1; ?>">Ant</a></li>
-            <?php
-            }
-            for ($i = 1; $i <= $total_paginas; $i++) {
-                # code...
-                if ($i == $pagina) {
-                    echo '<li class="pageSelected">' . $i . '</li>';
-                } else {
-                    echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
-                }
-            }
-
-            if ($pagina != $total_paginas) {
-            ?>
-                <li><a href="?pagina=<?php echo $pagina + 1; ?>">Sig</a></li>
-                <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
             <?php } ?>
-        </ul>
-    </div>
+            <a class="btn btn-warning" href="Reporte_Parametro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+        </div>
+        <?php
+        $mostrar_datos = 0;
+        ?>
+
+        <form action="" method="get" class="form_datos">
+            <label for="datos_mostrar">Datos A Mostrarㅤ</label>
+            <select name="mostrar" onchange='submit();'>
+                <option></option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <?php
+                $mostrar_datos = $_GET['mostrar'];
+                ?>
+            </select>
+        </form>
+        <form action="Buscador_Parametro.php" method="get" class="form_search">
+
+            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
+            <input type="submit" value="Buscar" class="btn btn-primary">
+        </form>
+
+        <table class="table">
+            <thead class="table-primary">
+                <tr>
+                    <th>
+                        <center> Id </center>
+                    </th>
+                    <th>
+                        <center>Nombre Parametro </center>
+                    </th>
+                    <th>
+                        <center>Valor </center>
+                    </th>
+                    <th colspan="3">
+                        <center>Acciones </center>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                //Paginador
+                $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_PARAMETROS WHERE Id_Parametro = Id_Parametro ");
+                $result_register = mysqli_fetch_array($sql_registe);
+                $total_registro = $result_register['total_registro'];
+
+                if ($mostrar_datos > 0) {
+                    $por_pagina = $mostrar_datos;
+                } else {
+                    $por_pagina = 10;
+                }
+
+                if (empty($_GET['pagina'])) {
+                    $pagina = 1;
+                } else {
+                    $pagina = $_GET['pagina'];
+                }
+
+                $desde = ($pagina - 1) * $por_pagina;
+                $total_paginas = ceil($total_registro / $por_pagina);
+                $sql = mysqli_query($conn, "select * FROM TBL_PARAMETROS ORDER BY Fecha_Creacion DESC LIMIT $desde,$por_pagina ");
+                mysqli_close($conn);
+
+                $result = mysqli_num_rows($sql);
+                if ($result > 0) {
+                    while ($row = mysqli_fetch_array($sql)) {
+                ?>
+                        <tr>
+                            <th>
+                                <center><?php echo $row['Id_Parametro'] ?></center>
+                            </th>
+                            <th>
+                                <center><?php echo $row['Parametro'] ?></center>
+                            </th>
+                            <th>
+                                <center><?php echo $row['Valor'] ?></center>
+                            </th>
+                            <script>
+                                function alerta() {
+                                    window.alert('No es posible hacer esta Accion');
+                                }
+                            </script>
+                            <?php if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['u'] == 1) {
+                            ?>
+                                <th>
+                                    <center><a href="Actualizar_Parametro.php?Id=<?php echo $row['Id_Parametro'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i></a></center>
+                                </th>
+                                <p>
+                                <?php
+                            }
+                                ?>
+
+
+                        </tr>
+                <?php
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
+        <div class="paginador">
+            <ul>
+                <?php
+                if ($pagina != 1) {
+                ?>
+                    <li><a href="?pagina=<?php echo 1; ?>">|<</a>
+                    </li>
+                    <li><a href="?pagina=<?php echo $pagina - 1; ?>">Ant</a></li>
+                <?php
+                }
+                for ($i = 1; $i <= $total_paginas; $i++) {
+                    # code...
+                    if ($i == $pagina) {
+                        echo '<li class="pageSelected">' . $i . '</li>';
+                    } else {
+                        echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
+                    }
+                }
+
+                if ($pagina != $total_paginas) {
+                ?>
+                    <li><a href="?pagina=<?php echo $pagina + 1; ?>">Sig</a></li>
+                    <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
+                <?php } ?>
+            </ul>
+        </div>
 
 
     </div>

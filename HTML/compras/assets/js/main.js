@@ -63,18 +63,19 @@ function calculate(){
 }
 
 
-var newRow = '<tr><td><a class="control removeRow" href="#">x</a><span contenteditable>12345</span></td><td><span contenteditable>Descripción</span></td><td class="amount"><input type="text" value="1"/></td><td class="rate"><input type="text" value="99" /></td><td class="tax taxrelated"></td><td class="sum"></td></tr>';
+/*var newRow = '<tr><td><a class="control removeRow" href="#">x</a><span contenteditable>12345</span></td><td><span contenteditable>Descripción</span></td><td class="amount"><input type="text" value="1"/></td><td class="rate"><input type="text" value="99" /></td><td class="tax taxrelated"></td><td class="sum"></td></tr>';
 
-$('.invoicelist-body').on('keyup','input',function(){
-  calculate();
-});
+
 
 $('.newRow').on('click',function(e){
   $('.invoicelist-body tbody').append(newRow);
   e.preventDefault();
   calculate();
 });
-
+*/
+$('.invoicelist-body').on('keyup','input',function(){
+  calculate();
+});
 $('body').on('click','.removeRow',function(e){
   $(this).closest('tr').remove();
   e.preventDefault();

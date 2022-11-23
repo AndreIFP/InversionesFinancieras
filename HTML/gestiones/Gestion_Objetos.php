@@ -33,10 +33,7 @@ font-size: 12px; ">
             <div>
                 <h2><strong> Gestión Objetos</strong> </h2>
                 <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-                <?php if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['w'] == 1) {
-                ?>
-                    <a href="Nuevo_Objetos.php" input type="submit" class="btn btn-success" Value="Crear Nuevo Objeto"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Objeto</a>
-                <?php } ?>
+               
                 <a class="btn btn-warning" href="Reporte_Objetos.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
             </div>
 
@@ -65,12 +62,12 @@ font-size: 12px; ">
             <table class="table">
                 <thead class="table-primary">
                     <tr>
-                        <th>Id</th>
-                        <th>Objeto</th>
-                        <th>Descripcion</th>
-                        <th>Tipo</th>
-                        <th></th>
-                        <th></th>
+                        <th><center>Id</center></th>
+                        <th><center>Objeto</center></th>
+                        <th><center>Descripcion</center></th>
+                        <th><center>Tipo</center></th>
+                       
+                        
 
                 </thead>
                 <tbody>
@@ -102,19 +99,12 @@ font-size: 12px; ">
                         while ($row = mysqli_fetch_array($sql)) {
                     ?>
                             <tr>
-                                <th><?php echo $row['Id_Objetos'] ?></th>
-                                <th><?php echo $row['Objetos'] ?></th>
-                                <th><?php echo $row['Descripcion'] ?></th>
-                                <th><?php echo $row['Tipo_Objeto'] ?></th>
+                                <th><center><?php echo $row['Id_Objetos'] ?></center></th>
+                                <th><center><?php echo $row['Objetos'] ?></center></th>
+                                <th><center><?php echo $row['Descripcion'] ?></center></th>
+                                <th><center><?php echo $row['Tipo_Objeto'] ?></center></th>
 
-                                <?php if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['u'] == 1) {
-                                ?>
-                                    <th><a href="Actualizar_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>" class="btn btn-primary btn-xs">Editar</a></th>
-                                <?php } ?>
-                                <?php if ($_SESSION['permisos'][M_GESTION_OBJETOS] and $_SESSION['permisos'][M_GESTION_OBJETOS]['d'] == 1) {
-                                ?>
-                                    <th> <a href="Delete_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>" class="btn btn-danger btn-xs">Eliminar</a></th>
-                                <?php } ?>
+                               
                             </tr>
                     <?php
                         }
@@ -128,10 +118,10 @@ font-size: 12px; ">
                 <?php
                 if ($pagina != 1) {
                 ?>
-                    <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                    <li><a href="?pagina=<?php echo 1; ?>">|<</a>
                     </li>
                     <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                            <<< /a>
+                            <<</a>
                     </li>
                 <?php
                 }

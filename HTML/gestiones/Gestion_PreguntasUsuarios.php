@@ -61,12 +61,11 @@ if (!isset($_SESSION['rol'])) {
             <table class="table">
                 <thead class="table-primary">
                     <tr>
-                        <th>Id</th>
-                        <th>Id Usuario</th>
-                        <th>Preguntas</th>
-                        <th>Respuestas</th>
-                        <th>Acciones</th>
-                        <th></th>
+                        <th><center>Id</center></th>
+                        <th><center>Id Usuario</center></th>
+                        <th><center>Preguntas</center></th>
+                        <th><center>Respuestas</center></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -98,23 +97,11 @@ if (!isset($_SESSION['rol'])) {
                         while ($row = mysqli_fetch_array($sql)) {
                     ?>
                             <tr>
-                                <th><?php echo $row['Id_Preguntas'] ?></th>
-                                <th><?php echo $row['Id_Usuario'] ?></th>
-                                <th><?php echo $row['Preguntas'] ?></th>
-                                <th><?php echo $row['Respuestas'] ?></th>
-                                <script>
-                                    function alerta() {
-                                        window.alert('No es posible hacer esta Accion');
-                                    }
-                                </script>
-                                <?php if ($_SESSION['permisos'][M_GESTION_PREG_USUARIOS] and $_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['u'] == 1) {
-                                ?>
-                                    <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a></th>
-                                <?php } ?>
-                                <?php if ($_SESSION['permisos'][M_GESTION_PREG_USUARIOS] and $_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['d'] == 1) {
-                                ?>
-                                    <th><a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a></th>
-                                <?php } ?>
+                                <th><center><?php echo $row['Id_Preguntas'] ?></center></th>
+                                <th><center><?php echo $row['Id_Usuario'] ?></center></th>
+                                <th><center><?php echo $row['Preguntas'] ?></center></th>
+                                <th><center><?php echo $row['Respuestas'] ?></center></th>
+                                
                             </tr>
                     <?php
                         }

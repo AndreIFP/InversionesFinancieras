@@ -106,11 +106,11 @@ $queryz = "SELECT CLASIFICACION FROM tbl_catalago_cuentas";
 
 
   <!--DEPOSITO-->
-  <div class="modal fade"  id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-document" role="document" >
-      <div class="modal-content" style="max-width: 1200px ; left:80px;  margin-top: 50px"   >
-        <div class="modal-header"  >
-          <div class="box-body" >
+  <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="box-body">
             <!-- Date range -->
             <form method="post" action="depositar_add.php" enctype="multipart/form-data" class="form-horizontal">
               <input type="hidden" class="form-control" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>" required>
@@ -118,33 +118,35 @@ $queryz = "SELECT CLASIFICACION FROM tbl_catalago_cuentas";
               <input type="hidden" class="form-control" id="debe_haber" name="debe_haber" value="debe" required>
               <div class="col-md-11 btn-print">
                 <br>
-
                 <div class="form-group">
                   <center>
-                    <h5> <strong> Asiento Contable </strong></h5>
+                    <h5> <strong> DEPÓSITO </strong></h5>
                   </center>
                   <hr>
-                  
-                  <div class="col-md-5 btn-print" style="right: 16px;">
-                   <!-- ENTRADA DEl ID ASIENTO-->
-                   
-                   <div class="form-group">
-                   <h5> <strong> Número de Asiento </strong></h5>
+                  <!-- ENTRADA PARA LA CUENTA -->
+                  <div class="form-group">
                     <div class="input-group">
-                    
-                      <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-                      <input type="text" class="form-control pull-right" id="descripcion" name="NAsiento" placeholder="Número de Asiento" required>
+                      <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                      <select class="form-control" name="txtpregunta" id="format" id="txtpregunta" required>
+                        <option value="">Seleccione una Cuenta</option>
+                        <?php
+                        include('../conexion.php');
+                        #consulta de todos los paises
+                        $consulta = mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS ;");
+                        while ($row = mysqli_fetch_array($consulta)) {
+                          $nombrepais = $row['CUENTA'];
+                          $nombeid = $row['CODIGO_CUENTA'];
+                        ?>
+                          <option class="dropdown-item" value="<?php echo $nombeid ?>"><?php echo $nombrepais ?></option>
+                        <?php
+                        }
+                        ?>
+                      </select>
                     </div>
                   </div>
-                  <h5> <strong >Fecha </strong></h5 >
-                  </div>
-                 
-        
 
                   <!-- ENTRADA PARA LA FECHA -->
-                  
                   <div class="form-group">
-                  
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                       <input type="date" class="form-control pull-right" id="date" name="fechax" required>
@@ -152,86 +154,24 @@ $queryz = "SELECT CLASIFICACION FROM tbl_catalago_cuentas";
                   </div>
                   <!-- ENTRADA DE LA DESCRIPCION-->
                   <div class="form-group">
-                  <h5> <strong> Descripción </strong></h5>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-                      <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" placeholder="Descripción del Asiento" required>
+                      <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" placeholder="Descripción del Movimiento" required>
                     </div>
                   </div>
-                            <!-- ENTRADA PARA LA CUENTA -->
-                            <div class="form-group">
-                            <h5> <strong> Cuenta principal </strong></h5>
+
+                  <!--ENTRADA DEL MONTO -->
+                  <div class="form-group">
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                      <!-- ENTRADA PARA LA CUENTA -->
-                      <form id="combo" name="combo" action="guarda.php" method="POST">
-                      <div>Selecciona Tipo de Cuenta : 
-                      <select name="cbx_estado" id="cbx_estado">
-        <option > </option>
-				<option value="Activo Corriente">Activo Corriente</option>
-				<option value="Activo No Corriente">Activo No Corriente</option>
-				<option value="Pasivo Corriente">Pasivo Corriente</option>
-				<option value="Pasivo No Corriente">Pasivo No Corriente</option>
-				<option value="Patrimonio">Patrimonio</option>
-			</select></div>
-			
-			<br />
-			
-			<div>Seleccione Cuenta: <select name="cbx_municipio" id="cbx_municipio"></select></div>
-			
-			<br />
-
-      <div>Seleccione Cuenta 2: <select name="cbx_casa" id="cbx_casa"></select></div>
-			
-			<br />
-			
-			<div>Selecciona Cuenta Final: <select name="cbx_localidad" id="cbx_localidad"></select></div>
-			
-			<br />
-			<input type="submit" id="enviar" name="enviar" value="Guardar" />
-		</form>
-
-			<br>
-			
+                      <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                      <input type="number" step="0.01" class="form-control pull-right" id="monto" name="monto" placeholder="Ingrese el monto" required>
                     </div>
                   </div>
                 </div>
                 <hr>
-                
-                <div class="container">
-  
-                      <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Debito</th>
-                                        <th>Crédito</th>
-                                        <th>Codigó de Cuenta</th>
-                                        <th>Nombre Cuenta</th>
-                                        <th>Descripción</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tableToModify">
-                                  
-                                  <tr id="rowToClone">
-                                      <td><input type="text" name="debito" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td>
-                                      <td><input type="text" name="credito" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td>
-                                      <td><input type="text" name="codig_cuenta" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo Cuenta" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td>
-                                      <td><div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                        <div id="select2lista"></div>
-                                      </div></td>
-                                      <td><input type="text" name="descripcion" style="width:250px;height:20px;border:0" maxlength="50"  placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <input type="button" onclick="cloneRow()" value="Agregar Nueva Fila"/>
-                     </div>
 
                 <div class="col-md-12">
-                  <button class="btn btn-primary" id="daterange-btn" name=""> <i class="fa fa-credit-card" aria-hidden="true"></i> Agregar</button>
+                  <button class="btn btn-primary" id="daterange-btn" name=""> <i class="fa fa-credit-card" aria-hidden="true"></i> DEPOSITAR</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> CERRAR</button>
                 </div>
 
@@ -246,6 +186,91 @@ $queryz = "SELECT CLASIFICACION FROM tbl_catalago_cuentas";
   </div>
   <!--end of modal-->
 
+  <!--RETIRO-->
+  <div class="modal fade" id="miModalenviar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width:90%;  overflow-y: scroll; display: block;" aria-hidden="false">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="box-body">
+            <!-- Date range -->
+
+
+
+            <form method="post" action="transferir_add.php" enctype="multipart/form-data" class="form-horizontal">
+              <input type="hidden" class="form-control" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>" required>
+
+              <input type="hidden" class="form-control" id="debe_haber" name="debe_haber" value="haber" required>
+              <div class="col-md-12 btn-print">
+                <br>
+                <div class="form-group">
+                  <center>
+                    <h5> <strong> RETIRO </strong></h5>
+                  </center>
+                  <hr>
+                  <!-- ENTRADA PARA LA CUENTA -->
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                      <select class="form-control" name="txtpregunta" id="format" id="txtpregunta" required>
+                        <option value="">Seleccione una Cuenta</option>
+                        <?php
+                        include('../conexion.php');
+                        #consulta de todos los paises
+                        $consulta = mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS ;");
+                        while ($row = mysqli_fetch_array($consulta)) {
+                          $nombrepais = $row['CUENTA'];
+                          $nombeid = $row['CODIGO_CUENTA'];
+                        ?>
+                          <option class="dropdown-item" value="<?php echo $nombeid ?>"><?php echo $nombrepais ?></option>
+                        <?php
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- ENTRADA PARA LA FECHA -->
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                      <input type="date" class="form-control pull-right" id="date" name="fechax" required>
+                    </div>
+                  </div>
+                  <!-- ENTRADA DE LA DESCRIPCION-->
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
+                      <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" placeholder="Descripción del Movimiento" required>
+                    </div>
+                  </div>
+
+                  <!--ENTRADA DEL MONTO -->
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                      <input type="number" step="0.01" class="form-control pull-right" id="monto" name="monto" placeholder="Ingrese el monto" required>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="col-md-12">
+                  <button class="btn btn-primary " id="daterange-btn" name=""> <i class="fa fa-credit-card" aria-hidden="true"></i> RETIRAR </button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> CERRAR</button>
+                </div>
+
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--end of modal-->
+
+
 
   <div class="box-body ">
     <!-- BOTONES -->
@@ -254,9 +279,12 @@ $queryz = "SELECT CLASIFICACION FROM tbl_catalago_cuentas";
 
     ?>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#miModal">
-      <i class="fa fa-plus-square" aria-hidden="true"></i> Agregar Asiento </button>
+      <i class="fa fa-plus-square" aria-hidden="true"></i> Depositar </button>
+      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#miModalenviar">
+      <i class="fa fa-minus-circle" aria-hidden="true"></i> Retirar </button>
     <?php } ?>
-      <a class="btn btn-info" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i   class="fa fa-file-pdf-o" ></i> Imprimir</a>
+      <a class="btn btn-secondary" href="Libro_Mayor.php"><i class="fa fa-book" aria-hidden="true"></i> Generar Libro Mayor</a>
+      <a class="btn btn-info" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i aria-hidden="true" class ="glyphicon glyphicon-print"></i> Imprimir</a>
       <a class="btn btn-light pull-right"><i class="fa fa-money" aria-hidden="true"></i> <strong>Saldo <?php echo $simbolo_moneda . " " . number_format($sumabanco, 2); ?></strong> </a>
 
     </div>
@@ -497,6 +525,10 @@ $queryz = "SELECT CLASIFICACION FROM tbl_catalago_cuentas";
       );
     });
   </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="assets/bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
+<script src="assets/js/main1.js"></script>
 
   <?php
   # code...
