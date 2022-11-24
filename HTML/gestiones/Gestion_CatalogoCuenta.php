@@ -52,9 +52,9 @@ if (!isset($_SESSION['rol'])) {
                     </b>
                     <select name="mostrar" onchange='submit();'>
                         <option></option>
-                        <option value="25">25</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
+                        <option value="500">500</option>
                         <?php
                         $mostrar_datos = $_GET['mostrar'];
                         ?>
@@ -88,7 +88,7 @@ if (!isset($_SESSION['rol'])) {
                         if ($mostrar_datos > 0) {
                             $por_pagina = $mostrar_datos;
                         } else {
-                            $por_pagina = 10;
+                            $por_pagina = 30;
                         }
 
                         if (empty($_GET['pagina'])) {
