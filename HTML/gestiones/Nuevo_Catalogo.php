@@ -241,7 +241,7 @@ if (!isset($_SESSION['rol'])) {
 					<div class="input-group">
 				
 			 <span  class="input-group-addon"><i class="fa fa-check"></i></span>
-			 <select class=" elegir elegirl eli form-control" name="cbx_localidad" id="cbx_localidad" ></select></div>
+			 <select class="form-control" name="cbx_localidad" id="cbx_localidad" disable></select></div>
 				</div>
 	
 		  <br />

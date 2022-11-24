@@ -11,7 +11,7 @@
 	
 	while($rowM = $resultadoM->fetch_assoc())
 	{
-		$html.= "<option value='".$rowM['CODIGO_CUENTA']."'>".$rowM['CUENTA']."</option>";
+		$html.= "<option value='".$rowM['CODIGO_CUENTA']."'>".$rowM['CODIGO_CUENTA']." - ".$rowM['CUENTA']."</option>";
 	}
 	
 	echo $html;
