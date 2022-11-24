@@ -110,55 +110,156 @@ if (!isset($_SESSION['rol'])) {
 		
 				</script>
 
+
 	<a class="btn btn-primary" href="Gestion_CatalogoCuenta.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
 	<hr>
 	<div clas="row ">
-
-		<div class="box-header with-border">
-
-			<div class="box-body">
-
-				<form class="" method="post">
+	<form class="" method="post">
 					<center>
 						<h2><strong>Registro de Cuentas</strong></h2>
 					</center>
+		<div class="box-header with-border">
+
+		<input id="busqueda" type="checkbox"  style="width:2%; height:20px ;"  >Principal
+        <input id="bup" type="checkbox"  style="width:2%; height:20px ;" >Sub-cuenta 1
+		<input id="bul" type="checkbox"  style="width:2%; height:20px ;" >Sub-cuenta 2
+
+      
+			<div class="box-body">
+				
+				<div class="row">
+	<table class="table">
+		<thead class="table-primary">
+			<tr>
+
+				<th>
+					<center>Cuenta Principal</center>
+				</th>
+
+
+				<th>
+					<center>Sub-cuenta 1</center>
+				</th>
+
+			</tr>
+		</thead>
+
+		<tbody>
+
+			<tr >
+
+				<td style="width:50%;" >
+
+					<div >
+				
 
 						<!-- ENTRADA PARA LA CUENTA -->
 							<div class="form-group">
-                            <h5> <strong> Cuenta principal </strong></h5>
+
 
                       <!-- ENTRADA PARA LA CUENTA -->
                       <form id="combo" name="combo" action="guarda.php" method="POST">
-                      <div>Selecciona Tipo de Cuenta : 
-                      <select name="cbx_estado" id="cbx_estado">
-        <option > </option>
+					  <div class="input-group">
+					  <span class="input-group-addon"><i class="fa fa-check"></i></span>
+					 <select  class=" form-control"  name="cbx_estado" id="cbx_estado" > 
+					  <option value="">Seleccione el estado de la cuenta</option>
 				<option value="110_">Activo</option>
 				<option value="210_">Pasivo</option>
 				<option value="310_">Capital y Patrimonio</option>
         <option value="410_">Ingresos</option>
 				<option value="510_">Costos</option>
 				<option value="610_">Gastos</option>
-			</select></div>
+			</select> </span></div>
 			
 			<br />
-			
-			<div>Seleccione Cuenta 2: <select name="cbx_municipio" id="cbx_municipio"></select></div>
+				</td>
 
-      <br />
-			
-			<div>Seleccione Cuenta 3: <select name="cbx_casa" id="cbx_casa"></select></div>
+				<td style="width: 50%">
+
+					<div class="input-group">
+
+					<div class="input-group">
+				
+				<span  class="input-group-addon"><i class="fa fa-check"></i></span>
+				<select  class=" elegir  form-control" name="cbx_municipio" id="cbx_municipio" ></select></div>
+				</div>
+	
+		  <br />
+					</div>
+
+				</td>
+
+			</tr>
+
+		</tbody>
+	</table>
+
+</div>
+
+</div>
+
+
+				
+				<div class="row">
+	<table class="table">
+		<thead class="table-primary">
+			<tr>
+
+				<th>
+					<center>Sub-cuenta 2</center>
+				</th>
+
+
+				<th>
+					<center>Cuentas Auxiliares</center>
+				</th>
+
+			</tr>
+		</thead>
+
+		<tbody>
+
+			<tr>
+
+				<td style="width:50%;" >
+
+				<div class="input-group">
+
+                <div class="input-group">
+				
+					<span  class="input-group-addon"><i class="fa fa-check"></i></span>
+		   <select class=" elegir elegirl form-control" name="cbx_casa" id="cbx_casa" ></select></div>
+			</div>
 			
 			<br />
-			
-			<div>Selecciona Cuenta Final: <select name="cbx_localidad" id="cbx_localidad"></select></div>
-			
-			<br />
-			<input type="submit" id="enviar" name="enviar" value="Guardar" />
-		</form>
+				</td>
 
-			<br>
+				<td style="width: 50%">
 
-					<hr>
+					<div class="input-group">
+
+					<div class="input-group">
+				
+			 <span  class="input-group-addon"><i class="fa fa-check"></i></span>
+			 <select class=" elegir elegirl eli form-control" name="cbx_localidad" id="cbx_localidad" ></select></div>
+				</div>
+	
+		  <br />
+					</div>
+
+				</td>
+
+			</tr>
+
+		</tbody>
+	</table>
+
+</div>
+
+
+
+				
+			
 
 					<div class="row">
 
@@ -169,7 +270,7 @@ if (!isset($_SESSION['rol'])) {
 									<tr>
 
 										<th>
-											<center>Código de cuenta</center>
+											<center>Codigo de Cuenta</center>
 										</th>
 
 
@@ -214,68 +315,7 @@ if (!isset($_SESSION['rol'])) {
 
 					</div>
 
-					<div class="row">
-
-						<div class="col-xs-14 pull-right">
-
-							<table class="table">
-								<thead class="table-primary">
-									<tr>
-
-										<th>
-											<center>Clasificación</center>
-										</th>
-
-
-										<th>
-											<center>Estado de la Cuenta</center>
-										</th>
-
-									</tr>
-								</thead>
-
-								<tbody>
-
-									<tr>
-
-										<td style="width: 50%">
-
-											<div class="input-group">
-												<span class="input-group-addon"><i class="fa fa-tags"></i></span>
-												<select class="form-control" name="CLASIFICACION" required>
-													<option value="">Seleccione el tipo de cuenta</option>
-													<option value="ACTIVO CORRIENTE">ACTIVO CORRIENTE</option>
-													<option value="ACTIVO NO CORRIENTE">ACTIVO NO CORRIENTE</option>
-													<option value="PASIVO CORRIENTE">PASIVO CORRIENTE</option>
-													<option value="PASIVO NO CORRIENTE">PASIVO NO CORRIENTE</option>
-													<option value="PATRIMONIO">PATRIMONIO</option>
-												</select>
-											</div>
-
-										</td>
-
-										<td style="width: 50%">
-
-											<div class="input-group">
-
-												<span class="input-group-addon"><i class="fa fa-check"></i></span>
-												<select class="form-control" name="Estado_Cuenta" required>
-													<option value="">Seleccione el estado de la cuenta</option>
-													<option value="ACTIVO">ACTIVO</option>
-													<option value="INACTIVO">INACTIVO</option>
-												</select>
-											</div>
-
-										</td>
-
-									</tr>
-
-								</tbody>
-							</table>
-
-						</div>
-
-					</div>
+					
 
 
 					<hr>
@@ -286,6 +326,56 @@ if (!isset($_SESSION['rol'])) {
 	</div>
 </section>
 </div>
+
+<script>
+      let elegir = document.querySelectorAll('.elegir');
+      let busqueda = document.getElementById('busqueda');
+      
+      document.addEventListener("DOMContentLoaded", () => {
+        elegir.forEach(elemento => elemento.disabled = false);
+        
+        busqueda.addEventListener('click', () => {
+          if (busqueda.checked) {
+            elegir.forEach(elemento => elemento.disabled = true);
+          } else {
+            elegir.forEach(elemento => elemento.disabled = false);
+          }
+        });
+      });
+    </script>
+	<script>
+      let elegirl = document.querySelectorAll('.elegirl');
+      let bup = document.getElementById('bup');
+      
+      document.addEventListener("DOMContentLoaded", () => {
+        elegirl.forEach(elemento => elemento.disabled = false);
+        
+        bup.addEventListener('click', () => {
+          if (bup.checked) {
+            elegirl.forEach(elemento => elemento.disabled = true);
+          } else {
+            elegirl.forEach(elemento => elemento.disabled = false);
+          }
+        });
+      });
+    </script>
+
+<script>
+      let eli = document.querySelectorAll('.eli');
+      let bul = document.getElementById('bul');
+      
+      document.addEventListener("DOMContentLoaded", () => {
+        eli.forEach(elemento => elemento.disabled = false);
+        
+        bul.addEventListener('click', () => {
+          if (bul.checked) {
+            eli.forEach(elemento => elemento.disabled = true);
+          } else {
+            eli.forEach(elemento => elemento.disabled = false);
+          }
+        });
+      });
+    </script>
 
 
 
@@ -360,5 +450,7 @@ if (!isset($_SESSION['rol'])) {
 	.alert p {
 		padding: 10px;
 	}
+
 </style>
+
 <?php include 'barralateralfinal.php'; ?>
