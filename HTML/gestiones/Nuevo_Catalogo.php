@@ -12,7 +12,7 @@ if (!empty($_POST)) {
 		$iduser = $row['Id_Usuario'];
 	}
 
-	$CODIGO_CUENTA     = $_POST['cbx_localida'];
+	$CODIGO_CUENTA     = $_POST['cbx_localidad'];
 	$CUENTA            = $_POST['CUENTA'];
 	//$CLASIFICACION     = $_POST['CLASIFICACION'];
 	$ESTADO_CUENTA     = $_POST['Estado_Cuenta'];
