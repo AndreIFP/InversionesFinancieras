@@ -211,7 +211,7 @@ if (!isset($_SESSION['rol'])) {
 
 
 				<th>
-					<center>Cuentas Auxiliares</center>
+					<center>Codigo de Cuenta</center>
 				</th>
 
 			</tr>
@@ -241,7 +241,7 @@ if (!isset($_SESSION['rol'])) {
 					<div class="input-group">
 				
 			 <span  class="input-group-addon"><i class="fa fa-check"></i></span>
-			 <select class="form-control" name="cbx_localidad" id="cbx_localidad" disable></select></div>
+			 <select class="form-control" name="cbx_localidad" id="cbx_localidad" disabled></select></div>
 				</div>
 	
 		  <br />

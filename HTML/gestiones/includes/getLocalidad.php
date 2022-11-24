@@ -10,7 +10,7 @@
 	while($rowl = $resultadol->fetch_assoc())	
 	{
 
-		$variable = $rowl['CODIGO_CUENTA']
+		$variable = $rowl['CODIGO_CUENTA'] +'1';
 		$html.= "<option value='".$variable."'>".$variable."</option>";
 	}
 	
