@@ -227,10 +227,10 @@
     }
 
     body {
-      background: #CBE4F2;
+      background: #76b852;
       /* fallback for old browsers */
       background: rgb(111, 161, 194);
-      background: linear-gradient(90deg, rgb(111, 126, 194) 0%, rgb(67, 119, 148) 50%);
+      background: linear-gradient(90deg, rgb(111, 126, 194) 0%, rgb(82, 184, 125) 50%);
       font-family: "Roboto", sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
