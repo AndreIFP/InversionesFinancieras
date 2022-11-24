@@ -15,7 +15,13 @@ $_SESSION['temporada'] = "10";
 
 <title> Libro Diario </title>
 <!-- script CUENTA -->
+
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css'>
+
 <script language="javascript" src="js/jquery-3.1.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
 		
 <script language="javascript">
 			$(document).ready(function(){
@@ -133,8 +139,6 @@ $fecha = date('Y-m-d h:i:s');
                   </div>
                   <h5> <strong >Fecha </strong></h5 >
                   </div>
-                 
-        
 
                   <!-- ENTRADA PARA LA FECHA -->
                   
@@ -151,45 +155,6 @@ $fecha = date('Y-m-d h:i:s');
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
                       <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" placeholder="Descripción del Asiento" required>
-                    </div>
-                  </div>
-                            <!-- ENTRADA PARA LA CUENTA -->
-                            <div class="form-group">
-                            <h5> <strong> Cuenta principal </strong></h5>
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                      <!-- ENTRADA PARA LA CUENTA -->
-                      <form id="combo" name="combo" action="guarda.php" method="POST">
-                      <div>Selecciona Tipo de Cuenta : 
-                      <select name="cbx_estado" id="cbx_estado">
-        <option > </option>
-				<option value="110_">Activo</option>
-				<option value="210_">Pasivo</option>
-				<option value="310_">Capital y Patrimonio</option>
-        <option value="410_">Ingresos</option>
-				<option value="510_">Costos</option>
-				<option value="610_">Gastos</option>
-			</select></div>
-			
-			<br />
-			
-			<div>Seleccione Cuenta 2: <select name="cbx_municipio" id="cbx_municipio"></select></div>
-
-      <br />
-			
-			<div>Seleccione Cuenta 3: <select name="cbx_casa" id="cbx_casa"></select></div>
-			
-			<br />
-			
-			<div>Selecciona Cuenta Final: <select name="cbx_localidad" id="cbx_localidad"></select></div>
-			
-			<br />
-			<input type="submit" id="enviar" name="enviar" value="Guardar" />
-		</form>
-
-			<br>
-			
                     </div>
                   </div>
                 </div>
@@ -209,15 +174,29 @@ $fecha = date('Y-m-d h:i:s');
                                     </tr>
                                 </thead>
                                 <tbody id="tableToModify">
-                                  
+                                
                                   <tr id="rowToClone">
-                                      <td><input type="text" name="debito" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td>
-                                      <td><input type="text" name="credito" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td>
-                                      <td><input type="text" name="codig_cuenta" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo Cuenta" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td>
+                                      <td><input type="text" name="debito" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
+                                      <td><input type="text" name="credito" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
                                       <td><div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                        <div id="select2lista"></div>
+                                        <select class="selectpicker" name="cuentas" id="cuentas" data-show-subtext="true" data-live-search="true">
+                                            <option value="">Seleccionar una marca</option>
+                                            <?php
+                                            include('../conexion.php');
+                                            #consulta de todos los paises
+                                            $consulta = mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA >='10';");
+                                            while ($row = mysqli_fetch_array($consulta)) {
+                                              $nombrepais = $row['CUENTA'];
+                                              $nombeid = $row['CODIGO_CUENTA'];
+                                            ?>
+                                              <option class="dropdown-item" value="<?php echo $nombeid ?>"><?php echo $nombrepais ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                      </select>
                                       </div></td>
+                                      <td><input type="text" name="codig_cuenta" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo Cuenta" size="15" value="<?php echo $nombeid?>" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td>
                                       <td><input type="text" name="descripcion" style="width:250px;height:20px;border:0" maxlength="50"  placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/></td>
                                     </tr>
                                 </tbody>
@@ -493,6 +472,7 @@ $fecha = date('Y-m-d h:i:s');
       );
     });
   </script>
+  
 
   <?php
   # code...
