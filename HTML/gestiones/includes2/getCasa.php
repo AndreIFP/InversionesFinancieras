@@ -2,14 +2,14 @@
 	
 	require ('../conexion.php');
 	
-	$id_casa = $_POST['id_casa'];
+	$id_municipio = $_POST['id_municipio'];
 	
-	$queryl = "SELECT CODIGO_CUENTA FROM tbl_catalago_cuentas WHERE MAYOR ='$id_casa' ORDER BY CODIGO_CUENTA desc LIMIT 1";
+	$queryl = "SELECT CODIGO_CUENTA FROM tbl_catalago_cuentas WHERE MAYOR ='$id_municipio' ORDER BY CODIGO_CUENTA desc LIMIT 1";
 	$resultadol = $mysqli->query($queryl);
 	
-	$html= "<option value='0'>Seleccione El Codigo Disponible $id_casa</option>";
+	$html= "<option value='0'>Seleccione El Codigo Disponible $id_municipio</option>";
 
-	$variable2 = $id_casa .''. '001';
+	$variable2 = $id_municipio .''. '001';
 	while($rowl = $resultadol->fetch_assoc())	
 	{
 

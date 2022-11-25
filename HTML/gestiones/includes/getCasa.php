@@ -2,12 +2,12 @@
 	
 	require ('../conexion.php');
 	
-	$id_municipio = $_POST['id_municipio'];
+	$id_calle = $_POST['id_calle'];
 	
-	$queryC = "SELECT CODIGO_CUENTA, CUENTA FROM tbl_catalago_cuentas WHERE MAYOR = '$id_municipio'";
+	$queryC = "SELECT CODIGO_CUENTA, CUENTA FROM tbl_catalago_cuentas WHERE MAYOR = '$id_calle'";
 	$resultadoC = $mysqli->query($queryC);
 	
-	$html= "<option value='0'>Seleccionar $id_municipio</option>";
+	$html= "<option value='0'>Seleccionar $id_calle</option>";
 	
 	while($rowC = $resultadoC->fetch_assoc())
 	{

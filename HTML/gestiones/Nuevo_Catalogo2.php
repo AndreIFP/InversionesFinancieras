@@ -12,9 +12,9 @@ if (!empty($_POST)) {
 		$iduser = $row['Id_Usuario'];
 	}
 
-	$CODIGO_CUENTA     = $_POST['cbx_localidad'];
+	$CODIGO_CUENTA     = $_POST['cbx_casa'];
 	$CUENTA            = $_POST['CUENTA'];
-	$MAYOR            = $_POST['cbx_casa'];
+	$MAYOR            = $_POST['cbx_municipio'];
 	$MOVIMIENTO        = $_POST['Movimiento'];
 	//$CLASIFICACION     = $_POST['CLASIFICACION'];
 	$ESTADO_CUENTA     = $_POST['Estado_Cuenta'];
@@ -77,42 +77,26 @@ if (!isset($_SESSION['rol'])) {
 					$(document).ready(function(){
 						$("#cbx_estado").change(function () {
 		
-							$('#cbx_calle').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
 							$('#cbx_casa').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
 							$('#cbx_localidad').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
 				  
 							$("#cbx_estado option:selected").each(function () {
 								id_estado = $(this).val();
-								$.post("includes/getMunicipio.php", { id_estado: id_estado }, function(data){
+								$.post("includes2/getMunicipio.php", { id_estado: id_estado }, function(data){
 									$("#cbx_municipio").html(data);
 								});            
 							});
 						})
 					});
-
-				$(document).ready(function(){
+		
+			  $(document).ready(function(){
 						$("#cbx_municipio").change(function () {
 		
-							$('#cbx_casa').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
-							$('#cbx_localidad').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
-
+				  
+		
 							$("#cbx_municipio option:selected").each(function () {
 								id_municipio = $(this).val();
-								$.post("includes/getCalle.php", { id_municipio: id_municipio }, function(data){
-									$("#cbx_calle").html(data);
-								});            
-							});
-						})
-					});
-		
-					$(document).ready(function(){
-						$("#cbx_calle").change(function () {
-
-							$('#cbx_localidad').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
-													  	
-							$("#cbx_calle option:selected").each(function () {
-								id_calle = $(this).val();
-								$.post("includes/getCasa.php", { id_calle: id_calle }, function(data){
+								$.post("includes2/getCasa.php", { id_municipio: id_municipio }, function(data){
 									$("#cbx_casa").html(data);
 								});            
 							});
@@ -121,10 +105,9 @@ if (!isset($_SESSION['rol'])) {
 		
 			  $(document).ready(function(){
 						$("#cbx_casa").change(function () {
-
 							$("#cbx_casa option:selected").each(function () {
 								id_casa = $(this).val();
-								$.post("includes/getLocalidad.php", { id_casa: id_casa}, function(data){
+								$.post("includes2/getLocalidad.php", { id_casa: id_casa}, function(data){
 									$("#cbx_localidad").html(data);
 								});            
 							});
@@ -186,7 +169,7 @@ if (!isset($_SESSION['rol'])) {
 					  <span class="input-group-addon"><i class="fa fa-check"></i></span>
 					 <select  class=" form-control"  name="cbx_estado" id="cbx_estado" > 
 					    <option value="">Seleccione el estado de la cuenta</option>
-						<option value="1_">Activo</option>
+						<option value="110_">Activo</option>
 						<option value="2_">Pasivo</option>
 						<option value="3_">Capital y Patrimonio</option>
 						<option value="4_">Ingresos</option>
@@ -251,42 +234,12 @@ if (!isset($_SESSION['rol'])) {
                 <div class="input-group">
 				
 					<span  class="input-group-addon"><i class="fa fa-check"></i></span>
-		   <select class=" elegir elegirl form-control" name="cbx_calle" id="cbx_calle" ></select></div>
-			</div>
-			
-			<br />
-				</td>
-				<br>
-				<tr>
-
-				<td style="width:50%;" >
-
-				<div class="input-group">
-
-                <div class="input-group">
-				
-					<span  class="input-group-addon"><i class="fa fa-check"></i></span>
 		   <select class=" elegir elegirl form-control" name="cbx_casa" id="cbx_casa" ></select></div>
 			</div>
 			
 			<br />
 				</td>
-
-				<td style="width: 50%">
-
-					<div class="input-group">
-
-					<div class="input-group">
 				
-			 <span  class="input-group-addon"><i class="fa fa-check"></i></span>
-			 <select class="form-control" name="cbx_localidad" id="cbx_localidad"></select></div>
-				</div>
-	
-		  <br />
-					</div>
-
-				</td>
-
 			</tr>
 
 		</tbody>
