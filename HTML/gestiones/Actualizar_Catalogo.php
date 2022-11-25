@@ -34,7 +34,7 @@ if ($result_sql == 0) {
 		# code...
 		$CODIGO_CUENTA  = $data['CODIGO_CUENTA'];
 		$CUENTA         = $data['CUENTA'];
-		$CLASIFICACION  = $data['CLASIFICACION'];
+		$CLASIFICACION  = $data['Movimiento'];
 		$ESTADO_CUENTA  = $data['Estado_Cuenta'];
 	}
 }
@@ -169,11 +169,8 @@ if (!isset($_SESSION['rol'])) {
 												<span class="input-group-addon"><i class="fa fa-tags"></i></span>
 												<select class="form-control notItemOne" name="CLASIFICACION">
 													<option value="<?php echo $CLASIFICACION ?>"><?php echo $CLASIFICACION ?></option>
-													<option value="ACTIVO CORRIENTE">ACTIVO CORRIENTE</option>
-													<option value="ACTIVO NO CORRIENTE">ACTIVO NO CORRIENTE</option>
-													<option value="PASIVO CORRIENTE">PASIVO CORRIENTE</option>
-													<option value="PASIVO NO CORRIENTE">PASIVO NO CORRIENTE</option>
-													<option value="PATRIMONIO">PATRIMONIO</option>
+													<option value="Acreedor">Acreedor</option>
+													<option value="Deudor">Deudor</option>
 												</select>
 											</div>
 

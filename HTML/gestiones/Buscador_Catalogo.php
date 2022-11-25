@@ -28,7 +28,7 @@ session_start();
                         <tr>
                             <th>Codigo</th>
                             <th>Cuenta</th>
-                            <th>Clasificación</th>
+                            <th>Movimiento</th>
                             <th>Estado</th>
                             <th>Acciones</th>
 
@@ -40,7 +40,7 @@ session_start();
                         $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CATALAGO_CUENTAS 
                                             WHERE ( CODIGO_CUENTA LIKE '%$busqueda%' OR
                                                     CUENTA LIKE '%$busqueda%' OR
-                                                    CLASIFIcACION  LIKE '%$busqueda%' OR 
+                                                    Movimiento  LIKE '%$busqueda%' OR 
                                                     Estado_Cuenta  LIKE '%$busqueda%')");
                         $result_register = mysqli_fetch_array($sql_registe);
                         $total_registro = $result_register['total_registro'];
@@ -56,7 +56,7 @@ session_start();
                         $desde = ($pagina - 1) * $por_pagina;
                         $total_paginas = ceil($total_registro / $por_pagina);
                         $sql = mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE ( CODIGO_CUENTA LIKE '%$busqueda%' OR
-                                                                        CUENTA  LIKE '%$busqueda%' OR CLASIFIcACION  LIKE '%$busqueda%' OR Estado_Cuenta  LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
+                                                                        CUENTA  LIKE '%$busqueda%' OR Movimiento  LIKE '%$busqueda%' OR Estado_Cuenta  LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
                         mysqli_close($conn);
 
                         $result = mysqli_num_rows($sql);
@@ -66,7 +66,7 @@ session_start();
                                 <tr>
                                     <th><?php echo $row['CODIGO_CUENTA'] ?></th>
                                     <th><?php echo $row['CUENTA'] ?></th>
-                                    <th><?php echo $row['CLASIFICACION'] ?></th>
+                                    <th><?php echo $row['Movimiento'] ?></th>
                                     <th><?php echo $row['Estado_Cuenta'] ?></th>
                                     <th><a href="Actualizar_Catalogo.php?Id=<?php echo $row['CODIGO_CUENTA'] ?>" class="btn btn-primary">Editar</a>
                                         <a href="Delete_Catalogo.php?Id=<?php echo $row['CODIGO_CUENTA'] ?>" class="btn btn-danger">Eliminar</a>
