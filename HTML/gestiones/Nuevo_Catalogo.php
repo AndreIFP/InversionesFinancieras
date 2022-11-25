@@ -14,6 +14,7 @@ if (!empty($_POST)) {
 
 	$CODIGO_CUENTA     = $_POST['cbx_localidad'];
 	$CUENTA            = $_POST['CUENTA'];
+	$MAYOR            = $_POST['cbx_casa'];
 	$MOVIMIENTO        = $_POST['Movimiento'];
 	//$CLASIFICACION     = $_POST['CLASIFICACION'];
 	$ESTADO_CUENTA     = $_POST['Estado_Cuenta'];
@@ -28,8 +29,8 @@ if (!empty($_POST)) {
 	$querynombre 	= mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE CUENTA = '$CUENTA'");
 	$nr1 = mysqli_num_rows($querynombre);
 	if ($nr == 0 and $nr1 == 0) {
-		$query_insert = mysqli_query($conn, "INSERT INTO TBL_CATALAGO_CUENTAS (CODIGO_CUENTA,Id_Usuario,CUENTA,Movimiento,Estado_Cuenta)
-																	VALUES('$CODIGO_CUENTA','$iduser','$CUENTA','$MOVIMIENTO','$ESTADO_CUENTA')");
+		$query_insert = mysqli_query($conn, "INSERT INTO TBL_CATALAGO_CUENTAS (CODIGO_CUENTA,Id_Usuario,CUENTA,Mayor,Movimiento,Estado_Cuenta)
+																	VALUES('$CODIGO_CUENTA','$iduser','$CUENTA','$MAYOR','$MOVIMIENTO','$ESTADO_CUENTA')");
 		if ($query_insert) {
 			echo "<script> alert('Cuenta Registrado Exitosamente');window.location= 'Gestion_CatalogoCuenta.php' </script>";
 		}
@@ -246,7 +247,7 @@ if (!isset($_SESSION['rol'])) {
 					<div class="input-group">
 				
 			 <span  class="input-group-addon"><i class="fa fa-check"></i></span>
-			 <select class="form-control" name="cbx_localidad" id="cbx_localidad" disabled></select></div>
+			 <select class="form-control" name="cbx_localidad" id="cbx_localidad"></select></div>
 				</div>
 	
 		  <br />
