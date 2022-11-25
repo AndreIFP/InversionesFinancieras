@@ -43,7 +43,7 @@ function multiplicar(){
 
     <td>FACTURA POR HONORARIOS</td>
     <br>
-    <a href="factura/Facturacion_H.html" type="submit" class="btn btn-success btn-lg">GENERAR FACTURA</a>
+    <a href="factura/Facturacion_H.php" type="submit" class="btn btn-success btn-lg">GENERAR FACTURA</a>
     
 
 <br><br>
