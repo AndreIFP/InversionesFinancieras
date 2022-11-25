@@ -47,20 +47,9 @@ $queryAlumnos= $conexion->query($alumnos);
     <div class="row">
       <div class="col-2-4">
         <div class="slogan">Facturación </div>
-
-        <label for="config_tax">IVA:
-          <input type="checkbox" id="config_tax" />
-        </label>
-        <label for="config_tax_rate" class="taxrelated">Tasa:
-          <input type="text" id="config_tax_rate" value="13"/>%
-        </label>
-        <label for="config_note">Nota:
-          <input type="checkbox" id="config_note" />
-        </label>
         
       </div>
       <div class="col-4 text-right">
-        <a href="javascript:window.print()">Imprimir</a>
         <a href="../index.php"><input type="submit" class="btn btn-primary" Value="Atras"></a>
       </div><!--.col-->
     </div><!--.row-->
@@ -81,14 +70,10 @@ $queryAlumnos= $conexion->query($alumnos);
 <div class="row section">
 
 	<<div class="col-2">
-  <input type="text" style="width:400px;height:35px;border:0;text-transform:uppercase"  placeholder="Ingrese el nombre del proveedor" name="nameProveedor" size="50" value="" /><br>
   </div><!--.col--> 
 
    <div class="col-2 text-center details">
-      Fecha: <input type="date" name="Fecha" style="width:90px;" name="Fechaini" required><br>
-      Factura #: <input type="text" name="factura" placeholder="000-001-01-000000" maxlength="15" style="width:120px;" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
-      CAI: <input type="text" name="CAI" value="" placeholder="000000-000000-000000-000000-000000-00" maxlength="50" style="width:300px;" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
-     Vence: <input type="date" style="width:90px;" name="Fechaven" required/>
+      
   </div><!--.col-->
   
   
@@ -98,7 +83,11 @@ $queryAlumnos= $conexion->query($alumnos);
 
     <p class="client">
       <strong>Datos</strong><br>
-      <input type="text" style="width:400px;height:35px;border:0"  placeholder="Direccion del Proveedor" size="150" value="" name="dirProveedor" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" required /><br><br>
+      Fecha: <input type="date" name="Fecha" style="width:90px;border:0" name="Fechaini" required><br>
+      Factura #: <input type="text" name="factura" placeholder="000-001-01-000000" maxlength="15" style="width:120px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
+      CAI: <input type="text" name="CAI" value="" placeholder="000000-000000-000000-000000-000000-00" maxlength="50" style="width:300px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
+     Vence: <input type="date" style="width:90px;border:0" name="Fechaven" required/><br><br>
+      <input type="text" style="width:600px;height:20px;border:0"  placeholder="Direccion del Proveedor" size="150" value="" name="dirProveedor" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" required /><br><br>
       <input type="text" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Telefono" size="15" name="telefono" value="" oninput="this.value = this.value.replace(/[^0-9\s]/,'')" required/><br>
     </p>
   </div><!--.col--> 
@@ -226,12 +215,7 @@ $queryAlumnos= $conexion->query($alumnos);
   <h2>Nota:</h2>
 </div><!--.note-->
 
-<footer class="row">
-  <div class="col-1 text-center">
-    <p class="notaxrelated" contenteditable>El monto de la factura no incluye el impuesto sobre las ventas.</p>
-    
-  </div>
-</footer>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="assets/bower_components/jquery/dist/jquery.min.js"><\/script>')</script>

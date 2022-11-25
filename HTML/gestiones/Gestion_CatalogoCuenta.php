@@ -71,7 +71,7 @@ if (!isset($_SESSION['rol'])) {
                         <tr>
                             <th><center>Código</center></th>
                             <th><center>Cuenta</center></th>
-                            <th><center>Clasificación</center></th>
+                            <th><center>Movimiento</center></th>
                             <th><center>Estado Cuenta</center></th>
                             <th colspan="2"><center>Acciones</center></th>
                             
@@ -109,7 +109,7 @@ if (!isset($_SESSION['rol'])) {
                                 <tr>
                                     <th><center><?php echo $row['CODIGO_CUENTA'] ?></center></th>
                                     <th><center><?php echo $row['CUENTA'] ?></center></th>
-                                    <th><center><?php echo $row['CLASIFICACION'] ?></center></th>
+                                    <th><center><?php echo $row['Movimiento'] ?></center></th>
                                     <th><center><?php echo $row['Estado_Cuenta'] ?></center></th>
                                     <script>
                                         function alerta() {

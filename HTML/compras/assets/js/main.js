@@ -49,8 +49,14 @@ function calculate(){
     var tax = ((sum / (TAX_RATE+100) ) * TAX_RATE);
     
     
-    total_price = total_price + sum;
-    total_tax = total_tax + tax;
+   
+     total_tax = total_tax + tax;
+     if (document.querySelector("#body.showtax")) {
+       total_price = total_price + sum + total_tax;
+     } else {
+       total_tax = 0;
+       total_price = total_price + sum;
+     }
     
     row.find('.sum').text( sum.toFixed(2) );
     row.find('.tax').text( tax.toFixed(2) );   
@@ -59,7 +65,8 @@ function calculate(){
   $('#total_price').text(total_price.toFixed(2));
   $('#total_tax').text(total_tax.toFixed(2));
   
-
+  document.getElementById("montoTotal").value = total_price.toFixed(2);
+  document.getElementById("totalRetenido").value = total_tax.toFixed(2);
 }
 
 
@@ -85,9 +92,16 @@ $('body').on('click','.removeRow',function(e){
 $('#config_note').on('change',function(){
   $('body').toggleClass('shownote hidenote');
 });
+
+$(".amount input").on("change", function () {
+  calculate();
+});
+
+
 $('#config_tax').on('change',function(){
   TAX_SETTING = !TAX_SETTING;
   $('body').toggleClass('showtax hidetax');
+  calculate();
 });
 
 $('#config_tax_rate').on('keyup',function(){

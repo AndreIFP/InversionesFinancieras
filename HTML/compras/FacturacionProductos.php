@@ -1,4 +1,5 @@
 <?php
+ include('conexion.php');
 ////////////////// CONEXION A LA BASE DE DATOS //////////////////
 session_start();
 $host = 'localhost:3307';
@@ -53,6 +54,8 @@ $queryAlumnos= $conexion->query($alumnos);
     <title>Nuevo Producto</title>
     <link rel="stylesheet" href="assets/css/main.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+    <script src="html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
     <script>
 			
       $(function(){
@@ -67,7 +70,7 @@ $queryAlumnos= $conexion->query($alumnos);
     });
   </script>
 </head>
-<body>
+<body id="body">
 <div class="control-bar">
   <div class="container">
     <div class="row">
@@ -78,12 +81,11 @@ $queryAlumnos= $conexion->query($alumnos);
           <input type="checkbox" id="config_tax" />
         </label>
         <label for="config_tax_rate" class="taxrelated">Tasa:
-          <input type="text" id="config_tax_rate" value="13"/>%
+          <input type="text" id="config_tax_rate" value="15"/>%
         </label>
-        <label for="config_note">Nota:
-          <input type="checkbox" id="config_note" />
+        <label for="config_note">Descargar en:
+          <a id="btnCrearPdf"><input type="submit" Value="PDF"></a>
         </label>
-        
       </div>
       <div class="col-4 text-right">
         <a href="javascript:window.print()">Imprimir</a>
@@ -106,15 +108,12 @@ $queryAlumnos= $conexion->query($alumnos);
 
 <div class="row section">
 
-	<<div class="col-2">
-  <input type="text" style="width:400px;height:35px;border:0;text-transform:uppercase"  placeholder="Ingrese el nombre del proveedor" disabled value="<?=  $_SESSION['productos']['nameProveedor']  ?>" size="50" value="" /><br>
+	<div class="col-2">
+ 
   </div><!--.col--> 
 
    <div class="col-2 text-center details">
-      Fecha: <input  disabled  type="date" name="Fecha" style="width:90px;" name="Fechaini" value="<?=  $_SESSION['productos']['Fecha']  ?>" required><br>
-      Factura #: <input  disabled type="text" name="factura" value="<?=  $_SESSION['productos']['factura']  ?>" placeholder="000-001-01-000000" maxlength="15" style="width:120px;" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
-      CAI: <input disabled  type="text" value="<?=  $_SESSION['productos']['CAI']  ?>" placeholder="00000000000" maxlength="17" style="width:120px;" oninput="this.value = this.value.replace(/[^0-9\s]/,'')" required/><br>
-     Vence: <input disabled  type="date" style="width:90px;" name="Fechaven" value="<?=  $_SESSION['productos']['Fechaven']  ?>" required/>
+      
   </div><!--.col-->
   
   
@@ -124,6 +123,10 @@ $queryAlumnos= $conexion->query($alumnos);
 
     <p class="client">
       <strong>Datos</strong><br>
+      Fecha: <input  disabled  type="date" name="Fecha" style="width:90px;border:0" name="Fechaini" value="<?=  $_SESSION['productos']['Fecha']  ?>" required><br>
+      Factura #: <input  disabled type="text" name="factura" value="<?=  $_SESSION['productos']['factura']  ?>" placeholder="000-001-01-000000" maxlength="15" style="width:120px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
+      CAI: <input disabled  type="text" value="<?=  $_SESSION['productos']['CAI']  ?>" placeholder="00000000000" maxlength="17" style="width:120px;border:0" oninput="this.value = this.value.replace(/[^0-9\s]/,'')" required/><br>
+     Vence: <input disabled  type="date" style="width:90px;border:0" name="Fechaven" value="<?=  $_SESSION['productos']['Fechaven']  ?>" required/>
       <input disabled type="text" style="width:400px;height:35px;border:0"  placeholder="Direccion del Proveedor" size="150" value="<?=  $_SESSION['productos']['dirProveedor']  ?>" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" required /><br><br>
       <input disabled type="text" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Telefono" size="15" value="<?=  $_SESSION['productos']['telefono']  ?>" oninput="this.value = this.value.replace(/[^0-9\s]/,'')" required/><br>
     </p>
@@ -165,7 +168,7 @@ $queryAlumnos= $conexion->query($alumnos);
       <th width="5%">Código</th>
       <th width="60%">Descripción</th>
       
-      <th width="10%">Cant.</th>
+      <th width="8%">Cant.</th>
       <th width="15%">Precio</th>
       <th class="taxrelated">IVA</th>
       <th width="10%">Total</th>
@@ -175,9 +178,9 @@ $queryAlumnos= $conexion->query($alumnos);
     <table  id="tabla">
  
       <tr class="fila-fija">
-        <td width='5%'><a class="control removeRow" href="#">x</a><input type="text" name="Codigo[]" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/><br> </td>
-        <td width='60%'><input type="text" name="Descripcion[]" style="width:250px;height:20px;border:0" maxlength="50"  placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/><br></td>
-        <td class="amount"><input type="number" name="cantidad[]" style="width:50px;height:20px;border:0" value="1" required/></td>
+        <td width='5%'><a class="control removeRow" href="#">x</a><input type="text" name="Codigo[]" style="width:35px;height:20px;border:0" maxlength="10"  placeholder="Cod." size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/><br> </td>
+        <td width='60%'><input type="text" name="Descripcion[]" style="width:350px;height:20px;border:0" maxlength="50"  placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/><br></td>
+        <td width='1%' class="amount"><input type="number" name="cantidad[]" style="width:50px;height:20px;border:0" value="1" required/></td>
         <td class="rate"><input type="number" name="precio[]" style="width:60px;height:20px;border:0" Placeholder="Precio" step=00.01 required/></td>
   
         <td class="tax taxrelated"></td>
@@ -196,11 +199,11 @@ $queryAlumnos= $conexion->query($alumnos);
   <table>
     <tr class="taxrelated">
       <td>IVA:</td>
-      <td id="total_tax"></td>
+      <td><label id="total_tax" name="totalr"></label><input type="hidden" id="totalRetenido" name="totalRetenido"></td>
     </tr>
     <tr>
       <td><strong>Total:</strong></td>
-      <td id="total_price"></td>
+      <td><label  id="total_price" name="totalt"></label><input value="" type="hidden" id="montoTotal" name="montoTotal"></td>
     </tr>
   </table>
 </div>
@@ -213,8 +216,6 @@ $queryAlumnos= $conexion->query($alumnos);
 				if(isset($_POST['insertar']))
 
 				{
-
-        
         $factura=$_SESSION['productos']['factura'];
         $proveedor=$_SESSION['productos']['proveedor'];
         
@@ -240,25 +241,48 @@ $queryAlumnos= $conexion->query($alumnos);
 				    $can=(( $item3 !== false) ? $item3 : ", &nbsp;");
 				    $gru=(( $item4 !== false) ? $item4 : ", &nbsp;");
 
+
+            
+            $sql5 = mysqli_query($conn,"SELECT * FROM product WHERE proname = '".$nom."'");
+            $result_register = mysqli_fetch_all($sql5,1);
+            $Result=$result_register;
+
+            
+            $request=$Result[0];
+            if (empty($Result)) {
+              $request=$Result[0];
+              $valores='("'.$factura.'","'.$proveedor.'","'.$nom.'","'.$can.'"),';
+              //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
+              $valoresQ= substr($valores, 0, -1);
+              ///////// QUERY DE INSERCIÓN ////////////////////////////
+              $sql = "INSERT INTO product (Nfactura,Proveedor,proname,amount) 
+                VALUES $valoresQ";
+
+                //$sqlRes=$conexion->query($sql) or mysql_error();
+              
+              $pdo=Conexion::conectar();
+              $consulta=$pdo->prepare($sql);
+
+              $consulta -> execute();
+              $idProducto = $pdo->lastInsertId();
+            }else{
+              
+              $request=$Result[0];
+
+              $canActual=$request['amount'];
+
+              $cantitadTotal=$canActual+ $can;
+
+              $idProducto =$request['id_product']; 
+
+              $query = mysqli_query($conn,"UPDATE `product` SET `amount`=$cantitadTotal WHERE proname='".$nom."'");
+              //$result_register = mysqli_fetch_all($sql5,1);
+            }
 				    //// CONCATENAR LOS VALORES EN ORDEN PARA SU FUTURA INSERCIÓN ////////
-				    $valores='("'.$factura.'","'.$proveedor.'","'.$nom.'","'.$can.'"),';
-				    //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
-				    $valoresQ= substr($valores, 0, -1);
-				    ///////// QUERY DE INSERCIÓN ////////////////////////////
-				    $sql = "INSERT INTO product (Nfactura,Proveedor,proname,amount) 
-					VALUES $valoresQ";
 
 					
-					//$sqlRes=$conexion->query($sql) or mysql_error();
+					
           
-          $pdo=Conexion::conectar();
-          $consulta=$pdo->prepare($sql);
-
-          $consulta -> execute();
-          $idProducto = $pdo->lastInsertId();
-          
-         
-
            //insertar en Kardex
            $valores2='("'.$idUsuario.'","ENTRADA","'.$idProducto.'","'.$nom.'","'.$can.'"),';
           
@@ -281,20 +305,13 @@ $queryAlumnos= $conexion->query($alumnos);
             if($item1 === false && $item2 === false && $item3 === false && $item4 === false) break;
     
 				}
-        echo "<script> alert('Productos insertado');window.location= 'Facturacion.php' </script>";
+        echo "<script> alert('Productos insertados correctamente');window.location= 'Facturacion.php' </script>";
 				}
 
 			?>
 <div class="note" contenteditable>
   <h2>Nota:</h2>
 </div><!--.note-->
-
-<footer class="row">
-  <div class="col-1 text-center">
-    <p class="notaxrelated" contenteditable>El monto de la factura no incluye el impuesto sobre las ventas.</p>
-    
-  </div>
-</footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="assets/bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
