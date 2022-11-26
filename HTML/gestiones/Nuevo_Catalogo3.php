@@ -12,9 +12,9 @@ if (!empty($_POST)) {
 		$iduser = $row['Id_Usuario'];
 	}
 
-	$CODIGO_CUENTA     = $_POST['cbx_localidad'];
+	$CODIGO_CUENTA     = $_POST['cbx_calle'];
 	$CUENTA            = $_POST['CUENTA'];
-	$MAYOR            = $_POST['cbx_casa'];
+	$MAYOR            = $_POST['cbx_municipio'];
 	$MOVIMIENTO        = $_POST['Movimiento'];
 	//$CLASIFICACION     = $_POST['CLASIFICACION'];
 	$ESTADO_CUENTA     = $_POST['Estado_Cuenta'];
@@ -83,7 +83,7 @@ if (!isset($_SESSION['rol'])) {
 				  
 							$("#cbx_estado option:selected").each(function () {
 								id_estado = $(this).val();
-								$.post("includes/getMunicipio.php", { id_estado: id_estado }, function(data){
+								$.post("includes3/getMunicipio.php", { id_estado: id_estado }, function(data){
 									$("#cbx_municipio").html(data);
 								});            
 							});
@@ -98,7 +98,7 @@ if (!isset($_SESSION['rol'])) {
 
 							$("#cbx_municipio option:selected").each(function () {
 								id_municipio = $(this).val();
-								$.post("includes/getCalle.php", { id_municipio: id_municipio }, function(data){
+								$.post("includes3/getCalle.php", { id_municipio: id_municipio }, function(data){
 									$("#cbx_calle").html(data);
 								});            
 							});
@@ -112,7 +112,7 @@ if (!isset($_SESSION['rol'])) {
 													  	
 							$("#cbx_calle option:selected").each(function () {
 								id_calle = $(this).val();
-								$.post("includes/getCasa.php", { id_calle: id_calle }, function(data){
+								$.post("includes3/getCasa.php", { id_calle: id_calle }, function(data){
 									$("#cbx_casa").html(data);
 								});            
 							});
@@ -124,7 +124,7 @@ if (!isset($_SESSION['rol'])) {
 
 							$("#cbx_casa option:selected").each(function () {
 								id_casa = $(this).val();
-								$.post("includes/getLocalidad.php", { id_casa: id_casa}, function(data){
+								$.post("includes4/getLocalidad.php", { id_casa: id_casa}, function(data){
 									$("#cbx_localidad").html(data);
 								});            
 							});
@@ -232,7 +232,7 @@ if (!isset($_SESSION['rol'])) {
 
 
 				<th>
-					<center>Sub-cuenta 3</center>
+					<center> </center>
 				</th>
 
 			</tr>
@@ -253,21 +253,7 @@ if (!isset($_SESSION['rol'])) {
 			</div>
 			
 			<br />
-				</td>
-				<br>
-
-				<td style="width:50%;" >
-
-				<div class="input-group">
-
-                <div class="input-group">
-				
-					<span  class="input-group-addon"><i class="fa fa-check"></i></span>
-		   <select class=" elegir elegirl form-control" name="cbx_casa" id="cbx_casa" ></select></div>
-			</div>
-			
-			<br />
-				
+				</td>			
 
 			</tr>
 
@@ -289,10 +275,6 @@ if (!isset($_SESSION['rol'])) {
 								<thead class="table-primary">
 									<tr>
 
-										<th>
-											<center>Código de la cuenta</center>
-										</th>
-
 
 										<th>
 											<center>Nombre De La Cuenta</center>
@@ -306,20 +288,7 @@ if (!isset($_SESSION['rol'])) {
 									<tr>
 										</td>
 
-				<td style="width: 50%">
-
-					<div class="input-group">
-
-					<div class="input-group">
 				
-			 <span  class="input-group-addon"><i class="fa fa-key"></i></span>
-			 <select class="form-control" name="cbx_localidad" id="cbx_localidad"></select></div>
-				</div>
-	
-		  <br />
-					</div>
-
-				</td>
 
 										<td style="width: 50%">
 
