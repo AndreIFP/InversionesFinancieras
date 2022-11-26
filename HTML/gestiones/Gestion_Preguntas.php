@@ -67,10 +67,16 @@ if (!isset($_SESSION['rol'])) {
             <table class="table ">
                 <thead class="table-primary">
                     <tr>
-                        <th><center>Id</center></th>
-                        <th><center>Preguntas</center></th>
-                        <th colspan="2"><center>Acciones</center></th>
-                     
+                        <th>
+                            <center>Id</center>
+                        </th>
+                        <th>
+                            <center>Preguntas</center>
+                        </th>
+                        <th colspan="2">
+                            <center>Acciones</center>
+                        </th>
+
 
                     </tr>
                 </thead>
@@ -103,18 +109,18 @@ if (!isset($_SESSION['rol'])) {
                         while ($row = mysqli_fetch_array($sql)) {
                     ?>
                             <tr>
-                                <th><center><?php echo $row['Id_Preguntas'] ?></center></th>
-                                <th><center><?php echo $row['Preguntas'] ?></center></th>
-                                <script>
-                                    function alerta() {
-                                        window.alert('No es posible hacer esta Accion');
-                                    }
-                                </script>
+                                <th>
+                                    <center><?php echo $row['Id_Preguntas'] ?></center>
+                                </th>
+                                <th>
+                                    <center><?php echo $row['Preguntas'] ?></center>
+                                </th>
                                 <?php if ($_SESSION['permisos'][M_GESTION_PREGUNTAS] and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['u'] == 1) {
                                 ?>
-                                    <th><center><a type="button" class="btn btn-primary btn-xs" onclick="alerta()"><i class="fa fa-pencil" aria-hidden="true"></i></a></center> </th>
-                                <?php } ?>
-                               
+                                    <th>
+                                        <center><a href="Actualizar_Preguntas.php?Id=<?php echo $row['Id_Preguntas'] ?>" class="btn btn-primary btn-xs"> <i class="fa fa-pencil" aria-hidden="true"></i> </a> </center>
+                                    </th><?php } ?>
+
                             </tr>
                     <?php
                         }
@@ -128,7 +134,7 @@ if (!isset($_SESSION['rol'])) {
                 <?php
                 if ($pagina != 1) {
                 ?>
-                    <li><a href="?pagina=<?php echo 1; ?>">|<</a>
+                    <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
                     </li>
                     <li><a href="?pagina=<?php echo $pagina - 1; ?>">Ant</a></li>
                 <?php
