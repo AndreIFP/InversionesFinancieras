@@ -119,11 +119,7 @@ if (!isset($_SESSION['rol'])) {
                             <th>
                                 <center><?php echo $row['Valor'] ?></center>
                             </th>
-                            <script>
-                                function alerta() {
-                                    window.alert('No es posible hacer esta Accion');
-                                }
-                            </script>
+
                             <?php if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['u'] == 1) {
                             ?>
                                 <th>
@@ -147,7 +143,7 @@ if (!isset($_SESSION['rol'])) {
                 <?php
                 if ($pagina != 1) {
                 ?>
-                    <li><a href="?pagina=<?php echo 1; ?>">|<</a>
+                    <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
                     </li>
                     <li><a href="?pagina=<?php echo $pagina - 1; ?>">Ant</a></li>
                 <?php
