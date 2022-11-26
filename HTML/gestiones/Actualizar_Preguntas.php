@@ -70,23 +70,74 @@ if (!isset($_SESSION['rol'])) {
 
 <?php include 'barralateralinicial.php'; ?>
 
-</div>
-<br>
-<a href="Gestion_Preguntas.php"><input type="submit" class="btn-atras" Value=" Regresar "></a>
-<div class="form_register">
-	<h1>Actualizar Preguntas</h1>
+<p></p>
+<section style=" background-color:rgb(255, 255, 255); padding: 15px; color:black; font-size: 12px; ">
+
+	<title>Gestion Preguntas</title>
+
+	<h6><a class="btn btn-primary" href="Gestion_Preguntas.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a></h6>
+
 	<hr>
-	<div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
-	<form action="" method="post">
-		<input type="hidden" name="Id_Preguntas" value="<?php echo $Id_Preguntas  ?>">
-		<label for="Preguntas">Preguntas</label>
-		<input type="text" name="Preguntas" maxlength="30" id="Preguntas" placeholder="Pregunta" value="<?php echo $Nombre ?>" size="40">
-		<br>
-		<input type="submit" value="Actualizar Pregunta" class="btn_save">
-	</form>
-</div>
+	<div clas="row ">
+
+		<div class="box-header with-border">
+
+			<div class="box-body">
+
+				<form class="" method="post">
+					<center>
+						<h2><strong> Actualizar Pregunta </strong></h2>
+					</center>
+					<hr>
+					<div class="row">
+						<input type="hidden" name="Id_Preguntas" value="<?php echo $Id_Preguntas  ?>">
+
+						<div class="col-xs-14 pull-right">
+
+							<table class="table">
+								<thead class="table-primary">
+									<tr>
+
+										<th>
+											<center>Pregunta</center>
+										</th>
+
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr>
+
+										<td style="width: 100%">
+
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-check"></i></span>
+												<input type="text" class="form-control" name="Preguntas" maxlength="30" id="Preguntas" placeholder="Pregunta" value="<?php echo $Nombre ?>" size="40">
+		
+											</div>
+
+										</td>
+
+									</tr>
+
+								</tbody>
+							</table>
+
+						</div>
+
+					</div>
+
+					<hr>
+				    <center><button type="submit" class="btn btn-primary btn-lg"> <i class="fa fa-eraser" aria-hidden="true"></i> Actualizar </button></center>
+            
+				</form>
+			</div>
+		</div>
+	</div>
 </section>
-</body>
+</div>
+
 <style type="text/css">
 	.btn-atras {
 		background: #1faac8;

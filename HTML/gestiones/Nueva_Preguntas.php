@@ -46,105 +46,144 @@ if (!isset($_SESSION['rol'])) {
 ?>
 
 <?php include 'barralateralinicial.php'; ?>
-</div>
-<br>
-<title>Gestion Preguntas</title>
-<div class="col-md-12">
-	<div class="col-md-12">
-		<div class="col-md-12">
-			<div class="col-md-12">
-				<h6><a class="btn btn-primary" href="Gestion_Preguntas.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a></h6>
-				<div class="form_register">
 
-					<form action="" method="post">
-						<center><h2><strong> Registro Pregunta </strong></h2></center>
-						<hr>
-						<hr>
-						<div class="form-group">
+<p></p>
+<section style=" background-color:rgb(255, 255, 255); padding: 15px; color:black; font-size: 12px; ">
 
-							<div class="input-group">
+	<title>Gestion Preguntas</title>
 
-								<span class="input-group-addon"><i class="fa fa-check"></i></span>
-								<input type="text" class="form-control" name="Preguntas" maxlength="35" id="Preguntas" placeholder="Pregunta" size="40">
-						
-							</div>
+	<h6><a class="btn btn-primary" href="Gestion_Preguntas.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a></h6>
+
+	<hr>
+	<div clas="row ">
+
+		<div class="box-header with-border">
+
+			<div class="box-body">
+
+				<form class="" method="post">
+					<center>
+						<h2><strong> Registro Pregunta </strong></h2>
+					</center>
+					<hr>
+					<div class="row">
+
+						<div class="col-xs-14 pull-right">
+
+							<table class="table">
+								<thead class="table-primary">
+									<tr>
+
+										<th>
+											<center>Nueva Pregunta</center>
+										</th>
+
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr>
+
+										<td style="width: 100%">
+
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-check"></i></span>
+												<input type="text" class="form-control" name="Preguntas" maxlength="35" id="Preguntas" placeholder="Pregunta" size="40">
+
+											</div>
+
+										</td>
+
+									</tr>
+
+								</tbody>
+							</table>
 
 						</div>
-						<hr>
-						<center><input type="submit" value="Registrar Pregunta" class="btn btn-primary"></center>
-					</form>
-				</div>
-				</section>
-				</body>
-				<style type="text/css">
-					.btn-atras {
-						background: #1faac8;
-						color: #FFF;
-						padding: 0 20px;
-						border: 0;
-						cursor: pointer;
-						margin-left: 20px;
-					}
 
-					.form_register {
-						width: 450px;
-						margin: auto;
-					}
+					</div>
 
-					.form_register h1 {
-						color: #3c93b0;
-					}
+					<hr>
+					<center><button type="submit" class="btn btn-primary btn-lg"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Actualizar </button></center>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+</div>
 
-					hr {
-						border: 0;
-						background: #CCC;
-						height: 1px;
-						margin: 10px 0;
-						display: block;
-					}
 
-					form {
-						background: #FFF;
-						margin: auto;
-						padding: 20px 50px;
-						border: 1px solid #d1d1d1;
-					}
 
-					label {
-						display: block;
-						font-size: 12pt;
-						font-family: 'GothamBook';
-						margin: 15px auto 5px auto;
-					}
+<style type="text/css">
+	.btn-atras {
+		background: #1faac8;
+		color: #FFF;
+		padding: 0 20px;
+		border: 0;
+		cursor: pointer;
+		margin-left: 20px;
+	}
 
-					.btn_save {
-						font-size: 12pt;
-						background: #12a4c6;
-						padding: 10px;
-						color: #FFF;
-						letter-spacing: 1px;
-						border: 0;
-						cursor: pointer;
-						margin: 15px auto;
-					}
+	.form_register {
+		width: 450px;
+		margin: auto;
+	}
 
-					.alert {
-						width: 100%;
-						background: #66e07d66;
-						border-radius: 6px;
-						margin: 20px auto;
-					}
+	.form_register h1 {
+		color: #3c93b0;
+	}
 
-					.msg_error {
-						color: #e65656;
-					}
+	hr {
+		border: 0;
+		background: #CCC;
+		height: 1px;
+		margin: 10px 0;
+		display: block;
+	}
 
-					.msg_save {
-						color: #126e00;
-					}
+	form {
+		background: #FFF;
+		margin: auto;
+		padding: 20px 50px;
+		border: 1px solid #d1d1d1;
+	}
 
-					.alert p {
-						padding: 10px;
-					}
-				</style>
-				<?php include 'barralateralfinal.php'; ?>
+	label {
+		display: block;
+		font-size: 12pt;
+		font-family: 'GothamBook';
+		margin: 15px auto 5px auto;
+	}
+
+	.btn_save {
+		font-size: 12pt;
+		background: #12a4c6;
+		padding: 10px;
+		color: #FFF;
+		letter-spacing: 1px;
+		border: 0;
+		cursor: pointer;
+		margin: 15px auto;
+	}
+
+	.alert {
+		width: 100%;
+		background: #66e07d66;
+		border-radius: 6px;
+		margin: 20px auto;
+	}
+
+	.msg_error {
+		color: #e65656;
+	}
+
+	.msg_save {
+		color: #126e00;
+	}
+
+	.alert p {
+		padding: 10px;
+	}
+</style>
+<?php include 'barralateralfinal.php'; ?>
