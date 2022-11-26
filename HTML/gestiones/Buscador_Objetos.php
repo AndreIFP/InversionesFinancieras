@@ -73,8 +73,8 @@ font-size: 12px; ">
                                             <th><?php echo $row['Objetos']?></th>
                                             <th><?php echo $row['Descripcion']?></th>
                                             <th><?php echo $row['Tipo_Objeto']?></th>
-                                                <th><a href="Actualizar_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-primary btn-xs" >Editar</a>
-                                                <a href="Delete_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-danger btn-xs">Eliminar</a></th>
+                                                <!--th><a href="Actualizar_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-primary btn-xs" >Editar</a-->
+                                                <!--a href="Delete_Objetos.php?Id=<?php echo $row['Id_Objetos'] ?>"class="btn btn-danger btn-xs">Eliminar</a></th-->
                                             </tr>
                                         <?php
                                                }
