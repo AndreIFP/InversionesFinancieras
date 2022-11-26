@@ -159,7 +159,7 @@ if (!isset($_SESSION['rol'])) {
 
 
 				<th>
-					<center>Sub-cuenta 1</center>
+				<center>Código de la cuenta</center>
 				</th>
 
 			</tr>
@@ -221,60 +221,7 @@ if (!isset($_SESSION['rol'])) {
 
 
 				
-				<div class="row">
-	<table class="table">
-		<thead class="table-primary">
-			<tr>
-
-				<th>
-					<center>Sub-cuenta 2</center>
-				</th>
-
-
-				<th>
-					<center>Sub-cuenta 3</center>
-				</th>
-
-			</tr>
-		</thead>
-
-		<tbody>
-
-			<tr>
-
-				<td style="width:50%;" >
-
-				<div class="input-group">
-
-                <div class="input-group">
 				
-					<span  class="input-group-addon"><i class="fa fa-check"></i></span>
-		   <select class=" elegir elegirl form-control" name="cbx_calle" id="cbx_calle" ></select></div>
-			</div>
-			
-			<br />
-				</td>
-				<br>
-
-				<td style="width:50%;" >
-
-				<div class="input-group">
-
-                <div class="input-group">
-				
-					<span  class="input-group-addon"><i class="fa fa-check"></i></span>
-		   <select class=" elegir elegirl form-control" name="cbx_casa" id="cbx_casa" ></select></div>
-			</div>
-			
-			<br />
-				
-
-			</tr>
-
-		</tbody>
-	</table>
-
-</div>
 
 
 
@@ -289,9 +236,7 @@ if (!isset($_SESSION['rol'])) {
 								<thead class="table-primary">
 									<tr>
 
-										<th>
-											<center>Código de la cuenta</center>
-										</th>
+										
 
 
 										<th>
@@ -304,23 +249,9 @@ if (!isset($_SESSION['rol'])) {
 								<tbody>
 
 									<tr>
-										</td>
+										
 
-				<td style="width: 50%">
-
-					<div class="input-group">
-
-					<div class="input-group">
 				
-			 <span  class="input-group-addon"><i class="fa fa-key"></i></span>
-			 <select class="form-control" name="cbx_localidad" id="cbx_localidad"></select></div>
-				</div>
-	
-		  <br />
-					</div>
-
-				</td>
-
 										<td style="width: 50%">
 
 											<div class="input-group">
