@@ -37,7 +37,7 @@ if (!isset($_SESSION['rol'])) {
                     <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['w'] == 1) {
 
                     ?>
-                        <a href="Nuevo_Catalogo.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Nueva cuenta</a>
+                        <a href="Gestion_CatalogoCuentadiseñoboton.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Nueva cuenta</a>
 
                     <?php } ?>
                     <a class="btn btn-info" href="Gestion_CatalogoCuenta_Inactivas.php"><i class="fa fa-book"></i> Cuentas Inactivas</a>
@@ -71,7 +71,7 @@ if (!isset($_SESSION['rol'])) {
                         <tr>
                             <th><center>Código</center></th>
                             <th><center>Cuenta</center></th>
-                            <th><center>Movimiento</center></th>
+                            
                             <th><center>Estado Cuenta</center></th>
                             <th colspan="2"><center>Acciones</center></th>
                             
@@ -109,7 +109,6 @@ if (!isset($_SESSION['rol'])) {
                                 <tr>
                                     <th><center><?php echo $row['CODIGO_CUENTA'] ?></center></th>
                                     <th><center><?php echo $row['CUENTA'] ?></center></th>
-                                    <th><center><?php echo $row['Movimiento'] ?></center></th>
                                     <th><center><?php echo $row['Estado_Cuenta'] ?></center></th>
                                     <script>
                                         function alerta() {

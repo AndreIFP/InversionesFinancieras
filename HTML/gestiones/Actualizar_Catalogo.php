@@ -147,9 +147,7 @@ if (!isset($_SESSION['rol'])) {
 								<thead class="table-primary">
 									<tr>
 
-										<th>
-											<center>Clasificación</center>
-										</th>
+										
 
 
 										<th>
@@ -163,18 +161,7 @@ if (!isset($_SESSION['rol'])) {
 
 									<tr>
 
-										<td style="width: 50%">
-
-											<div class="input-group">
-												<span class="input-group-addon"><i class="fa fa-tags"></i></span>
-												<select class="form-control notItemOne" name="CLASIFICACION">
-													<option value="<?php echo $CLASIFICACION ?>"><?php echo $CLASIFICACION ?></option>
-													<option value="Acreedor">Acreedor</option>
-													<option value="Deudor">Deudor</option>
-												</select>
-											</div>
-
-										</td>
+										
 
 										<td style="width: 50%">
 

@@ -63,9 +63,7 @@ if (!isset($_SESSION['rol'])) {
                             <th>
                                 <center>Cuenta</center>
                             </th>
-                            <th>
-                                <center>Movimiento</center>
-                            </th>
+
                             <th>
                                 <center>Estado Cuenta</center>
                             </th>
@@ -110,9 +108,7 @@ if (!isset($_SESSION['rol'])) {
                                     <th>
                                         <center><?php echo $row['CUENTA'] ?></center>
                                     </th>
-                                    <th>
-                                        <center><?php echo $row['Movimiento'] ?></center>
-                                    </th>
+
                                     <th>
                                         <center><?php echo $row['Estado_Cuenta'] ?></center>
                                     </th>

@@ -103,8 +103,7 @@ $pdf->setX(20);
 $pdf->SetFillColor(108, 250, 254 );
 $pdf->Cell(30,5, utf8_decode('Codigo Cuenta'),1,0,'C',1);
 $pdf->Cell(80,5, utf8_decode('Cuenta'),1,0,'C',1);
-$pdf->Cell(40,5, utf8_decode('Movimiento'),1,0,'C',1);
-$pdf->Cell(25,5, utf8_decode('Estado'),1,1,'C',1);
+$pdf->Cell(25,5, utf8_decode('Estado Cuenta'),1,1,'C',1);
 
 
 
@@ -112,7 +111,6 @@ while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(20);
     $pdf->Cell(30, 5, utf8_decode($fila['CODIGO_CUENTA']), 1, 0, "L",0);
     $pdf->Cell(80, 5, utf8_decode($fila['CUENTA']), 1, 0, "L",0);
-    $pdf->Cell(40, 5, utf8_decode($fila['Movimiento']), 1, 0, "L",0);
     $pdf->Cell(25, 5, utf8_decode($fila['Estado_Cuenta']), 1, 1, "L",0);
 }
 

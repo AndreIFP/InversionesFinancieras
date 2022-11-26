@@ -134,7 +134,7 @@ if (!isset($_SESSION['rol'])) {
 				</script>
 
 
-	<a class="btn btn-primary" href="Gestion_CatalogoCuenta.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+	<a class="btn btn-primary" href="Gestion_CatalogoCuentadiseñoboton.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
 	<hr>
 	<div clas="row ">
 	<form class="" method="post">

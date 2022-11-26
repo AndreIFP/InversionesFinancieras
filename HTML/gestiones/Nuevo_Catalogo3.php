@@ -134,7 +134,7 @@ if (!isset($_SESSION['rol'])) {
 				</script>
 
 
-	<a class="btn btn-primary" href="Gestion_CatalogoCuenta.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+	<a class="btn btn-primary" href="Gestion_CatalogoCuentadiseñoboton.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
 	<hr>
 	<div clas="row ">
 	<form class="" method="post">
@@ -232,9 +232,8 @@ if (!isset($_SESSION['rol'])) {
 
 
 				<th>
-					<center> </center>
-				</th>
-
+					<center>Nombre De La Cuenta</center>
+					</th>
 			</tr>
 		</thead>
 
@@ -253,7 +252,17 @@ if (!isset($_SESSION['rol'])) {
 			</div>
 			
 			<br />
-				</td>			
+				</td>
+				
+				<td style="width: 50%">
+
+											<div class="input-group">
+											    <span class="input-group-addon"><i class="fa fa-book"></i></span>
+												<input type="text" class="form-control" name="CUENTA" maxlength="50" id="CUENTA" placeholder="Nombre de la Cuenta" size="35" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)" required>
+
+											</div>
+
+										</td>
 
 			</tr>
 
@@ -267,49 +276,7 @@ if (!isset($_SESSION['rol'])) {
 				
 			
 
-					<div class="row">
-
-						<div class="col-xs-14 pull-right">
-
-							<table class="table">
-								<thead class="table-primary">
-									<tr>
-
-
-										<th>
-											<center>Nombre De La Cuenta</center>
-										</th>
-
-									</tr>
-								</thead>
-
-								<tbody>
-
-									<tr>
-										</td>
-
-				
-
-										<td style="width: 50%">
-
-											<div class="input-group">
-											    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-												<input type="text" class="form-control" name="CUENTA" maxlength="50" id="CUENTA" placeholder="Nombre de la Cuenta" size="35" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)" required>
-
-											</div>
-
-										</td>
-
-										
-									</tr>
-
-								</tbody>
-							</table>
-
-						</div>
-
-					</div>
-
+					
 
 					<div class="row">
 
@@ -322,9 +289,7 @@ if (!isset($_SESSION['rol'])) {
 										<th>
 											<center>Estado de Cuenta</center>
 										</th>
-										<th>
-											<center>Tipo De Movimiento De La Cuenta</center>
-										</th>
+										
 
 									</tr>
 								</thead>
@@ -348,20 +313,7 @@ if (!isset($_SESSION['rol'])) {
                               </td>
 
 
-										<td style="width: 50%">
-
-											<div class="input-group">
-
-											    <span class="input-group-addon"><i class='bx bxs-book bx-tada' ></i></span>
-												<select class="form-control" name="Movimiento">
-													<option value="">Seleccione el tipo de movimiento de la cuenta</option>
-													<option value="Acreedor">ACREEDOR</option>
-													<option value="deudor">DEUDOR</option>
-												</select>
-
-											</div>
-
-										</td>
+										
 										
 
 									</tr>

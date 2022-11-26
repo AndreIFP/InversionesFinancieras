@@ -134,7 +134,7 @@ if (!isset($_SESSION['rol'])) {
 				</script>
 
 
-	<a class="btn btn-primary" href="Gestion_CatalogoCuenta.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+	<a class="btn btn-primary" href="Gestion_CatalogoCuentadiseñoboton.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
 	<hr>
 	<div clas="row ">
 	<form class="" method="post">
@@ -293,6 +293,9 @@ if (!isset($_SESSION['rol'])) {
 										<th>
 											<center>Nombre De La Cuenta</center>
 										</th>
+										<th>
+											<center>Estado de Cuenta</center>
+										</th>
 
 									</tr>
 								</thead>
@@ -313,6 +316,20 @@ if (!isset($_SESSION['rol'])) {
 											</div>
 
 										</td>
+										<td style="width: 50%">
+
+                                 <div class="input-group">
+
+	                              <span class="input-group-addon"><i class="fa fa-check"></i></span>
+	                              <select class="form-control" name="Estado_Cuenta" required>
+	                            	<option value="">Seleccione el estado de la cuenta</option>
+	                              	<option value="ACTIVO">ACTIVO</option>
+	                             	<option value="INACTIVO">INACTIVO</option>
+	                         </select>
+
+                            </div>
+
+                              </td>
 
 										
 									</tr>
@@ -333,49 +350,18 @@ if (!isset($_SESSION['rol'])) {
 								<thead class="table-primary">
 									<tr>
 
-										<th>
-											<center>Estado de Cuenta</center>
-										</th>
-										<th>
-											<center>Tipo De Movimiento De La Cuenta</center>
-										</th>
-
+										
+										
 									</tr>
 								</thead>
 
 								<tbody>
 
 									<tr>
-									<td style="width: 50%">
-
-                                 <div class="input-group">
-
-	                              <span class="input-group-addon"><i class="fa fa-check"></i></span>
-	                              <select class="form-control" name="Estado_Cuenta" required>
-	                            	<option value="">Seleccione el estado de la cuenta</option>
-	                              	<option value="ACTIVO">ACTIVO</option>
-	                             	<option value="INACTIVO">INACTIVO</option>
-	                         </select>
-
-                            </div>
-
-                              </td>
+									
 
 
-										<td style="width: 50%">
-
-											<div class="input-group">
-
-											    <span class="input-group-addon"><i class='bx bxs-book bx-tada' ></i></span>
-												<select class="form-control" name="Movimiento">
-													<option value="">Seleccione el tipo de movimiento de la cuenta</option>
-													<option value="Acreedor">ACREEDOR</option>
-													<option value="deudor">DEUDOR</option>
-												</select>
-
-											</div>
-
-										</td>
+										
 										
 
 									</tr>
