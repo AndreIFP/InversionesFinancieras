@@ -20,18 +20,18 @@ font-size: 12px; ">
             <div class="reportes">
                 <a class="btn btn-primary" href="GestionRoles.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                 <a class="btn btn-warning" href="Reporte_Roles_Buscador.php?variable=<?php echo $busqueda; ?>" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-            <br><br>
+                <br><br>
             </div>
 
 
             <table class="table">
                 <thead class="table-primary">
                     <tr>
-                        <th>Id</th>
-                        <th>Rol</th>
-                        <th>Estado</th>
-                        <th>Descripcion</th>
-                        <th></th>
+                        <th><center>Id</center></th>
+                        <th><center>Rol</center></th>
+                        <th><center>Estado</center></th>
+                        <th><center>Descripción</center></th>
+                        <th colspan="3"><center>Acciones</center></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,13 +64,20 @@ font-size: 12px; ">
                         while ($row = mysqli_fetch_array($sql)) {
                     ?>
                             <tr>
-                                <th><?php echo $row['Id_Rol'] ?></th>
-                                <th><?php echo $row['Rol'] ?></th>
-                                <th><?php echo $row['Estado'] ?></th>
-                                <th><?php echo $row['Descripcion'] ?></th>
-                                <th><a href="Actualizar_Roles.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-primary">Editar</a>
-                                    <a href="Delete_Roles.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-danger">Eliminar</a>
-                                </th>
+                                <th><center><?php echo $row['Id_Rol'] ?></center></th>
+                                <th><center><?php echo $row['Rol'] ?></center></th>
+                                <th><center><?php echo $row['Estado'] ?></center></th>
+                                <th><center><?php echo $row['Descripcion'] ?></center></th>
+                                <?php if ($_SESSION['permisos'][M_GESTION_ROLES] and $_SESSION['permisos'][M_GESTION_ROLES]['u'] == 1) {
+
+                                ?>
+                                    <th>
+                                        <center><a href="Actualizar_Roles.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i></a></center>
+                                    </th>
+                                    <th>
+                                        <center><a href="Actualizar_Permisos.php?Id=<?php echo $row['Id_Rol'] ?>" class="btn btn-success btn-xs"><i class="fa fa-key" aria-hidden="true"></i></a></center>
+                                    </th>
+                                <?php } ?>
                             </tr>
                     <?php
                         }
