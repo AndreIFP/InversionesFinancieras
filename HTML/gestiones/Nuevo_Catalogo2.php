@@ -12,9 +12,9 @@ if (!empty($_POST)) {
 		$iduser = $row['Id_Usuario'];
 	}
 
-	$CODIGO_CUENTA     = $_POST['cbx_localidad'];
+	$CODIGO_CUENTA     = $_POST['cbx_municipio'];
 	$CUENTA            = $_POST['CUENTA'];
-	$MAYOR            = $_POST['cbx_casa'];
+	$MAYOR            = $_POST['cbx_estado'];
 	$MOVIMIENTO        = $_POST['Movimiento'];
 	//$CLASIFICACION     = $_POST['CLASIFICACION'];
 	$ESTADO_CUENTA     = $_POST['Estado_Cuenta'];
@@ -83,7 +83,7 @@ if (!isset($_SESSION['rol'])) {
 				  
 							$("#cbx_estado option:selected").each(function () {
 								id_estado = $(this).val();
-								$.post("includes/getMunicipio.php", { id_estado: id_estado }, function(data){
+								$.post("includes2/getMunicipio.php", { id_estado: id_estado }, function(data){
 									$("#cbx_municipio").html(data);
 								});            
 							});
@@ -98,7 +98,7 @@ if (!isset($_SESSION['rol'])) {
 
 							$("#cbx_municipio option:selected").each(function () {
 								id_municipio = $(this).val();
-								$.post("includes/getCalle.php", { id_municipio: id_municipio }, function(data){
+								$.post("includes2/getCalle.php", { id_municipio: id_municipio }, function(data){
 									$("#cbx_calle").html(data);
 								});            
 							});
@@ -112,7 +112,7 @@ if (!isset($_SESSION['rol'])) {
 													  	
 							$("#cbx_calle option:selected").each(function () {
 								id_calle = $(this).val();
-								$.post("includes/getCasa.php", { id_calle: id_calle }, function(data){
+								$.post("includes2/getCasa.php", { id_calle: id_calle }, function(data){
 									$("#cbx_casa").html(data);
 								});            
 							});
@@ -243,6 +243,10 @@ if (!isset($_SESSION['rol'])) {
 											<center>Nombre De La Cuenta</center>
 										</th>
 
+										<th>
+											<center>Estado de Cuenta</center>
+										</th>
+
 									</tr>
 								</thead>
 
@@ -261,40 +265,7 @@ if (!isset($_SESSION['rol'])) {
 											</div>
 
 										</td>
-
-										
-									</tr>
-
-								</tbody>
-							</table>
-
-						</div>
-
-					</div>
-
-
-					<div class="row">
-
-						<div class="col-xs-14 pull-right">
-
-							<table class="table">
-								<thead class="table-primary">
-									<tr>
-
-										<th>
-											<center>Estado de Cuenta</center>
-										</th>
-										<th>
-											<center>Tipo De Movimiento De La Cuenta</center>
-										</th>
-
-									</tr>
-								</thead>
-
-								<tbody>
-
-									<tr>
-									<td style="width: 50%">
+										<td style="width: 50%">
 
                                  <div class="input-group">
 
@@ -309,23 +280,7 @@ if (!isset($_SESSION['rol'])) {
 
                               </td>
 
-
-										<td style="width: 50%">
-
-											<div class="input-group">
-
-											    <span class="input-group-addon"><i class='bx bxs-book bx-tada' ></i></span>
-												<select class="form-control" name="Movimiento">
-													<option value="">Seleccione el tipo de movimiento de la cuenta</option>
-													<option value="Acreedor">ACREEDOR</option>
-													<option value="deudor">DEUDOR</option>
-												</select>
-
-											</div>
-
-										</td>
 										
-
 									</tr>
 
 								</tbody>
@@ -335,8 +290,8 @@ if (!isset($_SESSION['rol'])) {
 
 					</div>
 
-					
 
+					
 
 					<hr>
 					<center><button type="submit" class="btn btn-primary"> <i class="fa fa-check" aria-hidden="true"></i> Registrar Cuenta</button></center>

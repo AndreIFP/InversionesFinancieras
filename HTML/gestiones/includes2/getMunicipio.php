@@ -4,15 +4,21 @@
 	
 	$id_estado = $_POST['id_estado'];
 	
-	$queryM = "SELECT CODIGO_CUENTA, CUENTA FROM tbl_catalago_cuentas WHERE CODIGO_CUENTA like '$id_estado'";
-	$resultadoM = $mysqli->query($queryM);
+	$queryl = "SELECT CODIGO_CUENTA FROM tbl_catalago_cuentas WHERE CODIGO_CUENTA like '$id_estado'  ORDER BY CODIGO_CUENTA desc LIMIT 1";
+	$resultadol = $mysqli->query($queryl);
 	
-	$html= "<option value='0'>Seleccionar $id_estado</option>";
-	
-	while($rowM = $resultadoM->fetch_assoc())
+	$html= "<option value='0'>Seleccione El Codigo Disponible </option>";
+
+	$variable2 = $id_estado .''. '001';
+	while($rowl = $resultadol->fetch_assoc())	
 	{
-		$html.= "<option value='".$rowM['CODIGO_CUENTA']."'>".$rowM['CODIGO_CUENTA']." - ".$rowM['CUENTA']."</option>";
+
+		$variable = $rowl['CODIGO_CUENTA'] +'1';
+		$html.= "<option value='".$variable."'>".$variable."</option>";
 	}
-	
+
+				
+		
+
 	echo $html;
 ?>		
