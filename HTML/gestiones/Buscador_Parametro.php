@@ -25,12 +25,10 @@ session_start();
             <table class="table"><br>
                 <thead class="table-primary"><br>
                     <tr>
-                        <th>Id</th>
-                        <th>Nombre Parametro</th>
-                        <th>Valor</th>
-                        <th>Fecha Creación</th>
-                        <th>Fecha Modificación</th>
-                        <th>Acciones</th>
+                        <th><center>Id</center></th>
+                        <th><center>Nombre Parametro</center></th>
+                        <th><center>Valor</center></th>
+                        <th><center>Acciones</center></th>
                         
                     </tr>
                 </thead>
@@ -62,15 +60,18 @@ session_start();
                         while ($row = mysqli_fetch_array($sql)) {
                     ?>
                             <tr>
-                                <th><?php echo $row['Id_Parametro'] ?></th>
-                                <th><?php echo $row['Parametro'] ?></th>
-                                <th><?php echo $row['Valor'] ?></th>
-                                <th><?php echo $row['Fecha_Creacion'] ?></th>
-                                <th><?php echo $row['Fecha_Modificacion'] ?></th>
-                                <th><a href="Actualizar_Parametro.php?Id=<?php echo $row['Id_Parametro'] ?>" class="btn btn-primary btn-xs">Editar</a>
-                                
-                                    <a href="Delete_Parametro.php?Id=<?php echo $row['Id_Parametro'] ?>" class="btn btn-danger btn-xs">Eliminar</a></th>
-                                
+                                <th><center><?php echo $row['Id_Parametro'] ?></center></th>
+                                <th><center><?php echo $row['Parametro'] ?></center></th>
+                                <th><center><?php echo $row['Valor'] ?></center></th>
+                                <?php if ($_SESSION['permisos'][M_GESTION_PARAMETROS] and $_SESSION['permisos'][M_GESTION_PARAMETROS]['u'] == 1) {
+                            ?>
+                                <th>
+                                    <center><a href="Actualizar_Parametro.php?Id=<?php echo $row['Id_Parametro'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i></a></center>
+                                </th>
+                                <p>
+                                <?php
+                            }
+                                ?>
                             </tr>
                     <?php
                         }

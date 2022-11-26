@@ -18,17 +18,16 @@ session_start();
             ?>
             <h2><strong>Gestión Preguntas Usuario</strong> </h2>
             <a class="btn btn-primary" href="Gestion_PreguntasUsuarios.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-            <a class="btn btn-warning" href="Reporte_Preg_Usu_Buscador.php?variable=<?php echo $busqueda; ?>"
-             onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+            <a class="btn btn-warning" href="Reporte_Preg_Usu_Buscador.php?variable=<?php echo $busqueda; ?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
 
             <table class="table">
                 <thead class="table-succees table-striped">
                     <tr>
-                        <th>Id</th>
-                        <th>Id Usuario</th>
-                        <th>Preguntas</th>
-                        <th>Respuesta</th>
-                        <th>Acciones</th>
+                        <th><center>Id</center></th>
+                        <th><center>Id Usuario</center></th>
+                        <th><center>Preguntas</center></th>
+                        <th><center>Respuesta</center></th>
+                      
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +35,7 @@ session_start();
                     //Paginador
                     $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_PREGUNTAS_X_USUARIO
                                             WHERE ( Id_Preguntas LIKE '%$busqueda%' OR
-                                                    Id_Usuario LIKE '%$busqueda%' )");
+                                                    Id_Usuario LIKE '%$busqueda%')");
                     $result_register = mysqli_fetch_array($sql_registe);
                     $total_registro = $result_register['total_registro'];
 
@@ -51,7 +50,8 @@ session_start();
                     $desde = ($pagina - 1) * $por_pagina;
                     $total_paginas = ceil($total_registro / $por_pagina);
                     $sql = mysqli_query($conn, "SELECT * from TBL_PREGUNTAS_X_USUARIO WHERE ( Id_Preguntas LIKE '%$busqueda%' OR
-                                                                                Id_Usuario LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
+                                                                                Id_Usuario LIKE '%$busqueda%'  OR
+                                                    Preguntas LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
                     mysqli_close($conn);
 
                     $result = mysqli_num_rows($sql);
@@ -59,13 +59,10 @@ session_start();
                         while ($row = mysqli_fetch_array($sql)) {
                     ?>
                             <tr>
-                                <th><?php echo $row['Id_Preguntas'] ?></th>
-                                <th><?php echo $row['Id_Usuario'] ?></th>
-                                <th><?php echo $row['Preguntas'] ?></th>
-                                <th><?php echo $row['Respuestas'] ?></th>
-                                <th><a href="Actualizar_PreguntasUsu.php?Id=<?php echo $row['Id_Preguntas'] ?>" class="btn btn-primary btn-xs">Editar</a>
-                                    <a href="Delete_PreguntasUsu.php?Id=<?php echo $row['Id_Preguntas'] ?>" class="btn btn-danger btn-xs">Eliminar</a>
-                                </th>
+                                <th><center><?php echo $row['Id_Preguntas'] ?></center></th>
+                                <th><center><?php echo $row['Id_Usuario'] ?></center></th>
+                                <th><center><?php echo $row['Preguntas'] ?></center></th>
+                                <th><center><?php echo $row['Respuestas'] ?></center></th>
                             </tr>
                     <?php
                         }
@@ -74,42 +71,43 @@ session_start();
                     }
                     ?>
                 </tbody>
-            </table></div>
+            </table>
+        </div>
 
-            <?php
-            if ($total_registro != 0) {
-            ?>
-                <div class="paginador">
-                    <ul>
-                        <?php
-                        if ($pagina != 1) {
-                        ?>
-                            <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<< /a>
-                            </li>
-                            <li><a href="?pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo $busqueda; ?>">
-                                    <<< /a>
-                            </li>
-                        <?php
+        <?php
+        if ($total_registro != 0) {
+        ?>
+            <div class="paginador">
+                <ul>
+                    <?php
+                    if ($pagina != 1) {
+                    ?>
+                        <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<< /a>
+                        </li>
+                        <li><a href="?pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo $busqueda; ?>">
+                                <<< /a>
+                        </li>
+                    <?php
+                    }
+                    for ($i = 1; $i <= $total_paginas; $i++) {
+                        # code...
+                        if ($i == $pagina) {
+                            echo '<li class="pageSelected">' . $i . '</li>';
+                        } else {
+                            echo '<li><a href="?pagina=' . $i . '&busqueda=' . $busqueda . '">' . $i . '</a></li>';
                         }
-                        for ($i = 1; $i <= $total_paginas; $i++) {
-                            # code...
-                            if ($i == $pagina) {
-                                echo '<li class="pageSelected">' . $i . '</li>';
-                            } else {
-                                echo '<li><a href="?pagina=' . $i . '&busqueda=' . $busqueda . '">' . $i . '</a></li>';
-                            }
-                        }
+                    }
 
-                        if ($pagina != $total_paginas) {
-                        ?>
-                            <li><a href="?pagina=<?php echo $pagina + 1; ?>&busqueda=<?php echo $busqueda; ?>">>></a></li>
-                            <li><a href="?pagina=<?php echo $total_paginas; ?>&busqueda=<?php echo $busqueda; ?> ">>|</a></li>
-                        <?php } ?>
-                    </ul>
-                </div>
-            <?php } ?>
+                    if ($pagina != $total_paginas) {
+                    ?>
+                        <li><a href="?pagina=<?php echo $pagina + 1; ?>&busqueda=<?php echo $busqueda; ?>">>></a></li>
+                        <li><a href="?pagina=<?php echo $total_paginas; ?>&busqueda=<?php echo $busqueda; ?> ">>|</a></li>
+                    <?php } ?>
+                </ul>
+            </div>
+        <?php } ?>
 
-        
+
 </section>
 </div>
 </body>

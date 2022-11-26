@@ -26,10 +26,10 @@ session_start();
                 <table class="table">
                     <thead class="table-primary">
                         <tr>
-                            <th>Codigo</th>
-                            <th>Cuenta</th>
-                            <th>Estado Cuenta</th>
-                            <th>Acciones</th>
+                            <th><center>Código</center></th>
+                            <th><center>Cuenta</center></th>
+                            <th><center>Estado Cuenta</center></th>
+                            <th><center>Acciones</center></th>
 
                         </tr>
                     </thead>
@@ -62,12 +62,16 @@ session_start();
                             while ($row = mysqli_fetch_array($sql)) {
                         ?>
                                 <tr>
-                                    <th><?php echo $row['CODIGO_CUENTA'] ?></th>
-                                    <th><?php echo $row['CUENTA'] ?></th>                      
-                                    <th><?php echo $row['Estado_Cuenta'] ?></th>
-                                    <th><a href="Actualizar_Catalogo.php?Id=<?php echo $row['CODIGO_CUENTA'] ?>" class="btn btn-primary">Editar</a>
-                                        
-                                    </th>
+                                    <th><center><?php echo $row['CODIGO_CUENTA'] ?></center></th>
+                                    <th><center><?php echo $row['CUENTA'] ?></center></th>
+                                    <th><center><?php echo $row['Estado_Cuenta'] ?></center></th>
+                                    <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['u'] == 1) {
+
+                                    ?>
+                                        <th>
+                                            <center><a href="Actualizar_Catalogo.php?Id=<?php echo $row['CODIGO_CUENTA'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i></a></center>
+                                        </th>
+                                    <?php } ?>
                                     <p>
                                 </tr>
                         <?php
@@ -87,10 +91,10 @@ session_start();
                         <?php
                         if ($pagina != 1) {
                         ?>
-                            <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<</a>
+                            <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<< /a>
                             </li>
                             <li><a href="?pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo $busqueda; ?>">
-                                    <<</a>
+                                    <<< /a>
                             </li>
                         <?php
                         }

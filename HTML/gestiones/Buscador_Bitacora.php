@@ -26,12 +26,12 @@ session_start();
                     <table class="table">
                         <thead class="table-primary"><br><br>
                             <tr>
-                                <th>Id</th>
-                                <th>Fecha</th>
-                                <th>Acción</th>
-                                <th>Descripcion</th>
-                                <th></th>
-                                <th></th>
+                                <th><center>Id</center></th>
+                                <th><center>Fecha</center></th>
+                                <th><center>Acción</center></th>
+                                <th><center>Descripcion</center></th>
+                                <th><center> Usuario </center></th>
+
                                
                             </tr>
                         </thead>
@@ -65,17 +65,12 @@ session_start();
                                 while ($row = mysqli_fetch_array($sql)) {
                             ?>
                                     <tr>
-                                        <th><?php echo $row['Id_Bitacora'] ?></th>
-                                        <th><?php echo $row['Fecha'] ?></th>
-                                        <th><?php echo $row['Accion'] ?></th>
-                                        <th><?php echo $row['Descripcion'] ?></th>
-                                        <script>
-                                            function alerta() {
-                                                window.alert('No es posible hacer esta Accion');
-                                            }
-                                        </script>
-                                        <th><a type="button" class="btn btn-primary btn-xs" onclick="alerta()">Editar</a></th>
-                                        <th><a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a></th>
+                                        <th><center><?php echo $row['Id_Bitacora'] ?></center></th>
+                                        <th><center><?php echo $row['Fecha'] ?></center></th>
+                                        <th><center> <?php echo $row['Accion'] ?> </center></th>
+                                        <th><center><?php echo $row['Descripcion'] ?></center></th>
+                                        <th><center> <?php echo $row['Id_Usuario'] ?> </center></th>
+                                     
 
                                     </tr>
                             <?php

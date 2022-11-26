@@ -147,12 +147,6 @@ $numero = 99999.99;
                                     <th><center><a href="Actualizar_Usuario.php?Id=<?php echo $Id_Usuario ?>" class="btn btn-primary btn-xs"> <i class="fa fa-pencil" aria-hidden="true"></i> </a> </center> </th>
                                 <?php } ?>
 
-                                <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['d'] == 1) {
-                                ?>
-
-                                <th><center> <a href="Delete_Usuario.php?Id=<?php echo $Id_Usuario ?>" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o" aria-hidden="true"></i> </a> </center> </th>
-                                <?php } ?>
-
                                 <th><center> <a href="Gestion_Usuarios2.php?Id_Usuario2=<?php echo $Id_Usuario?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center> </th>
 
                             </tr>
