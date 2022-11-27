@@ -125,7 +125,7 @@ if (!isset($_SESSION['rol'])) {
 				<input type="Direccion" name="Direccion" maxlength="60" id="Direccion" placeholder="Dirección"  value ="<?php echo $Direccion ?>"size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"   required>
 				<label for="Teléfono">Teléfono</label>
 				<input type="tex" name="Telefono" maxlength="10" id="Telefono" placeholder="Teléfono"value ="<?php echo $Telefono ?>"size="40">
-             			<label for="Tipo_Cliente">Estado del Cliente</label>
+             			<label for="Tipo_Cliente">Estado</label>
 				<select name="Tipo_Cliente" class="notItemOne" required>
 				  <option value="<?php echo $Tipo_Cliente ?>"><?php echo $Tipo_Cliente ?></option>
                                   <option value="ACTIVO">ACTIVO</option>
