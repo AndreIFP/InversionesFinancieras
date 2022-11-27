@@ -116,7 +116,7 @@ if (!isset($_SESSION['rol'])) {
                 <input type="hidden" name="Id_Cliente" value="<?php echo $Id_Cliente  ?>">
 				<label for="Nombre_Empresa">Nombre Empresa</label>
 				<input type="text" name="Nombre_Empresa" maxlength="35" id="Nombre_Empresa" placeholder="Nombre completo" value ="<?php echo $Nombree ?>" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"   required>
-				<label for="Representante Legal">Nombre Cliente</label>
+				<label for="Representante Legal">Representate Legal</label>
 				<input type="text" name="Nombre_Cliente" maxlength="35" id="Nombre_Cliente" placeholder="Nombre completo" value ="<?php echo $Nombre ?>" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)"  required>
 				<label for="RTN_Cliente">RTN</label>
 				<input type="text" name="RTN_Cliente" maxlength="20" id="RTN_Cliente" placeholder="RTN"value ="<?php echo $RTN_Cliente ?>" size="40" oninput="this.value = this.value.replace(/[^0-9]/,'')" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
