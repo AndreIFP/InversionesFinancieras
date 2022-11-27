@@ -206,7 +206,7 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$pol
 
 
   <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >RTN Cliente:</label>
+  <label for="recipient-name" class="col-form-label" >RTN:</label>
   <input type="text" class="form-control" id="recipient-name" value=" <?php echo $RTN_Cliente ?> ">
   </div>
 
@@ -224,8 +224,13 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$pol
 
 
   <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Tipo Cliente:</label>
+  <label for="recipient-name" class="col-form-label" >Estado:</label>
   <input type="text" class="form-control" id="recipient-name" value=" <?php echo $Tipo_Cliente?> ">
+  </div>
+	
+  <div class= "form group">
+  <label for="Ciudad">Ciudad</label>
+  <input type="text" class="form-control" Readonly  id="recipient-name"  value ="<?php echo $Ciudad?> ">
   </div>
 
   <?php

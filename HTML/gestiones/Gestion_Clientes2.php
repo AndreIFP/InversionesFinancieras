@@ -96,7 +96,7 @@ $numero = 99999.99;
                 <tr>
                     <th>Id</th>
                     <th>Nombre Empresa</th>
-                    <th>Nombre Cliente</th>
+                    <th>Representante Legal</th>
                     <th>RTN</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -138,7 +138,7 @@ $numero = 99999.99;
 		             	$Direccion    = $row ['Direccion'];
 		             	$Telefono     = $row ['Telefono'];
 		            	$Tipo_Cliente = $row ['Tipo_Cliente'];
-                        $Ciudad       = $row ['Ciudad'];
+                       		
 
                         $_SESSION['Id_Mauri']=$Id_Cliente2;
                 ?>
@@ -148,6 +148,7 @@ $numero = 99999.99;
                             <th><?php echo  $Nombre   ?></th>
                             <th><?php echo  $RTN_Cliente?></th>
                             <th><?php echo $Tipo_Cliente ?></th>
+			    <th><?php echo $Ciudad ?></th>
 
                             <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {
                             ?>
@@ -224,13 +225,13 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$pol
 
 
   <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Nombre Cliente:</label>
+  <label for="recipient-name" class="col-form-label" >Representante Legal:</label>
   <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo  $Nombre ?> ">
   </div>
 
 
   <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >RTN Cliente:</label>
+  <label for="recipient-name" class="col-form-label" >RTN:</label>
   <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $RTN_Cliente ?> ">
   </div>
 
@@ -251,7 +252,12 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$pol
   <label for="recipient-name" class="col-form-label" >Estado:</label>
   <input type="text" class="form-control" Readonly  id="recipient-name" value=" <?php echo $Tipo_Cliente?> ">
   </div>
-
+	
+  div class= "form group">
+  <label for="Ciudad">Ciudad</label>
+  <input type="text" class="form-control" Readonly  id="recipient-name"  value ="<?php echo $Ciudad?> ">
+  </div>
+	
   <?php
 }
 ?>

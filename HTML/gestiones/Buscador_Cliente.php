@@ -26,7 +26,7 @@ session_start();
                         <tr>
                             <th>Id</th>
                             <th>Nombre Empresa</th>
-                            <th>Nombre Cliente</th>
+                            <th>Respresentate Legal</th>
                             <th>RTN</th>
                             <th>Fecha Creación</th>
                             <th>Acciones</th>

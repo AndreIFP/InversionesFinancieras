@@ -103,11 +103,11 @@ $pdf->setX(2);
 $pdf->SetFillColor(108, 250, 254 );
 $pdf->Cell(20,5, utf8_decode('ID'),1,0,'C',1);
 $pdf->Cell(35,5, utf8_decode('Nombre Empresa'),1,0,'C',1);
-$pdf->Cell(40,5, utf8_decode('Nombre Cliente'),1,0,'C',1);
-$pdf->Cell(30,5, utf8_decode('RTN Cliente'),1,0,'C',1);
+$pdf->Cell(40,5, utf8_decode('Representante Legal'),1,0,'C',1);
+$pdf->Cell(30,5, utf8_decode('RTN'),1,0,'C',1);
 $pdf->Cell(30,5, utf8_decode('Dirección'),1,0,'C',1);
 $pdf->Cell(30,5, utf8_decode('Telefono'),1,0,'C',1);
-$pdf->Cell(30,5, utf8_decode('Tipo Cliente'),1,0,'C',1);
+$pdf->Cell(30,5, utf8_decode('Estado'),1,0,'C',1);
 $pdf->Cell(30,5, utf8_decode('Ciudad'),1,0,'C',1);
 $pdf->Cell(30,5, utf8_decode('Fecha Creación'),1,1,'C',1);
 
