@@ -113,7 +113,8 @@ if (!isset($_SESSION['rol'])) {
 			<form action="" method="post">
 			<h1><strong>Actualizar Cliente</strong> </h1>
 			<hr>
-                <input type="hidden" name="Id_Cliente" value="<?php echo $Id_Cliente  ?>">
+              			<label for="Id_Cliente">Id Cliente</label>
+				<input type="text" class="form-control" Readonly  id="recipient-name" value="  <?php echo $Id_Cliente ?>">
 				<label for="Nombre_Empresa">Nombre Empresa</label>
 				<input type="text" name="Nombre_Empresa" maxlength="35" id="Nombre_Empresa" placeholder="Nombre completo" value ="<?php echo $Nombree ?>" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"   required>
 				<label for="Nombre_Cliente">Representate Legal</label>
