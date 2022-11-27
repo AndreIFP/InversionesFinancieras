@@ -7,7 +7,7 @@ $id_usuario = $_SESSION['id'];
 $cliente = $_SESSION['cliente'];
 
 const DRIVER='mysql';
-const SERVER='localhost';
+const SERVER='localhost:3307';
 const DATABASE='2w4GSUinHO';
 const USERNAME='root';
 const PASSWORD='';

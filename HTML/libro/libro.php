@@ -92,7 +92,6 @@ $fecha = date('Y-m-d h:i:s');
 
   <a class="btn btn-primary" href="validacionlibro.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
   <br>
-  <?php include 'indexXD.php'; ?>
   <div class="box-header">
     <center>
       <h3><strong> Libro diario de <?php echo $empresa  ?></strong></h3>
