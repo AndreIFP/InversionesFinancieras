@@ -81,7 +81,7 @@ $numero = 99999.99;
                 <tr>
                     <th>Id</th>
                     <th>Nombre Empresa</th>
-                    <th>Nombre Cliente</th>
+                    <th>Representante Legal</th>
                     <th>RTN</th>
                     <th>Estado</th>
                     <th>Acciones</th>
