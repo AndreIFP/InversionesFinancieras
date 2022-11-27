@@ -230,7 +230,7 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$pol
 
 
   <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >RTN Cliente:</label>
+  <label for="recipient-name" class="col-form-label" >RTN:</label>
   <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $RTN_Cliente ?> ">
   </div>
 
@@ -251,7 +251,12 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$pol
   <label for="recipient-name" class="col-form-label" >Estado:</label>
   <input type="text" class="form-control" Readonly  id="recipient-name" value=" <?php echo $Tipo_Cliente?> ">
   </div>
-
+	
+  <div class= "form group">
+  <label for="Ciudad">Ciudad</label>
+  <input type="text" name="Ciudad" maxlength="25" id="Ciudad" placeholder="Ciudad"  value ="<?php echo $Ciudad ?>"size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"   required>
+  </div>
+	
   <?php
 }
 ?>
