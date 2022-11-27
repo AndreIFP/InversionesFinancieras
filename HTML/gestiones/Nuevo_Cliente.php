@@ -113,7 +113,7 @@ if (!isset($_SESSION['rol'])) {
 
 
 										<th>
-											<center>Nombre del Cliente</center>
+											<center>Representante Legal</center>
 										</th>
 
 										<th>
