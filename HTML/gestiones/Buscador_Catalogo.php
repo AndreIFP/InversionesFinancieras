@@ -22,7 +22,11 @@ session_start();
             <div class="box-body table-responsive">
                 <a class="btn btn-primary" href="Gestion_CatalogoCuenta.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                 <a class="btn btn-warning" href="Reporte_Catalogo_Buscador.php?variable=<?php echo $busqueda; ?>  " onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-
+                <form action="reporte_excel_buscador_catalago.php" method="get" class="form_busqueda">
+                    <input type="hidden" name="busqueda_filtro" id="busqueda_filtro" value="<?php echo $busqueda ?>">
+                    <input type="submit" value=" Reporte Excel" class="btn btn-warning" download="Mi_Excel" >
+                </form>
+                
                 <table class="table">
                     <thead class="table-primary">
                         <tr>
@@ -159,7 +163,7 @@ session_start();
     }
 
     /*============ Buscador ============*/
-    .form_search {
+    .form_busqueda {
         display: -webkit-flex;
         display: -moz-flex;
         display: -ms-flex;
@@ -167,10 +171,10 @@ session_start();
         display: flex;
         float: right;
         background: initial;
-        padding: 10px;
+        padding: 0px;
         border-radius: 10px;
     }
-
+    
     .form_search .btn_search {
         background: #1faac8;
         color: #FFF;
