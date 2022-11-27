@@ -116,7 +116,7 @@ if (!isset($_SESSION['rol'])) {
                 <input type="hidden" name="Id_Cliente" value="<?php echo $Id_Cliente  ?>">
 				<label for="Nombre_Empresa">Nombre Empresa</label>
 				<input type="text" name="Nombre_Empresa" maxlength="35" id="Nombre_Empresa" placeholder="Nombre completo" value ="<?php echo $Nombree ?>" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"   required>
-				<label for="Representante Legal">Representate Legal</label>
+				<label for="Nombre_Cliente">Representate Legal</label>
 				<input type="text" name="Nombre_Cliente" maxlength="35" id="Nombre_Cliente" placeholder="Nombre completo" value ="<?php echo $Nombre ?>" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)"  required>
 				<label for="RTN_Cliente">RTN</label>
 				<input type="text" name="RTN_Cliente" maxlength="20" id="RTN_Cliente" placeholder="RTN"value ="<?php echo $RTN_Cliente ?>" size="40" oninput="this.value = this.value.replace(/[^0-9]/,'')" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
@@ -124,7 +124,7 @@ if (!isset($_SESSION['rol'])) {
 				<input type="Direccion" name="Direccion" maxlength="60" id="Direccion" placeholder="Dirección"  value ="<?php echo $Direccion ?>"size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"   required>
 				<label for="Teléfono">Teléfono</label>
 				<input type="tex" name="Telefono" maxlength="10" id="Telefono" placeholder="Teléfono"value ="<?php echo $Telefono ?>"size="40">
-             			<label for="Estado del Cliente">Tipo Cliente</label>
+             			<label for="Tipo_Cliente">Estado del Cliente</label>
 				<select name="Tipo_Cliente" class="notItemOne" required>
 				  <option value="<?php echo $Tipo_Cliente ?>"><?php echo $Tipo_Cliente ?></option>
                                   <option value="ACTIVO">ACTIVO</option>
