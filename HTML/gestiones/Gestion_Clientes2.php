@@ -96,7 +96,7 @@ $numero = 99999.99;
                 <tr>
                     <th>Id</th>
                     <th>Nombre Empresa</th>
-                    <th>Nombre Cliente</th>
+                    <th>Representante Legal</th>
                     <th>RTN</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -224,7 +224,7 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$pol
 
 
   <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Nombre Cliente:</label>
+  <label for="recipient-name" class="col-form-label" >Representante Legal:</label>
   <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo  $Nombre ?> ">
   </div>
 
