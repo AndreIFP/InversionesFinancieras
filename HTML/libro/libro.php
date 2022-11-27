@@ -167,6 +167,7 @@ $fecha = date('Y-m-d h:i:s');
                                         <th>Codigó de Cuenta</th>
                                         <!-- <th>Nombre Cuenta</th> -->
                                         <th>Descripción</th>
+                                            }
                                     </tr>
                                 </thead>
                                 <tbody id="tableToModify">
@@ -228,7 +229,7 @@ $fecha = date('Y-m-d h:i:s');
       <i class="fa fa-plus-square" aria-hidden="true"></i> Agregar Asiento </button>
     <?php } ?>
       <a class="btn btn-info" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i   class="fa fa-file-pdf-o" ></i> Imprimir</a>
-      <a class="btn btn-light pull-right"><i class="fa fa-money" aria-hidden="true"></i> <strong>Saldo <?php echo $simbolo_moneda . " " . number_format($sumabanco, 2); ?></strong> </a>
+
 
     </div>
 
@@ -239,23 +240,28 @@ $fecha = date('Y-m-d h:i:s');
         <tr class="table-primary">
 
           <th>
-            <center> Fecha </center>
+            <center> Id Asiento </center>
           </th>
           <th>
-            <center> Cuenta </center>
+            <center> ID Cliente </center>
           </th>
           <th>
-            <center> Descripción </center>
+            <center> ID Usuario </center>
           </th>
           <th>
-            <center> Debe </center>
+            <center> Fecha</center>
           </th>
           <th>
-            <center> Haber </center>
+            <center> Descripcion </center>
+          </th>
+          <th >
+            <center> Monto </center>
           </th>
           <th class="btn-print">
             <center> Acción </center>
           </th>
+         
+
 
         </tr>
       </thead>
@@ -263,40 +269,31 @@ $fecha = date('Y-m-d h:i:s');
         <?php
 
         // $branch=$_SESSION['branch'];
-        $query = mysqli_query($con, "select * from libro where id_cliente='$cliente' and fecha >='$fechai' and fecha <='$fechaf' ") or die(mysqli_error($con));
+        $query = mysqli_query($con, "select * from tbl_asientos where id_cliente='$cliente' ") ;
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
-          $monto_haber = 0;
-          $monto_debe = 0;
-          $monto = $row['monto'];
-          $id_libro = $row['id_libro'];
-          $debe_haber = $row['debe_haber'];
 
-          if ($debe_haber == "debe") {
-            $monto_debe = $row['monto'];
-          }
-          if ($debe_haber == "haber") {
-            $monto_haber = $row['monto'];
-          }
+          
         ?>
           <tr>
             <td>
-              <center><?php echo $row['fecha']; ?></center>
+              <center><?php echo $row['Id_asiento']; ?></center>
             </td>
             <td>
-              <center><?php echo $row['cuenta']; ?></center>
+              <center><?php echo $row['Id_Cliente']; ?></center>
             </td>
             <td>
-              <center><?php echo $row['descripcion']; ?></center>
+              <center><?php echo $row['Id_usuario']; ?></center>
             </td>
             <td>
-              <center><?php echo $simbolo_moneda . " " . number_format($monto_debe, 2); ?></center>
+              <center><?php echo $row['Fecha']; ?></center>
             </td>
             <td>
-              <center><?php echo $simbolo_moneda . " " . number_format($monto_haber, 2); ?></center>
+              <center><?php echo $row['Descripcion']; ?></center>
             </td>
-
-
+            <td>
+              <center><?php echo $row['montoTotal']; ?></center>
+            </td>
             <td class="btn-print">
               <center>
                 <?php
@@ -322,6 +319,9 @@ $fecha = date('Y-m-d h:i:s');
 
               </center>
             </td>
+            
+
+            
           </tr>
           <!--end of modal-->
 
