@@ -487,6 +487,17 @@ $user = $_SESSION['user'];
                         </a>
                     </li>
                 <?php } ?>
+		
+		<?php
+                if (isset($_SESSION['permisos'][M_GESTION_CLIENTE]) and $_SESSION['permisos'][M_GESTION_CLIENTE]['r'] == 1) {
+                ?>
+                    <li class="" style="height: 50px;">
+                        <a href="../gestiones/Gestion_Clientes.php" style="align-items: center;">
+                            <i class='bx bxs-user-account bx-tada icon'></i>
+                            <span class="text nav-text">Clientes</span>
+                        </a>
+                    </li>
+                <?php } ?>
 
                 <?php
                 if (isset($_SESSION['permisos'][M_LIBRO_DIARIO]) and $_SESSION['permisos'][M_LIBRO_DIARIO]['r'] == 1) {
@@ -535,7 +546,6 @@ $user = $_SESSION['user'];
                 <?php
                 if ((isset($_SESSION['permisos'][M_GESTION_BITACORA]) and $_SESSION['permisos'][M_GESTION_BITACORA]['r'] == 1) ||
                     (isset($_SESSION['permisos'][M_GESTION_CAT_CUENTA]) and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_GESTION_CLIENTE]) and $_SESSION['permisos'][M_GESTION_CLIENTE]['r'] == 1) ||
                     (isset($_SESSION['permisos'][M_GESTION_FACTURAS]) and $_SESSION['permisos'][M_GESTION_FACTURAS]['r'] == 1) ||
                     (isset($_SESSION['permisos'][M_INVENTARIOS]) and $_SESSION['permisos'][M_INVENTARIOS]['r'] == 1) ||
                     (isset($_SESSION['permisos'][M_LIBRO_MAYOR]) and $_SESSION['permisos'][M_LIBRO_MAYOR]['r'] == 1) ||
@@ -553,28 +563,13 @@ $user = $_SESSION['user'];
                             <i class='bx bx-cog icon'></i>
                             <span class="text nav-text">Gestiones</span>
                         </a>
-                        <?php
-                        if (isset($_SESSION['permisos'][M_GESTION_BITACORA]) and $_SESSION['permisos'][M_GESTION_BITACORA]['r'] == 1) {
-                        ?>
-                            <ul style="position: relative;  display: none; ">
-                                <a href="../gestiones/Gestion_Bitacora.php" style="align-items: center;">
-                                    <span class="text nav-text">Gestion Bitacora </span>
-                                </a>
-                            <?php } ?>
-
+                        <ul style="position: relative;  display: none; ">
+                            
                             <?php
                             if (isset($_SESSION['permisos'][M_GESTION_CAT_CUENTA]) and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['r'] == 1) {
                             ?>
                                 <a href="../gestiones/Gestion_CatalogoCuenta.php" style="align-items: center;">
                                     <span class="text nav-text">Gestion Catalogo Cuentas</span>
-                                </a>
-                            <?php } ?>
-
-                            <?php
-                            if (isset($_SESSION['permisos'][M_GESTION_CLIENTE]) and $_SESSION['permisos'][M_GESTION_CLIENTE]['r'] == 1) {
-                            ?>
-                                <a href="../gestiones/Gestion_Clientes.php" style="align-items: center;">
-                                    <span class="text nav-text">Gestion Clientes</span>
                                 </a>
                             <?php } ?>
 
@@ -601,6 +596,30 @@ $user = $_SESSION['user'];
                                 </a>
                             <?php } ?>
 
+                            <?php
+                            if (isset($_SESSION['permisos'][M_GESTION_USUARIOS]) and $_SESSION['permisos'][M_GESTION_USUARIOS]['r'] == 1) {
+                            ?>
+                                <a href="../gestiones/Gestion_Usuarios.php" style="align-items: center;">
+                                    <span class="text nav-text">Gestion Usuarios </span>
+                                </a>
+                            <?php } ?>
+                        </ul>
+                    </li>
+
+                    <li class="" class="fa fa-caret-down">
+
+                        <a href="../index.php" style="align-items: center; height: 50px;  ">
+                            <i class='bx bx-cog icon'></i>
+                            <span class="text nav-text">Seguridad</span>
+                        </a>
+                        <ul style="position: relative;  display: none; ">
+                            <?php
+                            if (isset($_SESSION['permisos'][M_GESTION_BITACORA]) and $_SESSION['permisos'][M_GESTION_BITACORA]['r'] == 1) {
+                            ?>
+                                <a href="../gestiones/Gestion_Bitacora.php" style="align-items: center;">
+                                    <span class="text nav-text">Gestion Bitacora </span>
+                                </a>
+                            <?php } ?>
 
                             <?php
                             if (isset($_SESSION['permisos'][M_GESTION_PARAMETROS]) and $_SESSION['permisos'][M_GESTION_PARAMETROS]['r'] == 1) {
@@ -627,13 +646,6 @@ $user = $_SESSION['user'];
                             <?php } ?>
 
                             <?php
-                            if (isset($_SESSION['permisos'][M_GESTION_USUARIOS]) and $_SESSION['permisos'][M_GESTION_USUARIOS]['r'] == 1) {
-                            ?>
-                                <a href="../gestiones/Gestion_Usuarios.php" style="align-items: center;">
-                                    <span class="text nav-text">Gestion Usuarios </span>
-                                </a>
-                            <?php } ?>
-                            <?php
                             if (isset($_SESSION['permisos'][M_GESTION_ROLES]) and $_SESSION['permisos'][M_GESTION_ROLES]['r'] == 1) {
                             ?>
                                 <a href="../gestiones/GestionRoles.php" style="align-items: center;">
@@ -649,9 +661,21 @@ $user = $_SESSION['user'];
                                 </a>
                             <?php } ?>
 
-                            </ul>
+                        </ul>
                     </li>
                 <?php } ?>
+
+                <div class="bottom-content">
+                    <?php
+                    if (isset($_SESSION['permisos'][M_BACKUP]) and $_SESSION['permisos'][M_BACKUP]['r'] == 1) {
+                    ?>
+                        <li class="" style="height: 50px;">
+                            <a href="../backupr.php" style="align-items: center;">
+                                <i class='bx bx-data icon'></i>
+                                <span class="text nav-text">Backup</span>
+                            </a>
+                        </li>
+                    <?php } ?>
 
 
 
@@ -675,8 +699,6 @@ $user = $_SESSION['user'];
                             <span class="text nav-text">Cerra Sesión</span>
                         </a>
                     </li>
-
-
 
                     <li class="mode" style="height: 50px; display: flex;">
                         <div class="sun-moon">
