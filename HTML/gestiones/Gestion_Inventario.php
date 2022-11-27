@@ -117,7 +117,7 @@ if (!isset($_SESSION['rol'])) {
                         <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['u'] == 1) {
 
                         ?>
-                            <th><a href="../Compras/salida.php?Id=<?php echo $row['id_product'] ?>" class="btn btn-primary btn-xs">Retirar</a></th>
+                            <th><a href="../Compras/Salida1.php?Id=<?php echo $row['id_product'] ?>" class="btn btn-primary btn-xs">Retirar</a></th>
                             <?php } ?>
                             <script>
                                 function alerta() {
