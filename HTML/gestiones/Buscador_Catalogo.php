@@ -25,7 +25,7 @@ session_start();
               <a class="btn btn-primary" href="Gestion_CatalogoCuenta.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                 <a class="btn btn-warning" href="Reporte_Catalogo_Buscador.php?variable=<?php echo $busqueda; ?>  " onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
                     <input type="hidden" name="busqueda_filtro" id="busqueda_filtro" value="<?php echo $busqueda ?>">
-                     <input type="submit" value=" Reporte Excel" class="btn btn-warning " download="Mi_Excel" >
+                     <button class="btn btn-warning" id="daterange-btn" name=""> <i class="fa fa-file-excel-o" aria-hidden="true"></i>  Reporte Excel </button>
                    
                 </form>
                 
