@@ -241,6 +241,9 @@ $fecha = date('Y-m-d h:i:s');
 
     <hr>
       
+   
+
+
     <table id="example22" class="table">
       <thead>
         <tr class="table-primary">
@@ -284,34 +287,27 @@ $fecha = date('Y-m-d h:i:s');
         $query = mysqli_query($con, "select * from tbl_asientos where Id_Cliente='$cliente' ") ;
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
-             
-          $_SESSION['Id_Mauri']= $row ['Id_asiento'];;
-          $Id_Cliente=$row['Id_Cliente'];
-          $Id_usuario=$row['Id_usuario'];
-          $Fecha=$row['Fecha'];
-         $Descripcion= $row['Descripcion'];
-         $montoTotal=$row['montoTotal'];
-         $Id_Asiento=$_SESSION['Id_Mauri'];
 
+          
         ?>
           <tr>
             <td>
-              <center><?php echo $Id_Asiento ?></center>
+              <center><?php echo $row['Id_asiento']; ?></center>
             </td>
             <td>
-              <center><?php echo  $Id_Cliente ?></center>
+              <center><?php echo $row['Id_Cliente']; ?></center>
             </td>
             <td>
-              <center><?php echo $Id_usuario ?></center>
+              <center><?php echo $row['Id_usuario']; ?></center>
             </td>
             <td>
-              <center><?php echo  $Fecha ?></center>
+              <center><?php echo $row['Fecha']; ?></center>
             </td>
             <td>
-              <center><?php echo $Descripcion ?></center>
+              <center><?php echo $row['Descripcion']; ?></center>
             </td>
             <td>
-              <center><?php echo  $montoTotal ?></center>
+              <center><?php echo $row['montoTotal']; ?></center>
             </td>
             <td class="btn-print">
               <center>
@@ -337,10 +333,8 @@ $fecha = date('Y-m-d h:i:s');
                 ?>
 
               </center>
-             
+              <th><center> <a href="Gestion_Usuarios2.php?Id_Usuario2=<?php echo $Id_Usuario?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center> </th>
             </td>
-
-            <th><center> <a href="libro2.php?Id_Asiento=<?php echo $Id_Asiento?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center> </th>
            
 
             
@@ -353,6 +347,7 @@ $fecha = date('Y-m-d h:i:s');
 
     </table>
   </div>
+
   <script>
                     function editar(este) {
                         var ModalEdit = new bootstrap.Modal(EditModal, {}).show();
@@ -362,7 +357,260 @@ $fecha = date('Y-m-d h:i:s');
                 </script>
 
   <div class="modal" tabindex="-1" id="EditModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
 
+                            <center>
+                                <h3><strong> Información del usuario</strong></h3>
+                            </center>
+
+                            <hr>
+
+                            <div class="modal-body">
+                                <form>
+                                    <?php
+                                    include("../conexion.php");
+                                    $poll = $_SESSION['Id_Mauri'];
+
+                                   
+        // $branch=$_SESSION['branch'];
+        $query = mysqli_query($con, "select * from tbl_detalleasientos where Id_Cliente='$cliente' ") ;
+        $i = 1;
+        while ($row = mysqli_fetch_array($query)) {
+             
+          $Id_Asiento=$row['Id_asiento'];
+          $Id_Cliente=$row['Id_Cliente'];
+          $Id_usuario=$row['Id_usuario'];
+          $Fecha=$row['Fecha'];
+         $Descripcion= $row['Descripcion'];
+         $montoTotal=$row['montoTotal'];
+
+ 
+
+                                    ?>
+
+                                        <div class="row">
+
+                                            <div class="col-xs-14 pull-right">
+
+                                                <table class="table">
+
+                                                    <thead class="table-primary">
+                                                        <tr>
+
+                                                            <th>
+                                                                <center>Id Asiento</center>
+                                                            </th>
+
+
+                                                            <th>
+                                                                <center>Usuario</center>
+                                                            </th>
+
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+
+                                                        <tr>
+
+                                                            <td style="width: 50%">
+
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value="  <?php echo $Id_Usuario ?>">
+
+                                                                </div>
+
+                                                            </td>
+
+                                                            <td style="width: 50%">
+
+                                                                <div class="input-group">
+
+                                                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $Usuario ?> ">
+
+                                                                </div>
+
+                                                            </td>
+
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-xs-14 pull-right">
+
+                                                <table class="table">
+
+                                                    <thead class="table-primary">
+                                                        <tr>
+
+                                                            <th>
+                                                                <center>Nombre de Usuario</center>
+                                                            </th>
+
+
+                                                            <th>
+                                                                <center>Estado del Usuario</center>
+                                                            </th>
+
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+
+                                                        <tr>
+
+                                                            <td style="width: 55%">
+
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-pencil-square"></i></span>
+                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo  $Nombre_Usuario ?> ">
+
+                                                                </div>
+
+                                                            </td>
+
+                                                            <td style="width: 45%">
+
+                                                                <div class="input-group">
+
+                                                                    <span class="input-group-addon"><i class="fa fa-check"></i></span>
+                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $Estado_Usuario ?> ">
+                                                                </div>
+
+                                                            </td>
+
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-xs-14 pull-right">
+
+                                                <table class="table">
+
+                                                    <thead class="table-primary">
+                                                        <tr>
+
+                                                            <th>
+                                                                <center>Rol de Usuario</center>
+                                                            </th>
+
+
+                                                            <th>
+                                                                <center>Última Fecha de conexión</center>
+                                                            </th>
+
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+
+                                                        <tr>
+
+                                                            <td style="width: 45%">
+
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $Rol ?> ">
+
+                                                                </div>
+
+                                                            </td>
+
+                                                            <td style="width: 55%">
+
+                                                                <div class="input-group">
+
+                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $Fecha_Ultimo_Conexion ?> ">
+
+                                                                </div>
+
+                                                            </td>
+
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-xs-14 pull-right">
+
+                                                <table class="table">
+
+                                                    <thead class="table-primary">
+                                                        <tr>
+
+                                                            <th>
+                                                                <center>Correo</center>
+                                                            </th>
+
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+
+                                                        <tr>
+
+                                                            <td style="width: 100%">
+
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $Correo_Electronico ?> ">
+
+                                                                </div>
+
+                                                            </td>
+
+
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    <?php
+                                    }
+                                    ?>
+
+
+                                    <center><button type="button" class="btn btn-danger" data-bs-dismiss="modal"> <i class="fa fa-close" aria-hidden="true"></i> Cerrar</button></Center>
+
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <
   </secction>
   </div>
 
@@ -726,7 +974,10 @@ class Conexion{
  
 
    }
+
   ?>
+  
+
 
   <script type="text/javascript">
     // < ![CDATA[
