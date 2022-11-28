@@ -10,9 +10,15 @@ function cloneRow() {
       console.log(rowCount);
      
       clone.firstChild.nextElementSibling.firstChild.id = "debito" + rowCount;
+      clone.firstChild.nextElementSibling.firstChild.value =0;
+      clone.firstChild.nextElementSibling.firstChild.attributes.onchange.nodeValue =
+        "changeDebito(" + rowCount + ")";
      
       clone.firstChild.nextElementSibling.nextSibling.nextElementSibling.firstChild.id =
         "credito" + rowCount;
+        clone.firstChild.nextElementSibling.nextSibling.nextElementSibling.firstChild.value=0;
+       clone.firstChild.nextElementSibling.nextSibling.nextElementSibling.firstChild.attributes.onchange.nodeValue ="changeCredito(" + rowCount + ")";
+
       clone.firstChild.nextElementSibling.nextSibling.nextElementSibling.nextSibling.nextElementSibling.firstChild.firstChild.nextElementSibling.nextElementSibling.id =
         "cuentas" + rowCount;
 

@@ -59,7 +59,7 @@ $_SESSION['temporada'] = "10";
 			});
 
 		</script>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="../layout/plugins/datatables/dataTables.bootstrap.css">
 <link rel="stylesheet" href="../layout/dist/css/AdminLTE.min.css">
@@ -87,11 +87,18 @@ $fecha = date('Y-m-d h:i:s');
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'><link rel="stylesheet" href="./style.css">
 
+<style>
+  .colored-toast.swal2-icon-info {
+    background-color: #3fc3ee !important;
+  }
+</style>
+
 <!-- partial:index.partial.html -->
 
 
   <a class="btn btn-primary" href="validacionlibro.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
   <br>
+
   <div class="box-header">
     <center>
       <h3><strong> Libro diario de <?php echo $empresa  ?></strong></h3>
@@ -167,14 +174,13 @@ $fecha = date('Y-m-d h:i:s');
                                         <th>Codigó de Cuenta</th>
                                         <!-- <th>Nombre Cuenta</th> -->
                                         <th>Descripción</th>
-                                            }
                                     </tr>
                                 </thead>
                                 <tbody id="tableToModify">
                                   
                                   <tr id="rowToClone">
-                                      <td><input type="text" class="debito" value="0" id="debito1"  name="debito[]" onchange="changeSelect(1)" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
-                                      <td><input type="text" value="0" class="credito" id="credito1" name="credito[]" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
+                                      <td><input type="text" class="debito" value="0" id="debito1"  name="debito[]" onkeyup="keyAlert(this)"  onchange="changeDebito(1)" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
+                                      <td><input type="text" value="0" class="credito" id="credito1" name="credito[]" style="width:150px;height:20px;border:0" maxlength="10" onchange="changeCredito(1)" onkeyup="keyAlert(this)"  placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
                                       <td><div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-book"></i></span>
                                         <select class="form-control cuentas" onchange="changeSelect(1)" name="cuentas[]" id="cuentas1" required>
@@ -229,7 +235,7 @@ $fecha = date('Y-m-d h:i:s');
       <i class="fa fa-plus-square" aria-hidden="true"></i> Agregar Asiento </button>
     <?php } ?>
       <a class="btn btn-info" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i   class="fa fa-file-pdf-o" ></i> Imprimir</a>
-
+      
 
     </div>
 
@@ -269,7 +275,7 @@ $fecha = date('Y-m-d h:i:s');
         <?php
 
         // $branch=$_SESSION['branch'];
-        $query = mysqli_query($con, "select * from tbl_asientos where id_cliente='$cliente' ") ;
+        $query = mysqli_query($con, "select * from tbl_asientos where Id_Cliente='$cliente' ") ;
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
 
@@ -422,7 +428,7 @@ $fecha = date('Y-m-d h:i:s');
 
 
 
-    document.querySelector('.debito').addEventListener('keyup', function() {
+  /*   document.querySelector('.debito').addEventListener('keyup', function() {
       debito= document.querySelector('.debito');
       credito=debito.parentNode.nextElementSibling.firstChild;
      
@@ -449,9 +455,65 @@ $fecha = date('Y-m-d h:i:s');
         debito.readOnly =false;
         
       }
-    })
+    }) */
+    
   });
-  function changeSelect(row) {
+
+  function changeDebito(row){
+    let fila=row;
+    id=`debito${fila}`;
+    selecDebito=document.querySelector(`#${id}`);
+    valorDebito=selecDebito.value;
+    // selecion del campo credto selecDebito.parentNode.nextElementSibling.firstChild
+    credito=selecDebito.parentNode.nextElementSibling.firstChild;
+    if (valorDebito>0) {
+      credito.readOnly=true;
+      credito.value=0;
+    }else{
+      credito.readOnly=false;
+    }
+  }
+
+  function changeCredito(row){
+    let fila=row;
+    id=`credito${fila}`;
+    selecCredito=document.querySelector(`#${id}`);
+    valorCredito=selecCredito.value;
+
+    
+    // selecion del campo debito selecCredito.parentNode.previousElementSibling.firstChild
+    debito=selecCredito.parentNode.previousElementSibling.firstChild;
+    if (valorCredito>0) {
+      debito.readOnly=true;
+      debito.value=0;
+    }else{
+      debito.readOnly=false;
+    }
+   
+  }
+  
+  var Toast =Swal.mixin({
+      toast: true,
+      position: 'top',
+      iconColor: 'white',
+      showConfirmButton: false,
+      timer: 3000,
+      customClass: {
+        popup: 'colored-toast'
+      },
+    });
+  function keyAlert(fila){
+    if (fila.hasAttribute("readOnly")) {
+      Toast.fire({
+        icon: 'info',
+        title: 'Campo Desactivado'
+      })
+    }
+    
+  }
+  
+
+  /* function changeSelect(row) {
       let fila=row;
       id=`cuentas${fila}`;
       selectCuenta=document.querySelector(`#${id}`)
@@ -517,7 +579,7 @@ $fecha = date('Y-m-d h:i:s');
    
 
      
-    }
+    } */
   </script>
 
 
@@ -772,6 +834,7 @@ class Conexion{
       );
     });
   </script>
+
 
   <?php
   # code...
