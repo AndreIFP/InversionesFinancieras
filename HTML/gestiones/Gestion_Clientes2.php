@@ -252,7 +252,7 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$pol
   <input type="text" class="form-control" Readonly  id="recipient-name" value=" <?php echo $Tipo_Cliente?> ">
   </div>
 	
-  div class= "form group">
+  <div class= "form group">
   <label for="Ciudad">Ciudad</label>
   <input type="text" class="form-control" Readonly  id="recipient-name"  value ="<?php echo $Ciudad?> ">
   </div>
