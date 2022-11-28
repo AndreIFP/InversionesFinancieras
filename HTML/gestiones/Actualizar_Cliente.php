@@ -8,7 +8,7 @@
 		{ 
 			$alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
 		}else{
-            $Id_Cliente   = $_POST['Id_Cliente'];
+			$Id_Cliente   = $_POST['Id_Cliente'];
 			$nombree      = $_POST['Nombre_Empresa'];
 			$nombre       = $_POST['Nombre_Cliente'];
 			$RTN          = $_POST['RTN_Cliente'];
@@ -114,7 +114,7 @@ if (!isset($_SESSION['rol'])) {
 			<h1><strong>Actualizar Cliente</strong> </h1>
 			<hr>
               			<label for="Id_Cliente">Id Cliente</label>
-				<input type="text" class="form-control" Readonly  id="recipient-name" value="  <?php echo $Id_Cliente ?>">
+				<input type="text" name="Id_Cliente" class="form-control" Readonly  id="recipient-name" value="  <?php echo $Id_Cliente ?>">
 				<label for="Nombre_Empresa">Nombre Empresa</label>
 				<input type="text" name="Nombre_Empresa" maxlength="35" id="Nombre_Empresa" placeholder="Nombre completo" value ="<?php echo $Nombree ?>" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"   required>
 				<label for="Nombre_Cliente">Representate Legal</label>
