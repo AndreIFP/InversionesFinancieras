@@ -392,7 +392,6 @@ $asiento2 = $_REQUEST['asiento'];
                             $CODIGO_CUENTA = $row['CODIGO_CUENTA'];
                             $debito = $row['debito'];
                             $credito = $row['credito'];
-                            $descripcion = $row['descripcion'];
                           }
                           ?>
                       </div>
@@ -417,9 +416,7 @@ $asiento2 = $_REQUEST['asiento'];
           <th>
             <center> Credito </center>
           </th>
-          <th>
-            <center> Descripcion </center>
-          </th>
+          
          
 
 
@@ -448,9 +445,7 @@ $asiento2 = $_REQUEST['asiento'];
             <td>
               <center><?php echo $row['credito']; ?></center>
             </td>
-            <td>
-              <center><?php echo $row['descripcion']; ?></center>
-            </td>
+           
               <center>
                 <?php
                 //  if ($eliminar=="si") {
