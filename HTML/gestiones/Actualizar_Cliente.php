@@ -134,10 +134,6 @@ if (!isset($_SESSION['rol'])) {
 									<tr>
 
 										<th>
-											<center>Id Cliente</center>
-										</th>
-
-										<th>
 											<center>Nombre de la empresa </center>
 										</th>
 
@@ -156,17 +152,9 @@ if (!isset($_SESSION['rol'])) {
 
 									<tr>
 
-										<td style="width: 25%">
+								
 
-											<div class="input-group">
-												<span class="input-group-addon"><i class="fa fa-key"></i></span>
-												<input type="text" name="Id_Cliente" class="form-control" Readonly id="recipient-name" value="  <?php echo $Id_Cliente ?>">
-
-											</div>
-
-										</td>
-
-										<td style="width: 40%">
+										<td style="width: 70%">
 
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-building"></i></span>
@@ -176,7 +164,7 @@ if (!isset($_SESSION['rol'])) {
 
 										</td>
 
-										<td style="width: 35%">
+										<td style="width: 30%">
 
 											<div class="input-group">
 
