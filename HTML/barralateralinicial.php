@@ -482,7 +482,7 @@ $user = $_SESSION['user'];
                 if (isset($_SESSION['permisos'][M_FACTURACION]) and $_SESSION['permisos'][M_FACTURACION]['r'] == 1) {
                 ?>
                     <li class="" style="height: 50px;">
-                        <a href="demo.php" style="align-items: center;">
+                        <a href="demo1.php" style="align-items: center;">
                             <i class='bx bx-detail icon'></i>
                             <span class="text nav-text">Facturación</span>
                         </a>
