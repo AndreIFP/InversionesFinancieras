@@ -19,21 +19,33 @@ session_start();
             <h2><strong> Gestión Clientes</strong></h2>
             <div class="box-body table-responsive">
                 <form action="reporte_excel_buscador_clientes.php" method="get">
-                <a class="btn btn-primary" href="Gestion_Clientes.php "><i class="fa fa-arrow-circle-left"></i>Volver Atrás</a>
-                <a class="btn btn-warning" href="Reporte_clientes_Buscador.php?variable=<?php echo $busqueda; ?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                    <a class="btn btn-primary" href="Gestion_Clientes.php "><i class="fa fa-arrow-circle-left"></i>Volver Atrás</a>
+                    <a class="btn btn-warning" href="Reporte_clientes_Buscador.php?variable=<?php echo $busqueda; ?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
                     <input type="hidden" name="busqueda_filtro" id="busqueda_filtro" value="<?php echo $busqueda ?>">
-                    <input type="submit" value=" Reporte Excel" class="btn btn-success" download="Mi_Excel" >
+                    <input type="submit" value=" Reporte Excel" class="btn btn-success" download="Mi_Excel">
                 </form>
+                <hr>
                 <table class="table">
                     <thead class="table-primary">
                         <tr>
-                            <th>Id</th>
-                            <th>Nombre Empresa</th>
-                            <th>Respresentate Legal</th>
-                            <th>RTN</th>
-                            <th>Fecha Creación</th>
-                            <th>Acciones</th>
-                            <th></th>
+                            <th>
+                                <center>Id</center>
+                            </th>
+                            <th>
+                                <center>Nombre Empresa</center>
+                            </th>
+                            <th>
+                                <center>Representante Legal</center>
+                            </th>
+                            <th>
+                                <center>RTN</center>
+                            </th>
+                            <th>
+                                <center>Estado</center>
+                            </th>
+                            <th colspan="3">
+                                <center>Acciones</center>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,15 +76,29 @@ session_start();
                             while ($row = mysqli_fetch_array($sql)) {
                         ?>
                                 <tr>
-                                    <th><?php echo $row['Id_Cliente'] ?></th>
-                                    <th><?php echo $row['Nombre_Empresa'] ?></th>
-                                    <th><?php echo $row['Nombre_Cliente'] ?></th>
-                                    <th><?php echo $row['RTN_Cliente'] ?></th>
-                                    <th><?php echo $row['Fecha_Dato'] ?></th>
-                                    <th><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-primary btn-xs">Editar</a></th>
-                                    <p>
-                                        <th><a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-danger btn-xs">Eliminar</a></th>
-                                    <p>
+                                    <th><CENTER><?php echo $row['Id_Cliente'] ?></CENTER></th>
+                                    <th><CENTER><?php echo $row['Nombre_Empresa'] ?></CENTER></th>
+                                    <th><CENTER><?php echo $row['Nombre_Cliente'] ?></CENTER></th>
+                                    <th><CENTER><?php echo $row['RTN_Cliente'] ?></CENTER></th>
+                                    <th><CENTER><?php echo $row['Tipo_Cliente'] ?></CENTER></th>
+                                    <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {
+                                ?>
+                                    <th>
+                                        <center><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i> </a></a></center>
+                                    </th>
+                                <?php } ?>
+
+                                <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['d'] == 1) {
+                                ?>
+                                    <th>
+                                        <center><a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-danger btn-xs"><i class="fa fa-close" aria-hidden="true"></i> </a></a></center>
+                                    </th>
+
+                                <?php } ?>
+
+                                <th>
+                                    <center><a href="Gestion_Clientes2.php?Id_Cliente2=<?php echo $row['Id_Cliente'] ?>" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> </a></a></center>
+                                </th>
                                 </tr>
                         <?php
                             }
@@ -91,10 +117,10 @@ session_start();
                         <?php
                         if ($pagina != 1) {
                         ?>
-                            <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<< /a>
+                            <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<</a>
                             </li>
                             <li><a href="?pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo $busqueda; ?>">
-                                    <<< /a>
+                                    <<</a>
                             </li>
                         <?php
                         }
