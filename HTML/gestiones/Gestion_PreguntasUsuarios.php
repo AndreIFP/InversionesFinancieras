@@ -35,6 +35,7 @@ if (!isset($_SESSION['rol'])) {
                 <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                 <a class="btn btn-warning" href="Reporte_Preg_Usu.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;">
                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                 <a class="btn btn-success" href="reporte_excel_preguntasusuario.php"> Reporte excel</a>
             </div>
             <?php
             $mostrar_datos = 0;
