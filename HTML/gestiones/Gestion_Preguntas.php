@@ -41,6 +41,7 @@ if (!isset($_SESSION['rol'])) {
                 <?php } ?>
                 <a class="btn btn-warning" href="Reporte_Preguntas.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;">
                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                 <a class="btn btn-success" href="reporte_excel_preguntas.php"> Reporte excel</a>
             </div>
             <?php
             $mostrar_datos = 0;
