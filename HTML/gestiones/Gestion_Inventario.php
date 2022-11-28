@@ -44,6 +44,7 @@ if (!isset($_SESSION['rol'])) {
             <?php } ?>
             
             <a class="btn btn-warning" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+           <a class="btn btn-success" href="reporte_excel_inventario.php"> Reporte excel</a>
             <p>
             <?php
             $mostrar_datos = 0;
