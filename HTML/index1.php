@@ -49,6 +49,13 @@ if($paracorreo =$correo)
 }
 }
 
+// Llamado del parametro correo
+$sqlCorreo = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '9'";
+$resultadocorreo = mysqli_query($conn,$sqlCorreo);
+while ($fila = $resultadocorreo->fetch_assoc()) {
+    $CorreoS = $fila["Valor"];
+}
+
 
 /*VaidrollTeam*/
 /*VaidrollTeam*/
@@ -73,13 +80,13 @@ try {
     $mail->isSMTP();                                            //Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'inversionesfinancierasish@gmail.com';                     //SMTP username
+    $mail->Username   = $CorreoS;                     //SMTP username
     $mail->Password   = 'paobulsoyjnbbqvf';                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('inversionesfinancierasish@gmail.com', 'Inversion');
+    $mail->setFrom($CorreoS;, 'Inversion');
     $mail->addAddress($correo );     //Add a recipient
     $mail->addCC('cc@example.com');
 
