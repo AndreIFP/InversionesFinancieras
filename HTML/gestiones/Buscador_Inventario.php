@@ -21,9 +21,12 @@ session_start();
              ?>
               <h2><strong> Gestión Inventario</strong></h2> 
               <div class="box-body table-responsive">
+             <form action="reporte_excel_buscador_inventario.php" method="get">
               <a  class="btn btn-primary"  href="Gestion_Inventario.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-              <a class="btn btn-warning" href="Reporte_Inventario_Buscador.php?variable=<?php echo $busqueda;?>" <a class="btn btn-warning"
-               href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  Reporte</a>
+              <a class="btn btn-warning" href="Reporte_Inventario_Buscador.php?variable=<?php echo $busqueda;?>" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  Reporte</a>
+              <input type="hidden" name="busqueda_filtro" id="busqueda_filtro" value="<?php echo $busqueda ?>">
+              <input type="submit" value=" Reporte Excel" class="btn btn-success" download="Mi_Excel" >
+                </form>
 
               <table class="table"><br>
                      <thead class="table-primary"><br>
