@@ -233,6 +233,7 @@ $fecha = date('Y-m-d h:i:s');
     ?>
       <button type="button" class="btn btn-primary" data-toggle="modal" onclick="limpiarForm()" data-target="#miModal">
       <i class="fa fa-plus-square" aria-hidden="true"></i> Agregar Asiento </button>
+      
     <?php } ?>
       <a class="btn btn-info" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i   class="fa fa-file-pdf-o" ></i> Imprimir</a>
       
@@ -308,7 +309,8 @@ $fecha = date('Y-m-d h:i:s');
                 <?php if ($_SESSION['permisos'][M_LIBRO_DIARIO] and $_SESSION['permisos'][M_LIBRO_DIARIO]['d'] == 1) {
 
                 ?>
-                    <a class="small-box-footer btn-print" href="<?php echo "eliminar_libro.php?monto=$monto&id_libro=$id_libro&debe_haber=$debe_haber&id_usuario=$id_usuario"; ?>" onClick="return confirm('¿Está seguro de eliminar la transacción?');"><i class="glyphicon glyphicon-remove"></i></a>
+                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miModales">
+                       <i class="fa fa-eye" aria-hidden="true"></i> </button>
                 <?php } ?>
                 <?php
                 //    }
@@ -324,8 +326,9 @@ $fecha = date('Y-m-d h:i:s');
 
               </center>
             </td>
+            <td>
             
-
+            
             
           </tr>
           <!--end of modal-->
@@ -336,7 +339,87 @@ $fecha = date('Y-m-d h:i:s');
 
     </table>
   </div>
+  <!--DEPOSITO-->
+  <div class="modal fade" id="miModales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="box-body">
+              <!-- Date range -->
+              <form method="post" action="depositar_add_estado.php" enctype="multipart/form-data" class="form-horizontal">
+                <input type="hidden" class="form-control" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>" required>
 
+                <input type="hidden" class="form-control" id="debe_haber" name="debe_haber" value="debe" required>
+                <div class="col-md-12 btn-print">
+                  <br>
+                  <div class="form-group">
+                    <center>
+                      <h5> <strong> Ingresar </strong></h5>
+                    </center>
+                    <hr>
+                    <!-- ENTRADA PARA LA CUENTA -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                        <select class="form-control" name="txtpregunta" id="format" id="txtpregunta" required>
+                          <option value="">Seleccione una Cuenta</option>
+                          <?php
+                          include('../conexion.php');
+                          #consulta de todos los paises
+                          $consulta = mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_ESTADO ;");
+                          while ($row = mysqli_fetch_array($consulta)) {
+                            $nombrepais = $row['CUENTA'];
+                            $nombeid = $row['CODIGO_CUENTA'];
+                          ?>
+                            <option class="dropdown-item" value="<?php echo $nombeid ?>"><?php echo $nombrepais ?></option>
+                          <?php
+                          }
+                          ?>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- ENTRADA PARA LA FECHA -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="date" class="form-control pull-right" id="date" name="fechax" required>
+                      </div>
+                    </div>
+                    <!-- ENTRADA DE LA DESCRIPCION-->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
+                        <input type="text" class="form-control pull-right" id="descripcion" name="descripcion" placeholder="Descripción del Movimiento" required maxlength="50">
+                      </div>
+                    </div>
+
+                    <!--ENTRADA DEL MONTO -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                        <input type="number" step="0.01" class="form-control pull-right" id="monto" name="monto" placeholder="Ingrese el monto" required>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="col-md-12">
+                    <button class="btn btn-primary " id="daterange-btn" name=""> <i class="fa fa-credit-card" aria-hidden="true"></i> INGRESAR </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> CERRAR</button>
+                  </div>
+
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  <!--end of modal-->
 
   </secction>
   </div>

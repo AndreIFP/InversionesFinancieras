@@ -72,7 +72,7 @@ $_SESSION['temporada'] = "10";
     <?php
     //     }
     ?>
-    <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="miModales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -197,26 +197,7 @@ $_SESSION['temporada'] = "10";
           <?php
 
           // $branch=$_SESSION['branch'];
-          $query = mysqli_query($con, "select * from libro2 where id_cliente='$cliente' and fecha >='$fechai' and fecha <='$fechaf' ") or die(mysqli_error($con));
-          $i = 1;
-          while ($row = mysqli_fetch_array($query)) {
-            $monto = $row['monto'];
-            $id_libro = $row['id_libro'];
-          ?>
-            <tr>
-              <td>
-                <center><?php echo $row['fecha']; ?></center>
-              </td>
-              <td>
-                <center><?php echo $row['cuenta']; ?></center>
-              </td>
-              <td>
-                <center><?php echo $row['descripcion']; ?></center>
-              </td>
-              <td>
-                <center><?php echo $simbolo_moneda . " " . number_format($monto, 2); ?></center>
-              </td>
-
+       ?>
 
               <td class="btn-print">
                 <center>
@@ -246,8 +227,7 @@ $_SESSION['temporada'] = "10";
             </tr>
             <!--end of modal-->
 
-          <?php $i++;
-          } ?>
+
         </tbody>
 
       </table>
