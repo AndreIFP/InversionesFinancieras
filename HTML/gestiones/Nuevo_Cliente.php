@@ -284,7 +284,7 @@ if (!isset($_SESSION['rol'])) {
 
 					</div>
 					<hr>
-					<center><input type="submit" value="Registrar Cliente" class="btn btn-primary"></center>
+					<center><button type="submit"  class="btn btn-primary btn-lg"><i class="fa fa-floppy-o" aria-hidden="true"></i> Registrar</a></button></center>
 				</form>
 			</div>
 
