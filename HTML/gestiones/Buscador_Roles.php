@@ -18,8 +18,12 @@ font-size: 12px; ">
             ?>
             <h2><strong>Gestión Roles</strong> </h2>
             <div class="reportes">
+           <form action="reporte_excel_buscador_roles.php" method="get">
                 <a class="btn btn-primary" href="GestionRoles.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                 <a class="btn btn-warning" href="Reporte_Roles_Buscador.php?variable=<?php echo $busqueda; ?>" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                <input type="hidden" name="busqueda_filtro" id="busqueda_filtro" value="<?php echo $busqueda ?>">
+                    <input type="submit" value=" Reporte Excel" class="btn btn-success" download="Mi_Excel" >
+            </form>
                 <br><br>
             </div>
 
