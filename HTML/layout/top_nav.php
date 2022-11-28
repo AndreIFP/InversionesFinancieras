@@ -5,24 +5,7 @@ $temporada = $_SESSION['temporada'];
 $fechai = $_SESSION['fechai'];
 $fechaf = $_SESSION['fechaf'];
 $usuario = $_SESSION['user'];
-$suma_debe = 0;
-$suma_haber = 0;
-$sumabanco = 0;
 
-
-?>
-
-<?php
-
-?>
-<?php
-include('../conexion.php');
-
-$simbolo_moneda = "L.";
-?>
-
-
-<?php
 
 ?>
 </div>

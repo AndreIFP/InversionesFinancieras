@@ -240,7 +240,6 @@ $fecha = date('Y-m-d h:i:s');
     </div>
 
     <hr>
-      
     <table id="example22" class="table">
       <thead>
         <tr class="table-primary">
@@ -263,15 +262,9 @@ $fecha = date('Y-m-d h:i:s');
           <th >
             <center> Monto </center>
           </th>
-          
           <th class="btn-print">
-            <center>
-          <th class="btn-print">
-             Acción 
+            <center> Acción </center>
           </th>
-          </center>
-          </th>
-
          
 
 
@@ -284,34 +277,27 @@ $fecha = date('Y-m-d h:i:s');
         $query = mysqli_query($con, "select * from tbl_asientos where Id_Cliente='$cliente' ") ;
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
-             
-          $_SESSION['Id_Mauri']= $row ['Id_asiento'];;
-          $Id_Cliente=$row['Id_Cliente'];
-          $Id_usuario=$row['Id_usuario'];
-          $Fecha=$row['Fecha'];
-         $Descripcion= $row['Descripcion'];
-         $montoTotal=$row['montoTotal'];
-         $Id_Asiento=$_SESSION['Id_Mauri'];
 
+          
         ?>
           <tr>
             <td>
-              <center><?php echo $Id_Asiento ?></center>
+              <center><?php echo $row['Id_asiento']; ?></center>
             </td>
             <td>
-              <center><?php echo  $Id_Cliente ?></center>
+              <center><?php echo $row['Id_Cliente']; ?></center>
             </td>
             <td>
-              <center><?php echo $Id_usuario ?></center>
+              <center><?php echo $row['Id_usuario']; ?></center>
             </td>
             <td>
-              <center><?php echo  $Fecha ?></center>
+              <center><?php echo $row['Fecha']; ?></center>
             </td>
             <td>
-              <center><?php echo $Descripcion ?></center>
+              <center><?php echo $row['Descripcion']; ?></center>
             </td>
             <td>
-              <center><?php echo  $montoTotal ?></center>
+              <center><?php echo $row['montoTotal']; ?></center>
             </td>
             <td class="btn-print">
               <center>
@@ -337,11 +323,8 @@ $fecha = date('Y-m-d h:i:s');
                 ?>
 
               </center>
-             
             </td>
-
-            <th><center> <a href="libro2.php?Id_Asiento=<?php echo $Id_Asiento?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center> </th>
-           
+            
 
             
           </tr>
@@ -353,15 +336,7 @@ $fecha = date('Y-m-d h:i:s');
 
     </table>
   </div>
-  <script>
-                    function editar(este) {
-                        var ModalEdit = new bootstrap.Modal(EditModal, {}).show();
-                        var $pop = este;
 
-                    }
-                </script>
-
-  <div class="modal" tabindex="-1" id="EditModal">
 
   </secction>
   </div>

@@ -8,14 +8,18 @@ function cloneRow() {
       var clone = row.cloneNode(true); // copy children too
       var rowCount = $("#Table_id tr").length;
       console.log(rowCount);
-     
+     //debito
       clone.firstChild.nextElementSibling.firstChild.id = "debito" + rowCount;
       clone.firstChild.nextElementSibling.firstChild.value =0;
       clone.firstChild.nextElementSibling.firstChild.attributes.onchange.nodeValue =
         "changeDebito(" + rowCount + ")";
-     
+     clone.firstChild.nextElementSibling.firstChild.readOnly = false;
+
+
+
       clone.firstChild.nextElementSibling.nextSibling.nextElementSibling.firstChild.id =
         "credito" + rowCount;
+        clone.firstChild.nextElementSibling.nextSibling.nextElementSibling.firstChild.readOnly = false;
         clone.firstChild.nextElementSibling.nextSibling.nextElementSibling.firstChild.value=0;
        clone.firstChild.nextElementSibling.nextSibling.nextElementSibling.firstChild.attributes.onchange.nodeValue ="changeCredito(" + rowCount + ")";
 
