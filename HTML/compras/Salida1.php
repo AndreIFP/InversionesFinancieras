@@ -22,7 +22,22 @@ if (!isset($_SESSION['rol'])) {
 
 ?>
 
-<?php include 'barralateralinicial.php'; ?>
+
+<?php include 'barralateralinicial.php'; 
+
+
+$url = "http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]; 
+//echo $url;
+
+$id = substr($url,58,65);
+
+$sql2 = "SELECT proname FROM product WHERE id_product = $id;";
+            $ext = $conn->query($sql2);
+            $fila = $ext->fetch_array(MYSQLI_NUM);
+            $param = $fila[0];
+
+
+?>
 
 <p></p>
 <section style=" background-color:rgb(255, 255, 255); padding: 15px; color:black; font-size: 16px; ">
@@ -55,18 +70,9 @@ if (!isset($_SESSION['rol'])) {
               <td style="width: 40%">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                  <select class="form-control" name="product" required>
-                    <option value="" style="font-size:18px" >Seleccione el articulo a retirar</option>
-                    <?php
-                    $consulta = mysqli_query($conn, "SELECT * FROM product;");
-                    while ($row = mysqli_fetch_array($consulta)) {
-                      $nombrepais = $row['proname'];
-                    ?>
-                      <option class="dropdown-item" style="font-size:18px" ><?php echo $nombrepais ?></option>
-                    <?php
-                    }
-                    ?>
-                  </select>
+            
+                  <input type="text" readonly="readonly"  class="form-control pull-right" value="<?php echo $param;?>" name="product" required>
+                  
                 </div>
 
               </td>
