@@ -16,7 +16,7 @@ $_SESSION['user'];
 <p></p>
 <section style=" background-color:rgb(255, 255, 255); padding: 15px; color:black; font-size: 16px; ">
 
-  <title>Libro Diario</title>
+  <title>Facturación</title>
   
   <a class="btn btn-primary" href="../index.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
   <div class="col-md-12" align="center">
