@@ -39,7 +39,7 @@ font-size: 12px; ">
             <?php } ?>
 
             <a class="btn btn-warning" href="reporte_roles.php" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-
+            <a class="btn btn-success" href="reporte_excel_roles.php"> Reporte excel</a>
             <a align="rigth" href="GestionRolesInac.php"><button type="submit" class="btn btn-info"><i class="fa fa-times" aria-hidden="true"></i> Roles Inactivos</button></a>
             <p></p>
 
