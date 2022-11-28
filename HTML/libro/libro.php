@@ -287,7 +287,8 @@ $fecha = date('Y-m-d h:i:s');
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
 
-          
+          $asiento = $row['Id_asiento'];
+
         ?>
           <tr>
             <td>
@@ -317,8 +318,7 @@ $fecha = date('Y-m-d h:i:s');
                 <?php if ($_SESSION['permisos'][M_LIBRO_DIARIO] and $_SESSION['permisos'][M_LIBRO_DIARIO]['d'] == 1) {
 
                 ?>
-                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miModales">
-                       <i class="fa fa-eye" aria-hidden="true"></i> </button>
+                    <a class="small-box-footer btn-print" href="libro2.php?asiento=<?php echo $asiento?>"><i class="glyphicon glyphicon-remove"></i></a>
                        
                 <?php } ?>
                 <?php

@@ -243,13 +243,20 @@ $asiento2 = $_REQUEST['asiento'];
     <?php if ($_SESSION['permisos'][M_LIBRO_DIARIO] and $_SESSION['permisos'][M_LIBRO_DIARIO]['w'] == 1) {
 
     ?>
+      
+      
+        
+      <form method="post" action="procebalanza.php" enctype="multipart/form-data" >
       <button type="button" class="btn btn-primary" data-toggle="modal" onclick="limpiarForm()" data-target="#miModal">
+      
       <i class="fa fa-plus-square" aria-hidden="true"></i> Agregar Asiento </button>
+      <a class="btn btn-info" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i   class="fa fa-file-pdf-o" ></i> Imprimir</a>
+      <button type="submit" name="btnregistrarx" class="btn btn-primary"><i class="fa fa-plus-square" aria-hidden="true"></i>  Balanza de Comprobación</button>
+      
       
     <?php } ?>
-      <a class="btn btn-info" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i   class="fa fa-file-pdf-o" ></i> Imprimir</a>
       
-
+      </form>
     </div>
 
     <hr>
