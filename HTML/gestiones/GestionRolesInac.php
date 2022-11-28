@@ -28,7 +28,7 @@ font-size: 12px; ">
     <title>Gestión Roles</title>
     <a class="btn btn-primary" href="GestionRoles.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
     <a class="btn btn-warning" href="Reporte_Roles_Inacti.php" target="_blank" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-
+   <a class="btn btn-success" href="reporte_excel_rolesInactivos.php"> Reporte excel</a>
 
     <h2><strong> Gestión Roles</strong></h2>
 
