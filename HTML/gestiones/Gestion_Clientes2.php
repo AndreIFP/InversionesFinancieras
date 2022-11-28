@@ -148,7 +148,6 @@ $numero = 99999.99;
                             <th><?php echo  $Nombre   ?></th>
                             <th><?php echo  $RTN_Cliente?></th>
                             <th><?php echo $Tipo_Cliente ?></th>
-			    <th><?php echo $Ciudad ?></th>
 
                             <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {
                             ?>
