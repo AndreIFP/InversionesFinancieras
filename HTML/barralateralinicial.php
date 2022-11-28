@@ -597,14 +597,6 @@ $user = $_SESSION['user'];
                             <?php } ?>
 
                             <?php
-                            if (isset($_SESSION['permisos'][M_INVENTARIOS]) and $_SESSION['permisos'][M_INVENTARIOS]['r'] == 1) {
-                            ?>
-                                <a href="gestiones/Gestion_Inventario.php" style="align-items: center;">
-                                    <span class="text nav-text">Gestion Inventario</span>
-                                </a>
-                            <?php } ?>
-
-                            <?php
                             if (isset($_SESSION['permisos'][M_LIBRO_MAYOR]) and $_SESSION['permisos'][M_LIBRO_MAYOR]['r'] == 1) {
                             ?>
                                 <a href="gestiones/Gestion_LibroMayor.php" style="align-items: center;">
