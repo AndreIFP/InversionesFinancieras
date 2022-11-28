@@ -25,13 +25,8 @@ if (!isset($_SESSION['rol'])) {
         die();
 
     } else{
-
-
-        $Id_Usuario2 = $_REQUEST['Id_Usuario2'];
-
+        $Id_Usuario2 = $_REQUEST['Id_Cliente2'];
     }
-
-
 
 }
 
@@ -113,7 +108,7 @@ $numero = 99999.99;
                 if ($mostrar_datos > 0) {
                     $por_pagina = $mostrar_datos;
                 } else {
-                    $por_pagina = 10;
+                    $por_pagina = 3;
                 }
 
                 if (empty($_GET['pagina'])) {
@@ -151,15 +146,15 @@ $numero = 99999.99;
 
                             <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {
                             ?>
-                                <th><a href="Actualizar_Cliente.php?Id=<?php echo $Id_Cliente ?>" class="btn btn-primary btn-xs">Editar</a>
+                                <th><a href="Actualizar_Cliente.php?Id=<?php echo $Id_Cliente ?>" class="btn btn-primary btn-xs"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                                 <?php } ?>
 
                                 <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['d'] == 1) {
                                 ?>
-                                    <a href="Delete_Cliente.php?Id=<?php echo $Id_Cliente ?>" class="btn btn-danger btn-xs">Eliminar</a>
+                                    <a href="Delete_Cliente.php?Id=<?php echo $Id_Cliente ?>" class="btn btn-danger btn-xs"> <i class="fa fa-trash-o" aria-hidden="true"></i> </a>
                                                    
                                 <?php } ?>
-                                <a href="Gestion_Clientes2.php?Id_Cliente2=<?php echo $Id_Cliente ?>" class="btn btn-success btn-xs">Ver</a>
+                                <a href="Gestion_Clientes2.php?Id_Cliente2=<?php echo $Id_Cliente ?>" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> </a>
                                 
                                 <form method="post" action="Gestion Clientes.php" name="miformulario">
                                 <script>
@@ -208,8 +203,6 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$pol
                      $Telefono     = $row ['Telefono'];
                     $Tipo_Cliente = $row ['Tipo_Cliente'];
                     $Ciudad       = $row ['Ciudad'];
-                 
-
 ?>
                   
 <div class= "form group">
@@ -230,22 +223,14 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$pol
 
 
   <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >RTN:</label>
+  <label for="recipient-name" class="col-form-label" >RTN / DNI:</label>
   <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $RTN_Cliente ?> ">
   </div>
-
-
-  <div class= "form group">
-  <label for="recipient-name" class="col-form-label" >Dirección:</label>
-  <input type="text" class="form-control"  Readonly id="recipient-name" value=" <?php echo $Direccion ?> ">
-  </div>
-
 
   <div class= "form group">
   <label for="recipient-name" class="col-form-label" >Telefono:</label>
   <input type="text" class="form-control"  Readonly id="recipient-name" value=" <?php echo $Telefono ?> ">
   </div>
-
 
   <div class= "form group">
   <label for="recipient-name" class="col-form-label" >Estado:</label>
@@ -253,8 +238,13 @@ $query = mysqli_query($conn,"SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$pol
   </div>
 	
   <div class= "form group">
-  <label for="Ciudad">Ciudad</label>
+  <label for="Ciudad">Ciudad:</label>
   <input type="text" class="form-control" Readonly  id="recipient-name"  value ="<?php echo $Ciudad?> ">
+  </div>
+
+  <div class= "form group">
+  <label for="recipient-name" class="col-form-label" >Dirección:</label>
+  <input type="text" class="form-control"  Readonly id="recipient-name" value=" <?php echo $Direccion ?> ">
   </div>
 	
   <?php
