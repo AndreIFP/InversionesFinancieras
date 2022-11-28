@@ -96,134 +96,18 @@ $fecha = date('Y-m-d h:i:s');
 <!-- partial:index.partial.html -->
 
 
-  <a class="btn btn-primary" href="validacionlibro.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+  <a class="btn btn-primary" href="libro.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
   <br>
 
   <div class="box-header">
     <center>
-      <h3><strong> Libro diario de <?php echo $empresa  ?></strong></h3>
+      <h3><strong> Balanza General de <?php echo $empresa  ?></strong></h3>
       <h3><strong> del <?php echo $fechai  ?> al  <?php echo $fechaf  ?></strong></h3>
     </center>
   </div><!-- /.box-header -->
 
 
-  <!--DEPOSITO-->
-  <div class="modal fade"  id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-document" role="document" >
-      <div class="modal-content" style="max-width: 1200px ; left:80px;  margin-top: 50px"   >
-        <div class="modal-header"  >
-          <div class="box-body" >
-            <!-- Date range -->
-            <form id="formasiento" method="POST" action="" enctype="multipart/form-data" class="form-horizontal">
-              <input type="hidden" class="form-control" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>" required>
-
-              <input type="hidden" class="form-control" id="debe_haber" name="debe_haber" value="debe" required>
-              <div class="col-md-11 btn-print">
-                <br>
-
-                <div class="form-group">
-                  <center>
-                    <h5> <strong> Asiento Contable </strong></h5>
-                  </center>
-                  <hr>
-                  
-                  <div class="col-md-5 btn-print" style="right: 16px;">
-                   <!-- ENTRADA DEl ID ASIENTO-->
-                   
-                   <div class="form-group">
-                   <h5> <strong> Número de Asiento </strong></h5>
-                    <div class="input-group">
-                    
-                      <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-                      <input type="text" class="form-control pull-right" id="descripcion" name="NAsiento" placeholder="Número de Asiento" required>
-                    </div>
-                  </div>
-                  <h5> <strong >Fecha </strong></h5 >
-                  </div>
-                 
-                  
-
-                  <!-- ENTRADA PARA LA FECHA -->
-                  
-                  <div class="form-group">
-                  
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                      <input type="date" class="form-control pull-right" id="date" name="fechax" required>
-                    </div>
-                  </div>
-                  <!-- ENTRADA DE LA DESCRIPCION-->
-                  <div class="form-group">
-                  <h5> <strong> Descripción </strong></h5>
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-                      <input type="text" class="form-control pull-right" id="descripcion" name="descripcion2" placeholder="Descripción del Asiento" required>
-                    </div>
-                  </div>
-                </div>
-                <hr>
-                
-                <div class="container">
   
-                      <div class="table-responsive">
-                            <table id="Table_id" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Debito</th>
-                                        <th>Crédito</th>
-                                        <th>Codigó de Cuenta</th>
-                                        <!-- <th>Nombre Cuenta</th> -->
-                                        <th>Descripción</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tableToModify">
-                                  
-                                  <tr id="rowToClone">
-                                      <td><input type="text" class="debito" value="0" id="debito1"  name="debito[]" onkeyup="keyAlert(this)"  onchange="changeDebito(1)" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
-                                      <td><input type="text" value="0" class="credito" id="credito1" name="credito[]" style="width:150px;height:20px;border:0" maxlength="10" onchange="changeCredito(1)" onkeyup="keyAlert(this)"  placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
-                                      <td><div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                        <select class="form-control cuentas" onchange="changeSelect(1)" name="cuentas[]" id="cuentas1" required>
-                                            <option value="">Seleccione una Cuenta</option>
-                                            <?php
-                                            include('../conexion.php');
-                                            #consulta de todos los paises
-                                            $consulta = mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA >='10';");
-                                            while ($row = mysqli_fetch_array($consulta)) {
-                                              $nombrepais = $row['CUENTA'];
-                                              $nombeid = $row['CODIGO_CUENTA'];
-                                            ?>
-                                              <option class="dropdown-item" value="<?php echo $nombeid ?>"><?php echo $nombeid ?> - <?php echo $nombrepais ?></option>
-                                            <?php
-                                            }
-                                            ?>
-                                        </select>
-                                      </div></td>
-                                      <!-- <td><input type="text" name="codig_cuenta[]" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo Cuenta" size="15" value="<?php echo $nombeid?>" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td> -->
-                                      <td><input type="text" name="descripcion[]" style="width:250px;height:20px;border:0" maxlength="50"  placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <input type="button" onclick="cloneRow()" value="Agregar Nueva Fila"/>
-                     </div>
-
-                <div class="col-md-12">
-                  <button class="btn btn-primary" id="daterange-btn" name="insertar"> <i class="fa fa-credit-card" aria-hidden="true"></i> Agregar</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> CERRAR</button>
-                </div>
-
-              </div>
-            </form>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <!--end of modal-->
-
 
   <div class="box-body ">
     <!-- BOTONES -->
@@ -231,20 +115,13 @@ $fecha = date('Y-m-d h:i:s');
     <?php if ($_SESSION['permisos'][M_LIBRO_DIARIO] and $_SESSION['permisos'][M_LIBRO_DIARIO]['w'] == 1) {
 
     ?>
-      
-      
-        
-      <form method="post" action="procebalanza.php" enctype="multipart/form-data" >
-      <button type="button" class="btn btn-primary" data-toggle="modal" onclick="limpiarForm()" data-target="#miModal">
-      
-      <i class="fa fa-plus-square" aria-hidden="true"></i> Agregar Asiento </button>
-      <a class="btn btn-info" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i   class="fa fa-file-pdf-o" ></i> Imprimir</a>
-      <button type="submit" name="btnregistrarx" class="btn btn-primary"><i class="fa fa-plus-square" aria-hidden="true"></i>  Balanza de Comprobación</button>
-      
-      
+    
+
+
+<a class="btn btn-info" href="../gestiones/Reporte_Estado_Resultado.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i   class="fa fa-file-pdf-o" ></i> Estado de resultados</a>
     <?php } ?>
+      <a class="btn btn-info" href="../gestiones/Reporte_Balance.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i   class="fa fa-file-pdf-o" ></i> Balance Genal</a>
       
-      </form>
 
     </div>
 
@@ -252,28 +129,26 @@ $fecha = date('Y-m-d h:i:s');
     <table id="example22" class="table">
       <thead>
         <tr class="table-primary">
-
-          <th>
-            <center> Id Asiento </center>
+        <th>
+            <center> Codigo Cuenta</center>
+          </th>
+        <th>
+            <center> Cuenta</center>
           </th>
           <th>
-            <center> ID Cliente </center>
-          </th>
-          <th>
-            <center> ID Usuario </center>
-          </th>
-          <th>
-            <center> Fecha</center>
-          </th>
-          <th>
-            <center> Descripcion </center>
+            <center>Monto Haber </center>
           </th>
           <th >
-            <center> Monto </center>
+            <center>Monto Debe </center>
           </th>
-          <th class="btn-print">
-            <center> Acción </center>
+          <th>
+            <center>Saldo Debe </center>
           </th>
+          <th >
+            <center>Saldo Haber </center>
+          </th>
+
+
          
 
 
@@ -283,58 +158,35 @@ $fecha = date('Y-m-d h:i:s');
         <?php
 
         // $branch=$_SESSION['branch'];
-        $query = mysqli_query($conn, "select * from tbl_asientos where Id_Cliente='$cliente' ") ;
+        $query = mysqli_query($con, " SELECT tcc.CODIGO_CUENTA,tcc.CUENTA ,tb.Mhaber,tb.Mdebe,tb.Sdebe,tb.SAcreedor  
+        FROM  Tbl_Balanza tb join tbl_catalago_cuentas tcc 
+        where tb.COD_CUENTA=tcc.CODIGO_CUENTA and tb.Id_cliente ='$cliente'; ") ;
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
-
+      
           
         ?>
           <tr>
-            <td>
-              <center><?php echo $row['Id_asiento']; ?></center>
-            </td>
-            <td>
-              <center><?php echo $row['Id_Cliente']; ?></center>
-            </td>
-            <td>
-              <center><?php echo $row['Id_Usuario']; ?></center>
-            </td>
-            <td>
-              <center><?php echo $row['Fecha']; ?></center>
-            </td>
-            <td>
-              <center><?php echo $row['Descripcion']; ?></center>
-            </td>
-            <td>
-              <center><?php echo $row['montoTotal']; ?></center>
-            </td>
-            <td class="btn-print">
-              <center>
-                <?php
-                //  if ($eliminar=="si") {
 
-                ?>
-                <?php if ($_SESSION['permisos'][M_LIBRO_DIARIO] and $_SESSION['permisos'][M_LIBRO_DIARIO]['d'] == 1) {
-
-                ?>
-                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#miModales">
-                       <i class="fa fa-eye" aria-hidden="true"></i> </button>
-                       
-                <?php } ?>
-                <?php
-                //    }
-                ?>
-                <?php
-                //     if ($editar=="si") {
-
-                ?>
-
-                <?php
-                //    }
-                ?>
-
-              </center>
+            <td style="text-align:left;">
+              <?php echo $row['CODIGO_CUENTA']; ?>
             </td>
+            <td style="text-align:left;">
+              <?php echo $row['CUENTA']; ?>
+            </td>
+            <td  style="text-align:right;">
+              <?php echo $row['Mhaber']; ?>
+            </td>
+            <td style="text-align:right;">
+              <?php echo $row['Mdebe']; ?>
+            </td>
+            <td style="text-align:right;">
+             <?php echo $row['Sdebe']; ?>
+            </td>
+            <td style="text-align:right;">
+              <?php echo $row['SAcreedor']; ?>
+            </td>
+           
             <td>
             
             
@@ -348,7 +200,8 @@ $fecha = date('Y-m-d h:i:s');
 
     </table>
   </div>
-  
+ 
+
   </secction>
   </div>
 
@@ -662,7 +515,7 @@ class Conexion{
         $sql = "INSERT INTO tbl_asientos (Id_asiento,Id_cliente,Id_usuario,Fecha,Descripcion) 
       VALUES $valoresQ";
 
-
+      
       //$sqlRes=$conexion->query($sql) or mysql_error();
       
       //$pdo=Conexion::conectar();

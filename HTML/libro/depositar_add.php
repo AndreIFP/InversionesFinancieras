@@ -42,7 +42,7 @@ $queryregistro = "UPDATE CUENTAS_POR_COBRAR SET  Cuentas='$idpreg',Descripcion='
 		$update=mysqli_query($con,"update TBL_LIBROS set caja=caja+'$monto' where Id_cliente='$cliente' and Id_Libro=$temporada ");
 
 		
-				mysqli_query($con, "CALL 	validar('$idpreg','$descripcion','$monto','$debe_haber','$cliente','$fecha','$id_usuario')"); 
+				mysqli_query($con, "CALL validar('$idpreg','$descripcion','$monto','$debe_haber','$cliente','$fecha','$id_usuario')"); 
 
 	echo "<script> alert('Se Ingreso el deposito correctamente');document.location='../libro/libro.php'</script>";	
 
