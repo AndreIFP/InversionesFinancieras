@@ -57,6 +57,7 @@ $numero = 99999.99;
                     <a href="Nuevo_Usuario.php" input type="submit" class="btn btn-success" Value="Nuevo"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo usuario</a>
                 <?php } ?>
                 <a class="btn btn-warning" href="Reporte_Usuario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                 <a class="btn btn-success" href="reporte_excel_usuarios.php"> Reporte excel</a>
             </div>
             <?php
             $mostrar_datos = 0;

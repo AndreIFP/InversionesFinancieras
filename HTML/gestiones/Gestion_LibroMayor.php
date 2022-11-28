@@ -40,6 +40,7 @@ $numero = 99999.99;
                     <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                     <a class="btn btn-warning" href="Reporte_LibroMayor.php" <a class="btn btn-warning" href="Reporte_Inventario_Buscador.php?variable=<?php echo $busqueda; ?>" <a class="btn btn-warning" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;">
                         <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                     <a class="btn btn-success" href="reporte_excel_libroMayor.php"> Reporte excel</a>
                 </div>
                 <form action="" method="get" class="form_datos">
 

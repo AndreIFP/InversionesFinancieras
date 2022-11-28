@@ -16,7 +16,7 @@ require ('../conexion.php');
 header("Content-Type: text/html;charset=utf-8");
 header("Content-Type: application/vnd.ms-excel charset=iso-8859-1");
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-header("Content-Disposition: attachment; filename= Catálogo De Cuentas.xls");
+header("Content-Disposition: attachment; filename= Reporte usuarios.xls");
 
 session_start();
 
@@ -25,8 +25,13 @@ $fecha = date("d-m-Y h:i:s a");
 
 $busqueda=$_GET['busqueda_filtro'];
 // Creación del objeto de la clase heredada
-$sql = mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE ( CODIGO_CUENTA LIKE '%$busqueda%' OR
-                                                                        CUENTA  LIKE '%$busqueda%'  OR Estado_Cuenta  LIKE '%$busqueda%')");
+$sql = mysqli_query($conn,"SELECT u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol 
+WHERE ( u.Id_Usuario LIKE '%$busqueda%' OR 
+        u.Usuario LIKE '%$busqueda%' OR
+        u.Nombre_Usuario LIKE '%$busqueda%' OR
+        u.Estado_Usuario LIKE '%$busqueda%' OR
+        r.rol LIKE '%$busqueda%') ORDER BY u.Id_Usuario ");
+
 
 // Llamado del parametro dirección
 $sqldireccion = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '4'";
@@ -60,24 +65,30 @@ while ($fila = $resultadocorreo->fetch_assoc()) {
 <label><center>Dirección: <?php echo $Direccion ?></center></label>
 <label><center>Teléfono: <?php echo $Telefono ?></center></label>
 <label><center>Email: <?php echo $Correo ?></strong></center></label>
-<label><center>Catálogo De Cuentas</center></label>
+<label><center>Reporte Usuarios</center></label>
 
 <br>
 <table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
 <thead>
     <tr style="background: #B0E0E6;">
-    <th>Código Cuenta</th>
-    <th>Cuenta</th>
-    <th>Estado Cuenta</th>
+    <th>Id</th>
+                                    <th>Usuario</th>
+                                    <th>Nombre Usuario</th>
+                                    <th>Estado</th>
+                                    <th>Correo Electrónico</th>
+                                    <th>Rol</th>
     </tr>
 </thead>
 <?php
     while ($row = mysqli_fetch_array($sql)) { ?>
     <tbody>
         <tr>
-        <td><?php echo $row['CODIGO_CUENTA'] ?></td>
-        <td><?php echo $row['CUENTA'] ?></td>
-        <td><?php echo $row['Estado_Cuenta'] ?></td>
+        <th><?php echo $row['Id_Usuario']?></th>
+                                                <th><?php echo $row['Usuario']?></th>
+                                                <th><?php echo $row['Nombre_Usuario']?></th>
+                                                <th><?php echo $row['Estado_Usuario']?></th>
+                                                <th><?php echo $row['Correo_Electronico']?></th>
+                                                <th><?php echo $row['Rol']?></th>
         </tr>
     </tbody>
     
