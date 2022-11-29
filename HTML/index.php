@@ -119,7 +119,7 @@ if (!isset($_SESSION['rol'])) {
                           </div>
                         </div>
                       </div>
-                      <a href="demo.php">
+                      <a href="demo1.php">
                         <div class="panel-footer">
                           <span class="pull-left" style="color:rgb(62, 226, 130);">Ver Detalles</span>
                           <span class="pull-right" style="color:rgb(62, 226, 130);"><i class="fa fa-arrow-circle-right"></i></span>
