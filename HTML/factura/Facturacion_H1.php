@@ -124,7 +124,7 @@
 <div class="invoicelist-footer">
   <table>
     <tr class="taxrelated">
-      <td>Total Retenido:</td>
+      <td>ISV:</td>
       <td><label id="total_tax" name="totalr"></label><input type="hidden" id="totalRetenido" name="totalRetenido"></td>
     </tr>
     <tr>

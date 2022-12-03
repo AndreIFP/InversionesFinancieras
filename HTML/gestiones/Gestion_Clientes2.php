@@ -81,7 +81,7 @@ $numero = 99999.99;
 
             <form action="Buscador_Cliente.php" method="get" class="form_search">
 
-                <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
+                <input type="text" name="busqueda" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" id="busqueda" placeholder="Buscar" size=40>
                 <input type="submit" value="Buscar" class="btn btn-primary">
             </form>
 

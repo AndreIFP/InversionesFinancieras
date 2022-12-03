@@ -26,10 +26,10 @@ if (!isset($_SESSION['rol'])) {
 <?php include 'barralateralinicial.php'; 
 
 
-$url = "http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]; 
+$url = $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]; 
 //echo $url;
 
-$id = substr($url,58,65);
+$id = substr($url,45,5);
 
 $sql2 = "SELECT proname FROM product WHERE id_product = $id;";
             $ext = $conn->query($sql2);

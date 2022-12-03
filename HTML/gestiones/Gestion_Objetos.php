@@ -56,7 +56,7 @@ font-size: 12px; ">
             </form>
             <form action="Buscador_Objetos.php" method="get" class="form_search">
 
-                <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
+                <input type="text" name="busqueda" id="busqueda" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" placeholder="Buscar" size=40>
                 <input type="submit" value="Buscar" class="btn btn-primary">
             </form>
 

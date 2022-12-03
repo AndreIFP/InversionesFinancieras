@@ -28,7 +28,7 @@ include("../conexion.php");
         </form>
         <form action="Buscador_Balance.php" method="get" class="form_search">
 
-            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
+            <input type="text" name="busqueda" id="busqueda" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" placeholder="Buscar" size=40>
             <input type="submit" value="Buscar" class="btn_search">
         </form>
 
