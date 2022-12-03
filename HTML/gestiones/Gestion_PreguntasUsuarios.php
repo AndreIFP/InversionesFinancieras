@@ -65,7 +65,7 @@ if (!isset($_SESSION['rol'])) {
                         <th><center>Id</center></th>
                         <th><center>Id Usuario</center></th>
                         <th><center>Preguntas</center></th>
-                        <th><center>Respuestas</center></th>
+                        
                         
                     </tr>
                 </thead>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['rol'])) {
                     $total_paginas = ceil($total_registro / $por_pagina);
                     $sql = mysqli_query($conn, "select * FROM TBL_PREGUNTAS_X_USUARIO ORDER BY Id_Usuario DESC LIMIT $desde,$por_pagina ");
                     mysqli_close($conn);
-
+                     
                     $result = mysqli_num_rows($sql);
                     if ($result > 0) {
                         while ($row = mysqli_fetch_array($sql)) {
@@ -101,7 +101,7 @@ if (!isset($_SESSION['rol'])) {
                                 <th><center><?php echo $row['Id_Preguntas'] ?></center></th>
                                 <th><center><?php echo $row['Id_Usuario'] ?></center></th>
                                 <th><center><?php echo $row['Preguntas'] ?></center></th>
-                                <th><center><?php echo $row['Respuestas'] ?></center></th>
+                                
                                 
                             </tr>
                     <?php

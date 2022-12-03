@@ -60,7 +60,7 @@ if (!isset($_SESSION['rol'])) {
                     <?php
                     $consulta = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES ;");
                     while ($row = mysqli_fetch_array($consulta)) {
-                      $nombrepais = $row['Nombre_Cliente'];
+                      $nombrepais = $row['Nombre_Empresa'];
                       $nombeid = $row['Id_Cliente'];
                     ?>
                       <option class="dropdown-item" style="font-size:18px" value="<?php echo $nombeid ?>"><?php echo $nombrepais ?></option>
