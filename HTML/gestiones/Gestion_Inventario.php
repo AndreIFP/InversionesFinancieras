@@ -21,25 +21,39 @@ if (!isset($_SESSION['rol'])) {
 
 
 
-
+$numero = 99999.99;
 ?>
-<?php include 'barralateralinicial.php'; ?>
-<p></p>
+<?php include 'barralateralinicial.php'; ?><p></p>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
 <title>Gestión Inventario</title>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+
+
+
+
+
+</head>
 <section style=" background-color:rgb(255, 255, 255);
     padding: 15px;
     color:black;
     font-size: 12px; ">
-
-
-    <h2><strong>Gestión Inventario</strong> </h2>
-    <div class="box-body table-responsive">
-    <div class="reportes">
+    <div class="container-fluid">
+        <div class="col-md-12">
+        <div class="box-body table-responsive">
+            <div class="reportes">
+                <h2><strong>Gestión Inventario</strong> </h2>
         <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
         <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {
         ?>
-              <a class="btn btn-secondary" href="reporte_excel_kardex.php"><i class="fa fa-check" aria-hidden="true"></i> Revisar Kardex</a>
-            <a href="../compras/Facturacion.php"input type="submit" class="btn btn-success" Value="Nuevo Producto"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Producto</a>
+            <a class="btn btn-secondary" href="reporte_excel_kardex.php"><i class="fa fa-check" aria-hidden="true"></i> Revisar Kardex</a>
+            <a href="Nuevo_Inventario.php"input type="submit" class="btn btn-success" Value="Nuevo Producto"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Producto</a>
             
             <?php } ?>
             
@@ -66,18 +80,18 @@ if (!isset($_SESSION['rol'])) {
     </form>
     <form action="Buscador_Inventario.php" method="get" class="form_search">
 
-        <input type="text" name="busqueda" id="busqueda" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" placeholder="Buscar" size=40>
+        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
         <input type="submit" value="Buscar" class="btn btn-primary">
     </form>
     <table class="table ">
         <thead class="table-primary">
             <tr>
-                <th>Id</th>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Fecha</th>
-                <th>Acciones</th>
-                <th> </th>
+                <th> <center>Id </center></th>
+                <th> <center>Producto </center></th>
+                <th> <center>Cantidad </center></th>
+                <th> <center>Fecha </center></th>
+                <th colspan="3"><center>Acciones </center></th>
+              
 
             </tr>
         </thead>
@@ -108,12 +122,33 @@ if (!isset($_SESSION['rol'])) {
             $result = mysqli_num_rows($sql);
             if ($result > 0) {
                 while ($row = mysqli_fetch_array($sql)) {
-            ?>
-                    <tr>
-                        <th><?php echo $row['id_product'] ?></th>
-                        <th><?php echo $row['proname'] ?></th>
-                        <th><?php echo $row['amount'] ?></th>
-                        <th><?php echo $row['time'] ?></th>
+                
+                    $_SESSION['Id_Mauri'] = $row['id_product'];;
+                    $NFactura      = $row['NFactura'];
+                    $Proveedor       = $row['Proveedor'];
+                    $proname  = $row['proname'];
+                    $amount     = $row['amount'];
+                    $time = $row['time'];
+                    
+                    $id_product = $_SESSION['Id_Mauri'];
+
+
+?>
+                        <tr>
+                        <th>
+                                    <center><?php echo  $id_product  ?></center>
+                                </th>
+                                <th>
+                                    <center><?php echo  $proname ?></center>
+                                </th>
+                                <th>
+                                    <center><?php echo  $amount   ?></center>
+                                </th>
+                                <th>
+                                    <center><?php echo  $time ?></center>
+                                </th>
+                               
+                              
 
                         <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['u'] == 1) {
 
@@ -131,6 +166,9 @@ if (!isset($_SESSION['rol'])) {
                             <th>
                                 <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
                             </th>
+
+                            <th><center> <a href="Gestion_Inventario2.php?id_product2=<?php echo $id_product ?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center> </th>
+
                         <?php } ?>
                     </tr>
             <?php
