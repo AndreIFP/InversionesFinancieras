@@ -294,10 +294,46 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
     </table>
   </div>
 
+   <!--Otros INGRESOS-->
+   <?php
+  $sqloingresos = "SELECT ifnull(sum(tb.SAcreedor),0) AS OINGRESOS  FROM tbl_catalago_cuentas tcc 
+  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6402%' ";
+  $resultadooingresos = mysqli_query($conn, $sqloingresos);
+  while ($rows = $resultadooingresos->fetch_assoc()) {
+    $OINGRESOS = $rows["OINGRESOS"];
+  }
+  ?>
+  <!-- DESPLIEGUE -->
+  <button class="accordion"><?php echo 'OTROS INGRESOS ' . $OINGRESOS ?></button>
+  <div class="panel">
+    <table class="table">
+      <?php
+      $sqlotros = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
+      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
+      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
+      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      where tcc.CODIGO_CUENTA  LIKE '6402%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+      $cotros= mysqli_query($conn, $sqlotros);
+
+      while ($rows =$cotros->fetch_assoc()) {
+        $Cod = $rows["CUENTA"];
+        $cuen = $rows['Sdebe'];
+
+      ?>
+        <tr>
+          <th> <?php echo $Cod . ' ' . $cuen ?></th>
+        </tr>
+      <?php
+      }
+      ?>
+    </table>
+  </div>
+
 
   <!--UTILIDAD-->
 
-  <?php $UTILIDADANTESISV = $ingresos - ($Costos + $operativos + $ventas + $financieros + $gastos) ?>
+  <?php $UTILIDADANTESISV = ($ingresos+$OINGRESOS) - ($Costos + $operativos + $ventas + $financieros + $gastos) ?>
 
   <button class="accordion"><?php echo  'UTILIDAD ANTES DE IMPUESTO ' . $UTILIDADANTESISV ?></button>
   <div class="panel">
