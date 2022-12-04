@@ -68,7 +68,6 @@ while ($fila = $resultadocorreo->fetch_assoc()) {
     <th>Id</th>
                         <th>Id Usuario</th>
                         <th>Preguntas</th>
-                        <th>Respuestas</th>
     </tr>
 </thead>
 <?php
@@ -78,7 +77,6 @@ while ($fila = $resultadocorreo->fetch_assoc()) {
         <th><?php echo $row['Id_Preguntas'] ?></th>
                                 <th><?php echo $row['Id_Usuario'] ?></th>
                                 <th><?php echo $row['Preguntas'] ?></th>
-                                <th><?php echo $row['Respuestas'] ?></th>
         </tr>
     </tbody>
     

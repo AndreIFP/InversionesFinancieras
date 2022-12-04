@@ -100,16 +100,16 @@ $pdf->setX(20);
 $pdf->SetFillColor(108, 250, 254 );
 $pdf->Cell(18,5, utf8_decode('Id Preguntas'),1,0,'C',1);
 $pdf->Cell(18,5, utf8_decode('Id Usuario'),1,0,'C',1);
-$pdf->Cell(100,5, utf8_decode('Preguntas'),1,0,'C',1);
-$pdf->Cell(35,5, utf8_decode('Respuestas'),1,1,'C',1);
+$pdf->Cell(100,5, utf8_decode('Preguntas'),1,1,'C',1);
+
 
 
 while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(20);
     $pdf->Cell(18, 5, utf8_decode($fila['Id_Preguntas']), 1, 0, "L",0);
     $pdf->Cell(18, 5, utf8_decode($fila['Id_Usuario']), 1, 0, "L",0);
-    $pdf->Cell(100, 5, utf8_decode($fila['Preguntas']), 1, 0, "L",0);
-    $pdf->Cell(35, 5, utf8_decode($fila['Respuestas']), 1, 1, "L",0);
+    $pdf->Cell(100, 5, utf8_decode($fila['Preguntas']), 1, 1, "L",0);
+
     
 }
 

@@ -10,7 +10,7 @@ const DRIVER='mysql';
 const SERVER='localhost:3307';
 const DATABASE='2w4GSUinHO';
 const USERNAME='root';
-const PASSWORD='3214';
+const PASSWORD='';
 class Conexion{
 
   public static function conectar(){

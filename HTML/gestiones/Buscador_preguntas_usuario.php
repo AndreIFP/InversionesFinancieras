@@ -31,7 +31,6 @@ session_start();
                         <th><center>Id</center></th>
                         <th><center>Id Usuario</center></th>
                         <th><center>Preguntas</center></th>
-                        <th><center>Respuesta</center></th>
                       
                     </tr>
                 </thead>
@@ -67,7 +66,6 @@ session_start();
                                 <th><center><?php echo $row['Id_Preguntas'] ?></center></th>
                                 <th><center><?php echo $row['Id_Usuario'] ?></center></th>
                                 <th><center><?php echo $row['Preguntas'] ?></center></th>
-                                <th><center><?php echo $row['Respuestas'] ?></center></th>
                             </tr>
                     <?php
                         }

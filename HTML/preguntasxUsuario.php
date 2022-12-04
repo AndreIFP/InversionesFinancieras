@@ -117,8 +117,8 @@ select::-ms-expand {
  <label>Pregunta de seguridad</label>
  <form id="frmregistrar" class="login-form" action="validacionpregseguri.php" method="post">
      <div class="select">
-     <select name="txtpregunta" id="format" >
-        <option selected disabled>seleccione la pregunta</option>
+     <select name="txtpregunta" id="format"  required>
+        <option selected disabled value="">seleccione la pregunta</option>
              
         <?php   
         include('conexion.php');
