@@ -35,22 +35,44 @@ class Conexion{
    if(isset($_POST['modo'])){
 
     if (($_POST['modo']=="Cuenta")) {
-
+      $mysqli = new mysqli("localhost:3307","root","3214","2w4GSUinHO"); 
       $idCuenta=$_POST['idCuenta'];
-      $sql5 = mysqli_query($conn,"SELECT * FROM tbl_catalago_cuentas WHERE CODIGO_CUENTA  = ".$idCuenta."");
-            $result_register = mysqli_fetch_all($sql5,1);
-            $Result=$result_register;
-            
-            
-            $request=$Result[0];
-            $arrResponse = array('status' => true, 'data' => $request);
+
+      $queryl = "select CODIGO_CUENTA, CONCAT(CODIGO_CUENTA,' ',CUENTA) as CUENTA  from tbl_catalago_cuentas c
+      where c.CODIGO_CUENTA like '".$idCuenta."_%'";
+
+      
+     /*  $permisos = mysqli_query($conn,"select CODIGO_CUENTA, CONCAT(CODIGO_CUENTA,' ',CUENTA) as CUENTA  from tbl_catalago_cuentas c
+      where c.CODIGO_CUENTA like '".$idCuenta."_%'");
+      $result_register = mysqli_fetch_all($permisos);
+      $row=$result_register; */
+
+     
+
+
+	$resultadol = $mysqli->query($queryl);
+	
+      $html= "<option value='0'>Seleccione El Codigo Disponible</option>";
+
+      while($rowl = $resultadol->fetch_assoc())	
+      {
+
+
+
+        $html.= "<option value='".$rowl['CODIGO_CUENTA']."'>".$rowl['CUENTA']."</option>";
+        
+      }
+
+
+       
+            $arrResponse = array('status' => true, 'data' => $html);
              echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);  
 
     }else{
 
-      
+     
       $id_usuario=$_POST['id_usuario'];
-      $NAsiento=$_POST['NAsiento'];
+      //$NAsiento=$_POST['NAsiento'];
       $fechax=$_POST['fechax'];
       $descripcion2=$_POST['descripcion2'];
 
@@ -68,18 +90,20 @@ class Conexion{
 
 
     if ($sumaCredito == $sumaDebito) {
-        $valores='('.$NAsiento.','.$cliente.','.$id_usuario.',"'.$fechax.'","'.$descripcion2.'","'.$sumaDebito.'"),';
+        $valores='('.$cliente.','.$id_usuario.',"'.$fechax.'","'.$descripcion2.'","'.$sumaDebito.'"),';
         //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
         $valoresQ= substr($valores, 0, -1);
         ///////// QUERY DE INSERCIÓN ////////////////////////////
-        $sql = "INSERT INTO tbl_asientos (Id_asiento,Id_cliente,Id_usuario,Fecha,Descripcion,montoTotal) 
+        $sql = "INSERT INTO tbl_asientos (Id_cliente,Id_usuario,Fecha,Descripcion,montoTotal) 
       VALUES $valoresQ";
           //$pdo=Conexion::conectar();
       $consulta=$pdo->prepare($sql);
 
       $consulta -> execute();
 
+      $NAsiento = $pdo->lastInsertId();
 
+    
       while(true) {
 
         //// RECUPERAR LOS VALORES DE LOS ARREGLOS ////////
@@ -101,7 +125,7 @@ class Conexion{
       //$sqlRes=$conexion->query($sql) or mysql_error();
       
     
-      $idProducto = $pdo->lastInsertId();
+      
       
      
 
@@ -113,7 +137,7 @@ class Conexion{
        ///////// QUERY DE INSERCIÓN ////////////////////////////
 
      
-     $sql2 = "INSERT INTO tbl_detallleasientos (Id_cuenta,debito,credito,Id_asiento,descripcion) VALUES $valoresQuery";
+     $sql2 = "INSERT INTO tbl_detallleasientos (CODIGO_CUENTA,debito,credito,Id_asiento,descripcion) VALUES $valoresQuery";
 
      
      $consulta=$pdo->prepare($sql2);

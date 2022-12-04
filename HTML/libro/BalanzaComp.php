@@ -118,9 +118,9 @@ $fecha = date('Y-m-d h:i:s');
     
 
 
-<a class="btn btn-info" href="../gestiones/Reporte_Estado_Resultado.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i   class="fa fa-file-pdf-o" ></i> Estado de resultados</a>
+<a class="btn btn-info" href="../libro/Resultado.php"><i   class="fa fa-file-pdf-o" ></i> Estado de resultados</a>
     <?php } ?>
-      <a class="btn btn-info" href="../gestiones/Reporte_Balance.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i   class="fa fa-file-pdf-o" ></i> Balance Genal</a>
+      <a class="btn btn-info" href="../libro/Balanzageneral.php"><i   class="fa fa-file-pdf-o" ></i> Balance Genal</a>
       
 
     </div>
@@ -160,7 +160,7 @@ $fecha = date('Y-m-d h:i:s');
         // $branch=$_SESSION['branch'];
         $query = mysqli_query($con, " SELECT tcc.CODIGO_CUENTA,tcc.CUENTA ,tb.Mhaber,tb.Mdebe,tb.Sdebe,tb.SAcreedor  
         FROM  Tbl_Balanza tb join tbl_catalago_cuentas tcc 
-        where tb.COD_CUENTA=tcc.CODIGO_CUENTA and tb.Id_cliente ='$cliente'; ") ;
+        where tb.COD_CUENTA=tcc.CODIGO_CUENTA and tb.Id_cliente ='$cliente'  and tb.Mhaber!=tb.Mdebe; ") ;
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
       

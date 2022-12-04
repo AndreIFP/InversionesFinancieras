@@ -8,7 +8,7 @@ $_SESSION['fechaf'];
 $_SESSION['empresa'];
 $_SESSION['temporada'] = "10";
 
-
+date_default_timezone_set('America/Tegucigalpa');
 
 
 ?>
@@ -130,14 +130,14 @@ $fecha = date('Y-m-d h:i:s');
                   <div class="col-md-5 btn-print" style="right: 16px;">
                    <!-- ENTRADA DEl ID ASIENTO-->
                    
-                   <div class="form-group">
+                  <!--  <div class="form-group">
                    <h5> <strong> Número de Asiento </strong></h5>
                     <div class="input-group">
                     
                       <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
                       <input type="text" class="form-control pull-right" id="descripcion" name="NAsiento" placeholder="Número de Asiento" required>
                     </div>
-                  </div>
+                  </div> -->
                   <h5> <strong >Fecha </strong></h5 >
                   </div>
                  
@@ -149,7 +149,7 @@ $fecha = date('Y-m-d h:i:s');
                   
                     <div class="input-group">
                       <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                      <input type="date" class="form-control pull-right" id="date" name="fechax" required>
+                      <input type="date" class="form-control pull-right" max=<?php $hoy=date("Y-m-d"); echo $hoy;?>  id="date" name="fechax" required>
                     </div>
                   </div>
                   <!-- ENTRADA DE LA DESCRIPCION-->
@@ -188,19 +188,24 @@ $fecha = date('Y-m-d h:i:s');
                                             <?php
                                             include('../conexion.php');
                                             #consulta de todos los paises
-                                            $consulta = mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA >='10';");
+                                            $consulta = mysqli_query($conn, "select CODIGO_CUENTA, CONCAT(CODIGO_CUENTA,' ',CUENTA) as CUENTA  from tbl_catalago_cuentas c
+                                            where char_length(c.CODIGO_CUENTA)=4");
                                             while ($row = mysqli_fetch_array($consulta)) {
                                               $nombrepais = $row['CUENTA'];
                                               $nombeid = $row['CODIGO_CUENTA'];
                                             ?>
-                                              <option class="dropdown-item" value="<?php echo $nombeid ?>"><?php echo $nombeid ?> - <?php echo $nombrepais ?></option>
+                                              <option class="dropdown-item" value="<?php echo $nombeid ?>"> <?php echo $nombrepais ?></option>
                                             <?php
                                             }
                                             ?>
                                         </select>
                                       </div></td>
                                       <!-- <td><input type="text" name="codig_cuenta[]" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo Cuenta" size="15" value="<?php echo $nombeid?>" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td> -->
-                                      <td><input type="text" name="descripcion[]" style="width:250px;height:20px;border:0" maxlength="50"  placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/></td>
+                                      <td><div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                        <select class="form-control cuentas" name="descripcion[]" id="descripcion2" required>
+                                           
+                                      </div></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -466,6 +471,8 @@ $fecha = date('Y-m-d h:i:s');
         
       }
     }) */
+
+
     
   });
 
@@ -523,11 +530,12 @@ $fecha = date('Y-m-d h:i:s');
   }
   
 
-  /* function changeSelect(row) {
+  function changeSelect(row) {
       let fila=row;
       id=`cuentas${fila}`;
       selectCuenta=document.querySelector(`#${id}`)
       idCuenta=selectCuenta.value;
+      console.log(idCuenta);
       //credito
       //selectCuenta.parentNode.parentNode.previousElementSibling.firstElementChild.value=idCuenta
       //debito
@@ -548,9 +556,19 @@ $fecha = date('Y-m-d h:i:s');
                 if (request.readyState == 4 && request.status == 200) {
                   //console.log(request.responseText);
                   let objData = JSON.parse(request.responseText);
-                  let movimiento=objData.data.Movimiento;
+                  //let movimiento=objData.data.Movimiento;
                   console.log(objData)
-                  if (movimiento==null) { 
+
+                 Select2= document.querySelector("#descripcion2");
+                 var option = document.createElement("option");
+                  //option.html = objData.html;
+                  //Select2.innerHTML=objData.data;
+                  //console.log(option)
+                  //Select2.add(option);
+                 console.log();
+
+                 selectCuenta.parentNode.parentNode.nextElementSibling.firstChild.firstChild.nextElementSibling.nextElementSibling.innerHTML=objData.data;
+                 /*  if (movimiento==null) { 
                     alert("seleccione una cuenta deudora o acreedora");
                     //credito
                     selectCuenta.parentNode.parentNode.previousElementSibling.firstElementChild.readOnly =true;
@@ -578,7 +596,7 @@ $fecha = date('Y-m-d h:i:s');
                       
                     }
 
-                  }
+                  } */
                 }
               }
 
@@ -589,7 +607,7 @@ $fecha = date('Y-m-d h:i:s');
    
 
      
-    } */
+    }
   </script>
 
 

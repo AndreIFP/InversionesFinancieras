@@ -186,10 +186,10 @@ if (!isset($_SESSION['rol'])) {
 					    <option value="">Seleccione el estado de la cuenta</option>
 						<option value="1_">Activo</option>
 						<option value="2_">Pasivo</option>
-						<option value="3_">Capital y Patrimonio</option>
+						<option value="3">Capital y Patrimonio</option>
 						<option value="4_">Ingresos</option>
 						<option value="5_">Costos</option>
-						<option value="6_">Gastos</option>
+						<option value="6_">Estado de resultados</option>
 			         </select> </span></div></form>
 			
 			<br />
@@ -262,8 +262,8 @@ if (!isset($_SESSION['rol'])) {
 
                 <div class="input-group">
 				
-					<span  class="input-group-addon"><i class="fa fa-check"></i></span>
-		   <select class=" elegir elegirl form-control" name="cbx_casa" id="cbx_casa" ></select></div>
+					<!-- <span  class="input-group-addon"><i class="fa fa-check"></i></span> -->
+		   <select hidden class=" elegir elegirl form-control" name="cbx_casa" id="cbx_casa" ></select></div>
 			</div>
 			
 			<br />
