@@ -27,7 +27,7 @@ function Header()
     }
    
    $this->SetFont('Arial','',8);
-   $this->Cell(95);
+   $this->Cell(121);
    $this->Cell(8,10, utf8_decode($Direccion),0,7, 45);
    $this->Ln(0);
 
@@ -39,7 +39,7 @@ function Header()
    }
 
    $this->SetFont('Arial','',8);
-   $this->Cell(110);
+   $this->Cell(116);
    $this->Cell(8,0, utf8_decode('Teléfono: ' .$Telefono ),0,7);
    $this->Ln(4);
 
