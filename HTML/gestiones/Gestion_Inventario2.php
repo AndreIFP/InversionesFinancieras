@@ -254,177 +254,75 @@ $numero = 99999.99;
 
                                     ?>
 
-                                        <div class="row">
-
-                                            <div class="col-xs-14 pull-right">
-
-                                                <table class="table">
-
-                                                    <thead class="table-primary">
-                                                        <tr>
-
-                                                            <th>
-                                                                <center>id producto</center>
-                                                            </th>
-
-
-                                                            <th>
-                                                                <center>Número de factura</center>
-                                                            </th>
-
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-
-                                                        <tr>
-
-                                                            <td style="width: 50%">
-
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value="  <?php echo $id_product ?>">
-
-                                                                </div>
-
-                                                            </td>
-
-
-
-                                                            <td style="width: 50%">
-
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value="  <?php echo $NFactura ?>">
-
-                                                                </div>
-
-                                                          
-
-
-                                                               
-
-                                                            </td>
-
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-
-                                            <div class="col-xs-14 pull-right">
-
-                                                <table class="table">
-
-                                                    <thead class="table-primary">
-                                                        <tr>
-
-                                                            <th>
-                                                                <center>Proveedor</center>
-                                                            </th>
-
-
-                                                            <th>
-                                                                <center>Nombre</center>
-                                                            </th>
-
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-
-                                                        <tr>
-
-                                                            <td style="width: 55%">
-
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon"><i class="fa fa-pencil-square"></i></span>
-                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo  $Proveedor ?> ">
-
-                                                                </div>
-
-                                                            </td>
-
-                                                            <td style="width: 45%">
-
-                                                                <div class="input-group">
-
-                                                                    <span class="input-group-addon"><i class="fa fa-check"></i></span>
-                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $proname ?> ">
-                                                                </div>
-
-                                                            </td>
-
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-
-                                            <div class="col-xs-14 pull-right">
-
-                                                <table class="table">
-
-                                                    <thead class="table-primary">
-                                                        <tr>
-
-                                                            <th>
-                                                                <center>Cantidad</center>
-                                                            </th>
-
-
-                                                            <th>
-                                                                <center>Fecha</center>
-                                                            </th>
-
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-
-                                                        <tr>
-
-                                                            <td style="width: 45%">
-
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $amount ?> ">
-
-                                                                </div>
-
-                                                            </td>
-
-                                                            <td style="width: 55%">
-
-                                                                <div class="input-group">
-
-                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $time ?> ">
-
-                                                                </div>
-
-                                                            </td>
-
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-
-                                            </div>
-
-                                        </div>
-
-                                      
+<!--  -->
+<!--  -->
+<table class="table">
+                     <thead class="table-primary">
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Detalle</th>
+                                <th>Producto</th>
+                                <th>Entradas</th>
+                                <th>Salidas</th>
+                                <th></th>
+                            </tr>   
+                        </thead>
+                        <tbody>
+                                <?php
+                                //Paginador
+			                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_KARDEX");
+			                    $result_register = mysqli_fetch_array($sql_registe);
+			                    $total_registro = $result_register['total_registro'];
+
+			         if($mostrar_datos > 0){
+                                    $por_pagina = $mostrar_datos;
+                                }else{
+                                    $por_pagina = 10;
+                                }
+
+                                if(empty($_GET['pagina']))
+                                {
+                                    $pagina = 1;
+                                }else{
+                                    $pagina = $_GET['pagina'];
+                                }
+
+                                $desde = ($pagina-1) * $por_pagina;
+                                $total_paginas = ceil($total_registro / $por_pagina);
+                                    $sql = mysqli_query($conn,"select * FROM TBL_KARDEX where id_product=$id_product ");
+                                    mysqli_close($conn);
+
+			                        $result = mysqli_num_rows($sql);
+                                    if($result > 0){
+                                    while($row=mysqli_fetch_array($sql)){
+
+
+                                        $_SESSION['Id_Mauri']= $row ['Id_kardex'];;
+                                        $fecha      = $row ['fecha'];
+                                        $detalle       = $row ['detalle'];
+                                        $proname  = $row ['proname'];
+                                         $cant_entrada    = $row ['cant_entrada'];
+                                         $total_cante       = $row ['total_cante'];
+                                         $cant_salida     = $row ['cant_salida'];
+                                         $total_cants       = $row ['total_cants'];  
+                                        $Id_kardex =$_SESSION['Id_Mauri'];
+
+                                ?>
+                                     <tr>
+                                        <th><?php echo $fecha?></th>
+                                        <th><?php echo $detalle?></th>
+                                        <th><?php echo $proname?></th>
+                                        <th><?php echo $cant_entrada?></th>   
+                                        <th><?php echo $cant_salida?></th>
+                                    </tr>
+                                <?php
+                                       }
+                                    }
+                                ?>
+                        </tbody>
+                      </table>
+                                        <!--  -->
+                                <!--  -->
 
 
                                     <?php

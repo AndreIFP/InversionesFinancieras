@@ -1,7 +1,7 @@
 <?php
    include('../conexion.php');
    ////////////////// CONEXION A LA BASE DE DATOS //////////////////
-   
+   include 'barralateralinicial.php';
      
 ?>
 <!DOCTYPE html>
@@ -12,30 +12,21 @@
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body id="body">
-<div class="control-bar">
-  <div class="container">
-    <div class="row">
-      <div class="col-2-4">
-        <div class="slogan">Facturación </div>
+<section 
+  style=" background-color:rgb(255, 255, 255);
+    padding: 15px;
+    color:black;
+    font-size: 20px; ">
 
-        <label for="config_tax">V. Retenidos:
+<label for="config_tax">V. Retenidos:
           <input type="checkbox" id="config_tax" />
         </label>
         <label for="config_tax_rate" class="taxrelated">Tasa:
           <input type="text" id="config_tax_rate" value="1"/>%
         </label>
-        
-      </div>
-      
-      <div class="col-4 text-right">
         <a href="javascript:window.print()">Imprimir</a>
-        
-        <a href="../index.php"><input type="submit" class="btn btn-primary" Value="Atras"></a>
+        <a href="../demo1.php"><input type="submit" class="btn btn-primary" Value="Atras"></a>
 
-      </div><!--.col-->
-    </div><!--.row-->
-  </div><!--.container-->
-</div><!--.control-bar-->
 
 <header class="row">
   <div class="logoholder text-center" >
@@ -200,11 +191,12 @@
     
   </div>
 </footer>
+</section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="assets/bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
 <script src="assets/js/main.js"></script>
 </body>
-</html>
+<?php include 'barralateralfinal.php'; ?>
 
 <?php
 
