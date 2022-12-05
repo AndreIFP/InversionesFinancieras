@@ -9,7 +9,7 @@ function Header()
 {
     require ('../conexion.php');
     // Logo
-    $this->Image('logO.PNG',20,32,41);
+    $this->Image('logO.PNG',10,10,40);
     // Arial bold 15
 
     $this->SetFont('Arial','B',18);
@@ -55,7 +55,7 @@ function Header()
   
 
     // Salto de línea
-    $this->Ln(50);
+    $this->Ln(15);
     
     $this->SetFont('Arial','',14);
     $this->Cell(105);

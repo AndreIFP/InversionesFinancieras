@@ -10,7 +10,7 @@ function Header()
 {
     require ('../conexion.php');
     // Logo
-    $this->Image('logO.PNG',92,32,35);
+    $this->Image('logO.PNG',10,10,40);
     // Arial bold 15
     $this->SetFont('Arial','B',18);
     // Movernos a la derecha
@@ -55,7 +55,7 @@ function Header()
     $this->Cell(8,0, utf8_decode('Email: '.$Correo),0,7);
 
     // Salto de línea
-    $this->Ln(45);
+    $this->Ln(15);
     
     $this->SetFont('Arial','',14);
     $this->Cell(65);

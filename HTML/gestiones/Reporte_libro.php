@@ -24,7 +24,7 @@ function Header()
 {
   require ('../conexion.php');
     // Logo
-    $this->Image('logO.PNG',92,32,35);
+    $this->Image('logO.PNG',10,10,40);
     // Arial bold 15
     $this->SetFont('Arial','B',18);
     // Movernos a la derecha
@@ -84,7 +84,7 @@ function Header()
     $this->Cell(8,0, utf8_decode($empresa=$_SESSION['empresa'] ),0,7);
     $this->Ln(2);
        
-    $this->Ln(5); 
+    $this->Ln(15); 
     
 }
 
