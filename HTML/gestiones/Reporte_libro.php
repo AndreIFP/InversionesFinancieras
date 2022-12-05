@@ -24,13 +24,13 @@ function Header()
 {
   require ('../conexion.php');
     // Logo
-    $this->Image('logO.PNG',10,10,40);
+    $this->Image('logO.PNG',10,10,60);
     // Arial bold 15
     $this->SetFont('Arial','B',18);
     // Movernos a la derecha
-    $this->Cell(86);
+    $this->Cell(80);
     // Título
-    $this->Cell(22,10,'Inversiones Financieras IS',2,0,'C');
+    $this->Cell(80,10,'Inversiones Financieras IS',2,0,'C');
     $this->Ln(5);
    // Llamado del parametro dirección
     $sqldireccion = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '4'";
@@ -39,8 +39,8 @@ function Header()
         $Direccion = $fila["Valor"];
     }
 
-    $this->SetFont('Arial','',8);
-    $this->Cell(89);
+    $this->SetFont('Arial','',10);
+    $this->Cell(90);
     $this->Cell(8,10, utf8_decode($Direccion),0,7, 45);
     $this->Ln(0);
     
@@ -51,8 +51,8 @@ function Header()
         $Telefono = $fila["Valor"];
     }
 
-    $this->SetFont('Arial','',8);
-    $this->Cell(78);
+    $this->SetFont('Arial','',10);
+    $this->Cell(90);
     $this->Cell(8,0, utf8_decode('Teléfono: ' .$Telefono ),0,7);
     $this->Ln(4);
     
@@ -63,28 +63,20 @@ function Header()
         $Correo = $fila["Valor"];
     }
 
-    $this->SetFont('Arial','',8);
-    $this->Cell(78);
+    $this->SetFont('Arial','',10);
+    $this->Cell(90);
     $this->Cell(8,0, utf8_decode('Email: '.$Correo),0,7);
-    $this->Ln(3);
+    $this->Ln(15);
 
     $this->SetFont('Arial','',14);
-    $this->Cell(75);
-    $this->Cell(10,60, utf8_decode('Reporte Libro Diario' ),0,7);
-    $this->Ln(-53);
-
-    
-    $this->SetFont('Arial','',14);
-    $this->Cell(68);
-    $this->Cell(10,60, utf8_decode('La empresa' ),0,7);
-    $this->Ln(-30);
+    $this->Cell(100);
+    $this->Cell(8,0, utf8_decode('Reporte Libro' ),0,7);
+    $this->Ln(7);
 
     $this->SetFont('Arial','',14);
-    $this->Cell(96);
+    $this->Cell(70);
     $this->Cell(8,0, utf8_decode($empresa=$_SESSION['empresa'] ),0,7);
-    $this->Ln(2);
-       
-    $this->Ln(15); 
+    $this->Ln(10);
     
 }
 
@@ -122,7 +114,10 @@ $fechaf=$_SESSION['fechaf'];
 
   
 // Creación del objeto de la clase heredada
-$sql = "SELECT * from libro where id_cliente='$cliente' and fecha >='$fechai' and fecha <='$fechaf'; ";
+$sql = "select a.Id_asiento, a.Fecha, a.Descripcion, a.montoTotal, c.Nombre_Cliente, u.Usuario
+from tbl_asientos a 
+inner join tbl_clientes c ON a.Id_Cliente = c.Id_Cliente
+inner join tbl_usuario u ON a.Id_Usuario = u.Id_Usuario where a.Id_Cliente='$cliente'";
 $resultado = mysqli_query($conn,$sql);
 
 
@@ -131,47 +126,32 @@ $resultado = mysqli_query($conn,$sql);
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->SetMargins(10,10,10);
-$pdf->AddPage();
+$pdf->AddPage('LANSPACE','LETTER');
 
 
 $pdf->SetFont('Times','B',8);
-$pdf->setX(10);
+$pdf->setX(15);
 
 
 
 $pdf->SetFillColor(108, 250, 254 );
-$pdf->Cell(40,5, utf8_decode('Fecha'),1,0,'C',1);
-$pdf->Cell(50,5, utf8_decode('Cuenta'),1,0,'C',1);
-$pdf->Cell(50,5, utf8_decode('Descripción'),1,0,'C',1);
-$pdf->Cell(25,5, utf8_decode('Debe'),1,0,'C',1);
-$pdf->Cell(25,5, utf8_decode('Haber'),1,1,'C',1);
-
+$pdf->Cell(30,5, utf8_decode('No. Asiento'),1,0,'C',1);
+$pdf->Cell(70,5, utf8_decode('Nombre Cliente'),1,0,'C',1);
+$pdf->Cell(30,5, utf8_decode('Usuario'),1,0,'C',1);
+$pdf->Cell(30,5, utf8_decode('Fecha'),1,0,'C',1);
+$pdf->Cell(60,5, utf8_decode('Descripción'),1,0,'C',1);
+$pdf->Cell(30,5, utf8_decode('Monto Total'),1,1,'C',1);
 
 
 while ($fila = $resultado->fetch_assoc()) {
-    $monto_haber=0;
-    $monto_debe=0;
-    $monto=$fila['monto'];
-    $id_libro=$fila['id_libro'];
-    $debe_haber=$fila['debe_haber'];
-     
-  if($debe_haber=="debe"){
-    $monto_debe=$fila['monto'];
-
-      }
-  if($debe_haber=="haber"){
-    $monto_haber=$fila['monto'];
-
-      }
-    $pdf->setX(10);
-    $pdf->Cell(40, 5, utf8_decode($fila['fecha']), 1, 0, "L",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['cuenta']), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['descripcion']), 1, 0, "B",0);
-    $pdf->Cell(25, 5, utf8_decode( $monto_debe), 1, 0, "R",0);
-    $pdf->Cell(25, 5, utf8_decode($monto_haber), 1, 1, "R",0);
+    $pdf->setX(15);
+    $pdf->Cell(30, 5, utf8_decode($fila['Id_asiento']), 1, 0, "L",0);
+    $pdf->Cell(70, 5, utf8_decode($fila['Nombre_Cliente']), 1, 0, "B",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Usuario']), 1, 0, "B",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Fecha']), 1, 0, "B",0);
+    $pdf->Cell(60, 5, utf8_decode($fila['Descripcion']), 1, 0, "B",0);
+    $pdf->Cell(30, 5, number_format($fila['montoTotal'],2), 1, 1, "R",0);
    
-
-
 }
 
 
