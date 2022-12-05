@@ -171,58 +171,54 @@ $fecha = date('Y-m-d h:i:s');
                 <hr>
 
                 <div class="container">
-
-                  <div class="table-responsive">
-                    <table id="Table_id" class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>Debito</th>
-                          <th>Crédito</th>
-                          <th>Codigó de Cuenta</th>
-                          <!-- <th>Nombre Cuenta</th> -->
-                          <th>Descripción</th>
-                        </tr>
-                      </thead>
-                      <tbody id="tableToModify">
-
-                        <tr id="rowToClone">
-                          <td><input type="text" class="debito" value="0" id="debito1" name="debito[]" onkeyup="keyAlert(this)" onchange="changeDebito(1)" style="width:150px;height:20px;border:0" maxlength="10" placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
-                          <td><input type="text" value="0" class="credito" id="credito1" name="credito[]" style="width:150px;height:20px;border:0" maxlength="10" onchange="changeCredito(1)" onkeyup="keyAlert(this)" placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
-                          <td>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                              <select class="form-control cuentas" onchange="changeSelect(1)" name="cuentas[]" id="cuentas1" required>
-                                <option value="">Seleccione una Cuenta</option>
-                                <?php
-                                include('../conexion.php');
-                                #consulta de todos los paises
-                                $consulta = mysqli_query($conn, "select CODIGO_CUENTA, CONCAT(CODIGO_CUENTA,' ',CUENTA) as CUENTA  from tbl_catalago_cuentas c
-                                            where char_length(c.CODIGO_CUENTA)=4");
-                                while ($row = mysqli_fetch_array($consulta)) {
-                                  $nombrepais = $row['CUENTA'];
-                                  $nombeid = $row['CODIGO_CUENTA'];
-                                ?>
-                                  <option class="dropdown-item" value="<?php echo $nombeid ?>"> <?php echo $nombrepais ?></option>
-                                <?php
-                                }
-                                ?>
-                              </select>
-                            </div>
-                          </td>
-                          <!-- <td><input type="text" name="codig_cuenta[]" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo Cuenta" size="15" value="<?php echo $nombeid ?>" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td> -->
-                          <td>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                              <select class="form-control cuentas" name="descripcion[]" id="descripcion2" required>
-
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <input type="button" onclick="cloneRow()" value="Agregar Nueva Fila" />
-                </div>
+  
+  <div class="table-responsive">
+        <table id="Table_id" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Debito</th>
+                    <th>Crédito</th>
+                    <th>Codigó de Cuenta</th>
+                    <!-- <th>Nombre Cuenta</th> -->
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody id="tableToModify">
+              
+              <tr id="rowToClone">
+                  <td><input type="text" class="debito" value="0" id="debito1"  name="debito[]" onkeyup="keyAlert(this)"  onchange="changeDebito(1)" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
+                  <td><input type="text" value="0" class="credito" id="credito1" name="credito[]" style="width:150px;height:20px;border:0" maxlength="10" onchange="changeCredito(1)" onkeyup="keyAlert(this)"  placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
+                  <td><div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                    <select class="form-control cuentas" onchange="changeSelect(1)" name="cuentas[]" id="cuentas1" required>
+                        <option value="">Seleccione una Cuenta</option>
+                        <?php
+                        include('../conexion.php');
+                        #consulta de todos los paises
+                        $consulta = mysqli_query($conn, "select CODIGO_CUENTA, CONCAT(CODIGO_CUENTA,' ',CUENTA) as CUENTA  from tbl_catalago_cuentas c
+                        where char_length(c.CODIGO_CUENTA)=4");
+                        while ($row = mysqli_fetch_array($consulta)) {
+                          $nombrepais = $row['CUENTA'];
+                          $nombeid = $row['CODIGO_CUENTA'];
+                        ?>
+                          <option class="dropdown-item" value="<?php echo $nombeid ?>"> <?php echo $nombrepais ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                  </div></td>
+                  <!-- <td><input type="text" name="codig_cuenta[]" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo Cuenta" size="15" value="<?php echo $nombeid?>" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td> -->
+                  <td><div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                    <select class="form-control cuentas" name="descripcion[]" id="descripcion2" required>
+                       
+                  </div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="button" onclick="cloneRow()" value="Agregar Nueva Fila"/>
+ </div>
 
                 <div class="col-md-12">
                   <button class="btn btn-primary" id="daterange-btn" name="insertar"> <i class="fa fa-credit-card" aria-hidden="true"></i> Agregar</button>
