@@ -21,7 +21,7 @@ header("Content-Disposition: attachment; filename= Reporte Clientes.xls");
 
 
 
-$sql = "SELECT * FROM TBL_CLIENTES";
+$sql = "SELECT * FROM TBL_CLIENTES WHERE Tipo_Cliente = 'Activo'";
 $DataPaises = mysqli_query($conn, $sql);
 
 // Llamado del parametro dirección

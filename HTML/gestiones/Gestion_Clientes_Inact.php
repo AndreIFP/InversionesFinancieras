@@ -44,16 +44,10 @@ $numero = 99999.99;
         <div class="col-md-12">
             <div class="box-body table-responsive">
                 <div class="reportes">
-                    <h2><strong>Gestión Clientes</strong> </h2>
-
-                    <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-                    <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['w'] == 1) {
-                    ?>
-                        <a href="Nuevo_Cliente.php" input type="submit" class="btn btn-success" Value="Crear Nuevo Cliente"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Cliente</a>
-                        <?php } ?>
-                        <a class="btn btn-warning" href="reporte_cliente.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-                        <a class="btn btn-success" href="reporte_excel_clientes.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
-                        <a align="rigth" href="Gestion_Clientes_Inact.php"><button type="submit" class="btn btn-info"><i class="fa fa-times" aria-hidden="true"></i> Clientes Inactivos</button></a>
+                    <h2><strong>Gestión Clientes</strong></h2>
+                    <a class="btn btn-primary" href="Gestion_Clientes.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                    <a class="btn btn-warning" href="Reporte_Cliente_Inact.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                    <a class="btn btn-success" href="reporte_excel_clientes_inac.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
                 </div>
 
             <?php
@@ -70,12 +64,6 @@ $numero = 99999.99;
                     $mostrar_datos = $_GET['mostrar'];
                     ?>
                 </select>
-            </form>
-
-            <form action="Buscador_Cliente.php" method="get" class="form_search">
-
-                <input type="text" name="busqueda" id="busqueda" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" placeholder="Buscar" size=40>
-                <input type="submit" value="Buscar" class="btn btn-primary">
             </form>
 
             <table class="table ">
@@ -105,7 +93,7 @@ $numero = 99999.99;
                 <tbody>
                     <?php
                     //Paginador
-                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CLIENTES WHERE Id_Cliente = Id_Cliente And Tipo_Cliente = 'Activo'");
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CLIENTES WHERE Id_Cliente = Id_Cliente AND Tipo_Cliente = 'Inactivo' ");
                     $result_register = mysqli_fetch_array($sql_registe);
                     $total_registro = $result_register['total_registro'];
 
@@ -123,7 +111,7 @@ $numero = 99999.99;
 
                     $desde = ($pagina - 1) * $por_pagina;
                     $total_paginas = ceil($total_registro / $por_pagina);
-                    $sql = mysqli_query($conn, "select * FROM TBL_CLIENTES WHERE Tipo_Cliente = 'Activo' ORDER BY Fecha_Dato DESC LIMIT $desde,$por_pagina ");
+                    $sql = mysqli_query($conn, "select * FROM TBL_CLIENTES WHERE Tipo_Cliente = 'Inactivo' ORDER BY Fecha_Dato DESC LIMIT $desde,$por_pagina ");
                     mysqli_close($conn);
 
                     $result = mysqli_num_rows($sql);
@@ -174,7 +162,7 @@ $numero = 99999.99;
                                 <?php } ?>
 
                                 <th>
-                                    <center><a href="Gestion_Clientes2.php?Id_Cliente2=<?php echo $Id_Cliente ?>" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> </a></a></center>
+                                    <center><a href="Gestion_Clientes2_Inac.php?Id_Cliente2=<?php echo $Id_Cliente ?>" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> </a></a></center>
                                 </th>
                             </tr>
                     <?php
@@ -203,7 +191,7 @@ $numero = 99999.99;
                                 <?php
                                 include("../conexion.php");
                                 $poll = $_SESSION['Id_Mauri'];
-                                $query = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$poll' And Tipo_Cliente = 'Activo' ");
+                                $query = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$poll' AND Tipo_Cliente = 'Inactivo' ");
                                 $nr = mysqli_num_rows($query);
                                 while ($row = mysqli_fetch_array($query)) {
                                     $Id_Cliente   = $row['Id_Cliente'];

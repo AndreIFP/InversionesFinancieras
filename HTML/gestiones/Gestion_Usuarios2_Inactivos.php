@@ -21,7 +21,7 @@ if (!isset($_SESSION['rol'])) {
     }
 
     if (empty($_REQUEST['Id_Usuario2'])) {
-        header("location: Gestion_Usuarios.php");
+        header("location: Gestion_Usuarios_Inactivos.php");
         die();
     } else {
 
@@ -53,17 +53,11 @@ $numero = 99999.99;
         <div class="col-md-12">
             <div class="box-body table-responsive">
                 <div class="reportes">
-                    <h2><strong>Gestión Usuarios</strong> </h2>
+                    <h2><strong>Gestión Usuarios Inactivos</strong> </h2>
 
-                    <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-                    <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['w'] == 1) {
-
-                    ?>
-                        <a href="Nuevo_Usuario.php" input type="submit" class="btn btn-success" Value="Nuevo"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo usuario</a>
-                    <?php } ?>
-                    <a class="btn btn-warning" href="Reporte_Usuario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-                    <a class="btn btn-success" href="reporte_excel_usuarios.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
-                 <a align="rigth" href="Gestion_Usuarios_Inactivos.php"><button type="submit" class="btn btn-info"><i class="fa fa-times" aria-hidden="true"></i> Usuarios Inactivos</button></a>
+                    <a class="btn btn-primary" href="Gestion_Usuarios.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                    <a class="btn btn-warning" href="Reporte_Usuario_Inac.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                    <a class="btn btn-success" href="reporte_excel_usuarios_inac.php"> Reporte excel</a>
                 </div>
 
 
@@ -84,10 +78,6 @@ $numero = 99999.99;
                         $mostrar_datos = $_GET['mostrar'];
                         ?>
                     </select>
-                </form>
-                <form action="Buscador_Usuario.php" method="get" class="form_search">
-                    <input type="text" name="busqueda" id="busqueda" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" placeholder="Buscar" size=40>
-                    <input type="submit" value="Buscar" class="btn btn-primary">
                 </form>
 
                 <table class="table">
@@ -118,7 +108,7 @@ $numero = 99999.99;
                     <tbody>
                         <?php
                         //Paginador
-                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_USUARIO WHERE Id_Usuario = Id_Usuario AND Estado_Usuario = 'Activo' ");
+                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_USUARIO WHERE Id_Usuario = Id_Usuario AND Estado_Usuario = 'Inactivo' ");
                         $result_register = mysqli_fetch_array($sql_registe);
                         $total_registro = $result_register['total_registro'];
 
@@ -136,7 +126,7 @@ $numero = 99999.99;
 
                         $desde = ($pagina - 1) * $por_pagina;
                         $total_paginas = ceil($total_registro / $por_pagina);
-                        $sql = mysqli_query($conn, "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Activo' ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
+                        $sql = mysqli_query($conn, "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Inactivo' ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
                         mysqli_close($conn);
 
 
@@ -193,10 +183,10 @@ $numero = 99999.99;
                                     <?php } ?>
 
                                     <th>
-                                        <center> <a href="Gestion_Usuarios2.php?Id_Usuario2=<?php echo $Id_Usuario ?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center>
+                                        <center> <a href="Gestion_Usuarios2_Inactivos.php?Id_Usuario2=<?php echo $Id_Usuario ?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center>
                                     </th>
 
-                                    <form method="post" action="Gestion Usuarios.php" name="miformulario">
+                                    <form method="post" action="Gestion_Usuarios_Inactivos.php" name="miformulario">
                                         <script>
                                             window.onload = function() {
                                                 // Una vez cargada la página, el formulario se enviara automáticamente.
@@ -236,7 +226,7 @@ $numero = 99999.99;
                                     include("../conexion.php");
                                     $poll = $_SESSION['Id_Mauri'];
 
-                                    $query = mysqli_query($conn, "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol WHERE Id_Usuario = '$poll' ");
+                                    $query = mysqli_query($conn, "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol WHERE Id_Usuario = '$poll' AND Estado_Usuario = 'Inactivo' ");
 
                                     $nr = mysqli_num_rows($query);
                                     while ($row = mysqli_fetch_array($query)) {

@@ -197,8 +197,8 @@ if (!isset($_SESSION['rol'])) {
                                         <div class="input-group">
 
                                             <span class="input-group-addon"><i class="fa fa-check"></i></span>
-                                            <select name="Estado_Usuario" class="form-control" required>
-                                                <option value="">Seleccione Una Opción</option>
+                                            <select name="Estado_Usuario" class="form-control notItemOne" required>
+                                                <option value="<?php echo $Estado_Usuario ?>"><?php echo $Estado_Usuario?></option>
                                                 <option value="ACTIVO">ACTIVO</option>
                                                 <option value="INACTIVO">INACTIVO</option>
                                             </select>
@@ -259,7 +259,7 @@ if (!isset($_SESSION['rol'])) {
                                             $result_rol = mysqli_num_rows($query_rol);
 
                                             ?>
-                                            <select name="Rol" id="Rol" class="form-control">
+                                            <select name="Rol" id="Rol" class="form-control notItemOne">
                                                 <?php
                                                 echo $option;
                                                 if ($result_rol > 0) {

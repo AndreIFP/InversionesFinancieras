@@ -21,7 +21,7 @@ header("Content-Disposition: attachment; filename= Reporte Usuarios.xls");
 
 
 
-$sql = "SELECT * FROM TBL_USUARIO";
+$sql = "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Activo' ORDER BY u.Id_Usuario DESC";
 $DataPaises = mysqli_query($conn, $sql);
 
 // Llamado del parametro dirección

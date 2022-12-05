@@ -129,7 +129,7 @@ if (!isset($_SESSION['rol'])) {
 											<div class="input-group">
 
 												<span class="input-group-addon"><i class="fa fa-check"></i></span>
-												<select name="Estado" class="form-control" required>
+												<select name="Estado" class="form-control notItemOne" required>
 													<option value="<?php echo $Estado ?>"><?php echo $Estado ?></option>
 													<option value="ACTIVO">ACTIVO</option>
 													<option value="INACTIVO">INACTIVO</option>

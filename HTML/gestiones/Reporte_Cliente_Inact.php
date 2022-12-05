@@ -89,7 +89,7 @@ function Footer()
 }
 
 // Creación del objeto de la clase heredada
-$sql = "SELECT * FROM TBL_CLIENTES WHERE Tipo_Cliente = 'Activo'";
+$sql = "SELECT * FROM TBL_CLIENTES WHERE Tipo_Cliente = 'Inactivo'";
 $resultado = mysqli_query($conn,$sql);
 
 

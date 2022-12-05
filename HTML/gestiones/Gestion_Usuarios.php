@@ -57,7 +57,8 @@ $numero = 99999.99;
                     <a href="Nuevo_Usuario.php" input type="submit" class="btn btn-success" Value="Nuevo"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo usuario</a>
                 <?php } ?>
                 <a class="btn btn-warning" href="Reporte_Usuario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-                 <a class="btn btn-success" href="reporte_excel_usuarios.php"> Reporte excel</a>
+                 <a class="btn btn-success" href="reporte_excel_usuarios.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
+                 <a align="rigth" href="Gestion_Usuarios_Inactivos.php"><button type="submit" class="btn btn-info"><i class="fa fa-times" aria-hidden="true"></i> Usuarios Inactivos</button></a>
             </div>
             <?php
             $mostrar_datos = 0;
@@ -97,7 +98,7 @@ $numero = 99999.99;
                 <tbody>
                     <?php
                     //Paginador
-                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_USUARIO WHERE Id_Usuario = Id_Usuario ");
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_USUARIO WHERE Id_Usuario = Id_Usuario AND Estado_Usuario = 'Activo' ");
                     $result_register = mysqli_fetch_array($sql_registe);
                     $total_registro = $result_register['total_registro'];
 
@@ -116,7 +117,7 @@ $numero = 99999.99;
                 
                     $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Activo' ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
                     $result = mysqli_num_rows($sql);

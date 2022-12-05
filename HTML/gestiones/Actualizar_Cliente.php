@@ -119,6 +119,7 @@ if (!isset($_SESSION['rol'])) {
 			<div class="box-body">
 
 				<form action="" method="post">
+				<input type="hidden" name="Id_Cliente" value="<?php echo $Id_Cliente  ?>">
 
 					<center>
 						<h2><strong> Actualizar Cliente</strong></h2>
@@ -243,7 +244,7 @@ if (!isset($_SESSION['rol'])) {
 											<div class="input-group">
 
 												<span class="input-group-addon"><i class="fa fa-check"></i></span>
-												<select name="Tipo_Cliente" class="form-control" required>
+												<select name="Tipo_Cliente" class="form-control notItemOne" required>
 													<option value="<?php echo $Tipo_Cliente ?>"><?php echo $Tipo_Cliente ?></option>
 													<option value="ACTIVO">ACTIVO</option>
 													<option value="INACTIVO">INACTIVO</option>

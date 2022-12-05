@@ -9,7 +9,7 @@ function Header()
 {
     require ('../conexion.php');
     // Logo
-    $this->Image('logO.PNG',115,35,50);
+    $this->Image('logO.PNG',20,32,41);
     // Arial bold 15
 
     $this->SetFont('Arial','B',18);
@@ -87,7 +87,7 @@ function Footer()
 }
 }
 // Creación del objeto de la clase heredada
-$sql = "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Activo' ORDER BY u.Id_Usuario DESC";
+$sql = "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Inactivo' ORDER BY u.Id_Usuario DESC";
 $resultado = mysqli_query($conn,$sql);
 
 
