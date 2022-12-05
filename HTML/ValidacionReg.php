@@ -5,7 +5,6 @@ $nombre = $_POST["txtusuario"];
 $nombreu= $_POST["Nombre_Usuario"];
 $pass = $_POST["txtpassword"];
 $email=$_POST["txtcorreo"];
-$fecha=$_POST["fecha_creacion"];
 $nombrec = $_POST["txtusuario"];
 
 $queryusuario 	= mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '$nombre'");
@@ -17,7 +16,7 @@ $nr 			= mysqli_num_rows($querycorreo);
 
 if ($nr == 0 )
 {
-	$queryregistrar = "INSERT INTO TBL_USUARIO (Usuario, Nombre_Usuario,Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja,Primer_Ingreso) values ('$nombre','$nombreu','$pass','$email','INACTIVO','4','0','$fecha')";
+	$queryregistrar = "INSERT INTO TBL_USUARIO (Usuario, Nombre_Usuario,Contraseña, Correo_Electronico,Estado_Usuario,Rol) values ('$nombre','$nombreu','$pass','$email','INACTIVO','4')";
 	//$queryregistrare = "INSERT INTO TBL_PREGUNTAS (pregunta) values ('$pregunta')";
 if(mysqli_query($conn,$queryregistrar))
 {

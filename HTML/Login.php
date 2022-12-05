@@ -6,9 +6,20 @@
   <title> Login</title>
 </head>
 
+<script>
+  function valid(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 8) return true; //Tecla de retroceso (para poder borrar)
+    // dejar la línea de patron que se necesite y borrar el resto
+    patron = /[a-zA-ZñÑáéíóúÁÉÍÓÚ ]/; // Solo acepta letras y espacios
+
+    te = String.fromCharCode(tecla);
+    return patron.test(te);
+  }
+</script>
+
+
 <body>
-
-
   <div class="login-page">
     <div class="form">
       <a href="http://localhost/login2/HTML/login.php">
@@ -17,33 +28,30 @@
 
 
       <form class="register-form" action="ValidacionReg.php" method="post">
-        <label for="text"> Registro</label>
-        <label5 for="text"> Nombre de Usuario</label5>
-        <input type="text" placeholder="Nombre de Usuario" name="Nombre_Usuario" maxlength="30" style="text-transform:uppercase;" required size="40">
-        <label5 for="text"> Usuario</label5>
-        <input type="text" placeholder="Usuario" name="txtusuario" maxlength="15" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required />
+        <h3><strong> Registro</strong></h3>
+        <hr>
+        <input type="text" placeholder="Ingresar nombre de usuario" name="Nombre_Usuario" maxlength="30" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return valid(event)"required size="40">
+
+        <input type="text" placeholder=" Ingresar usuario" name="txtusuario" maxlength="15" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return blockSpecialCharacters(event)" required />
 
         <div class="container">
           <div class="row">
             <div class="col s12 m12 l6">
-              <label5 for="text"> Contraseña</label5>
-              <input id="inpucontra2" type="password" placeholder="Contraseña" name="txtpassword" maxlength="30" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}" title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. " />
-              <label5 for="text"> Confirmar Contraseña</label5>
+              <input id="inpucontra2" type="password" placeholder=" Ingresar Contraseña" name="txtpassword" maxlength="30" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}" title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. " />
               <input id="inpucontracon" type="password" placeholder="Confirmar Contraseña" maxlength="16" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}" title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. " onblur="verificar()" />
             </div>
             <div class="col s12">
-              <a id="viewPassword" class="mover">Mostrar contraseña</a>
+              <h4><a id="viewPassword" class="mover">Mostrar contraseña</a></h4>
             </div>
           </div>
         </div>
-        <label5 for="text"> Correo</label5>
-        <input type="email" placeholder="Direccion de correo" name="txtcorreo" maxlength="50" required required />
-        <br>
-        <a id="viewPassword" class="mover">Fecha de creación</a>
-        <br>
-        <input type="text" name="fecha_creacion" value="<?php date_default_timezone_set("America/Tegucigalpa");
-                                                        echo date("d-m-Y - h:i"); ?>" size="10" readonly required>
-        <br>
+        <input type="email" placeholder="Ingresar direccion de correo" name="txtcorreo" maxlength="50" required required />
+
+        <hr>
+
+        <h4 name="fecha_creacion" ><?php date_default_timezone_set("America/Tegucigalpa");
+                                                        echo date("d-m-Y - h:i"); ?></h4>
+        <hr>
         <button type="submit" name="btnregistrarx">Registrar</button>
         <p class="message">¿Ya te registraste? <a href="#">Iniciar Sesión</a></p>
       </form>

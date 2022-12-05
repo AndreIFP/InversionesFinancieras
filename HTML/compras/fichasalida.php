@@ -14,6 +14,8 @@ $sql9 = "SELECT id_product,amount FROM product WHERE proname = '".$art."'";
 
          if($cantidad <= 0){          
                echo "<script> alert('ERROR NO TIENE CANTIDAD SUFICICIENTE PARA RETIRAR ESTE ARTICULO ¡REVISE EXISTENCIAS!');window.location= '../gestiones/Gestion_Inventario.php' </script>";
+         }else {
+            echo "<script> alert('EL ARTICULO HA SIDO RETIRADO CON EXITO!');window.location= '../gestiones/Gestion_Inventario.php' </script>";
          }
 
 ?>

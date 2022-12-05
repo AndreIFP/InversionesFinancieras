@@ -75,13 +75,69 @@
   <div class="col-2">
     
     <br>
+
+    <?php
+    $sql2 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '10';";
+    $ext = $conn->query($sql2);
+    $fila = $ext->fetch_array(MYSQLI_NUM);
+    $param = $fila[0];
+    ?>
+
+<?php
+    $sql3 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '11';";
+    $extr = $conn->query($sql3);
+    $fila1 = $extr->fetch_array(MYSQLI_NUM);
+    $param1 = $fila1[0];
+    ?>
+
+<?php
+    $sql4 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '12';";
+    $extra = $conn->query($sql4);
+    $fila2 = $extra->fetch_array(MYSQLI_NUM);
+    $param2 = $fila2[0];
+    ?>
+
+<?php
+    $sql5 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '13';";
+    $extrac = $conn->query($sql5);
+    $fila3 = $extrac->fetch_array(MYSQLI_NUM);
+    $param3 = $fila3[0];
+    ?>
       
-      Fecha: <input type="text" name="Fecha" style="width:90px;border:0" class="datePicker" readonly/><br>
+
+      <?php
+    $sql6 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '14';";
+    $extracc = $conn->query($sql6);
+    $fila4 = $extracc->fetch_array(MYSQLI_NUM);
+    $param4 = $fila4[0];
+    ?>
+
+<?php
+    $sql6 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '15';";
+    $extracci = $conn->query($sql6);
+    $fila5 = $extracci->fetch_array(MYSQLI_NUM);
+    $param5 = $fila5[0];
+    ?>
+      Fecha: <input type="Date" name="Fecha" style="width:90px;border:0" required/><br>
      <label for="" style="width:120px;">RTN: 08011972047876</label><br>
-     Factura #: <input type="text" name="N_Factura" placeholder="000-001-01-000000" maxlength="17" style="width:120px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
-     CAI: <input type="text" name="CAI" value="" placeholder="000000-000000-000000-000000-000000-00" maxlength="37" style="width:300px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br><br>
+     <b>Rango Inicial :</b> <input type="text" readonly = "Readonly" name="rangoini" value="<?php echo $param1 ?> " placeholder="" maxlength="25" style="width:150px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
+     <b>Rango Final:</b> <input type="text" readonly = "Readonly" name="rangofini" value="<?php echo $param2 ?>" placeholder="" maxlength="25" style="width:150px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
+     <b>Factura #: <input type="text" readonly = "Readonly" name="N_Factura" value="<?php echo $param3?>-<?php echo $param4?>-<?php echo $param5?>" maxlength="17" style="width:70px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/>- <input type="text" name="N_Factura2" value="" placeholder="00000000" maxlength="8" style="width:60px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br></b>
+     <b>CAI:</b> <input type="text" readonly = "Readonly"name="CAI" value="<?php echo $param ?>" maxlength="37" style="width:280px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required/><br>
+     Fecha LImite de Emisión: <input type="date" name="Fechalimite" style="width:90px;border:0" required/><br><br>
      <strong>Recibí de:</strong><br>
-      <td><input type="text"  style="width:150px;height:25px;border:0" name="Nombre_Cliente" value="" placeholder="Nombre del Cliente" size="30" maxlength="30"  required></td>
+      <td><select class="form-control" name="Nombre_Cliente" id="Nombre_Cliente" required>
+                    <option value="" style="width:90px;border:0" >Seleccione un cliente</option>
+                    <?php
+                    $consulta = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES ;");
+                    while ($row = mysqli_fetch_array($consulta)) {
+                      $nombrepais = $row['Nombre_Empresa'];
+                    ?>
+                      <option class="dropdown-item" style="font-size:18px" value="<?php echo $nombrepais ?>"><?php echo $nombrepais ?></option>
+                    <?php
+                    }
+                    ?>
+                  </select></td>
       <br>
       <td><input type="text"  style="width:150px;height:25px;border:0" name="RTN_Cliente" value="" placeholder="Numero de R.T.N." size="15" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/,'')" required></td> 
       <br>

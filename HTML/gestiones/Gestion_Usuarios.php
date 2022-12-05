@@ -65,7 +65,7 @@ $numero = 99999.99;
             ?>
 
             <form action="" method="get" class="form_datos">
-                <label for="datos_mostrar">Datos A mostrar</label>
+                <label for="datos_mostrar">Datos A mostrarㅤ</label>
                 <select name="mostrar" onchange='submit();'>
                     <option></option>
                     <option value="25">25</option>

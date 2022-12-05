@@ -1,5 +1,4 @@
 <?php
-
 	# Incluyendo librerias necesarias #
 	require "./code128.php";
 	require ('../conexion.php');
@@ -33,9 +32,32 @@
 	 }
    }
 
+   $factu = $_POST["N_Factura2"];
+
+$sql4 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '12';";
+    $extra = $conn->query($sql4);
+    $fila2 = $extra->fetch_array(MYSQLI_NUM);
+    $param2 = $fila2[0];
+
+	$param2 = substr($param2,11,8);
+
+$sql5 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '11';";
+    $extra = $conn->query($sql5);
+    $fila3 = $extra->fetch_array(MYSQLI_NUM);
+    $param3 = $fila3[0];
+
+	$param3 = substr($param3,11,8);
+
+if ($factu > $param2) {
+	echo "<script> alert('EL NUMERO DE FACTURA INGRESADO NO COINCIDE CON EL RANGO FIJADO EN LA GESTION PARAMETROS' );window.location= 'Facturacion_H1.php' </script>";
+}elseif ($factu <= $param2 and $factu >= $param3) {
+
    $fecha=$_POST['Fecha'];
+   $rangoini = $_POST['rangoini'];
+   $rangofin = $_POST['rangofini'];
    $N_Factura=$_POST['N_Factura'];
    $cai = $_POST["CAI"];
+   $fechalimi = $_POST["Fechalimite"];
    $Nombre_Cliente=$_POST['Nombre_Cliente'];
    $RTN_Cliente=$_POST['RTN_Cliente'];
    $Suma_letras=$_POST['Suma_letras'];
@@ -145,13 +167,36 @@
 
 	$pdf->SetFont('Arial','',10);
 	$pdf->SetTextColor(39,39,51);
-	$pdf->Cell(150,9,utf8_decode("FACTURA #: ".$N_Factura),0,0,'L');
+	$pdf->Cell(150,9,utf8_decode("Rango Inicial: ".$rangoini),0,0,'L');
 
 	$pdf->Ln(5);
 
+
+	$pdf->SetFont('Arial','',10);
+	$pdf->SetTextColor(39,39,51);
+	$pdf->Cell(150,9,utf8_decode("Rango Final: ".$rangofin),0,0,'L');
+
+
+	$pdf->Ln(5);
+
+
+	$pdf->SetFont('Arial','b',10);
+	$pdf->SetTextColor(39,39,51);
+	$pdf->Cell(150,9,utf8_decode("FACTURA #: ".$N_Factura."-".$factu),0,0,'L');
+
+	$pdf->Ln(5);
+
+	$pdf->SetFont('Arial','',10);
+	$pdf->SetTextColor(39,39,51);
 	$pdf->Cell(150,9,utf8_decode("CAI:  ".$cai),0,0,'L');
 
-	$pdf->Ln(6);
+	$pdf->Ln(5);
+
+	$pdf->SetFont('Arial','',10);
+	$pdf->SetTextColor(39,39,51);
+	$pdf->Cell(150,9,utf8_decode("Fecha Limite de Emisión:  ".$fechalimi),0,0,'L');
+
+	$pdf->Ln(10);
 
 	$pdf->SetFont('Arial','B',10);
 	$pdf->SetTextColor(39,39,51);
@@ -187,8 +232,8 @@
 	$pdf->Cell(90,8,utf8_decode("Descripción"),1,0,'C',true);
 	$pdf->Cell(15,8,utf8_decode("servicio"),1,0,'C',true);
 	$pdf->Cell(25,8,utf8_decode("Precio"),1,0,'C',true);
-	$pdf->Cell(19,8,utf8_decode("Valor Retenido"),1,0,'C',true);
-	$pdf->Cell(32,8,utf8_decode("Total por Honorarios"),1,0,'C',true);
+	$pdf->Cell(19,8,utf8_decode("ISV"),1,0,'C',true);
+	$pdf->Cell(32,8,utf8_decode("Total"),1,0,'C',true);
 
 	$pdf->Ln(8);
 
@@ -245,3 +290,4 @@
 
 	# Nombre del archivo PDF #
 	$pdf->Output("I","Factura_Nro_1.pdf",true);
+}
