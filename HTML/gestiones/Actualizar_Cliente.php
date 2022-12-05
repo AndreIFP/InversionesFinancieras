@@ -16,15 +16,15 @@ if (!empty($_POST)) {
 		$Ciudad       = $_POST['Ciudad'];
 		if (!is_numeric($RTN) || !is_numeric($Telefono)) {
 			$alert = '<p class="msg_error">Error al actualizar el cliente, Solo Números en RTN o Teléfono.</p>';
-		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $nombree)) {
+		} elseif (!preg_match("/^[a-z A-Z \s  ñÑáéíóúÁÉÍÓÚ.]+$/", $nombree)) {
 			$alert = '<p class="msg_error"> El Nombre Solo Recibe Letras.</p>';
-		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $nombre)) {
+		} elseif (!preg_match("/^[a-z A-Z \s  ñÑáéíóúÁÉÍÓÚ]+$/", $nombre)) {
 			$alert = '<p class="msg_error"> El Nombre Solo Recibe Letras.</p>';
-		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $Direccion)) {
+		} elseif (!preg_match("/^[a-z A-Z \s  ñÑáéíóúÁÉÍÓÚ,.]+$/", $Direccion)) {
 			$alert = '<p class="msg_error">La dirección solo recibe letras.</p>';
 		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $Tipo_Cliente)) {
 			$alert = '<p class="msg_error">El tipo cliente solo recibe letras.</p>';
-		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $Ciudad)) {
+		} elseif (!preg_match("/^[a-z A-Z \s ñÑáéíóúÁÉÍÓÚ]+$/", $Ciudad)) {
 			$alert = '<p class="msg_error">Solo recibe letras.</p>';
 		} else {
 			$query = mysqli_query($conn, "UPDATE TBL_CLIENTES SET Nombre_Empresa='$nombree',Nombre_Cliente='$nombre',RTN_Cliente ='$RTN',Direccion ='$Direccion',Telefono ='$Telefono',Tipo_Cliente ='$Tipo_Cliente' ,Ciudad ='$Ciudad' WHERE Id_Cliente ='$Id_Cliente'");
@@ -99,7 +99,32 @@ if (!isset($_SESSION['rol'])) {
 			tecla = (document.all) ? e.keyCode : e.which;
 			if (tecla == 8) return true; //Tecla de retroceso (para poder borrar)
 			// dejar la línea de patron que se necesite y borrar el resto
-			patron = /[A-Za-z\s]/; // Solo acepta letras y espacios
+			patron = /[a-zA-ZñÑáéíóúÁÉÍÓÚ ]/; // Solo acepta letras y espacios
+
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+	</script>
+
+
+	<script>
+		function vali(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8) return true; //Tecla de retroceso (para poder borrar)
+			// dejar la línea de patron que se necesite y borrar el resto
+			patron = /^[a-z A-Z \s  ñÑáéíóúÁÉÍÓÚ.]+$/; // Solo acepta letras y espacios
+
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+	</script>
+
+	<script>
+		function val(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8) return true; //Tecla de retroceso (para poder borrar)
+			// dejar la línea de patron que se necesite y borrar el resto
+			patron = /^[a-z A-Z \s ñÑáéíóúÁÉÍÓÚ]+$/; // Solo acepta letras y espacios
 
 			te = String.fromCharCode(tecla);
 			return patron.test(te);
@@ -119,7 +144,7 @@ if (!isset($_SESSION['rol'])) {
 			<div class="box-body">
 
 				<form action="" method="post">
-				<input type="hidden" name="Id_Cliente" value="<?php echo $Id_Cliente  ?>">
+					<input type="hidden" name="Id_Cliente" value="<?php echo $Id_Cliente  ?>">
 
 					<center>
 						<h2><strong> Actualizar Cliente</strong></h2>
@@ -139,10 +164,46 @@ if (!isset($_SESSION['rol'])) {
 										</th>
 
 
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr>
+
+
+
+										<td style="width: 100%">
+
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-building"></i></span>
+												<input type="text" class="form-control" name="Nombre_Empresa" maxlength="35" id="Nombre_Empresa" placeholder="Nombre completo" value="<?php echo $Nombree ?>" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return vali(event)"  required>
+
+											</div>
+
+										</td>
+
+									</tr>
+
+								</tbody>
+							</table>
+
+						</div>
+
+					</div>
+
+					<div class="row">
+
+						<div class="col-xs-14 pull-right">
+
+							<table class="table">
+								<thead class="table-primary">
+
+									<tr>
+
 										<th>
 											<center>Representante Legal</center>
 										</th>
-
 
 
 
@@ -153,19 +214,9 @@ if (!isset($_SESSION['rol'])) {
 
 									<tr>
 
-								
 
-										<td style="width: 70%">
 
-											<div class="input-group">
-												<span class="input-group-addon"><i class="fa fa-building"></i></span>
-												<input type="text" class="form-control" name="Nombre_Empresa" maxlength="35" id="Nombre_Empresa" placeholder="Nombre completo" value="<?php echo $Nombree ?>" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-
-											</div>
-
-										</td>
-
-										<td style="width: 30%">
+										<td style="width: 100%">
 
 											<div class="input-group">
 
@@ -176,7 +227,6 @@ if (!isset($_SESSION['rol'])) {
 											</div>
 
 										</td>
-
 
 									</tr>
 
@@ -295,7 +345,7 @@ if (!isset($_SESSION['rol'])) {
 											<div class="input-group">
 
 												<span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-												<input type="text" class="form-control" name="Ciudad" maxlength="25" id="Ciudad" placeholder="Ciudad" value="<?php echo $Ciudad ?>" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+												<input type="text" class="form-control" name="Ciudad" maxlength="25" id="Ciudad" placeholder="Ciudad" value="<?php echo $Ciudad ?>" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();"  onkeypress="return val(event)"required>
 
 											</div>
 

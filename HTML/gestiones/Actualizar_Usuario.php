@@ -13,7 +13,7 @@ if (!empty($_POST)) {
         $Correo_Electronico = $_POST['Correo_Electronico'];
         $Rol                = $_POST['Rol'];
 
-        if (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $Nombre_Usuario)) {
+        if (!preg_match("/[a-zA-ZñÑáéíóúÁÉÍÓÚ ]/", $Nombre_Usuario)) {
             $alert = '<p class="msg_error"> El Nombre Solo Recibe Letras.</p>';
         } else {
             $sql = "UPDATE TBL_USUARIO SET Nombre_Usuario='$Nombre_Usuario',Estado_Usuario='$Estado_Usuario', Contraseña='$contra', Correo_Electronico='$Correo_Electronico' ,Rol='$Rol' WHERE Id_Usuario='$Id_Usuario'";
@@ -84,6 +84,8 @@ if (!isset($_SESSION['rol'])) {
     }
 }
 ?>
+
+
 <?php include 'barralateralinicial.php'; ?>
 <p></p>
 <section style=" background-color:rgb(255, 255, 255); padding: 15px; color:black; font-size: 12px; ">
@@ -143,7 +145,7 @@ if (!isset($_SESSION['rol'])) {
                                         <div class="input-group">
 
                                             <span class="input-group-addon"><i class="fa fa-pencil-square"></i></span>
-                                            <input type="text" Class="form-control" name="Nombre_Usuario" placeholder="Nombre Usuario" value="<?php echo $Nombre_Usuario ?>" maxlength="20" style="text-transform:uppercase;" required size="30">
+                                            <input type="text" Class="form-control" name="Nombre_Usuario" placeholder="Nombre Usuario" value="<?php echo $Nombre_Usuario ?>" maxlength="40" style="text-transform:uppercase;" required size="30">
 
                                         </div>
 

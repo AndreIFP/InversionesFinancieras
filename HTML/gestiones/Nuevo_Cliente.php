@@ -17,7 +17,7 @@ if (!empty($_POST)) {
 
 		if (!is_numeric($RTN) || !is_numeric($Telefono)) {
 			$alert = '<p class="msg_error">Error al registrar el cliente, Solo Números en RTN o Teléfono.</p>';
-		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $nombree)) {
+		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú.]+$/", $nombree)) {
 			$alert = '<p class="msg_error"> El Nombre Solo Recibe Letras.</p>';
 		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $nombre)) {
 			$alert = '<p class="msg_error"> El Nombre Solo Recibe Letras.</p>';
@@ -75,7 +75,7 @@ if (!isset($_SESSION['rol'])) {
 			tecla = (document.all) ? e.keyCode : e.which;
 			if (tecla == 8) return true; //Tecla de retroceso (para poder borrar)
 			// dejar la línea de patron que se necesite y borrar el resto
-			patron = /[A-Za-z\s]/; // Solo acepta letras y espacios
+			patron = /[a-zA-ZñÑáéíóúÁÉÍÓÚ ]/; // Solo acepta letras y espacios
 
 			te = String.fromCharCode(tecla);
 			return patron.test(te);
