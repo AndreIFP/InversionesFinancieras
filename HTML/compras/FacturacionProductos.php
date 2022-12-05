@@ -45,7 +45,7 @@ die( "Fallo la conexión : (" . $conexion -> mysqli_connect_errno()
 $alumnos="SELECT * FROM product order by id_product";
 $queryAlumnos= $conexion->query($alumnos);
 
-
+include 'barralateralinicial.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,36 +70,30 @@ $queryAlumnos= $conexion->query($alumnos);
     });
   </script>
 </head>
+<section 
+  style=" background-color:rgb(255, 255, 255);
+    padding: 15px;
+    color:black;
+    font-size: 20px; ">
 <body id="body">
-<div class="control-bar">
-  <div class="container">
     <div class="row">
-      <div class="col-2-4">
-        <div class="slogan">Facturación </div>
-
-        <label for="config_tax">IVA:
+    </div><!--.row-->
+    <a href="../index.php"><input type="submit" class="btn btn-primary" Value="Atras"></a>
+<label for="config_tax">IVA:
           <input type="checkbox" id="config_tax" />
         </label>
         <label for="config_tax_rate" class="taxrelated">Tasa:
           <input type="text" id="config_tax_rate" value="15"/>%
         </label>
-        <label for="config_note">Descargar en:
-          <a id="btnCrearPdf"><input type="submit" Value="PDF"></a>
+        
         </label>
-      </div>
-      <div class="col-4 text-right">
-        <a href="javascript:window.print()">Imprimir</a>
-        <a href="../index.php"><input type="submit" class="btn btn-primary" Value="Atras"></a>
-      </div><!--.col-->
-    </div><!--.row-->
-  </div><!--.container-->
-</div><!--.control-bar-->
-
+        <br>
 <header class="row">
 
 
   <div class="me">
     <div class="col-2">
+    <br>
     <h1>Factura Inventario</h1>
   </div><!--.col-->
   </div><!--.me-->
@@ -317,5 +311,5 @@ $queryAlumnos= $conexion->query($alumnos);
 <script>window.jQuery || document.write('<script src="assets/bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
 <script src="assets/js/main.js"></script>
 </body>
-</html>
+<?php include 'barralateralfinal.php'; ?>
 
