@@ -296,8 +296,7 @@ $fecha = date('Y-m-d h:i:s');
 
         // $branch=$_SESSION['branch'];
         $query = mysqli_query($conn, "SELECT * from tbl_asientos a
-        join Rangosdeperiodos p on p.Id_Cliente=a.Id_Cliente 
-        where a.Id_Cliente='$cliente'  and a.Fecha BETWEEN p.Fechainicio and p.Fechafinal ");
+        where a.Id_Cliente='$cliente' ");
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
 

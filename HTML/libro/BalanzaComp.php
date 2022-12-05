@@ -123,7 +123,7 @@ $fecha = date('Y-m-d h:i:s');
       ?>
 
 
-        <form method="post" action="proceresultado.php" enctype="multipart/form-data">
+<form method="post" action="proceresultado.php" enctype="multipart/form-data">
           <button type="submit" name="btnregistrarx" class="btn btn-primary"><i class="fa fa-file-pdf-o"></i> Estado de resultados</button>
           <a class="btn btn-info" href="../libro/Balanzageneral.php"><i class="fa fa-file-pdf-o"></i> Balance Genal</a>
         </form>
@@ -134,6 +134,8 @@ $fecha = date('Y-m-d h:i:s');
 
       </form>
 
+
+       
 
     </div>
 
