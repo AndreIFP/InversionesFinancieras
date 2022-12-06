@@ -262,65 +262,69 @@ $asiento2 = $_REQUEST['asiento'];
     <hr>
     <table id="example22" class="table">
       <thead>
-        <tr class="table-primary">
+      <tr class="table-primary">
 
-          <th>
-            <center> Id Asiento </center>
-          </th>
-          <th>
-            <center> ID Cliente </center>
-          </th>
-          <th>
-            <center> ID Usuario </center>
-          </th>
-          <th>
-            <center> Fecha</center>
-          </th>
-          <th>
-            <center> Descripcion </center>
-          </th>
-          <th >
-            <center> Monto </center>
-          </th>
-          <th class="btn-print">
-            <center> Acción </center>
-          </th>
-         
+<th>
+  <center> No. Asiento </center>
+</th>
+<th>
+  <center> Nombre del Represente </center>
+</th>
+<th>
+  <center> Usuario </center>
+</th>
+<th>
+  <center> Fecha</center>
+</th>
+<th>
+  <center> Descripcion </center>
+</th>
+<th>
+  <center> Monto </center>
+</th>
+<th class="btn-print">
+  <center> Acción </center>
+</th>
 
 
-        </tr>
-      </thead>
-      <tbody>
-        <?php
 
-        // $branch=$_SESSION['branch'];
-        $query = mysqli_query($con, "select * from tbl_asientos where Id_Cliente='$cliente' ") ;
-        $i = 1;
-        while ($row = mysqli_fetch_array($query)) {
-        $asiento = $row['Id_asiento'];
-          
-        ?>
-          <tr>
-            <td>
-              <center><?php echo $row['Id_asiento']; ?></center>
-            </td>
-            <td>
-              <center><?php echo $row['Id_Cliente']; ?></center>
-            </td>
-            <td>
-              <center><?php echo $row['Id_Usuario']; ?></center>
-            </td>
-            <td>
-              <center><?php echo $row['Fecha']; ?></center>
-            </td>
-            <td>
-              <center><?php echo $row['Descripcion']; ?></center>
-            </td>
-            <td>
-              <center><?php echo $row['montoTotal']; ?></center>
-            </td>
-            <td class="btn-print">
-              <center>
+</tr>
+</thead>
+<tbody>
+<?php
+
+// $branch=$_SESSION['branch'];
+$query = mysqli_query($conn, "SELECT a.Id_asiento, a.Fecha, a.Descripcion, a.montoTotal, c.Nombre_Cliente, u.Usuario
+from tbl_asientos a 
+inner join tbl_clientes c ON a.Id_Cliente = c.Id_Cliente
+inner join tbl_usuario u ON a.Id_Usuario = u.Id_Usuario where a.Id_Cliente='$cliente'");
+$i = 1;
+while ($row = mysqli_fetch_array($query)) {
+
+$asiento = $row['Id_asiento'];
+
+?>
+<tr>
+  <td>
+    <center><?php echo $row['Id_asiento']; ?></center>
+  </td>
+  <td>
+    <center><?php echo $row['Nombre_Cliente']; ?></center>
+  </td>
+  <td>
+    <center><?php echo $row['Usuario']; ?></center>
+  </td>
+  <td>
+    <center><?php echo $row['Fecha']; ?></center>
+  </td>
+  <td>
+    <center><?php echo $row['Descripcion']; ?></center>
+  </td>
+  <td>
+    <center><?php echo $row['montoTotal']; ?></center>
+  </td>
+  <td class="btn-print">
+    <center>
                 <?php
                 //  if ($eliminar=="si") {
 

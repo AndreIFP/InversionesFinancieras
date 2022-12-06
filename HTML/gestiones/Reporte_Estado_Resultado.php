@@ -134,11 +134,9 @@ $pdf->SetFont('Arial','',14);
       $ingresos = $rows["Ingresos"];
     }
 
-    $sql1 = "SELECT tcc.CUENTA ,tb.SAcreedor  from tbl_detallleasientos td 
-               join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-               join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-               join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
-               where tcc.CODIGO_CUENTA  LIKE '6401%' and tb.Id_cliente= $cliente and tb.SAcreedor!=0 ;";
+    $sql1 = "SELECT tcc.CUENTA,tb2.SAcreedor  from Tbl_Balanza tb2  
+    join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
+    where COD_CUENTA like '6401%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
       $resultado1 = mysqli_query($conn, $sql1);
 
       while ($fila = $resultado1->fetch_assoc()) {
@@ -166,10 +164,10 @@ $sql2 = "SELECT ifnull(sum(tb.Sdebe),0) AS costos   FROM tbl_catalago_cuentas tc
   }
 
   $sqlcosto = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
-      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
-      where tcc.CODIGO_CUENTA  LIKE '6501%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+  join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
+  join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
+  join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+  where tcc.CODIGO_CUENTA  LIKE '6501%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $costosv = mysqli_query($conn, $sqlcosto);
 
       while ($fila = $costosv->fetch_assoc()) {
@@ -207,10 +205,10 @@ $pdf->Ln(5);
   }
 
 $sqloperativos = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
-      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
-      where tcc.CODIGO_CUENTA  LIKE '6502%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
+join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
+join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+where tcc.CODIGO_CUENTA  LIKE '6502%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $coperativos = mysqli_query($conn, $sqloperativos);
 
     while ($fila = $coperativos->fetch_assoc()) {
@@ -269,10 +267,10 @@ $sql5 = "SELECT ifnull(sum(tb.Sdebe),0) AS financieros   FROM tbl_catalago_cuent
   }
 
 $sqlfinancieros = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
-      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
-      where tcc.CODIGO_CUENTA  LIKE '6504%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
+join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
+join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+where tcc.CODIGO_CUENTA  LIKE '6504%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $cfinancieros= mysqli_query($conn, $sqlfinancieros);
 
   while ($fila = $cfinancieros->fetch_assoc()) {
@@ -330,11 +328,9 @@ $sqloingresos = "SELECT ifnull(sum(tb.SAcreedor),0) AS OINGRESOS  FROM tbl_catal
     $OINGRESOS = $rows["OINGRESOS"];
   }
 
-$sqlotrosi = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
-      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
-      where tcc.CODIGO_CUENTA  LIKE '6402%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+$sqlotrosi = " SELECT tcc.CUENTA,tb2.SAcreedor  from Tbl_Balanza tb2  
+join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
+where COD_CUENTA like '6402%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
       $cotrosi= mysqli_query($conn, $sqlotros);
 
   while ($fila = $cotrosi->fetch_assoc()) {
