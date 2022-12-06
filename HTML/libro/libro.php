@@ -251,6 +251,7 @@ $fecha = date('Y-m-d h:i:s');
 
             <i class="fa fa-plus-square" aria-hidden="true"></i> Agregar Asiento </button>
           <a class="btn btn-info" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
+          <a class="btn btn-info" href="#"  ><i class="fa fa-file-excel-o"></i> Excel</a>
           <button type="submit" name="btnregistrarx" class="btn btn-primary"><i class="fa fa-plus-square" aria-hidden="true"></i> Balanza de Comprobación</button>
 
 
@@ -266,13 +267,13 @@ $fecha = date('Y-m-d h:i:s');
         <tr class="table-primary">
 
           <th>
-            <center> Id Asiento </center>
+            <center> No. Asiento </center>
           </th>
           <th>
-            <center> ID Cliente </center>
+            <center> Nombre del Represente </center>
           </th>
           <th>
-            <center> ID Usuario </center>
+            <center> Usuario </center>
           </th>
           <th>
             <center> Fecha</center>
@@ -295,8 +296,10 @@ $fecha = date('Y-m-d h:i:s');
         <?php
 
         // $branch=$_SESSION['branch'];
-        $query = mysqli_query($conn, "SELECT * from tbl_asientos a
-        where a.Id_Cliente='$cliente' ");
+        $query = mysqli_query($conn, "SELECT a.Id_asiento, a.Fecha, a.Descripcion, a.montoTotal, c.Nombre_Cliente, u.Usuario
+        from tbl_asientos a 
+        inner join tbl_clientes c ON a.Id_Cliente = c.Id_Cliente
+        inner join tbl_usuario u ON a.Id_Usuario = u.Id_Usuario where a.Id_Cliente='$cliente'");
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
 
@@ -308,10 +311,10 @@ $fecha = date('Y-m-d h:i:s');
               <center><?php echo $row['Id_asiento']; ?></center>
             </td>
             <td>
-              <center><?php echo $row['Id_Cliente']; ?></center>
+              <center><?php echo $row['Nombre_Cliente']; ?></center>
             </td>
             <td>
-              <center><?php echo $row['Id_Usuario']; ?></center>
+              <center><?php echo $row['Usuario']; ?></center>
             </td>
             <td>
               <center><?php echo $row['Fecha']; ?></center>

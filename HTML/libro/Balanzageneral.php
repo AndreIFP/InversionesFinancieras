@@ -66,7 +66,9 @@ WHERE Id_cliente=$cliente");
   ?>
   <a class="btn btn-primary" href="BalanzaComp.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
   <br>
-
+  <br>
+  <a class="btn btn-info" href="../gestiones/Reporte_Balance.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
+          <a class="btn btn-info" href="../gestiones/reporte_excel_balance.php"  ><i class="fa fa-file-excel-o"></i> Excel</a>
   <h2>Balanza general</h2>
   <?php
   include("../conexion.php");

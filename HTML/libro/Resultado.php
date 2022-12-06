@@ -66,7 +66,9 @@ WHERE Id_cliente=$cliente");
   ?>
   <a class="btn btn-primary" href="BalanzaComp.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
   <br>
-
+    <br>
+  <a class="btn btn-info" href="../gestiones/Reporte_Estado_Resultado.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
+          <a class="btn btn-info" href="../gestiones/reporte_excel_resultado.php"  ><i class="fa fa-file-excel-o"></i> Excel</a>
   <h2>Estado De Resultado</h2>
   <?php
   include("../conexion.php");
@@ -144,7 +146,7 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
   </div>
 
   <!--UTILIDAD BRUTA-->
-  <button class="accordion"><?php echo 'UTILIDAD BRUTA ' . $ingresos - $Costos ?></button>
+  <button class="accordion"><?php echo 'UTILIDAD BRUTA ' . ($ingresos - $Costos) ?></button>
   <div class="panel">
   </div>
 
@@ -230,6 +232,7 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
     $financieros = $rows["financieros"];
   }
   ?>
+
   <!-- DESPLIEGUE -->
   <button class="accordion"><?php echo 'GASTOS FINANCIEROS ' . $financieros ?></button>
   <div class="panel">
@@ -329,7 +332,7 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
 
   <!--UTILIDAD-->
 
-  <?php $UTILIDADANTESISV = ($ingresos+$OINGRESOS)  ?>
+  <?php $UTILIDADANTESISV = ($ingresos+$OINGRESOS) - ($Costos + $operativos + $ventas + $financieros + $gastos) ?>
 
   <button class="accordion"><?php echo  'UTILIDAD ANTES DE IMPUESTO ' . $UTILIDADANTESISV ?></button>
   <div class="panel">
@@ -345,6 +348,11 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
     $isv = $rows["isv"];
   }
   $ISV = $UTILIDADANTESISV  * ($isv / 100);
+  
+  
+
+
+
   ?>
   <button class="accordion"><?php echo 'IMPUESTO ' . $ISV ?></button>
   <div class="panel">
@@ -353,15 +361,17 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
 
   <!--UTILIDAD-->
 
-  <button class="accordion"><?php echo 'UTILIDAD NETA ' . $UTILIDADANTESISV - $ISV ?></button>
+  <button class="accordion"><?php echo 'UTILIDAD NETA ' . ($UTILIDADANTESISV - $ISV) ?></button>
   <div class="panel">
   </div>
 
 
-  <?php
-   " INSERT INTO tbl_detallleasientos(CODIGO_CUENTA, debito, credito, Id_asiento, descripcion) VALUES(2101,0,1940,148,'210101');"
-  ?>
 
+<?php
+$UTILIDADNETA=$UTILIDADANTESISV - $ISV;
+$_SESSION['impu']=$ISV;
+$_SESSION['neta']=$UTILIDADNETA;
+?>
 
 
 
