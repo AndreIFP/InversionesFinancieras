@@ -36,7 +36,7 @@ if (!isset($_SESSION['rol'])) {
                     <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['w'] == 1) {
 
                     ?>
-                        <a href="Gestion_CatalogoCuentadiseñoboton.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Nueva cuenta</a>
+                        <!--a href="Gestion_CatalogoCuentadiseñoboton.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Nueva cuenta</a-->
 
                     <?php } ?>
                     <a class="btn btn-info" href="Gestion_CatalogoCuenta_Inactivas.php"><i class="fa fa-book"></i> Cuentas Inactivas</a>
@@ -69,7 +69,7 @@ if (!isset($_SESSION['rol'])) {
                     </b>
                     <select name="filtro" onchange='buscarFiltro(this);'>
                         <option>Todas</option>
-                        <option value="ACTIVOS">ACTIVOS</option>
+                        <option value="1">ACTIVOS</option>
                         <option value="PASIVOS">PASIVOS</option>
                         <option value="CAPITAL">CAPITAL</option>
                         <option value="GASTOS">GASTOS</option>
