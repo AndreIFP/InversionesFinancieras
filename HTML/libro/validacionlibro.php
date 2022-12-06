@@ -44,7 +44,7 @@ if (!isset($_SESSION['rol'])) {
             <tr>
               <th><center>Seleccione un cliente</center></th>
               <th><center>Seleccione el Periodo</center></th>
-              <th><center>Fecha Final</center></th>
+              <th><center>Seleccione la Fecha Final</center></th>
 
             </tr>
           </thead>
@@ -73,7 +73,7 @@ if (!isset($_SESSION['rol'])) {
           </div>
           </div>
           
-          <div id="select2lista"></div>
+          
           <br>
              
 
@@ -99,15 +99,12 @@ function recargarLista(){
   });
 }
 </script>
-
-              
-              <!-- Fecha Inicial
+<!--Fecha Inicial-->
               <td style="width: 30%">
-                <div class="input-group">
+                <div class="input-group" id="select2lista" >
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                  <input type="date" class="form-control pull-right" id="date" name="fecha_inicio" required>
                 </div>
-              </td> -->
+              </td>
 
               <!--Fecha Final-->
               <td style="width: 30%">
