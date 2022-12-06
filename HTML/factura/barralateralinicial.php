@@ -1,6 +1,7 @@
 <?php
 //validacion Login
  include('../conexion.php');
+ session_start();
  $user=$_SESSION['user'];
 ?>
 <!DOCTYPE html>

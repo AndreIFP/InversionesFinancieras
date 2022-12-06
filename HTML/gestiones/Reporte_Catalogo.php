@@ -86,7 +86,10 @@ function Footer()
 }
 
 // Creación del objeto de la clase heredada
-$sql = "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE Estado_Cuenta = 'ACTIVO'";
+// Creación del objeto de la clase heredada
+$sql = "SELECT  SUBSTRING( tcc2.CODIGO_CUENTA,1,2) as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA  as TIPOCUENTA, tcc.Estado_Cuenta  from tbl_catalago_cuentas tcc 
+join tbl_catalago_cuentas tcc2 on tcc.Mayor =SUBSTRING( tcc2.CODIGO_CUENTA,1, 1)
+order by SUBSTRING( tcc2.CODIGO_CUENTA,4,6)";
 $resultado = mysqli_query($conn,$sql);
 
 
@@ -103,6 +106,7 @@ $pdf->setX(20);
 $pdf->SetFillColor(108, 250, 254 );
 $pdf->Cell(30,5, utf8_decode('Codigo Cuenta'),1,0,'C',1);
 $pdf->Cell(80,5, utf8_decode('Cuenta'),1,0,'C',1);
+$pdf->Cell(40,5, utf8_decode('Tipo Cuenta'),1,0,'C',1);
 $pdf->Cell(25,5, utf8_decode('Estado Cuenta'),1,1,'C',1);
 
 
@@ -111,6 +115,7 @@ while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(20);
     $pdf->Cell(30, 5, utf8_decode($fila['CODIGO_CUENTA']), 1, 0, "L",0);
     $pdf->Cell(80, 5, utf8_decode($fila['CUENTA']), 1, 0, "L",0);
+    $pdf->Cell(40, 5, utf8_decode($fila['TIPOCUENTA']), 1, 0, "L",0);
     $pdf->Cell(25, 5, utf8_decode($fila['Estado_Cuenta']), 1, 1, "L",0);
 }
 

@@ -30,7 +30,7 @@ if (!empty($_POST)) {
 	$nr1 = mysqli_num_rows($querynombre);
 	if ($nr == 0 and $nr1 == 0) {
 		$query_insert = mysqli_query($conn, "INSERT INTO TBL_CATALAGO_CUENTAS (CODIGO_CUENTA,Id_Usuario,CUENTA,Mayor,Movimiento,Estado_Cuenta)
-																	VALUES('$CODIGO_CUENTA','$iduser','$CUENTA','$MAYOR','$MOVIMIENTO','$ESTADO_CUENTA')");
+																	VALUES('$CODIGO_CUENTA','$iduser','$CUENTA','NULL','$MOVIMIENTO','$ESTADO_CUENTA')");
 		if ($query_insert) {
 			echo "<script> alert('Cuenta Registrado Exitosamente');window.location= 'Gestion_CatalogoCuenta.php' </script>";
 		}
@@ -134,7 +134,7 @@ if (!isset($_SESSION['rol'])) {
 				</script>
 
 
-	<a class="btn btn-primary" href="Gestion_CatalogoCuentadiseñoboton.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+	<a class="btn btn-primary" href="Gestion_CatalogoCuenta.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
 	<hr>
 	<div clas="row ">
 	<form class="" method="post">
@@ -184,12 +184,10 @@ if (!isset($_SESSION['rol'])) {
 					  <span class="input-group-addon"><i class="fa fa-check"></i></span>
 					 <select  class=" form-control"  name="cbx_estado" id="cbx_estado" > 
 					    <option value="">Seleccione el estado de la cuenta</option>
-						<option value="1_">Activo</option>
-						<option value="2_">Pasivo</option>
-						<option value="3">Capital y Patrimonio</option>
-						<option value="4_">Ingresos</option>
-						<option value="5_">Costos</option>
-						<option value="6_">Estado de resultados</option>
+						<option value="1_">ACTIVOS</option>
+						<option value="2_">PASIVOS</option>
+						<option value="3">CAPITAL</option>
+						<option value="6_">ESTADO DE RESULTADOS</option>
 			         </select> </span></div></form>
 			
 			<br />

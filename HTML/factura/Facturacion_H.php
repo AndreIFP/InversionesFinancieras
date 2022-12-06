@@ -27,7 +27,7 @@
         <a href="javascript:window.print()">Imprimir</a>
         <a href="../demo1.php"><input type="submit" class="btn btn-primary" Value="Atras"></a>
 
-
+<div class="periodo" >
 <header class="row">
   <div class="logoholder text-center" >
     <img src="log1.png">
@@ -56,6 +56,7 @@
   </div>.bank -->
 
 </header>
+</div>
 
 
 <div class="row section">
