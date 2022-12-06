@@ -389,6 +389,7 @@ $asiento2 = $_REQUEST['asiento'];
                           $consulta = mysqli_query($conn, "SELECT * FROM tbl_detallleasientos;");
                           while ($row = mysqli_fetch_array($consulta)) {
                             $Id_detalle = $row['Id_detalle'];
+                            
                             $CODIGO_CUENTA = $row['CODIGO_CUENTA'];
                             $debito = $row['debito'];
                             $credito = $row['credito'];
@@ -396,7 +397,9 @@ $asiento2 = $_REQUEST['asiento'];
                           ?>
                       </div>
                     </div>
+<?php
 
+?>
                     <!-- ENTRADA -->
                     <h5>Id Aciento: <?php echo $asiento2 ?></h5>
 

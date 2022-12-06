@@ -7,6 +7,7 @@ $_SESSION['fechai'];
 $_SESSION['fechaf'];
 $_SESSION['empresa'];
 $_SESSION['temporada'] = "10";
+$_SESSION['detalle'];
 
 ?>
 <!DOCTYPE html>
@@ -144,7 +145,7 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
   </div>
 
   <!--UTILIDAD BRUTA-->
-  <button class="accordion"><?php echo 'UTILIDAD BRUTA ' . $ingresos - $Costos ?></button>
+  <button class="accordion"><?php echo 'UTILIDAD BRUTA ' . ($ingresos - $Costos) ?></button>
   <div class="panel">
   </div>
 
@@ -230,6 +231,7 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
     $financieros = $rows["financieros"];
   }
   ?>
+
   <!-- DESPLIEGUE -->
   <button class="accordion"><?php echo 'GASTOS FINANCIEROS ' . $financieros ?></button>
   <div class="panel">
@@ -329,7 +331,7 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
 
   <!--UTILIDAD-->
 
-  <?php $UTILIDADANTESISV = ($ingresos+$OINGRESOS)  ?>
+  <?php $UTILIDADANTESISV = ($ingresos+$OINGRESOS) - ($Costos + $operativos + $ventas + $financieros + $gastos) ?>
 
   <button class="accordion"><?php echo  'UTILIDAD ANTES DE IMPUESTO ' . $UTILIDADANTESISV ?></button>
   <div class="panel">
@@ -345,6 +347,11 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
     $isv = $rows["isv"];
   }
   $ISV = $UTILIDADANTESISV  * ($isv / 100);
+  
+  
+
+
+
   ?>
   <button class="accordion"><?php echo 'IMPUESTO ' . $ISV ?></button>
   <div class="panel">
@@ -353,15 +360,17 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
 
   <!--UTILIDAD-->
 
-  <button class="accordion"><?php echo 'UTILIDAD NETA ' . $UTILIDADANTESISV - $ISV ?></button>
+  <button class="accordion"><?php echo 'UTILIDAD NETA ' . ($UTILIDADANTESISV - $ISV) ?></button>
   <div class="panel">
   </div>
 
 
-  <?php
-   " INSERT INTO tbl_detallleasientos(CODIGO_CUENTA, debito, credito, Id_asiento, descripcion) VALUES(2101,0,1940,148,'210101');"
-  ?>
 
+<?php
+$UTILIDADNETA=$UTILIDADANTESISV - $ISV;
+$_SESSION['impu']=$ISV;
+$_SESSION['neta']=$UTILIDADNETA;
+?>
 
 
 
