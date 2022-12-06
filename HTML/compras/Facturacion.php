@@ -50,14 +50,17 @@ include 'barralateralinicial.php';
     font-size: 20px; ">
     
 <a href="../index.php"><input type="submit" class="btn btn-primary" Value="Atras"></a>
+
 <header class="row">
 
 <form method="post">
   <div class="me">
     <div class="col-2">
+    <div class="periodo" >
     <h1>Factura Inventario</h1>
   </div><!--.col-->
   </div><!--.me-->
+  </div>
 </header>
 
 
