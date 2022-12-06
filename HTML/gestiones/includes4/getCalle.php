@@ -9,7 +9,7 @@
 
 	$resultadoS = $mysqli->query($queryS);
 	
-	$html= "<option value='0'>Seleccionar $id_municipio</option>";
+	$html= "<option value='0'>Seleccionar</option>";
 	
 	while($rowS = $resultadoS->fetch_assoc())
 	{

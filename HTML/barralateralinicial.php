@@ -230,18 +230,18 @@ $user = $_SESSION['user'];
             transition: var(--tran-05);
         }
 
-
         .sidebar li a {
             list-style: none;
             height: 100%;
             background-color: transparent;
             display: flex;
-            height: 100%;
+           height: auto;
             width: 100%;
             border-radius: 6px;
             text-decoration: none;
             transition: var(--tran-03);
         }
+
 
         .sidebar li a:hover {
             background-color: var(--primary-color);

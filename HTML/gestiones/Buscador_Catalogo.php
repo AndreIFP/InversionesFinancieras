@@ -34,6 +34,7 @@ session_start();
                         <tr>
                             <th><center>Código</center></th>
                             <th><center>Cuenta</center></th>
+                            <th><center>Tipo Cuenta</center></th>
                             <th><center>Estado Cuenta</center></th>
                             <th><center>Acciones</center></th>
 
@@ -59,8 +60,13 @@ session_start();
 
                         $desde = ($pagina - 1) * $por_pagina;
                         $total_paginas = ceil($total_registro / $por_pagina);
-                        $sql = mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE ( CODIGO_CUENTA LIKE '%$busqueda%' OR
-                                                                        CUENTA  LIKE '%$busqueda%'  OR Estado_Cuenta  LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
+                        
+                        $sql = mysqli_query($conn, "SELECT tcc2.CODIGO_CUENTA as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA as TIPOCUENTA,
+                        tcc.Estado_Cuenta from tbl_catalago_cuentas tcc join tbl_catalago_cuentas tcc2 on tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2) or
+                        tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,1)
+                        and  tcc2.Mayor=SUBSTRING(tcc.CODIGO_CUENTA,1,2)  
+                        where  tcc.CUENTA LIKE '%$busqueda%' OR tcc.CODIGO_CUENTA like '%$busqueda%' OR tcc2.CUENTA LIKE '%$busqueda%' OR tcc2.CODIGO_CUENTA like '%$busqueda%'
+                        order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6) LIMIT $desde,$por_pagina ");
                         mysqli_close($conn);
 
                         $result = mysqli_num_rows($sql);
@@ -70,6 +76,7 @@ session_start();
                                 <tr>
                                     <th><center><?php echo $row['CODIGO_CUENTA'] ?></center></th>
                                     <th><center><?php echo $row['CUENTA'] ?></center></th>
+                                    <th><center><?php echo $row['TIPOCUENTA'] ?></center></th>
                                     <th><center><?php echo $row['Estado_Cuenta'] ?></center></th>
                                     <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['u'] == 1) {
 

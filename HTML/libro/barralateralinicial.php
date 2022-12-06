@@ -77,6 +77,7 @@ $user = $_SESSION['user'];
         }
 
         /* ===== Sidebar ===== */
+        
         .sidebar {
             position: fixed;
             top: 0;
@@ -237,7 +238,7 @@ $user = $_SESSION['user'];
             height: 100%;
             background-color: transparent;
             display: flex;
-            height: 100%;
+           height: auto;
             width: 100%;
             border-radius: 6px;
             text-decoration: none;
