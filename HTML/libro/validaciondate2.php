@@ -9,7 +9,7 @@ $temporada=$_POST['txtfecha'];
             <?php 
 			include('../conexion.php');
 
-			$queryusuario 	= mysqli_query($conn,"SELECT * FROM Rangosdeperiodos WHERE Temporada = '$temporada' AND Id_Cliente='$cliente' ");
+			$queryusuario 	= mysqli_query($conn,"SELECT * FROM Rangosdeperiodos WHERE Fechainicio = '$temporada' AND Id_Cliente='$cliente' ");
 			$nr 			= mysqli_num_rows($queryusuario); 
 
 
@@ -17,8 +17,8 @@ $temporada=$_POST['txtfecha'];
 			if ($nr == 0 )
 			{
 			
-			$query_insert = mysqli_query($conn,"INSERT INTO Rangosdeperiodos (Id_Cliente,Fechainicio,Fechafinal,Temporada) 
-			                   values ('$cliente','NULL','NULL','$temporada')");
+			$query_insert = mysqli_query($conn,"INSERT INTO Rangosdeperiodos (Id_Cliente,Fechainicio,Fechafinal) 
+			                   values ('$cliente','$temporada','NULL')");
 			}
 			else
 			{

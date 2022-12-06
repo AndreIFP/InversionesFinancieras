@@ -5,11 +5,10 @@ $fechai = $_POST['Idtemporada'];
 $fechaf = $_POST['fecha_final'];
 
 
-
 include('../conexion.php');
 $consulta = mysqli_query($conn, "SELECT * FROM Rangosdeperiodos where Id_periodo='$temporada'; ");
 while ($row = mysqli_fetch_array($consulta)) {
-	$fechai = $row['Temporada'];
+	$fechai = $row['Fechainicio'];
 }
 
 if ($fechaf < $fechai) {
