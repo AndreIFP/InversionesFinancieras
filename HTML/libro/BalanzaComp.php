@@ -129,10 +129,10 @@ $fecha = date('Y-m-d h:i:s');
         </form>
 
       <?php } ?>
-      <form method="post" action="cierrecontable.php" enctype="multipart/form-data">
+      <!--form method="post" action="cierrecontable.php" enctype="multipart/form-data">
         <button type="submit" name="btnregistrarx" class="btn btn-primary"><i class="fa fa-file-pdf-o"></i> Cierre contable</button>
 
-      </form>
+      </form-->
 
 
        

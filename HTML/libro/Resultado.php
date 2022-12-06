@@ -86,11 +86,9 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
   <div class="panel">
     <table class="table">
       <?php
-      $sql1 = "SELECT tcc.CUENTA ,tb.SAcreedor  from tbl_detallleasientos td 
-               join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-               join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-               join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
-               where tcc.CODIGO_CUENTA  LIKE '6401%' and tb.Id_cliente= $cliente and tb.SAcreedor!=0 ;";
+      $sql1 = "SELECT tcc.CUENTA,tb2.SAcreedor  from Tbl_Balanza tb2  
+      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
+      where COD_CUENTA like '6401%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
       $resultado1 = mysqli_query($conn, $sql1);
 
       while ($rows = $resultado1->fetch_assoc()) {
@@ -309,16 +307,14 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
   <div class="panel">
     <table class="table">
       <?php
-      $sqlotros = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
-      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
-      where tcc.CODIGO_CUENTA  LIKE '6402%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+      $sqlotros = " SELECT tcc.CUENTA,tb2.SAcreedor  from Tbl_Balanza tb2  
+      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
+      where COD_CUENTA like '6402%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
       $cotros= mysqli_query($conn, $sqlotros);
 
       while ($rows =$cotros->fetch_assoc()) {
         $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
+        $cuen = $rows['SAcreedor'];
 
       ?>
         <tr>
@@ -333,7 +329,7 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
 
   <!--UTILIDAD-->
 
-  <?php $UTILIDADANTESISV = ($ingresos+$OINGRESOS) - ($Costos + $operativos + $ventas + $financieros + $gastos) ?>
+  <?php $UTILIDADANTESISV = ($ingresos+$OINGRESOS)  ?>
 
   <button class="accordion"><?php echo  'UTILIDAD ANTES DE IMPUESTO ' . $UTILIDADANTESISV ?></button>
   <div class="panel">
