@@ -43,11 +43,12 @@ if (!isset($_SESSION['rol'])) {
           <thead>
             <tr>
               <th><center>Seleccione un cliente</center></th>
-              <th><center>Fecha Inicio</center></th>
+              <th><center>Seleccione el Periodo</center></th>
               <th><center>Fecha Final</center></th>
 
             </tr>
           </thead>
+          
 
           <tbody>
             <tr>
@@ -68,16 +69,45 @@ if (!isset($_SESSION['rol'])) {
                     }
                     ?>
                   </select>
-                </div>
+                  
+          </div>
+          </div>
+          
+          <div id="select2lista"></div>
+          <br>
+             
 
-              </td>
-              <!--Fecha Inicial-->
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#Idcliente').val(0);
+  recargarLista();
+
+  $('#Idcliente').change(function(){
+    recargarLista();
+  });
+})
+</script>
+<script type="text/javascript">
+function recargarLista(){
+  $.ajax({
+    type:"POST",
+    url:"datos.php",
+    data:"cliente=" + $('#Idcliente').val(),
+    success:function(r){
+      $('#select2lista').html(r);
+    }
+  });
+}
+</script>
+
+              
+              <!-- Fecha Inicial
               <td style="width: 30%">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   <input type="date" class="form-control pull-right" id="date" name="fecha_inicio" required>
                 </div>
-              </td>
+              </td> -->
 
               <!--Fecha Final-->
               <td style="width: 30%">
@@ -95,8 +125,17 @@ if (!isset($_SESSION['rol'])) {
       </div>
       <div class="col-md-12" align="right">
         <button class="btn btn-lg btn-success btn-print" id="daterange-btn" name="">Continuar <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+        
+        <!-- Agregar Nuevo -->
+        <br>
+                        <hr>
+                        <a href="validaciondate.php" style="font-size:18px" >Agregar Nuevo Libro</a>
+        <!-- Fin - Agregar Nuevo -->
       </div>
     </div>
+
+
+    
   </form>
   </secction>
   </div>
@@ -265,6 +304,11 @@ if (!isset($_SESSION['rol'])) {
     }
   </style>
 
+  <script>
+$('.message a').click(function(){
+  $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+</script>
 
   </body>
 

@@ -38,10 +38,10 @@ if (!isset($_SESSION['rol'])) {
 
                     ?>
                     <center>
-                        <a href="Nuevo_Catalogo2.php " class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i>Sub-Cuenta </a>
+                        <!--a href="Nuevo_Catalogo2.php " class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i>Sub-Cuenta </a-->
                         <a href="Nuevo_Catalogo3.php " class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Sub-Cuenta-2</a>
                         <a href="Nuevo_Catalogo4.php " class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Sub-Cuenta-3</a>
-                        <a href="Nuevo_Catalogo.php " class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Cuenta Auxiliar</a>
+                        <!--a href="Nuevo_Catalogo.php " class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Cuenta Auxiliar</a-->
                         </center>
                     <?php } ?>
                    

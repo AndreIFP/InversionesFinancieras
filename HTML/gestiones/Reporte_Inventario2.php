@@ -1,49 +1,36 @@
-<?php 
-
-session_start();
-$_SESSION['id'];
-$_SESSION['cliente'];
-$_SESSION['fechai'];
-$_SESSION['fechaf'];
-$_SESSION['temporada']="10";
-
-
-
-
-?>
-
 <?php
 
 require('fpdf.php');
 require ('../conexion.php');
-
+session_start();
 class PDF extends FPDF
 {
 // Cabecera de página
 function Header()
 {
-  require ('../conexion.php');
+    require ('../conexion.php');
     // Logo
-    $this->Image('logO.PNG',10,10,60);
+    $this->Image('logO.PNG',10,10,40);
     // Arial bold 15
     $this->SetFont('Arial','B',18);
     // Movernos a la derecha
-    $this->Cell(80);
+    $this->Cell(119);
     // Título
-    $this->Cell(80,10,'Inversiones Financieras IS',2,0,'C');
+    $this->Cell(22,10,'Inversiones Financieras IS',2,0,'C');
     $this->Ln(5);
-   // Llamado del parametro dirección
+
+    // Llamado del parametro dirección
     $sqldireccion = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '4'";
     $resultadodir = mysqli_query($conn,$sqldireccion);
     while ($fila = $resultadodir->fetch_assoc()) {
         $Direccion = $fila["Valor"];
     }
-
-    $this->SetFont('Arial','',10);
-    $this->Cell(90);
+    
+    $this->SetFont('Arial','',8);
+    $this->Cell(115);
     $this->Cell(8,10, utf8_decode($Direccion),0,7, 45);
     $this->Ln(0);
-    
+
     // Llamado del parametro telefono
     $sqlTelefono = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '3'";
     $resultadotel = mysqli_query($conn,$sqlTelefono);
@@ -51,8 +38,8 @@ function Header()
         $Telefono = $fila["Valor"];
     }
 
-    $this->SetFont('Arial','',10);
-    $this->Cell(90);
+    $this->SetFont('Arial','',8);
+    $this->Cell(110);
     $this->Cell(8,0, utf8_decode('Teléfono: ' .$Telefono ),0,7);
     $this->Ln(4);
     
@@ -63,20 +50,17 @@ function Header()
         $Correo = $fila["Valor"];
     }
 
-    $this->SetFont('Arial','',10);
-    $this->Cell(90);
+    $this->SetFont('Arial','',8);
+    $this->Cell(106);
     $this->Cell(8,0, utf8_decode('Email: '.$Correo),0,7);
+
+    // Salto de línea
     $this->Ln(15);
-
+    
     $this->SetFont('Arial','',14);
-    $this->Cell(100);
-    $this->Cell(8,0, utf8_decode('Reporte Libro' ),0,7);
-    $this->Ln(7);
-
-    $this->SetFont('Arial','',14);
-    $this->Cell(70);
-    $this->Cell(8,0, utf8_decode($empresa=$_SESSION['empresa'] ),0,7);
-    $this->Ln(10);
+    $this->Cell(105);
+    $this->Cell(8,0, utf8_decode('Reporte De Inventario' ),0,7);
+    $this->Ln(3);
     
 }
 
@@ -101,28 +85,15 @@ function Footer()
 }
 }
 
+$_SESSION['busquedaX'];
+$busquedaX = $_SESSION['busquedaX'];
 
-$id_usuario=$_SESSION['id'];
-$cliente=$_SESSION['cliente'];
-$temporada=$_SESSION['temporada'];
-$fechai=$_SESSION['fechai'];
-$fechaf=$_SESSION['fechaf'];
-        $fecha = date('Y-m-d h:i:s');
-
-
-//  if ($guardar=="si") {
-
-  
 // Creación del objeto de la clase heredada
-$sql = "select a.Id_asiento, a.Fecha, a.Descripcion, a.montoTotal, c.Nombre_Cliente, u.Usuario
-from tbl_asientos a 
-inner join tbl_clientes c ON a.Id_Cliente = c.Id_Cliente
-inner join tbl_usuario u ON a.Id_Usuario = u.Id_Usuario where a.Id_Cliente='$cliente'";
+$sql = "SELECT * FROM product WHERE ( id_product LIKE '%$busquedaX%' OR
+proname LIKE '%$busquedaX%')";
 $resultado = mysqli_query($conn,$sql);
 
 
-  
-    
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->SetMargins(10,10,10);
@@ -130,28 +101,22 @@ $pdf->AddPage('LANSPACE','LETTER');
 
 
 $pdf->SetFont('Times','B',8);
-$pdf->setX(15);
-
+$pdf->setX(60);
 
 
 $pdf->SetFillColor(108, 250, 254 );
-$pdf->Cell(30,5, utf8_decode('No. Asiento'),1,0,'C',1);
-$pdf->Cell(70,5, utf8_decode('Nombre Cliente'),1,0,'C',1);
-$pdf->Cell(30,5, utf8_decode('Usuario'),1,0,'C',1);
-$pdf->Cell(30,5, utf8_decode('Fecha'),1,0,'C',1);
-$pdf->Cell(60,5, utf8_decode('Descripción'),1,0,'C',1);
-$pdf->Cell(30,5, utf8_decode('Monto Total'),1,1,'C',1);
+$pdf->Cell(20,5, utf8_decode('Id'),1,0,'C',1);
+$pdf->Cell(50,5, utf8_decode('Nombre Producto'),1,0,'C',1);
+$pdf->Cell(50,5, utf8_decode('Cantidad'),1,0,'C',1);
+$pdf->Cell(50,5, utf8_decode('Fecha'),1,1,'C',1);
 
 
 while ($fila = $resultado->fetch_assoc()) {
-    $pdf->setX(15);
-    $pdf->Cell(30, 5, utf8_decode($fila['Id_asiento']), 1, 0, "L",0);
-    $pdf->Cell(70, 5, utf8_decode($fila['Nombre_Cliente']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Usuario']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Fecha']), 1, 0, "B",0);
-    $pdf->Cell(60, 5, utf8_decode($fila['Descripcion']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, number_format($fila['montoTotal'],2), 1, 1, "R",0);
-   
+    $pdf->setX(60);
+    $pdf->Cell(20, 5, utf8_decode($fila['id_product']), 1, 0, "L",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['proname']), 1, 0, "L",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['amount']), 1, 0, "C",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['time']), 1, 1, "L",0);
 }
 
 

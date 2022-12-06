@@ -12,6 +12,7 @@ $fechaf = $_SESSION['fechaf'];
 ?>
 
 <?php include 'barralateralinicial.php'; ?>
+
 <p></p>
 <section style=" background-color:rgb(255, 255, 255); padding: 15px; color:black; font-size: 20px;">
   <title>Verificacion - Libro Diario</title>
@@ -20,7 +21,7 @@ $fechaf = $_SESSION['fechaf'];
   <center> <H1><strong> Libro Diario </strong></H1>
   <h3><em>¡Verifique Los datos!</em></h3>
   <br>
-  <h4 > Cliente:         <?php echo $ncliente ?></h4>
+  <h4 > Cliente:        <?php echo $ncliente ?></h4>
   <h4> Empresa:         <?php echo $empresa ?> </h4>
   <h4> Fecha Inicial:   <?php echo $fechai ?> </h4>
   <h4> Fecha Final:     <?php echo $fechaf ?> </h4>

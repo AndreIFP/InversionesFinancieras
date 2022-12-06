@@ -7,7 +7,7 @@
 	$queryS = "SELECT CODIGO_CUENTA, CUENTA FROM tbl_catalago_cuentas WHERE MAYOR = '$id_municipio'";
 	$resultadoS = $mysqli->query($queryS);
 	
-	$html= "<option value='0'>Seleccionar $id_municipio</option>";
+	$html= "<option value='0'>Seleccionar</option>";
 	
 	while($rowS = $resultadoS->fetch_assoc())
 	{

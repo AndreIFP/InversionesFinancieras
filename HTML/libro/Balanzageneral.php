@@ -66,7 +66,9 @@ WHERE Id_cliente=$cliente");
   ?>
   <a class="btn btn-primary" href="BalanzaComp.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
   <br>
-
+  <br>
+  <a class="btn btn-info" href="../gestiones/Reporte_Balance.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
+          <a class="btn btn-info" href="../gestiones/reporte_excel_balance.php"  ><i class="fa fa-file-excel-o"></i> Excel</a>
   <h2>Balanza general</h2>
   <?php
   include("../conexion.php");
@@ -154,7 +156,7 @@ WHERE Id_cliente=$cliente");
   <div class="panel">
     <table class="table">
       <?php
-      $sqloperativos = "SELECT tcc.CUENTA ,tb.Sdebe  FROM Tbl_Balanza tb 
+      $sqloperativos = "SELECT tcc.CUENTA ,tb.SAcreedor as Sdebe FROM Tbl_Balanza tb 
       join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
       where Id_cliente=$cliente  and COD_CUENTA like '3%';";
       $coperativos = mysqli_query($conn, $sqloperativos);

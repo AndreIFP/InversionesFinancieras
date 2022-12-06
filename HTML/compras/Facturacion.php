@@ -18,15 +18,14 @@ die( "Fallo la conexión : (" . $conexion -> mysqli_connect_errno()
 $alumnos="SELECT * FROM product order by id_product";
 $queryAlumnos= $conexion->query($alumnos);
 
-
+include 'barralateralinicial.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Nuevo Producto</title>
-    <link rel="stylesheet" href="assets/css/main.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+    <link rel="stylesheet" href="assets/css/main.css">
     <script>
 			
       $(function(){
@@ -36,26 +35,21 @@ $queryAlumnos= $conexion->query($alumnos);
       });
      
       // Evento que selecciona la fila y la elimina 
-     
-      
     });
   </script>
 </head>
 <body>
-<div class="control-bar">
   <div class="container">
     <div class="row">
-      <div class="col-2-4">
-        <div class="slogan">Facturación </div>
-        
-      </div>
-      <div class="col-4 text-right">
-        <a href="../index.php"><input type="submit" class="btn btn-primary" Value="Atras"></a>
-      </div><!--.col-->
     </div><!--.row-->
   </div><!--.container-->
-</div><!--.control-bar-->
-
+  <section 
+  style=" background-color:rgb(255, 255, 255);
+    padding: 15px;
+    color:black;
+    font-size: 20px; ">
+    
+<a href="../index.php"><input type="submit" class="btn btn-primary" Value="Atras"></a>
 <header class="row">
 
 <form method="post">
@@ -214,6 +208,7 @@ $queryAlumnos= $conexion->query($alumnos);
 <div class="note" contenteditable>
   <h2>Nota:</h2>
 </div><!--.note-->
+      </section>
 
 
 
@@ -221,5 +216,5 @@ $queryAlumnos= $conexion->query($alumnos);
 <script>window.jQuery || document.write('<script src="assets/bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
 <script src="assets/js/main.js"></script>
 </body>
-</html>
+<?php include 'barralateralfinal.php'; ?>
 
