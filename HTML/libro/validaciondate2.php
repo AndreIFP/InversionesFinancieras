@@ -1,8 +1,7 @@
 <?php 
 
 $cliente=$_POST['Idcliente'];
-$fechai=$_POST['fecha_inicio'];
-$fechaf=$_POST['fecha_final'];
+$temporada=$_POST['txtfecha'];
 
 
 ?>
@@ -10,7 +9,7 @@ $fechaf=$_POST['fecha_final'];
             <?php 
 			include('../conexion.php');
 
-			$queryusuario 	= mysqli_query($conn,"SELECT * FROM TBL_LIBROS WHERE fecha = '$temporada' AND Id_cliente='$cliente' ");
+			$queryusuario 	= mysqli_query($conn,"SELECT * FROM Rangosdeperiodos WHERE Temporada = '$temporada' AND Id_Cliente='$cliente' ");
 			$nr 			= mysqli_num_rows($queryusuario); 
 
 
@@ -18,8 +17,8 @@ $fechaf=$_POST['fecha_final'];
 			if ($nr == 0 )
 			{
 			
-			$query_insert = mysqli_query($conn,"INSERT INTO TBL_LIBROS (fecha,Id_cliente,caja) 
-			                   values ('$temporada','$cliente','0')");
+			$query_insert = mysqli_query($conn,"INSERT INTO Rangosdeperiodos (Id_Cliente,Fechainicio,Fechafinal,Temporada) 
+			                   values ('$cliente','NULL','NULL','$temporada')");
 			}
 			else
 			{
