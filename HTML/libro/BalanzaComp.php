@@ -121,19 +121,17 @@ $fecha = date('Y-m-d h:i:s');
       <?php if ($_SESSION['permisos'][M_LIBRO_DIARIO] and $_SESSION['permisos'][M_LIBRO_DIARIO]['w'] == 1) {
 
       ?>
-
-
-        <form method="post" action="proceresultado.php" enctype="multipart/form-data">
-          <button type="submit" name="btnregistrarx" class="btn btn-primary"><i class="fa fa-file-pdf-o"></i> Estado de resultados</button>
-          <a class="btn btn-info" href="../libro/Balanzageneral.php"><i class="fa fa-file-pdf-o"></i> Balance Genal</a>
+<form method="post" action="proceresultado.php" enctype="multipart/form-data">
+          <button type="submit" name="btnregistrarx" class="btn btn-primary"><i class="fa fa-file-pdf-o"></i> Balance Genal</button>
+          <a class="btn btn-info" href="../libro/Resultado.php"><i class="fa fa-file-pdf-o">Estado de resultados</i> </a>
         </form>
-
       <?php } ?>
-      <form method="post" action="cierrecontable.php" enctype="multipart/form-data">
+      <!--form method="post" action="cierrecontable.php" enctype="multipart/form-data">
         <button type="submit" name="btnregistrarx" class="btn btn-primary"><i class="fa fa-file-pdf-o"></i> Cierre contable</button>
 
-      </form>
+      </form-->
 
+       
 
     </div>
 

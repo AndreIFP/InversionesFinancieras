@@ -86,11 +86,9 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
   <div class="panel">
     <table class="table">
       <?php
-      $sql1 = "SELECT tcc.CUENTA ,tb.SAcreedor  from tbl_detallleasientos td 
-               join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-               join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-               join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
-               where tcc.CODIGO_CUENTA  LIKE '6401%' and tb.Id_cliente= $cliente and tb.SAcreedor!=0 ;";
+      $sql1 = "SELECT tcc.CUENTA,tb2.SAcreedor  from Tbl_Balanza tb2  
+      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
+      where COD_CUENTA like '6401%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
       $resultado1 = mysqli_query($conn, $sql1);
 
       while ($rows = $resultado1->fetch_assoc()) {
@@ -146,7 +144,7 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
   </div>
 
   <!--UTILIDAD BRUTA-->
-  <button class="accordion"><?php echo 'UTILIDAD BRUTA ' . $ingresos - $Costos ?></button>
+  <button class="accordion"><?php echo 'UTILIDAD BRUTA ' . ($ingresos - $Costos) ?></button>
   <div class="panel">
   </div>
 
@@ -232,6 +230,7 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
     $financieros = $rows["financieros"];
   }
   ?>
+
   <!-- DESPLIEGUE -->
   <button class="accordion"><?php echo 'GASTOS FINANCIEROS ' . $financieros ?></button>
   <div class="panel">
@@ -309,16 +308,14 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
   <div class="panel">
     <table class="table">
       <?php
-      $sqlotros = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
-      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
-      where tcc.CODIGO_CUENTA  LIKE '6402%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+      $sqlotros = " SELECT tcc.CUENTA,tb2.SAcreedor  from Tbl_Balanza tb2  
+      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
+      where COD_CUENTA like '6402%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
       $cotros= mysqli_query($conn, $sqlotros);
 
       while ($rows =$cotros->fetch_assoc()) {
         $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
+        $cuen = $rows['SAcreedor'];
 
       ?>
         <tr>
@@ -349,6 +346,11 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
     $isv = $rows["isv"];
   }
   $ISV = $UTILIDADANTESISV  * ($isv / 100);
+  
+  
+
+
+
   ?>
   <button class="accordion"><?php echo 'IMPUESTO ' . $ISV ?></button>
   <div class="panel">
@@ -357,15 +359,17 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
 
   <!--UTILIDAD-->
 
-  <button class="accordion"><?php echo 'UTILIDAD NETA ' . $UTILIDADANTESISV - $ISV ?></button>
+  <button class="accordion"><?php echo 'UTILIDAD NETA ' . ($UTILIDADANTESISV - $ISV) ?></button>
   <div class="panel">
   </div>
 
 
-  <?php
-   " INSERT INTO tbl_detallleasientos(CODIGO_CUENTA, debito, credito, Id_asiento, descripcion) VALUES(2101,0,1940,148,'210101');"
-  ?>
 
+<?php
+$UTILIDADNETA=$UTILIDADANTESISV - $ISV;
+$_SESSION['impu']=$ISV;
+$_SESSION['neta']=$UTILIDADNETA;
+?>
 
 
 

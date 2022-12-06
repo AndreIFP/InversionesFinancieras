@@ -65,21 +65,15 @@ function Header()
     $this->SetFont('Arial','',8);
     $this->Cell(78);
     $this->Cell(8,0, utf8_decode('Email: '.$Correo),0,7);
-    $this->Ln(3);
+    $this->Ln(15);
 
     $this->SetFont('Arial','',14);
     $this->Cell(64);
-    $this->Cell(10,60, utf8_decode('Reporte Estado De Resultado' ),0,7);
-    $this->Ln(-53);
-
-    
-    $this->SetFont('Arial','',14);
-    $this->Cell(68);
-    $this->Cell(10,60, utf8_decode('La empresa' ),0,7);
-    $this->Ln(-30);
+    $this->Cell(8,0, utf8_decode('Reporte Estado De Resultado' ),0,7);
+    $this->Ln(7);
 
     $this->SetFont('Arial','',14);
-    $this->Cell(96);
+    $this->Cell(40);
     $this->Cell(8,0, utf8_decode($empresa=$_SESSION['empresa'] ),0,7);
     $this->Ln(2);
 
@@ -125,192 +119,274 @@ $fecha = date('Y-m-d h:i:s');
 
 $pdf->SetFillColor(161, 174, 175  );
 
-$Venta = 0;
-$sql="SELECT Monto FROM libro2 where  Id_Cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' And Cuenta = 'Venta';";
-$resultado = mysqli_query($conn,$sql);
-while ($fila = $resultado->fetch_assoc()) {
-  $Venta = $fila['Monto'];
-  if(empty($Venta)){
-    $Venta = $fila['0'];
-  }
-  $pdf->setX(40); 
-  }
-  $pdf->SetFont('Arial','',14);
+$pdf->SetFont('Arial','',14);
+    $pdf->setX(80);
+    $pdf->Write(5, utf8_decode(''),0,7);
+    $pdf->Ln(7);
+
+    // INGRESOS
+  $sql = "SELECT ifnull(sum(tb.SAcreedor),0) as Ingresos  FROM tbl_catalago_cuentas tcc 
+  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
+
+    $resultado = mysqli_query($conn, $sql);
+    while ($rows = $resultado->fetch_assoc()) {
+      $ingresos = $rows["Ingresos"];
+    }
+
+    $sql1 = "SELECT tcc.CUENTA ,tb.SAcreedor  from tbl_detallleasientos td 
+               join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
+               join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
+               join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+               where tcc.CODIGO_CUENTA  LIKE '6401%' and tb.Id_cliente= $cliente and tb.SAcreedor!=0 ;";
+      $resultado1 = mysqli_query($conn, $sql1);
+
+      while ($fila = $resultado1->fetch_assoc()) {
+        $pdf->setX(15);
+        $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
+        $pdf->Cell(30, 5, utf8_decode($fila['SAcreedor']), 1, 0, "C",0);
+        $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
+    }
+
+    $pdf->SetFont('Arial','',14);
+$pdf->setX(15);
+$pdf->Cell(95, 5, utf8_decode("Total Ingresos"), 1, 0, "L",1);
+$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
+$pdf->Cell(30, 5, utf8_decode($ingresos), 1, 0, "C",1);
 $pdf->Ln(5);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Ventas"), 1, 0, "L",0);
-$pdf->Cell(30, 5, utf8_decode($Venta), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
 
-$costo = 0;
-$sql="SELECT Monto FROM libro2 where  Id_Cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' And Cuenta = 'Costo de venta';";
-$resultado = mysqli_query($conn,$sql);
-while ($fila = $resultado->fetch_assoc()) {
-  $costo = $fila['Monto'];
-  if(empty($costo)){
-    $costo = $fila['0'];
-  }
-  $pdf->setX(40); 
-  }
-  $pdf->SetFont('Arial','',14);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Costo de ventas"), 1, 0, "L",0);
-$pdf->Cell(30, 5, utf8_decode($costo), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
+//COSTO DE VENTAS
 
-$Utilidad_Bruta = 0;
-$Utilidad_Bruta = $Venta- $costo ;
-$pdf->SetFont('Arial','',14);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Utilidad Bruta"), 1, 0, "L",1);
+$sql2 = "SELECT ifnull(sum(tb.Sdebe),0) AS costos   FROM tbl_catalago_cuentas tcc 
+  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6501%'";
+  $resultado2 = mysqli_query($conn, $sql2);
+  while ($rows = $resultado2->fetch_assoc()) {
+    $Costos = $rows["costos"];
+  }
+
+  $sqlcosto = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
+      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
+      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
+      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      where tcc.CODIGO_CUENTA  LIKE '6501%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+      $costosv = mysqli_query($conn, $sqlcosto);
+
+      while ($fila = $costosv->fetch_assoc()) {
+        $pdf->setX(15);
+        $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
+        $pdf->Cell(30, 5, utf8_decode($fila['Sdebe']), 1, 0, "C",0);
+        $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
+    }
+
+    $pdf->SetFont('Arial','',14);
+$pdf->setX(15);
+$pdf->Cell(95, 5, utf8_decode("Total Costos"), 1, 0, "L",1);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Utilidad_Bruta), 1, 1, "C",1);
+$pdf->Cell(30, 5, utf8_decode($Costos), 1, 0, "C",1);
+$pdf->Ln(5);
 
+//--UTILIDAD BRUTA-->
+  $Utilidad = 0;
+  $Utilidad = $ingresos - $Costos;
+  $pdf->SetFont('Arial','',14);
+  $pdf->setX(15);
+  $pdf->Cell(95, 5, utf8_decode("Utilidad Bruta"), 1, 0, "L",1);
+  $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
+  $pdf->Cell(30, 5, utf8_decode($Utilidad), 1, 0, "C",1);
+  $pdf->Ln(5);
 
-$pdf->SetFont('Arial','','14');
-$pdf->Ln(0);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Gastos De Operacion"), 1, 0, "L",0);
+  //gastos operativos
+
+  $sql3 = "SELECT ifnull(sum(tb.Sdebe),0) AS operativos   FROM tbl_catalago_cuentas tcc 
+  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6502%'";
+  $resultado3 = mysqli_query($conn, $sql3);
+  while ($rows = $resultado3->fetch_assoc()) {
+    $operativos  = $rows["operativos"];
+  }
+
+$sqloperativos = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
+      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
+      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
+      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      where tcc.CODIGO_CUENTA  LIKE '6502%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+      $coperativos = mysqli_query($conn, $sqloperativos);
+
+    while ($fila = $coperativos->fetch_assoc()) {
+      $pdf->setX(15);
+      $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
+      $pdf->Cell(30, 5, utf8_decode($fila['Sdebe']), 1, 0, "C",0);
+      $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
+  }
+
+  $pdf->SetFont('Arial','',14);
+$pdf->setX(15);
+$pdf->Cell(95, 5, utf8_decode("Total Gastos Operativos"), 1, 0, "L",1);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-$pdf->setX(40); 
+$pdf->Cell(30, 5, utf8_decode($operativos), 1, 0, "C",1);
+$pdf->Ln(5);
 
+//gastos ventas
 
-$GV = 0;
-$sql="SELECT Monto FROM libro2 where  Id_Cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' And Cuenta = 'Gastos de venta';";
-$resultado = mysqli_query($conn,$sql);
-while ($fila = $resultado->fetch_assoc()) {
-  $GV = $fila['Monto'];
-  if(empty($GV)){
-    $GV = $GV['0'];
+$sql4 = "SELECT ifnull(sum(tb.Sdebe),0) AS ventas  FROM tbl_catalago_cuentas tcc 
+  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6503%'";
+  $resultado4 = mysqli_query($conn, $sql4);
+  while ($rows = $resultado4->fetch_assoc()) {
+    $ventas  = $rows["ventas"];
   }
-  $pdf->setX(40); 
-  }
-  $pdf->SetFont('Arial','',14);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Gasto de ventas"), 1, 0, "L",0);
-$pdf->Cell(30, 5, utf8_decode($GV), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
 
-$GA = 0;
-$sql="SELECT Monto FROM libro2 where  Id_Cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' And Cuenta = 'Gastos de administracion';";
-$resultado = mysqli_query($conn,$sql);
-while ($fila = $resultado->fetch_assoc()) {
-  $GA = $fila['Monto'];
-  if(empty($GA)){
-    $GA = $GA['0'];
-  }
-  $pdf->setX(40); 
-  }
-  $pdf->SetFont('Arial','',14);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Gastos De Administración"), 1, 0, "L",0);
-$pdf->Cell(30, 5, utf8_decode($GA), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
+$sqlventas = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
+join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
+join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
+join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+where tcc.CODIGO_CUENTA  LIKE '6503%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+$cventas = mysqli_query($conn, $sqlventas);
 
-$GF = 0;
-$sql="SELECT Monto FROM libro2 where  Id_Cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' And Cuenta = 'Gastos financieros';";
-$resultado = mysqli_query($conn,$sql);
-while ($fila = $resultado->fetch_assoc()) {
-  $GF = $fila['Monto'];
-  if(empty($GF)){
-    $GF = $GF['0'];
-  }
-  $pdf->setX(40); 
-  }
-  $pdf->SetFont('Arial','',14);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Gastos Financieros"), 1, 0, "L",0);
-$pdf->Cell(30, 5, utf8_decode($GF), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-
-$Total_Gastos = 0;
-$Total_Gastos= $GV + $GA + $GF;
-$pdf->SetFont('Arial','',14);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Total Gastos Operación"), 1, 0, "L",1);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Total_Gastos), 1, 1, "C",1);
-
-
-$Utilidad_Op = 0;
-$Utilidad_Op= $Utilidad_Bruta - $Total_Gastos;
-$pdf->SetFont('Arial','',14);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Utilidad Operación"), 1, 0, "L",1);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Utilidad_Op), 1, 1, "C",1);
-
-
-$OI = 0;
-$sql="SELECT Monto FROM libro2 where  Id_Cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' And Cuenta = 'Otros ingresos';";
-$resultado = mysqli_query($conn,$sql);
-while ($fila = $resultado->fetch_assoc()) {
-  $OI = $fila['Monto'];
-  if(empty($OI)){
-    $OI = $OI['0'];
-  }
-  $pdf->setX(40); 
-  }
-  $pdf->SetFont('Arial','',14);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Otros Ingresos"), 1, 0, "L",0);
-$pdf->Cell(30, 5, utf8_decode($OI), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-
-
-$OG = 0;
-$sql="SELECT Monto FROM libro2 where  Id_Cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' And Cuenta = 'Otros Gastos';";
-$resultado = mysqli_query($conn,$sql);
-while ($fila = $resultado->fetch_assoc()) {
-  $OG = $fila['Monto'];
-  if(empty($OG)){
-    $OG = $OG['0'];
-  }
-  $pdf->setX(40); 
-  }
-  $pdf->SetFont('Arial','',14);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Otros Gastos"), 1, 0, "L",0);
-$pdf->Cell(30, 5, utf8_decode($OG), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-
-
-$UAI = 0;
-$UAI = $Utilidad_Op - $OG +$OI;
-$pdf->SetFont('Arial','',14);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Utilidad Antes De Impuesto"), 1, 0, "L",1);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($UAI), 1, 1, "C",1);
-
- // Llamado del parametro correo
- $Imp = 0;
- $sqlISR = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '5'";
- $resultadoISR = mysqli_query($conn,$sqlISR);
- while ($fila = $resultadoISR->fetch_assoc()) {
-     $ISR = $fila["Valor"];
-     $Imp = ($ISR/100);
- }
- $pdf->setX(40); 
- $ImpT = 0;
- $ImpT = $Imp * $UAI;
-
+  while ($fila = $cventas->fetch_assoc()) {
+    $pdf->setX(15);
+    $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Sdebe']), 1, 0, "C",0);
+    $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
+}
 
 $pdf->SetFont('Arial','',14);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Impuestos"), 1, 0, "L",0);
-$pdf->Cell(30, 5, utf8_decode($ImpT), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-
-
-$Utilidad_Neta = 0;
-$Utilidad_Neta = $UAI - $ImpT;
-$pdf->SetFont('Arial','',14);
-$pdf->setX(40);
-$pdf->Cell(70, 5, utf8_decode("Utilidad Neta"), 1, 0, "L",1);
+$pdf->setX(15);
+$pdf->Cell(95, 5, utf8_decode("Total Gastos De Ventas"), 1, 0, "L",1);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Utilidad_Neta), 1, 1, "C",1);
+$pdf->Cell(30, 5, utf8_decode($ventas), 1, 0, "C",1);
+$pdf->Ln(5);
+
+//gastos financieros
+
+$sql5 = "SELECT ifnull(sum(tb.Sdebe),0) AS financieros   FROM tbl_catalago_cuentas tcc 
+  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6504%'";
+  $resultado5 = mysqli_query($conn, $sql5);
+  while ($rows = $resultado5->fetch_assoc()) {
+    $financieros = $rows["financieros"];
+  }
+
+$sqlfinancieros = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
+      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
+      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
+      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      where tcc.CODIGO_CUENTA  LIKE '6504%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+      $cfinancieros= mysqli_query($conn, $sqlfinancieros);
+
+  while ($fila = $cfinancieros->fetch_assoc()) {
+    $pdf->setX(15);
+    $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Sdebe']), 1, 0, "C",0);
+    $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
+}
+
+$pdf->SetFont('Arial','',14);
+$pdf->setX(15);
+$pdf->Cell(95, 5, utf8_decode("Total Gastos Financieros"), 1, 0, "L",1);
+$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
+$pdf->Cell(30, 5, utf8_decode($financieros), 1, 0, "C",1);
+$pdf->Ln(5);
+
+//gastos Gasto
+
+$sql6 = "SELECT ifnull(sum(tb.Sdebe),0) AS gastos  FROM tbl_catalago_cuentas tcc 
+  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6505%' ";
+  $resultado6 = mysqli_query($conn, $sql6);
+  while ($rows = $resultado6->fetch_assoc()) {
+    $gastos = $rows["gastos"];
+  }
+
+$sqlotros = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
+join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
+join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
+join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+where tcc.CODIGO_CUENTA  LIKE '6505%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+$cotros= mysqli_query($conn, $sqlotros);
+
+  while ($fila = $cotros->fetch_assoc()) {
+    $pdf->setX(15);
+    $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Sdebe']), 1, 0, "C",0);
+    $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
+}
+
+$pdf->SetFont('Arial','',14);
+$pdf->setX(15);
+$pdf->Cell(95, 5, utf8_decode("Total Otros Gastos"), 1, 0, "L",1);
+$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
+$pdf->Cell(30, 5, utf8_decode($gastos), 1, 0, "C",1);
+$pdf->Ln(5);
+
+//otros ingresos
+
+$sqloingresos = "SELECT ifnull(sum(tb.SAcreedor),0) AS OINGRESOS  FROM tbl_catalago_cuentas tcc 
+  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6402%' ";
+  $resultadooingresos = mysqli_query($conn, $sqloingresos);
+  while ($rows = $resultadooingresos->fetch_assoc()) {
+    $OINGRESOS = $rows["OINGRESOS"];
+  }
+
+$sqlotrosi = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
+      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
+      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
+      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      where tcc.CODIGO_CUENTA  LIKE '6402%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
+      $cotrosi= mysqli_query($conn, $sqlotros);
+
+  while ($fila = $cotrosi->fetch_assoc()) {
+    $pdf->setX(15);
+    $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Sdebe']), 1, 0, "C",0);
+    $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
+}
+
+$pdf->SetFont('Arial','',14);
+$pdf->setX(15);
+$pdf->Cell(95, 5, utf8_decode("Total Otros Ingresos"), 1, 0, "L",1);
+$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
+$pdf->Cell(30, 5, utf8_decode($OINGRESOS), 1, 0, "C",1);
+$pdf->Ln(5);
+
+//--UTILIDAD BRUTA-->
+$UTILIDADANTESISV = 0;
+$UTILIDADANTESISV = ($ingresos+$OINGRESOS) - ($Costos + $operativos + $ventas + $financieros + $gastos);
+$pdf->SetFont('Arial','',14);
+$pdf->setX(15);
+$pdf->Cell(95, 5, utf8_decode("Utilidad Antes De Impuesto"), 1, 0, "L",1);
+$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
+$pdf->Cell(30, 5, utf8_decode($UTILIDADANTESISV), 1, 0, "C",1);
+$pdf->Ln(5);
+
+//--Impuesto-->
+$sql7 = " SELECT valor as isv FROM tbl_parametros tp 
+  WHERE Parametro='Impuesto'";
+  $resultado7 = mysqli_query($conn, $sql7);
+  while ($rows = $resultado7->fetch_assoc()) {
+    $isv = $rows["isv"];
+  }
+  $ISV = 0;
+  $ISV = $UTILIDADANTESISV  * ($isv / 100);
+$pdf->SetFont('Arial','',14);
+$pdf->setX(15);
+$pdf->Cell(95, 5, utf8_decode("Impuesto"), 1, 0, "L",1);
+$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
+$pdf->Cell(30, 5, utf8_decode($ISV), 1, 0, "C",1);
+$pdf->Ln(5);
+
+//--UTILIDAD -->
+$UTILIDADDESISV = 0;
+$UTILIDADDESISV = $UTILIDADANTESISV - $ISV;
+$pdf->SetFont('Arial','',14);
+$pdf->setX(15);
+$pdf->Cell(95, 5, utf8_decode("Utilidad Antes De Impuesto"), 1, 0, "L",1);
+$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
+$pdf->Cell(30, 5, utf8_decode($UTILIDADDESISV), 1, 0, "C",1);
+$pdf->Ln(5);
+
 
 $pdf->Output();
 ?>
