@@ -7,7 +7,6 @@ $_SESSION['fechai'];
 $_SESSION['fechaf'];
 $_SESSION['empresa'];
 $_SESSION['temporada'] = "10";
-$_SESSION['detalle'];
 
 ?>
 <!DOCTYPE html>
