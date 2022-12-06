@@ -57,33 +57,27 @@ function Header()
   $resultadocorreo = mysqli_query($conn,$sqlCorreo);
   while ($fila = $resultadocorreo->fetch_assoc()) {
       $Correo = $fila["Valor"];
-  }
+  }  
   
 
   $this->SetFont('Arial','',8);
   $this->Cell(78);
   $this->Cell(8,0, utf8_decode('Email: '.$Correo),0,7);
-  $this->Ln(5);
+  $this->Ln(15);
 
 
     $this->SetFont('Arial','',14);
     $this->Cell(70);
-    $this->Cell(10,60, utf8_decode('Reporte Balance General' ),0,7);
-    $this->Ln(-53);
-
-    
-    $this->SetFont('Arial','',14);
-    $this->Cell(68);
-    $this->Cell(10,60, utf8_decode('La empresa' ),0,7);
-    $this->Ln(-30);
+    $this->Cell(8,0, utf8_decode('Reporte Balance General' ),0,7);
+    $this->Ln(7);
 
     $this->SetFont('Arial','',14);
-    $this->Cell(96);
+    $this->Cell(40);
     $this->Cell(8,0, utf8_decode($empresa=$_SESSION['empresa'] ),0,7);
     $this->Ln(2);
 
     $this->Ln(3);
-     $this->SetFont('Arial','',14);
+    $this->SetFont('Arial','',14);
     $this->Cell(86);
     $this->Cell(8,0, utf8_decode($_SESSION['fechaf'] ),0,7);
    
@@ -128,135 +122,88 @@ $pdf->SetFont('Arial','',14);
     $pdf->setX(80);
     $pdf->Write(5, utf8_decode(''),0,7);
     $pdf->Ln(7);
-$Total_Activo_Corriente = 0;
-$sqlAC = "select l.cuenta, l.total_cuenta, c.CLASIFICACION, c.CUENTA from TBL_LIBRO_MAYOR2 l inner join TBL_CATALAGO_CUENTAS c ON l.cuenta = c.CUENTA WHERE id_cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' and c.CLASIFICACION = 'ACTIVO CORRIENTE' ";
-$resultado = mysqli_query($conn,$sqlAC);
+
+    $sql = "SELECT ifnull(SUM(Sdebe),0) as Activos  FROM Tbl_Balanza tb 
+  where Id_cliente=$cliente and COD_CUENTA like '1%';";
+  $resultado = mysqli_query($conn, $sql);
+  while ($rows = $resultado->fetch_assoc()) {
+    $Activos  = $rows["Activos"];
+  }
+
+  $sql1 = "SELECT tcc.CUENTA ,tb.Sdebe  FROM Tbl_Balanza tb 
+  join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  where Id_cliente=$cliente and COD_CUENTA like '1%'; ";
+  $resultado1 = mysqli_query($conn, $sql1);
 
   $pdf->SetFont('Arial','B',12);
   $pdf->Ln(5);
   $pdf->setX(15);
-  $pdf->Cell (95, 5, utf8_decode("ACTIVO CORRRIENTE"), 1, 0, "C",0);
+  $pdf->Cell (95, 5, utf8_decode("ACTIVO"), 1, 0, "C",0);
   $pdf->setX(25);
   $pdf->Ln(5);
 
-  while ($fila = $resultado->fetch_assoc()) {
-    $total_cuenta_ac = $fila['total_cuenta'];
+  while ($fila = $resultado1->fetch_assoc()) {
     $pdf->setX(15);
-    $pdf->Cell(95, 5, utf8_decode($fila['cuenta']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['total_cuenta']), 1, 0, "C",0);
+    $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Sdebe']), 1, 0, "C",0);
     $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-    $Total_Activo_Corriente = $Total_Activo_Corriente + $total_cuenta_ac;
 }
 
-$pdf->SetFont('Arial','',14);
-$pdf->setX(15);
-$pdf->Cell(95, 5, utf8_decode("Total Activo Corriente"), 1, 0, "L",1);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Total_Activo_Corriente), 1, 0, "C",1);
-
-
-//ACTIVOS NO CORRIENTES
-$Total_Activo_No_Corriente = 0;
-$sqlA_N_C = "select l.cuenta, l.total_cuenta, c.CLASIFICACION, c.CUENTA from TBL_LIBRO_MAYOR2 l inner join TBL_CATALAGO_CUENTAS c ON l.cuenta = c.CUENTA WHERE id_cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' and c.CLASIFICACION = 'ACTIVO NO CORRIENTE' ";
-$resultadoa_n_c = mysqli_query($conn,$sqlA_N_C);
-$pdf->SetFont('Arial','B',"12");
-$pdf->Ln(9);
-$pdf->setX(15);
-$pdf->Cell(95, 5, utf8_decode("ACTIVO NO CORRIENTE"), 1, 1, "C",0);
-$pdf->setX(25); 
-
-while ($fila = $resultadoa_n_c->fetch_assoc()) {
-  $total_cuenta_a_n_c = $fila['total_cuenta'];
-  $pdf->setX(15);
-  $pdf->Cell(95, 5, utf8_decode($fila['cuenta']), 1, 0, "B",0);
-  $pdf->Cell(30, 5, utf8_decode($fila['total_cuenta']), 1, 0, "C",0);
-  $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-  $Total_Activo_No_Corriente = $Total_Activo_No_Corriente + $total_cuenta_a_n_c;
-}
-
-$pdf->SetFont('Arial','',14);
-$pdf->setX(15);
-$pdf->Cell(95, 5, utf8_decode("Total Activo No Corriente"), 1, 0, "L",1);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Total_Activo_No_Corriente), 1, 1, "C",1);
-
-$Total_Activo = 0;
-$Total_Activo= $Total_Activo_Corriente + $Total_Activo_No_Corriente ;
 $pdf->SetFont('Arial','',14);
 $pdf->setX(15);
 $pdf->Cell(95, 5, utf8_decode("Total Activo"), 1, 0, "L",1);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Total_Activo), 1, 1, "C",1);
+$pdf->Cell(30, 5, utf8_decode($Activos), 1, 0, "C",1);
+$pdf->Ln(5);
 
 
 //PASIVOS CORRIENTE
 
-$Total_Pasivo_Corriente = 0;
-$sqlPC = "select l.cuenta, l.total_cuenta, c.CLASIFICACION, c.CUENTA from TBL_LIBRO_MAYOR2 l inner join TBL_CATALAGO_CUENTAS c ON l.cuenta = c.CUENTA WHERE id_cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' and c.CLASIFICACION = 'PASIVO CORRIENTE' ";
-$resultadop_c = mysqli_query($conn,$sqlPC);
-  $pdf->SetFont('Arial','B',"12");
-  $pdf->Ln(5);
-  $pdf->setX(15);
-  $pdf->Cell(95, 5, utf8_decode("PASIVO CORRIENTE"), 1, 1, "C",0);
-  $pdf->setX(25); 
-
-  while ($fila = $resultadop_c->fetch_assoc()) {
-    $total_cuenta_p_c = $fila['total_cuenta'];
-    $pdf->setX(15);
-    $pdf->Cell(95, 5, utf8_decode($fila['cuenta']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['total_cuenta']), 1, 0, "C",0);
-    $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-    $Total_Pasivo_Corriente = $Total_Pasivo_Corriente + $total_cuenta_p_c;
+$sql2 = "SELECT ifnull(SUM(SAcreedor),0) AS pasivo  FROM Tbl_Balanza tb 
+  where Id_cliente=$cliente and COD_CUENTA like '2%';";
+  $resultado2 = mysqli_query($conn, $sql2);
+  while ($rows = $resultado2->fetch_assoc()) {
+    $Pasivo = $rows["pasivo"];
   }
-$pdf->SetFont('Arial','',14);
-$pdf->setX(15);
-$pdf->Cell(95, 5, utf8_decode("Total Pasivo Corriente"), 1, 0, "L",1);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Total_Pasivo_Corriente), 1, 1, "C",1);
 
-
-
-//PASIVO NO CORRIENTE
-$Total_Pasivo_No_Corriente = 0;
-$sqlP_N_C = "select l.cuenta, l.total_cuenta, c.CLASIFICACION, c.CUENTA from TBL_LIBRO_MAYOR2 l inner join TBL_CATALAGO_CUENTAS c ON l.cuenta = c.CUENTA WHERE id_cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' and c.CLASIFICACION = 'PASIVO NO CORRIENTE' ";
-$resultadop_n_c = mysqli_query($conn,$sqlP_N_C);
+  $sqlcosto = "SELECT tcc.CUENTA ,tb.SAcreedor   FROM Tbl_Balanza tb 
+  join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  where Id_cliente=$cliente and COD_CUENTA like '2%'; ";
+  $costosv = mysqli_query($conn, $sqlcosto);
 
   $pdf->SetFont('Arial','B',"12");
   $pdf->Ln(5);
   $pdf->setX(15);
-  $pdf->Cell(95, 5, utf8_decode("PASIVO NO CORRIENTE"), 1, 1, "C",0);
+  $pdf->Cell(95, 5, utf8_decode("PASIVO "), 1, 1, "C",0);
   $pdf->setX(25); 
 
-  while ($fila = $resultadop_n_c->fetch_assoc()) {
-    $total_cuenta_p_n_c = $fila['total_cuenta'];
+  while ($fila = $costosv->fetch_assoc()) {
     $pdf->setX(15);
-    $pdf->Cell(95, 5, utf8_decode($fila['cuenta']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['total_cuenta']), 1, 0, "C",0);
+    $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['SAcreedor']), 1, 0, "C",0);
     $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-    $Total_Pasivo_No_Corriente = $Total_Pasivo_No_Corriente + $total_cuenta_p_n_c;
   }
 
 $pdf->SetFont('Arial','',14);
 $pdf->setX(15);
-$pdf->Cell(95, 5, utf8_decode("Total Pasivo No Corriente"), 1, 0, "L",1);
+$pdf->Cell(95, 5, utf8_decode("Total Pasivo "), 1, 0, "L",1);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Total_Pasivo_No_Corriente), 1, 1, "C",1);
-
-
-
-$Total_Pasivo = 0;
-$Total_Pasivo = $Total_Pasivo_Corriente + $Total_Pasivo_No_Corriente;
-$pdf->SetFont('Arial','',14);
-$pdf->setX(15);
-$pdf->Cell(95, 5, utf8_decode("Total Pasivo"), 1, 0, "L",1);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Total_Pasivo), 1, 1, "C",1);
+$pdf->Cell(30, 5, utf8_decode($Pasivo), 1, 1, "C",1);
 
 
 //Patrimonio
-$Total_Patrimonio = 0;
-$sqlP = "select l.cuenta, l.total_cuenta, c.CLASIFICACION, c.CUENTA from TBL_LIBRO_MAYOR2 l inner join TBL_CATALAGO_CUENTAS c ON l.cuenta = c.CUENTA WHERE id_cliente = $cliente AND fecha >='$fechai' and fecha <='$fechaf' and c.CLASIFICACION = 'PATRIMONIO' ";
-$resultadop = mysqli_query($conn,$sqlP);
+
+$sql3 = "SELECT ifnull(SUM(SAcreedor),0) as patrimonio  FROM Tbl_Balanza tb 
+  where Id_cliente=$cliente  and COD_CUENTA like '3%';";
+  $resultado3 = mysqli_query($conn, $sql3);
+  while ($rows = $resultado3->fetch_assoc()) {
+    $patrimonio  = $rows["patrimonio"];
+  }
+
+  $sqloperativos = "SELECT tcc.CUENTA ,tb.Sdebe  FROM Tbl_Balanza tb 
+  join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  where Id_cliente=$cliente  and COD_CUENTA like '3%';";
+  $coperativos = mysqli_query($conn, $sqloperativos);
 
   $pdf->SetFont('Arial','B',"12");
   $pdf->Ln(5);
@@ -264,30 +211,28 @@ $resultadop = mysqli_query($conn,$sqlP);
   $pdf->Cell(95, 5, utf8_decode("PATRIMONIO"), 1, 1, "C",0);
   $pdf->setX(25); 
 
-  while ($fila = $resultadop->fetch_assoc()) {
-    $total_cuenta_p = $fila['total_cuenta'];
+  while ($fila = $coperativos->fetch_assoc()) {
     $pdf->setX(15);
-    $pdf->Cell(95, 5, utf8_decode($fila['cuenta']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['total_cuenta']), 1, 0, "C",0);
+    $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
+    $pdf->Cell(30, 5, utf8_decode($fila['Sdebe']), 1, 0, "C",0);
     $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-    $Total_Patrimonio = $Total_Patrimonio + $total_cuenta_p;
   }
 
 $pdf->SetFont('Arial','',14);
 $pdf->setX(15);
 $pdf->Cell(95, 5, utf8_decode("Total Patrimonio"), 1, 0, "L",1);
 $pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Total_Patrimonio), 1, 1, "C",1);
+$pdf->Cell(30, 5, utf8_decode($patrimonio), 1, 1, "C",1);
 
 
 
-$Total_Pasivo_Patrimonio = 0;
-$Total_Pasivo_Patrimonio= $Total_Pasivo + $Total_Patrimonio ;
-$pdf->SetFont('Arial','',14);
-$pdf->setX(15);
-$pdf->Cell(95, 5, utf8_decode("Total Pasivo Y Patrimonio"), 1, 0, "L",1);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Total_Pasivo_Patrimonio), 1, 1, "C",1);
+//$Total_Pasivo_Patrimonio = 0;
+//$Total_Pasivo_Patrimonio= $Total_Pasivo + $Total_Patrimonio ;
+//$pdf->SetFont('Arial','',14);
+//$pdf->setX(15);
+//$pdf->Cell(95, 5, utf8_decode("Total Pasivo Y Patrimonio"), 1, 0, "L",1);
+//$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
+//$pdf->Cell(30, 5, utf8_decode($Total_Pasivo_Patrimonio), 1, 1, "C",1);
 
 $pdf->Output();
 ?>
