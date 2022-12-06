@@ -30,7 +30,7 @@ if (!empty($_POST)) {
 	$nr1 = mysqli_num_rows($querynombre);
 	if ($nr == 0 and $nr1 == 0) {
 		$query_insert = mysqli_query($conn, "INSERT INTO TBL_CATALAGO_CUENTAS (CODIGO_CUENTA,Id_Usuario,CUENTA,Mayor,Movimiento,Estado_Cuenta)
-																	VALUES('$CODIGO_CUENTA','$iduser','$CUENTA','$MAYOR','$MOVIMIENTO','$ESTADO_CUENTA')");
+																	VALUES('$CODIGO_CUENTA','$iduser','$CUENTA','NULL','$MOVIMIENTO','$ESTADO_CUENTA')");
 		if ($query_insert) {
 			echo "<script> alert('Cuenta Registrado Exitosamente');window.location= 'Gestion_CatalogoCuenta.php' </script>";
 		}
@@ -134,12 +134,12 @@ if (!isset($_SESSION['rol'])) {
 				</script>
 
 
-	<a class="btn btn-primary" href="Gestion_CatalogoCuentadiseñoboton.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+	<a class="btn btn-primary" href="Gestion_CatalogoCuenta.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
 	<hr>
 	<div clas="row ">
 	<form class="" method="post">
 					<center>
-						<h2><strong>Registro de Cuentas</strong></h2>
+						<h2><strong>Registro de Grupos</strong></h2>
 					</center>
 		<div class="box-header with-border">
 
@@ -184,11 +184,9 @@ if (!isset($_SESSION['rol'])) {
 					  <span class="input-group-addon"><i class="fa fa-check"></i></span>
 					 <select  class=" form-control"  name="cbx_estado" id="cbx_estado" > 
 					    <option value="">Seleccione el estado de la cuenta</option>
-						<option value="1_">Activo</option>
-						<option value="2_">Pasivo</option>
-						<option value="3">Capital y Patrimonio</option>
-			
-						<option value="6_">Estado de resultados</option>
+						<option value="1_">ACTIVO</option>
+						<option value="2_">PASIVO</option>
+						<option value="3">CAPITAL</option>
 			         </select> </span></div></form>
 			
 			<br />
@@ -226,12 +224,12 @@ if (!isset($_SESSION['rol'])) {
 			<tr>
 
 				<th>
-					<center>Sub-cuenta 2</center>
+					<center>Tipo</center>
 				</th>
 
 
 				<th>
-					<center>Nombre De La Cuenta</center>
+					<center>Nombre Del Grupo</center>
 					</th>
 			</tr>
 		</thead>
