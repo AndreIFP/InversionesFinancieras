@@ -89,7 +89,7 @@ include 'barralateralinicial.php';
       <b>Factura #:</b> <input type="text" name="factura" placeholder="000-001-01-000000" maxlength="15" style="width:140px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required /><br>
       <b>CAI:</b> <input type="text" name="CAI" value="" placeholder="000000-000000-000000-000000-000000-00" maxlength="50" style="width:300px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required /><br>
       <b>Vence:</b> <input type="date" style="width:110px;border:0" name="Fechaven" required /><br>
-      <b>Dirección:</b> <input type="text" style="width:450px;height:20px;border:0" placeholder="Dirección" size="150" value="" name="dirProveedor" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" required /><br>
+      <b>Dirección:</b> <input type="text" style="width:700px;height:20px;border:0" placeholder="Dirección" size="250" value="" name="dirProveedor" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" required /><br>
       <b>Teléfono:</b> <input type="text" style="width:150px;height:20px;border:0" maxlength="10" placeholder="Telefono" size="15" name="telefono" value="" oninput="this.value = this.value.replace(/[^0-9-\s]/,'')" required /><br><br><br>
       </p>
     </div>
@@ -101,7 +101,7 @@ include 'barralateralinicial.php';
     <div class="row section" style="margin-top:-1rem">
       <div class="col-1">
         <table style='width:100%'>
-          <thead contenteditable>
+          <thead>
             <tr class="invoice_detail">
               <th width="25%">
                 <center>Proveedor</center>
@@ -111,7 +111,7 @@ include 'barralateralinicial.php';
               </th>
             </tr>
           </thead>
-          <tbody contenteditable>
+          <tbody>
             <tr class="invoice_detail">
               <td width="25%">
                 <center><input type="text" name="proveedor" style="width:350px;height:20px;border:0" maxlength="50" placeholder="Nombre de proveedor" size="30" oninput="this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/,'')" value="" required /></center>
