@@ -155,9 +155,6 @@ $numero = 99999.99;
 
                                 <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['d'] == 1) {
                                 ?>
-                                    <th>
-                                        <center><a href="Delete_Cliente.php?Id=<?php echo $Id_Cliente ?>" class="btn btn-danger btn-xs"><i class="fa fa-close" aria-hidden="true"></i> </a></a></center>
-                                    </th>
 
                                 <?php } ?>
 

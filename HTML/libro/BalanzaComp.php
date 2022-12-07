@@ -107,7 +107,7 @@ $fecha = date('Y-m-d h:i:s');
 
   <div class="box-header">
     <center>
-      <h3><strong> Balanza General de <?php echo $empresa  ?></strong></h3>
+      <h3><strong> Balanza de Comprobación de <?php echo $empresa  ?></strong></h3>
       <h3><strong> del <?php echo $fechai  ?> al <?php echo $fechaf  ?></strong></h3>
     </center>
   </div><!-- /.box-header -->
@@ -121,7 +121,7 @@ $fecha = date('Y-m-d h:i:s');
       <?php if ($_SESSION['permisos'][M_LIBRO_DIARIO] and $_SESSION['permisos'][M_LIBRO_DIARIO]['w'] == 1) {
 
       ?>
-          <a class="btn btn-info" href="../libro/Resultado.php"><i class="fa fa-file-pdf-o">Estado de resultados</i> </a>
+          <a class="btn btn-info" href="../libro/Resultado.php"><i class="fa fa-book"> Estado de resultado</i> </a>
 
       <?php } ?>
       <!--form method="post" action="cierrecontable.php" enctype="multipart/form-data">
@@ -138,22 +138,22 @@ $fecha = date('Y-m-d h:i:s');
       <thead>
         <tr class="table-primary">
           <th>
-            <center> Codigo Cuenta</center>
+            <center><strong>Codigo Cuenta</strong></center>
           </th>
           <th>
-            <center> Cuenta</center>
+            <center> <strong>Cuenta</strong></center>
           </th>
           <th>
-            <center>Monto Haber </center>
+            <center><strong>Monto Haber</strong> </center>
           </th>
           <th>
-            <center>Monto Debe </center>
+            <center><strong>Monto Debe</strong> </center>
           </th>
           <th>
-            <center>Saldo Debe </center>
+            <center><strong>Saldo Debe </strong></center>
           </th>
           <th>
-            <center>Saldo Haber </center>
+            <center><strong>Saldo Haber</strong> </center>
           </th>
 
 
@@ -180,23 +180,23 @@ $fecha = date('Y-m-d h:i:s');
         ?>
           <tr>
 
-            <td style="text-align:left;">
-              <?php echo $row['CODIGO_CUENTA']; ?>
+            <td style="text-align:left;"><center>
+              <?php echo $row['CODIGO_CUENTA']; ?></center>
             </td>
-            <td style="text-align:left;">
-              <?php echo $row['CUENTA']; ?>
+            <td style="text-align:left;"><center>
+              <?php echo $row['CUENTA']; ?></center>
             </td>
-            <td style="text-align:right;">
-              <?php echo $row['Mhaber']; ?>
+            <td style="text-align:right;"><center>
+              <?php echo number_format($row['Mhaber'],2); ?>
             </td>
-            <td style="text-align:right;">
-              <?php echo $row['Mdebe']; ?>
+            <td style="text-align:right;"><center>
+              <?php echo number_format($row['Mdebe'],2); ?></center>
             </td>
-            <td style="text-align:right;">
-              <?php echo $row['Sdebe']; ?>
+            <td style="text-align:right;"><center>
+              <?php echo number_format($row['Sdebe'],2); ?></center>
             </td>
-            <td style="text-align:right;">
-              <?php echo $row['SAcreedor']; ?>
+            <td style="text-align:right;"><center>
+              <?php echo number_format($row['SAcreedor'],2); ?></center>
             </td>
 
             <td>

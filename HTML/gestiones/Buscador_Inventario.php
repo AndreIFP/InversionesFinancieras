@@ -57,8 +57,8 @@ $_SESSION['busquedaX'] = $busqueda;
                     <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                     <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {
                     ?>
-                        <a class="btn btn-secondary" href="reporte_excel_kardex.php"><i class="fa fa-check" aria-hidden="true"></i> Revisar Kardex</a>
-                        <a href="../compras/Facturacion.php" input type="submit" class="btn btn-success" Value="Nuevo Producto"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Producto</a>
+                        
+                        
 
                     <?php } ?>
 
@@ -71,23 +71,7 @@ $_SESSION['busquedaX'] = $busqueda;
                 </div>
 
 
-                <form action="" method="get" class="form_datos">
-                    <label for="datos_mostrar">Datos A Mostrarㅤ</label>
-                    <select name="mostrar" onchange='submit();'>
-                        <option></option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                        <?php
-                        $mostrar_datos = $_GET['mostrar'];
-                        ?>
-                    </select>
-                </form>
-                <form action="Buscador_Inventario.php" method="get" class="form_search">
-
-                    <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-                    <input type="submit" value="Buscar" class="btn btn-primary">
-                </form>
+                <br>
                 <table class="table ">
                     <thead class="table-primary">
                         <tr>
