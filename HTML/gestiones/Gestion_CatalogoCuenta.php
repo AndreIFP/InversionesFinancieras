@@ -27,12 +27,12 @@ if (!isset($_SESSION['rol'])) {
     color:black;
     font-size: 12px; ">
     <div class="container-fluid">
-        <h2><strong> Catálogo Cuentas</strong></h2>
+        <h2><strong>Gestión Catálogo Cuentas</strong></h2>
         <div class="col-md-12">
 
             <div class="box-body table-responsive">
                 <div class="reportes">
-                    <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                     <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['w'] == 1) {
 
                     ?>
@@ -43,7 +43,6 @@ if (!isset($_SESSION['rol'])) {
                     <a class="btn btn-warning" href="Reporte_Catalogo.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
                     <a href="Nuevo_Catalogo3.php " class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Nuevos Grupos</a>
                         <a href="Nuevo_Catalogo4.php " class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Cuentas</a>
-
                 </div>
                 <?php
                 $mostrar_datos = 0;
@@ -70,16 +69,16 @@ if (!isset($_SESSION['rol'])) {
                     <select name="filtro" onchange='buscarFiltro(this);'>
                         <option>Todas</option>
                         <option value="1">ACTIVOS</option>
-                        <option value="PASIVOS">PASIVOS</option>
-                        <option value="CAPITAL">CAPITAL</option>
-                        <option value="GASTOS">GASTOS</option>
-                        <option value="INGRESOS">INGRESOS</option>
+                        <option value="2">PASIVOS</option>
+                        <option value="3">Capital</option>
+                        <option value="64">INGRESOS</option>
+                        <option value="65">GASTOS</option>
                         <?php
                         $mostrar_datos = $_GET['mostrar'];
                         ?>
                     </select>
                 </form>
-
+                
                 <form action="Buscador_Catalogo.php" method="get" class="form_search">
 
                     <input type="text" name="busqueda" id="busqueda" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" placeholder="Buscar" size=40>
@@ -89,23 +88,13 @@ if (!isset($_SESSION['rol'])) {
                 <table class="table">
                     <thead class="table-primary">
                         <tr>
-                            <th>
-                                <center>Código</center>
-                            </th>
-                            <th>
-                                <center>Cuenta</center>
-                            </th>
-
-                            <th>
-                                <center>Tipo Cuenta</center>
-                            </th>
-                            <th>
-                                <center>Estado Cuenta</center>
-                            </th>
-                            <th colspan="2">
-                                <center>Acciones</center>
-                            </th>
-
+                            <th><center>Código</center></th>
+                            <th><center>Cuenta</center></th>
+                            
+                            <th><center>Tipo Cuenta</center></th>
+                            <th><center>Estado Cuenta</center></th>
+                            <th colspan="2"><center>Acciones</center></th>
+                            
 
                         </tr>
                     </thead>
@@ -130,31 +119,21 @@ if (!isset($_SESSION['rol'])) {
 
                         $desde = ($pagina - 1) * $por_pagina;
                         $total_paginas = ceil($total_registro / $por_pagina);
-                        $sql = mysqli_query($conn, "  SELECT tcc2.CODIGO_CUENTA as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA as TIPOCUENTA, 
-                        tcc2.Estado_Cuenta from tbl_catalago_cuentas tcc join tbl_catalago_cuentas tcc2 on tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2) or
-                        tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,1)
-                        and  tcc2.Mayor=SUBSTRING(tcc.CODIGO_CUENTA,1,2)
-                        order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6)   LIMIT $desde,$por_pagina ");
+                        $sql = mysqli_query($conn, "SELECT  tcc2.CODIGO_CUENTA as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA  as TIPOCUENTA, tcc.Estado_Cuenta  from tbl_catalago_cuentas tcc 
+                        join tbl_catalago_cuentas tcc2 on tcc.Mayor =SUBSTRING( tcc2.CODIGO_CUENTA,1, 1)
+                        order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6) LIMIT $desde,$por_pagina ");
                         mysqli_close($conn);
-
-
+                        
+                        
                         $result = mysqli_num_rows($sql);
                         if ($result > 0) {
                             while ($row = mysqli_fetch_array($sql)) {
                         ?>
                                 <tr>
-                                    <th>
-                                        <center><?php echo $row['CODIGO_CUENTA'] ?></center>
-                                    </th>
-                                    <th>
-                                        <center><?php echo $row['CUENTA'] ?></center>
-                                    </th>
-                                    <th>
-                                        <center><?php echo $row['TIPOCUENTA'] ?></center>
-                                    </th>
-                                    <th>
-                                        <center><?php echo $row['Estado_Cuenta'] ?></center>
-                                    </th>
+                                    <th><center><?php echo $row['CODIGO_CUENTA'] ?></center></th>
+                                    <th><center><?php echo $row['CUENTA'] ?></center></th>
+                                    <th><center><?php echo $row['TIPOCUENTA'] ?></center></th>
+                                    <th><center><?php echo $row['Estado_Cuenta'] ?></center></th>
 
                                     <script>
                                         function alerta() {
@@ -165,9 +144,7 @@ if (!isset($_SESSION['rol'])) {
                                     <?php if ($_SESSION['permisos'][M_GESTION_CAT_CUENTA] and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['u'] == 1) {
 
                                     ?>
-                                        <th>
-                                            <center><a href="Actualizar_Catalogo.php?Id=<?php echo $row['CODIGO_CUENTA'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i></a></center>
-                                        </th>
+                                        <th><center><a href="Actualizar_Catalogo.php?Id=<?php echo $row['CODIGO_CUENTA'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i></a></center></th>
                                     <?php } ?>
 
                                 </tr>
@@ -293,7 +270,7 @@ if (!isset($_SESSION['rol'])) {
 
 <script>
     function buscarFiltro(cuenta) {
-        window.location.href = "Buscador_Catalogo.php?busqueda=" + cuenta.value;
+        window.location.href="Buscador_Catalogo.php?busqueda="+cuenta.value+"&filtro=si";
     }
 </script>
 
