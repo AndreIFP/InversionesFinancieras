@@ -190,7 +190,7 @@ include 'barralateralinicial.php';
             <td width='60%'><input type="text" class="form-control" name="Descripcion" style="width:600px;height:40px;border:0" maxlength="50" placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required /><br></td>
             </td>
             <td class="amount"><input type="text" class="form-control" value="1" disabled /></td>
-            <td class="rate"><input type="text" class="form-control" name="total" placeholder="Precio" value="" required /></td>
+            <td class="rate"><input type="text" class="form-control" name="total" oninput="this.value = this.value.replace(/[^0-9_.]/,'')" placeholder="Precio" value="" required /></td>
             <td class="tax taxrelated"></td>
             <td class="sum"></td>
           </tr>
