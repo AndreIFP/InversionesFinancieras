@@ -28,7 +28,7 @@ if (!isset($_SESSION['rol'])) {
     font-size: 12px; ">
 
     <div class="container-fluid">
-        <h2><strong>Gestión Bitacora</strong> </h2>
+        <h2><strong>Gestión Bitácora</strong> </h2>
         <div class="box-body table-responsive">
             <div class="reportes">
                 <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
