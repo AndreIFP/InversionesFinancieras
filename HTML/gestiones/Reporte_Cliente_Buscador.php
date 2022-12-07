@@ -2,7 +2,7 @@
 
 require('fpdf.php');
 require ('../conexion.php');
-
+session_start();
 class PDF extends FPDF
 {
 // Cabecera de página
@@ -83,8 +83,8 @@ function Footer()
     $this->Cell(0,15,$DateAndTime,0,1,'R');
 }
 }
-
-$cliente=$_GET['variable'];
+$_SESSION['busquedaX'];
+$cliente = $_SESSION['busquedaX'];
 // Creación del objeto de la clase heredada
 $sql = "SELECT * FROM TBL_CLIENTES where Nombre_Empresa LIKE '%$cliente%' OR Nombre_Cliente LIKE '%$cliente%'";
 $resultado = mysqli_query($conn,$sql);

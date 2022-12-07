@@ -1,55 +1,100 @@
 <?php
 include("../conexion.php");
+
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
 session_start();
+// si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+    header("Location: ../login.php");
+    die();
+} else {
+    //actualiza los permisos
+    updatePermisos($_SESSION['rol']);
+
+    //si no tiene permiso de visualización redirige al index
+    if ($_SESSION['permisos'][M_GESTION_CLIENTE]['r'] == 0 or !isset($_SESSION['permisos'][M_GESTION_CLIENTE]['r'])) {
+        header("Location: ../index.php");
+        die();
+    }
+}
+
+$numero = 99999.99;
 ?>
-<?php include 'barralateralinicial.php'; ?><P></P>
+
+<?php include 'barralateralinicial.php'; ?><p></p>
+<?php 
+                 $busqueda = strtolower($_REQUEST['busqueda']);
+                 if(empty($busqueda))
+                 {
+                     header("location: Gestion_Cliente.php");
+                     mysqli_close($conn);
+                 }
+                 $_SESSION['busquedaX'] = $busqueda;
+             ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<title>Gestión Clientes</title>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+</head>
 <section style=" background-color:rgb(255, 255, 255);
     padding: 15px;
     color:black;
     font-size: 12px; ">
-    <title>Gestión Clientes</title>
     <div class="container-fluid">
         <div class="col-md-12">
+        <div class="box-body table-responsive">
+                <div class="reportes">
+                    <h2><strong>Gestión Clientes</strong> </h2>
+
+                    <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                    <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['w'] == 1) {
+                    ?>
+                        
+                        <?php } ?>
+                        <a class="btn btn-warning" href="Reporte_Cliente_Buscador.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                        <a class="btn btn-success" href="reporte_excel_buscador_clientes.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
+                        
+                </div>
+
             <?php
-            $busqueda = strtolower($_REQUEST['busqueda']);
-            if (empty($busqueda)) {
-                echo "<script> alert('Dejo En Blanco El Buscador');window.location= 'Gestion_Clientes.php' </script>";
-            }
+            $mostrar_datos = 0;
             ?>
-            <h2><strong> Gestión Clientes</strong></h2>
-            <div class="box-body table-responsive">
-                <form action="reporte_excel_buscador_clientes.php" method="get">
-                    <a class="btn btn-primary" href="Gestion_Clientes.php "><i class="fa fa-arrow-circle-left"></i>Volver Atrás</a>
-                    <a class="btn btn-warning" href="Reporte_clientes_Buscador.php?variable=<?php echo $busqueda; ?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-                    <input type="hidden" name="busqueda_filtro" id="busqueda_filtro" value="<?php echo $busqueda ?>">
-                    <input type="submit" value=" Reporte Excel" class="btn btn-success" download="Mi_Excel">
-                </form>
-                <hr>
-                <table class="table">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>
-                                <center>Id</center>
-                            </th>
-                            <th>
-                                <center>Nombre Empresa</center>
-                            </th>
-                            <th>
-                                <center>Representante Legal</center>
-                            </th>
-                            <th>
-                                <center>RTN</center>
-                            </th>
-                            <th>
-                                <center>Estado</center>
-                            </th>
-                            <th colspan="3">
-                                <center>Acciones</center>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+            <br>
+
+            <table class="table ">
+                <thead class="table-primary">
+                    <tr>
+                        <th>
+                            <center>Id</center>
+                        </th>
+                        <th>
+                            <center>Nombre Empresa</center>
+                        </th>
+                        <th>
+                            <center>Representante Legal</center>
+                        </th>
+                        <th>
+                            <center>RTN</center>
+                        </th>
+                        <th>
+                            <center>Estado</center>
+                        </th>
+                        <th colspan="3">
+                            <center>Acciones</center>
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
                         //Paginador
                         $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CLIENTES
                                             WHERE ( Nombre_Empresa LIKE '%$busqueda%' OR
@@ -77,86 +122,196 @@ session_start();
                         $result = mysqli_num_rows($sql);
                         if ($result > 0) {
                             while ($row = mysqli_fetch_array($sql)) {
-                        ?>
-                                <tr>
-                                    <th><CENTER><?php echo $row['Id_Cliente'] ?></CENTER></th>
-                                    <th><CENTER><?php echo $row['Nombre_Empresa'] ?></CENTER></th>
-                                    <th><CENTER><?php echo $row['Nombre_Cliente'] ?></CENTER></th>
-                                    <th><CENTER><?php echo $row['RTN_Cliente'] ?></CENTER></th>
-                                    <th><CENTER><?php echo $row['Tipo_Cliente'] ?></CENTER></th>
-                                    <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {
+
+                            $_SESSION['Id_Mauri'] = $row['Id_Cliente'];;
+                            $Nombree      = $row['Nombre_Empresa'];
+                            $Nombre       = $row['Nombre_Cliente'];
+                            $RTN_Cliente  = $row['RTN_Cliente'];
+                            $Direccion    = $row['Direccion'];
+                            $Telefono     = $row['Telefono'];
+                            $Tipo_Cliente = $row['Tipo_Cliente'];
+                            $Ciudad       = $row['Ciudad'];
+
+                            $Id_Cliente = $_SESSION['Id_Mauri'];
+                    ?>
+                            <tr>
+                                <th>
+                                    <center><?php echo  $Id_Cliente  ?></center>
+                                </th>
+                                <th>
+                                    <center><?php echo  $Nombree ?></center>
+                                </th>
+                                <th>
+                                    <center><?php echo  $Nombre   ?></center>
+                                </th>
+                                <th>
+                                    <center><?php echo  $RTN_Cliente ?></center>
+                                </th>
+                                <th>
+                                    <center><?php echo $Tipo_Cliente ?></center>
+                                </th>
+
+                                <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['u'] == 1) {
                                 ?>
                                     <th>
-                                        <center><a href="Actualizar_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i> </a></a></center>
+                                        <center><a href="Actualizar_Cliente.php?Id=<?php echo $Id_Cliente ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i> </a></a></center>
                                     </th>
                                 <?php } ?>
 
                                 <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['d'] == 1) {
                                 ?>
                                     <th>
-                                        <center><a href="Delete_Cliente.php?Id=<?php echo $row['Id_Cliente'] ?>" class="btn btn-danger btn-xs"><i class="fa fa-close" aria-hidden="true"></i> </a></a></center>
+                                        <center><a href="Delete_Cliente.php?Id=<?php echo $Id_Cliente ?>" class="btn btn-danger btn-xs"><i class="fa fa-close" aria-hidden="true"></i> </a></a></center>
                                     </th>
 
                                 <?php } ?>
 
                                 <th>
-                                    <center><a href="Gestion_Clientes2.php?Id_Cliente2=<?php echo $row['Id_Cliente'] ?>" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> </a></a></center>
+                                    <center><a href="Buscador_Cliente2.php?Id_Cliente2=<?php echo $Id_Cliente ?>" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> </a></a></center>
                                 </th>
-                                </tr>
-                        <?php
-                            }
-                        } else {
-                            echo "<script> alert('No se encontro registros');window.location= 'Gestion_Clientes.php' </script>";
+                            </tr>
+                    <?php
                         }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-            <?php
-            if ($total_registro != 0) {
-            ?>
-                <div class="paginador">
-                    <ul>
-                        <?php
-                        if ($pagina != 1) {
-                        ?>
-                            <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<</a>
-                            </li>
-                            <li><a href="?pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo $busqueda; ?>">
-                                    <<</a>
-                            </li>
-                        <?php
-                        }
-                        for ($i = 1; $i <= $total_paginas; $i++) {
-                            # code...
-                            if ($i == $pagina) {
-                                echo '<li class="pageSelected">' . $i . '</li>';
-                            } else {
-                                echo '<li><a href="?pagina=' . $i . '&busqueda=' . $busqueda . '">' . $i . '</a></li>';
-                            }
-                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+            <script>
+                function editar(este) {
+                    var ModalEdit = new bootstrap.Modal(EditModal, {}).show();
+                    var $pop = este;
 
-                        if ($pagina != $total_paginas) {
-                        ?>
-                            <li><a href="?pagina=<?php echo $pagina + 1; ?>&busqueda=<?php echo $busqueda; ?>">>></a></li>
-                            <li><a href="?pagina=<?php echo $total_paginas; ?>&busqueda=<?php echo $busqueda; ?> ">>|</a></li>
-                        <?php } ?>
-                    </ul>
+                }
+            </script>
+
+            <div class="modal" tabindex="-1" id="EditModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Información del cliente</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <?php
+                                include("../conexion.php");
+                                $poll = $_SESSION['Id_Mauri'];
+                                $query = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$poll' And Tipo_Cliente = 'Activo' ");
+                                $nr = mysqli_num_rows($query);
+                                while ($row = mysqli_fetch_array($query)) {
+                                    $Id_Cliente   = $row['Id_Cliente'];
+                                    $Nombree      = $row['Nombre_Empresa'];
+                                    $Nombre       = $row['Nombre_Cliente'];
+                                    $RTN_Cliente  = $row['RTN_Cliente'];
+                                    $Direccion    = $row['Direccion'];
+                                    $Telefono     = $row['Telefono'];
+                                    $Tipo_Cliente = $row['Tipo_Cliente'];
+                                    $Ciudad       = $row['Ciudad'];
+
+
+                                ?>
+
+                                    <div class="form group">
+                                        <label for="recipient-name" class="col-form-label">Id Cliente:</label>
+                                        <input type="text" class="form-control" id="recipient-name" value="  <?php echo $Id_Cliente ?>">
+                                    </div>
+
+                                    <div class="form group">
+                                        <label for="recipient-name" class="col-form-label">Nombre Empresa:</label>
+                                        <input type="text" class="form-control" id="recipient-name" value=" <?php echo $Nombree ?> ">
+                                    </div>
+
+
+                                    <div class="form group">
+                                        <label for="recipient-name" class="col-form-label">Nombre Cliente:</label>
+                                        <input type="text" class="form-control" id="recipient-name" value=" <?php echo  $Nombre ?> ">
+                                    </div>
+
+
+                                    <div class="form group">
+                                        <label for="recipient-name" class="col-form-label">RTN:</label>
+                                        <input type="text" class="form-control" id="recipient-name" value=" <?php echo $RTN_Cliente ?> ">
+                                    </div>
+
+
+                                    <div class="form group">
+                                        <label for="recipient-name" class="col-form-label">Direccion:</label>
+                                        <input type="text" class="form-control" id="recipient-name" value=" <?php echo $Direccion ?> ">
+                                    </div>
+
+
+                                    <div class="form group">
+                                        <label for="recipient-name" class="col-form-label">Telefono:</label>
+                                        <input type="text" class="form-control" id="recipient-name" value=" <?php echo $Telefono ?> ">
+                                    </div>
+
+
+                                    <div class="form group">
+                                        <label for="recipient-name" class="col-form-label">Estado:</label>
+                                        <input type="text" class="form-control" id="recipient-name" value=" <?php echo $Tipo_Cliente ?> ">
+                                    </div>
+
+                                    <div class="form group">
+                                        <label for="Ciudad">Ciudad</label>
+                                        <input type="text" class="form-control" Readonly id="recipient-name" value="<?php echo $Ciudad ?> ">
+                                    </div>
+
+                                <?php
+                                }
+                                ?>
+
+                                <p id="variable"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+                        </div>
+                    </div>
                 </div>
-            <?php } ?>
-        </div>
-        <div class="reportes">
+            </div>
 
+            </div>
+            <div class="paginador">
+                <ul>
+                    <?php
+                    if ($pagina != 1) {
+                    ?>
+                        <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                        </li>
+                        <li><a href="?pagina=<?php echo $pagina - 1; ?>">
+                                <<< /a>
+                        </li>
+                    <?php
+                    }
+                    for ($i = 1; $i <= $total_paginas; $i++) {
+                        # code...
+                        if ($i == $pagina) {
+                            echo '<li class="pageSelected">' . $i . '</li>';
+                        } else {
+                            echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
+                        }
+                    }
+
+                    if ($pagina != $total_paginas) {
+                    ?>
+                        <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
+                        <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
+                    <?php } ?>
+                </ul>
+            </div>
         </div>
     </div>
 
 
-</SECtion>
+    </div>
 
-</div>
+
+
+</section>
+
 </body>
+
 <style type="text/css">
-    /*============ Paginador =============*/
     .paginador ul {
         padding: 15px;
         list-style: none;
@@ -212,5 +367,21 @@ session_start();
         cursor: pointer;
         margin-left: 10px;
     }
+
+    .form_datos {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        float: left;
+        background: initial;
+        padding: 10px;
+        border-radius: 10px;
+    }
 </style>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7a1f591275269451a2c909baf67dc271e6fdc6bb
 <?php include 'barralateralfinal.php'; ?>

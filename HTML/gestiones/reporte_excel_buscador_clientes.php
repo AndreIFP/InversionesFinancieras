@@ -23,7 +23,8 @@ session_start();
 date_default_timezone_set("America/Guatemala");
 $fecha = date("d-m-Y h:i:s a");
 
-$busqueda=$_GET['busqueda_filtro'];
+$_SESSION['busquedaX'];
+$busqueda = $_SESSION['busquedaX'];
 // Creación del objeto de la clase heredada
 $sql = mysqli_query($conn, "select * from TBL_CLIENTES WHERE ( Nombre_Empresa LIKE '%$busqueda%' OR
                                                                                 Nombre_Cliente LIKE '%$busqueda%') ");

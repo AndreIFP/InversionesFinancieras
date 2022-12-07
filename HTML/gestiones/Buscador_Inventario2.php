@@ -36,10 +36,9 @@ $numero = 99999.99;
 ?>
 <?php include 'barralateralinicial.php';?><p></p>
 <?php 
-
 $_SESSION['busquedaX'];
 $busqueda = $_SESSION['busquedaX'];
-             ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">

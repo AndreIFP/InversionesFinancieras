@@ -21,10 +21,10 @@ if (!isset($_SESSION['rol'])) {
     }
 
     if (empty($_REQUEST['Id_Cliente2'])) {
-        header("location: Gestion_Clientes.php");
+        header("location: Gestion_Cliente2.php");
         die();
     } else {
-        $Id_Usuario2 = $_REQUEST['Id_Cliente2'];
+        $Id_Cliente2 = $_REQUEST['Id_Cliente2'];
     }
 }
 
@@ -32,6 +32,10 @@ $numero = 99999.99;
 ?>
 
 <?php include 'barralateralinicial.php'; ?><p></p>
+<?php 
+$_SESSION['busquedaX'];
+$busqueda = $_SESSION['busquedaX'];
+?>
 
 
 <!DOCTYPE html>
@@ -56,35 +60,17 @@ $numero = 99999.99;
                     <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                     <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['w'] == 1) {
                     ?>
-                        <a href="Nuevo_Cliente.php" input type="submit" class="btn btn-success" Value="Crear Nuevo Cliente"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Cliente</a>
+                        
                         <?php } ?>
-                        <a class="btn btn-warning" href="reporte_cliente.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-                        <a class="btn btn-success" href="reporte_excel_clientes.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
-                        <a align="rigth" href="Gestion_Clientes_Inact.php"><button type="submit" class="btn btn-info"><i class="fa fa-times" aria-hidden="true"></i> Clientes Inactivos</button></a>
+                        <a class="btn btn-warning" href="Reporte_Cliente_Buscador.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                        <a class="btn btn-success" href="reporte_excel_buscador_clientes.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
+                        
                     </div>
 
             <?php
             $mostrar_datos = 0;
-            $Id_Cliente2 = $_REQUEST['Id_Cliente2'];
             ?>
-            <form action="" method="get" class="form_datos">
-                <label for="datos_mostrar">Datos A Mostrarㅤ</label>
-                <select name="mostrar" onchange='submit();'>
-                    <option></option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <?php
-                    $mostrar_datos = $_GET['mostrar'];
-                    ?>
-                </select>
-            </form>
-
-            <form action="Buscador_Cliente.php" method="get" class="form_search">
-
-                <input type="text" name="busqueda" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" id="busqueda" placeholder="Buscar" size=40>
-                <input type="submit" value="Buscar" class="btn btn-primary">
-            </form>
+            <br>
 
             <table class="table ">
                 <thead class="table-primary">
@@ -111,32 +97,31 @@ $numero = 99999.99;
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    //Paginador
-                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CLIENTES WHERE Id_Cliente = Id_Cliente And Tipo_Cliente = 'Activo'");
-                    $result_register = mysqli_fetch_array($sql_registe);
-                    $total_registro = $result_register['total_registro'];
+                <?php
+                        //Paginador
+                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CLIENTES
+                                            WHERE ( Nombre_Empresa LIKE '%$busqueda%' OR
+                                                    Nombre_Cliente LIKE '%$busqueda%' )");
+                        $result_register = mysqli_fetch_array($sql_registe);
+                        $total_registro = $result_register['total_registro'];
 
-                    if ($mostrar_datos > 0) {
-                        $por_pagina = $mostrar_datos;
-                    } else {
                         $por_pagina = 10;
-                    }
 
-                    if (empty($_GET['pagina'])) {
-                        $pagina = 1;
-                    } else {
-                        $pagina = $_GET['pagina'];
-                    }
+                        if (empty($_GET['pagina'])) {
+                            $pagina = 1;
+                        } else {
+                            $pagina = $_GET['pagina'];
+                        }
 
-                    $desde = ($pagina - 1) * $por_pagina;
-                    $total_paginas = ceil($total_registro / $por_pagina);
-                    $sql = mysqli_query($conn, "select * FROM TBL_CLIENTES WHERE Tipo_Cliente = 'Activo' ORDER BY Fecha_Dato DESC LIMIT $desde,$por_pagina ");
-                    mysqli_close($conn);
+                        $desde = ($pagina - 1) * $por_pagina;
+                        $total_paginas = ceil($total_registro / $por_pagina);
+                        $sql = mysqli_query($conn, "select * from TBL_CLIENTES WHERE ( Nombre_Empresa LIKE '%$busqueda%' OR
+                                                                                Nombre_Cliente LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
+                        mysqli_close($conn);
 
-                    $result = mysqli_num_rows($sql);
-                    if ($result > 0) {
-                        while ($row = mysqli_fetch_array($sql)) {
+                        $result = mysqli_num_rows($sql);
+                        if ($result > 0) {
+                            while ($row = mysqli_fetch_array($sql)) {
 
                             $Id_Cliente   = $row['Id_Cliente'];
                             $Nombree      = $row['Nombre_Empresa'];
@@ -145,7 +130,7 @@ $numero = 99999.99;
                             $Direccion    = $row['Direccion'];
                             $Telefono     = $row['Telefono'];
                             $Tipo_Cliente = $row['Tipo_Cliente'];
-
+                            $Ciudad       = $row['Ciudad'];
 
                             $_SESSION['Id_Mauri'] = $Id_Cliente2;
                     ?>
@@ -182,7 +167,7 @@ $numero = 99999.99;
                                 <?php } ?>
 
                                 <th>
-                                    <center><a href="Gestion_Clientes2.php?Id_Cliente2=<?php echo $Id_Cliente ?>" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> </a></a></center>
+                                    <center><a href="Buscador_Cliente2.php?Id_Cliente2=<?php echo $Id_Cliente ?>" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> </a></a></center>
                                 </th>
                                 <form method="post" action="Gestion Clientes.php" name="miformulario">
                                     <script>
@@ -457,10 +442,10 @@ $numero = 99999.99;
                 <?php
                     if ($pagina != 1) {
                     ?>
-                        <li><a href="?pagina=<?php echo 1; ?>">|<</a>
+                        <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
                         </li>
                         <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                                <<</a>
+                                <<< /a>
                         </li>
                     <?php
                     }

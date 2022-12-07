@@ -23,7 +23,8 @@ session_start();
 date_default_timezone_set("America/Guatemala");
 $fecha = date("d-m-Y h:i:s a");
 
-$busqueda=$_GET['busqueda_filtro'];
+$_SESSION['busquedaX'];
+$busqueda = $_SESSION['busquedaX'];
 // Creación del objeto de la clase heredada
 $sql = mysqli_query($conn,"SELECT u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol 
 WHERE ( u.Id_Usuario LIKE '%$busqueda%' OR 
