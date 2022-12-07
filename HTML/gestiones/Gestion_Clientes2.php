@@ -113,14 +113,14 @@ $numero = 99999.99;
                 <tbody>
                     <?php
                     //Paginador
-                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CLIENTES WHERE Id_Cliente = Id_Cliente AND Tipo_Cliente = 'Activo' ");
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CLIENTES WHERE Id_Cliente = Id_Cliente And Tipo_Cliente = 'Activo'");
                     $result_register = mysqli_fetch_array($sql_registe);
                     $total_registro = $result_register['total_registro'];
 
                     if ($mostrar_datos > 0) {
                         $por_pagina = $mostrar_datos;
                     } else {
-                        $por_pagina = 3;
+                        $por_pagina = 10;
                     }
 
                     if (empty($_GET['pagina'])) {
@@ -454,7 +454,7 @@ $numero = 99999.99;
             </div>
             <div class="paginador">
                 <ul>
-                    <?php
+                <?php
                     if ($pagina != 1) {
                     ?>
                         <li><a href="?pagina=<?php echo 1; ?>">|<< /a>

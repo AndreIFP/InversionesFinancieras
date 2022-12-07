@@ -19,6 +19,13 @@ if (!isset($_SESSION['rol'])) {
         header("Location: ../index.php");
         die();
     }
+
+    if (empty($_REQUEST['Id_Cliente2'])) {
+        header("location: Gestion_Cliente2.php");
+        die();
+    } else {
+        $Id_Cliente2 = $_REQUEST['Id_Cliente2'];
+    }
 }
 
 $numero = 99999.99;
@@ -26,14 +33,10 @@ $numero = 99999.99;
 
 <?php include 'barralateralinicial.php'; ?><p></p>
 <?php 
-                 $busqueda = strtolower($_REQUEST['busqueda']);
-                 if(empty($busqueda))
-                 {
-                     header("location: Gestion_Cliente.php");
-                     mysqli_close($conn);
-                 }
-                 $_SESSION['busquedaX'] = $busqueda;
-             ?>
+$_SESSION['busquedaX'];
+$busqueda = $_SESSION['busquedaX'];
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +53,7 @@ $numero = 99999.99;
     font-size: 12px; ">
     <div class="container-fluid">
         <div class="col-md-12">
-        <div class="box-body table-responsive">
+            <div class="box-body table-responsive">
                 <div class="reportes">
                     <h2><strong>Gestión Clientes</strong> </h2>
 
@@ -62,7 +65,7 @@ $numero = 99999.99;
                         <a class="btn btn-warning" href="Reporte_Cliente_Buscador.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
                         <a class="btn btn-success" href="reporte_excel_buscador_clientes.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
                         
-                </div>
+                    </div>
 
             <?php
             $mostrar_datos = 0;
@@ -120,7 +123,7 @@ $numero = 99999.99;
                         if ($result > 0) {
                             while ($row = mysqli_fetch_array($sql)) {
 
-                            $_SESSION['Id_Mauri'] = $row['Id_Cliente'];;
+                            $Id_Cliente   = $row['Id_Cliente'];
                             $Nombree      = $row['Nombre_Empresa'];
                             $Nombre       = $row['Nombre_Cliente'];
                             $RTN_Cliente  = $row['RTN_Cliente'];
@@ -129,7 +132,7 @@ $numero = 99999.99;
                             $Tipo_Cliente = $row['Tipo_Cliente'];
                             $Ciudad       = $row['Ciudad'];
 
-                            $Id_Cliente = $_SESSION['Id_Mauri'];
+                            $_SESSION['Id_Mauri'] = $Id_Cliente2;
                     ?>
                             <tr>
                                 <th>
@@ -166,6 +169,15 @@ $numero = 99999.99;
                                 <th>
                                     <center><a href="Buscador_Cliente2.php?Id_Cliente2=<?php echo $Id_Cliente ?>" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> </a></a></center>
                                 </th>
+                                <form method="post" action="Gestion Clientes.php" name="miformulario">
+                                    <script>
+                                        window.onload = function() {
+                                            // Una vez cargada la página, el formulario se enviara automáticamente.
+                                            var ModalEdit = new bootstrap.Modal(EditModal, {}).show();
+                                            var $pop = este;
+                                        }
+                                    </script>
+                                </form>
                             </tr>
                     <?php
                         }
@@ -185,15 +197,17 @@ $numero = 99999.99;
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">Información del cliente</h3>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <center>
+                                <h3><strong> Información del Cliente</strong></h3>
+                            </center>
+
                         </div>
                         <div class="modal-body">
                             <form>
                                 <?php
                                 include("../conexion.php");
                                 $poll = $_SESSION['Id_Mauri'];
-                                $query = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$poll' And Tipo_Cliente = 'Activo' ");
+                                $query = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$poll' AND Tipo_Cliente = 'Activo' ");
                                 $nr = mysqli_num_rows($query);
                                 while ($row = mysqli_fetch_array($query)) {
                                     $Id_Cliente   = $row['Id_Cliente'];
@@ -204,65 +218,220 @@ $numero = 99999.99;
                                     $Telefono     = $row['Telefono'];
                                     $Tipo_Cliente = $row['Tipo_Cliente'];
                                     $Ciudad       = $row['Ciudad'];
-
-
                                 ?>
 
-                                    <div class="form group">
-                                        <label for="recipient-name" class="col-form-label">Id Cliente:</label>
-                                        <input type="text" class="form-control" id="recipient-name" value="  <?php echo $Id_Cliente ?>">
+                                    <div class="row">
+
+                                        <div class="col-xs-14 pull-right">
+
+                                            <table class="table">
+
+                                                <thead class="table-primary">
+                                                    <tr>
+
+                                                        <th>
+                                                            <center>Id Cliente</center>
+                                                        </th>
+
+
+                                                        <th>
+                                                            <center>Nombre de la empresa</center>
+                                                        </th>
+
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    <tr>
+
+                                                        <td style="width: 30%">
+
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                                                <input type="text" class="form-control" id="recipient-name" readonly value="  <?php echo $Id_Cliente ?>">
+
+                                                            </div>
+
+                                                        </td>
+
+                                                        <td style="width: 70%">
+
+                                                            <div class="input-group">
+
+                                                                <span class="input-group-addon"><i class="fa fa-building"></i></span>
+                                                                <input type="text" class="form-control" readonly id="recipient-name" value=" <?php echo $Nombree ?> ">
+
+                                                            </div>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
                                     </div>
 
-                                    <div class="form group">
-                                        <label for="recipient-name" class="col-form-label">Nombre Empresa:</label>
-                                        <input type="text" class="form-control" id="recipient-name" value=" <?php echo $Nombree ?> ">
+                                    <div class="row">
+
+                                        <div class="col-xs-14 pull-right">
+
+                                            <table class="table">
+
+                                                <thead class="table-primary">
+                                                    <tr>
+
+                                                        <th>
+                                                            <center>Representante legal</center>
+                                                        </th>
+
+
+                                                        <th>
+                                                            <center>RTN</center>
+                                                        </th>
+
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    <tr>
+
+                                                        <td style="width: 55%">
+
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                                <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo  $Nombre ?> ">
+
+                                                            </div>
+
+                                                        </td>
+
+                                                        <td style="width: 45%">
+
+                                                            <div class="input-group">
+
+                                                                <span class="input-group-addon"><i class="fa fa-check"></i></span>
+                                                                <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $RTN_Cliente ?> ">
+                                                            </div>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
                                     </div>
 
+                                    <div class="row">
 
-                                    <div class="form group">
-                                        <label for="recipient-name" class="col-form-label">Nombre Cliente:</label>
-                                        <input type="text" class="form-control" id="recipient-name" value=" <?php echo  $Nombre ?> ">
+                                        <div class="col-xs-14 pull-right">
+
+                                            <table class="table">
+
+                                                <thead class="table-primary">
+                                                    <tr>
+
+                                                        <th>
+                                                            <center>Teléfono</center>
+                                                        </th>
+
+
+                                                        <th>
+                                                            <center>Estado</center>
+                                                        </th>
+
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    <tr>
+
+                                                        <td style="width: 50%">
+
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                                                <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $Telefono ?> ">
+
+                                                            </div>
+
+                                                        </td>
+
+                                                        <td style="width: 50%">
+
+                                                            <div class="input-group">
+
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $Tipo_Cliente ?> ">
+
+                                                            </div>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
                                     </div>
 
+                                    <div class="row">
 
-                                    <div class="form group">
-                                        <label for="recipient-name" class="col-form-label">RTN:</label>
-                                        <input type="text" class="form-control" id="recipient-name" value=" <?php echo $RTN_Cliente ?> ">
-                                    </div>
+                                        <div class="col-xs-14 pull-right">
+
+                                            <table class="table">
+
+                                                <thead class="table-primary">
+                                                    <tr>
+
+                                                        <th>
+                                                            <center>Dirección</center>
+                                                        </th>
+
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    <tr>
+
+                                                        <td style="width: 100%">
+
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                                                <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $Direccion ?> ">
+
+                                                            </div>
+
+                                                        </td>
 
 
-                                    <div class="form group">
-                                        <label for="recipient-name" class="col-form-label">Direccion:</label>
-                                        <input type="text" class="form-control" id="recipient-name" value=" <?php echo $Direccion ?> ">
-                                    </div>
+                                                    </tr>
 
+                                                </tbody>
+                                            </table>
 
-                                    <div class="form group">
-                                        <label for="recipient-name" class="col-form-label">Telefono:</label>
-                                        <input type="text" class="form-control" id="recipient-name" value=" <?php echo $Telefono ?> ">
-                                    </div>
+                                        </div>
 
-
-                                    <div class="form group">
-                                        <label for="recipient-name" class="col-form-label">Estado:</label>
-                                        <input type="text" class="form-control" id="recipient-name" value=" <?php echo $Tipo_Cliente ?> ">
-                                    </div>
-
-                                    <div class="form group">
-                                        <label for="Ciudad">Ciudad</label>
-                                        <input type="text" class="form-control" Readonly id="recipient-name" value="<?php echo $Ciudad ?> ">
                                     </div>
 
                                 <?php
                                 }
                                 ?>
 
-                                <p id="variable"></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
 
                         </div>
+                        <center><button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-close" aria-hidden="true"></i> </a> Cerrar</button></center>
+                        <hr>
                     </div>
                 </div>
             </div>
@@ -270,7 +439,7 @@ $numero = 99999.99;
             </div>
             <div class="paginador">
                 <ul>
-                    <?php
+                <?php
                     if ($pagina != 1) {
                     ?>
                         <li><a href="?pagina=<?php echo 1; ?>">|<< /a>

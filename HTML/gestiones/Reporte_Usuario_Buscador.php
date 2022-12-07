@@ -86,7 +86,8 @@ function Footer()
     $this->Cell(0,15,$DateAndTime,0,1,'R');
 }
 }
-$usuariox=$_GET['variable'];
+$_SESSION['busquedaX'];
+$usuariox = $_SESSION['busquedaX'];
 // Creación del objeto de la clase heredada
 $sql = "SELECT u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol  
                                   where ( u.Id_Usuario LIKE '%$usuariox%'
