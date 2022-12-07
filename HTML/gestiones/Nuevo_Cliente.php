@@ -268,7 +268,7 @@ if (!isset($_SESSION['rol'])) {
 
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-question-circle"></i></span>
-												<input type="Direccion" class="form-control"  name="Direccion" maxlength="60" id="Direccion" placeholder="Dirección" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+												<input type="Direccion" class="form-control"  name="Direccion" maxlength="100" id="Direccion" placeholder="Dirección" size="40" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
 					
 											</div>
 
