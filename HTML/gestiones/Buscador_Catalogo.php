@@ -1,6 +1,8 @@
 <?php
 include("../conexion.php");
 session_start();
+
+
 ?>
 <?php include 'barralateralinicial.php'; ?>
 <p></p>
@@ -23,9 +25,21 @@ session_start();
                 
               <form action="reporte_excel_buscador_catalago.php" method="get" >
               <a class="btn btn-primary" href="Gestion_CatalogoCuenta.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-                <a class="btn btn-warning" href="Reporte_Catalogo_Buscador.php?variable=<?php echo $busqueda; ?>  " onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                <?php  
+                
+                if (isset($_GET['filtro'])) {
+                ?>
+                    <a class="btn btn-warning" href="Reporte_Catalogo_Buscador.php?variable=<?php echo $busqueda; ?>&filtro=<?php echo "si"; ?>  " onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                    <input type="hidden" name="busqueda_filtro" id="busqueda_filtro" value="<?php echo $busqueda ?>">
+                    <input type="hidden" name="filtro" id="filtro" value="<?php echo "si" ?>">
+                     <button class="btn btn-warning" id="daterange-btn" name=""> <i class="fa fa-file-excel-o" aria-hidden="true"></i>  Reporte Excel </button>
+                <?php }else{  ?>
+                    <a class="btn btn-warning" href="Reporte_Catalogo_Buscador.php?variable=<?php echo $busqueda; ?>  " onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
                     <input type="hidden" name="busqueda_filtro" id="busqueda_filtro" value="<?php echo $busqueda ?>">
                      <button class="btn btn-warning" id="daterange-btn" name=""> <i class="fa fa-file-excel-o" aria-hidden="true"></i>  Reporte Excel </button>
+                <?php } ?>
+
+               
                    
                 </form>
                 
@@ -42,11 +56,18 @@ session_start();
                     </thead>
                     <tbody>
                         <?php
-                        //Paginador
+                         if (isset($_GET['filtro'])) {
+                            //Paginador
+                            $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CATALAGO_CUENTAS 
+                            WHERE ( CODIGO_CUENTA LIKE '$busqueda%')");
+                         }else{
+                             //Paginador
                         $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CATALAGO_CUENTAS 
-                                            WHERE ( CODIGO_CUENTA LIKE '%$busqueda%' OR
-                                                    CUENTA LIKE '%$busqueda%' OR 
-                                                    Estado_Cuenta  LIKE '%$busqueda%')");
+                        WHERE ( CODIGO_CUENTA LIKE '%$busqueda%' OR
+                                CUENTA LIKE '%$busqueda%' OR 
+                                Estado_Cuenta  LIKE '%$busqueda%')");
+                         }
+                       
                         $result_register = mysqli_fetch_array($sql_registe);
                         $total_registro = $result_register['total_registro'];
 
@@ -60,13 +81,29 @@ session_start();
 
                         $desde = ($pagina - 1) * $por_pagina;
                         $total_paginas = ceil($total_registro / $por_pagina);
-                        
-                        $sql = mysqli_query($conn, "SELECT tcc2.CODIGO_CUENTA as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA as TIPOCUENTA,
-                        tcc.Estado_Cuenta from tbl_catalago_cuentas tcc join tbl_catalago_cuentas tcc2 on tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2) or
-                        tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,1)
-                        and  tcc2.Mayor=SUBSTRING(tcc.CODIGO_CUENTA,1,2)  
-                        where  tcc.CUENTA LIKE '%$busqueda%' OR tcc.CODIGO_CUENTA like '%$busqueda%' OR tcc2.CUENTA LIKE '%$busqueda%' OR tcc2.CODIGO_CUENTA like '%$busqueda%'
-                        order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6) LIMIT $desde,$por_pagina ");
+
+                        if (isset($_GET['filtro'])) {
+
+                            
+                            $sql = mysqli_query($conn, "SELECT tcc2.CODIGO_CUENTA as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA as TIPOCUENTA,
+                            tcc.Estado_Cuenta from tbl_catalago_cuentas tcc join tbl_catalago_cuentas tcc2 on tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2) or
+                            tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,1)
+                             AND  tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2)
+                           where tcc2.CODIGO_CUENTA LIKE '$busqueda%'
+                            order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6) LIMIT $desde,$por_pagina");
+                        }else{
+                            
+                            $sql = mysqli_query($conn, "SELECT tcc2.CODIGO_CUENTA as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA as TIPOCUENTA,
+                            tcc.Estado_Cuenta from tbl_catalago_cuentas tcc join tbl_catalago_cuentas tcc2 on tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2) or
+                            tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,1)
+                            and  tcc2.Mayor=SUBSTRING(tcc.CODIGO_CUENTA,1,2)  
+                            where  tcc.CUENTA LIKE '%$busqueda%' OR tcc.CODIGO_CUENTA like '%$busqueda%' OR tcc2.CUENTA LIKE '%$busqueda%' OR tcc2.CODIGO_CUENTA like '%$busqueda%'
+                            order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6) LIMIT $desde,$por_pagina ");
+                        }
+                       
+
+
+
                         mysqli_close($conn);
 
                         $result = mysqli_num_rows($sql);
@@ -103,28 +140,48 @@ session_start();
                     <ul>
                         <?php
                         if ($pagina != 1) {
+                            if (isset($_GET['filtro'])) {
                         ?>
-                            <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<</a>
+
+                            <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>&filtro=<?php echo "si"; ?>">|<</a>
+                            </li>
+                            <li><a href="?pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo $busqueda; ?>&filtro=<?php echo "si"; ?>">
+                                    <<</a>
+                            </li>
+                            <?php }else{  ?>   
+
+                                <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<</a>
                             </li>
                             <li><a href="?pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo $busqueda; ?>">
                                     <<</a>
                             </li>
                         <?php
+                         }
                         }
                         for ($i = 1; $i <= $total_paginas; $i++) {
                             # code...
                             if ($i == $pagina) {
                                 echo '<li class="pageSelected">' . $i . '</li>';
                             } else {
-                                echo '<li><a href="?pagina=' . $i . '&busqueda=' . $busqueda . '">' . $i . '</a></li>';
+                                if (isset($_GET['filtro'])) {
+                                    echo '<li><a href="?pagina=' . $i . '&busqueda=' . $busqueda . '&filtro=si">' . $i . '</a></li>';
+                                }else{
+
+                                    echo '<li><a href="?pagina=' . $i . '&busqueda=' . $busqueda . '">' . $i . '</a></li>';
+                                }
                             }
                         }
 
                         if ($pagina != $total_paginas) {
+                            if (isset($_GET['filtro'])) {
                         ?>
+                        
+                        <li><a href="?pagina=<?php echo $pagina + 1; ?>&busqueda=<?php echo $busqueda; ?>&filtro=<?php echo "si"; ?>">>></a></li>
+                        <li><a href="?pagina=<?php echo $total_paginas; ?>&busqueda=<?php echo $busqueda; ?>&filtro=<?php echo "si"; ?>">>|</a></li>
+                        <?php }else{?>
                             <li><a href="?pagina=<?php echo $pagina + 1; ?>&busqueda=<?php echo $busqueda; ?>">>></a></li>
                             <li><a href="?pagina=<?php echo $total_paginas; ?>&busqueda=<?php echo $busqueda; ?> ">>|</a></li>
-                        <?php } ?>
+                        <?php } } ?>
                     </ul>
                 </div>
             <?php } ?>

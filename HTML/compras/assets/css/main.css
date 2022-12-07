@@ -229,14 +229,6 @@ html {
     box-sizing: border-box
 }
 
-body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    margin: 6rem auto 0;
-    max-width: 800px;
-    background: white;
-    border: 1px solid #aaa;
-    padding: 2rem
-}
 
 .container {
     max-width: 800px;
@@ -387,7 +379,7 @@ p {
     display: none
 }
 
-header {
+.primero {
     margin: 1rem 0 0;
     padding: 0 0 2rem 0;
     border-bottom: 3pt solid #6567da

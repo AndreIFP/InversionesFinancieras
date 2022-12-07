@@ -93,10 +93,10 @@ session_start();
                         <?php
                         if ($pagina != 1) {
                         ?>
-                            <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<< /a>
+                            <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<</a>
                             </li>
                             <li><a href="?pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo $busqueda; ?>">
-                                    <<< /a>
+                                    <<</a>
                             </li>
                         <?php
                         }

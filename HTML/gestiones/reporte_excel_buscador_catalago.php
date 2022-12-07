@@ -24,6 +24,12 @@ date_default_timezone_set("America/Guatemala");
 $fecha = date("d-m-Y h:i:s a");
 
 $busqueda=$_GET['busqueda_filtro'];
+
+
+if (isset($_GET['filtro'])) {
+    $sql = mysqli_query($conn, "SELECT tcc2.CODIGO_CUENTA as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA as TIPOCUENTA, tcc.Estado_Cuenta from tbl_catalago_cuentas tcc join tbl_catalago_cuentas tcc2 on tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2) or tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,1) AND tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2) where tcc2.CODIGO_CUENTA LIKE '$busqueda%' order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6);");
+    
+}else{
 // Creación del objeto de la clase heredada
 $sql = mysqli_query($conn, "SELECT tcc2.CODIGO_CUENTA as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA as TIPOCUENTA,
 tcc.Estado_Cuenta from tbl_catalago_cuentas tcc join tbl_catalago_cuentas tcc2 on tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2) or
@@ -31,6 +37,9 @@ tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,1)
 and  tcc2.Mayor=SUBSTRING(tcc.CODIGO_CUENTA,1,2)  
 where  tcc.CUENTA LIKE '%$busqueda%' OR tcc.CODIGO_CUENTA like '%$busqueda%' OR tcc2.CUENTA LIKE '%$busqueda%' OR tcc2.CODIGO_CUENTA like '%$busqueda%'
 order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6)");
+
+}
+
 
 // Llamado del parametro dirección
 $sqldireccion = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '4'";

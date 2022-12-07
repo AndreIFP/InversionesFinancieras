@@ -30,10 +30,11 @@ $numero = 99999.99;
 <!DOCTYPE html>
 <html lang="en">
 <title>Gestión Inventario</title>
+
 <head>
-  <meta charset="UTF-8">
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 
 
 
@@ -46,168 +47,180 @@ $numero = 99999.99;
     font-size: 12px; ">
     <div class="container-fluid">
         <div class="col-md-12">
-        <div class="box-body table-responsive">
-            <div class="reportes">
-                <h2><strong>Gestión Inventario</strong> </h2>
-        <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-        <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {
-        ?>
-            <a class="btn btn-secondary" href="reporte_excel_kardex.php"><i class="fa fa-check" aria-hidden="true"></i> Revisar Kardex</a>
-            <a href="../compras/Facturacion.php"input type="submit" class="btn btn-success" Value="Nuevo Producto"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Producto</a>
-            
-            <?php } ?>
-            
-            <a class="btn btn-warning" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-           <a class="btn btn-success" href="reporte_excel_inventario.php"> Reporte excel</a>
-            <p>
-            <?php
-            $mostrar_datos = 0;
-            ?>
-    </div>
+            <div class="box-body table-responsive">
+                <div class="reportes">
+                    <h2><strong>Inventario</strong> </h2>
+                    <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                    <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {
+                    ?>
+                        <a class="btn btn-secondary" href="reporte_excel_kardex.php"><i class="fa fa-check" aria-hidden="true"></i> Revisar Kardex</a>
+                        <a href="../compras/Facturacion.php" input type="submit" class="btn btn-success" Value="Nuevo Producto"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Producto</a>
 
+                    <?php } ?>
 
-    <form action="" method="get" class="form_datos">
-        <label for="datos_mostrar">Datos A Mostrarㅤ</label>
-        <select name="mostrar" onchange='submit();'>
-            <option></option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <?php
-            $mostrar_datos = $_GET['mostrar'];
-            ?>
-        </select>
-    </form>
-    <form action="Buscador_Inventario.php" method="get" class="form_search">
-
-        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-        <input type="submit" value="Buscar" class="btn btn-primary">
-    </form>
-    <table class="table ">
-        <thead class="table-primary">
-            <tr>
-                <th> <center>Id </center></th>
-                <th> <center>Producto </center></th>
-                <th> <center>Cantidad </center></th>
-                <th> <center>Fecha </center></th>
-                <th colspan="3"><center>Acciones </center></th>
-              
-
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            //Paginador
-            $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM product WHERE id_product= id_product");
-            $result_register = mysqli_fetch_array($sql_registe);
-            $total_registro = $result_register['total_registro'];
-
-            if ($mostrar_datos > 0) {
-                $por_pagina = $mostrar_datos;
-            } else {
-                $por_pagina = 10;
-            }
-
-            if (empty($_GET['pagina'])) {
-                $pagina = 1;
-            } else {
-                $pagina = $_GET['pagina'];
-            }
-
-            $desde = ($pagina - 1) * $por_pagina;
-            $total_paginas = ceil($total_registro / $por_pagina);
-            $sql = mysqli_query($conn, "select * FROM product ORDER BY time DESC LIMIT $desde,$por_pagina ");
-            mysqli_close($conn);
-
-            $result = mysqli_num_rows($sql);
-            if ($result > 0) {
-                while ($row = mysqli_fetch_array($sql)) {
-                
-                    $_SESSION['Id_Mauri'] = $row['id_product'];;
-                    $NFactura      = $row['NFactura'];
-                    $Proveedor       = $row['Proveedor'];
-                    $proname  = $row['proname'];
-                    $amount     = $row['amount'];
-                    $time = $row['time'];
-                    
-                    $id_product = $_SESSION['Id_Mauri'];
-
-
-?>
-                        <tr>
-                        <th>
-                                    <center><?php echo  $id_product  ?></center>
-                                </th>
-                                <th>
-                                    <center><?php echo  $proname ?></center>
-                                </th>
-                                <th>
-                                    <center><?php echo  $amount   ?></center>
-                                </th>
-                                <th>
-                                    <center><?php echo  $time ?></center>
-                                </th>
-                               
-                              
-
-                        <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['u'] == 1) {
-
+                    <a class="btn btn-warning" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                    <a class="btn btn-success" href="reporte_excel_inventario.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i>  Reporte excel</a>
+                    <p>
+                        <?php
+                        $mostrar_datos = 0;
                         ?>
-                            <th><a href="../Compras/Salida1.php?Id=<?php echo $row['id_product'] ?>" class="btn btn-primary btn-xs">Retirar</a></th>
-                            <?php } ?>
-                            <script>
-                                function alerta() {
-                                    window.alert('No es posible hacer esta Accion');
-                                }
-                            </script>
-                            <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['d'] == 1) {
+                </div>
 
-                            ?>
+
+                <form action="" method="get" class="form_datos">
+                    <label for="datos_mostrar">Datos A Mostrarㅤ</label>
+                    <select name="mostrar" onchange='submit();'>
+                        <option></option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <?php
+                        $mostrar_datos = $_GET['mostrar'];
+                        ?>
+                    </select>
+                </form>
+                <form action="Buscador_Inventario.php" method="get" class="form_search">
+
+                    <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
+                    <input type="submit" value="Buscar" class="btn btn-primary">
+                </form>
+                <table class="table ">
+                    <thead class="table-primary">
+                        <tr>
                             <th>
-                                <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
+                                <center>Id </center>
+                            </th>
+                            <th>
+                                <center>Producto </center>
+                            </th>
+                            <th>
+                                <center>Cantidad </center>
+                            </th>
+                            <th>
+                                <center>Fecha </center>
+                            </th>
+                            <th colspan="5">
+                                <center>Acciones </center>
                             </th>
 
-                            <th><center> <a href="Gestion_Inventario2.php?id_product2=<?php echo $id_product ?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center> </th>
 
-                        <?php } ?>
-                    </tr>
-            <?php
-                }
-            }
-            ?>
-        </tbody>
-    </table>
-    </div>
-    <div class="paginador">
-        <ul>
-            <?php
-            if ($pagina != 1) {
-            ?>
-                <li><a href="?pagina=<?php echo 1; ?>">|<</a>
-                </li>
-                <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                        <<</a>
-                </li>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        //Paginador
+                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM product WHERE id_product= id_product");
+                        $result_register = mysqli_fetch_array($sql_registe);
+                        $total_registro = $result_register['total_registro'];
+
+                        if ($mostrar_datos > 0) {
+                            $por_pagina = $mostrar_datos;
+                        } else {
+                            $por_pagina = 10;
+                        }
+
+                        if (empty($_GET['pagina'])) {
+                            $pagina = 1;
+                        } else {
+                            $pagina = $_GET['pagina'];
+                        }
+
+                        $desde = ($pagina - 1) * $por_pagina;
+                        $total_paginas = ceil($total_registro / $por_pagina);
+                        $sql = mysqli_query($conn, "select * FROM product ORDER BY time DESC LIMIT $desde,$por_pagina ");
+                        mysqli_close($conn);
+
+                        $result = mysqli_num_rows($sql);
+                        if ($result > 0) {
+                            while ($row = mysqli_fetch_array($sql)) {
+
+                                $_SESSION['Id_Mauri'] = $row['id_product'];;
+                                $NFactura      = $row['NFactura'];
+                                $Proveedor       = $row['Proveedor'];
+                                $proname  = $row['proname'];
+                                $amount     = $row['amount'];
+                                $time = $row['time'];
+
+                                $id_product = $_SESSION['Id_Mauri'];
 
 
-            <?php
-            }
-            for ($i = 1; $i <= $total_paginas; $i++) {
-                # code...
-                if ($i == $pagina) {
-                    echo '<li class="pageSelected">' . $i . '</li>';
-                } else {
-                    echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
-                }
-            }
+                        ?>
+                                <tr>
+                                    <th>
+                                        <center><?php echo  $id_product  ?></center>
+                                    </th>
+                                    <th>
+                                        <center><?php echo  $proname ?></center>
+                                    </th>
+                                    <th>
+                                        <center><?php echo  $amount   ?></center>
+                                    </th>
+                                    <th>
+                                        <center><?php echo  $time ?></center>
+                                    </th>
 
-            if ($pagina != $total_paginas) {
-            ?>
-                <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
-                <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
-            <?php } ?>
-        </ul>
-    </div>
+
+
+                                    <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['u'] == 1) {
+
+                                    ?>
+                                        <th><center><a href="../Compras/Salida1.php?Id=<?php echo $row['id_product'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-sign-out" aria-hidden="true"></i></a></center></th>
+                                    <?php } ?>
+                                    <script>
+                                        function alerta() {
+                                            window.alert('No es posible hacer esta Accion');
+                                        }
+                                    </script>
+                                    <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['d'] == 1) {
+
+                                    ?>
+                                        <th>
+                                            <center><a type="button" class="btn btn-danger btn-xs" onclick="alerta()"><i class="fa fa-times" aria-hidden="true"></i></a></center>
+                                        </th>
+
+                                        <th>
+                                            <center> <a href="Gestion_Inventario2.php?id_product2=<?php echo $id_product ?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center>
+                                        </th>
+
+                                    <?php } ?>
+                                </tr>
+                        <?php
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="paginador">
+                <ul>
+                    <?php
+                    if ($pagina != 1) {
+                    ?>
+                        <li><a href="?pagina=<?php echo 1; ?>">|<</a>
+                        </li>
+                        <li><a href="?pagina=<?php echo $pagina - 1; ?>">
+                                <<</a>
+                        </li>
+
+
+                    <?php
+                    }
+                    for ($i = 1; $i <= $total_paginas; $i++) {
+                        # code...
+                        if ($i == $pagina) {
+                            echo '<li class="pageSelected">' . $i . '</li>';
+                        } else {
+                            echo '<li><a href="?pagina=' . $i . '">' . $i . '</a></li>';
+                        }
+                    }
+
+                    if ($pagina != $total_paginas) {
+                    ?>
+                        <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
+                        <li><a href="?pagina=<?php echo $total_paginas; ?> ">>|</a></li>
+                    <?php } ?>
+                </ul>
+            </div>
 
 
 

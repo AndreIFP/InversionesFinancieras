@@ -94,25 +94,27 @@ $pdf->AddPage('LANSPACE','LETTER');
 
 
 $pdf->SetFont('Times','B',8);
-$pdf->setX(48);
+$pdf->setX(10);
 
 
 $pdf->SetFillColor(108, 250, 254 );
-$pdf->Cell(20,5, utf8_decode('ID'),1,0,'C',1);
-$pdf->Cell(20,5, utf8_decode('No. Factura'),1,0,'C',1);
-$pdf->Cell(35,5, utf8_decode('Cliente'),1,0,'C',1);
+$pdf->Cell(15,5, utf8_decode('Factura'),1,0,'C',1);
+$pdf->Cell(100,5, utf8_decode('Nombre Cliente'),1,0,'C',1);
 $pdf->Cell(100,5, utf8_decode('Descripción'),1,0,'C',1);
-$pdf->Cell(22,5, utf8_decode('Total'),1,1,'C',1);
+$pdf->Cell(25,5, utf8_decode('Total'),1,0,'C',1);
+$pdf->Cell(20,5, utf8_decode('Tipo Factura'),1,1,'C',1);
 
 
 while ($fila = $resultado->fetch_assoc()) {
-    $pdf->setX(48);
-    $pdf->Cell(20, 5, utf8_decode($fila['ID']), 1, 0, "L",0);
-    $pdf->Cell(20, 5, utf8_decode($fila['NFACTURA']), 1, 0, "L",0);
-    $pdf->Cell(35, 5, utf8_decode($fila['Id_Cliente']), 1, 0, "L",0);
-    $pdf->Cell(100, 5, utf8_decode($fila['DESCRIPCION']), 1, 0, "L",0);
-    $pdf->Cell(22, 5, utf8_decode($fila['TOTAL']), 1, 1, "R",0);
+    $pdf->setX(10);
+    $pdf->Cell(15, 5, utf8_decode($fila['N_Factura']), 1, 0, "L",0);
+    $pdf->Cell(100, 5, utf8_decode($fila['Nombre_Cliente']), 1, 0, "L",0);
+    $pdf->Cell(100, 5, utf8_decode($fila['Concepto']), 1, 0, "L",0);
+    $pdf->Cell(25, 5, utf8_decode(number_format($fila['Total_Neto'], 2)), 1, 0, "R",0);
+    $pdf->Cell(20, 5, utf8_decode($fila['Tipo_Factura']), 1, 1, "L",0);
+
 }
+
 
 
 

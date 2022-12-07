@@ -44,7 +44,7 @@ function calculate() {
       amount = row.find(".amount input").val();
 
     var sum = rate * amount;
-    var tax = (sum / (TAX_RATE + 100)) * TAX_RATE;
+    var tax = (sum * (TAX_RATE / 100)) ;
 
     total_tax = total_tax + tax;
     if (document.querySelector("#body.showtax")) {

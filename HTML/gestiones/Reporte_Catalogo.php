@@ -10,7 +10,7 @@ function Header()
 {
     require ('../conexion.php');
     // Logo
-    $this->Image('logO.PNG',10,10,40);
+    $this->Image('logO.PNG',92,32,35);
     // Arial bold 15
     $this->SetFont('Arial','B',18);
     // Movernos a la derecha
@@ -55,7 +55,7 @@ function Header()
     $this->Cell(8,0, utf8_decode('Email: '.$Correo),0,7);
 
     // Salto de línea
-    $this->Ln(15);
+    $this->Ln(45);
     
     $this->SetFont('Arial','',14);
     $this->Cell(65);
@@ -86,10 +86,9 @@ function Footer()
 }
 
 // Creación del objeto de la clase heredada
-// Creación del objeto de la clase heredada
-$sql = "SELECT  SUBSTRING( tcc2.CODIGO_CUENTA,1,2) as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA  as TIPOCUENTA, tcc.Estado_Cuenta  from tbl_catalago_cuentas tcc 
+$sql = "SELECT  SUBSTRING( tcc2.CODIGO_CUENTA,1,6) as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA  as TIPOCUENTA, tcc.Estado_Cuenta  from tbl_catalago_cuentas tcc 
 join tbl_catalago_cuentas tcc2 on tcc.Mayor =SUBSTRING( tcc2.CODIGO_CUENTA,1, 1)
-order by SUBSTRING( tcc2.CODIGO_CUENTA,4,6)";
+order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6)";
 $resultado = mysqli_query($conn,$sql);
 
 

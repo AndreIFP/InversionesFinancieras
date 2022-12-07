@@ -19,7 +19,7 @@ if (!empty($_POST)) {
 	//$CLASIFICACION     = $_POST['CLASIFICACION'];
 	$ESTADO_CUENTA     = $_POST['Estado_Cuenta'];
 
-	if(empty($MOVIMIENTO)){
+	if (empty($MOVIMIENTO)) {
 		$MOVIMIENTO = "NULL";
 	}
 
@@ -71,321 +71,337 @@ if (!isset($_SESSION['rol'])) {
 	<title>Registrar Cuentas</title>
 
 	<!-- script CUENTA -->
-<script language="javascript" src="js/jquery-3.1.1.min.js"></script>
-		
-		<script language="javascript">
-					$(document).ready(function(){
-						$("#cbx_estado").change(function () {
-		
-							$('#cbx_calle').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
-							$('#cbx_casa').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
-							$('#cbx_localidad').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
-				  
-							$("#cbx_estado option:selected").each(function () {
-								id_estado = $(this).val();
-								$.post("includes3/getMunicipio.php", { id_estado: id_estado }, function(data){
-									$("#cbx_municipio").html(data);
-								});            
-							});
-						})
-					});
+	<script language="javascript" src="js/jquery-3.1.1.min.js"></script>
 
-				$(document).ready(function(){
-						$("#cbx_municipio").change(function () {
-		
-							$('#cbx_casa').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
-							$('#cbx_localidad').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+	<script language="javascript">
+		$(document).ready(function() {
+			$("#cbx_estado").change(function() {
 
-							$("#cbx_municipio option:selected").each(function () {
-								id_municipio = $(this).val();
-								$.post("includes3/getCalle.php", { id_municipio: id_municipio }, function(data){
-									$("#cbx_calle").html(data);
-								});            
-							});
-						})
-					});
-		
-					$(document).ready(function(){
-						$("#cbx_calle").change(function () {
+				$('#cbx_calle').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+				$('#cbx_casa').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+				$('#cbx_localidad').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
 
-							$('#cbx_localidad').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
-													  	
-							$("#cbx_calle option:selected").each(function () {
-								id_calle = $(this).val();
-								$.post("includes3/getCasa.php", { id_calle: id_calle }, function(data){
-									$("#cbx_casa").html(data);
-								});            
-							});
-						})
+				$("#cbx_estado option:selected").each(function() {
+					id_estado = $(this).val();
+					$.post("includes3/getMunicipio.php", {
+						id_estado: id_estado
+					}, function(data) {
+						$("#cbx_municipio").html(data);
 					});
-		
-			  $(document).ready(function(){
-						$("#cbx_casa").change(function () {
+				});
+			})
+		});
 
-							$("#cbx_casa option:selected").each(function () {
-								id_casa = $(this).val();
-								$.post("includes4/getLocalidad.php", { id_casa: id_casa}, function(data){
-									$("#cbx_localidad").html(data);
-								});            
-							});
-						})
+		$(document).ready(function() {
+			$("#cbx_municipio").change(function() {
+
+				$('#cbx_casa').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+				$('#cbx_localidad').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+
+				$("#cbx_municipio option:selected").each(function() {
+					id_municipio = $(this).val();
+					$.post("includes3/getCalle.php", {
+						id_municipio: id_municipio
+					}, function(data) {
+						$("#cbx_calle").html(data);
 					});
-		
-				</script>
+				});
+			})
+		});
+
+		$(document).ready(function() {
+			$("#cbx_calle").change(function() {
+
+				$('#cbx_localidad').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
+
+				$("#cbx_calle option:selected").each(function() {
+					id_calle = $(this).val();
+					$.post("includes3/getCasa.php", {
+						id_calle: id_calle
+					}, function(data) {
+						$("#cbx_casa").html(data);
+					});
+				});
+			})
+		});
+
+		$(document).ready(function() {
+			$("#cbx_casa").change(function() {
+
+				$("#cbx_casa option:selected").each(function() {
+					id_casa = $(this).val();
+					$.post("includes4/getLocalidad.php", {
+						id_casa: id_casa
+					}, function(data) {
+						$("#cbx_localidad").html(data);
+					});
+				});
+			})
+		});
+	</script>
 
 
 	<a class="btn btn-primary" href="Gestion_CatalogoCuenta.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
 	<hr>
 	<div clas="row ">
-	<form class="" method="post">
-					<center>
-						<h2><strong>Registro de Grupos</strong></h2>
-					</center>
-		<div class="box-header with-border">
+		<form class="" method="post">
+			<center>
+				<h2><strong>Registro de Grupos</strong></h2>
+			</center>
+			<div class="box-header with-border">
 
 
 
-      
-			<div class="box-body">
-				
-				<div class="row">
-	<table class="table">
-		<thead class="table-primary">
-			<tr>
 
-				<th>
-					<center>Cuenta Principal</center>
-				</th>
-
-
-				<th>
-					<center>Sub-cuenta 1</center>
-				</th>
-
-			</tr>
-		</thead>
-
-		<tbody>
-
-			<tr >
-
-				<td style="width:50%;" >
-
-					<div >
-				
-
-						<!-- ENTRADA PARA LA CUENTA -->
-							<div class="form-group">
-
-
-                      <!-- ENTRADA PARA LA CUENTA -->
-                      <form id="combo" name="combo" action="guarda.php" method="POST">
-					  <div class="input-group">
-					  <span class="input-group-addon"><i class="fa fa-check"></i></span>
-					 <select  class=" form-control"  name="cbx_estado" id="cbx_estado" > 
-					    <option value="">Seleccione el estado de la cuenta</option>
-						<option value="1_">ACTIVO</option>
-						<option value="2_">PASIVO</option>
-						<option value="3">CAPITAL</option>
-			         </select> </span></div></form>
-			
-			<br />
-				</td>
-
-				<td style="width: 50%">
-
-					<div class="input-group">
-
-					<div class="input-group">
-				
-				<span  class="input-group-addon"><i class="fa fa-check"></i></span>
-				<select  class=" elegir  form-control" name="cbx_municipio" id="cbx_municipio" ></select></div>
-				</div>
-	
-		  <br />
-					</div>
-
-				</td>
-
-			</tr>
-
-		</tbody>
-	</table>
-
-</div>
-
-</div>
-
-
-				
-				<div class="row">
-	<table class="table">
-		<thead class="table-primary">
-			<tr>
-
-				<th>
-					<center>Tipo</center>
-				</th>
-
-
-				<th>
-					<center>Nombre Del Grupo</center>
-					</th>
-			</tr>
-		</thead>
-
-		<tbody>
-
-			<tr>
-
-				<td style="width:50%;" >
-
-				<div class="input-group">
-
-                <div class="input-group">
-				
-					<!-- <span  class="input-group-addon"><i class="fa fa-check"></i></span> -->
-		   <select hidden class=" elegir elegirl form-control" name="cbx_calle" id="cbx_calle" ></select></div>
-			</div>
-			
-			<br />
-				</td>
-				
-				<td style="width: 50%">
-
-											<div class="input-group">
-											    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-												<input type="text" class="form-control" name="CUENTA" maxlength="50" id="CUENTA" placeholder="Nombre de la Cuenta" size="35" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)" required>
-
-											</div>
-
-										</td>
-
-			</tr>
-
-		</tbody>
-	</table>
-
-</div>
-
-
-
-				
-			
-
-					
+				<div class="box-body">
 
 					<div class="row">
+						<table class="table">
+							<thead class="table-primary">
+								<tr>
 
-						<div class="col-xs-14 pull-right">
+									<th>
+										<center>Cuenta Principal</center>
+									</th>
 
-							<table class="table">
-								<thead class="table-primary">
-									<tr>
 
-										<th>
-											<center>Estado de Cuenta</center>
-										</th>
-										
+									<th>
+										<center>Sub-cuenta 1</center>
+									</th>
 
-									</tr>
-								</thead>
+								</tr>
+							</thead>
 
-								<tbody>
+							<tbody>
 
-									<tr>
+								<tr>
+
+									<td style="width:50%;">
+
+										<div>
+
+
+											<!-- ENTRADA PARA LA CUENTA -->
+											<div class="form-group">
+
+
+												<!-- ENTRADA PARA LA CUENTA -->
+												<form id="combo" name="combo" action="guarda.php" method="POST">
+													<div class="input-group">
+														<span class="input-group-addon"><i class="fa fa-check"></i></span>
+														<select class=" form-control js-example-basic-single" name="cbx_estado" id="cbx_estado">
+															<option value="">Seleccione el estado de la cuenta</option>
+															<option value="1_">ACTIVO</option>
+															<option value="2_">PASIVO</option>
+															<option value="3">CAPITAL</option>
+														</select> </span>
+													</div>
+												</form>
+
+												<br />
+									</td>
+
 									<td style="width: 50%">
 
-                                 <div class="input-group">
+										<div class="input-group">
 
-	                              <span class="input-group-addon"><i class="fa fa-check"></i></span>
-	                              <select class="form-control" name="Estado_Cuenta" required>
-	                            	<option value="">Seleccione el estado de la cuenta</option>
-	                              	<option value="ACTIVO">ACTIVO</option>
-	                             	<option value="INACTIVO">INACTIVO</option>
-	                         </select>
+											<div class="input-group">
 
-                            </div>
+												<span class="input-group-addon "><i class="fa fa-check"></i></span>
+												<select class=" elegir  form-control js-example-basic-single" name="cbx_municipio" id="cbx_municipio"></select>
+											</div>
+										</div>
 
-                              </td>
-
-
-										
-										
-
-									</tr>
-
-								</tbody>
-							</table>
-
-						</div>
-
+										<br />
 					</div>
 
-					
+					</td>
 
+					</tr>
 
-					<hr>
-					<center><button type="submit" class="btn btn-primary"> <i class="fa fa-check" aria-hidden="true"></i> Registrar Cuenta</button></center>
-				</form>
+					</tbody>
+					</table>
+
+				</div>
+
 			</div>
-		</div>
+
+
+
+			<div class="row">
+				<table class="table">
+					<thead class="table-primary">
+						<tr>
+
+
+
+							<th>
+								<center>Nombre Del Grupo</center>
+							</th>
+							<th>
+								<center>Estado de Cuenta</center>
+							</th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr>
+
+							<td style="width: 50%">
+
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-book"></i></span>
+									<input type="text" class="form-control" name="CUENTA" maxlength="50" id="CUENTA" placeholder="Nombre de la Cuenta" size="35" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeypress="return validar(event)" required>
+
+								</div>
+
+							</td>
+
+							<td style="width: 50%">
+
+								<div class="input-group">
+
+									<span class="input-group-addon"><i class="fa fa-check"></i></span>
+									<select class="form-control js-example-basic-single" name="Estado_Cuenta" required>
+										<option value="">Seleccione el estado de la cuenta</option>
+										<option value="ACTIVO">ACTIVO</option>
+										<option value="INACTIVO">INACTIVO</option>
+									</select>
+
+								</div>
+
+							</td>
+
+
+
+
+
+
+
+
+							<td style="width:50%;">
+
+								<div class="input-group">
+
+									<div class="input-group">
+
+										<!-- <span  class="input-group-addon"><i class="fa fa-check"></i></span> -->
+										<select hidden class=" elegir elegirl form-control" name="cbx_calle" id="cbx_calle"></select>
+									</div>
+								</div>
+
+								<br />
+							</td>
+
+
+
+						</tr>
+
+					</tbody>
+				</table>
+
+			</div>
+
+
+
+
+
+
+
+
+			<div class="row">
+
+				<div class="col-xs-14 pull-right">
+
+					<table class="table">
+						<thead class="table-primary">
+							<tr>
+
+
+
+
+							</tr>
+						</thead>
+
+						<tbody>
+
+
+						</tbody>
+					</table>
+
+				</div>
+
+			</div>
+
+
+
+
+			<hr>
+			<center><button type="submit" class="btn btn-primary"> <i class="fa fa-check" aria-hidden="true"></i> Registrar Cuenta</button></center>
+		</form>
+	</div>
+	</div>
 	</div>
 </section>
 </div>
 
 <script>
-      let elegir = document.querySelectorAll('.elegir');
-      let busqueda = document.getElementById('busqueda');
-      
-      document.addEventListener("DOMContentLoaded", () => {
-        elegir.forEach(elemento => elemento.disabled = false);
-        
-        busqueda.addEventListener('click', () => {
-          if (busqueda.checked) {
-            elegir.forEach(elemento => elemento.disabled = true);
-          } else {
-            elegir.forEach(elemento => elemento.disabled = false);
-          }
-        });
-      });
-    </script>
-	<script>
-      let elegirl = document.querySelectorAll('.elegirl');
-      let bup = document.getElementById('bup');
-      
-      document.addEventListener("DOMContentLoaded", () => {
-        elegirl.forEach(elemento => elemento.disabled = false);
-        
-        bup.addEventListener('click', () => {
-          if (bup.checked) {
-            elegirl.forEach(elemento => elemento.disabled = true);
-          } else {
-            elegirl.forEach(elemento => elemento.disabled = false);
-          }
-        });
-      });
-    </script>
+	let elegir = document.querySelectorAll('.elegir');
+	let busqueda = document.getElementById('busqueda');
+
+	document.addEventListener("DOMContentLoaded", () => {
+		elegir.forEach(elemento => elemento.disabled = false);
+
+		busqueda.addEventListener('click', () => {
+			if (busqueda.checked) {
+				elegir.forEach(elemento => elemento.disabled = true);
+			} else {
+				elegir.forEach(elemento => elemento.disabled = false);
+			}
+		});
+	});
+</script>
+<script>
+	let elegirl = document.querySelectorAll('.elegirl');
+	let bup = document.getElementById('bup');
+
+	document.addEventListener("DOMContentLoaded", () => {
+		elegirl.forEach(elemento => elemento.disabled = false);
+
+		bup.addEventListener('click', () => {
+			if (bup.checked) {
+				elegirl.forEach(elemento => elemento.disabled = true);
+			} else {
+				elegirl.forEach(elemento => elemento.disabled = false);
+			}
+		});
+	});
+</script>
 
 <script>
-      let eli = document.querySelectorAll('.eli');
-      let bul = document.getElementById('bul');
-      
-      document.addEventListener("DOMContentLoaded", () => {
-        eli.forEach(elemento => elemento.disabled = false);
-        
-        bul.addEventListener('click', () => {
-          if (bul.checked) {
-            eli.forEach(elemento => elemento.disabled = true);
-          } else {
-            eli.forEach(elemento => elemento.disabled = false);
-          }
-        });
-      });
-    </script>
+	let eli = document.querySelectorAll('.eli');
+	let bul = document.getElementById('bul');
+
+	document.addEventListener("DOMContentLoaded", () => {
+		eli.forEach(elemento => elemento.disabled = false);
+
+		bul.addEventListener('click', () => {
+			if (bul.checked) {
+				eli.forEach(elemento => elemento.disabled = true);
+			} else {
+				eli.forEach(elemento => elemento.disabled = false);
+			}
+		});
+	});
+</script>
 
 
-
+<script>
+	$(document).ready(function() {
+		$('.js-example-basic-single').select2();
+	});
+</script>
 
 <style type="text/css">
 	.btn-atras {
@@ -457,7 +473,6 @@ if (!isset($_SESSION['rol'])) {
 	.alert p {
 		padding: 10px;
 	}
-
 </style>
 
 <?php include 'barralateralfinal.php'; ?>
