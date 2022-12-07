@@ -120,7 +120,7 @@ include 'barralateralinicial.php';
         <b>Factura #:</b> <input disabled type="text" name="factura" value="<?= $_SESSION['productos']['factura']  ?>" placeholder="000-001-01-000000" maxlength="15" style="width:120px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required /><br>
         <b>CAI:</b> <input disabled type="text" value="<?= $_SESSION['productos']['CAI']  ?>" placeholder="00000000000" maxlength="17" style="width:120px;border:0" oninput="this.value = this.value.replace(/[^0-9\s]/,'')" required /><br>
         <b>Vence:</b> <input disabled type="date" style="width:90px;border:0" name="Fechaven" value="<?= $_SESSION['productos']['Fechaven']  ?>" required /><br>
-        <b>Direción:</b> <input disabled type="text" style="width:450px;height:20px;border:0" placeholder="Direccion del Proveedor" size="150" value="<?= $_SESSION['productos']['dirProveedor']  ?>" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" required /><br>
+        <b>Direción:</b> <input disabled type="text" style="width:700px;height:20px;border:0" placeholder="Direccion del Proveedor" size="250" value="<?= $_SESSION['productos']['dirProveedor']  ?>" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" required /><br>
         <b>Teléfono:</b><input disabled type="text" style="width:150px;height:20px;border:0" maxlength="10" placeholder="Telefono" size="15" value="<?= $_SESSION['productos']['telefono']  ?>" oninput="this.value = this.value.replace(/[^0-9-\s]/,'')" required /><br><br><br>
         </p>
       </div>
@@ -142,7 +142,7 @@ include 'barralateralinicial.php';
     <div class="row section" style="margin-top:-1rem">
       <div class="col-1">
         <table style='width:100%'>
-          <thead contenteditable>
+          <thead>
             <tr class="invoice_detail">
               <th width="25%">
                 <center>Proveedor</center>
@@ -152,7 +152,7 @@ include 'barralateralinicial.php';
               </th>
             </tr>
           </thead>
-          <tbody contenteditable>
+          <tbody>
             <tr class="invoice_detail">
               <td width="25%" style="text-align">
                 <center><input disabled type="text" name="proveedor" value="<?= $_SESSION['productos']['proveedor']  ?>" style="width:350px;height:20px;border:0" maxlength="50" placeholder="Nombre de proveedor" size="30" oninput="this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/,'')" value="" required /></center>
@@ -175,7 +175,7 @@ include 'barralateralinicial.php';
       <input type="checkbox" id="config_tax" />
     </label>
     <label for="config_tax_rate" class="taxrelated">Tasa:
-      <input type="text" id="config_tax_rate" value="15" />%
+      <input type="text" oninput="this.value = this.value.replace(/[^0-9_.]/,'')" id="config_tax_rate" value="15" />%
     </label>
     </div>
     <hr>
@@ -214,10 +214,10 @@ include 'barralateralinicial.php';
               <center><input type="text" name="Descripcion[]" style="width:550px;height:30px;border:0" maxlength="50" placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/,'')" value="" required /></center>
             </td>
             <td width='1%' class="amount">
-              <center><input type="number" name="cantidad[]" style="width:60px;height:40px;border:0" value="1" required /></center>
+              <center><input type="number" name="cantidad[]" style="width:60px;height:40px;border:0" oninput="this.value = this.value.replace(/[^0-9]/,'')" value="1" required /></center>
             </td>
             <td class="rate">
-              <center><input type="number" name="precio[]" style="width:100px;height:40px;border:0" Placeholder="Precio" step=00.01 required /></center>
+              <center><input type="number" name="precio[]" style="width:100px;height:40px;border:0" Placeholder="Precio" oninput="this.value = this.value.replace(/[^0-9_.]/,'')" step=00.01 required /></center>
             </td>
 
             <td class="tax taxrelated"></td>
