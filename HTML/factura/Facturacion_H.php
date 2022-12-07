@@ -123,9 +123,10 @@ include 'barralateralinicial.php';
         <b for="" style="width:120px;">RTN: 08011972047876</b><br>
         <b>Rango Inicial :</b> <input type="text" readonly="Readonly" name="rangoini" value="<?php echo $param1 ?> " placeholder="" maxlength="25" style="width:150px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required /><br>
         <b>Rango Final:</b> <input type="text" readonly="Readonly" name="rangofini" value="<?php echo $param2 ?>" placeholder="" maxlength="25" style="width:150px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required /><br>
-        <b>Factura #: <input type="text" readonly="Readonly" name="N_Factura" value="<?php echo $param3 ?>-<?php echo $param4 ?>-<?php echo $param5 ?>" maxlength="17" style="width:70px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required />- <input type="text" name="N_Factura2" value="" placeholder="00000000" maxlength="8" style="width:90px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required /><br></b>
+        <b>Factura #: <input type="text" readonly="Readonly" name="N_Factura" maxlength="8" minlength="8" value="<?php echo $param3 ?>-<?php echo $param4 ?>-<?php echo $param5 ?>" maxlength="17" style="width:70px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required />- <input type="text" name="N_Factura2" value="" placeholder="00000000" maxlength="8" style="width:90px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required /><br></b>
         <b>CAI:</b> <input type="text" readonly="Readonly" name="CAI" value="<?php echo $param ?>" maxlength="37" style="width:280px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required /><br>
         <b>Fecha LImite de Emisión: </b><input type="date" name="Fechalimite" style="width:110px;border:0" required /><br><br>
+        <input type="hidden" value="Honorarios" name="Tipofactura"  />
         <hr>
         <div class="form-group">
 
