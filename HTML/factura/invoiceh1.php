@@ -51,7 +51,7 @@ $sql5 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '11';";
 if ($factu > $param2) {
 	echo "<script> alert('EL NUMERO DE FACTURA INGRESADO NO COINCIDE CON EL RANGO FIJADO EN LA GESTION PARAMETROS' );window.location= 'Facturacion_H1.php' </script>";
 }elseif ($factu <= $param2 and $factu >= $param3) {
-
+	$Tipo_factura =$_POST["Tipofactura"];
    $fecha=$_POST['Fecha'];
    $rangoini = $_POST['rangoini'];
    $rangofin = $_POST['rangofini'];
@@ -67,11 +67,11 @@ if ($factu > $param2) {
    $montoTotal=$_POST['montoTotal'];
 
 
-   $valores='("'.$N_Factura.'","'.$fecha.'","'.$Nombre_Cliente.'","'.$RTN_Cliente.'","'.$Suma_letras.'","'.$Descripcion.'",'.$total.','.$totalRetenido.','.$montoTotal.'),';
+   $valores='("'.$N_Factura.'","'.$fecha.'","'.$Nombre_Cliente.'","'.$RTN_Cliente.'","'.$Suma_letras.'","'.$Descripcion.'",'.$total.','.$totalRetenido.','.$montoTotal.',"'.$Tipo_factura.'"),';
    //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
    $valoresQ= substr($valores, 0, -1);
    ///////// QUERY DE INSERCIÓN ////////////////////////////
-   $sql = "INSERT INTO tbl_factura_1 (N_Factura,Fecha,Nombre_Cliente	,RTN_Cliente,Suma_Neta,Concepto,Total_Honorarios,Valores_Retenidos,Total_Neto) VALUES $valoresQ";
+   $sql = "INSERT INTO tbl_factura_1 (N_Factura,Fecha,Nombre_Cliente	,RTN_Cliente,Suma_Neta,Concepto,Total_Honorarios,Valores_Retenidos,Total_Neto,Tipo_Factura) VALUES $valoresQ";
   
    $pdo=Conexion::conectar();
    $consulta=$pdo->prepare($sql);
