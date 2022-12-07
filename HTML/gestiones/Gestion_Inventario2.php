@@ -53,7 +53,7 @@ $numero = 99999.99;
         <div class="col-md-12">
             <div class="box-body table-responsive">
                 <div class="reportes">
-                    <h2><strong>Gestión Inventario</strong> </h2>
+                    <h2><strong>Inventario</strong> </h2>
 
                     <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                     <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {
@@ -65,7 +65,7 @@ $numero = 99999.99;
                     <?php } ?>
 
                     <a class="btn btn-warning" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>´
-                    <a class="btn btn-success" href="reporte_excel_inventario.php"> Reporte excel</a>
+                    <a class="btn btn-success" href="reporte_excel_inventario.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
                 </div>
 
 
@@ -76,7 +76,7 @@ $numero = 99999.99;
                 ?>
 
                 <form action="" method="get" class="form_datos">
-                    <label for="datos_mostrar">Datos A mostrar</label>
+                    <label for="datos_mostrar">Datos A mostrarㅤ</label>
                     <select name="mostrar" onchange='submit();'>
                         <option></option>
                         <option value="25">25</option>
