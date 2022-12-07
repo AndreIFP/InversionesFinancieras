@@ -160,9 +160,6 @@ $numero = 99999.99;
 
                                 <?php if ($_SESSION['permisos'][M_GESTION_CLIENTE] and $_SESSION['permisos'][M_GESTION_CLIENTE]['d'] == 1) {
                                 ?>
-                                    <th>
-                                        <center><a href="Delete_Cliente.php?Id=<?php echo $Id_Cliente ?>" class="btn btn-danger btn-xs"><i class="fa fa-close" aria-hidden="true"></i> </a></a></center>
-                                    </th>
 
                                 <?php } ?>
 
@@ -380,8 +377,4 @@ $numero = 99999.99;
         border-radius: 10px;
     }
 </style>
-<<<<<<< HEAD
-
-=======
->>>>>>> 7a1f591275269451a2c909baf67dc271e6fdc6bb
 <?php include 'barralateralfinal.php'; ?>
