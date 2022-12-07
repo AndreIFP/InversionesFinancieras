@@ -162,7 +162,7 @@ include 'barralateralinicial.php';
         <input type="checkbox" id="config_tax" />
       </label>
       <label for="config_tax_rate" class="taxrelated"> -> Tasa:
-        <input type="text" id="config_tax_rate" value="15" />%
+        <input type="text" oninput="this.value = this.value.replace(/[^0-9_.]/,'')" id="config_tax_rate" value="15" />%
       </label>
 
     </div>
