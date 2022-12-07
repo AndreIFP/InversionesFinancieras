@@ -59,10 +59,10 @@ $numero = 99999.99;
                     <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {
 
                     ?>
-                       <a class="btn btn-secondary" href="reporte_excel_kardex.php"><i class="fa fa-check" aria-hidden="true"></i> Revisar Kardex</a>
+                        <a class="btn btn-secondary" href="reporte_excel_kardex.php"><i class="fa fa-check" aria-hidden="true"></i> Revisar Kardex</a>
                         <a href="../compras/Facturacion.php" input type="submit" class="btn btn-success" Value="Nuevo Producto"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Producto</a>
-                    
-                        <?php } ?>
+
+                    <?php } ?>
 
                     <a class="btn btn-warning" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>´
                     <a class="btn btn-success" href="reporte_excel_inventario.php"> Reporte excel</a>
@@ -88,7 +88,7 @@ $numero = 99999.99;
                     </select>
                 </form>
                 <form action="Buscador_Inventario.php" method="get" class="form_search">
-                  
+
                     <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
                     <input type="submit" value="Buscar" class="btn btn-primary">
                 </form>
@@ -108,7 +108,7 @@ $numero = 99999.99;
                             <th>
                                 <center> Fecha </center>
                             </th>
-                    
+
                             <th colspan="3">
                                 <center> Acciones </center>
                             </th>
@@ -144,7 +144,7 @@ $numero = 99999.99;
                         if ($result > 0) {
                             while ($row = mysqli_fetch_array($sql)) {
 
- 
+
                                 $id_product = $row['id_product'];
                                 $NFactura      = $row['NFactura'];
                                 $Proveedor       = $row['Proveedor'];
@@ -153,61 +153,65 @@ $numero = 99999.99;
                                 $time = $row['time'];
 
 
-                            $_SESSION['Id_Mauri'] = $id_product2;
-                                
-                           
-            
-            
-            ?>
-                                    <tr>
+                                $_SESSION['Id_Mauri'] = $id_product2;
+
+
+
+
+                        ?>
+                                <tr>
                                     <th>
-                                                <center><?php echo  $id_product  ?></center>
-                                            </th>
-                                            <th>
-                                                <center><?php echo  $proname ?></center>
-                                            </th>
-                                            <th>
-                                                <center><?php echo  $amount   ?></center>
-                                            </th>
-                                            <th>
-                                                <center><?php echo  $time ?></center>
-                                            </th>
-                                   
+                                        <center><?php echo  $id_product  ?></center>
+                                    </th>
+                                    <th>
+                                        <center><?php echo  $proname ?></center>
+                                    </th>
+                                    <th>
+                                        <center><?php echo  $amount   ?></center>
+                                    </th>
+                                    <th>
+                                        <center><?php echo  $time ?></center>
+                                    </th>
+
                                     <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['u'] == 1) {
 
-?>
-    <th><a href="../Compras/Salida1.php?Id=<?php echo $row['id_product'] ?>" class="btn btn-primary btn-xs">Retirar</a></th>
-    <?php } ?>
-    <script>
-        function alerta() {
-            window.alert('No es posible hacer esta Accion');
-        }
-    </script>
-    <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['d'] == 1) {
+                                    ?>
+                                        <th>
+                                            <center><a href="../Compras/Salida1.php?Id=<?php echo $row['id_product'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-sign-out" aria-hidden="true"></i></a></center>
+                                        </th>
+                                    <?php } ?>
+                                    <script>
+                                        function alerta() {
+                                            window.alert('No es posible hacer esta Accion');
+                                        }
+                                    </script>
+                                    <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['d'] == 1) {
 
-    ?>
-    <th>
-        <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
-    </th>
+                                    ?>
+                                        <th>
+                                            <center><a type="button" class="btn btn-danger btn-xs" onclick="alerta()"><i class="fa fa-times" aria-hidden="true"></i></a></center>
+                                        </th>
 
-    <th><center> <a href="Gestion_Inventario2.php?id_product2=<?php echo $id_product ?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center> </th>
+                                        <th>
+                                            <center> <a href="Gestion_Inventario2.php?id_product2=<?php echo $id_product ?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center>
+                                        </th>
 
-<?php } ?>
-</tr>
+                                    <?php } ?>
+                                </tr>
 
 
-    
 
 
-                                    <form method="post" action="Gestion_Inventario.php" name="miformulario">
-                                        <script>
-                                            window.onload = function() {
-                                                // Una vez cargada la página, el formulario se enviara automáticamente.
-                                                var ModalEdit = new bootstrap.Modal(EditModal, {}).show();
-                                                var $pop = este;
-                                            }
-                                        </script>
-                                    </form>
+
+                                <form method="post" action="Gestion_Inventario.php" name="miformulario">
+                                    <script>
+                                        window.onload = function() {
+                                            // Una vez cargada la página, el formulario se enviara automáticamente.
+                                            var ModalEdit = new bootstrap.Modal(EditModal, {}).show();
+                                            var $pop = este;
+                                        }
+                                    </script>
+                                </form>
                                 </tr>
                         <?php
                             }
@@ -239,90 +243,89 @@ $numero = 99999.99;
                                     include("../conexion.php");
                                     $poll = $_SESSION['Id_Mauri'];
 
-                                    $query = mysqli_query($conn,"select * from product WHERE ( id_product LIKE '%$poll%' OR
+                                    $query = mysqli_query($conn, "select * from product WHERE ( id_product LIKE '%$poll%' OR
                                     proname LIKE '%$poll%') ");
                                     $nr = mysqli_num_rows($query);
                                     while ($row = mysqli_fetch_array($query)) {
 
 
-                                $id_product                = $row['id_product'];
-                                $NFactura                  = $row['NFactura'];
-                                $Proveedor                = $row['Proveedor'];
-                                $proname                   = $row['proname'];
-                                $amount                    = $row['amount'];
-                                $time                      = $row['time'];
+                                        $id_product                = $row['id_product'];
+                                        $NFactura                  = $row['NFactura'];
+                                        $Proveedor                = $row['Proveedor'];
+                                        $proname                   = $row['proname'];
+                                        $amount                    = $row['amount'];
+                                        $time                      = $row['time'];
 
                                     ?>
 
-<!--  -->
-<!--  -->
-<table class="table">
-                     <thead class="table-primary">
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Detalle</th>
-                                <th>Producto</th>
-                                <th>Entradas</th>
-                                <th>Salidas</th>
-                                <th></th>
-                            </tr>   
-                        </thead>
-                        <tbody>
-                                <?php
-                                //Paginador
-			                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_KARDEX");
-			                    $result_register = mysqli_fetch_array($sql_registe);
-			                    $total_registro = $result_register['total_registro'];
-
-			         if($mostrar_datos > 0){
-                                    $por_pagina = $mostrar_datos;
-                                }else{
-                                    $por_pagina = 10;
-                                }
-
-                                if(empty($_GET['pagina']))
-                                {
-                                    $pagina = 1;
-                                }else{
-                                    $pagina = $_GET['pagina'];
-                                }
-
-                                $desde = ($pagina-1) * $por_pagina;
-                                $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select * FROM TBL_KARDEX where id_product=$id_product ");
-                                    mysqli_close($conn);
-
-			                        $result = mysqli_num_rows($sql);
-                                    if($result > 0){
-                                    while($row=mysqli_fetch_array($sql)){
-
-
-                                        $_SESSION['Id_Mauri']= $row ['Id_kardex'];;
-                                        $fecha      = $row ['fecha'];
-                                        $detalle       = $row ['detalle'];
-                                        $proname  = $row ['proname'];
-                                         $cant_entrada    = $row ['cant_entrada'];
-                                         $total_cante       = $row ['total_cante'];
-                                         $cant_salida     = $row ['cant_salida'];
-                                         $total_cants       = $row ['total_cants'];  
-                                        $Id_kardex =$_SESSION['Id_Mauri'];
-
-                                ?>
-                                     <tr>
-                                        <th><?php echo $fecha?></th>
-                                        <th><?php echo $detalle?></th>
-                                        <th><?php echo $proname?></th>
-                                        <th><?php echo $cant_entrada?></th>   
-                                        <th><?php echo $cant_salida?></th>
-                                    </tr>
-                                <?php
-                                       }
-                                    }
-                                ?>
-                        </tbody>
-                      </table>
                                         <!--  -->
-                                <!--  -->
+                                        <!--  -->
+                                        <table class="table">
+                                            <thead class="table-primary">
+                                                <tr>
+                                                    <th>Fecha</th>
+                                                    <th>Detalle</th>
+                                                    <th>Producto</th>
+                                                    <th>Entradas</th>
+                                                    <th>Salidas</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                //Paginador
+                                                $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_KARDEX");
+                                                $result_register = mysqli_fetch_array($sql_registe);
+                                                $total_registro = $result_register['total_registro'];
+
+                                                if ($mostrar_datos > 0) {
+                                                    $por_pagina = $mostrar_datos;
+                                                } else {
+                                                    $por_pagina = 10;
+                                                }
+
+                                                if (empty($_GET['pagina'])) {
+                                                    $pagina = 1;
+                                                } else {
+                                                    $pagina = $_GET['pagina'];
+                                                }
+
+                                                $desde = ($pagina - 1) * $por_pagina;
+                                                $total_paginas = ceil($total_registro / $por_pagina);
+                                                $sql = mysqli_query($conn, "select * FROM TBL_KARDEX where id_product=$id_product ");
+                                                mysqli_close($conn);
+
+                                                $result = mysqli_num_rows($sql);
+                                                if ($result > 0) {
+                                                    while ($row = mysqli_fetch_array($sql)) {
+
+
+                                                        $_SESSION['Id_Mauri'] = $row['Id_kardex'];;
+                                                        $fecha      = $row['fecha'];
+                                                        $detalle       = $row['detalle'];
+                                                        $proname  = $row['proname'];
+                                                        $cant_entrada    = $row['cant_entrada'];
+                                                        $total_cante       = $row['total_cante'];
+                                                        $cant_salida     = $row['cant_salida'];
+                                                        $total_cants       = $row['total_cants'];
+                                                        $Id_kardex = $_SESSION['Id_Mauri'];
+
+                                                ?>
+                                                        <tr>
+                                                            <th><?php echo $fecha ?></th>
+                                                            <th><?php echo $detalle ?></th>
+                                                            <th><?php echo $proname ?></th>
+                                                            <th><?php echo $cant_entrada ?></th>
+                                                            <th><?php echo $cant_salida ?></th>
+                                                        </tr>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                        <!--  -->
+                                        <!--  -->
 
 
                                     <?php
