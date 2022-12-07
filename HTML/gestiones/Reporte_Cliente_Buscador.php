@@ -2,7 +2,7 @@
 
 require('fpdf.php');
 require ('../conexion.php');
-
+session_start();
 class PDF extends FPDF
 {
 // Cabecera de página
@@ -28,7 +28,7 @@ function Header()
     }
     
     $this->SetFont('Arial','',8);
-    $this->Cell(95);
+    $this->Cell(119);
     $this->Cell(8,10, utf8_decode($Direccion),0,7, 45);
     $this->Ln(0);
 
@@ -40,7 +40,7 @@ function Header()
     }
 
     $this->SetFont('Arial','',8);
-    $this->Cell(110);
+    $this->Cell(115);
     $this->Cell(8,0, utf8_decode('Teléfono: ' .$Telefono ),0,7);
     $this->Ln(4);
 
@@ -83,8 +83,8 @@ function Footer()
     $this->Cell(0,15,$DateAndTime,0,1,'R');
 }
 }
-
-$cliente=$_GET['variable'];
+$_SESSION['busquedaX'];
+$cliente = $_SESSION['busquedaX'];
 // Creación del objeto de la clase heredada
 $sql = "SELECT * FROM TBL_CLIENTES where Nombre_Empresa LIKE '%$cliente%' OR Nombre_Cliente LIKE '%$cliente%'";
 $resultado = mysqli_query($conn,$sql);
@@ -96,33 +96,32 @@ $pdf->SetMargins(10,10,10);
 $pdf->AddPage('LANSPACE','LETTER');
 
 
-$pdf->SetFont('Times','B',8);
+$pdf->SetFont('Times','B',7);
 $pdf->setX(2);
 
-
 $pdf->SetFillColor(108, 250, 254 );
-$pdf->Cell(20,5, utf8_decode('ID'),1,0,'C',1);
-$pdf->Cell(35,5, utf8_decode('Nombre Empresa'),1,0,'C',1);
+$pdf->Cell(11,5, utf8_decode('ID'),1,0,'C',1);
+$pdf->Cell(42,5, utf8_decode('Nombre Empresa'),1,0,'C',1);
 $pdf->Cell(40,5, utf8_decode('Representante Legal'),1,0,'C',1);
-$pdf->Cell(30,5, utf8_decode('RTN'),1,0,'C',1);
-$pdf->Cell(30,5, utf8_decode('Dirección'),1,0,'C',1);
-$pdf->Cell(30,5, utf8_decode('Telefono'),1,0,'C',1);
-$pdf->Cell(30,5, utf8_decode('Estado'),1,0,'C',1);
+$pdf->Cell(21,5, utf8_decode('RTN'),1,0,'C',1);
+$pdf->Cell(75,5, utf8_decode('Dirección'),1,0,'C',1);
+$pdf->Cell(16,5, utf8_decode('Telefono'),1,0,'C',1);
+$pdf->Cell(14,5, utf8_decode('Estado'),1,0,'C',1);
 $pdf->Cell(30,5, utf8_decode('Ciudad'),1,0,'C',1);
-$pdf->Cell(30,5, utf8_decode('Fecha Creación'),1,1,'C',1);
+$pdf->Cell(27,5, utf8_decode('Fecha Creación'),1,1,'C',1);
 
 
 while ($fila = $resultado->fetch_assoc()) {
     $pdf->setX(2);
-    $pdf->Cell(20, 5, $fila['Id_Cliente'], 1, 0, "L",0);
-    $pdf->Cell(35, 5, utf8_decode($fila['Nombre_Empresa']), 1, 0, "L",0);
+    $pdf->Cell(11, 5, $fila['Id_Cliente'], 1, 0, "C",0);
+    $pdf->Cell(42, 5, utf8_decode($fila['Nombre_Empresa']), 1, 0, "L",0);
     $pdf->Cell(40, 5, utf8_decode($fila['Nombre_Cliente']), 1, 0, "L",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['RTN_Cliente']), 1, 0, "L",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Direccion']), 1, 0, "L",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Telefono']), 1, 0, "L",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Tipo_Cliente']), 1, 0, "L",0);
+    $pdf->Cell(21, 5, utf8_decode($fila['RTN_Cliente']), 1, 0, "L",0);
+    $pdf->Cell(75, 5, utf8_decode($fila['Direccion']), 1, 0, "L",0);
+    $pdf->Cell(16, 5, utf8_decode($fila['Telefono']), 1, 0, "L",0);
+    $pdf->Cell(14, 5, utf8_decode($fila['Tipo_Cliente']), 1, 0, "L",0);
     $pdf->Cell(30, 5, utf8_decode($fila['Ciudad']), 1, 0, "L",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Fecha_Dato']), 1, 1, "L",0);
+    $pdf->Cell(27, 5, utf8_decode($fila['Fecha_Dato']), 1, 1, "L",0);
 }
 
 

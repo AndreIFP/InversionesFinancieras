@@ -7,7 +7,7 @@ session_start();
     padding: 15px;
     color:black;
     font-size: 12px; ">
-  <div class="container-fluid">
+    <div class="container-fluid">
         <title>Gestión Facturas</title>
         <div class="col-md-12">
             <?php
@@ -18,24 +18,26 @@ session_start();
             ?>
             <h2><strong> Gestión Facturas</strong></h2>
             <a class="btn btn-primary" href="Gestion_Factura.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-            <a class="btn btn-warning" href="Reporte_Factura_Buscador.php?variable=<?php echo $busqueda; ?>" <a class="btn btn-warning" href="Reporte_Catalogo_Buscador.php?variable=<?php echo $busqueda; ?>" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+            <a class="btn btn-warning" href="Reporte_Factura.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                     
             <div class="box-body table-responsive">
                 <table class="table"><br>
                     <thead class="table-primary">
                         <tr>
-                            <th>Id</th>
-                            <th>No. Factura</th>
-                            <th>Cliente</th>
-                            <th>Descripcion</th>
-                            <th>Total</th>
+                            <th><center>No. Factura</center></th>
+                            <th><center>Cliente</center></th>
+                            <th><center>Descripción</center></th>
+                            <th><center>Total</center></th>
+                            <th><center>Tipo Factura</center></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         //Paginador
-                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM FACTURA 
-                                            WHERE ( ID LIKE '%$busqueda%' OR
-                                                    DESCRIPCION LIKE '%$busqueda%' )");
+                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_Factura_1
+                                            WHERE ( N_Factura LIKE '%$busqueda%' OR
+                                                    Concepto LIKE '%$busqueda%' OR
+                                                    Nombre_Cliente LIKE '%$busqueda%' )");
                         $result_register = mysqli_fetch_array($sql_registe);
                         $total_registro = $result_register['total_registro'];
 
@@ -49,8 +51,8 @@ session_start();
 
                         $desde = ($pagina - 1) * $por_pagina;
                         $total_paginas = ceil($total_registro / $por_pagina);
-                        $sql = mysqli_query($conn, "SELECT * FROM FACTURA WHERE ( DESCRIPCION LIKE '%$busqueda%' OR
-                                                                        NFACTURA LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
+                        $sql = mysqli_query($conn, "SELECT * FROM TBL_Factura_1 WHERE ( Concepto LIKE '%$busqueda%' OR
+                                                                        N_Factura LIKE '%$busqueda%' OR Nombre_Cliente LIKE '%$busqueda%' ) LIMIT $desde,$por_pagina ");
                         mysqli_close($conn);
 
                         $result = mysqli_num_rows($sql);
@@ -58,11 +60,12 @@ session_start();
                             while ($row = mysqli_fetch_array($sql)) {
                         ?>
                                 <tr>
-                                    <th><?php echo $row['ID'] ?></th>
-                                    <th><?php echo $row['NFACTURA'] ?></th>
-                                    <th><?php echo $row['Id_Cliente'] ?></th>
-                                    <th><?php echo $row['DESCRIPCION'] ?></th>
-                                    <th><?php echo $row['TOTAL'] ?></th>
+                                    <th><center><?php echo $row['N_Factura'] ?></center></th>
+                                    <th><center><?php echo $row['Nombre_Cliente'] ?></center></th>
+                                    <th><center><?php echo $row['Concepto'] ?></center></th>
+                                    <th><center><?php echo 'L ' . number_format($row['Total_Neto'], 2) ?></center></th>
+                                    <th><center><?php echo $row['Tipo_Factura'] ?></center></th>
+
                                 </tr>
                         <?php
                             }
@@ -81,10 +84,10 @@ session_start();
                         <?php
                         if ($pagina != 1) {
                         ?>
-                            <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<< /a>
+                            <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|<</a>
                             </li>
                             <li><a href="?pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo $busqueda; ?>">
-                                    <<< /a>
+                                    <<</a>
                             </li>
                         <?php
                         }

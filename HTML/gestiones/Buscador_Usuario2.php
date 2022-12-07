@@ -21,11 +21,9 @@ if (!isset($_SESSION['rol'])) {
     }
 
     if (empty($_REQUEST['Id_Usuario2'])) {
-        header("location: Gestion_Usuarios.php");
+        header("location: Gestion_Usuario2.php");
         die();
     } else {
-
-
         $Id_Usuario2 = $_REQUEST['Id_Usuario2'];
     }
 }
@@ -34,6 +32,10 @@ $numero = 99999.99;
 ?>
 
 <?php include 'barralateralinicial.php'; ?><p></p>
+<?php 
+$_SESSION['busquedaX'];
+$busqueda = $_SESSION['busquedaX'];
+?>
 
 
 <!DOCTYPE html>
@@ -57,109 +59,98 @@ $numero = 99999.99;
 
                     <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                     <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['w'] == 1) {
-
                     ?>
-                        <a href="Nuevo_Usuario.php" input type="submit" class="btn btn-success" Value="Nuevo"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo usuario</a>
-                    <?php } ?>
-                    <a class="btn btn-warning" href="Reporte_Usuario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-                    <a class="btn btn-success" href="reporte_excel_usuarios.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
-                 <a align="rigth" href="Gestion_Usuarios_Inactivos.php"><button type="submit" class="btn btn-info"><i class="fa fa-times" aria-hidden="true"></i> Usuarios Inactivos</button></a>
-                </div>
+                        
+                        <?php } ?>
+                        <a class="btn btn-warning" href="Reporte_Usuario_Buscador.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                        <a class="btn btn-success" href="reporte_excel_buscador_Usuarios.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
+                        
+                    </div>
+            
+<br>
+            <table class="table ">
+                <thead class="table-primary">
+                    <tr>
+                        <th>
+                            <center>Id</center>
+                        </th>
+                        <th>
+                            <center>Nombre Empresa</center>
+                        </th>
+                        <th>
+                            <center>Representante Legal</center>
+                        </th>
+                        <th>
+                            <center>RTN</center>
+                        </th>
+                        <th>
+                            <center>Estado</center>
+                        </th>
+                        <th colspan="3">
+                            <center>Acciones</center>
+                        </th>
 
-
-
+                    </tr>
+                </thead>
+                <tbody>
                 <?php
-                $mostrar_datos = 0;
+                         //Paginador
+                    $rol = '';
+                    if ($busqueda == 'administrador') {
+                        $rol = " OR rol LIKE '%1%' ";
+                    } else if ($busqueda == 'secretario') {
 
-                ?>
+                        $rol = " OR rol LIKE '%2%' ";
+                    } else if ($busqueda == 'seguridad') {
 
-                <form action="" method="get" class="form_datos">
-                    <label for="datos_mostrar">Datos A mostrarㅤ</label>
-                    <select name="mostrar" onchange='submit();'>
-                        <option></option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                        <?php
-                        $mostrar_datos = $_GET['mostrar'];
-                        ?>
-                    </select>
-                </form>
-                <form action="Buscador_Usuario.php" method="get" class="form_search">
-                    <input type="text" name="busqueda" id="busqueda" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" placeholder="Buscar" size=40>
-                    <input type="submit" value="Buscar" class="btn btn-primary">
-                </form>
+                        $rol = " OR rol LIKE '%3%' ";
+                    } else if ($busqueda == 'nuevo') {
 
-                <table class="table">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>
-                                <center> Id </center>
-                            </th>
-                            <th>
-                                <center> Usuario </center>
-                            </th>
-                            <th>
-                                <center> Nombre Usuario </center>
-                            </th>
-                            <th>
-                                <center> Estado </center>
-                            </th>
-                            <th>
-                                <center> Rol </center>
-                            </th>
-                            <th colspan="3">
-                                <center> Acciones </center>
-                            </th>
+                        $rol = " OR rol LIKE '%4%' ";
+                    }
 
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_USUARIO
+                                            WHERE ( Id_Usuario LIKE '%$busqueda%' OR 
+                                                    Usuario LIKE '%$busqueda%' OR
+                                                    Nombre_Usuario LIKE '%$busqueda%' OR
+                                                    Estado_Usuario LIKE '%$busqueda%'
+                                                    $rol  )");
+                    $result_register = mysqli_fetch_array($sql_registe);
+                    $total_registro = $result_register['total_registro'];
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        //Paginador
-                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_USUARIO WHERE Id_Usuario = Id_Usuario AND Estado_Usuario = 'Activo' ");
-                        $result_register = mysqli_fetch_array($sql_registe);
-                        $total_registro = $result_register['total_registro'];
+                    $por_pagina = 20;
 
-                        if ($mostrar_datos > 0) {
-                            $por_pagina = $mostrar_datos;
-                        } else {
-                            $por_pagina = 10;
-                        }
+                    if (empty($_GET['pagina'])) {
+                        $pagina = 1;
+                    } else {
+                        $pagina = $_GET['pagina'];
+                    }
 
-                        if (empty($_GET['pagina'])) {
-                            $pagina = 1;
-                        } else {
-                            $pagina = $_GET['pagina'];
-                        }
-
-                        $desde = ($pagina - 1) * $por_pagina;
-                        $total_paginas = ceil($total_registro / $por_pagina);
-                        $sql = mysqli_query($conn, "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Activo' ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
-                        mysqli_close($conn);
-
-
-
+                    $desde = ($pagina - 1) * $por_pagina;
+                    $total_paginas = ceil($total_registro / $por_pagina);
+                    $sql = mysqli_query($conn, "SELECT u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol 
+                                                                        WHERE ( u.Id_Usuario LIKE '%$busqueda%' OR 
+                                                                                u.Usuario LIKE '%$busqueda%' OR
+                                                                                u.Nombre_Usuario LIKE '%$busqueda%' OR
+                                                                                u.Estado_Usuario LIKE '%$busqueda%' OR
+                                                                                r.rol LIKE '%$busqueda%') ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
+                    mysqli_close($conn);
 
                         $result = mysqli_num_rows($sql);
                         if ($result > 0) {
                             while ($row = mysqli_fetch_array($sql)) {
-
 
                                 $Id_Usuario                = $row['Id_Usuario'];
                                 $Usuario                   = $row['Usuario'];
                                 $Nombre_Usuario            = $row['Nombre_Usuario'];
                                 $Estado_Usuario            = $row['Estado_Usuario'];
                                 $Rol                       = $row['Rol'];
-                                $Fecha_Ultimo_Conexion     = $row['Fecha_Ultimo_Conexion'];
                                 $Correo_Electronico        = $row['Correo_Electronico'];
 
                                 $_SESSION['Id_Mauri'] = $Id_Usuario2;
-
-                        ?>
-                                <tr>
-                                    <th>
+                    ?>
+                            <tr>
+                            <th>
                                         <center><?php echo $Id_Usuario ?> </center>
                                     </th>
                                     <th>
@@ -175,20 +166,21 @@ $numero = 99999.99;
                                         <center><?php echo $Rol ?>
                                     </th>
 
-
                                     <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['u'] == 1) {
+                                ?>
+                                    <th>
+                                    <center><a href="Actualizar_Usuario.php?Id=<?php echo $Id_Usuario ?>" class="btn btn-primary btn-xs"> <i class="fa fa-pencil" aria-hidden="true"></i> </a> </center>
+                                    </th>
+                                <?php } ?>
 
-                                    ?>
-                                        <th>
-                                            <center><a href="Actualizar_Usuario.php?Id=<?php echo $Id_Usuario ?>" class="btn btn-primary btn-xs"> <i class="fa fa-pencil" aria-hidden="true"></i> </a> </center>
-                                        </th>
+                                <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['d'] == 1) {
+                                ?>
                                     <?php } ?>
 
-                                    <th>
-                                        <center> <a href="Gestion_Usuarios2.php?Id_Usuario2=<?php echo $Id_Usuario ?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center>
-                                    </th>
-
-                                    <form method="post" action="Gestion Usuarios.php" name="miformulario">
+                                <th>
+                                    <center><a href="Buscador_Usuario2.php?Id_Usuario2=<?php echo $Id_Usuario ?>" class="btn btn-success btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> </a></a></center>
+                                </th>
+                                <form method="post" action="Buscador_Usuario2.php" name="miformulario">
                                         <script>
                                             window.onload = function() {
                                                 // Una vez cargada la página, el formulario se enviara automáticamente.
@@ -469,18 +461,16 @@ $numero = 99999.99;
 
             </div>
 
-
-
-
+            </div>
             <div class="paginador">
                 <ul>
-                    <?php
+                <?php
                     if ($pagina != 1) {
                     ?>
-                        <li><a href="?pagina=<?php echo 1; ?>">|<</a>
+                        <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
                         </li>
                         <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                                <<</a>
+                                <<< /a>
                         </li>
                     <?php
                     }
@@ -500,11 +490,16 @@ $numero = 99999.99;
                     <?php } ?>
                 </ul>
             </div>
-
         </div>
+    </div>
+
+
+    </div>
+
+
+
 </section>
 
-</div>
 </body>
 
 <style type="text/css">
@@ -555,6 +550,15 @@ $numero = 99999.99;
         border-radius: 10px;
     }
 
+    .form_search .btn_search {
+        background: #1faac8;
+        color: #FFF;
+        padding: 0 20px;
+        border: 0;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
     .form_datos {
         display: -webkit-flex;
         display: -moz-flex;
@@ -566,14 +570,6 @@ $numero = 99999.99;
         padding: 10px;
         border-radius: 10px;
     }
-
-    .form_search .btn_search {
-        background: #1faac8;
-        color: #FFF;
-        padding: 0 20px;
-        border: 0;
-        cursor: pointer;
-        margin-left: 10px;
-    }
 </style>
-<?php include 'barralateralfinal.php'; ?><?php
+
+<?php include 'barralateralfinal.php'; ?>

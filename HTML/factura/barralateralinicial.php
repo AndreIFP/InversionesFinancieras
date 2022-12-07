@@ -366,7 +366,7 @@ $user = $_SESSION['user'];
         }
 
         #Hola {
-            line-height: 75%;
+            line-height: 400%;
         }
 
         /* 

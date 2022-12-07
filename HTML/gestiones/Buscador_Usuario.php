@@ -1,46 +1,95 @@
 <?php
 include("../conexion.php");
+
+//incluir las funciones de helpers
+include_once("../helpers/helpers.php");
+
+//iniciar las sesiones
 session_start();
+// si no existe la variable rol, el usuario no esta logueado y redirige al Login
+if (!isset($_SESSION['rol'])) {
+    header("Location: ../login.php");
+    die();
+} else {
+    //actualiza los permisos
+    updatePermisos($_SESSION['rol']);
+
+    //si no tiene permiso de visualización redirige al index
+    if ($_SESSION['permisos'][M_GESTION_USUARIOS]['r'] == 0 or !isset($_SESSION['permisos'][M_GESTION_USUARIOS]['r'])) {
+        header("Location: ../index.php");
+        die();
+    }
+}
+
+$numero = 99999.99;
 ?>
+
 <?php include 'barralateralinicial.php'; ?><p></p>
+<?php
+$busqueda = strtolower($_REQUEST['busqueda']);
+                 if(empty($busqueda))
+                 {
+                     header("location: Gestion_Cliente.php");
+                     mysqli_close($conn);
+                 }
+                 $_SESSION['busquedaX'] = $busqueda;
+             ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<title>Gestión Usuarios</title>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+
+
+
+
+
+  
+</head>
 <section style=" background-color:rgb(255, 255, 255);
     padding: 15px;
     color:black;
     font-size: 12px; ">
-    <title>Gestión Usuarios</title>
     <div class="container-fluid">
+        <div class="col-md-12">
         <div class="box-body table-responsive">
-            <?php
-            $busqueda = strtolower($_REQUEST['busqueda']);
-            if (empty($busqueda)) {
-                echo "<script> alert('Dejo En Blanco El Buscador');window.location= 'Gestion_Usuarios.php' </script>";
-            }
-            ?>
-            <h2><strong> Gestión Usuarios</strong></h2>
-        <form action="reporte_excel_buscador_usuarios.php" method="get">
-                    <a  class="btn btn-primary"  href="Gestion_Usuarios.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-                    <a class="btn btn-warning" href="Reporte_Usuario_Buscador.php?variable=<?php echo $busqueda;?>
-                    " onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-                    <input type="hidden" name="busqueda_filtro" id="busqueda_filtro" value="<?php echo $busqueda ?>">
-                    <input type="submit" value=" Reporte Excel" class="btn btn-success" download="Mi_Excel" >
-                    </form>
+            <div class="reportes">
+                <h2><strong>Gestión Usuarios</strong> </h2>
+                <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+                <?php if ($_SESSION['permisos'][M_GESTION_USUARIOS] and $_SESSION['permisos'][M_GESTION_USUARIOS]['w'] == 1) {
 
-<hr>
+                ?>
+                    
+                <?php } ?>
+                <a class="btn btn-warning" href="Reporte_Usuario_Buscador.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                 <a class="btn btn-success" href="reporte_excel_buscador_Usuarios.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
+                 </div>
+            <?php
+            $mostrar_datos = 0;
+            ?>
+
+            <br>
+            
+
             <table class="table">
                 <thead class="table-primary">
                     <tr>
-                        <th><center>Id</center></th>
-                        <th><center>Usuario</center></th>
-                        <th><center>Nombre Usuario</center></th>
-                        <th><center>Estado</center></th>
-                        <th><center>Correo Electrónico</center></th>
-                        <th><center>Rol</center></th>
-                        <th colspan="3"><center>Acciones</center></th>
+                        <th> <center> Id </center></th>
+                        <th> <center> Usuario </center></th>
+                        <th> <center> Nombre Usuario </center></th>
+                        <th> <center> Estado </center></th>
+                        <th> <center> Rol </center></th>
+                        <th colspan="3"> <center> Acciones </center> </th>
+                        
+                       
 
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
+                <?php
                     //Paginador
                     $rol = '';
                     if ($busqueda == 'administrador') {
@@ -65,7 +114,7 @@ session_start();
                     $result_register = mysqli_fetch_array($sql_registe);
                     $total_registro = $result_register['total_registro'];
 
-                    $por_pagina = 20;
+                    $por_pagina = 500;
 
                     if (empty($_GET['pagina'])) {
                         $pagina = 1;
@@ -105,7 +154,7 @@ session_start();
                                 <?php } ?>
 
                                 <th>
-                                    <center> <a href="Gestion_Usuarios2.php?Id_Usuario2=<?php echo $row['Id_Usuario']?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center>
+                                    <center> <a href="Buscador_Usuario2.php?Id_Usuario2=<?php echo $row['Id_Usuario']?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center>
                                 </th>
 
                             </tr>
