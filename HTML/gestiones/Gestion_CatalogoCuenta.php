@@ -69,6 +69,7 @@ if (!isset($_SESSION['rol'])) {
                     <select name="filtro" onchange='buscarFiltro(this);'>
                         <option>Todas</option>
                         <option value="1">ACTIVOS</option>
+                        <option value="12">ACTIVOS</option>
                         <option value="2">PASIVOS</option>
                         <option value="3">Capital</option>
                         <option value="64">INGRESOS</option>

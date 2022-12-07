@@ -90,7 +90,7 @@ session_start();
                             tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,1)
                              AND  tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2)
                            where tcc2.CODIGO_CUENTA LIKE '$busqueda%'
-                            order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6) LIMIT $desde,$por_pagina ");
+                            order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6) LIMIT $desde,$por_pagina");
                         }else{
                             
                             $sql = mysqli_query($conn, "SELECT tcc2.CODIGO_CUENTA as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA as TIPOCUENTA,
