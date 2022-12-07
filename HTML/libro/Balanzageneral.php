@@ -89,7 +89,7 @@ WHERE Id_cliente=$cliente");
       <?php
       $sql1 = "SELECT tcc.CUENTA ,tb.Sdebe  FROM Tbl_Balanza tb 
       join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where Id_cliente=$cliente and COD_CUENTA like '1%'; ";
+      where Id_cliente=$cliente and COD_CUENTA like '1%' AND tb.Sdebe!=0;";
       $resultado1 = mysqli_query($conn, $sql1);
 
       while ($rows = $resultado1->fetch_assoc()) {

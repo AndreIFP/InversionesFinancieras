@@ -171,7 +171,8 @@ $fecha = date('Y-m-d h:i:s');
         JOIN Rangosdeperiodos r on tb.Id_cliente=r.Id_Cliente 
         join tbl_asientos ta on ta.Id_Cliente=r.Id_Cliente 
         where tb.COD_CUENTA=tcc.CODIGO_CUENTA and tb.Id_cliente =$cliente  and tb.Mhaber!=tb.Mdebe
-       and ta.Fecha BETWEEN r.Fechainicio and r.Fechafinal;");
+        and $fechai BETWEEN $fechai and r.Fechafinal
+        group by tcc.CODIGO_CUENTA ");
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
 
