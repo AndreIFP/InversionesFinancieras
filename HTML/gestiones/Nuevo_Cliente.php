@@ -156,7 +156,7 @@ if (!isset($_SESSION['rol'])) {
 											<div class="input-group">
 
 												<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-												<input type="text" class="form-control" name="RTN_Cliente" maxlength="13" id="RTN_Cliente" placeholder="RTN" size="40" oninput="this.value = this.value.replace(/[^0-9]/,'')" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+												<input type="text" class="form-control" name="RTN_Cliente" maxlength="14" id="RTN_Cliente" placeholder="RTN" size="40" oninput="this.value = this.value.replace(/[^0-9]/,'')" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
 
 											</div>
 
