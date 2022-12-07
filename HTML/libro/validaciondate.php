@@ -57,11 +57,17 @@ $_SESSION['user'];
           </div>
           <br>
 
-          <label for="text" style="font-size:18px" > Nuevo Libro</label>
-            <input type="date" placeholder="Fecha"  name="txtfecha" maxlength="10" style="font-size:18px"/>
+          <label for="text" style="font-size:18px" > Fecha Inicial</label>
+            <input type="date" placeholder="Fecha Inicial"  name="txtfecha" maxlength="10" style="font-size:18px"/>
             <br>
 
-          <br>         
+          <br>    
+
+          <label for="text" style="font-size:18px" > Fecha Final</label>
+            <input type="date" placeholder="Fecha Final"  name="txtfecha2" maxlength="10" style="font-size:18px"/>
+            <br>
+
+          <br>     
 
 
 

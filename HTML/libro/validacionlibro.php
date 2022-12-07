@@ -44,8 +44,6 @@ if (!isset($_SESSION['rol'])) {
             <tr>
               <th><center>Seleccione un cliente</center></th>
               <th><center>Seleccione el Periodo</center></th>
-              <th><center>Seleccione la Fecha Final</center></th>
-
             </tr>
           </thead>
           
@@ -53,7 +51,7 @@ if (!isset($_SESSION['rol'])) {
           <tbody>
             <tr>
               <!--Cliente-->
-              <td style="width: 40%">
+              <td style="width: 50%">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-users"></i></span>
                   <select class="form-control" name="Idcliente" id="Idcliente" required>
@@ -100,20 +98,13 @@ function recargarLista(){
 }
 </script>
 <!--Fecha Inicial-->
-              <td style="width: 30%">
+              <td style="width: 50%">
                 <div class="input-group" id="select2lista" >
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
               </td>
 
-              <!--Fecha Final-->
-              <td style="width: 30%">
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                  <input type="date" class="form-control pull-right" id="date" name="fecha_final" required>
-                </div>
-              </td>
-
+              
             </tr>
 
           </tbody>
@@ -126,7 +117,7 @@ function recargarLista(){
         <!-- Agregar Nuevo -->
         <br>
                         <hr>
-                        <a href="validaciondate.php" style="font-size:18px" >Agregar Nuevo Libro</a>
+                        <a href="validaciondate.php" style="font-size:18px" >Agregar Nuevo Periodo</a>
         <!-- Fin - Agregar Nuevo -->
       </div>
     </div>
