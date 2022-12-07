@@ -68,7 +68,10 @@ session_start();
                         $desde = ($pagina - 1) * $por_pagina;
                         $total_paginas = ceil($total_registro / $por_pagina);
                         $sql = mysqli_query($conn, "select * from TBL_CLIENTES WHERE ( Nombre_Empresa LIKE '%$busqueda%' OR
-                                                                                Nombre_Cliente LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
+                                                                                Nombre_Cliente LIKE '%$busqueda%' OR
+                                                                                Id_Cliente LIKE '%$busqueda%'  OR
+                                                                                Tipo_Cliente LIKE '%$busqueda%' OR
+                                                                                RTN_Cliente LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
                         mysqli_close($conn);
 
                         $result = mysqli_num_rows($sql);
