@@ -27,7 +27,7 @@ function Header()
       }
       
       $this->SetFont('Arial','',8);
-      $this->Cell(95);
+      $this->Cell(119);
       $this->Cell(8,10, utf8_decode($Direccion),0,7, 45);
       $this->Ln(0);
   
@@ -39,7 +39,7 @@ function Header()
       }
   
       $this->SetFont('Arial','',8);
-      $this->Cell(110);
+      $this->Cell(115);
       $this->Cell(8,0, utf8_decode('Teléfono: ' .$Telefono ),0,7);
       $this->Ln(4);
   
@@ -99,7 +99,7 @@ $pdf->SetMargins(10,10,10);
 $pdf->AddPage('LANSPACE','LETTER');
 
 
-$pdf->SetFont('Times','B',6);
+$pdf->SetFont('Times','B',7);
 $pdf->setX(2);
 
 

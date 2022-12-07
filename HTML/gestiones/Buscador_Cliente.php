@@ -273,10 +273,10 @@ $numero = 99999.99;
                     <?php
                     if ($pagina != 1) {
                     ?>
-                        <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                        <li><a href="?pagina=<?php echo 1; ?>">|<</a>
                         </li>
                         <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                                <<< /a>
+                                <<</a>
                         </li>
                     <?php
                     }
@@ -377,4 +377,8 @@ $numero = 99999.99;
         border-radius: 10px;
     }
 </style>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7a1f591275269451a2c909baf67dc271e6fdc6bb
 <?php include 'barralateralfinal.php'; ?>

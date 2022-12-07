@@ -364,7 +364,9 @@ $user = $_SESSION['user'];
         body.dark .home .text {
             color: var(--text-color);
         }
-
+        #Hola {
+            line-height: 100%;
+        }
         /* 
 #menu ul{
 	list-style:none;
@@ -679,10 +681,10 @@ font-size: 20px; ">
                         </div>
                     </div>
                 </div>
-                <div class="content">
+                <div class="content" id="Hola">
                     <div class="content-header">
                         <h3 style>
-                            <center>INVERSIONES FINANCIERAS - IS DE HONDURAS S.A</center>
+                            <center><strong>INVERSIONES FINANCIERAS - IS DE HONDURAS S.A</strong> </center>
                         </h3>
                         <p>
                             <center>Trabajando Juntos Hoy Forjamos Nuestro Patrimononio del Mañana</center>

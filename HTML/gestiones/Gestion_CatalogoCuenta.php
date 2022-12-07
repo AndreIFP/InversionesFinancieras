@@ -69,9 +69,8 @@ if (!isset($_SESSION['rol'])) {
                     <select name="filtro" onchange='buscarFiltro(this);'>
                         <option>Todas</option>
                         <option value="1">ACTIVOS</option>
-                        <option value="12">ACTIVOS</option>
                         <option value="2">PASIVOS</option>
-                        <option value="3">Capital</option>
+                        <option value="3">CAPITAL</option>
                         <option value="64">INGRESOS</option>
                         <option value="65">GASTOS</option>
                         <?php
@@ -120,9 +119,12 @@ if (!isset($_SESSION['rol'])) {
 
                         $desde = ($pagina - 1) * $por_pagina;
                         $total_paginas = ceil($total_registro / $por_pagina);
-                        $sql = mysqli_query($conn, "SELECT  tcc2.CODIGO_CUENTA as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA  as TIPOCUENTA, tcc.Estado_Cuenta  from tbl_catalago_cuentas tcc 
-                        join tbl_catalago_cuentas tcc2 on tcc.Mayor =SUBSTRING( tcc2.CODIGO_CUENTA,1, 1)
-                        order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6) LIMIT $desde,$por_pagina ");
+                        $sql = mysqli_query($conn, "SELECT tcc2.CODIGO_CUENTA as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA as TIPOCUENTA,
+                        tcc.Estado_Cuenta from tbl_catalago_cuentas tcc join tbl_catalago_cuentas tcc2 on tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2) or
+                        tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,1)
+                         AND  tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2)
+                                        order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6)
+LIMIT $desde,$por_pagina ");
                         mysqli_close($conn);
                         
                         
