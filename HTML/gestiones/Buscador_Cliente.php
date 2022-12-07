@@ -380,5 +380,8 @@ $numero = 99999.99;
         border-radius: 10px;
     }
 </style>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7a1f591275269451a2c909baf67dc271e6fdc6bb
 <?php include 'barralateralfinal.php'; ?>
