@@ -129,63 +129,48 @@ $fecha = date('Y-m-d h:i:s');
 
                 <div class="form-group">
                   <center>
-                    <h5> <strong> Asiento Contable </strong></h5>
+                    <h5> <strong>REGISTRO DE ASIENTOS CONTABLES</strong></h5>
                   </center>
                   <hr>
 
-                  <div class="col-md-5 btn-print" style="right: 16px;">
-                    <!-- ENTRADA DEl ID ASIENTO-->
-
-                    <!--  <div class="form-group">
-                   <h5> <strong> Número de Asiento </strong></h5>
-                    <div class="input-group">
-                    
-                      <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-                      <input type="text" class="form-control pull-right" id="descripcion" name="NAsiento" placeholder="Número de Asiento" required>
-                    </div>
-                  </div> -->
-                    <h5> <strong>Fecha </strong></h5>
-                  </div>
-
-
-
+      
                   <!-- ENTRADA PARA LA FECHA -->
-
+                  
                   <div class="form-group">
-
+                  
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                      <input type="date" class="form-control pull-right" max=<?php $hoy = date("Y-m-d");
-                                                                              echo $hoy; ?> id="date" name="fechax" required>
+                      <span class="input-group-addon"><i class="fa fa-calendar"></i>  <strong >Fecha</strong></span>
+                      <input type="date" class="form-control pull-right" max=<?php $hoy=date("Y-m-d"); echo $hoy;?>  id="date" name="fechax" required>
                     </div>
                   </div>
                   <!-- ENTRADA DE LA DESCRIPCION-->
                   <div class="form-group">
-                    <h5> <strong> Descripción </strong></h5>
+                 
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
+                    
+                      <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i><strong> Descripción </strong></span>
                       <input type="text" class="form-control pull-right" id="descripcion" name="descripcion2" placeholder="Descripción del Asiento" required>
                     </div>
                   </div>
                 </div>
                 <hr>
+                
 
-                <div class="container">
+                <div class="container" align="center" >
   
-  <div class="table-responsive">
-        <table id="Table_id" class="table table-striped">
+  <div class="table-responsive" align="center">
+        <table id="Table_id" class="table table-primary" align="center">
             <thead>
                 <tr>
-                    <th>Debito</th>
-                    <th>Crédito</th>
-                    <th>Codigó de Cuenta</th>
-                    <!-- <th>Nombre Cuenta</th> -->
-                    <th>Descripción</th>
+                    <th><CENTER><STRONG>DEBE</STRONG></CENTER></th>
+                    <th><CENTER><STRONg>HABER</STRONg></CENTER></th>
+                    <th><CENTER><STRONg>CUENTA PRINCIPAL</STRONg></CENTER></th>
+                    <th><CENTER><STRONg>CUENTA AUXILIAR</STRONg></CENTER></th>
                 </tr>
             </thead>
-            <tbody id="tableToModify">
+            <tbody id="tableToModify" align="center">
               
-              <tr id="rowToClone">
+              <tr id="rowToClone" align="center">
                   <td><input type="text" class="debito" value="0" id="debito1"  name="debito[]" onkeyup="keyAlert(this)"  onchange="changeDebito(1)" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
                   <td><input type="text" value="0" class="credito" id="credito1" name="credito[]" style="width:150px;height:20px;border:0" maxlength="10" onchange="changeCredito(1)" onkeyup="keyAlert(this)"  placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
                   <td><div class="input-group">
@@ -195,7 +180,7 @@ $fecha = date('Y-m-d h:i:s');
                         <?php
                         include('../conexion.php');
                         #consulta de todos los paises
-                        $consulta = mysqli_query($conn, "select CODIGO_CUENTA, CONCAT(CODIGO_CUENTA,' ',CUENTA) as CUENTA  from tbl_catalago_cuentas c
+                        $consulta = mysqli_query($conn, "select CODIGO_CUENTA, CUENTA as CUENTA  from tbl_catalago_cuentas c
                         where char_length(c.CODIGO_CUENTA)=4");
                         while ($row = mysqli_fetch_array($consulta)) {
                           $nombrepais = $row['CUENTA'];
@@ -217,12 +202,12 @@ $fecha = date('Y-m-d h:i:s');
             </tbody>
         </table>
     </div>
-    <input type="button" onclick="cloneRow()" value="Agregar Nueva Fila"/>
+    <button type="button" class="btn btn-success" onclick="cloneRow()"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Fila </button> 
  </div>
 
                 <div class="col-md-12">
-                  <button class="btn btn-primary" id="daterange-btn" name="insertar"> <i class="fa fa-credit-card" aria-hidden="true"></i> Agregar</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> CERRAR</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> CERRAR</button>
+                  <button class="btn btn-primary" id="daterange-btn" name="insertar"><i class="fa fa-floppy-o" aria-hidden="true"></i> Agregar</button>
                 </div>
 
               </div>
@@ -250,9 +235,9 @@ $fecha = date('Y-m-d h:i:s');
           <button type="button" class="btn btn-primary" data-toggle="modal" onclick="limpiarForm()" data-target="#miModal">
 
             <i class="fa fa-plus-square" aria-hidden="true"></i> Agregar Asiento </button>
-          <a class="btn btn-info" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
-          <a class="btn btn-info" href="#"  ><i class="fa fa-file-excel-o"></i> Excel</a>
-          <button type="submit" name="btnregistrarx" class="btn btn-primary"><i class="fa fa-plus-square" aria-hidden="true"></i> Balanza de Comprobación</button>
+          <a class="btn btn-warning" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
+          <a class="btn btn-success" href="../gestiones/reporte_excel_libro.php"  ><i class="fa fa-file-excel-o"></i> Excel</a>
+          <button type="submit" name="btnregistrarx" class="btn btn-info"><i class="fa fa-plus-square" aria-hidden="true"></i> Balanza de Comprobación</button>
 
 
         <?php } ?>
@@ -334,7 +319,7 @@ $fecha = date('Y-m-d h:i:s');
                 <?php if ($_SESSION['permisos'][M_LIBRO_DIARIO] and $_SESSION['permisos'][M_LIBRO_DIARIO]['d'] == 1) {
 
                 ?>
-                  <a class="small-box-footer btn-print" href="libro2.php?asiento=<?php echo $asiento ?>"><i class="glyphicon glyphicon-remove"></i></a>
+                  <a class="small-box-footer btn-print" href="libro2.php?asiento=<?php echo $asiento ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
                 <?php } ?>
                 <?php

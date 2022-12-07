@@ -38,7 +38,7 @@ class Conexion{
       $mysqli = new mysqli("localhost:3307","root","3214","2w4GSUinHO"); 
       $idCuenta=$_POST['idCuenta'];
 
-      $queryl = "select CODIGO_CUENTA, CONCAT(CODIGO_CUENTA,' ',CUENTA) as CUENTA  from tbl_catalago_cuentas c
+      $queryl = "select CODIGO_CUENTA,CUENTA as CUENTA  from tbl_catalago_cuentas c
       where c.CODIGO_CUENTA like '".$idCuenta."_%'";
 
       

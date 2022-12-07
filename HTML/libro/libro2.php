@@ -135,40 +135,26 @@ $asiento2 = $_REQUEST['asiento'];
 
                 <div class="form-group">
                   <center>
-                    <h5> <strong> Asiento Contable </strong></h5>
+                    <h5> <strong>REGISTRO DE ASIENTOS CONTABLES</strong></h5>
                   </center>
                   <hr>
-                  
-                  <div class="col-md-5 btn-print" style="right: 16px;">
-                   <!-- ENTRADA DEl ID ASIENTO-->
-                   
-                   <div class="form-group">
-                   <h5> <strong> Número de Asiento </strong></h5>
-                    <div class="input-group">
-                    
-                      <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-                      <input type="text" class="form-control pull-right" id="descripcion" name="NAsiento" placeholder="Número de Asiento" required>
-                    </div>
-                  </div>
-                  <h5> <strong >Fecha </strong></h5 >
-                  </div>
-                 
-                  
 
+      
                   <!-- ENTRADA PARA LA FECHA -->
                   
                   <div class="form-group">
                   
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                      <input type="date" class="form-control pull-right" id="date" name="fechax" required>
+                      <span class="input-group-addon"><i class="fa fa-calendar"></i>  <strong >Fecha</strong></span>
+                      <input type="date" class="form-control pull-right" max=<?php $hoy=date("Y-m-d"); echo $hoy;?>  id="date" name="fechax" required>
                     </div>
                   </div>
                   <!-- ENTRADA DE LA DESCRIPCION-->
                   <div class="form-group">
-                  <h5> <strong> Descripción </strong></h5>
+                 
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
+                    
+                      <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i><strong> Descripción </strong></span>
                       <input type="text" class="form-control pull-right" id="descripcion" name="descripcion2" placeholder="Descripción del Asiento" required>
                     </div>
                   </div>
@@ -178,51 +164,55 @@ $asiento2 = $_REQUEST['asiento'];
                 <div class="container">
   
                       <div class="table-responsive">
-                            <table id="Table_id" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Debito</th>
-                                        <th>Crédito</th>
-                                        <th>Codigó de Cuenta</th>
-                                        <!-- <th>Nombre Cuenta</th> -->
-                                        <th>Descripción</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tableToModify">
-                                  
-                                  <tr id="rowToClone">
-                                      <td><input type="text" class="debito" value="0" id="debito1"  name="debito[]" onkeyup="keyAlert(this)"  onchange="changeDebito(1)" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
-                                      <td><input type="text" value="0" class="credito" id="credito1" name="credito[]" style="width:150px;height:20px;border:0" maxlength="10" onchange="changeCredito(1)" onkeyup="keyAlert(this)"  placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
-                                      <td><div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                        <select class="form-control cuentas" onchange="changeSelect(1)" name="cuentas[]" id="cuentas1" required>
-                                            <option value="">Seleccione una Cuenta</option>
-                                            <?php
-                                            include('../conexion.php');
-                                            #consulta de todos los paises
-                                            $consulta = mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA >='10';");
-                                            while ($row = mysqli_fetch_array($consulta)) {
-                                              $nombrepais = $row['CUENTA'];
-                                              $nombeid = $row['CODIGO_CUENTA'];
-                                            ?>
-                                              <option class="dropdown-item" value="<?php echo $nombeid ?>"><?php echo $nombeid ?> - <?php echo $nombrepais ?></option>
-                                            <?php
-                                            }
-                                            ?>
-                                        </select>
-                                      </div></td>
-                                      <!-- <td><input type="text" name="codig_cuenta[]" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo Cuenta" size="15" value="<?php echo $nombeid?>" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td> -->
-                                      <td><input type="text" name="descripcion[]" style="width:250px;height:20px;border:0" maxlength="50"  placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" value="" required/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                      <table id="Table_id" class="table table-primary" align="center">
+            <thead>
+                <tr>
+                    <th><CENTER><STRONG>DEBE</STRONG></CENTER></th>
+                    <th><CENTER><STRONg>HABER</STRONg></CENTER></th>
+                    <th><CENTER><STRONg>CUENTA PRINCIPAL</STRONg></CENTER></th>
+                    <th><CENTER><STRONg>CUENTA AUXILIAR</STRONg></CENTER></th>
+                </tr>
+            </thead>
+            <tbody id="tableToModify" align="center">
+              
+              <tr id="rowToClone" align="center">
+                  <td><input type="text" class="debito" value="0" id="debito1"  name="debito[]" onkeyup="keyAlert(this)"  onchange="changeDebito(1)" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Debito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
+                  <td><input type="text" value="0" class="credito" id="credito1" name="credito[]" style="width:150px;height:20px;border:0" maxlength="10" onchange="changeCredito(1)" onkeyup="keyAlert(this)"  placeholder="Credito" size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" /></td>
+                  <td><div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                    <select class="form-control cuentas" onchange="changeSelect(1)" name="cuentas[]" id="cuentas1" required>
+                        <option value="">Seleccione una Cuenta</option>
+                        <?php
+                        include('../conexion.php');
+                        #consulta de todos los paises
+                        $consulta = mysqli_query($conn, "select CODIGO_CUENTA, CUENTA as CUENTA  from tbl_catalago_cuentas c
+                        where char_length(c.CODIGO_CUENTA)=4");
+                        while ($row = mysqli_fetch_array($consulta)) {
+                          $nombrepais = $row['CUENTA'];
+                          $nombeid = $row['CODIGO_CUENTA'];
+                        ?>
+                          <option class="dropdown-item" value="<?php echo $nombeid ?>"> <?php echo $nombrepais ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                  </div></td>
+                  <!-- <td><input type="text" name="codig_cuenta[]" style="width:150px;height:20px;border:0" maxlength="10"  placeholder="Codigo Cuenta" size="15" value="<?php echo $nombeid?>" oninput="this.value = this.value.replace(/[^0-9]/,'')" required/></td> -->
+                  <td><div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                    <select class="form-control cuentas" name="descripcion[]" id="descripcion2" required>
+                       
+                  </div></td>
+                </tr>
+            </tbody>
+        </table>
                         </div>
-                        <input type="button" onclick="cloneRow()" value="Agregar Nueva Fila"/>
+                        <center><button type="button" class="btn btn-success" onclick="cloneRow()"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Fila </button></center> 
                      </div>
 
                 <div class="col-md-12">
-                  <button class="btn btn-primary" id="daterange-btn" name="insertar"> <i class="fa fa-credit-card" aria-hidden="true"></i> Agregar</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> CERRAR</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> CERRAR</button>
+                  <button class="btn btn-primary" id="daterange-btn" name="insertar"><i class="fa fa-floppy-o" aria-hidden="true"></i> Agregar</button>
                 </div>
 
               </div>
@@ -248,10 +238,12 @@ $asiento2 = $_REQUEST['asiento'];
         
       <form method="post" action="procebalanza.php" enctype="multipart/form-data" >
       <button type="button" class="btn btn-primary" data-toggle="modal" onclick="limpiarForm()" data-target="#miModal">
-      
-      <i class="fa fa-plus-square" aria-hidden="true"></i> Agregar Asiento </button>
-      <a class="btn btn-info" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i   class="fa fa-file-pdf-o" ></i> Imprimir</a>
-      <button type="submit" name="btnregistrarx" class="btn btn-primary"><i class="fa fa-plus-square" aria-hidden="true"></i>  Balanza de Comprobación</button>
+
+            <i class="fa fa-plus-square" aria-hidden="true"></i> Agregar Asiento </button>
+          <a class="btn btn-warning" href="../gestiones/Reporte_libro.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
+          <a class="btn btn-success" href="../gestiones/reporte_excel_libro.php"  ><i class="fa fa-file-excel-o"></i> Excel</a>
+          <button type="submit" name="btnregistrarx" class="btn btn-info"><i class="fa fa-plus-square" aria-hidden="true"></i> Balanza de Comprobación</button>
+
       
       
     <?php } ?>
@@ -335,7 +327,7 @@ $asiento = $row['Id_asiento'];
 
 
                 ?>
-                    <a class="small-box-footer btn-print" href="libro2.php?asiento=<?php echo $asiento?>"><i class="glyphicon glyphicon-remove"></i></a>
+                    <a class="small-box-footer btn-print" href="libro2.php?asiento=<?php echo $asiento?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
                     
                        
                 <?php } ?>
@@ -366,6 +358,8 @@ $asiento = $row['Id_asiento'];
 
     </table>
   </div>
+  
+  
   <!--DEPOSITO-->
   <div class="modal fade" id="miModales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -381,7 +375,7 @@ $asiento = $row['Id_asiento'];
                   <br>
                   <div class="form-group">
                     <center>
-                      <h5> <strong> Ingresar </strong></h5>
+                      <h5> <strong> DETALLES DE ASIENTO NÚMERO <?php echo $asiento2 ?>  </strong></h5>
                     </center>
                     <hr>
                     <!-- ENTRADA PARA LA CUENTA -->
@@ -404,24 +398,21 @@ $asiento = $row['Id_asiento'];
 <?php
 
 ?>
-                    <!-- ENTRADA -->
-                    <h5>Id Aciento: <?php echo $asiento2 ?></h5>
+                    
 
                     <table id="example22" class="table">
       <thead>
         <tr class="table-primary">
 
+          
           <th>
-            <center> Detalle </center>
+            <center><STRONG>CUENTA</STRONG>  </center>
           </th>
           <th>
-            <center> Codigo Cuenta </center>
+            <center><STRong>DEBE</STRong>  </center>
           </th>
           <th>
-            <center> Debito </center>
-          </th>
-          <th>
-            <center> Credito </center>
+            <center><STRONG> HABER</STRONG></STRONG></center>
           </th>
           
          
@@ -433,16 +424,15 @@ $asiento = $row['Id_asiento'];
         <?php
 
         // $branch=$_SESSION['branch'];
-        $query = mysqli_query($con, "select * from tbl_detallleasientos where Id_asiento='$asiento2' ") ;
+        $query = mysqli_query($con, "SELECT tcc.CUENTA AS CODIGO_CUENTA,td.debito,td.credito  from tbl_detallleasientos td
+        JOIN tbl_catalago_cuentas tcc ON td.descripcion=tcc.CODIGO_CUENTA  where Id_asiento='$asiento2' ") ;
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
 
           
         ?>
           <tr>
-            <td>
-              <center><?php echo $row['Id_detalle']; ?></center>
-            </td>
+           
             <td>
               <center><?php echo $row['CODIGO_CUENTA']; ?></center>
             </td>
@@ -494,7 +484,6 @@ $asiento = $row['Id_asiento'];
                     <!-- SALIDA -->
 
                   <div class="col-md-12">
-                    <button class="btn btn-primary " id="daterange-btn" name=""> <i class="fa fa-credit-card" aria-hidden="true"></i> INGRESAR </button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> CERRAR</button>
                   </div>
 
