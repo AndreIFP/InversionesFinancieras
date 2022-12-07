@@ -18,10 +18,6 @@ include('../../dist/includes/dbcon.php');
 		$condigo= $row['COD_CUENTA'];
 	}
 
-	$patata=mysqli_query($con, "SELECT COD_CUENTA FROM Tbl_Balanza WHERE Id_cliente=$cliente ;");
-	while ($row = mysqli_fetch_array($patata)) {
-		$condigo= $row['COD_CUENTA'];
-	}
 	$consulta=mysqli_query($con, "SELECT Id_asiento FROM tbl_asientos WHERE Id_cliente= '$cliente';" );
 	while ($row = mysqli_fetch_array($consulta)) {
 		$asiento= $row['Id_asiento'];
@@ -40,8 +36,7 @@ include('../../dist/includes/dbcon.php');
 	}else{
 		mysqli_query($con,"INSERT INTO Tbl_Balanza(Id_cliente,COD_CUENTA,Mhaber,Mdebe,Sdebe,SAcreedor) VALUE ('$cliente','2105','0','0','0','$ISV')");
 		mysqli_query($con,"INSERT INTO Tbl_Balanza(Id_cliente,COD_CUENTA,Mhaber,Mdebe,Sdebe,SAcreedor) VALUE ('$cliente','3104','0','0','0','$UTILIDADNETA')");
-		echo "<script> alert('Balance Generado'); window.location='Balanzageneral.php' </script>";
-		$ISV=0;
+		echo "<script> alert('Balance pp'); window.location='Balanzageneral.php' </script>";
 		
 	}
 
