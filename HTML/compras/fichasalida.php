@@ -1,6 +1,7 @@
 <?php
  include('conexion.php');
- 
+ session_start();
+$usuarios=$_SESSION['id'];
 ?>
 
 
@@ -130,7 +131,7 @@ $sql9 = "SELECT id_product,amount FROM product WHERE proname = '".$art."'";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql5);
             
-            $sql = "INSERT INTO TBL_KARDEX (Id_Usuario,fecha, detalle, id_product, proname, cant_salida, total_cants) VALUES (1,'$fechaa','SALIDA',1,'$art',$cant,$res1)";
+            $sql = "INSERT INTO TBL_KARDEX (Id_Usuario,fecha, detalle, id_product, proname, cant_salida, total_cants) VALUES ($usuarios,'$fechaa','SALIDA',$id,'$art',$cant,$res1)";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql);
                }else{    
