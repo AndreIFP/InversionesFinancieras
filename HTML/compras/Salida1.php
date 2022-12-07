@@ -5,36 +5,36 @@ include_once("../helpers/helpers.php");
 
 //iniciar las sesiones
 session_start();
-   // si no existe la variable rol, el usuario no esta logueado y redirige al Login
+// si no existe la variable rol, el usuario no esta logueado y redirige al Login
 if (!isset($_SESSION['rol'])) {
-   header("Location: ../login.php"); 
-   die();
-}else{
-   //actualiza los permisos
-   updatePermisos($_SESSION['rol']);
-   
-   //si no tiene permiso de visualización redirige al index
-   if ($_SESSION['permisos'][M_INVENTARIOS]['u']==0 or !isset($_SESSION['permisos'][M_INVENTARIOS]['u'])) {
-       header("Location: ../index.php");
-       die();
-   }
+  header("Location: ../login.php");
+  die();
+} else {
+  //actualiza los permisos
+  updatePermisos($_SESSION['rol']);
+
+  //si no tiene permiso de visualización redirige al index
+  if ($_SESSION['permisos'][M_INVENTARIOS]['u'] == 0 or !isset($_SESSION['permisos'][M_INVENTARIOS]['u'])) {
+    header("Location: ../index.php");
+    die();
+  }
 }
 
 ?>
 
 
-<?php include 'barralateralinicial.php'; 
+<?php include 'barralateralinicial.php';
 
 
-$url = $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]; 
+$url = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 //echo $url;
 
-$id = substr($url,45,5);
+$id = substr($url, 45, 5);
 
 $sql2 = "SELECT proname FROM product WHERE id_product = $id;";
-            $ext = $conn->query($sql2);
-            $fila = $ext->fetch_array(MYSQLI_NUM);
-            $param = $fila[0];
+$ext = $conn->query($sql2);
+$fila = $ext->fetch_array(MYSQLI_NUM);
+$param = $fila[0];
 
 
 ?>
@@ -43,23 +43,29 @@ $sql2 = "SELECT proname FROM product WHERE id_product = $id;";
 <section style=" background-color:rgb(255, 255, 255); padding: 15px; color:black; font-size: 16px; ">
 
   <title>Retirar producto</title>
-  <a class="btn btn-primary" href="../index.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
+  <a class="btn btn-primary" href="../gestiones/Gestion_inventario.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
   <center>
     <h2> <strong> RETIRAR PRODUCTO</strong></h2>
   </center>
 
   <br>
 
-  <form method="post" action="fichasalida.php" >
+  <form method="post" action="fichasalida.php">
     <div class="row">
       <div class="col-xs-14 pull-right">
 
         <table class="table">
           <thead>
             <tr>
-              <th><center>Seleccione un Articulo</center></th>
-              <th><center>Cantidad a retirar</center></th>
-              <th><center>Fecha de retiro</center></th>
+              <th>
+                <center>Seleccione un Artículo</center>
+              </th>
+              <th>
+                <center>Cantidad a retirar</center>
+              </th>
+              <th>
+                <center>Fecha de retiro</center>
+              </th>
 
             </tr>
           </thead>
@@ -70,9 +76,9 @@ $sql2 = "SELECT proname FROM product WHERE id_product = $id;";
               <td style="width: 40%">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-users"></i></span>
-            
-                  <input type="text" readonly="readonly"  class="form-control pull-right" value="<?php echo $param;?>" name="product" required>
-                  
+
+                  <input type="text" readonly="readonly" class="form-control pull-right" value="<?php echo $param; ?>" name="product" required>
+
                 </div>
 
               </td>
@@ -87,11 +93,11 @@ $sql2 = "SELECT proname FROM product WHERE id_product = $id;";
               <td style="width: 30%">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                  <input type="text" class="form-control pull-right" name="fech" value="<?php
-date_default_timezone_set('America/Tegucigalpa');    
-$DateAndTime2 = date('m-d-Y h:i:s a', time());  
-echo $DateAndTime2;
-?>" size="20">
+                  <input type="text" class="form-control pull-right" name="fech" readonly value="<?php
+                                                                                        date_default_timezone_set('America/Tegucigalpa');
+                                                                                        $DateAndTime2 = date('m-d-Y h:i:s a', time());
+                                                                                        echo $DateAndTime2;
+                                                                                        ?>" size="20">
                 </div>
               </td>
 
