@@ -99,7 +99,7 @@ $pdf->SetMargins(10,10,10);
 $pdf->AddPage('LANSPACE','LETTER');
 
 
-$pdf->SetFont('Times','B',8);
+$pdf->SetFont('Times','B',6);
 $pdf->setX(2);
 
 
