@@ -226,7 +226,7 @@ include 'barralateralinicial.php';
       <div class="input-group">
 
         <h5>Total en letras:</h5>
-        <input type="text" class="form-control" style="border:0" name="Suma_letras" placeholder="Suma neta en letras" size="80" value="" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" required /><br><br>
+        <input type="text" class="form-control" style="border:0" name="Suma_letras" placeholder="Suma neta en letras" size="80" value="" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/,'')" required /><br><br>
 
 
       </div>
