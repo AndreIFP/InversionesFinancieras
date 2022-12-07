@@ -1,19 +1,13 @@
 <?php
 $cliente = $_POST['Idcliente'];
 $temporada=$_POST['Idtemporada'];
-$fechai = $_POST['Idtemporada'];
-$fechaf = $_POST['fecha_final'];
-
 
 
 include('../conexion.php');
 $consulta = mysqli_query($conn, "SELECT * FROM Rangosdeperiodos where Id_periodo='$temporada'; ");
 while ($row = mysqli_fetch_array($consulta)) {
-	$fechai = $row['Temporada'];
-}
-
-if ($fechaf < $fechai) {
-	echo "<script> alert('La fecha final no debe ser menor a la inicial');window.location= 'validacionlibro.php' </script>";
+	$fechai = $row['Fechainicio'];
+	$fechaf = $row['Fechafinal'];
 }
 
 
@@ -29,7 +23,6 @@ while ($row = mysqli_fetch_array($consulta)) {
 	<?php
 	session_start();
 	$_SESSION['cliente'] = $cliente;
-	$_SESSION['temporada']=$temporada;
 	$_SESSION['ncliente'] = $nnombre;
 	$_SESSION['empresa'] = $nombree;
 	$_SESSION['fechai'] = $fechai;

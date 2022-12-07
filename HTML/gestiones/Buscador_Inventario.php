@@ -23,9 +23,17 @@ if (!isset($_SESSION['rol'])) {
 
 $numero = 99999.99;
 ?>
-<?php include 'barralateralinicial.php'; ?><p></p>
-
-
+<?php include 'barralateralinicial.php';?><p></p>
+<?php 
+                 $busqueda = strtolower($_REQUEST['busqueda']);
+                 if(empty($busqueda))
+                 {
+                     header("location: Gestion_Inventario.php");
+                     mysqli_close($conn);
+                 }
+                 $_SESSION['busquedaX'] = $busqueda;
+             ?>
+             
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,17 +42,6 @@ $numero = 99999.99;
   <meta charset="UTF-8">
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
-
-  <?php 
-                 $busqueda = strtolower($_REQUEST['busqueda']);
-                 if(empty($busqueda))
-                 {
-                     header("location: Gestion_Inventario.php");
-                     mysqli_close($conn);
-                 }
-             ?>
-
-
 
 </head>
 <section style=" background-color:rgb(255, 255, 255);
@@ -55,6 +52,7 @@ $numero = 99999.99;
         <div class="col-md-12">
         <div class="box-body table-responsive">
             <div class="reportes">
+                
                 <h2><strong>Gestión Inventario</strong> </h2>
         <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
         <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {
@@ -64,8 +62,8 @@ $numero = 99999.99;
             
             <?php } ?>
             
-            <a class="btn btn-warning" href="Reporte_Inventario.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-           <a class="btn btn-success" href="reporte_excel_inventario.php"> Reporte excel</a>
+            <a class="btn btn-warning" href="Reporte_Inventario2.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+           <a class="btn btn-success" href="reporte_excel_inventario2.php"> Reporte excel</a>
             <p>
             <?php
             $mostrar_datos = 0;
@@ -88,11 +86,11 @@ $numero = 99999.99;
     <form action="Buscador_Inventario.php" method="get" class="form_search">
 
         <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" size=40>
-        <input type="submit" value="<?php echo $busqueda ?>" class="btn btn-primary">
+        <input type="submit" value="Buscar" class="btn btn-primary">
     </form>
     <table class="table ">
         <thead class="table-primary">
-            <tr>
+                         <tr>
                 <th> <center>Id </center></th>
                 <th> <center>Producto </center></th>
                 <th> <center>Cantidad </center></th>
@@ -105,7 +103,7 @@ $numero = 99999.99;
         <tbody>
             <?php
             //Paginador
-            $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM product WHERE ( id_product LIKE '%$busqueda%')");
+            $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM product WHERE id_product= id_product");
             $result_register = mysqli_fetch_array($sql_registe);
             $total_registro = $result_register['total_registro'];
 
@@ -123,7 +121,8 @@ $numero = 99999.99;
 
             $desde = ($pagina - 1) * $por_pagina;
             $total_paginas = ceil($total_registro / $por_pagina);
-            $sql = mysqli_query($conn, "select * FROM product ORDER BY time DESC LIMIT $desde,$por_pagina ");
+            $sql = mysqli_query($conn, "select * from product WHERE ( id_product LIKE '%$busqueda%' OR
+            proname LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
             mysqli_close($conn);
 
             $result = mysqli_num_rows($sql);
@@ -174,7 +173,7 @@ $numero = 99999.99;
                                 <a type="button" class="btn btn-danger btn-xs" onclick="alerta()">Eliminar</a>
                             </th>
 
-                            <th><center> <a href="Gestion_Inventario2.php?id_product2=<?php echo $id_product ?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center> </th>
+                            <th><center> <a href="Buscador_Inventario2.php?id_product2=<?php echo $id_product ?>" class="btn btn-success btn-xs"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </center> </th>
 
                         <?php } ?>
                     </tr>

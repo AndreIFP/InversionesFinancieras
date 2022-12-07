@@ -170,7 +170,10 @@ $fecha = date('Y-m-d h:i:s');
         // $branch=$_SESSION['branch'];
         $query = mysqli_query($con, " SELECT tcc.CODIGO_CUENTA,tcc.CUENTA ,tb.Mhaber,tb.Mdebe,tb.Sdebe,tb.SAcreedor  
         FROM  Tbl_Balanza tb join tbl_catalago_cuentas tcc 
-        where tb.COD_CUENTA=tcc.CODIGO_CUENTA and tb.Id_cliente ='$cliente'  and tb.Mhaber!=tb.Mdebe; ");
+        JOIN Rangosdeperiodos r on tb.Id_cliente=r.Id_Cliente 
+        join tbl_asientos ta on ta.Id_Cliente=r.Id_Cliente 
+        where tb.COD_CUENTA=tcc.CODIGO_CUENTA and tb.Id_cliente =$cliente  and tb.Mhaber!=tb.Mdebe
+       and ta.Fecha BETWEEN r.Fechainicio and r.Fechafinal;");
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
 

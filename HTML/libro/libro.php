@@ -299,7 +299,7 @@ $fecha = date('Y-m-d h:i:s');
         $query = mysqli_query($conn, "SELECT a.Id_asiento, a.Fecha, a.Descripcion, a.montoTotal, c.Nombre_Cliente, u.Usuario
         from tbl_asientos a 
         inner join tbl_clientes c ON a.Id_Cliente = c.Id_Cliente
-        inner join tbl_usuario u ON a.Id_Usuario = u.Id_Usuario where a.Id_Cliente='$cliente'");
+        inner join tbl_usuario u ON a.Id_Usuario = u.Id_Usuario where a.Id_Cliente='$cliente' and Fecha >='$fechai' and Fecha <='$fechaf' ");
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
 

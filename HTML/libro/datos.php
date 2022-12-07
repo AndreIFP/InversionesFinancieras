@@ -14,10 +14,11 @@ $cliente=$_POST['cliente'];
 	  #consulta de todos los paises
 	  $consulta2=mysqli_query($conn,"SELECT * FROM Rangosdeperiodos where Id_Cliente=$cliente ;" );
 	  while($row=mysqli_fetch_array($consulta2)){
-		  $epais=$row['Temporada']; 
+		  $epais=$row['Fechainicio']; 
+		  $ecity=$row['Fechafinal'];
 		  $eid=$row['Id_periodo'];      
    ?>
-                      <option class="dropdown-item" style="font-size:18px" value="<?php echo $eid?>"><?php echo $epais ?></option>
+                      <option class="dropdown-item" style="font-size:18px" value="<?php echo $eid?>"><?php echo $epais ?> al <?php echo $ecity ?></option>
                     <?php
                     }
                     ?>
