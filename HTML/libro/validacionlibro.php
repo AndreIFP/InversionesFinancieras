@@ -42,11 +42,15 @@ if (!isset($_SESSION['rol'])) {
         <table class="table">
           <thead>
             <tr>
-              <th><center>Seleccione un cliente</center></th>
-              <th><center>Seleccione el Periodo</center></th>
+              <th>
+                <center>Seleccione un cliente</center>
+              </th>
+              <th>
+                <center>Seleccione el Periodo</center>
+              </th>
             </tr>
           </thead>
-          
+
 
           <tbody>
             <tr>
@@ -54,8 +58,8 @@ if (!isset($_SESSION['rol'])) {
               <td style="width: 50%">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                  <select class="form-control" name="Idcliente" id="Idcliente" required>
-                    <option value="" style="font-size:18px" >Selecciona un cliente</option>
+                  <select class="form-control js-example-basic-single" name="Idcliente" id="Idcliente" required>
+                    <option value="">Selecciona un cliente</option>
                     <?php
                     $consulta = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES ;");
                     while ($row = mysqli_fetch_array($consulta)) {
@@ -67,63 +71,65 @@ if (!isset($_SESSION['rol'])) {
                     }
                     ?>
                   </select>
-                  
-          </div>
-          </div>
-          
-          
-          <br>
-             
 
-<script type="text/javascript">
-$(document).ready(function(){
-  $('#Idcliente').val(0);
-  recargarLista();
-
-  $('#Idcliente').change(function(){
-    recargarLista();
-  });
-})
-</script>
-<script type="text/javascript">
-function recargarLista(){
-  $.ajax({
-    type:"POST",
-    url:"datos.php",
-    data:"cliente=" + $('#Idcliente').val(),
-    success:function(r){
-      $('#select2lista').html(r);
-    }
-  });
-}
-</script>
-<!--Fecha Inicial-->
-              <td style="width: 50%">
-                <div class="input-group" id="select2lista" >
-                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
-              </td>
-
-              
-            </tr>
-
-          </tbody>
-        </table>
-
       </div>
-      <div class="col-md-12" align="right">
-        <button class="btn btn-lg btn-success btn-print" id="daterange-btn" name="">Continuar <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
-        
-        <!-- Agregar Nuevo -->
-        <br>
-                        <hr>
-                        <a href="validaciondate.php" style="font-size:18px" >Agregar Nuevo Periodo</a>
-        <!-- Fin - Agregar Nuevo -->
-      </div>
+
+
+      <br>
+
+
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $('#Idcliente').val(0);
+          recargarLista();
+
+          $('#Idcliente').change(function() {
+            recargarLista();
+          });
+        })
+      </script>
+      <script type="text/javascript">
+        function recargarLista() {
+          $.ajax({
+            type: "POST",
+            url: "datos.php",
+            data: "cliente=" + $('#Idcliente').val(),
+            success: function(r) {
+              $('#select2lista').html(r);
+            }
+          });
+        }
+      </script>
+      <!--Fecha Inicial-->
+      <td style="width: 50%">
+        <div class="input-group" id="select2lista">
+          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        </div>
+      </td>
+
+
+      </tr>
+
+      </tbody>
+      </table>
+
+    </div>
+
+    <div align="right">
+      <a class="btn btn-warning" href="validaciondate.php" style="font-size:18px"><i class="fa fa-calendar-o" aria-hidden="true"></i> Agregar Período</a>
+      <!-- Fin - Agregar Nuevo -->
+
+      <hr>
+
+      <button class="btn btn-lg btn-success btn-print" id="daterange-btn" name="">Continuar <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
     </div>
 
 
-    
+    </div>
+
+
+
   </form>
   </secction>
   </div>
@@ -131,7 +137,11 @@ function recargarLista(){
   <!-- partial -->
   <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   <script src="/JS/Java.js"></script>
-
+  <script>
+    $(document).ready(function() {
+      $('.js-example-basic-single').select2();
+    });
+  </script>
   <!--Estilos Css-->
   <style>
     @import url(https://fonts.googleapis.com/css?family=Roboto:300);
@@ -293,10 +303,13 @@ function recargarLista(){
   </style>
 
   <script>
-$('.message a').click(function(){
-  $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-});
-</script>
+    $('.message a').click(function() {
+      $('form').animate({
+        height: "toggle",
+        opacity: "toggle"
+      }, "slow");
+    });
+  </script>
 
   </body>
 

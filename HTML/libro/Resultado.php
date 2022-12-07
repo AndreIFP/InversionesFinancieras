@@ -16,7 +16,7 @@ $_SESSION['temporada'] = "10";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     .accordion {
-      background-color: #eee;
+      background-color:#ECFAF4  ;
       color: #444;
       cursor: pointer;
       padding: 18px;
@@ -57,7 +57,7 @@ $_SESSION['temporada'] = "10";
   $fecha = date('Y-m-d h:i:s');
 
   $consulta = mysqli_query($conn, "select * from Tbl_Balanza
-WHERE Id_cliente=$cliente");
+  WHERE Id_cliente=$cliente");
   $nr = mysqli_num_rows($consulta);
   if ($nr == 0) {
     echo "<script> alert('No hay datos');window.location= 'BalanzaComp.php' </script>";
@@ -66,20 +66,26 @@ WHERE Id_cliente=$cliente");
   ?>
   <a class="btn btn-primary" href="BalanzaComp.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
   <br>
-    <br>
-    <form method="post" action="proceresultado.php" enctype="multipart/form-data">
-          <button type="submit" name="btnregistrarx" class="btn btn-primary"><i class="fa fa-file-pdf-o"></i> Balance Genal</button>
-  <a class="btn btn-info" href="../gestiones/Reporte_Estado_Resultado.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
-          <a class="btn btn-info" href="../gestiones/reporte_excel_resultado.php"  ><i class="fa fa-file-excel-o"></i> Excel</a>
-    </form>
-  <h2>Estado De Resultado</h2>
+  <br>
+  <form method="post" action="proceresultado.php" enctype="multipart/form-data">
+    <div align="right">
+      <button type="submit" name="btnregistrarx" class="btn btn-info"><i class="fa fa-book"></i> Balance General</button>
+      <a class="btn btn-warning" href="../gestiones/Reporte_Estado_Resultado.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
+      <a class="btn btn-success" href="../gestiones/reporte_excel_resultado.php"><i class="fa fa-file-excel-o"></i> Excel</a>
+    </div>
+  </form>
+  <hr>
+  <center>
+    <h2><strong>Estado De Resultado</strong></h2>
+  </center>
+  <hr>
   <?php
   include("../conexion.php");
 
   // INGRESOS
   $sql = "SELECT ifnull(sum(tb.SAcreedor),0) as Ingresos  FROM tbl_catalago_cuentas tcc 
-JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
+  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
   $resultado = mysqli_query($conn, $sql);
   while ($rows = $resultado->fetch_assoc()) {
     $ingresos = $rows["Ingresos"];
@@ -246,9 +252,9 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
       join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
       join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
       where tcc.CODIGO_CUENTA  LIKE '6504%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
-      $cfinancieros= mysqli_query($conn, $sqlfinancieros);
+      $cfinancieros = mysqli_query($conn, $sqlfinancieros);
 
-      while ($rows =$cfinancieros->fetch_assoc()) {
+      while ($rows = $cfinancieros->fetch_assoc()) {
         $Cod = $rows["CUENTA"];
         $cuen = $rows['Sdebe'];
 
@@ -282,9 +288,9 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
       join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
       join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
       where tcc.CODIGO_CUENTA  LIKE '6505%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
-      $cotros= mysqli_query($conn, $sqlotros);
+      $cotros = mysqli_query($conn, $sqlotros);
 
-      while ($rows =$cotros->fetch_assoc()) {
+      while ($rows = $cotros->fetch_assoc()) {
         $Cod = $rows["CUENTA"];
         $cuen = $rows['Sdebe'];
 
@@ -298,8 +304,8 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
     </table>
   </div>
 
-   <!--Otros INGRESOS-->
-   <?php
+  <!--Otros INGRESOS-->
+  <?php
   $sqloingresos = "SELECT ifnull(sum(tb.SAcreedor),0) AS OINGRESOS  FROM tbl_catalago_cuentas tcc 
   JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6402%' ";
@@ -316,9 +322,9 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
       $sqlotros = " SELECT tcc.CUENTA,tb2.SAcreedor  from Tbl_Balanza tb2  
       join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
       where COD_CUENTA like '6402%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
-      $cotros= mysqli_query($conn, $sqlotros);
+      $cotros = mysqli_query($conn, $sqlotros);
 
-      while ($rows =$cotros->fetch_assoc()) {
+      while ($rows = $cotros->fetch_assoc()) {
         $Cod = $rows["CUENTA"];
         $cuen = $rows['SAcreedor'];
 
@@ -335,7 +341,7 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
 
   <!--UTILIDAD-->
 
-  <?php $UTILIDADANTESISV = ($ingresos+$OINGRESOS) - ($Costos + $operativos + $ventas + $financieros + $gastos) ?>
+  <?php $UTILIDADANTESISV = ($ingresos + $OINGRESOS) - ($Costos + $operativos + $ventas + $financieros + $gastos) ?>
 
   <button class="accordion"><?php echo  'UTILIDAD ANTES DE IMPUESTO ' . $UTILIDADANTESISV ?></button>
   <div class="panel">
@@ -351,8 +357,8 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
     $isv = $rows["isv"];
   }
   $ISV = $UTILIDADANTESISV  * ($isv / 100);
-  
-  
+
+
 
 
 
@@ -370,11 +376,11 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
 
 
 
-<?php
-$UTILIDADNETA=$UTILIDADANTESISV - $ISV;
-$_SESSION['impu']=$ISV;
-$_SESSION['neta']=$UTILIDADNETA;
-?>
+  <?php
+  $UTILIDADNETA = $UTILIDADANTESISV - $ISV;
+  $_SESSION['impu'] = $ISV;
+  $_SESSION['neta'] = $UTILIDADNETA;
+  ?>
 
 
 

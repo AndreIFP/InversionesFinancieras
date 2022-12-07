@@ -14,9 +14,9 @@ include('../../dist/includes/dbcon.php');
 
 	if(mysqli_query($con,$queryregistro))
     {
-		echo "<script> alert('Se Ingreso el  procedure correctamente');document.location='../libro/BalanzaComp.php'</script>";	
+		echo "<script> alert('Generando Balanza De Comprobación');document.location='../libro/BalanzaComp.php'</script>";	
     } else{
-		echo "<script> alert('No se Ingreso el procedure ');document.location='../libro/libro.php'</script>";
+		echo "<script> alert('¡Error!');document.location='../libro/libro.php'</script>";
 	}
 
 

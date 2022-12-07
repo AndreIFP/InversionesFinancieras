@@ -16,7 +16,7 @@ $_SESSION['temporada'] = "10";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     .accordion {
-      background-color: #eee;
+      background-color:#ECFAF4 ;
       color: #444;
       cursor: pointer;
       padding: 18px;
@@ -66,10 +66,15 @@ WHERE Id_cliente=$cliente");
   ?>
   <a class="btn btn-primary" href="Resultado.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
   <br>
-  <br>
-  <a class="btn btn-info" href="../gestiones/Reporte_Balance.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
-          <a class="btn btn-info" href="../gestiones/reporte_excel_balance.php"  ><i class="fa fa-file-excel-o"></i> Excel</a>
-  <h2>Balanza general</h2>
+  <div align="right">
+    <a class="btn btn-warning" href="../gestiones/Reporte_Balance.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
+    <a class="btn btn-success" href="../gestiones/reporte_excel_balance.php"><i class="fa fa-file-excel-o"></i> Excel</a>
+  </div>
+  <hr>
+  <center>
+    <h2><strong> Balance General </strong></h2>
+  </center>
+  <hr>
   <?php
   include("../conexion.php");
 
@@ -141,7 +146,7 @@ WHERE Id_cliente=$cliente");
     </table>
   </div>
 
-  
+
   <!--patrimonio-->
   <?php
   $sql3 = "SELECT ifnull(SUM(SAcreedor),0) as patrimonio  FROM Tbl_Balanza tb 
