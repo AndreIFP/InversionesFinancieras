@@ -7,7 +7,7 @@ include('conexion.php');
 $correo = $_POST['txtcorreo'];
 $usuario = $_POST['txtususario'];
 
-$queryusuario 	= mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Correo_Electronico = '$correo'");
+$queryusuario 	= mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Correo_Electronico = '$correo'");
 $nr 			= mysqli_num_rows($queryusuario); 
 if ($nr == 1)
 {
@@ -28,7 +28,7 @@ if($paracorreo =$correo)
 }
 
 // Llamado del parametro correo
-$sqlCorreo = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '9'";
+$sqlCorreo = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '9'";
 $resultadocorreo = mysqli_query($conn,$sqlCorreo);
 while ($fila = $resultadocorreo->fetch_assoc()) {
     $CorreoS = $fila["Valor"];

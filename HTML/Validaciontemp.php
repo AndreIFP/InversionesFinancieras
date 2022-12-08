@@ -22,12 +22,12 @@ $id_user = $tokenResult['Id_Usuario'];
 if($tok == $valor){
     if ($date < $fechaFinal ) {      
     if($contra1 == $contra2){
-        /*$sql1 = "SELECT Id_Usuario FROM TBL_USUARIO WHERE Id_usuario = '$id_user'";
+        /*$sql1 = "SELECT Id_Usuario FROM tbl_usuario WHERE Id_usuario = '$id_user'";
         $ext = $conn->query($sql);
         $fila = $ext->fetch_array(MYSQLI_NUM);
         $id_user = $fila[0];*/
         
-        $sql2 = "UPDATE TBL_USUARIO SET Contraseña='$contra2' WHERE Id_Usuario='$id_user'";
+        $sql2 = "UPDATE tbl_usuario SET Contraseña='$contra2' WHERE Id_Usuario='$id_user'";
         $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
         $exito = mysqli_query($con,$sql2);
 

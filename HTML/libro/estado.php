@@ -98,7 +98,7 @@ $_SESSION['temporada'] = "10";
                           <?php
                           include('../conexion.php');
                           #consulta de todos los paises
-                          $consulta = mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_ESTADO ;");
+                          $consulta = mysqli_query($conn, "SELECT * FROM tbl_catalago_estado ;");
                           while ($row = mysqli_fetch_array($consulta)) {
                             $nombrepais = $row['CUENTA'];
                             $nombeid = $row['CODIGO_CUENTA'];

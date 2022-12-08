@@ -11,7 +11,7 @@ if ($fechaf < $fechai) {
 
 
 #consulta de todos los paises
-$consulta = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES where Id_Cliente='$cliente'; ");
+$consulta = mysqli_query($conn, "SELECT * FROM tbl_clientes where Id_Cliente='$cliente'; ");
 while ($row = mysqli_fetch_array($consulta)) {
 	$nombree = $row['Nombre_Empresa'];
 	$nnombre = $row['Nombre_Cliente'];

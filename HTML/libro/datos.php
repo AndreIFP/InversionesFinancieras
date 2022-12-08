@@ -1,5 +1,5 @@
 <?php 
-$conexion=mysqli_connect('localhost:3307','root','3214','2w4GSUinHO');
+$conexion=mysqli_connect('142.44.161.115','CALAPAL','Calapal##567','2w4GSUinHO');
 $cliente=$_POST['cliente'];
 ?>
 
@@ -12,7 +12,7 @@ $cliente=$_POST['cliente'];
 	include('../conexion.php');
 	  
 	  #consulta de todos los paises
-	  $consulta2=mysqli_query($conn,"SELECT * FROM Rangosdeperiodos where Id_Cliente=$cliente ;" );
+	  $consulta2=mysqli_query($conn,"SELECT * FROM rangosdeperiodos where Id_Cliente=$cliente ;" );
 	  while($row=mysqli_fetch_array($consulta2)){
 		  $epais=$row['Fechainicio']; 
 		  $ecity=$row['Fechafinal'];

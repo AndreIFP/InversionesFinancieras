@@ -56,7 +56,7 @@ $_SESSION['temporada'] = "10";
   $empresa = $_SESSION['empresa'];
   $fecha = date('Y-m-d h:i:s');
 
-  $consulta = mysqli_query($conn, "select * from Tbl_Balanza
+  $consulta = mysqli_query($conn, "select * from tbl_balanza
 WHERE Id_cliente=$cliente");
   $nr = mysqli_num_rows($consulta);
   if ($nr == 0) {
@@ -79,7 +79,7 @@ WHERE Id_cliente=$cliente");
   include("../conexion.php");
 
   // ACTIVOS
-  $sql = "SELECT ifnull(SUM(Sdebe),0) as Activos  FROM Tbl_Balanza tb 
+  $sql = "SELECT ifnull(SUM(Sdebe),0) as Activos  FROM tbl_balanza tb 
   where Id_cliente=$cliente and COD_CUENTA like '1%';";
   $resultado = mysqli_query($conn, $sql);
   while ($rows = $resultado->fetch_assoc()) {
@@ -92,7 +92,7 @@ WHERE Id_cliente=$cliente");
   <div class="panel">
     <table class="table">
       <?php
-      $sql1 = "SELECT tcc.CUENTA ,tb.Sdebe  FROM Tbl_Balanza tb 
+      $sql1 = "SELECT tcc.CUENTA ,tb.Sdebe  FROM tbl_balanza tb 
       join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
       where Id_cliente=$cliente and COD_CUENTA like '1%' AND tb.Sdebe!=0;";
       $resultado1 = mysqli_query($conn, $sql1);
@@ -114,7 +114,7 @@ WHERE Id_cliente=$cliente");
 
   <!-- PASIVOS-->
   <?php
-  $sql2 = "SELECT ifnull(SUM(SAcreedor),0) AS pasivo  FROM Tbl_Balanza tb 
+  $sql2 = "SELECT ifnull(SUM(SAcreedor),0) AS pasivo  FROM tbl_balanza tb 
   where Id_cliente=$cliente and COD_CUENTA like '2%';";
   $resultado2 = mysqli_query($conn, $sql2);
   while ($rows = $resultado2->fetch_assoc()) {
@@ -127,7 +127,7 @@ WHERE Id_cliente=$cliente");
   <div class="panel">
     <table class="table">
       <?php
-      $sqlcosto = "SELECT tcc.CUENTA ,tb.SAcreedor   FROM Tbl_Balanza tb 
+      $sqlcosto = "SELECT tcc.CUENTA ,tb.SAcreedor   FROM tbl_balanza tb 
       join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
       where Id_cliente=$cliente and COD_CUENTA like '2%'; ";
       $costosv = mysqli_query($conn, $sqlcosto);
@@ -149,7 +149,7 @@ WHERE Id_cliente=$cliente");
 
   <!--patrimonio-->
   <?php
-  $sql3 = "SELECT ifnull(SUM(SAcreedor),0) as patrimonio  FROM Tbl_Balanza tb 
+  $sql3 = "SELECT ifnull(SUM(SAcreedor),0) as patrimonio  FROM tbl_balanza tb 
   where Id_cliente=$cliente  and COD_CUENTA like '3%';";
   $resultado3 = mysqli_query($conn, $sql3);
   while ($rows = $resultado3->fetch_assoc()) {
@@ -161,7 +161,7 @@ WHERE Id_cliente=$cliente");
   <div class="panel">
     <table class="table">
       <?php
-      $sqloperativos = "SELECT tcc.CUENTA ,tb.SAcreedor as Sdebe FROM Tbl_Balanza tb 
+      $sqloperativos = "SELECT tcc.CUENTA ,tb.SAcreedor as Sdebe FROM tbl_balanza tb 
       join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
       where Id_cliente=$cliente  and COD_CUENTA like '3%';";
       $coperativos = mysqli_query($conn, $sqloperativos);

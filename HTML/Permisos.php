@@ -271,7 +271,7 @@ body {
     </thead>
     <tbody id="permissionsBody">
     <?php
-    $sql = mysqli_query($conn,"select u.Id_Rol, u.Id_Objetos, r.Rol, o.Objetos from TBL_ROLES_OBJETOS u inner join TBL_ROLES r ON u.Id_Rol = r.Id_Rol join TBL_OBJETOS o ON u.Id_Objetos = o.Id_Objetos");
+    $sql = mysqli_query($conn,"select u.Id_Rol, u.Id_Objetos, r.Rol, o.Objetos from tbl_roles_objetos u inner join tbl_roles r ON u.Id_Rol = r.Id_Rol join tbl_objetos o ON u.Id_Objetos = o.Id_Objetos");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);

@@ -42,11 +42,11 @@ include('../../dist/includes/dbcon.php');
           }
   mysqli_query($con,"delete from libro2 where id_libro='$id_libro'")or die(mysqli_error());
 if ($debe_haber=="haber") {
-       $update=mysqli_query($con,"update TBL_LIBROS2 set caja=caja+'$monto' where Id_cliente='$cliente' and Id_Libro='$temporada' ");
+       $update=mysqli_query($con,"update tbl_libros2 set caja=caja+'$monto' where Id_cliente='$cliente' and Id_Libro='$temporada' ");
 }
 
 if ($debe_haber=="debe") {
-       $update=mysqli_query($con,"update TBL_LIBROS2 set caja=caja-'$monto' Id_cliente='$cliente' and Id_Libro='$temporada' ");
+       $update=mysqli_query($con,"update tbl_libros2 set caja=caja-'$monto' Id_cliente='$cliente' and Id_Libro='$temporada' ");
 }
 
 

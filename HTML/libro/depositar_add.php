@@ -18,7 +18,7 @@ include('../../dist/includes/dbcon.php');
 
 
 
-$consultas=mysqli_query($con,"SELECT CUENTA FROM TBL_CATALAGO_CUENTAS where CODIGO_CUENTA='$idcuenta' ;");
+$consultas=mysqli_query($con,"SELECT CUENTA FROM tbl_catalago_cuentas where CODIGO_CUENTA='$idcuenta' ;");
 while($row=mysqli_fetch_array($consultas)){
  $idpreg=$row['CUENTA'];
 }
@@ -39,7 +39,7 @@ $queryregistro = "UPDATE CUENTAS_POR_COBRAR SET  Cuentas='$idpreg',Descripcion='
     } 
 
 
-		$update=mysqli_query($con,"update TBL_LIBROS set caja=caja+'$monto' where Id_cliente='$cliente' and Id_Libro=$temporada ");
+		$update=mysqli_query($con,"update tbl_libros set caja=caja+'$monto' where Id_cliente='$cliente' and Id_Libro=$temporada ");
 
 		
 				mysqli_query($con, "CALL validar('$idpreg','$descripcion','$monto','$debe_haber','$cliente','$fecha','$id_usuario')"); 

@@ -16,7 +16,7 @@ if (!empty($_POST)) {
         if (!preg_match("/[a-zA-ZñÑáéíóúÁÉÍÓÚ ]/", $Nombre_Usuario)) {
             $alert = '<p class="msg_error"> El Nombre Solo Recibe Letras.</p>';
         } else {
-            $sql = "UPDATE TBL_USUARIO SET Nombre_Usuario='$Nombre_Usuario',Estado_Usuario='$Estado_Usuario', Contraseña='$contra', Correo_Electronico='$Correo_Electronico' ,Rol='$Rol' WHERE Id_Usuario='$Id_Usuario'";
+            $sql = "UPDATE tbl_usuario SET Nombre_Usuario='$Nombre_Usuario',Estado_Usuario='$Estado_Usuario', Contraseña='$contra', Correo_Electronico='$Correo_Electronico' ,Rol='$Rol' WHERE Id_Usuario='$Id_Usuario'";
             $query = mysqli_query($conn, $sql);
             if ($query) {
                 echo "<script> alert('Usuario: $Usuario Actualizado');window.location= 'Gestion_Usuarios.php' </script>";
@@ -26,8 +26,8 @@ if (!empty($_POST)) {
 }
 $Id = $_GET['Id'];
 $sql = "SELECT u.Id_Usuario,u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Contraseña, u.Correo_Electronico, (u.Rol) as IdRol, (r.Rol) as Rol 
-             FROM TBL_USUARIO u
-             INNER JOIN TBL_ROLES r
+             FROM tbl_usuario u
+             INNER JOIN tbl_roles r
              ON u.Rol = r.Id_Rol
              WHERE Id_Usuario='$Id'";
 $query = mysqli_query($conn, $sql);
@@ -256,7 +256,7 @@ if (!isset($_SESSION['rol'])) {
                                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                             <?php
                                             include("../conexion.php");
-                                            $query_rol = mysqli_query($conn, "SELECT * FROM TBL_ROLES WHERE Estado = 'ACTIVO'");
+                                            $query_rol = mysqli_query($conn, "SELECT * FROM tbl_roles WHERE Estado = 'ACTIVO'");
                                             mysqli_close($conn);
                                             $result_rol = mysqli_num_rows($query_rol);
 

@@ -6,7 +6,7 @@
 		
 		$CODIGO_CUENTA = $_POST['CODIGO_CUENTA'];
 
-		$query_delete = mysqli_query($conn,"DELETE FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA =$CODIGO_CUENTA");
+		$query_delete = mysqli_query($conn,"DELETE FROM tbl_catalago_cuentas WHERE CODIGO_CUENTA =$CODIGO_CUENTA");
 		if($query_delete){
 			header("location: Gestion_CatalogoCuenta.php");
 		}else{
@@ -22,7 +22,7 @@
   }else{
     $CODIGO_CUENTA = $_REQUEST['Id'];
 
-		$query = mysqli_query($conn,"SELECT * FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA = $CODIGO_CUENTA ");
+		$query = mysqli_query($conn,"SELECT * FROM tbl_catalago_cuentas WHERE CODIGO_CUENTA = $CODIGO_CUENTA ");
 		$result = mysqli_num_rows($query);
 
 		if($result > 0){

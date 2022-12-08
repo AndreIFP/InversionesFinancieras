@@ -6,26 +6,26 @@ $respuesta=$_POST['txtrespuesta'];
 $user=$_SESSION['user'];
     if(isset($_POST["btnregistro"])){
 
-      $consultas=mysqli_query($conn,"SELECT Preguntas FROM TBL_PREGUNTAS where Id_Preguntas=$pregunta  ;");
+      $consultas=mysqli_query($conn,"SELECT Preguntas FROM tbl_preguntas where Id_Preguntas=$pregunta  ;");
       while($row=mysqli_fetch_array($consultas))
       {
        $idpreg=$row['Preguntas'];
       }
 
  
-      $conecsul	= mysqli_query($conn,"SELECT Id_Usuario FROM TBL_USUARIO WHERE Usuario = '$user'");
+      $conecsul	= mysqli_query($conn,"SELECT Id_Usuario FROM tbl_usuario WHERE Usuario = '$user'");
       while($row=mysqli_fetch_array($conecsul)){
       $idusus=$row['Id_Usuario'];
       }
 
   
-      mysqli_query($conn,"SELECT * FROM TBL_PREGUNTAS_X_USUARIO ");
-      $queryregistro = "INSERT INTO TBL_PREGUNTAS_X_USUARIO (Id_Preguntas,Id_Usuario,Preguntas,Respuestas) values ('$pregunta','$idusus','$idpreg','$respuesta');";
+      mysqli_query($conn,"SELECT * FROM tbl_preguntas_x_usuario ");
+      $queryregistro = "INSERT INTO tbl_preguntas_x_usuario (Id_Preguntas,Id_Usuario,Preguntas,Respuestas) values ('$pregunta','$idusus','$idpreg','$respuesta');";
     
     if(mysqli_query($conn,$queryregistro))
   {
 
-    $queryregistro = "UPDATE TBL_USUARIO SET Rol = 4, Estado_Usuario = 'ACTIVO' where Id_Usuario='$idusus';";
+    $queryregistro = "UPDATE tbl_usuario SET Rol = 4, Estado_Usuario = 'ACTIVO' where Id_Usuario='$idusus';";
     
     if(mysqli_query($conn,$queryregistro))
     {

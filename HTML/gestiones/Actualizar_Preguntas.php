@@ -12,7 +12,7 @@ if (!empty($_POST)) {
 			$alert = '<p class="msg_error">Solo Letras.</p>';
 		} else {
 
-			$query = mysqli_query($conn, "UPDATE TBL_PREGUNTAS SET Preguntas='$nombre' WHERE Id_Preguntas ='$Id_Preguntas'");
+			$query = mysqli_query($conn, "UPDATE tbl_preguntas SET Preguntas='$nombre' WHERE Id_Preguntas ='$Id_Preguntas'");
 
 			if ($query) {
 				echo "<script> alert('Pregunta Actualizado Exitosamente');window.location= 'Gestion_Preguntas.php' </script>";
@@ -29,7 +29,7 @@ if (empty($_REQUEST['Id'])) {
 }
 $Id = $_REQUEST['Id'];
 
-$sql = mysqli_query($conn, "SELECT *	FROM TBL_PREGUNTAS WHERE Id_Preguntas = $Id");
+$sql = mysqli_query($conn, "SELECT *	FROM tbl_preguntas WHERE Id_Preguntas = $Id");
 $result_sql = mysqli_num_rows($sql);
 
 if ($result_sql == 0) {

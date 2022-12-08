@@ -21,25 +21,25 @@ header("Content-Disposition: attachment; filename= Reporte Usuarios Inactivos.xl
 
 
 
-$sql = "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Inactivo' ORDER BY u.Id_Usuario DESC";
+$sql = "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from tbl_usuario u inner join tbl_roles r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Inactivo' ORDER BY u.Id_Usuario DESC";
 $DataPaises = mysqli_query($conn, $sql);
 
 // Llamado del parametro dirección
-$sqldireccion = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '4'";
+$sqldireccion = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '4'";
 $resultadodir = mysqli_query($conn,$sqldireccion);
 while ($fila = $resultadodir->fetch_assoc()) {
     $Direccion = $fila["Valor"];
 }
 
 // Llamado del parametro telefono
-$sqlTelefono = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '3'";
+$sqlTelefono = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '3'";
 $resultadotel = mysqli_query($conn,$sqlTelefono);
 while ($fila = $resultadotel->fetch_assoc()) {
     $Telefono = $fila["Valor"];
 }
 
 // Llamado del parametro correo
-$sqlCorreo = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '2'";
+$sqlCorreo = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '2'";
 $resultadocorreo = mysqli_query($conn,$sqlCorreo);
 while ($fila = $resultadocorreo->fetch_assoc()) {
     $Correo = $fila["Valor"];

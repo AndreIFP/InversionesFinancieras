@@ -7,7 +7,7 @@ if (!empty($_POST)) {
 	$alert = '';
 	session_start();
 	$user              = $_SESSION['user'];
-	$consultas = mysqli_query($conn, "SELECT Id_Usuario FROM TBL_USUARIO where Usuario='$user' ;");
+	$consultas = mysqli_query($conn, "SELECT Id_Usuario FROM tbl_usuario where Usuario='$user' ;");
 	while ($row = mysqli_fetch_array($consultas)) {
 		$iduser = $row['Id_Usuario'];
 	}
@@ -23,13 +23,13 @@ if (!empty($_POST)) {
 		$MOVIMIENTO = "NULL";
 	}
 
-	$querycodigo 	= mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA = '$CODIGO_CUENTA'");
+	$querycodigo 	= mysqli_query($conn, "SELECT * FROM tbl_catalago_cuentas WHERE CODIGO_CUENTA = '$CODIGO_CUENTA'");
 	$nr = mysqli_num_rows($querycodigo);
 
-	$querynombre 	= mysqli_query($conn, "SELECT * FROM TBL_CATALAGO_CUENTAS WHERE CUENTA = '$CUENTA'");
+	$querynombre 	= mysqli_query($conn, "SELECT * FROM tbl_catalago_cuentas WHERE CUENTA = '$CUENTA'");
 	$nr1 = mysqli_num_rows($querynombre);
 	if ($nr == 0 and $nr1 == 0) {
-		$query_insert = mysqli_query($conn, "INSERT INTO TBL_CATALAGO_CUENTAS (CODIGO_CUENTA,Id_Usuario,CUENTA,Mayor,Movimiento,Estado_Cuenta)
+		$query_insert = mysqli_query($conn, "INSERT INTO tbl_catalago_cuentas (CODIGO_CUENTA,Id_Usuario,CUENTA,Mayor,Movimiento,Estado_Cuenta)
 																	VALUES('$CODIGO_CUENTA','$iduser','$CUENTA','NULL','$MOVIMIENTO','$ESTADO_CUENTA')");
 		if ($query_insert) {
 			echo "<script> alert('Cuenta Registrado Exitosamente');window.location= 'Gestion_CatalogoCuenta.php' </script>";

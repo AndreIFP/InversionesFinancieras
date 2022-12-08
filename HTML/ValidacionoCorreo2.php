@@ -19,7 +19,7 @@ function tokenG($len=10){
 
 $passtoken = tokenG(20);
 
-$query = mysqli_query($conn,"SELECT Usuario, Correo_Electronico,Id_Usuario  FROM TBL_USUARIO WHERE Usuario like '$nombre'  order by Id_Usuario desc");
+$query = mysqli_query($conn,"SELECT Usuario, Correo_Electronico,Id_Usuario  FROM tbl_usuario WHERE Usuario like '$nombre'  order by Id_Usuario desc");
 $nr = mysqli_num_rows($query);
 
 if($nr == 1)

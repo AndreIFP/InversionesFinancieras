@@ -12,11 +12,11 @@ if(isset($_REQUEST["btnrlogin"])){
     $_SESSION["intentos"] = isset($_SESSION["intentos"]) ? $_SESSION["intentos"] : 0;
     
     try {
-        $query = mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '".$nombre."' and Contraseña = '".$pass."'");
+        $query = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Contraseña = '".$pass."'");
         $nr = mysqli_num_rows($query);
 
            if ($nr > 0){
-            $sqlc = "SELECT * FROM TBL_USUARIO WHERE Usuario = '".$nombre."' and Contraseña = '".$pass."'";
+            $sqlc = "SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Contraseña = '".$pass."'";
             $extr = $conn->query($sqlc);
             $fila = $extr->fetch_array(MYSQLI_NUM);
             $valor1 = $fila[3];
@@ -42,7 +42,7 @@ if(isset($_REQUEST["btnrlogin"])){
                 echo "<script>alert('Ingreso invalido, EL USUARIO SE ENCUENTRA BLOQUEADO O ESTA INACTIVO. CONSULTE CON SU ADMINISTRADOR');window.location= 'login.php'</script>";  
             }
         }
-        $sql2 = "SELECT Valor FROM TBL_PARAMETROS;";
+        $sql2 = "SELECT Valor FROM tbl_parametros;";
             $ext = $conn->query($sql2);
             $fila = $ext->fetch_array(MYSQLI_NUM);
             $param = $fila[0];
@@ -50,12 +50,12 @@ if(isset($_REQUEST["btnrlogin"])){
         if($_SESSION["intentos"] >=$param){
             
             // actualizamos el campo mostrar para que no se puede iniciar session
-            $sql1="SELECT Id_usuario from TBL_USUARIO WHERE Usuario='$nombre'";
+            $sql1="SELECT Id_usuario from tbl_usuario WHERE Usuario='$nombre'";
                         $res1 = $conn->query($sql1);
                         $fila = $res1->fetch_array(MYSQLI_NUM);
                         $iduser = $fila[0];    
         
-                        $sql = "UPDATE TBL_USUARIO SET Estado_Usuario='BLOQUEADO' WHERE Id_Usuario='$iduser'";
+                        $sql = "UPDATE tbl_usuario SET Estado_Usuario='BLOQUEADO' WHERE Id_Usuario='$iduser'";
                         $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
                         $exito = mysqli_query($con,$sql);
                         echo "<script>alert('DEMASIADOS INTENTOS EL USUARIO ".$nombre." SE HA BLOQUEADO');window.location= 'login.php'</script>";
@@ -67,19 +67,19 @@ if(isset($_REQUEST["btnrlogin"])){
 
         
         }catch (Exception $e) {
-            echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
+            echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla tbl_usuario. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
         }
 try{
     if($nr == 1)
 {
     $usuario = $_POST["txtusuario"];
 
-    $conecsul	= mysqli_query($conn,"SELECT Id_Usuario FROM TBL_USUARIO WHERE Usuario = '$usuario'");
+    $conecsul	= mysqli_query($conn,"SELECT Id_Usuario FROM tbl_usuario WHERE Usuario = '$usuario'");
 	while($row=mysqli_fetch_array($conecsul)){
 	$idusus=$row['Id_Usuario'];
 	}
     $_SESSION['id']="$idusus";
-    $query2 = mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '".$nombre."';");
+    $query2 = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."';");
     $nr2 = mysqli_num_rows($query2);
     //header("Location: index.php");
     if($nr2 == 1)
@@ -100,11 +100,11 @@ try{
     }
     else 
     {
-    $query2 = mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '".$nombre."' and Rol = '2'");
+    $query2 = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Rol = '2'");
     $nr2 = mysqli_num_rows($query2);
     if($nr2 != 1)
     {
-    $query2 = mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '".$nombre."' and Rol = '4'");
+    $query2 = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Rol = '4'");
     $nr2 = mysqli_num_rows($query2);
     echo "<script> window.location= 'preguntasReg.php' </script>";
     }
@@ -113,7 +113,7 @@ try{
 }
 
 }catch (Exception $e){
-    echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
+    echo "<script> alert('ERR-002: Se presento un error en la consulta hacia la tabla tbl_usuario. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
 }
 /*if(isset($_COOKIE["block".$nombre])){
     echo "<script> alert('El usuario ha sido bloqueado. PORFAVOR PONGASE EN CONTACTO CON EL ADMINISTRADOR');window.location= 'login.php' </script>";
@@ -123,26 +123,26 @@ try{
             $cont++;
             setcookie($nombre,$cont,time()+500);             
             try{
-            $sql2 = "SELECT Valor FROM TBL_PARAMETROS;";
+            $sql2 = "SELECT Valor FROM tbl_parametros;";
             $ext = $conn->query($sql2);
             $fila = $ext->fetch_array(MYSQLI_NUM);
             $valor = $fila[0];
             }catch(Exception $e){
-                echo "<script> alert('ERR-003: Error en la consulta hacia la tabla TBL_PARAMETROS. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
+                echo "<script> alert('ERR-003: Error en la consulta hacia la tabla tbl_parametros. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
             }
              
             if($cont==$valor){
-            $sql1="SELECT Id_usuario from TBL_USUARIO WHERE Usuario='$nombre'";
+            $sql1="SELECT Id_usuario from tbl_usuario WHERE Usuario='$nombre'";
             $res1 = $conn->query($sql1);
             $fila = $res1->fetch_array(MYSQLI_NUM);
             $iduser = $fila[0];    
             try{
-            $sql = "UPDATE TBL_USUARIO SET Estado_Usuario='BLOQUEADO' WHERE Id_Usuario='$iduser'";
+            $sql = "UPDATE tbl_usuario SET Estado_Usuario='BLOQUEADO' WHERE Id_Usuario='$iduser'";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql);
             setcookie("block".$nombre,$cont,time()+500);
             }catch(Exception $e ){
-                echo "<script> alert('ERR-004: Error en la proceso de actualizacion del estado en la tabla TBL_USUARIO. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
+                echo "<script> alert('ERR-004: Error en la proceso de actualizacion del estado en la tabla tbl_usuario. LINEA DEL ERROR: ".$e->getline()."' );window.location= 'login.php' </script>";
             }
         }  
         echo"<script>alert('Error al iniciar sesion');window.location= 'login.php'</script>"; 
@@ -155,7 +155,7 @@ try{
 /*
 if($nr == 1)
 {
-    $query2 = mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '".$nombre."' and Rol = '1'");
+    $query2 = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Rol = '1'");
     $nr2 = mysqli_num_rows($query2);
     //header("Location: OlvidoContra.html");
     if($nr2 == 1)
@@ -165,11 +165,11 @@ if($nr == 1)
     }
     else 
     {
-    $query2 = mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '".$nombre."' and Rol = '2'");
+    $query2 = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Rol = '2'");
     $nr2 = mysqli_num_rows($query2);
     if($nr2 != 1)
     {
-    $query2 = mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '".$nombre."' and Rol = '4'");
+    $query2 = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Rol = '4'");
     $nr2 = mysqli_num_rows($query2);
     echo "<script> window.location= 'preguntasReg.php' </script>";
     }

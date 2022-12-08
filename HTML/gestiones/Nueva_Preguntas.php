@@ -10,7 +10,7 @@ if (!empty($_POST)) {
 		if (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú ¿?]+$/", $nombre)) {
 			$alert = '<p class="msg_error">Solo Letras.</p>';
 		} else {
-			$query_insert = mysqli_query($conn, "INSERT INTO TBL_PREGUNTAS (Preguntas)
+			$query_insert = mysqli_query($conn, "INSERT INTO tbl_preguntas (Preguntas)
 																	VALUES('$nombre')");
 			if ($query_insert) {
 				echo "<script> alert('Pregunta Registrada Exitosamente');window.location= 'Gestion_Preguntas.php' </script>";

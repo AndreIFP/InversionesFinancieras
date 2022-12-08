@@ -96,7 +96,7 @@ $numero = 99999.99;
                 <tbody>
                 <?php
                         //Paginador
-                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CLIENTES
+                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_clientes
                                             WHERE ( Nombre_Empresa LIKE '%$busqueda%' OR
                                                     Nombre_Cliente LIKE '%$busqueda%' )");
                         $result_register = mysqli_fetch_array($sql_registe);
@@ -112,7 +112,7 @@ $numero = 99999.99;
 
                         $desde = ($pagina - 1) * $por_pagina;
                         $total_paginas = ceil($total_registro / $por_pagina);
-                        $sql = mysqli_query($conn, "select * from TBL_CLIENTES WHERE ( Nombre_Empresa LIKE '%$busqueda%' OR
+                        $sql = mysqli_query($conn, "select * from tbl_clientes WHERE ( Nombre_Empresa LIKE '%$busqueda%' OR
                                                                                 Nombre_Cliente LIKE '%$busqueda%' OR
                                                                                 Id_Cliente LIKE '%$busqueda%'  OR
                                                                                 Tipo_Cliente LIKE '%$busqueda%' OR
@@ -193,7 +193,7 @@ $numero = 99999.99;
                                 <?php
                                 include("../conexion.php");
                                 $poll = $_SESSION['Id_Mauri'];
-                                $query = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$poll' And Tipo_Cliente = 'Activo' ");
+                                $query = mysqli_query($conn, "SELECT * FROM tbl_clientes WHERE Id_Cliente = '$poll' And Tipo_Cliente = 'Activo' ");
                                 $nr = mysqli_num_rows($query);
                                 while ($row = mysqli_fetch_array($query)) {
                                     $Id_Cliente   = $row['Id_Cliente'];

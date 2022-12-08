@@ -109,7 +109,7 @@ $busqueda = $_SESSION['busquedaX'];
                         $rol = " OR rol LIKE '%4%' ";
                     }
 
-                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_USUARIO
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_usuario
                                             WHERE ( Id_Usuario LIKE '%$busqueda%' OR 
                                                     Usuario LIKE '%$busqueda%' OR
                                                     Nombre_Usuario LIKE '%$busqueda%' OR
@@ -128,7 +128,7 @@ $busqueda = $_SESSION['busquedaX'];
 
                     $desde = ($pagina - 1) * $por_pagina;
                     $total_paginas = ceil($total_registro / $por_pagina);
-                    $sql = mysqli_query($conn, "SELECT u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol 
+                    $sql = mysqli_query($conn, "SELECT u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from tbl_usuario u inner join tbl_roles r ON u.Rol = r.Id_Rol 
                                                                         WHERE ( u.Id_Usuario LIKE '%$busqueda%' OR 
                                                                                 u.Usuario LIKE '%$busqueda%' OR
                                                                                 u.Nombre_Usuario LIKE '%$busqueda%' OR
@@ -220,7 +220,7 @@ $busqueda = $_SESSION['busquedaX'];
                                     include("../conexion.php");
                                     $poll = $_SESSION['Id_Mauri'];
 
-                                    $query = mysqli_query($conn, "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol WHERE Id_Usuario = '$poll' ");
+                                    $query = mysqli_query($conn, "select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from tbl_usuario u inner join tbl_roles r ON u.Rol = r.Id_Rol WHERE Id_Usuario = '$poll' ");
 
                                     $nr = mysqli_num_rows($query);
                                     while ($row = mysqli_fetch_array($query)) {

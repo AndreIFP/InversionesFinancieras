@@ -7,9 +7,9 @@ $id_usuario = $_SESSION['id'];
 $cliente = $_SESSION['cliente'];
 
 const DRIVER='mysql';
-const SERVER='localhost:3307';
+const SERVER='142.44.161.115';
 const DATABASE='2w4GSUinHO';
-const USERNAME='root';
+const USERNAME='CALAPAL';
 const PASSWORD='';
 class Conexion{
 
@@ -35,7 +35,7 @@ class Conexion{
    if(isset($_POST['modo'])){
 
     if (($_POST['modo']=="Cuenta")) {
-      $mysqli = new mysqli("localhost:3307","root","3214","2w4GSUinHO"); 
+      $mysqli = new mysqli("142.44.161.115","CALAPAL","Calapal##567","2w4GSUinHO"); 
       $idCuenta=$_POST['idCuenta'];
 
       $queryl = "select CODIGO_CUENTA,CUENTA as CUENTA  from tbl_catalago_cuentas c

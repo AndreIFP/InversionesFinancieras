@@ -124,7 +124,7 @@ if(isset($_POST['btn_temporada']))
       <h4>
 <?php
 $num=0;
-$select = mysqli_query($con, "SELECT * FROM TBL_USUARIO ") or die (mysqli_error($link));
+$select = mysqli_query($con, "SELECT * FROM tbl_usuario ") or die (mysqli_error($link));
 $num = mysqli_num_rows($select);
 echo $num;
 ?>
@@ -188,7 +188,7 @@ echo $num;
 <?php
 
 $num=0;
-    $query=mysqli_query($con,"select * from TBL_USUARIO where Id_Usuario='$Id_Usuario' ")or die(mysqli_error());
+    $query=mysqli_query($con,"select * from tbl_usuario where Id_Usuario='$Id_Usuario' ")or die(mysqli_error());
     $i=0;
     while($row=mysqli_fetch_array($query)){
     $num=$row['caja'];

@@ -12,7 +12,7 @@ if (!empty($_POST)) {
 		if (!is_numeric($Valor)) {
 			$alert = '<p class="msg_error">Error El Valor Solo Números.</p>';
 		} else {
-			$query = mysqli_query($conn, "UPDATE TBL_PARAMETROS SET Parametro='$nombre',Valor='$Valor' WHERE Id_Parametro ='$Id_Parametro'");
+			$query = mysqli_query($conn, "UPDATE tbl_parametros SET Parametro='$nombre',Valor='$Valor' WHERE Id_Parametro ='$Id_Parametro'");
 
 			if ($query) {
 				echo "<script> alert('Parametro Actualizado Exitosamente');window.location= 'Gestion_parametros.php' </script>";
@@ -29,7 +29,7 @@ if (empty($_REQUEST['Id'])) {
 }
 $Id = $_REQUEST['Id'];
 
-$sql = mysqli_query($conn, "SELECT *	FROM TBL_PARAMETROS WHERE Id_Parametro = $Id");
+$sql = mysqli_query($conn, "SELECT *	FROM tbl_parametros WHERE Id_Parametro = $Id");
 $result_sql = mysqli_num_rows($sql);
 
 if ($result_sql == 0) {

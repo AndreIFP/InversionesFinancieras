@@ -11,10 +11,10 @@ $nombrec = $_POST["txtusuario"];
 if(isset($_POST["btnregistrarx"]))
 {
 
-$queryusuario 	= mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '$nombre'");
+$queryusuario 	= mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '$nombre'");
 $nr 			= mysqli_num_rows($queryusuario); 
 
-$querycorreo 	= mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Correo_Electronico= '$email'");
+$querycorreo 	= mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Correo_Electronico= '$email'");
 $nr 			= mysqli_num_rows($querycorreo); 
 
 
@@ -22,22 +22,22 @@ if ($nr == 0 )
 {
 
 	
-	$queryregistrar = "INSERT INTO TBL_USUARIO (Usuario, Nombre_Usuario,Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja) values ('$nombre','$nombreu','$pass','$email','INACTIVO','4','0')";
-	//$queryregistrare = "INSERT INTO TBL_PREGUNTAS (pregunta) values ('$pregunta')";
+	$queryregistrar = "INSERT INTO tbl_usuario (Usuario, Nombre_Usuario,Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja) values ('$nombre','$nombreu','$pass','$email','INACTIVO','4','0')";
+	//$queryregistrare = "INSERT INTO tbl_preguntas (pregunta) values ('$pregunta')";
 if(mysqli_query($conn,$queryregistrar))
 {
-	$conecsul	= mysqli_query($conn,"SELECT Id_Usuario FROM TBL_USUARIO WHERE Usuario = '$nombre'");
+	$conecsul	= mysqli_query($conn,"SELECT Id_Usuario FROM tbl_usuario WHERE Usuario = '$nombre'");
 	while($row=mysqli_fetch_array($conecsul)){
 	$idusus=$row['Id_Usuario'];
 	}
-	mysqli_query($conn,"SELECT * FROM TBL_PREGUNTAS_X_USUARIO ");
-	$queryregistro = "INSERT INTO TBL_PREGUNTAS_X_USUARIO (Id_Usuario,Preguntas,Respuestas) values ('$idusus','aaaa','eweer');";
+	mysqli_query($conn,"SELECT * FROM tbl_preguntas_x_usuario ");
+	$queryregistro = "INSERT INTO tbl_preguntas_x_usuario (Id_Usuario,Preguntas,Respuestas) values ('$idusus','aaaa','eweer');";
 	mysqli_query($conn,$queryregistro);
 
 /////////////////
 
 
-$query2 = mysqli_query($conn,"SELECT Usuario, Correo_Electronico,Contraseña  FROM TBL_USUARIO WHERE Usuario like '$nombrec'  order by Id_Usuario desc");
+$query2 = mysqli_query($conn,"SELECT Usuario, Correo_Electronico,Contraseña  FROM tbl_usuario WHERE Usuario like '$nombrec'  order by Id_Usuario desc");
 $nr2 = mysqli_num_rows($query2);
 
 if($nr2 == 1)

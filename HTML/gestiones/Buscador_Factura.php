@@ -34,7 +34,7 @@ session_start();
                     <tbody>
                         <?php
                         //Paginador
-                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_Factura_1
+                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_factura_1
                                             WHERE ( N_Factura LIKE '%$busqueda%' OR
                                                     Concepto LIKE '%$busqueda%' OR
                                                     Nombre_Cliente LIKE '%$busqueda%' )");
@@ -51,7 +51,7 @@ session_start();
 
                         $desde = ($pagina - 1) * $por_pagina;
                         $total_paginas = ceil($total_registro / $por_pagina);
-                        $sql = mysqli_query($conn, "SELECT * FROM TBL_Factura_1 WHERE ( Concepto LIKE '%$busqueda%' OR
+                        $sql = mysqli_query($conn, "SELECT * FROM tbl_factura_1 WHERE ( Concepto LIKE '%$busqueda%' OR
                                                                         N_Factura LIKE '%$busqueda%' OR Nombre_Cliente LIKE '%$busqueda%' ) LIMIT $desde,$por_pagina ");
                         mysqli_close($conn);
 

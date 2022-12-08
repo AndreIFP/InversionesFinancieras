@@ -43,7 +43,7 @@ if (!empty($_POST)) {
                     $alert='<p class="msg_error">La descripcion solo recibe letras.</p>';
             }else{
 
-            $query = mysqli_query($conn,"UPDATE TBL_ROLES SET Descripcion='$Descripcion' WHERE Id_Rol ='$Id_Rol'");
+            $query = mysqli_query($conn,"UPDATE tbl_roles SET Descripcion='$Descripcion' WHERE Id_Rol ='$Id_Rol'");
 
 				if($query){
 					echo "<script> alert('Rol Actualizado Exitosamente');window.location= 'GestionRoles.php' </script>";

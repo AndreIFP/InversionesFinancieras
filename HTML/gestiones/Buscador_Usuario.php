@@ -105,7 +105,7 @@ $busqueda = strtolower($_REQUEST['busqueda']);
                         $rol = " OR rol LIKE '%4%' ";
                     }
 
-                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_USUARIO
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_usuario
                                             WHERE ( Id_Usuario LIKE '%$busqueda%' OR 
                                                     Usuario LIKE '%$busqueda%' OR
                                                     Nombre_Usuario LIKE '%$busqueda%' OR
@@ -124,7 +124,7 @@ $busqueda = strtolower($_REQUEST['busqueda']);
 
                     $desde = ($pagina - 1) * $por_pagina;
                     $total_paginas = ceil($total_registro / $por_pagina);
-                    $sql = mysqli_query($conn, "SELECT u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol 
+                    $sql = mysqli_query($conn, "SELECT u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from tbl_usuario u inner join tbl_roles r ON u.Rol = r.Id_Rol 
                                                                         WHERE ( u.Id_Usuario LIKE '%$busqueda%' OR 
                                                                                 u.Usuario LIKE '%$busqueda%' OR
                                                                                 u.Nombre_Usuario LIKE '%$busqueda%' OR

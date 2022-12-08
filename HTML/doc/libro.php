@@ -90,7 +90,7 @@ ul {
               include('../conexion.php');
                 
                 #consulta de todos los paises
-                $consulta=mysqli_query($conn,"SELECT * FROM TBL_CATALAGO_CUENTAS ;" );
+                $consulta=mysqli_query($conn,"SELECT * FROM tbl_catalago_cuentas ;" );
                 while($row=mysqli_fetch_array($consulta)){
                     $nombrepais=$row['CUENTA']; 
                     $nombeid=$row['CODIGO_CUENTA'];      
@@ -184,7 +184,7 @@ ul {
 <?php
 
    // $branch=$_SESSION['branch'];
-    $query=mysqli_query($con,"select * from TBL_ESTADO_RESULTADO where Id_Usuario='$id_usuario' ")or die(mysqli_error());
+    $query=mysqli_query($con,"select * from tbl_estado_RESULTADO where Id_Usuario='$id_usuario' ")or die(mysqli_error());
     $i=1;
     while($row=mysqli_fetch_array($query)){
 $monto_debe=0;

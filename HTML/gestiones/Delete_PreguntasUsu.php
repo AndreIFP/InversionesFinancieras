@@ -17,7 +17,7 @@
   }else{
     $Id_Preguntas = $_REQUEST['Id'];
 
-		$query = mysqli_query($conn,"SELECT * FROM TBL_PREGUNTAS_X_USUARIO WHERE Id_Preguntas = $Id_Preguntas ");
+		$query = mysqli_query($conn,"SELECT * FROM tbl_preguntas_x_usuario WHERE Id_Preguntas = $Id_Preguntas ");
 		$result = mysqli_num_rows($query);
 
 		if($result > 0){

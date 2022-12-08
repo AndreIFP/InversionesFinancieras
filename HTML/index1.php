@@ -13,7 +13,7 @@ $token = $_POST['txttoken'];
 //fecha actual
 $date = date('Y-m-d H:i:s');
 
-$queryParametros = mysqli_query($conn, "SELECT valor FROM TBL_PARAMETROS WHERE Parametro='Minutos_Vigencia_Token'");
+$queryParametros = mysqli_query($conn, "SELECT valor FROM tbl_parametros WHERE Parametro='Minutos_Vigencia_Token'");
 $parametrosResult = mysqli_fetch_array($queryParametros, 1);
 //MINUTOS DE VIGENCIA=================================================
 $vigencia = $parametrosResult['valor'];
@@ -28,7 +28,7 @@ $queryregistro = "INSERT INTO tbl_token (Token,Id_usuario,Fecha_inicio,Fecha_fin
                    values ('$token','$idusuario','$date','$Fecha_final')";
 mysqli_query($conn, $queryregistro);
 
-$queryusuario     = mysqli_query($conn, "SELECT * FROM TBL_USUARIO WHERE Correo_Electronico = '$correo'");
+$queryusuario     = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE Correo_Electronico = '$correo'");
 $nr             = mysqli_num_rows($queryusuario);
 if ($nr == 1) {
     $mostrar        = mysqli_fetch_array($queryusuario);
@@ -47,7 +47,7 @@ if ($nr == 1) {
 }
 
 // Llamado del parametro correo
-$sqlCorreo = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '9'";
+$sqlCorreo = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '9'";
 $resultadocorreo = mysqli_query($conn, $sqlCorreo);
 while ($fila = $resultadocorreo->fetch_assoc()) {
     $CorreoS = $fila["Valor"];

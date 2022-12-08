@@ -10,26 +10,26 @@ $nombrec = $_POST["txtusuario"];
 if(isset($_POST["btnregistrarx"]))
 {
 
-$queryusuario 	= mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '$usuario'");
+$queryusuario 	= mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '$usuario'");
 $nr 			= mysqli_num_rows($queryusuario); 
 
-$queryemail 	= mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Correo_Electronico = '$email'");
+$queryemail 	= mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Correo_Electronico = '$email'");
 $n 			= mysqli_num_rows($queryemail); 
 
 if ($nr == 0 AND $n == 0 )
 {
-	$queryregistrar = "INSERT INTO TBL_USUARIO (Usuario,Nombre_Usuario, Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja) values ('$usuario','$nombre','$pass','$email','INACTIVO','4','0')";
-	//$queryregistrare = "INSERT INTO TBL_PREGUNTAS (pregunta) values ('$pregunta')";
+	$queryregistrar = "INSERT INTO tbl_usuario (Usuario,Nombre_Usuario, Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja) values ('$usuario','$nombre','$pass','$email','INACTIVO','4','0')";
+	//$queryregistrare = "INSERT INTO tbl_preguntas (pregunta) values ('$pregunta')";
 if(mysqli_query($conn,$queryregistrar))
 {
-	$conecsul	= mysqli_query($conn,"SELECT Id_Usuario FROM TBL_USUARIO WHERE Usuario = '$usuario'");
+	$conecsul	= mysqli_query($conn,"SELECT Id_Usuario FROM tbl_usuario WHERE Usuario = '$usuario'");
 	while($row=mysqli_fetch_array($conecsul)){
 	$idusus=$row['Id_Usuario'];
 	}
 /////////////////
 
 
-$query2 = mysqli_query($conn,"SELECT Usuario, Correo_Electronico,Contraseña  FROM TBL_USUARIO WHERE Usuario like '$nombrec'  order by Id_Usuario desc");
+$query2 = mysqli_query($conn,"SELECT Usuario, Correo_Electronico,Contraseña  FROM tbl_usuario WHERE Usuario like '$nombrec'  order by Id_Usuario desc");
 $nr2 = mysqli_num_rows($query2);
 
 if($nr2 == 1)

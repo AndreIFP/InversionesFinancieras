@@ -34,7 +34,7 @@ session_start();
                             <tbody>
                                     <?php
                                     //Paginador
-                                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_KARDEX
+                                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM tbl_kardex
                                             WHERE ( proname LIKE '%$busqueda%' )");
                                     $result_register = mysqli_fetch_array($sql_registe);
                                     $total_registro = $result_register['total_registro'];
@@ -50,7 +50,7 @@ session_start();
 
                                     $desde = ($pagina-1) * $por_pagina;
                                     $total_paginas = ceil($total_registro / $por_pagina);
-                                        $sql = mysqli_query($conn,"select * from TBL_KARDEX WHERE ( proname LIKE '%$busqueda%' ) LIMIT $desde,$por_pagina ");
+                                        $sql = mysqli_query($conn,"select * from tbl_kardex WHERE ( proname LIKE '%$busqueda%' ) LIMIT $desde,$por_pagina ");
                                         mysqli_close($conn);
 
                                         $result = mysqli_num_rows($sql);

@@ -68,28 +68,28 @@ include 'barralateralinicial.php';
         <br>
 
         <?php
-        $sql2 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '10';";
+        $sql2 = "SELECT Valor FROM tbl_parametros WHERE Id_Parametro = '10';";
         $ext = $conn->query($sql2);
         $fila = $ext->fetch_array(MYSQLI_NUM);
         $param = $fila[0];
         ?>
 
         <?php
-        $sql3 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '11';";
+        $sql3 = "SELECT Valor FROM tbl_parametros WHERE Id_Parametro = '11';";
         $extr = $conn->query($sql3);
         $fila1 = $extr->fetch_array(MYSQLI_NUM);
         $param1 = $fila1[0];
         ?>
 
         <?php
-        $sql4 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '12';";
+        $sql4 = "SELECT Valor FROM tbl_parametros WHERE Id_Parametro = '12';";
         $extra = $conn->query($sql4);
         $fila2 = $extra->fetch_array(MYSQLI_NUM);
         $param2 = $fila2[0];
         ?>
 
         <?php
-        $sql5 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '13';";
+        $sql5 = "SELECT Valor FROM tbl_parametros WHERE Id_Parametro = '13';";
         $extrac = $conn->query($sql5);
         $fila3 = $extrac->fetch_array(MYSQLI_NUM);
         $param3 = $fila3[0];
@@ -97,14 +97,14 @@ include 'barralateralinicial.php';
 
 
         <?php
-        $sql6 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '14';";
+        $sql6 = "SELECT Valor FROM tbl_parametros WHERE Id_Parametro = '14';";
         $extracc = $conn->query($sql6);
         $fila4 = $extracc->fetch_array(MYSQLI_NUM);
         $param4 = $fila4[0];
         ?>
 
         <?php
-        $sql6 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '15';";
+        $sql6 = "SELECT Valor FROM tbl_parametros WHERE Id_Parametro = '15';";
         $extracci = $conn->query($sql6);
         $fila5 = $extracci->fetch_array(MYSQLI_NUM);
         $param5 = $fila5[0];
@@ -126,7 +126,7 @@ include 'barralateralinicial.php';
             <select class="form-control" name="Nombre_Cliente" id="Nombre_Cliente" required>
               <option value="" style="width:90px;border:0">Seleccione un cliente</option>
               <?php
-              $consulta = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES ;");
+              $consulta = mysqli_query($conn, "SELECT * FROM tbl_clientes ;");
               while ($row = mysqli_fetch_array($consulta)) {
                 $nombrepais = $row['Nombre_Empresa'];
               ?>

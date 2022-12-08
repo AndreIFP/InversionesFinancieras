@@ -85,7 +85,7 @@ if (!isset($_SESSION['rol'])) {
             <tbody>
                 <?php
                 //Paginador
-                $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_PARAMETROS WHERE Id_Parametro = Id_Parametro ");
+                $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_parametros WHERE Id_Parametro = Id_Parametro ");
                 $result_register = mysqli_fetch_array($sql_registe);
                 $total_registro = $result_register['total_registro'];
 
@@ -103,7 +103,7 @@ if (!isset($_SESSION['rol'])) {
 
                 $desde = ($pagina - 1) * $por_pagina;
                 $total_paginas = ceil($total_registro / $por_pagina);
-                $sql = mysqli_query($conn, "select * FROM TBL_PARAMETROS ORDER BY Fecha_Creacion DESC LIMIT $desde,$por_pagina ");
+                $sql = mysqli_query($conn, "select * FROM tbl_parametros ORDER BY Fecha_Creacion DESC LIMIT $desde,$por_pagina ");
                 mysqli_close($conn);
 
                 $result = mysqli_num_rows($sql);

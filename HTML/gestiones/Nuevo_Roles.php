@@ -16,10 +16,10 @@ if (!empty($_POST)) {
 		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $Descripcion)) {
 			echo "<script> alert('La descripción solo recibe letras');window.location= 'Nuevo_Roles.php' </script>";
 		} else {
-			$queryrol 	= mysqli_query($conn, "SELECT * FROM TBL_ROLES WHERE Rol = '$Rol'");
+			$queryrol 	= mysqli_query($conn, "SELECT * FROM tbl_roles WHERE Rol = '$Rol'");
 			$nr 			= mysqli_num_rows($queryrol);
 			if ($nr == 0) {
-				$query_insert = mysqli_query($conn, "INSERT INTO TBL_ROLES(Rol,Estado,Descripcion)
+				$query_insert = mysqli_query($conn, "INSERT INTO tbl_roles(Rol,Estado,Descripcion)
 										VALUES('$Rol','$Estado','$Descripcion')");
 				if ($query_insert) {
 					echo "<script> alert('El Rol se ha registrado exitosamente');window.location= 'GestionRoles.php' </script>";

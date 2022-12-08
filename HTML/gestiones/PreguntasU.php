@@ -26,7 +26,7 @@ include("../conexion.php");
                         <tbody>
                                 <?php
                                 //Paginador
-			                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_PREGUNTAS WHERE Id_Preguntas = Id_Preguntas ");
+			                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM tbl_preguntas WHERE Id_Preguntas = Id_Preguntas ");
 			                    $result_register = mysqli_fetch_array($sql_registe);
 			                    $total_registro = $result_register['total_registro'];
 
@@ -41,7 +41,7 @@ include("../conexion.php");
 
                                 $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select * FROM TBL_PREGUNTAS LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select * FROM tbl_preguntas LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);

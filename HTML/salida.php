@@ -22,8 +22,8 @@
 <br><br>
 <table cellpadding="5" border="1">
 <?php
-$mysqli = mysqli_connect("localhost:3307","root","3214","2w4GSUinHO");
-$query = mysqli_query($mysqli,"SELECT nproducto FROM TBL_KARDEX");
+$mysqli = mysqli_connect("142.44.161.115","CALAPAL","Calapal##567","2w4GSUinHO");
+$query = mysqli_query($mysqli,"SELECT nproducto FROM tbl_kardex");
 ?>
 <tr>
  <td>Articulo:</td>
@@ -58,8 +58,8 @@ echo $DateAndTime2;
 ?>" size="20"></td>
       </table>
 <?php
-/*$mysqli = mysqli_connect("localhost","root","","2w4GSUinHO");
-$query = mysqli_query($mysqli,"SELECT CODIGO_CUENTA, CUENTA FROM TBL_CATALAGO_CUENTAS ORDER BY FIELD (CLASIFICACION, 'ACTIVO', 'PASIVO', 'CAPITAL', 'INGRESOS','COSTOS','GASTOS') ASC, CODIGO_CUENTA, CLASIFICACION");
+/*$mysqli = mysqli_connect("localhost","CALAPAL","","2w4GSUinHO");
+$query = mysqli_query($mysqli,"SELECT CODIGO_CUENTA, CUENTA FROM tbl_catalago_cuentas ORDER BY FIELD (CLASIFICACION, 'ACTIVO', 'PASIVO', 'CAPITAL', 'INGRESOS','COSTOS','GASTOS') ASC, CODIGO_CUENTA, CLASIFICACION");
 ?>
 <table>
    <tr>

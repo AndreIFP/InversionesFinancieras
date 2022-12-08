@@ -21,7 +21,7 @@
                     $alert='<p class="msg_error">El Tipo de Objeto solo recibe letras.</p>';
             }else{
 			
-			$query_insert = mysqli_query($conn,"INSERT INTO TBL_OBJETOS(Objetos,Descripcion,Tipo_Objeto)
+			$query_insert = mysqli_query($conn,"INSERT INTO tbl_objetos(Objetos,Descripcion,Tipo_Objeto)
 										VALUES('$Objetos','$Descripcion','$Tipo_Objeto')"); 
 			    if($query_insert){
 					echo "<script> alert('Objetos Registrado Exitosamente');window.location= 'Gestion_Objetos.php' </script>";

@@ -117,7 +117,7 @@ $sql9 = "SELECT id_product,amount FROM product WHERE proname = '".$art."'";
                $exist = $fila[1];
 
                
-               $sql4 = "SELECT total_cante, cant_entrada FROM TBL_KARDEX WHERE proname = '".$art."'";
+               $sql4 = "SELECT total_cante, cant_entrada FROM tbl_kardex WHERE proname = '".$art."'";
                $ext = $conn->query($sql4);
                $fila = $ext->fetch_array(MYSQLI_NUM);
                $tsal = $fila[0];
@@ -131,7 +131,7 @@ $sql9 = "SELECT id_product,amount FROM product WHERE proname = '".$art."'";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql5);
             
-            $sql = "INSERT INTO TBL_KARDEX (Id_Usuario,fecha, detalle, id_product, proname, cant_salida, total_cants) VALUES ($usuarios,'$fechaa','SALIDA',$id,'$art',$cant,$res1)";
+            $sql = "INSERT INTO tbl_kardex (Id_Usuario,fecha, detalle, id_product, proname, cant_salida, total_cants) VALUES ($usuarios,'$fechaa','SALIDA',$id,'$art',$cant,$res1)";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql);
                }else{    
@@ -142,7 +142,7 @@ $sql9 = "SELECT id_product,amount FROM product WHERE proname = '".$art."'";
             $exito = mysqli_query($con,$sql1);
  
         }elseif ($nr == 0) {
-            $sql = "INSERT INTO TBL_KARDEX (fecha, detalle, nproducto, cant_entrada, total_cante) VALUES ('$fecha','ENTRADA','$art','$ent','$total')";
+            $sql = "INSERT INTO tbl_kardex (fecha, detalle, nproducto, cant_entrada, total_cante) VALUES ('$fecha','ENTRADA','$art','$ent','$total')";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql);
             }*/

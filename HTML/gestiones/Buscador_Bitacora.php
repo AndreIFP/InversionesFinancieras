@@ -41,7 +41,7 @@ session_start();
                         <tbody>
                             <?php
                             //Paginador
-                            $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_MS_BITACORA 
+                            $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_ms_bitacora 
                                             WHERE ( Id_Bitacora LIKE '%$busqueda%' OR
                                                     Accion LIKE '%$busqueda%' )");
                             $result_register = mysqli_fetch_array($sql_registe);
@@ -57,7 +57,7 @@ session_start();
 
                             $desde = ($pagina - 1) * $por_pagina;
                             $total_paginas = ceil($total_registro / $por_pagina);
-                            $sql = mysqli_query($conn, "select * FROM TBL_MS_BITACORA WHERE ( Id_Bitacora LIKE '%$busqueda%' OR
+                            $sql = mysqli_query($conn, "select * FROM tbl_ms_bitacora WHERE ( Id_Bitacora LIKE '%$busqueda%' OR
                                                                 Accion LIKE '%$busqueda%' OR
                                                                 Descripcion LIKE '%$busqueda%' OR
                                                                 Fecha LIKE '%$busqueda%'  ) LIMIT $desde,$por_pagina ");

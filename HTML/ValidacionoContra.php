@@ -5,7 +5,7 @@ include('conexion.php');
 $nombre = $_POST["txtusuario"];
 
 
-$query = mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE Usuario = '".$nombre."'");
+$query = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."'");
 $nr = mysqli_num_rows($query);
 
 if($nr == 1)

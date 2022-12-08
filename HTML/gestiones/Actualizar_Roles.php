@@ -15,7 +15,7 @@ if (!empty($_POST)) {
 			echo "<script> alert('La descripción solo recibe letras');window.location= 'Actualizar_Roles.php' </script>";
 		} else {
 
-			$query = mysqli_query($conn, "UPDATE TBL_ROLES SET Estado='$Estado', Descripcion='$Descripcion' WHERE Id_Rol ='$Id_Rol'");
+			$query = mysqli_query($conn, "UPDATE tbl_roles SET Estado='$Estado', Descripcion='$Descripcion' WHERE Id_Rol ='$Id_Rol'");
 
 			if ($query) {
 				echo "<script> alert('Rol Actualizado Exitosamente');window.location= 'GestionRoles.php' </script>";
@@ -32,7 +32,7 @@ if (empty($_REQUEST['Id'])) {
 }
 $Id = $_REQUEST['Id'];
 
-$sql = mysqli_query($conn, "SELECT *	FROM TBL_ROLES WHERE Id_Rol = $Id");
+$sql = mysqli_query($conn, "SELECT *	FROM tbl_roles WHERE Id_Rol = $Id");
 $result_sql = mysqli_num_rows($sql);
 
 if ($result_sql == 0) {

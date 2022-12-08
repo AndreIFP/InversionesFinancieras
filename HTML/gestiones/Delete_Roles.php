@@ -17,7 +17,7 @@
   }else{
     $Id_Rol = $_REQUEST['Id'];
 
-		$query = mysqli_query($conn,"SELECT * FROM TBL_ROLES WHERE Id_Rol = $Id_Rol ");
+		$query = mysqli_query($conn,"SELECT * FROM tbl_roles WHERE Id_Rol = $Id_Rol ");
 		$result = mysqli_num_rows($query);
 
 		if($result > 0){

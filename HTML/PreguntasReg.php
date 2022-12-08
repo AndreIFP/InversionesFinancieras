@@ -18,7 +18,7 @@
               include('conexion.php');
                 
                 #consulta de todos los paises
-                $consulta=mysqli_query($conn,"SELECT * FROM TBL_PREGUNTAS ;" );
+                $consulta=mysqli_query($conn,"SELECT * FROM tbl_preguntas ;" );
                 while($row=mysqli_fetch_array($consulta)){
                     $nombrepais=$row['Preguntas']; 
                     $nombeid=$row['Id_Preguntas'];      

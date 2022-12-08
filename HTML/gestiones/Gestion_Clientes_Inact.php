@@ -93,7 +93,7 @@ $numero = 99999.99;
                 <tbody>
                     <?php
                     //Paginador
-                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CLIENTES WHERE Id_Cliente = Id_Cliente AND Tipo_Cliente = 'Inactivo' ");
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_clientes WHERE Id_Cliente = Id_Cliente AND Tipo_Cliente = 'Inactivo' ");
                     $result_register = mysqli_fetch_array($sql_registe);
                     $total_registro = $result_register['total_registro'];
 
@@ -111,7 +111,7 @@ $numero = 99999.99;
 
                     $desde = ($pagina - 1) * $por_pagina;
                     $total_paginas = ceil($total_registro / $por_pagina);
-                    $sql = mysqli_query($conn, "select * FROM TBL_CLIENTES WHERE Tipo_Cliente = 'Inactivo' ORDER BY Fecha_Dato DESC LIMIT $desde,$por_pagina ");
+                    $sql = mysqli_query($conn, "select * FROM tbl_clientes WHERE Tipo_Cliente = 'Inactivo' ORDER BY Fecha_Dato DESC LIMIT $desde,$por_pagina ");
                     mysqli_close($conn);
 
                     $result = mysqli_num_rows($sql);
@@ -188,7 +188,7 @@ $numero = 99999.99;
                                 <?php
                                 include("../conexion.php");
                                 $poll = $_SESSION['Id_Mauri'];
-                                $query = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = '$poll' AND Tipo_Cliente = 'Inactivo' ");
+                                $query = mysqli_query($conn, "SELECT * FROM tbl_clientes WHERE Id_Cliente = '$poll' AND Tipo_Cliente = 'Inactivo' ");
                                 $nr = mysqli_num_rows($query);
                                 while ($row = mysqli_fetch_array($query)) {
                                     $Id_Cliente   = $row['Id_Cliente'];

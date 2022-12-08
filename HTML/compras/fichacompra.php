@@ -156,7 +156,7 @@ echo "FECHA A DIA DE HOY DE LA FICHA : $DateAndTime2.";
                $fila = $ext->fetch_array(MYSQLI_NUM);
                $id = $fila[0];
 
-    $sql = "INSERT INTO TBL_KARDEX (Id_Usuario,fecha, detalle, id_product, proname, cant_entrada, total_cante,cant_salida, total_cants) VALUES (1,'$fecha','ENTRADA',1,'$art',$ent,$result,null,null)";
+    $sql = "INSERT INTO tbl_kardex (Id_Usuario,fecha, detalle, id_product, proname, cant_entrada, total_cante,cant_salida, total_cants) VALUES (1,'$fecha','ENTRADA',1,'$art',$ent,$result,null,null)";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql);
 
@@ -165,7 +165,7 @@ echo "FECHA A DIA DE HOY DE LA FICHA : $DateAndTime2.";
             $exito = mysqli_query($con,$sql1);
  
         }elseif ($nr == 0) {
-            $sql = "INSERT INTO TBL_KARDEX (Id_Usuario,fecha, detalle, id_product, proname, cant_entrada, total_cante,cant_salida, total_cants) VALUES (1,'$fecha','ENTRADA',1,'$art',$ent,$result,null,null)";
+            $sql = "INSERT INTO tbl_kardex (Id_Usuario,fecha, detalle, id_product, proname, cant_entrada, total_cante,cant_salida, total_cants) VALUES (1,'$fecha','ENTRADA',1,'$art',$ent,$result,null,null)";
             $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
             $exito = mysqli_query($con,$sql);
 

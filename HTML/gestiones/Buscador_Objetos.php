@@ -42,7 +42,7 @@ font-size: 12px; ">
                                     //NO Existe
 
                                     //Paginador
-                                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_OBJETOS
+                                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM tbl_objetos
                                             WHERE ( Id_Objetos LIKE '%$busqueda%' OR
                                             Objetos LIKE '%$busqueda%' )");
                                     $result_register = mysqli_fetch_array($sql_registe);
@@ -64,7 +64,7 @@ font-size: 12px; ">
 
                                     $desde = ($pagina-1) * $por_pagina;
                                     $total_paginas = ceil($total_registro / $por_pagina);
-                                        $sql = mysqli_query($conn,"SELECT * from TBL_OBJETOS WHERE ( Id_Objetos LIKE '%$busqueda%' OR
+                                        $sql = mysqli_query($conn,"SELECT * from tbl_objetos WHERE ( Id_Objetos LIKE '%$busqueda%' OR
                                                                                 Objetos LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
                                         mysqli_close($conn);
 

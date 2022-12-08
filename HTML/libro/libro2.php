@@ -747,7 +747,7 @@ $asiento = $row['Id_asiento'];
 const DRIVER='mysql';
 const SERVER='localhost';
 const DATABASE='2w4GSUinHO';
-const USERNAME='root';
+const USERNAME='CALAPAL';
 const PASSWORD='';
 class Conexion{
 

@@ -1,8 +1,8 @@
 <?php
-$dbuser = 'root';
-$dbpass = '3214';
+$dbuser = 'CALAPAL';
+$dbpass = 'Calapal##567';
 $dbname = '2w4GSUinHO';
-$con = mysqli_connect("localhost:3307",$dbuser,$dbpass,$dbname);
+$con = mysqli_connect("142.44.161.115",$dbuser,$dbpass,$dbname);
 
 // Check connection
 if (mysqli_connect_errno())

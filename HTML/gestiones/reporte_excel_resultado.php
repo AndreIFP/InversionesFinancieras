@@ -35,7 +35,7 @@ $empresa = $_SESSION['empresa'];
 
 //Llanmado de total ingresos
 $sql = "SELECT ifnull(sum(tb.SAcreedor),0) as Ingresos  FROM tbl_catalago_cuentas tcc 
-JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
 where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
   $resultado = mysqli_query($conn, $sql);
   while ($rows = $resultado->fetch_assoc()) {
@@ -44,7 +44,7 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
 
   //<!-- COSTO DE VENTAS-->
   $sql2 = "SELECT ifnull(sum(tb.Sdebe),0) AS costos   FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6501%'";
   $resultado2 = mysqli_query($conn, $sql2);
   while ($rows = $resultado2->fetch_assoc()) {
@@ -52,21 +52,21 @@ where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
   }
 
 // Llamado del parametro dirección
-$sqldireccion = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '4'";
+$sqldireccion = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '4'";
 $resultadodir = mysqli_query($conn,$sqldireccion);
 while ($fila = $resultadodir->fetch_assoc()) {
     $Direccion = $fila["Valor"];
 }
 
 // Llamado del parametro telefono
-$sqlTelefono = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '3'";
+$sqlTelefono = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '3'";
 $resultadotel = mysqli_query($conn,$sqlTelefono);
 while ($fila = $resultadotel->fetch_assoc()) {
     $Telefono = $fila["Valor"];
 }
 
 // Llamado del parametro correo
-$sqlCorreo = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '2'";
+$sqlCorreo = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '2'";
 $resultadocorreo = mysqli_query($conn,$sqlCorreo);
 while ($fila = $resultadocorreo->fetch_assoc()) {
     $Correo = $fila["Valor"];
@@ -94,7 +94,7 @@ $fecha = date("d-m-Y h:i:s a");
 
 <table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
 <?php
-      $sql1 = "SELECT tcc.CUENTA,tb2.SAcreedor  from Tbl_Balanza tb2  
+      $sql1 = "SELECT tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2  
       join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
       where COD_CUENTA like '6401%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
 $resultado1 = mysqli_query($conn, $sql1);
@@ -124,7 +124,7 @@ $cuen = $rows['SAcreedor'];
       $sqlcosto = "SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
       join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
       join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
       where tcc.CODIGO_CUENTA  LIKE '6501%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $costosv = mysqli_query($conn, $sqlcosto);
 
@@ -162,7 +162,7 @@ $cuen = $rows['SAcreedor'];
 <!--gastos operativos-->
 <?php
   $sql3 = "SELECT ifnull(sum(tb.Sdebe),0) AS operativos   FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6502%'";
   $resultado3 = mysqli_query($conn, $sql3);
   while ($rows = $resultado3->fetch_assoc()) {
@@ -174,7 +174,7 @@ $cuen = $rows['SAcreedor'];
       $sqloperativos = "  SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
       join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
       join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
       where tcc.CODIGO_CUENTA  LIKE '6502%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $coperativos = mysqli_query($conn, $sqloperativos);
 
@@ -201,7 +201,7 @@ $cuen = $rows['SAcreedor'];
 <!--gastos ventas-->
 <?php
   $sql4 = "SELECT ifnull(sum(tb.Sdebe),0) AS ventas  FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6503%'";
   $resultado4 = mysqli_query($conn, $sql4);
   while ($rows = $resultado4->fetch_assoc()) {
@@ -213,7 +213,7 @@ $cuen = $rows['SAcreedor'];
       $sqlventas = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
       join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
       join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
       where tcc.CODIGO_CUENTA  LIKE '6503%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $cventas = mysqli_query($conn, $sqlventas);
 
@@ -241,7 +241,7 @@ $cuen = $rows['SAcreedor'];
 <!--gastos financieros-->
 <?php
   $sql5 = "SELECT ifnull(sum(tb.Sdebe),0) AS financieros   FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6504%'";
   $resultado5 = mysqli_query($conn, $sql5);
   while ($rows = $resultado5->fetch_assoc()) {
@@ -253,7 +253,7 @@ $cuen = $rows['SAcreedor'];
       $sqlfinancieros = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
       join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
       join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
       where tcc.CODIGO_CUENTA  LIKE '6504%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $cfinancieros= mysqli_query($conn, $sqlfinancieros);
 
@@ -281,7 +281,7 @@ $cuen = $rows['SAcreedor'];
 <!--Otros gastos-->
 <?php
   $sql6 = "SELECT ifnull(sum(tb.Sdebe),0) AS gastos  FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6505%' ";
   $resultado6 = mysqli_query($conn, $sql6);
   while ($rows = $resultado6->fetch_assoc()) {
@@ -293,7 +293,7 @@ $cuen = $rows['SAcreedor'];
       $sqlotros = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
       join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
       join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
       where tcc.CODIGO_CUENTA  LIKE '6505%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $cotros= mysqli_query($conn, $sqlotros);
 
@@ -321,7 +321,7 @@ $cuen = $rows['SAcreedor'];
 <!--Otros INGRESOS-->
 <?php
   $sqloingresos = "SELECT ifnull(sum(tb.SAcreedor),0) AS OINGRESOS  FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6402%' ";
   $resultadooingresos = mysqli_query($conn, $sqloingresos);
   while ($rows = $resultadooingresos->fetch_assoc()) {
@@ -330,7 +330,7 @@ $cuen = $rows['SAcreedor'];
   ?>
 <table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
 <?php
-      $sqlotros = "SELECT tcc.CUENTA,tb2.SAcreedor  from Tbl_Balanza tb2  
+      $sqlotros = "SELECT tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2  
       join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
       where COD_CUENTA like '6402%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
       $cotros= mysqli_query($conn, $sqlotros);

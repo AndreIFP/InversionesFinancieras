@@ -5,7 +5,7 @@ if (!empty($_POST)) {
 
 	$Id_Usuario = $_POST['Id_Usuario'];
 
-	$query_delete = mysqli_query($conn, "DELETE FROM TBL_USUARIO WHERE Id_Usuario =$Id_Usuario AND Rol='4'");
+	$query_delete = mysqli_query($conn, "DELETE FROM tbl_usuario WHERE Id_Usuario =$Id_Usuario AND Rol='4'");
 	if ($query_delete) {
 		header("location: Gestion_Usuarios.php");
 	} else {
@@ -20,9 +20,9 @@ if (empty($_REQUEST['Id'])) {
 	$Id_Usuario = $_REQUEST['Id'];
 
 	$query = mysqli_query($conn, "SELECT u.Usuario,u.Nombre_Usuario,r.Rol
-												FROM TBL_USUARIO u
+												FROM tbl_usuario u
 												INNER JOIN
-												TBL_ROLES r
+												tbl_roles r
 												ON u.Rol = r.Id_Rol
 												WHERE u.Id_Usuario = $Id_Usuario ");
 	$result = mysqli_num_rows($query);

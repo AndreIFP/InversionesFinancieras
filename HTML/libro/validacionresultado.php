@@ -65,7 +65,7 @@ if (!isset($_SESSION['rol'])) {
                   <select class="form-control" name="Idcliente" id="Idcliente" required>
                     <option value="" style="font-size:18px">Selecciona un cliente</option>
                     <?php
-                    $consulta = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES ;");
+                    $consulta = mysqli_query($conn, "SELECT * FROM tbl_clientes ;");
                     while ($row = mysqli_fetch_array($consulta)) {
                       $nombrepais = $row['Nombre_Cliente'];
                       $nombeid = $row['Id_Cliente'];

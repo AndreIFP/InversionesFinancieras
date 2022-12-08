@@ -6,13 +6,13 @@
 	session_start();
 	$host = 'localhost';
 	$basededatos = '2w4GSUinHO';
-	$usuario = 'root';
-	$contraseña = '3214';
+	$usuario = 'CALAPAL';
+	$contraseña = 'Calapal##567';
 	const DRIVER='mysql';
-	const SERVER='localhost:3307';
+	const SERVER='142.44.161.115';
 	const DATABASE='2w4GSUinHO';
-	const USERNAME='root';
-	const PASSWORD='3214';
+	const USERNAME='CALAPAL';
+	const PASSWORD='Calapal##567';
  
 	class Conexion{
  
@@ -35,14 +35,14 @@
 
    $factu = $_POST["N_Factura2"];
 
-   $sql4 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '12';";
+   $sql4 = "SELECT Valor FROM tbl_parametros WHERE Id_Parametro = '12';";
 	   $extra = $conn->query($sql4);
 	   $fila2 = $extra->fetch_array(MYSQLI_NUM);
 	   $param2 = $fila2[0];
    
 	   $param2 = substr($param2,11,8);
    
-   $sql5 = "SELECT Valor FROM TBL_PARAMETROS WHERE Id_Parametro = '11';";
+   $sql5 = "SELECT Valor FROM tbl_parametros WHERE Id_Parametro = '11';";
 	   $extra = $conn->query($sql5);
 	   $fila3 = $extra->fetch_array(MYSQLI_NUM);
 	   $param3 = $fila3[0];
@@ -92,26 +92,26 @@
 
 	$pdf->SetFont('Arial','',10);
 	
-	    $sqlTelefono = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '3'";
+	    $sqlTelefono = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '3'";
         $resultadotel = mysqli_query($conn,$sqlTelefono);
         while ($fila = $resultadotel->fetch_assoc()) {
             $Telefono = $fila["Valor"];
         }
 
-		$sqlCorreo = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '2'";
+		$sqlCorreo = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '2'";
         $resultadocorreo = mysqli_query($conn,$sqlCorreo);
         while ($fila = $resultadocorreo->fetch_assoc()) {
             $Correo = $fila["Valor"];
 		}
 
 
-        $sqlWeb = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '7'";
+        $sqlWeb = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '7'";
         $resultadoweb = mysqli_query($conn,$sqlWeb);
         while ($fila = $resultadoweb->fetch_assoc()) {
             $web = $fila["Valor"];
 		}
 
-		$sqlrtn = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '8'";
+		$sqlrtn = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '8'";
         $resultadortn = mysqli_query($conn,$sqlrtn);
         while ($fila = $resultadortn->fetch_assoc()) {
             $rrtn = $fila["Valor"];

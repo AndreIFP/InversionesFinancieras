@@ -15,7 +15,7 @@ $monto = $_POST['monto'];
 
 $caja=0;
 
-$consultas=mysqli_query($con,"SELECT CUENTA FROM TBL_CATALAGO_ESTADO where CODIGO_CUENTA='$idcuenta' ;");
+$consultas=mysqli_query($con,"SELECT CUENTA FROM tbl_catalago_estado where CODIGO_CUENTA='$idcuenta' ;");
 while($row=mysqli_fetch_array($consultas)){
  $idpreg=$row['CUENTA'];
 }

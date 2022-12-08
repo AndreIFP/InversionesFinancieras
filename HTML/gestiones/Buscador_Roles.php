@@ -41,7 +41,7 @@ font-size: 12px; ">
                 <tbody>
                     <?php
                     //Paginador
-                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_ROLES
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_roles
                                             WHERE ( Id_Rol LIKE '%$busqueda%' OR
                                                     Rol LIKE '%$busqueda%' OR
                                                     Estado LIKE '%$busqueda%')");
@@ -58,7 +58,7 @@ font-size: 12px; ">
 
                     $desde = ($pagina - 1) * $por_pagina;
                     $total_paginas = ceil($total_registro / $por_pagina);
-                    $sql = mysqli_query($conn, "SELECT * from TBL_ROLES WHERE ( Id_Rol LIKE '%$busqueda%' OR
+                    $sql = mysqli_query($conn, "SELECT * from tbl_roles WHERE ( Id_Rol LIKE '%$busqueda%' OR
                                                                                 Rol LIKE '%$busqueda%' OR
                                                                                 Estado LIKE '%$busqueda%' ) LIMIT $desde,$por_pagina ");
                     mysqli_close($conn);

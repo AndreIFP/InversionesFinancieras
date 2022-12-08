@@ -27,7 +27,7 @@ if (!empty($_POST)) {
 		} elseif (!preg_match("/^[a-z A-Z \s ñÑáéíóúÁÉÍÓÚ]+$/", $Ciudad)) {
 			$alert = '<p class="msg_error">Solo recibe letras.</p>';
 		} else {
-			$query = mysqli_query($conn, "UPDATE TBL_CLIENTES SET Nombre_Empresa='$nombree',Nombre_Cliente='$nombre',RTN_Cliente ='$RTN',Direccion ='$Direccion',Telefono ='$Telefono',Tipo_Cliente ='$Tipo_Cliente' ,Ciudad ='$Ciudad' WHERE Id_Cliente ='$Id_Cliente'");
+			$query = mysqli_query($conn, "UPDATE tbl_clientes SET Nombre_Empresa='$nombree',Nombre_Cliente='$nombre',RTN_Cliente ='$RTN',Direccion ='$Direccion',Telefono ='$Telefono',Tipo_Cliente ='$Tipo_Cliente' ,Ciudad ='$Ciudad' WHERE Id_Cliente ='$Id_Cliente'");
 
 			if ($query) {
 				echo "<script> alert('Cliente Actualizado Exitosamente');window.location= 'Gestion_Clientes.php' </script>";
@@ -44,7 +44,7 @@ if (empty($_REQUEST['Id'])) {
 }
 $Id = $_REQUEST['Id'];
 
-$sql = mysqli_query($conn, "SELECT *	FROM TBL_CLIENTES WHERE Id_Cliente = $Id");
+$sql = mysqli_query($conn, "SELECT *	FROM tbl_clientes WHERE Id_Cliente = $Id");
 $result_sql = mysqli_num_rows($sql);
 
 if ($result_sql == 0) {

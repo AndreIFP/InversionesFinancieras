@@ -6982,7 +6982,7 @@ $Utilidad_Neta = 0;
 <br>
 <?php
   include('../conexion.php');
-  $query_insert = mysqli_query($conn,"INSERT INTO TBL_ESTADO_RESULTADO(Id_Cliente,Utilida_Bruta,Total_Gasto,Utilidad_Operacion,Utilidad_Antes_Impu,Utilidad_Neta)
+  $query_insert = mysqli_query($conn,"INSERT INTO tbl_estado_RESULTADO(Id_Cliente,Utilida_Bruta,Total_Gasto,Utilidad_Operacion,Utilidad_Antes_Impu,Utilidad_Neta)
                         VALUES('$cliente','$Utilidad_Bruta','$Total_Gastos','$Utilidad_Op','$UAI','$Utilidad_Neta')");
 ?>
 <a class = "btn btn-success btn-print" href = "../gestiones/Reporte_Estado_Resultado.php"><i class ="glyphicon glyphicon-print"></i> Imprimir</a>

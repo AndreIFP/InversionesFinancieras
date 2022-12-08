@@ -45,7 +45,7 @@ include('../../dist/includes/dbcon.php');
           }
   mysqli_query($con,"delete from libro where id_libro='$id_libro'")or die(mysqli_error());
 if ($debe_haber=="haber") {
-       $update=mysqli_query($con,"update TBL_LIBROS set caja=caja+'$monto' where Id_cliente='$cliente' ");
+       $update=mysqli_query($con,"update tbl_libros set caja=caja+'$monto' where Id_cliente='$cliente' ");
 }
 
 

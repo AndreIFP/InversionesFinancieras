@@ -1,10 +1,10 @@
 <?php
 ////////////////// CONEXION A LA BASE DE DATOS //////////////////
 session_start();
-$host = 'localhost:3307';
+$host = '142.44.161.115';
 $basededatos = '2w4GSUinHO';
-$usuario = 'root';
-$contraseña = '3214';
+$usuario = 'CALAPAL';
+$contraseña = 'Calapal##567';
 
 
 

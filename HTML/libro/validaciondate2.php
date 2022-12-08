@@ -12,7 +12,7 @@ if ($temporada2 < $temporada) {
             <?php 
 			include('../conexion.php');
 
-			$queryusuario 	= mysqli_query($conn,"SELECT * FROM Rangosdeperiodos WHERE Fechainicio = '$temporada' AND Fechafinal = '$temporada' AND Id_Cliente='$cliente' ");
+			$queryusuario 	= mysqli_query($conn,"SELECT * FROM rangosdeperiodos WHERE Fechainicio = '$temporada' AND Fechafinal = '$temporada' AND Id_Cliente='$cliente' ");
 			$nr 			= mysqli_num_rows($queryusuario); 
 
 
@@ -20,7 +20,7 @@ if ($temporada2 < $temporada) {
 			if ($nr == 0 )
 			{
 			
-			$query_insert = mysqli_query($conn,"INSERT INTO Rangosdeperiodos (Id_Cliente,Fechainicio,Fechafinal) 
+			$query_insert = mysqli_query($conn,"INSERT INTO rangosdeperiodos (Id_Cliente,Fechainicio,Fechafinal) 
 			                   values ('$cliente','$temporada','$temporada2')");
 			}
 			else

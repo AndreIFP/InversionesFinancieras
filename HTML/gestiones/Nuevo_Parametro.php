@@ -14,7 +14,7 @@ if (!empty($_POST)) {
 		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $nombre)) {
 			$alert = '<p class="msg_error"> El Nombre Del Parametro Solo Recibe Letras.</p>';
 		} else {
-			$query_insert = mysqli_query($conn, "INSERT INTO TBL_PARAMETROS (Parametro,Valor)
+			$query_insert = mysqli_query($conn, "INSERT INTO tbl_parametros (Parametro,Valor)
 																	VALUES('$nombre','$Valor')");
 			if ($query_insert) {
 				echo "<script> alert('Parametro Registrado Exitosamente');window.location= 'Gestion_parametros.php' </script>";

@@ -28,7 +28,7 @@ if (!empty($_POST)) {
 		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $Ciudad)) {
 			$alert = '<p class="msg_error">Solo recibe letras.</p>';
 		} else {
-			$query_insert = mysqli_query($conn, "INSERT INTO TBL_CLIENTES(Nombre_Empresa,Nombre_Cliente,RTN_Cliente,Direccion,Telefono,Tipo_Cliente,Ciudad)
+			$query_insert = mysqli_query($conn, "INSERT INTO tbl_clientes(Nombre_Empresa,Nombre_Cliente,RTN_Cliente,Direccion,Telefono,Tipo_Cliente,Ciudad)
 																	VALUES('$Nombree','$nombre','$RTN','$Direccion','$Telefono','$Tipo_Cliente','$Ciudad')");
 			if ($query_insert) {
 				echo "<script> alert('Cliente Registrado Exitosamente');window.location= 'Gestion_Clientes.php' </script>";

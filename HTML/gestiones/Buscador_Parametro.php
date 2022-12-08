@@ -39,7 +39,7 @@ session_start();
                 <tbody>
                     <?php
                     //Paginador
-                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_PARAMETROS
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_parametros
                                             WHERE ( Id_Parametro LIKE '%$busqueda%' OR
                                                     Parametro LIKE '%$busqueda%' )");
                     $result_register = mysqli_fetch_array($sql_registe);
@@ -55,7 +55,7 @@ session_start();
 
                     $desde = ($pagina - 1) * $por_pagina;
                     $total_paginas = ceil($total_registro / $por_pagina);
-                    $sql = mysqli_query($conn, "select * from TBL_PARAMETROS WHERE ( Id_Parametro LIKE '%$busqueda%' OR
+                    $sql = mysqli_query($conn, "select * from tbl_parametros WHERE ( Id_Parametro LIKE '%$busqueda%' OR
                                                                                 Parametro LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
                     mysqli_close($conn);
 

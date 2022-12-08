@@ -1,5 +1,5 @@
 <?php 
-$conexion=mysqli_connect('localhost:3307','root','3214','2w4GSUinHO');
+$conexion=mysqli_connect('142.44.161.115','CALAPAL','Calapal##567','2w4GSUinHO');
 $clasificacion=$_POST['clasificacion2'];
 ?>
 

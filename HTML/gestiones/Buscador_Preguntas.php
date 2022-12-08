@@ -43,7 +43,7 @@ session_start();
                     <tbody>
                         <?php
                         //Paginador
-                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_PREGUNTAS
+                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_preguntas
                                             WHERE ( Id_Preguntas LIKE '%$busqueda%' OR
                                                     Preguntas LIKE '%$busqueda%' )");
                         $result_register = mysqli_fetch_array($sql_registe);
@@ -59,7 +59,7 @@ session_start();
 
                         $desde = ($pagina - 1) * $por_pagina;
                         $total_paginas = ceil($total_registro / $por_pagina);
-                        $sql = mysqli_query($conn, "select * from TBL_PREGUNTAS WHERE ( Id_Preguntas LIKE '%$busqueda%' OR
+                        $sql = mysqli_query($conn, "select * from tbl_preguntas WHERE ( Id_Preguntas LIKE '%$busqueda%' OR
                                                                                 Preguntas LIKE '%$busqueda%') LIMIT $desde,$por_pagina ");
                         mysqli_close($conn);
 

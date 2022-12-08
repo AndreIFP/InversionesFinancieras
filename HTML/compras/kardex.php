@@ -158,7 +158,7 @@ $query = mysqli_query($conn, $sql_fetch_todos);
     <?php
     include('conexion.php');
 
-     $sql7 = "SELECT * FROM TBL_KARDEX";
+     $sql7 = "SELECT * FROM tbl_kardex";
      $result=mysqli_query($conn,$sql7);
      while($mostrar=mysqli_fetch_array($result)){
 

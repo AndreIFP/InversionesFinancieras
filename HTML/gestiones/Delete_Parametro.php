@@ -6,7 +6,7 @@
 		
 		$Id_Parametro = $_POST['Id_Parametro'];
 
-		$query_delete = mysqli_query($conn,"DELETE FROM TBL_PARAMETROS WHERE Id_Parametro =$Id_Parametro");
+		$query_delete = mysqli_query($conn,"DELETE FROM tbl_parametros WHERE Id_Parametro =$Id_Parametro");
 		if($query_delete){
 			header("location: parametro.php");
 		}else{
@@ -22,7 +22,7 @@
   }else{
     $Id_Parametro = $_REQUEST['Id'];
 
-		$query = mysqli_query($conn,"SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = $Id_Parametro ");
+		$query = mysqli_query($conn,"SELECT * FROM tbl_parametros WHERE Id_Parametro = $Id_Parametro ");
 		$result = mysqli_num_rows($query);
 
 		if($result > 0){

@@ -23,7 +23,7 @@
 				$alert='<p class="msg_error">El Objetos solo recibe letras.</p>';
 			}else{
 
-				$sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_OBJETOS
+				$sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM tbl_objetos
                                             WHERE ( Objetos )");
                                     $result_register = mysqli_fetch_array($sql_registe);
                                     $total_registro = $result_register['total_registro'];
@@ -33,7 +33,7 @@
 									}
 
 
-            $query = mysqli_query($conn,"UPDATE TBL_OBJETOS SET Objetos='$Objetos', Descripcion='$Descripcion', Tipo_Objeto='$Tipo_Objeto' WHERE Id_Objetos ='$Id_Objetos'");
+            $query = mysqli_query($conn,"UPDATE tbl_objetos SET Objetos='$Objetos', Descripcion='$Descripcion', Tipo_Objeto='$Tipo_Objeto' WHERE Id_Objetos ='$Id_Objetos'");
 
 				if($query){
 					echo "<script> alert('Objeto Actualizado Exitosamente');window.location= 'Gestion_Objetos.php' </script>";
@@ -51,7 +51,7 @@
 	}
 	$Id = $_REQUEST['Id'];
 
-	$sql= mysqli_query($conn,"SELECT *	FROM TBL_OBJETOS WHERE Id_Objetos = $Id");
+	$sql= mysqli_query($conn,"SELECT *	FROM tbl_objetos WHERE Id_Objetos = $Id");
 	$result_sql = mysqli_num_rows($sql);
 
 	if($result_sql == 0){

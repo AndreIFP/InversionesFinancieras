@@ -58,11 +58,11 @@ session_start();
                         <?php
                          if (isset($_GET['filtro'])) {
                             //Paginador
-                            $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CATALAGO_CUENTAS 
+                            $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_catalago_cuentas 
                             WHERE ( CODIGO_CUENTA LIKE '$busqueda%')");
                          }else{
                              //Paginador
-                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_CATALAGO_CUENTAS 
+                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_catalago_cuentas 
                         WHERE ( CODIGO_CUENTA LIKE '%$busqueda%' OR
                                 CUENTA LIKE '%$busqueda%' OR 
                                 Estado_Cuenta  LIKE '%$busqueda%')");

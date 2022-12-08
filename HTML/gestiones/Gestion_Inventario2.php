@@ -274,7 +274,7 @@ $numero = 99999.99;
                                             <tbody>
                                                 <?php
                                                 //Paginador
-                                                $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_KARDEX");
+                                                $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_kardex");
                                                 $result_register = mysqli_fetch_array($sql_registe);
                                                 $total_registro = $result_register['total_registro'];
 
@@ -292,7 +292,7 @@ $numero = 99999.99;
 
                                                 $desde = ($pagina - 1) * $por_pagina;
                                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                                $sql = mysqli_query($conn, "select * FROM TBL_KARDEX where id_product=$id_product ");
+                                                $sql = mysqli_query($conn, "select * FROM tbl_kardex where id_product=$id_product ");
                                                 mysqli_close($conn);
 
                                                 $result = mysqli_num_rows($sql);

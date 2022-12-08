@@ -5,7 +5,7 @@ if (!empty($_POST)) {
 
 	$Id_Cliente = $_POST['Id_Cliente'];
 
-	$query_delete = mysqli_query($conn, "DELETE FROM TBL_CLIENTES WHERE Id_Cliente =$Id_Cliente");
+	$query_delete = mysqli_query($conn, "DELETE FROM tbl_clientes WHERE Id_Cliente =$Id_Cliente");
 	if ($query_delete) {
 		header("location: Gestion_Clientes.php");
 	} else {
@@ -19,7 +19,7 @@ if (empty($_REQUEST['Id'])) {
 } else {
 	$Id_Cliente = $_REQUEST['Id'];
 
-	$query = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES WHERE Id_Cliente = $Id_Cliente ");
+	$query = mysqli_query($conn, "SELECT * FROM tbl_clientes WHERE Id_Cliente = $Id_Cliente ");
 	$result = mysqli_num_rows($query);
 
 	if ($result > 0) {

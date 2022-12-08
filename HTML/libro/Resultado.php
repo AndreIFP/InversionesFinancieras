@@ -56,7 +56,7 @@ $_SESSION['temporada'] = "10";
   $empresa = $_SESSION['empresa'];
   $fecha = date('Y-m-d h:i:s');
 
-  $consulta = mysqli_query($conn, "select * from Tbl_Balanza
+  $consulta = mysqli_query($conn, "select * from tbl_balanza
   WHERE Id_cliente=$cliente");
   $nr = mysqli_num_rows($consulta);
   if ($nr == 0) {
@@ -84,7 +84,7 @@ $_SESSION['temporada'] = "10";
 
   // INGRESOS
   $sql = "SELECT ifnull(sum(tb.SAcreedor),0) as Ingresos  FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE '6401%'; ";
   $resultado = mysqli_query($conn, $sql);
   while ($rows = $resultado->fetch_assoc()) {
@@ -97,7 +97,7 @@ $_SESSION['temporada'] = "10";
   <div class="panel">
     <table class="table">
       <?php
-      $sql1 = "SELECT tcc.CUENTA,tb2.SAcreedor  from Tbl_Balanza tb2  
+      $sql1 = "SELECT tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2  
       join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
       where COD_CUENTA like '6401%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
       $resultado1 = mysqli_query($conn, $sql1);
@@ -120,7 +120,7 @@ $_SESSION['temporada'] = "10";
   <!-- COSTO DE VENTAS-->
   <?php
   $sql2 = "SELECT ifnull(sum(tb.Sdebe),0) AS costos   FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6501%'";
   $resultado2 = mysqli_query($conn, $sql2);
   while ($rows = $resultado2->fetch_assoc()) {
@@ -136,7 +136,7 @@ $_SESSION['temporada'] = "10";
       $sqlcosto = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
       join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
       join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
       where tcc.CODIGO_CUENTA  LIKE '6501%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $costosv = mysqli_query($conn, $sqlcosto);
 
@@ -162,7 +162,7 @@ $_SESSION['temporada'] = "10";
   <!--gastos operativos-->
   <?php
   $sql3 = "SELECT ifnull(sum(tb.Sdebe),0) AS operativos   FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6502%'";
   $resultado3 = mysqli_query($conn, $sql3);
   while ($rows = $resultado3->fetch_assoc()) {
@@ -177,7 +177,7 @@ $_SESSION['temporada'] = "10";
       $sqloperativos = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
       join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
       join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
       where tcc.CODIGO_CUENTA  LIKE '6502%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $coperativos = mysqli_query($conn, $sqloperativos);
 
@@ -198,7 +198,7 @@ $_SESSION['temporada'] = "10";
   <!--gastos ventas-->
   <?php
   $sql4 = "SELECT ifnull(sum(tb.Sdebe),0) AS ventas  FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6503%'";
   $resultado4 = mysqli_query($conn, $sql4);
   while ($rows = $resultado4->fetch_assoc()) {
@@ -213,7 +213,7 @@ $_SESSION['temporada'] = "10";
       $sqlventas = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
       join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
       join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
       where tcc.CODIGO_CUENTA  LIKE '6503%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $cventas = mysqli_query($conn, $sqlventas);
 
@@ -234,7 +234,7 @@ $_SESSION['temporada'] = "10";
   <!--gastos financieros-->
   <?php
   $sql5 = "SELECT ifnull(sum(tb.Sdebe),0) AS financieros   FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6504%'";
   $resultado5 = mysqli_query($conn, $sql5);
   while ($rows = $resultado5->fetch_assoc()) {
@@ -250,7 +250,7 @@ $_SESSION['temporada'] = "10";
       $sqlfinancieros = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
       join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
       join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
       where tcc.CODIGO_CUENTA  LIKE '6504%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $cfinancieros = mysqli_query($conn, $sqlfinancieros);
 
@@ -271,7 +271,7 @@ $_SESSION['temporada'] = "10";
   <!--Otros gastos-->
   <?php
   $sql6 = "SELECT ifnull(sum(tb.Sdebe),0) AS gastos  FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6505%' ";
   $resultado6 = mysqli_query($conn, $sql6);
   while ($rows = $resultado6->fetch_assoc()) {
@@ -286,7 +286,7 @@ $_SESSION['temporada'] = "10";
       $sqlotros = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
       join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
       join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join Tbl_Balanza tb  on tb.Id_detalle=td.Id_detalle 
+      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
       where tcc.CODIGO_CUENTA  LIKE '6505%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
       $cotros = mysqli_query($conn, $sqlotros);
 
@@ -307,7 +307,7 @@ $_SESSION['temporada'] = "10";
   <!--Otros INGRESOS-->
   <?php
   $sqloingresos = "SELECT ifnull(sum(tb.SAcreedor),0) AS OINGRESOS  FROM tbl_catalago_cuentas tcc 
-  JOIN Tbl_Balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
   where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6402%' ";
   $resultadooingresos = mysqli_query($conn, $sqloingresos);
   while ($rows = $resultadooingresos->fetch_assoc()) {
@@ -319,7 +319,7 @@ $_SESSION['temporada'] = "10";
   <div class="panel">
     <table class="table">
       <?php
-      $sqlotros = " SELECT tcc.CUENTA,tb2.SAcreedor  from Tbl_Balanza tb2  
+      $sqlotros = " SELECT tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2  
       join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
       where COD_CUENTA like '6402%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
       $cotros = mysqli_query($conn, $sqlotros);

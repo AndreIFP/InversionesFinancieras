@@ -2,15 +2,15 @@
 include('conexion.php');
 ////////////////// CONEXION A LA BASE DE DATOS //////////////////
 session_start();
-$host = 'localhost:3307';
+$host = '142.44.161.115';
 $basededatos = '2w4GSUinHO';
-$usuario = 'root';
-$contraseña = '3214';
+$usuario = 'CALAPAL';
+$contraseña = 'Calapal##567';
 const DRIVER = 'mysql';
-const SERVER = 'localhost:3307';
+const SERVER = '142.44.161.115';
 const DATABASE = '2w4GSUinHO';
-const USERNAME = 'root';
-const PASSWORD = '3214';
+const USERNAME = 'CALAPAL';
+const PASSWORD = 'Calapal##567';
 
 
 
@@ -327,7 +327,7 @@ include 'barralateralinicial.php';
           ///////// QUERY DE INSERCIÓN ////////////////////////////
 
 
-          $sql2 = "INSERT INTO TBL_KARDEX (Id_Usuario, detalle,id_product, proname, cant_entrada) VALUES $valoresQuery";
+          $sql2 = "INSERT INTO tbl_kardex (Id_Usuario, detalle,id_product, proname, cant_entrada) VALUES $valoresQuery";
           $sqlRes2 = $conexion->query($sql2) or mysql_error();
 
 

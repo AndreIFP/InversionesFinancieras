@@ -103,7 +103,7 @@ include("../conexion.php");
                         <tbody>
                                 <?php
                                 //Paginador
-			                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM TBL_USUARIO WHERE Id_Usuario = Id_Usuario ");
+			                    $sql_registe = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM tbl_usuario WHERE Id_Usuario = Id_Usuario ");
 			                    $result_register = mysqli_fetch_array($sql_registe);
 			                    $total_registro = $result_register['total_registro'];
 
@@ -118,7 +118,7 @@ include("../conexion.php");
 
                                 $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from TBL_USUARIO u inner join TBL_ROLES r ON u.Rol = r.Id_Rol LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, r.Rol from tbl_usuario u inner join tbl_roles r ON u.Rol = r.Id_Rol LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
 			                        $result = mysqli_num_rows($sql);

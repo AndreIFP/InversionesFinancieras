@@ -4,7 +4,7 @@ $temporada=$_POST['Idtemporada'];
 
 
 include('../conexion.php');
-$consulta = mysqli_query($conn, "SELECT * FROM Rangosdeperiodos where Id_periodo='$temporada'; ");
+$consulta = mysqli_query($conn, "SELECT * FROM rangosdeperiodos where Id_periodo='$temporada'; ");
 while ($row = mysqli_fetch_array($consulta)) {
 	$fechai = $row['Fechainicio'];
 	$fechaf = $row['Fechafinal'];
@@ -12,7 +12,7 @@ while ($row = mysqli_fetch_array($consulta)) {
 
 
 #consulta de todos los paises
-$consulta = mysqli_query($conn, "SELECT * FROM TBL_CLIENTES where Id_Cliente='$cliente'; ");
+$consulta = mysqli_query($conn, "SELECT * FROM tbl_clientes where Id_Cliente='$cliente'; ");
 while ($row = mysqli_fetch_array($consulta)) {
 	$nombree = $row['Nombre_Empresa'];
 	$nnombre = $row['Nombre_Cliente'];

@@ -34,7 +34,7 @@ $fechaf = $_SESSION['fechaf'];
 $empresa = $_SESSION['empresa'];
 
 //Llanmado de total activo
-$sql = "SELECT ifnull(SUM(Sdebe),0) as Activos  FROM Tbl_Balanza tb 
+$sql = "SELECT ifnull(SUM(Sdebe),0) as Activos  FROM tbl_balanza tb 
   where Id_cliente=$cliente and COD_CUENTA like '1%';";
   $resultado = mysqli_query($conn, $sql);
   while ($rows = $resultado->fetch_assoc()) {
@@ -42,7 +42,7 @@ $sql = "SELECT ifnull(SUM(Sdebe),0) as Activos  FROM Tbl_Balanza tb
 }
 
 //Llanmado de total pasivo
-$sql2 = "SELECT ifnull(SUM(SAcreedor),0) AS pasivo  FROM Tbl_Balanza tb 
+$sql2 = "SELECT ifnull(SUM(SAcreedor),0) AS pasivo  FROM tbl_balanza tb 
   where Id_cliente=$cliente and COD_CUENTA like '2%';";
   $resultado2 = mysqli_query($conn, $sql2);
   while ($rows = $resultado2->fetch_assoc()) {
@@ -50,7 +50,7 @@ $sql2 = "SELECT ifnull(SUM(SAcreedor),0) AS pasivo  FROM Tbl_Balanza tb
 }
 
 //Llanmado de total patrimonio
-$sql3 = "SELECT ifnull(SUM(SAcreedor),0) as patrimonio  FROM Tbl_Balanza tb 
+$sql3 = "SELECT ifnull(SUM(SAcreedor),0) as patrimonio  FROM tbl_balanza tb 
   where Id_cliente=$cliente  and COD_CUENTA like '3%';";
   $resultado3 = mysqli_query($conn, $sql3);
   while ($rows = $resultado3->fetch_assoc()) {
@@ -58,21 +58,21 @@ $sql3 = "SELECT ifnull(SUM(SAcreedor),0) as patrimonio  FROM Tbl_Balanza tb
   }
 
 // Llamado del parametro dirección
-$sqldireccion = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '4'";
+$sqldireccion = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '4'";
 $resultadodir = mysqli_query($conn,$sqldireccion);
 while ($fila = $resultadodir->fetch_assoc()) {
     $Direccion = $fila["Valor"];
 }
 
 // Llamado del parametro telefono
-$sqlTelefono = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '3'";
+$sqlTelefono = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '3'";
 $resultadotel = mysqli_query($conn,$sqlTelefono);
 while ($fila = $resultadotel->fetch_assoc()) {
     $Telefono = $fila["Valor"];
 }
 
 // Llamado del parametro correo
-$sqlCorreo = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '2'";
+$sqlCorreo = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '2'";
 $resultadocorreo = mysqli_query($conn,$sqlCorreo);
 while ($fila = $resultadocorreo->fetch_assoc()) {
     $Correo = $fila["Valor"];
@@ -101,7 +101,7 @@ $fecha = date("d-m-Y h:i:s a");
 <label>ACTIVOS</label>
 <table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
 <?php
-      $sql1 = "SELECT tcc.CUENTA ,tb.Sdebe  FROM Tbl_Balanza tb 
+      $sql1 = "SELECT tcc.CUENTA ,tb.Sdebe  FROM tbl_balanza tb 
       join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
       where Id_cliente=$cliente and COD_CUENTA like '1%'; ";
       $resultado1 = mysqli_query($conn, $sql1);
@@ -130,7 +130,7 @@ $fecha = date("d-m-Y h:i:s a");
 <label>PASIVOS</label>
 <table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
 <?php
-      $sqlcosto = "SELECT tcc.CUENTA ,tb.SAcreedor   FROM Tbl_Balanza tb 
+      $sqlcosto = "SELECT tcc.CUENTA ,tb.SAcreedor   FROM tbl_balanza tb 
       join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
       where Id_cliente=$cliente and COD_CUENTA like '2%'; ";
       $costosv = mysqli_query($conn, $sqlcosto);
@@ -159,7 +159,7 @@ $fecha = date("d-m-Y h:i:s a");
 <label>PATRIMONIO</label>
 <table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
 <?php
-      $sqloperativos = "SELECT tcc.CUENTA ,tb.SAcreedor as Sdebe FROM Tbl_Balanza tb 
+      $sqloperativos = "SELECT tcc.CUENTA ,tb.SAcreedor as Sdebe FROM tbl_balanza tb 
       join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
       where Id_cliente=$cliente  and COD_CUENTA like '3%';";
       $coperativos = mysqli_query($conn, $sqloperativos);

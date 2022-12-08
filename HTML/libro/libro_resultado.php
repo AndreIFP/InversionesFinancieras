@@ -153,7 +153,7 @@ select::-ms-expand {
               include('../conexion.php');
                 
                 #consulta de todos los paises
-                $consulta=mysqli_query($conn,"SELECT * FROM TBL_CATALAGO_CUENTAS ;" );
+                $consulta=mysqli_query($conn,"SELECT * FROM tbl_catalago_cuentas ;" );
                 while($row=mysqli_fetch_array($consulta)){
                     $nombrepais=$row['CUENTA']; 
                     $nombeid=$row['CODIGO_CUENTA'];      

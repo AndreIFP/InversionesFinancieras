@@ -9,7 +9,7 @@ if (!empty($_POST)) {
 	$CLASIFICACION  = $_POST['CLASIFICACION'];
 	$ESTADO_CUENTA  = $_POST['Estado_Cuenta'];
 
-	$query = mysqli_query($conn, "UPDATE TBL_CATALAGO_CUENTAS SET CODIGO_CUENTA='$CODIGO_CUENTA', CUENTA ='$CUENTA', CLASIFICACION ='$CLASIFICACION', Estado_Cuenta ='$ESTADO_CUENTA' WHERE CODIGO_CUENTA ='$CODIGO_CUENTA'");
+	$query = mysqli_query($conn, "UPDATE tbl_catalago_cuentas SET CODIGO_CUENTA='$CODIGO_CUENTA', CUENTA ='$CUENTA', CLASIFICACION ='$CLASIFICACION', Estado_Cuenta ='$ESTADO_CUENTA' WHERE CODIGO_CUENTA ='$CODIGO_CUENTA'");
 
 	if ($query) {
 		echo "<script> alert('Cuenta Actualizada Exitosamente');window.location= 'Gestion_CatalogoCuenta.php' </script>";
@@ -24,7 +24,7 @@ if (empty($_REQUEST['Id'])) {
 }
 $Id = $_REQUEST['Id'];
 
-$sql = mysqli_query($conn, "SELECT *	FROM TBL_CATALAGO_CUENTAS WHERE CODIGO_CUENTA = $Id");
+$sql = mysqli_query($conn, "SELECT *	FROM tbl_catalago_cuentas WHERE CODIGO_CUENTA = $Id");
 $result_sql = mysqli_num_rows($sql);
 
 if ($result_sql == 0) {

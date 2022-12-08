@@ -29,21 +29,21 @@ $sql = mysqli_query($conn,"select * from product WHERE ( id_product LIKE '%$busq
 proname LIKE '%$busqueda%') ");
 
 // Llamado del parametro dirección
-$sqldireccion = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '4'";
+$sqldireccion = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '4'";
 $resultadodir = mysqli_query($conn,$sqldireccion);
 while ($fila = $resultadodir->fetch_assoc()) {
     $Direccion = $fila["Valor"];
 }
 
 // Llamado del parametro telefono
-$sqlTelefono = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '3'";
+$sqlTelefono = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '3'";
 $resultadotel = mysqli_query($conn,$sqlTelefono);
 while ($fila = $resultadotel->fetch_assoc()) {
     $Telefono = $fila["Valor"];
 }
 
 // Llamado del parametro correo
-$sqlCorreo = "SELECT * FROM TBL_PARAMETROS WHERE Id_Parametro = '2'";
+$sqlCorreo = "SELECT * FROM tbl_parametros WHERE Id_Parametro = '2'";
 $resultadocorreo = mysqli_query($conn,$sqlCorreo);
 while ($fila = $resultadocorreo->fetch_assoc()) {
     $Correo = $fila["Valor"];

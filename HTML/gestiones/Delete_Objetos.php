@@ -6,7 +6,7 @@
 		
 		$Id_Objetos = $_POST['Id_Objetos'];
 
-		$query_delete = mysqli_query($conn,"DELETE FROM TBL_OBJETOS WHERE Id_Objetos =$Id_Objetos");
+		$query_delete = mysqli_query($conn,"DELETE FROM tbl_objetos WHERE Id_Objetos =$Id_Objetos");
 		if($query_delete){
 			header("location: Gestion_Objetos.php");
 			
@@ -22,7 +22,7 @@
   }else{
     $Id_Objetos = $_REQUEST['Id'];
 
-		$query = mysqli_query($conn,"SELECT * FROM TBL_OBJETOS WHERE Id_Objetos = $Id_Objetos ");
+		$query = mysqli_query($conn,"SELECT * FROM tbl_objetos WHERE Id_Objetos = $Id_Objetos ");
 		$result = mysqli_num_rows($query);
 
 		if($result > 0){

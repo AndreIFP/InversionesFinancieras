@@ -1,16 +1,16 @@
 <?php
 
 //Nombre de usuario de mysql
- const USER = "root";
+ const USER = "CALAPAL";
 
 //Servidor de mysql
- const SERVER = "localhost:3307"; 
+ const SERVER = "142.44.161.115"; 
 
 //Nombre de la base de datos
 const BD = "2w4GSUinHO";
 
 //Contraseña de myqsl
-const PASS = "3214";
+const PASS = "Calapal##567";
 
 //Carpeta donde se almacenaran las copias de seguridad
 const BACKUP_PATH =  "../backup/";
