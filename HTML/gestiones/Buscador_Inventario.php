@@ -124,7 +124,6 @@ $_SESSION['busquedaX'] = $busqueda;
                             while ($row = mysqli_fetch_array($sql)) {
 
                                 $_SESSION['Id_Mauri'] = $row['id_product'];;
-                                $NFactura      = $row['NFactura'];
                                 $Proveedor       = $row['Proveedor'];
                                 $proname  = $row['proname'];
                                 $amount     = $row['amount'];

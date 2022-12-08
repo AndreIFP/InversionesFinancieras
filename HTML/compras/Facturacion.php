@@ -45,6 +45,7 @@ include 'barralateralinicial.php';
     <!--.row-->
   </div>
   <!--.container-->
+  <p></p>
   <section style=" background-color:rgb(255, 255, 255);
     padding: 15px;
     color:black;
@@ -85,12 +86,6 @@ include 'barralateralinicial.php';
 
       <p class="client">
       <h5><strong>Datos</strong></h5>
-      <b>Fecha:</b> <input type="date" name="Fecha" style="width:110px;border:0" name="Fechaini" required><br>
-      <b>Factura #:</b> <input type="text" name="factura" placeholder="000-001-01-000000" maxlength="15" style="width:140px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required /><br>
-      <b>CAI:</b> <input type="text" name="CAI" value="" placeholder="000000-000000-000000-000000-000000-00" maxlength="50" style="width:300px;border:0" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required /><br>
-      <b>Vence:</b> <input type="date" style="width:110px;border:0" name="Fechaven" required /><br>
-      <b>Dirección:</b> <input type="text" style="width:700px;height:20px;border:0" placeholder="Dirección" size="250" value="" name="dirProveedor" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/,'')" required /><br>
-      <b>Teléfono:</b> <input type="text" style="width:150px;height:20px;border:0" maxlength="10" placeholder="Telefono" size="15" name="telefono" value="" oninput="this.value = this.value.replace(/[^0-9-\s]/,'')" required /><br><br><br>
       </p>
     </div>
     <!--.col-->
@@ -128,7 +123,7 @@ include 'barralateralinicial.php';
     <center>
       <div class="invoicelist-footer">
 
-        <center><button type="submit" name="insertar" class="btn btn-success btn-lg"><i class="fa fa-floppy-o"></i>  Registrar Productos</button></center>
+        <center><button type="submit" name="insertar" class="btn btn-success btn-lg"><i class="fa fa-floppy-o"></i> Registrar Productos</button></center>
       </div>
       </form>
 

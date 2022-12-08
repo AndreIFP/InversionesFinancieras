@@ -151,7 +151,6 @@ $busqueda = $_SESSION['busquedaX'];
 
  
                                 $id_product = $row['id_product'];
-                                $NFactura      = $row['NFactura'];
                                 $Proveedor       = $row['Proveedor'];
                                 $proname  = $row['proname'];
                                 $amount     = $row['amount'];
