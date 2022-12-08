@@ -7,6 +7,7 @@ $_SESSION['fechai'];
 $_SESSION['fechaf'];
 $_SESSION['empresa'];
 $_SESSION['temporada'] = "10";
+$Idperiodo=$_SESSION['Idtemporada'];
 
 
 
@@ -166,12 +167,9 @@ $fecha = date('Y-m-d h:i:s');
         <?php
 
         // $branch=$_SESSION['branch'];
-        $query = mysqli_query($con, " SELECT tcc.CODIGO_CUENTA,tcc.CUENTA ,tb.Mhaber,tb.Mdebe,tb.Sdebe,tb.SAcreedor  
-        FROM  tbl_balanza tb join tbl_catalago_cuentas tcc 
-        JOIN rangosdeperiodos r on tb.Id_cliente=r.Id_Cliente 
-        join tbl_asientos ta on ta.Id_Cliente=r.Id_Cliente 
-        where tb.COD_CUENTA=tcc.CODIGO_CUENTA and tb.Id_cliente =$cliente  and tb.Mhaber!=tb.Mdebe
-        and $fechai BETWEEN $fechai and r.Fechafinal");
+        $query = mysqli_query($con, " select tcc.CODIGO_CUENTA,tcc.CUENTA,tb.Mhaber,tb.Mdebe,tb.Sdebe,tb.SAcreedor  from tbl_balanza tb
+        join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
+        where tb.Id_cliente='$cliente' and tb.Id_periodo='$Idperiodo'");
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
 

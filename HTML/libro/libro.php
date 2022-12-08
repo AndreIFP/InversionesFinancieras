@@ -136,7 +136,7 @@ $fecha = date('Y-m-d h:i:s');
                 <div class="form-group">
                   <center>
                     <h5> <strong>REGISTRO DE ASIENTOS CONTABLES</strong></h5>
-                    <h3><strong> del <?php echo $Idperiodo ?> al <?php echo $fechaf  ?></strong></h3>
+                    <h3><strong> del <?php echo $fechai ?> al <?php echo $fechaf  ?></strong></h3>
                   </center>
                   <hr>
 
@@ -170,10 +170,12 @@ $fecha = date('Y-m-d h:i:s');
 
 
                   
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i>  <strong ></strong></span>
-                    <input type="date" class="form-control pull-right"   id="date" name="fechax" required>
-                  </div>
+        <div class="input-group">
+                  
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i>  <strong ></strong></span>
+                  <input type="date" class="form-control pull-right"   id="date" name="fechax" 
+                 name="party" min=<?php echo $fechai  ?> max=<?php echo $fechaf  ?> required>
+                </div>
             
 
         </td>
@@ -308,9 +310,7 @@ $fecha = date('Y-m-d h:i:s');
           <th>
             <center> No. Asiento </center>
           </th>
-          <th>
-            <center> Nombre del Represente </center>
-          </th>
+
           <th>
             <center> Usuario </center>
           </th>
@@ -335,10 +335,9 @@ $fecha = date('Y-m-d h:i:s');
         <?php
 
         // $branch=$_SESSION['branch'];
-        $query = mysqli_query($conn, "SELECT a.Id_asiento, a.Fecha, a.Descripcion, a.montoTotal, c.Nombre_Cliente, u.Usuario
-        from tbl_asientos a 
-        inner join tbl_clientes c ON a.Id_Cliente = c.Id_Cliente
-        inner join tbl_usuario u ON a.Id_Usuario = u.Id_Usuario where a.Id_Cliente='$cliente' and Fecha >='$fechai' and Fecha <='$fechaf' ");
+        $query = mysqli_query($conn, "select ta.Id_asiento,tu.Usuario ,ta.Fecha,ta.Descripcion,ta.montoTotal  from tbl_asientos ta
+        join tbl_usuario tu on ta.Id_Usuario=tu.Id_Usuario 
+        where ta.Id_Cliente='$cliente' and ta.Id_periodo='$Idperiodo'");
         $i = 1;
         while ($row = mysqli_fetch_array($query)) {
 
@@ -348,9 +347,6 @@ $fecha = date('Y-m-d h:i:s');
           <tr>
             <td>
               <center><?php echo $row['Id_asiento']; ?></center>
-            </td>
-            <td>
-              <center><?php echo $row['Nombre_Cliente']; ?></center>
             </td>
             <td>
               <center><?php echo $row['Usuario']; ?></center>
