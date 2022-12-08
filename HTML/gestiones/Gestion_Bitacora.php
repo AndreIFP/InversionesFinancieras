@@ -65,8 +65,11 @@ if (!isset($_SESSION['rol'])) {
                         <th><center> Id </center></th>
                         <th><center> Fecha </center></th>
                         <th><center> Acción </center></th>
-                        <th><center> Descripción </center></th>
-                        <th><center> Usuario </center></th>
+                        <th><center> Tabla </center></th>
+                        <th><center> Campo </center></th>
+                        <th><center> Valor Original </center></th>
+                        <th><center> Nuevo Valor </center></th>
+                     
 
                         <th></th>
                         <th></th>
@@ -75,7 +78,7 @@ if (!isset($_SESSION['rol'])) {
                 <tbody>
                     <?php
                     //Paginador
-                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_ms_bitacora WHERE Id_Bitacora = Id_Bitacora ");
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM TBL_MS_BITACORA WHERE Id_Bitacora = Id_Bitacora ");
                     $result_register = mysqli_fetch_array($sql_registe);
                     $total_registro = $result_register['total_registro'];
 
@@ -93,7 +96,7 @@ if (!isset($_SESSION['rol'])) {
 
                     $desde = ($pagina - 1) * $por_pagina;
                     $total_paginas = ceil($total_registro / $por_pagina);
-                    $sql = mysqli_query($conn, "select * FROM tbl_ms_bitacora ORDER BY Id_Bitacora DESC LIMIT $desde,$por_pagina ");
+                    $sql = mysqli_query($conn, "select * FROM TBL_MS_BITACORA ORDER BY Id_Bitacora DESC LIMIT $desde,$por_pagina ");
                     mysqli_close($conn);
 
                     $result = mysqli_num_rows($sql);
@@ -104,7 +107,10 @@ if (!isset($_SESSION['rol'])) {
                                 <th><center> <?php echo $row['Id_Bitacora'] ?> </center></th>
                                 <th><center> <?php echo $row['Fecha'] ?> </center></th>
                                 <th><center> <?php echo $row['Accion'] ?> </center></th>
-                                <th><center> <?php echo $row['Descripcion'] ?> </center></th>
+                                <th><center> <?php echo $row['Tabla'] ?> </center></th>
+                                <th><center> <?php echo $row['Campo'] ?> </center></th>
+                                <th><center> <?php echo $row['Valor_Original'] ?> </center></th>
+                                <th><center> <?php echo $row['Nuevo_Valor'] ?> </center></th>
                                 <th><center> <?php echo $row['Id_Usuario'] ?> </center></th>
                                
                             </tr>
