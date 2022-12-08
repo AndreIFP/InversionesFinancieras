@@ -7,6 +7,7 @@ $_SESSION['fechai'];
 $_SESSION['fechaf'];
 $_SESSION['empresa'];
 $_SESSION['temporada'] = "10";
+$_SESSION['Idtemporada'];
 
 date_default_timezone_set('America/Tegucigalpa');
 
@@ -82,6 +83,7 @@ $temporada = $_SESSION['temporada'];
 $fechai = $_SESSION['fechai'];
 $fechaf = $_SESSION['fechaf'];
 $empresa = $_SESSION['empresa'];
+$Idperiodo=$_SESSION['Idtemporada'];
 $fecha = date('Y-m-d h:i:s');
 
 ?>
@@ -124,38 +126,90 @@ $fecha = date('Y-m-d h:i:s');
               <input type="hidden" class="form-control" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>" required>
 
               <input type="hidden" class="form-control" id="debe_haber" name="debe_haber" value="debe" required>
-              <div class="col-md-11 btn-print">
+             
+              <div class="col-md-5 btn-print" >
+              <div class="container" align="right" >
+                
                 <br>
-
+                
+                
                 <div class="form-group">
                   <center>
                     <h5> <strong>REGISTRO DE ASIENTOS CONTABLES</strong></h5>
+                    <h3><strong> del <?php echo $Idperiodo ?> al <?php echo $fechaf  ?></strong></h3>
                   </center>
                   <hr>
 
-      
+                  <div class="row">
+
+<div class="col-xs-14 pull-right">
+
+  <table class="table">
+    <thead class="table-primary">
+      <tr>
+
+        <th>
+          <center><strong>Fecha </strong></center>
+        </th>
+
+
+        <th>
+          <center><strong>Descripción</strong></center>
+        </th>
+
+       
+
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr>
+
+        <td style="width: 40%">
+
+
+                  
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i>  <strong ></strong></span>
+                    <input type="date" class="form-control pull-right"   id="date" name="fechax" required>
+                  </div>
+            
+
+        </td>
+<br>
+        <td style="width: 60%">
+
+                 
+                 <div class="input-group">
+                 
+                   <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i><strong></strong></span>
+                   <input type="text" class="form-control pull-right" id="descripcion" name="descripcion2" placeholder="Descripción del Asiento" required>
+                 </div>
+               
+
+        </td>
+
+
+        
+
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+
+</div>
                   <!-- ENTRADA PARA LA FECHA -->
                   
-                  <div class="form-group">
-                  
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-calendar"></i>  <strong >Fecha</strong></span>
-                      <input type="date" class="form-control pull-right" max=<?php $hoy=date("Y-m-d"); echo $hoy;?>  id="date" name="fechax" required>
-                    </div>
-                  </div>
-                  <!-- ENTRADA DE LA DESCRIPCION-->
-                  <div class="form-group">
                  
-                    <div class="input-group">
-                    
-                      <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i><strong> Descripción </strong></span>
-                      <input type="text" class="form-control pull-right" id="descripcion" name="descripcion2" placeholder="Descripción del Asiento" required>
-                    </div>
-                  </div>
+                  <!-- ENTRADA DE LA DESCRIPCION-->
+                  
                 </div>
                 <hr>
                 
-
+</die
                 <div class="container" align="center" >
   
   <div class="table-responsive" align="center">
@@ -610,10 +664,10 @@ a
 
   <?php
   const DRIVER = 'mysql';
-  const SERVER = 'localhost';
+  const SERVER = '142.44.161.115';
   const DATABASE = '2w4GSUinHO';
   const USERNAME = 'CALAPAL';
-  const PASSWORD = '';
+  const PASSWORD = 'Calapal##567';
   class Conexion
   {
 
@@ -671,11 +725,11 @@ a
         $descripcion = (($item4 !== false) ? $item4 : ", &nbsp;");
 
         //// CONCATENAR LOS VALORES EN ORDEN PARA SU FUTURA INSERCIÓN ////////
-        $valores = '(' . $NAsiento . ',' . $cliente . ',' . $id_usuario . ',"' . $fechax . '","' . $descripcion . '"),';
+        $valores = '(' . $NAsiento . ',' . $cliente . ',' . $id_usuario . ',"' . $fechax . '","' . $descripcion.'" ,"'.$Idperiodo.'"),';
         //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
         $valoresQ = substr($valores, 0, -1);
         ///////// QUERY DE INSERCIÓN ////////////////////////////
-        $sql = "INSERT INTO tbl_asientos (Id_asiento,Id_cliente,Id_usuario,Fecha,Descripcion) 
+        $sql = "INSERT INTO tbl_asientos (Id_asiento,Id_cliente,Id_usuario,Fecha,Descripcion,Id_periodo) 
       VALUES $valoresQ";
 
 
@@ -690,14 +744,14 @@ a
 
 
         //insertar en Kardex
-        $valores2 = "('.$cuentas.','.$debito.','.$credito.','.$NAsiento.'),";
+        $valores2 = "('.$cuentas.','.$debito.','.$credito.','.$NAsiento.','.$Idperiodo.'),";
 
         //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
         $valoresQuery = substr($valores2, 0, -1);
         ///////// QUERY DE INSERCIÓN ////////////////////////////
 
 
-        $sql2 = "INSERT INTO tbl_detallleasientos (Id_cuenta,debito, credito, Id_asiento) VALUES $valoresQuery";
+        $sql2 = "INSERT INTO tbl_detallleasientos (Id_cuenta,debito, credito, Id_asiento,Id_periodo) VALUES $valoresQuery";
 
 
         $consulta = $pdo->prepare($sql2);

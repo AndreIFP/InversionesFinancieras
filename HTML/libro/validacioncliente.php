@@ -27,6 +27,7 @@ while ($row = mysqli_fetch_array($consulta)) {
 	$_SESSION['empresa'] = $nombree;
 	$_SESSION['fechai'] = $fechai;
 	$_SESSION['fechaf'] = $fechaf;
+	$_SESSION['Idtemporada']= $temporada;
 	?>
 
 	<script>
