@@ -12,9 +12,6 @@ const DATABASE = '2w4GSUinHO';
 const USERNAME = 'CALAPAL';
 const PASSWORD = 'Calapal##567';
 
-
-
-
 class Conexion
 {
 
@@ -71,8 +68,6 @@ include 'barralateralinicial.php';
     });
   </script>
 </head>
-
-<p></p>
 <section style=" background-color:rgb(255, 255, 255);
     padding: 15px;
     color:black;
@@ -166,21 +161,36 @@ include 'barralateralinicial.php';
     <!--.row-->
 
     <hr>
-    <br>
-    <br>
-
+    <div align="right">
+    <label for="config_tax">IVA:
+      <input type="checkbox" id="config_tax" />
+    </label>
+    <label for="config_tax_rate" class="taxrelated">Tasa:
+      <input type="text" oninput="this.value = this.value.replace(/[^0-9_.]/,'')" id="config_tax_rate" value="15" />%
+    </label>
+    </div>
+    <hr>
 
     <div class="invoicelist-body">
       <table>
         <thead>
-          <th width="10%">
-            <center>Código</center>
+          <th width="5%">
+            Código
           </th>
-          <th width="65%">
-            <center>Descripción</center>
+          <th width="70%">
+            Descripción
           </th>
           <th width="8%">
-            <center>Cant.</center>
+            Cant.
+          </th>
+          <th width="15%">
+            Precio
+          </th>
+          <th class="taxrelated">
+            IVA
+          </th>
+          <th width="10%">
+            Total
           </th>
         </thead>
       </table>
@@ -188,26 +198,44 @@ include 'barralateralinicial.php';
         <table id="tabla">
 
           <tr class="fila-fija">
-            <td width='10%'><a class="control removeRow" href="#">x</a>
-              <center><input type="text" name="Codigo[]" maxlength="10" placeholder="Cod." size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required /></center>
+            <td width='%'><a class="control removeRow" href="#">x</a>
+              <center><input type="text" name="Codigo[]" style="width:45px;height:30px;border:0" maxlength="10" placeholder="Cod." size="15" value="" oninput="this.value = this.value.replace(/[^0-9]/,'')" required /></center>
             </td>
-            <td width='65%'>
-              <center><input type="text" name="Descripcion[]" maxlength="50" placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/,'')" value="" required /></center>
+            <td width='60%'>
+              <center><input type="text" name="Descripcion[]" style="width:550px;height:30px;border:0" maxlength="50" placeholder="Descripción" size="30" oninput="this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/,'')" value="" required /></center>
             </td>
-            <td width='8%' class="amount">
-              <center><input type="number" name="cantidad[]" oninput="this.value = this.value.replace(/[^0-9]/,'')" value="1" required /></center>
+            <td width='1%' class="amount">
+              <center><input type="number" name="cantidad[]" style="width:60px;height:40px;border:0" oninput="this.value = this.value.replace(/[^0-9]/,'')" value="1" required /></center>
+            </td>
+            <td class="rate">
+              <center><input type="number" name="precio[]" style="width:100px;height:40px;border:0" Placeholder="Precio" oninput="this.value = this.value.replace(/[^0-9_.]/,'')" step=00.01 required /></center>
             </td>
 
+            <td class="tax taxrelated"></td>
+            <td class="sum"></td>
           </tr>
 
         </table>
         <a class="control newRow" id="newRow" href="#">+ Nueva Producto</a>
     </div>
     <!--.invoice-body-->
-    <br>
-    <hr>
-
     <center>
+
+
+
+
+      <div class="invoicelist-footer">
+        <table>
+          <tr class="taxrelated">
+            <td><strong>IVA:</strong></td>
+            <td><label id="total_tax" name="totalr"></label><input type="hidden" id="totalRetenido" name="totalRetenido"></td>
+          </tr>
+          <tr>
+            <td><strong>Total:</strong></td>
+            <td><label id="total_price" name="totalt"></label><input value="" type="hidden" id="montoTotal" name="montoTotal"></td>
+          </tr>
+        </table>
+      </div>
       <button type="submit" name="insertar" class="btn btn-success btn-lg"><i class="fa fa-floppy-o"></i> Registrar su factura</button>
       </form>
 
@@ -250,11 +278,11 @@ include 'barralateralinicial.php';
           $request = $Result[0];
           if (empty($Result)) {
             $request = $Result[0];
-            $valores = '("' . $factura . '","' . $proveedor . '","' . $nom . '","' . $can . '"),';
+            $valores = '("' . $proveedor . '","' . $nom . '","' . $can . '"),';
             //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
             $valoresQ = substr($valores, 0, -1);
             ///////// QUERY DE INSERCIÓN ////////////////////////////
-            $sql = "INSERT INTO product (Nfactura,Proveedor,proname,amount) 
+            $sql = "INSERT INTO product (Proveedor,proname,amount) 
                 VALUES $valoresQ";
 
             //$sqlRes=$conexion->query($sql) or mysql_error();
