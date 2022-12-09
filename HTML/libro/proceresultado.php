@@ -9,13 +9,18 @@ include('../../dist/includes/dbcon.php');
 	$nombre = $_POST=["btnrlogin"];
 	$ISV=$_SESSION['impu'];
 	$UTILIDADNETA=$_SESSION['neta'];
+	$Idperiodo=$_SESSION['Idtemporada'];
 	// $id_usuario = $_POST['id_usuario'];
 	
 
 
-	$patata=mysqli_query($con, "SELECT COD_CUENTA FROM tbl_balanza WHERE Id_cliente=$cliente ;");
+	$patata=mysqli_query($con, " SELECT COD_CUENTA FROM tbl_balanza WHERE Id_cliente=$cliente ;");
 	while ($row = mysqli_fetch_array($patata)) {
 		$condigo= $row['COD_CUENTA'];
+	}
+	$paspa=mysqli_query($con, " SELECT SAcreedor FROM tbl_balanza WHERE COD_CUENTA='2105';");
+	while ($row = mysqli_fetch_array($paspa)) {
+		$saldi= $row['SAcreedor'];
 	}
 
 	$consulta=mysqli_query($con, "SELECT Id_asiento FROM tbl_asientos WHERE Id_cliente= '$cliente';" );
@@ -27,17 +32,20 @@ include('../../dist/includes/dbcon.php');
 		$detalle= $row['Id_detalle'];
 		
 	}
- 
-	
+
 	if($condigo=='2105' or $condigo=='3104'){
-		mysqli_query($con,"UPDATE tbl_balanza SET SAcreedor='$ISV' WHERE Id_cliente= '$cliente' and COD_CUENTA='2105'");
+		 
+	$suma=$ISV + $saldi;
+		mysqli_query($con,"UPDATE tbl_balanza SET SAcreedor='$suma' WHERE Id_cliente= '$cliente' and COD_CUENTA='2105'");
 		mysqli_query($con,"UPDATE tbl_balanza SET SAcreedor='$UTILIDADNETA' WHERE Id_cliente= '$cliente' and COD_CUENTA='3104'");
 		echo "<script> alert('Balance Generado'); window.location='Balanzageneral.php' </script>";
-	}else{
-		mysqli_query($con,"INSERT INTO tbl_balanza(Id_cliente,COD_CUENTA,Mhaber,Mdebe,Sdebe,SAcreedor) VALUE ('$cliente','2105','0','0','0','$ISV')");
-		mysqli_query($con,"INSERT INTO tbl_balanza(Id_cliente,COD_CUENTA,Mhaber,Mdebe,Sdebe,SAcreedor) VALUE ('$cliente','3104','0','0','0','$UTILIDADNETA')");
+	}elseif($condigo!='2105' or $condigo!='3104'){
+		mysqli_query($con,"INSERT INTO tbl_balanza(Id_cliente,COD_CUENTA,Mhaber,Mdebe,Sdebe,SAcreedor,Id_periodo) VALUE ('$cliente','2105','0','0','0','$ISV','$Idperiodo')");
+		mysqli_query($con,"INSERT INTO tbl_balanza(Id_cliente,COD_CUENTA,Mhaber,Mdebe,Sdebe,SAcreedor,Id_periodo) VALUE ('$cliente','3104','0','0','0','$UTILIDADNETA','$Idperiodo')");
 		echo "<script> alert('Balance pp'); window.location='Balanzageneral.php' </script>";
 		
+	}else{
+		echo "<script> alert('Balance pp'); window.location='Resultado.php' </script>";
 	}
 
 	

@@ -21,7 +21,11 @@ header("Content-Disposition: attachment; filename= Catálogo De Cuentas.xls");
 
 
 
-$sql = "SELECT * FROM tbl_catalago_cuentas WHERE Estado_Cuenta = 'ACTIVO'";
+$sql = "SELECT tcc2.CODIGO_CUENTA as CODIGO_CUENTA ,tcc2.CUENTA,tcc.CUENTA as TIPOCUENTA,
+tcc.Estado_Cuenta from tbl_catalago_cuentas tcc join tbl_catalago_cuentas tcc2 on tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2) or
+tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,1)
+ AND  tcc.Mayor=SUBSTRING(tcc2.CODIGO_CUENTA,1,2)
+                order by SUBSTRING( tcc2.CODIGO_CUENTA,1,6)";
 $DataPaises = mysqli_query($conn, $sql);
 
 // Llamado del parametro dirección
@@ -77,7 +81,7 @@ while ($fila = $resultadocorreo->fetch_assoc()) {
         <tr>
         <td><?php echo $row['CODIGO_CUENTA'] ?></td>
         <td><?php echo $row['CUENTA'] ?></td>
-        <td><?php echo $row['CLASIFICACION'] ?></td>
+        <td><?php echo $row['TIPOCUENTA'] ?></td>
         <td><?php echo $row['Estado_Cuenta'] ?></td>
         </tr>
     </tbody>

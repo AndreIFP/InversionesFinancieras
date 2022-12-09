@@ -9,16 +9,12 @@ if (!empty($_POST)) {
 		$Id_Parametro = $_POST['Id_Parametro'];
 		$nombre       = $_POST['Parametro'];
 		$Valor        = $_POST['Valor'];
-		if (!is_numeric($Valor)) {
-			$alert = '<p class="msg_error">Error El Valor Solo Números.</p>';
-		} else {
-			$query = mysqli_query($conn, "UPDATE tbl_parametros SET Parametro='$nombre',Valor='$Valor' WHERE Id_Parametro ='$Id_Parametro'");
+		$query = mysqli_query($conn, "UPDATE tbl_parametros SET Parametro='$nombre',Valor='$Valor' WHERE Id_Parametro ='$Id_Parametro'");
 
-			if ($query) {
-				echo "<script> alert('Parametro Actualizado Exitosamente');window.location= 'Gestion_parametros.php' </script>";
-			} else {
-				$alert = '<p class="msg_error">Error al actualizar el parametro.</p>';
-			}
+		if ($query) {
+			echo "<script> alert('Parametro Actualizado Exitosamente');window.location= 'Gestion_parametros.php' </script>";
+		} else {
+			$alert = '<p class="msg_error">Error al actualizar el parametro.</p>';
 		}
 	}
 }
@@ -103,8 +99,8 @@ if ($result_sql == 0) {
 											<div class="input-group">
 
 												<span class="input-group-addon"><i class="fa fa-key"></i></span>
-												<input type="text"  class="form-control" name="Valor" maxlength="40" id="Valor" placeholder="Valor Parametro" value="<?php echo $Valor ?>" size="40">
-		
+												<input type="text" class="form-control" name="Valor" maxlength="40" id="Valor" placeholder="Valor Parametro" value="<?php echo $Valor ?>" size="40">
+
 											</div>
 
 										</td>

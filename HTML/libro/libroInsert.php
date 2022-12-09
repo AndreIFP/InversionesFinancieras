@@ -2,15 +2,16 @@
 session_start();
 $_SESSION['id'];
 $_SESSION['cliente'];
+$_SESSION['Idtemporada'];
 include('../conexion.php');
 $id_usuario = $_SESSION['id'];
 $cliente = $_SESSION['cliente'];
-
+$Idperiodo=$_SESSION['Idtemporada'];
 const DRIVER='mysql';
 const SERVER='142.44.161.115';
 const DATABASE='2w4GSUinHO';
 const USERNAME='CALAPAL';
-const PASSWORD='';
+const PASSWORD='Calapal##567';
 class Conexion{
 
   public static function conectar(){
@@ -90,11 +91,11 @@ class Conexion{
 
 
     if ($sumaCredito == $sumaDebito) {
-        $valores='('.$cliente.','.$id_usuario.',"'.$fechax.'","'.$descripcion2.'","'.$sumaDebito.'"),';
+        $valores='('.$cliente.','.$id_usuario.',"'.$fechax.'","'.$descripcion2.'","'.$sumaDebito.'","'.$Idperiodo.'"),';
         //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
         $valoresQ= substr($valores, 0, -1);
         ///////// QUERY DE INSERCIÓN ////////////////////////////
-        $sql = "INSERT INTO tbl_asientos (Id_cliente,Id_usuario,Fecha,Descripcion,montoTotal) 
+        $sql = "INSERT INTO tbl_asientos (Id_cliente,Id_usuario,Fecha,Descripcion,montoTotal,Id_periodo) 
       VALUES $valoresQ";
           //$pdo=Conexion::conectar();
       $consulta=$pdo->prepare($sql);
@@ -130,14 +131,14 @@ class Conexion{
      
 
        //insertar en Kardex
-       $valores2='("'.$cuentas.'","'.$debito.'","'.$credito.'","'.$NAsiento.'","'.$descripcion.'"),';
+       $valores2='("'.$cuentas.'","'.$debito.'","'.$credito.'","'.$NAsiento.'","'.$descripcion.'","'.$Idperiodo.'"),';
       
        //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
        $valoresQuery= substr($valores2, 0, -1);
        ///////// QUERY DE INSERCIÓN ////////////////////////////
 
      
-     $sql2 = "INSERT INTO tbl_detallleasientos (CODIGO_CUENTA,debito,credito,Id_asiento,descripcion) VALUES $valoresQuery";
+     $sql2 = "INSERT INTO tbl_detallleasientos (CODIGO_CUENTA,debito,credito,Id_asiento,descripcion,Id_periodo) VALUES $valoresQuery";
 
      
      $consulta=$pdo->prepare($sql2);

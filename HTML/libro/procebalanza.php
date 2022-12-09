@@ -7,10 +7,11 @@ include('../../dist/includes/dbcon.php');
 	$cliente = $_SESSION['cliente'];
 	$temporada = $_SESSION['temporada'];
 	$nombre = $_POST=["btnrlogin"];
+	$Idperiodo=$_SESSION['Idtemporada'];
 	// $id_usuario = $_POST['id_usuario'];
 	
 
-	$queryregistro=("CALL Balanza('$cliente')"); 
+	$queryregistro=("CALL INSERTARBALANZA('$Idperiodo','$cliente')"); 
 
 	if(mysqli_query($con,$queryregistro))
     {

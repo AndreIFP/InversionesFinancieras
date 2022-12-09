@@ -104,7 +104,7 @@ try{
     $nr2 = mysqli_num_rows($query2);
     if($nr2 != 1)
     {
-    $query2 = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Rol = '4'");
+    $query2 = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Estado_Usuario = 'NUEVO'");
     $nr2 = mysqli_num_rows($query2);
     echo "<script> window.location= 'preguntasReg.php' </script>";
     }

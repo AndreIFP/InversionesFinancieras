@@ -165,7 +165,7 @@
 
                     <form id="frmregistrar" class="login-form" action="validacionpregseguri.php" method="post">
                         <DIV CLASS="CONTEINER">
-                            <div class="select">
+                            <div class="select" style="width:500px">
                                 <select name="txtpregunta" id="format" required>
                                     <option selected disabled value="">SELECIONE SU PREGUNTA</option>
 

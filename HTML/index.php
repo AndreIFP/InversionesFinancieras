@@ -57,7 +57,7 @@ if (!isset($_SESSION['rol'])) {
                       <div class="panel-heading" style="background:rgb(226, 62, 62);">
                         <div class="row" >
                           <div class="col-xs-3">
-                            <i class="fa fa-user fa-5x"></i>
+                            <i class="fa fa-users fa-5x"></i>
                           </div>
                           <div class="col-xs-9 text-right">
                             <div class="huge"><h1></h1></div>
@@ -84,11 +84,11 @@ if (!isset($_SESSION['rol'])) {
                       <div class="panel-heading">
                         <div class="row">
                           <div class="col-xs-3">
-                            <i class="fa fa-book fa-5x"></i>
+                            <i class="fa fa-cubes fa-5x"></i>
                           </div>
                           <div class="col-xs-9 text-right">
                             <div class="huge"><h1></h1></div>
-                            <div>Inventarios</div>
+                            <div>Insumos</div>
                           </div>
                         </div>
                       </div>

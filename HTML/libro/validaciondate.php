@@ -57,7 +57,7 @@ $_SESSION['user'];
                     #consulta de todos los paises
                     $consulta = mysqli_query($conn, "SELECT * FROM tbl_clientes ;");
                     while ($row = mysqli_fetch_array($consulta)) {
-                      $nombrepais = $row['Nombre_Cliente'];
+                      $nombrepais = $row['Nombre_Empresa'];
                       $nombeid = $row['Id_Cliente'];
 
                     ?>

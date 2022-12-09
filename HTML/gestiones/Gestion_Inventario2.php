@@ -38,7 +38,7 @@ $numero = 99999.99;
 
 <!DOCTYPE html>
 <html lang="en">
-<title>Gestión Inventario</title>
+<title>Gestión Insumos</title>
 
 <head>
     <meta charset="UTF-8">
@@ -53,7 +53,7 @@ $numero = 99999.99;
         <div class="col-md-12">
             <div class="box-body table-responsive">
                 <div class="reportes">
-                    <h2><strong>Inventario</strong> </h2>
+                    <h2><strong>Gestión de Insumo</strong> </h2>
 
                     <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                     <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {
@@ -109,7 +109,7 @@ $numero = 99999.99;
                                 <center> Fecha </center>
                             </th>
 
-                            <th colspan="3">
+                            <th colspan="5">
                                 <center> Acciones </center>
                             </th>
 
@@ -146,7 +146,6 @@ $numero = 99999.99;
 
 
                                 $id_product = $row['id_product'];
-                                $NFactura      = $row['NFactura'];
                                 $Proveedor       = $row['Proveedor'];
                                 $proname  = $row['proname'];
                                 $amount     = $row['amount'];
@@ -176,6 +175,10 @@ $numero = 99999.99;
                                     <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['u'] == 1) {
 
                                     ?>
+                                        <th>
+                                            <center><a href="../Compras/entrada.php?Id=<?php echo $row['id_product'] ?>" class="btn btn-secondary btn-xs"><i class="fa fa-plus-square" aria-hidden="true"></i></a></center>
+                                        </th>
+
                                         <th>
                                             <center><a href="../Compras/Salida1.php?Id=<?php echo $row['id_product'] ?>" class="btn btn-primary btn-xs"><i class="fa fa-sign-out" aria-hidden="true"></i></a></center>
                                         </th>
@@ -250,7 +253,6 @@ $numero = 99999.99;
 
 
                                         $id_product                = $row['id_product'];
-                                        $NFactura                  = $row['NFactura'];
                                         $Proveedor                = $row['Proveedor'];
                                         $proname                   = $row['proname'];
                                         $amount                    = $row['amount'];

@@ -7,7 +7,7 @@ $_SESSION['fechai'];
 $_SESSION['fechaf'];
 $_SESSION['empresa'];
 $_SESSION['temporada'] = "10";
-
+$_SESSION['Idtemporada'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,6 +54,7 @@ $_SESSION['temporada'] = "10";
   $fechai = $_SESSION['fechai'];
   $fechaf = $_SESSION['fechaf'];
   $empresa = $_SESSION['empresa'];
+  $Idperiodo=$_SESSION['Idtemporada'];
   $fecha = date('Y-m-d h:i:s');
 
   $consulta = mysqli_query($conn, "select * from tbl_balanza
@@ -72,113 +73,158 @@ WHERE Id_cliente=$cliente");
   </div>
   <hr>
   <center>
-    <h2><strong> Balance General </strong></h2>
+    <h4><strong><?php echo $empresa  ?></strong></h4>
+    <h4><strong>Balance General</strong></h4>
+    <h4><strong> del <?php echo $fechai  ?> al <?php echo $fechaf  ?></strong></h4>
   </center>
   <hr>
   <?php
   include("../conexion.php");
 
-  // ACTIVOS
-  $sql = "SELECT ifnull(SUM(Sdebe),0) as Activos  FROM tbl_balanza tb 
-  where Id_cliente=$cliente and COD_CUENTA like '1%';";
-  $resultado = mysqli_query($conn, $sql);
-  while ($rows = $resultado->fetch_assoc()) {
-    $Activos  = $rows["Activos"];
-  }
-  ?>
-  <button class="accordion"><?php echo  ' ACTIVOS  ' . $Activos  ?> </button>
+ // Activos
+ $sqlactivo = " select ifnull(sum(tb2.Sdebe),0) as Activos from tbl_balanza tb2 
+ where tb2.COD_CUENTA like '1%' and tb2.Id_cliente='$cliente' and tb2.Id_periodo='$Idperiodo'";
+ $resultadoactivo = mysqli_query($conn, $sqlactivo);
+ while ($rows = $resultadoactivo->fetch_assoc()) {
+   $activo= $rows["Activos"];
+ }
+ ?>
 
-  <!-- DESPLIEGUE DE ACTIVOS-->
-  <div class="panel">
-    <table class="table">
-      <?php
-      $sql1 = "SELECT tcc.CUENTA ,tb.Sdebe  FROM tbl_balanza tb 
-      join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where Id_cliente=$cliente and COD_CUENTA like '1%' AND tb.Sdebe!=0;";
-      $resultado1 = mysqli_query($conn, $sql1);
+ <!-- DESPLIEGUE DE INGRESOS-->
+   <table class="table">
+   <thead class="table-primary">
+               <tr>
+                   <th>
+                       Activos
+                   </th>
+                   <th>
+                    </th>
+                   <th style="width: 15%">
+                       <?php echo   $activo?>
+                   </th>
 
-      while ($rows = $resultado1->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
+               </tr>
+           </thead>
+           <tbody>
+     <?php
+     $sql1 = "select tcc.CUENTA,tb2.Sdebe  from tbl_balanza tb2
+     join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
+     where tb2.COD_CUENTA like '1%' and tb2.Id_cliente='$cliente' and tb2.Id_periodo='$Idperiodo' and tb2.Sdebe!=0  ";
+     $resultado1 = mysqli_query($conn, $sql1);
 
-      ?>
-        <tr>
-          <th> <?php echo $Cod . ' ' . $cuen ?></th>
-        </tr>
-      <?php
-      }
-      ?>
-    </table>
-  </div>
+     while ($rows = $resultado1->fetch_assoc()) {
+       $Cod = $rows["CUENTA"];
+       $cuen = $rows['Sdebe'];
 
-
-  <!-- PASIVOS-->
-  <?php
-  $sql2 = "SELECT ifnull(SUM(SAcreedor),0) AS pasivo  FROM tbl_balanza tb 
-  where Id_cliente=$cliente and COD_CUENTA like '2%';";
-  $resultado2 = mysqli_query($conn, $sql2);
-  while ($rows = $resultado2->fetch_assoc()) {
-    $Pasivo = $rows["pasivo"];
-  }
-  ?>
-
-  <!-- DESPLIEGUE DE  COSTOS-->
-  <button class="accordion"><?php echo 'PASIVOS ' . $Pasivo ?></button>
-  <div class="panel">
-    <table class="table">
-      <?php
-      $sqlcosto = "SELECT tcc.CUENTA ,tb.SAcreedor   FROM tbl_balanza tb 
-      join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where Id_cliente=$cliente and COD_CUENTA like '2%'; ";
-      $costosv = mysqli_query($conn, $sqlcosto);
-
-      while ($rows = $costosv->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['SAcreedor'];
-
-      ?>
-        <tr>
-          <th> <?php echo $Cod . ' ' . $cuen ?></th>
-        </tr>
-      <?php
-      }
-      ?>
-    </table>
-  </div>
+     ?>
+       <tr>
+         <th> <?php echo  $Cod ?></th>
+         <th> <?php echo $cuen ?></th>
+         <th></th>
+       </tr>
+     <?php
+     }
+     ?>
+     </tbody>
+   </table>
 
 
-  <!--patrimonio-->
-  <?php
-  $sql3 = "SELECT ifnull(SUM(SAcreedor),0) as patrimonio  FROM tbl_balanza tb 
-  where Id_cliente=$cliente  and COD_CUENTA like '3%';";
-  $resultado3 = mysqli_query($conn, $sql3);
-  while ($rows = $resultado3->fetch_assoc()) {
-    $patrimonio  = $rows["patrimonio"];
-  }
-  ?>
-  <!-- DESPLIEGUE -->
-  <button class="accordion"><?php echo 'PATRIMONIO ' . $patrimonio  ?></button>
-  <div class="panel">
-    <table class="table">
-      <?php
-      $sqloperativos = "SELECT tcc.CUENTA ,tb.SAcreedor as Sdebe FROM tbl_balanza tb 
-      join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where Id_cliente=$cliente  and COD_CUENTA like '3%';";
-      $coperativos = mysqli_query($conn, $sqloperativos);
+<?php
+   // Pasivo
+ $sqlpasivos = "select ifnull(sum(tb2.SAcreedor),0) as Pasivos from tbl_balanza tb2 
+ where tb2.COD_CUENTA like '2%' and tb2.Id_cliente='$cliente' and tb2.Id_periodo='$Idperiodo'";
+ $resultadopasivos = mysqli_query($conn, $sqlpasivos);
+ while ($rows = $resultadopasivos->fetch_assoc()) {
+   $pasivos= $rows["Pasivos"];
+ }
+ ?>
 
-      while ($rows = $coperativos->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
+ <!-- DESPLIEGUE DE INGRESOS-->
+   <table class="table">
+   <thead class="table-primary">
+               <tr>
+                   <th>
+                       Pasivos
+                   </th>
+                   <th>
+                    </th>
+                   <th style="width: 15%">
+                       <?php echo   $pasivos?>
+                   </th>
 
-      ?>
-        <tr>
-          <th> <?php echo $Cod . ' ' . $cuen ?></th>
-        </tr>
-      <?php
-      }
-      ?>
-    </table>
-  </div>
+               </tr>
+           </thead>
+           <tbody>
+     <?php
+     $sql2 = "select tcc.CUENTA,tb2.SAcreedor from tbl_balanza tb2
+     join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
+     where tb2.COD_CUENTA like '2%' and tb2.Id_cliente='$cliente' and tb2.Id_periodo='$Idperiodo' and tb2.SAcreedor!=0  ";
+     $resultado1 = mysqli_query($conn, $sql2);
+
+     while ($rows = $resultado1->fetch_assoc()) {
+       $Cod = $rows["CUENTA"];
+       $cuen = $rows['SAcreedor'];
+
+     ?>
+       <tr>
+         <th> <?php echo  $Cod ?></th>
+         <th> <?php echo $cuen ?></th>
+         <th></th>
+       </tr>
+     <?php
+     }
+     ?>
+     </tbody>
+   </table>
+
+
+   <?php
+   // patrimonio
+ $sqlpatrimonio = "select ifnull(sum(tb2.SAcreedor),0) as Capital from tbl_balanza tb2 
+ where tb2.COD_CUENTA like '3%' and tb2.Id_cliente='$cliente' and tb2.Id_periodo='$Idperiodo'";
+ $resultadopatrimonio = mysqli_query($conn, $sqlpatrimonio);
+ while ($rows =$resultadopatrimonio ->fetch_assoc()) {
+   $patrimonio= $rows["Capital"];
+ }
+ ?>
+
+ <!-- DESPLIEGUE DE INGRESOS-->
+   <table class="table">
+   <thead class="table-primary">
+               <tr>
+                   <th>
+                       Patrimonio
+                   </th>
+                   <th>
+                   </th>
+                   <th style="width: 15%">
+                       <?php echo  $patrimonio?>
+                   </th>
+
+               </tr>
+           </thead>
+           <tbody>
+     <?php
+     $sql2 = "select tcc.CUENTA,tb2.SAcreedor from tbl_balanza tb2
+     join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
+     where tb2.COD_CUENTA like '3%' and tb2.Id_cliente='$cliente' and tb2.Id_periodo='$Idperiodo' and tb2.SAcreedor!=0  ";
+     $resultado1 = mysqli_query($conn, $sql2);
+
+     while ($rows = $resultado1->fetch_assoc()) {
+       $Cod = $rows["CUENTA"];
+       $cuen = $rows['SAcreedor'];
+
+     ?>
+       <tr>
+         <th> <?php echo  $Cod ?></th>
+         <th> <?php echo $cuen ?></th>
+         <th></th>
+       </tr>
+     <?php
+     }
+     ?>
+     </tbody>
+   </table>
 
 
 
