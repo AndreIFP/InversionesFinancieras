@@ -88,7 +88,7 @@ if (!isset($_SESSION['rol'])) {
                           </div>
                           <div class="col-xs-9 text-right">
                             <div class="huge"><h1></h1></div>
-                            <div>Inventarios</div>
+                            <div>Insumos</div>
                           </div>
                         </div>
                       </div>
