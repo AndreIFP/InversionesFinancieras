@@ -47,7 +47,7 @@ if (!empty($_POST)) {
  $rest = $_POST['cant'];
  $fecha = $_POST['fech'];
 
-  if($rest < $cantidad){
+  if($rest <= $cantidad){
     $resta = $cantidad - $rest;
     $sql5 = "UPDATE product SET amount=$resta where id_product='$id'";
     $exito = mysqli_query($conn,$sql5);
