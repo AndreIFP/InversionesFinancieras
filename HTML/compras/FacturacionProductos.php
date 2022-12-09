@@ -281,6 +281,7 @@ include 'barralateralinicial.php';
       <script>
         window.jQuery || document.write('<script src="assets/bower_components/jquery/dist/jquery.min.js"><\/script>')
       </script>
-
+      <script src="assets/js/main.js"></script>
+      
   </body>
   <?php include 'barralateralfinal.php'; ?>
