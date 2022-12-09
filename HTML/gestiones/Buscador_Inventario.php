@@ -36,7 +36,7 @@ $_SESSION['busquedaX'] = $busqueda;
 
 <!DOCTYPE html>
 <html lang="en">
-<title>Gestión Inventario</title>
+<title>Gestión Insumos</title>
 
 <head>
     <meta charset="UTF-8">
@@ -53,7 +53,7 @@ $_SESSION['busquedaX'] = $busqueda;
             <div class="box-body table-responsive">
                 <div class="reportes">
 
-                    <h2><strong>Gestión Inventario</strong> </h2>
+                    <h2><strong>Gestión  de Insumo</strong> </h2>
                     <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                     <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {
                     ?>
