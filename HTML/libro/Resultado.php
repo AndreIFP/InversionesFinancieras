@@ -78,7 +78,9 @@ $_SESSION['Idtemporada'];
   </form>
   <hr>
   <center>
-    <h2><strong>Estado De Resultado</strong></h2>
+    <h4><strong><?php echo $empresa  ?></strong></h4>
+    <h4><strong>Estado De Resultado</strong></h4>
+    <h4><strong> del <?php echo $fechai  ?> al <?php echo $fechaf  ?></strong></h4>
   </center>
   <hr>
   <?php
@@ -96,7 +98,7 @@ $_SESSION['Idtemporada'];
 
   <!-- DESPLIEGUE DE INGRESOS-->
     <table class="table">
-    <thead class="table-primary">
+    <thead >
       <?php
       if(empty($ingresos)){
         $ingresos = 0;
@@ -108,7 +110,8 @@ $_SESSION['Idtemporada'];
                     </th>
                     <th>
                     </th>
-                    <th>
+                   
+                    <th style="width: 29%" >
                         <?php echo  $ingresos ?>
                     </th>
 
@@ -150,14 +153,12 @@ $_SESSION['Idtemporada'];
 
   <!-- DESPLIEGUE DE INGRESOS-->
     <table class="table">
-    <thead class="table-primary">
+    <thead >
                 <tr>
                     <th>
                         Costo De Venta 
                     </th>
-                    <th>
-                    </th>
-                    <th>
+                    <th style="width: 27%">
                         <?php echo  $costo ?>
                     </th>
 
@@ -193,9 +194,7 @@ $_SESSION['Idtemporada'];
                     <th>
                         Utilidad 
                     </th>
-                    <th>
-                    </th>
-                    <th>
+                    <th style="width: 15%">
                         <?php echo  ($ingresos - $costo) ?>
                     </th>
 
@@ -215,14 +214,12 @@ $_SESSION['Idtemporada'];
 
   <!-- DESPLIEGUE DE INGRESOS-->
     <table class="table">
-    <thead class="table-primary">
+    <thead >
                 <tr>
                     <th>
                         Gastos Operativos 
                     </th>
-                    <th>
-                    </th>
-                    <th>
+                    <th style="width: 27%">
                         <?php echo  $opera ?>
                     </th>
 
@@ -263,14 +260,12 @@ $_SESSION['Idtemporada'];
 
   <!-- DESPLIEGUE DE INGRESOS-->
     <table class="table">
-    <thead class="table-primary">
+    <thead >
                 <tr>
                     <th>
                         Gastos De Venta 
                     </th>
-                    <th>
-                    </th>
-                    <th>
+                    <th style="width: 27%">
                         <?php echo  $GV ?>
                     </th>
 
@@ -310,18 +305,15 @@ $_SESSION['Idtemporada'];
   ?>
 
   <!-- DESPLIEGUE DE INGRESOS-->
-    <table class="table">
-    <thead class="table-primary">
+    <table class="table" >
+    <thead >
                 <tr>
                     <th>
                         Gastos De Administración 
                     </th>
-                    <th>
+                    <th style="width: 27%">
+                        <?php echo$GA ?>
                     </th>
-                    <th>
-                        <?php echo  $GA ?>
-                    </th>
-
                 </tr>
             </thead>
             <tbody>
@@ -359,14 +351,12 @@ $_SESSION['Idtemporada'];
 
   <!-- DESPLIEGUE DE INGRESOS-->
     <table class="table">
-    <thead class="table-primary">
+    <thead >
                 <tr>
                     <th>
                         Gastos Financieros
                     </th>
-                    <th>
-                    </th>
-                    <th>
+                    <th style="width: 27%">
                         <?php echo  $GF ?>
                     </th>
 
@@ -398,7 +388,7 @@ $_SESSION['Idtemporada'];
     <?php
     // Otros Gastos
   $sqlOG = "select ifnull(sum(tb2.SAcreedor),0) as costo from tbl_balanza tb2 
-  where tb2.COD_CUENTA like '6505%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo";
+  where tb2.COD_CUENTA like '6506%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo";
   $resultadoOG = mysqli_query($conn, $sqlOG);
   while ($rows = $resultadoOG->fetch_assoc()) {
     $OG = $rows["costo"];
@@ -407,14 +397,12 @@ $_SESSION['Idtemporada'];
 
   <!-- DESPLIEGUE DE INGRESOS-->
     <table class="table">
-    <thead class="table-primary">
+    <thead >
                 <tr>
                     <th>
                         Otros Gastos
                     </th>
-                    <th>
-                    </th>
-                    <th>
+                    <th style="width: 27%">
                         <?php echo  $OG ?>
                     </th>
 
@@ -424,7 +412,7 @@ $_SESSION['Idtemporada'];
       <?php
       $sql1 = "select tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2
       join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where tb2.COD_CUENTA like '6505%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo and tb2.Sdebe!=0";
+      where tb2.COD_CUENTA like '6506%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo and tb2.Sdebe!=0";
       $resultado1 = mysqli_query($conn, $sql1);
 
       while ($rows = $resultado1->fetch_assoc()) {
@@ -455,14 +443,12 @@ $_SESSION['Idtemporada'];
 
   <!-- DESPLIEGUE DE INGRESOS-->
     <table class="table">
-    <thead class="table-primary">
+    <thead >
                 <tr>
                     <th>
                         Otros Ingresos
                     </th>
-                    <th>
-                    </th>
-                    <th>
+                    <th style="width: 27%">
                         <?php echo  $OI ?>
                     </th>
 
@@ -500,9 +486,7 @@ $_SESSION['Idtemporada'];
                     <th>
                         Utilidad Antes De Impuesto 
                     </th>
-                    <th>
-                    </th>
-                    <th>
+                    <th style="width: 15%">
                         <?php echo $UTILIDADANTESISV ?>
                     </th>
 
@@ -521,14 +505,12 @@ $_SESSION['Idtemporada'];
   $ISV = $UTILIDADANTESISV  * ($isv / 100);
 ?>
     <table class="table">
-    <thead class="table-primary">
+    <thead >
                 <tr>
                     <th>
                         Impuesto 
                     </th>
-                    <th>
-                    </th>
-                    <th>
+                    <th style="width: 27%">
                         <?php echo $ISV ?>
                     </th>
 
@@ -545,11 +527,9 @@ $_SESSION['Idtemporada'];
     <thead class="table-primary">
                 <tr>
                     <th>
-                        Impuesto 
+                        UTILIDAD O PERDIDA DEL PERIODO
                     </th>
-                    <th>
-                    </th>
-                    <th>
+                    <th style="width: 15%">
                         <?php echo $UTILIDADNETA ?>
                     </th>
 
