@@ -84,10 +84,10 @@ include 'barralateralinicial.php';
 
 
       <div>
-        <div>
-          <br>
-          <h1 align="center">Factura Inventario</h1>
-        </div>
+       
+        
+          <h1 align="center"><strong>Factura Inventario</strong> </h1>
+       
         <!--.col-->
       </div>
       <!--.me-->
@@ -96,7 +96,7 @@ include 'barralateralinicial.php';
     
     <div class="row section">
       <div class="col-2">
-        <h5><strong>Datos</strong></h5>
+       
         <div class="form-group" style="width:250px" ;>
 
           <div class="input-group">
@@ -111,7 +111,7 @@ include 'barralateralinicial.php';
     </div>
     <!--.row-->
 
-    <hr>
+
     <br>
     <div class="row section" style="margin-top:-1rem">
       <div class="col-1">
@@ -143,10 +143,10 @@ include 'barralateralinicial.php';
     </div>
     <!--.row-->
 
-    <hr>
+
 
     <div class="invoicelist-body">
-      <table>
+      <table class="table table-primary">
         <thead>
           <th width="80%">
             <h5><center><strong>Descripción</strong></center></h5>
