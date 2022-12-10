@@ -484,7 +484,7 @@ $user = $_SESSION['user'];
             <div class="menu">
 
                 <li class="" class="fa fa-caret-down">
-                    <a href="#" style="align-items: center; height: 50px;">
+                    <a href="../perfil.php" style="align-items: center; height: 50px;">
                         <i class='bx bxs-user bx-tada icon'></i>
                         <span style="align-items:center; color:#18191a"><?php echo $user; ?></span>
                     </a>
