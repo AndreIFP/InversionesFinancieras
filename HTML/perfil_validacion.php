@@ -76,14 +76,49 @@ if (!empty($_POST)) {
 }else {
     if (!empty($_POST))     {
         $alert = '';
+
+       
+
         if (empty($_POST['Contraseña'])) {
             echo "<script> alert('No puede dejar campos en blanco');window.location= 'perfil.php' </script>";
         }else {
             $Id_Usuario = $_SESSION['id'];
             $Contraseña = $_POST["Contraseña"];
             // echo "<script> alert('$Id_Usuario $Contraseña');</script>";
+
+            $clave  = 'Una cadena, muy, muy larga para mejorar la encriptacion';
+            //Metodo de encriptaciÃ³n
+            $method = 'aes-256-cbc';
+            // Puedes generar una diferente usando la funcion $getIV()
+            $iv = base64_decode("C9fBxl1EWtYTL1/M8jfstw");
+             /*
+             Encripta el contenido de la variable, enviada como parametro.
+              */
+             $encriptar = function ($valor) use ($method, $clave, $iv) {
+                 return openssl_encrypt ($valor, $method, $clave, false, $iv);
+             };
+             /*
+             Desencripta el texto recibido
+             */
+             $desencriptar = function ($valor) use ($method, $clave, $iv) {
+                 $encrypted_data = base64_decode($valor);
+                 return openssl_decrypt($valor, $method, $clave, false, $iv);
+             };
+             /*
+             Genera un valor para IV
+             */
+             $getIV = function () use ($method) {
+                 return base64_encode(openssl_random_pseudo_bytes(openssl_cipher_iv_length($method)));
+             };
+             
+             // Como usar las funciones para encriptar y desencriptar.
+             $dato =  $Contraseña;
+             //Encripta informaciÃ³n:
+                $dato_encriptado = $encriptar($dato);
+                //Desencripta informaciÃ³n:
+                    $dato_desencriptado = $desencriptar($dato_encriptado);
     
-            $query_user = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE Id_Usuario = '$Id_Usuario' AND Contraseña = '$Contraseña'");
+            $query_user = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE Id_Usuario = '$Id_Usuario' AND Contraseña = '$dato_encriptado'");
             $result_sql = mysqli_num_rows($query_user);
     
         }
