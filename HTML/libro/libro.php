@@ -122,6 +122,7 @@ $fecha = date('Y-m-d h:i:s');
         <div class="modal-header">
           <div class="box-body">
             <!-- Date range -->
+            <!-- Mauri -->
             <form id="formasiento" method="POST" action="" enctype="multipart/form-data" class="form-horizontal">
               <input type="hidden" class="form-control" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>" required>
 
