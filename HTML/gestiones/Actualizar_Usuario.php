@@ -56,10 +56,36 @@ if (!empty($_POST)) {
         $Correo_Electronico = $_POST['Correo_Electronico'];
         $Rol                = $_POST['Rol'];
 
+        $clave  = 'Una cadena, muy, muy larga para mejorar la encriptacion';
+        //Metodo de encriptaciÃ³n
+        $method = 'aes-256-cbc';
+        // Puedes generar una diferente usando la funcion $getIV()
+        $iv = base64_decode("C9fBxl1EWtYTL1/M8jfstw");
+         /*
+         Encripta el contenido de la variable, enviada como parametro.
+          */
+         $encriptar = function ($valor) use ($method, $clave, $iv) {
+             return openssl_encrypt ($valor, $method, $clave, false, $iv);
+         };
+         /*
+         Desencripta el texto recibido
+         */
+        
+         /*
+         Genera un valor para IV
+         */
+         $getIV = function () use ($method) {
+             return base64_encode(openssl_random_pseudo_bytes(openssl_cipher_iv_length($method)));
+         };
+        
+         $dato = $contra ;
+         //Encripta informaciÃ³n:
+            $dato_encriptado = $encriptar($dato);
+
         if (!preg_match("/[a-zA-ZñÑáéíóúÁÉÍÓÚ ]/", $Nombre_Usuario)) {
             $alert = '<p class="msg_error"> El Nombre Solo Recibe Letras.</p>';
         } else {
-            $sql = "UPDATE tbl_usuario SET Nombre_Usuario='$Nombre_Usuario',Estado_Usuario='$Estado_Usuario', Contraseña='$contra', Correo_Electronico='$Correo_Electronico' ,Rol='$Rol' WHERE Id_Usuario='$Id_Usuario'";
+            $sql = "UPDATE tbl_usuario SET Nombre_Usuario='$Nombre_Usuario',Estado_Usuario='$Estado_Usuario', Contraseña='$dato_encriptado', Correo_Electronico='$Correo_Electronico' ,Rol='$Rol' WHERE Id_Usuario='$Id_Usuario'";
             $query = mysqli_query($conn, $sql);
             if ($query) {
                 echo "<script> alert('Usuario: $Usuario Actualizado');window.location= 'Gestion_Usuarios.php' </script>";
@@ -231,7 +257,7 @@ if (!isset($_SESSION['rol'])) {
 
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                            <input id="inpucontracon" type="password" Class="form-control" name="Contraseña" placeholder="Contraseña" value="<?php echo $contra ?>" maxlength="16" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}" title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. " />
+                                            <input id="inpucontracon" type="password" Class="form-control" name="Contraseña" placeholder="Contraseña" value="<?php echo $contra ?>" maxlength="200" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}" title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. " />
 
                                         </div>
 

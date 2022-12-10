@@ -53,13 +53,52 @@ if(isset($_REQUEST["btnrlogin"])){
     $_SESSION['user']=$_POST["txtusuario"];
     $pass = $_POST["txtpassword"];
     $_SESSION["intentos"] = isset($_SESSION["intentos"]) ? $_SESSION["intentos"] : 0;
-    
     try {
-        $query = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Contraseña = '".$pass."'");
+        $consultas=mysqli_query($conn,"SELECT Contraseña FROM tbl_usuario WHERE Usuario = '".$nombre."' ;");
+        while($row=mysqli_fetch_array($consultas))
+        {
+         $contrabase=$row['Contraseña'];
+        }
+
+        $clave  = 'Una cadena, muy, muy larga para mejorar la encriptacion';
+        //Metodo de encriptaciÃ³n
+        $method = 'aes-256-cbc';
+        // Puedes generar una diferente usando la funcion $getIV()
+        $iv = base64_decode("C9fBxl1EWtYTL1/M8jfstw");
+         /*
+         Encripta el contenido de la variable, enviada como parametro.
+          */
+         $encriptar = function ($valor) use ($method, $clave, $iv) {
+             return openssl_encrypt ($valor, $method, $clave, false, $iv);
+         };
+         /*
+         Desencripta el texto recibido
+         */
+         $desencriptar = function ($valor) use ($method, $clave, $iv) {
+             $encrypted_data = base64_decode($valor);
+             return openssl_decrypt($valor, $method, $clave, false, $iv);
+         };
+         /*
+         Genera un valor para IV
+         */
+         $getIV = function () use ($method) {
+             return base64_encode(openssl_random_pseudo_bytes(openssl_cipher_iv_length($method)));
+         };
+         
+         // Como usar las funciones para encriptar y desencriptar.
+         $dato =  $pass;
+         //Encripta informaciÃ³n:
+            $dato_encriptado = $encriptar($dato);
+            //Desencripta informaciÃ³n:
+                $dato_desencriptado = $desencriptar($dato_encriptado);
+
+
+    
+        $query = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Contraseña = '".$dato_encriptado."'");
         $nr = mysqli_num_rows($query);
 
-           if ($nr > 0){
-            $sqlc = "SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Contraseña = '".$pass."'";
+           if ($nr > 0 ){
+            $sqlc = "SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Contraseña = '".$dato_encriptado."'";
             $extr = $conn->query($sqlc);
             $fila = $extr->fetch_array(MYSQLI_NUM);
             $valor1 = $fila[3];

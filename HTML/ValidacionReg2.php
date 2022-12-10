@@ -59,9 +59,36 @@ $nr 			= mysqli_num_rows($queryusuario);
 $queryemail 	= mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Correo_Electronico = '$email'");
 $n 			= mysqli_num_rows($queryemail); 
 
+$clave  = 'Una cadena, muy, muy larga para mejorar la encriptacion';
+//Metodo de encriptaciÃ³n
+$method = 'aes-256-cbc';
+// Puedes generar una diferente usando la funcion $getIV()
+$iv = base64_decode("C9fBxl1EWtYTL1/M8jfstw");
+ /*
+ Encripta el contenido de la variable, enviada como parametro.
+  */
+ $encriptar = function ($valor) use ($method, $clave, $iv) {
+	 return openssl_encrypt ($valor, $method, $clave, false, $iv);
+ };
+ /*
+ Desencripta el texto recibido
+ */
+
+ /*
+ Genera un valor para IV
+ */
+ $getIV = function () use ($method) {
+	 return base64_encode(openssl_random_pseudo_bytes(openssl_cipher_iv_length($method)));
+ };
+
+ $dato =  $pass;
+ //Encripta informaciÃ³n:
+	$dato_encriptado = $encriptar($dato);
+
 if ($nr == 0 AND $n == 0 )
+
 {
-	$queryregistrar = "INSERT INTO tbl_usuario (Usuario,Nombre_Usuario, Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja) values ('$usuario','$nombre','$pass','$email','NUEVO','4','0')";
+	$queryregistrar = "INSERT INTO tbl_usuario (Usuario,Nombre_Usuario, Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja) values ('$usuario','$nombre','$dato_encriptado','$email','NUEVO','4','0')";
 	//$queryregistrare = "INSERT INTO tbl_preguntas (pregunta) values ('$pregunta')";
 if(mysqli_query($conn,$queryregistrar))
 {
@@ -98,7 +125,7 @@ if($nr2 == 1)
 		
 	<?php
 	}
-	
+
 	echo "<script> alert('Usuario $usuario Registrado'); window.location= Gestion_Usuarios.php </script>";
 
 }
