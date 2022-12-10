@@ -500,7 +500,7 @@ $user = $_SESSION['user'];
                 <?php } ?>
 
 
-                
+
 
                 <!-- DESPUES -->
                 <?php
@@ -517,33 +517,33 @@ $user = $_SESSION['user'];
                     (isset($_SESSION['permisos'][M_GESTION_OBJETOS]) and $_SESSION['permisos'][M_GESTION_OBJETOS]['r']) == 1
                 ) {
                 ?>
-                  
-                  <li class="" class="fa fa-caret-down">
 
-<a href="../index.php" style="align-items: center; height: 50px;  ">
-    <i class='bx bx-money icon'></i>
-    <span class="text nav-text">Contabilidad</span>
-</a>
-<ul style="position: relative;  display: none; ">
+                    <li class="" class="fa fa-caret-down">
 
-    <?php
-    if (isset($_SESSION['permisos'][M_GESTION_CAT_CUENTA]) and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['r'] == 1) {
-    ?>
-        <a href="gestiones/Gestion_CatalogoCuenta.php" style="align-items: center;">
-            <span class="text nav-text">Catálogo Cuentas</span>
-        </a>
-    <?php } ?>
-    <?php
-    if (isset($_SESSION['permisos'][M_LIBRO_DIARIO]) and $_SESSION['permisos'][M_LIBRO_DIARIO]['r'] == 1) {
-    ?>
-        <a href="libro/validacionlibro.php" style="align-items: center;">
-            <span class="text nav-text">Libro Diario</span>
-        </a>
-    <?php } ?>
+                        <a href="../index.php" style="align-items: center; height: 50px;  ">
+                            <i class='bx bx-money icon'></i>
+                            <span class="text nav-text">Contabilidad</span>
+                        </a>
+                        <ul style="position: relative;  display: none; ">
+
+                            <?php
+                            if (isset($_SESSION['permisos'][M_GESTION_CAT_CUENTA]) and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['r'] == 1) {
+                            ?>
+                                <a href="gestiones/Gestion_CatalogoCuenta.php" style="align-items: center;">
+                                    <span class="text nav-text">Catálogo Cuentas</span>
+                                </a>
+                            <?php } ?>
+                            <?php
+                            if (isset($_SESSION['permisos'][M_LIBRO_DIARIO]) and $_SESSION['permisos'][M_LIBRO_DIARIO]['r'] == 1) {
+                            ?>
+                                <a href="libro/validacionlibro.php" style="align-items: center;">
+                                    <span class="text nav-text">Libro Diario</span>
+                                </a>
+                            <?php } ?>
 
 
-</ul>
-</li>
+                        </ul>
+                    </li>
 
                     <li class="" class="fa fa-caret-down">
 
