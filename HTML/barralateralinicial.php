@@ -483,7 +483,7 @@ $user = $_SESSION['user'];
                     <li class="" style="height: 50px;">
                         <a href="gestiones/Gestion_Inventario.php" style="align-items: center;">
                             <i class='bx bx-pie-chart-alt icon'></i>
-                            <span class="text nav-text">Inventarios</span>
+                            <span class="text nav-text">Insumos</span>
                         </a>
                     </li>
                 <?php } ?>
