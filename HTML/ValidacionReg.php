@@ -59,7 +59,7 @@ $nr 			= mysqli_num_rows($querycorreo);
 
 if ($nr == 0 )
 {
-	$queryregistrar = "INSERT INTO tbl_usuario (Usuario, Nombre_Usuario,Contraseña, Correo_Electronico,Estado_Usuario,Rol) values ('$nombre','$nombreu','$pass','$email','INACTIVO','4')";
+	$queryregistrar = "INSERT INTO tbl_usuario (Usuario, Nombre_Usuario,Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja) values ('$nombre','$nombreu','$pass','$email','NUEVO','4','0')";
 	//$queryregistrare = "INSERT INTO tbl_preguntas (pregunta) values ('$pregunta')";
 if(mysqli_query($conn,$queryregistrar))
 {

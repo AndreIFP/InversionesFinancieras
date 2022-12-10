@@ -280,7 +280,7 @@ $fecha = date('Y-m-d h:i:s');
                         include('../conexion.php');
                         #consulta de todos los paises
                         $consulta = mysqli_query($conn, "select CODIGO_CUENTA, CUENTA as CUENTA  from tbl_catalago_cuentas c
-                        where char_length(c.CODIGO_CUENTA)=4");
+                        where char_length(c.CODIGO_CUENTA)=4 and Estado_Cuenta='ACTIVO'");
                         while ($row = mysqli_fetch_array($consulta)) {
                           $nombrepais = $row['CUENTA'];
                           $nombeid = $row['CODIGO_CUENTA'];

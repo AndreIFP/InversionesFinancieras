@@ -163,14 +163,53 @@ $_SESSION['user'];
                       <div class="col-sm-12">
                            <label> </label> <label> </label>
                         </div>
-                        <div class="col-sm-3">
-                           <label>Nueva Contraseña</label>
-                           <input type="password" name="userpassword" class="input-md form-control " required placeholder="Ingrese su Contraseña" maxlength="16" required size="30" pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}" title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30.">
-                        </div>
-                        <div class="col-sm-3">
-                           <label>Ingrese Otra vez la Contraseña</label>
-                           <input type="password" name="userpassword" class="input-md form-control " required placeholder="Ingrese su Contraseña" maxlength="16" required size="30" pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}" title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30." onblur="verificar()">
-                           </div>
+                        
+                        <table class="table">
+                <thead class="table-white">
+                  <tr>
+
+                    <th>
+                      <center>Contraseña</center>
+                    </th>
+
+
+                    <th>
+                      <center>Confirmar Contraseña</center>
+                    </th>
+
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr>
+
+                    <td style="width: 50%">
+
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                        <input id="inpucontra2" class="form-control" type="password" placeholder="Contraseña" name="txtpassword" maxlength="30" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}" title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. " />
+
+                      </div>
+
+                    </td>
+
+                    <td style="width: 50%">
+
+                      <div class="input-group">
+
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input id="inpucontracon" class="form-control" type="password" placeholder="Confirmar Contraseña" maxlength="16" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}" title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. " onblur="verificar()" />
+                        <span class="input-group-addon"> <a id="viewPassword" class="mover"><i class="fa fa-eye" aria-hidden="true"></i></a></span>
+                      </div>
+
+                    </td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+
                         <div class="col-sm-12">
                            <label> </label> <input type="hidden" class="input-md form-control" name="eleccion" value="2"> <label> </label>
                         </div>

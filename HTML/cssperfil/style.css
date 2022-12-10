@@ -3,7 +3,7 @@
 }
 
 .panel-default > .panel-heading {
-  background-color: #73C92D;
+  background-color: #2d83c9;
   text-transform: uppercase;
   font-weight: 500;
 }
@@ -15,7 +15,7 @@
 .nav-tabs > li.active > a:after {
   position: absolute;
   content: " ";
-  background: #73C92D;
+  background: #2d83c9;
   width: 12px;
   height: 12px;
   border-radius: 3px 0 0 0;

@@ -72,7 +72,7 @@ $eleccion=$_POST['eleccion'];
 
     }else {
         
-$passw=$_POST['userpassword'];
+$passw=$_POST['txtpassword'];
 
         $sql = "UPDATE tbl_usuario SET Contraseña='$passw' WHERE Id_Usuario='$Id_Usuario'";
         $query = mysqli_query($conn, $sql);

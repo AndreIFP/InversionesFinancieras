@@ -68,7 +68,7 @@ $user=$_SESSION['user'];
     if(mysqli_query($conn,$queryregistro))
   {
 
-    $queryregistro = "UPDATE tbl_usuario SET Rol = 4, Estado_Usuario = 'ACTIVO' where Id_Usuario='$idusus';";
+    $queryregistro = "UPDATE tbl_usuario SET Estado_Usuario = 'ACTIVO' where Id_Usuario='$idusus';";
     
     if(mysqli_query($conn,$queryregistro))
     {

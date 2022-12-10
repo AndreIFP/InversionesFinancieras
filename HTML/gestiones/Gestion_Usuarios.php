@@ -160,7 +160,7 @@ $numero = 99999.99;
                 
                     $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from tbl_usuario u inner join tbl_roles r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Activo' ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from tbl_usuario u inner join tbl_roles r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Activo' or  Estado_Usuario = 'NUEVO' ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
                     $result = mysqli_num_rows($sql);

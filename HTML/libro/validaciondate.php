@@ -24,7 +24,7 @@ $_SESSION['user'];
 
         <table class="table">
           <input type="hidden" name="Id_Usuario" value="<?php echo $Id_Usuario  ?>">
-          <thead class="table-primary">
+          <thead class="table-white">
             <tr>
 
               <th>

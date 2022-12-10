@@ -79,7 +79,7 @@ if(isset($_REQUEST["btnrlogin"])){
                 $_SESSION['rol']=$data["Rol"];
                 header("Location: index.php");
 
-            }elseif(($valor1 == 'INACTIVO' AND $valor2 == '4') or ($valor1 == 'INACTIVO' AND $valor2 == '2') or ($valor1 == 'INACTIVO' AND $valor2 == '3')){
+            }elseif(($valor1 == 'NUEVO' )){
                 echo "<script> window.location= 'preguntasReg.php' </script>";
             }elseif ($valor1 == 'INACTIVO' OR $valor1 == 'BLOQUEADO') {
                 echo "<script>alert('Ingreso invalido, EL USUARIO SE ENCUENTRA BLOQUEADO O ESTA INACTIVO. CONSULTE CON SU ADMINISTRADOR');window.location= 'login.php'</script>";  
@@ -143,7 +143,7 @@ try{
     }
     else 
     {
-    $query2 = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Rol = '2'");
+    $query2 = mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario = '".$nombre."' and Estado_Usuario = 'ACTIVO''");
     $nr2 = mysqli_num_rows($query2);
     if($nr2 != 1)
     {
