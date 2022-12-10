@@ -169,6 +169,8 @@ $numero = 99999.99;
                             </tr>
                     <?php
                         }
+                    }else {
+                        echo "<script> alert('No se encontro registros');window.location= 'Gestion_Clientes.php' </script>";
                     }
                     ?>
                 </tbody>
@@ -377,8 +379,4 @@ $numero = 99999.99;
         border-radius: 10px;
     }
 </style>
-<<<<<<< HEAD
-
-=======
->>>>>>> 7a1f591275269451a2c909baf67dc271e6fdc6bb
 <?php include 'barralateralfinal.php'; ?>

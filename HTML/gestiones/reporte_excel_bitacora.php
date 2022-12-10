@@ -19,7 +19,10 @@ header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 header("Content-Disposition: attachment; filename= Reporte bitacora.xls");
 
 
+session_start();
 
+date_default_timezone_set("America/Guatemala");
+$fecha = date("d-m-Y h:i:s a");
 
 $sql = "SELECT * FROM tbl_ms_bitacora";
 $DataPaises = mysqli_query($conn, $sql);
@@ -65,26 +68,36 @@ while ($fila = $resultadocorreo->fetch_assoc()) {
 
 
     <tr style="background: #B0E0E6;">
-    <th>Id</th> 
-    <th>Fecha</th>
-    <th>Acción</th>  
-    <th>Descripción</th>
-    <th>Usuario</th>
+        <th><center> Id </center></th>
+        <th><center> Fecha </center></th>
+        <th><center> Acción </center></th>
+        <th><center> Tabla </center></th>
+        <th><center> Campo </center></th>
+        <th><center> Valor Original </center></th>
+        <th><center> Nuevo Valor </center></th>
+        <th><center> Id Usuario </center></th>
     </tr>
 </thead>
 <?php
     while ($row = mysqli_fetch_array($DataPaises)) { ?>
     <tbody>
         <tr>
-        <td><?php echo $row['Id_Bitacora'] ?></td>
-        <td><?php echo $row['Fecha'] ?></td>
-        <td><?php echo $row['Accion'] ?></td>
-        <td><?php echo $row['Descripcion'] ?></td>
-        <td><?php echo $row['Id_Usuario'] ?></td>
+            <th> <?php echo $row['Id_Bitacora'] ?></th>
+            <th> <?php echo $row['Fecha'] ?> </th>
+            <th> <?php echo $row['Accion'] ?> </th>
+            <th> <?php echo $row['Tabla'] ?> </th>
+            <th> <?php echo $row['Campo'] ?> </th>
+            <th> <?php echo $row['Valor_Antes'] ?> </th>
+            <th> <?php echo $row['Valor_Despues'] ?> </th>
+            <th> <?php echo $row['Id_Usuario'] ?> </th>
+                               
         </tr>
     </tbody>
     
 <?php } ?>
 </table>
+<br>
+<label>Reporte creado por: <?php echo $user=$_SESSION['user'] ?></label>
+<label> <?php echo $fecha ?></strong></label>
 </body>
 </html>

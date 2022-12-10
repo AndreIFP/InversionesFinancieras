@@ -47,6 +47,7 @@ $numero = 99999.99;
             if (empty($busqueda)) {
                 echo "<script> alert('Dejo En Blanco El Buscador');window.location= 'Gestion_Inventario.php' </script>";
             }
+            $_SESSION['busquedaX'] = $busqueda;
             ?>
                 <div class="reportes">
 
