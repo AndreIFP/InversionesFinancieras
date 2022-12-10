@@ -1,4 +1,4 @@
------------------------------------------------------------------------
+<!-- -----------------------------------------------------------------------
 	    Universidad Nacional Autonoma de Honduras (UNAH)
 		           Facultad de Ciencias Economicas
 	        Departamento de Informatica administrativa
@@ -39,7 +39,7 @@ Andrés	        01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
 Allan		        01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
 Esperanza		    01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
 José		        01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
------------------------------------------------------------------------
+----------------------------------------------------------------------- -->
 
 </section>
 <!-- partial -->
