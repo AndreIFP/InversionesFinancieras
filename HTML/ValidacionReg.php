@@ -1,3 +1,46 @@
+<!-- -----------------------------------------------------------------------
+	    Universidad Nacional Autonoma de Honduras (UNAH)
+		           Facultad de Ciencias Economicas
+	        Departamento de Informatica administrativa
+        Analisis, Programacion y Evaluacion de Sistemas
+                    Primer Periodo 2022
+
+
+Equipo:
+Allan Mauricio Hernández ...... (mauricio.galindo@unah.hn)
+Andrés Isaías Flores .......... (aifloresp@unah.hn)
+Esperanza Lisseth Cartagena ... (esperanza.cartagena@unah.hn)
+Fanny Merari Ventura .......... (fmventura@unah.hn
+José David García ............. (jdgarciad@unah.hn)
+José Luis Martínez ............ (jlmartinezo@unah.hn)
+Luis Steven Vásquez ........... (Lsvasquez@unah.hn)
+Sara Raquel Ortiz ............. (Sortizm@unah.hn)
+
+Catedratico:
+LIC. CLAUDIA REGINA NUÑEZ GALINDO
+Lic. GIANCARLO MARTINI SCALICI AGUILAR
+Lic. KARLA MELISA GARCIA PINEDA 
+
+----------------------------------------------------------------------
+
+Programa:          ValidacionReg
+Fecha:             16-jul-2022
+Programador:       Fanny
+descripcion:       libro
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Fanny	         01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+José		       01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+David 	       01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Allan		       01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+----------------------------------------------------------------------- -->
+
 <?php 
 include('conexion.php');
 
@@ -16,7 +59,7 @@ $nr 			= mysqli_num_rows($querycorreo);
 
 if ($nr == 0 )
 {
-	$queryregistrar = "INSERT INTO tbl_usuario (Usuario, Nombre_Usuario,Contraseña, Correo_Electronico,Estado_Usuario,Rol) values ('$nombre','$nombreu','$pass','$email','INACTIVO','4')";
+	$queryregistrar = "INSERT INTO tbl_usuario (Usuario, Nombre_Usuario,Contraseña, Correo_Electronico,Estado_Usuario,Rol,caja) values ('$nombre','$nombreu','$pass','$email','NUEVO','4','0')";
 	//$queryregistrare = "INSERT INTO tbl_preguntas (pregunta) values ('$pregunta')";
 if(mysqli_query($conn,$queryregistrar))
 {

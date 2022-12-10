@@ -1,3 +1,45 @@
+<!-- -----------------------------------------------------------------------
+	    Universidad Nacional Autonoma de Honduras (UNAH)
+		           Facultad de Ciencias Economicas
+	        Departamento de Informatica administrativa
+        Analisis, Programacion y Evaluacion de Sistemas
+                    Primer Periodo 2022
+
+
+Equipo:
+Allan Mauricio Hernández ...... (mauricio.galindo@unah.hn)
+Andrés Isaías Flores .......... (aifloresp@unah.hn)
+Esperanza Lisseth Cartagena ... (esperanza.cartagena@unah.hn)
+Fanny Merari Ventura .......... (fmventura@unah.hn
+José David García ............. (jdgarciad@unah.hn)
+José Luis Martínez ............ (jlmartinezo@unah.hn)
+Luis Steven Vásquez ........... (Lsvasquez@unah.hn)
+Sara Raquel Ortiz ............. (Sortizm@unah.hn)
+
+Catedratico:
+LIC. CLAUDIA REGINA NUÑEZ GALINDO
+Lic. GIANCARLO MARTINI SCALICI AGUILAR
+Lic. KARLA MELISA GARCIA PINEDA 
+
+----------------------------------------------------------------------
+
+Programa:          salida1
+Fecha:             16-jul-2022
+Programador:       Sara
+descripcion:       Pantalla 
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+José	          01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Sara		       01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Fanny 	       01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Esperanza	    01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+----------------------------------------------------------------------- -->
 <?php
 
 //incluir las funciones de helpers
@@ -5,6 +47,7 @@ include_once("../helpers/helpers.php");
 
 //iniciar las sesiones
 session_start();
+$usuarios=$_SESSION['id'];
 // si no existe la variable rol, el usuario no esta logueado y redirige al Login
 if (!isset($_SESSION['rol'])) {
   header("Location: ../login.php");
@@ -36,8 +79,31 @@ $ext = $conn->query($sql2);
 $fila = $ext->fetch_array(MYSQLI_NUM);
 $param = $fila[0];
 
+if (!empty($_POST)) {
+  include('conexion.php');
+  $sql2 = "Select * from product where id_product = $id";
+  $esperancita = mysqli_query($conn,$sql2);
+  while ($fila = $esperancita->fetch_assoc()) {
+    $cantidad = $fila["amount"];
+}
+ $rest = $_POST['cant'];
+ $fecha = $_POST['fech'];
 
-?>
+  if($rest <= $cantidad){
+    $resta = $cantidad - $rest;
+    $sql5 = "UPDATE product SET amount=$resta where id_product='$id'";
+    $exito = mysqli_query($conn,$sql5);
+
+    $sqlre = "INSERT INTO tbl_kardex (Id_Usuario, fecha, detalle, id_product, proname, cant_salida, total_cants) VALUES ($usuarios,'$fecha','SALIDA',$id,'$param',$rest,$resta)";
+    $exito2 = mysqli_query($conn,$sqlre);
+
+
+    echo "<script> alert('EL ARTÍCULO HA SIDO RETIRADO CON ÉXITO!!');window.location= '../gestiones/Gestion_Inventario.php' </script>";
+ }else{    
+    echo "<script> alert('ERROR NO TIENE LA CANTIDAD SUFICICIENTE PARA RETIRAR ESTE ARTICULO ¡REVISE EXISTENCIAS!');window.location= '../gestiones/Gestion_Inventario.php' </script>";
+}
+}
+  ?>
 
 <p></p>
 <section style=" background-color:rgb(255, 255, 255); padding: 15px; color:black; font-size: 16px; ">
@@ -50,7 +116,7 @@ $param = $fila[0];
 
   <br>
 
-  <form method="post" action="fichasalida.php">
+  <form method="post" action="">
     <div class="row">
       <div class="col-xs-14 pull-right">
 
@@ -72,6 +138,15 @@ $param = $fila[0];
 
           <tbody>
             <tr>
+              <?php
+              include('conexion.php');
+              $sql2 = "Select * from product where id_product = $id";
+              $esperancita = mysqli_query($conn,$sql2);
+              while ($fila = $esperancita->fetch_assoc()) {
+                $Direccion = $fila["amount"];
+            }
+
+              ?>
               <!--Cliente-->
               <td style="width: 40%">
                 <div class="input-group">
@@ -85,7 +160,7 @@ $param = $fila[0];
               <!--Fecha Inicial-->
               <td style="width: 30%">
                 <div class="input-group">
-                  <input type="number" class="form-control pull-right" name="cant" required>
+                <input type="text" class="form-control pull-right" name="cant" oninput="this.value = this.value.replace(/[^0-9]/,'')" required>
                 </div>
               </td>
 
@@ -108,7 +183,7 @@ $param = $fila[0];
 
       </div>
       <div class="col-md-12" align="right">
-        <button class="btn btn-lg btn-success btn-print" name="">Continuar </button>
+        <button type="submit" class="btn btn-lg btn-success btn-print" name="">Continuar </button>
       </div>
     </div>
   </form>

@@ -1,3 +1,46 @@
+<!-- -----------------------------------------------------------------------
+	    Universidad Nacional Autonoma de Honduras (UNAH)
+		           Facultad de Ciencias Economicas
+	        Departamento de Informatica administrativa
+        Analisis, Programacion y Evaluacion de Sistemas
+                    Primer Periodo 2022
+
+
+Equipo:
+Allan Mauricio Hernández ...... (mauricio.galindo@unah.hn)
+Andrés Isaías Flores .......... (aifloresp@unah.hn)
+Esperanza Lisseth Cartagena ... (esperanza.cartagena@unah.hn)
+Fanny Merari Ventura .......... (fmventura@unah.hn
+José David García ............. (jdgarciad@unah.hn)
+José Luis Martínez ............ (jlmartinezo@unah.hn)
+Luis Steven Vásquez ........... (Lsvasquez@unah.hn)
+Sara Raquel Ortiz ............. (Sortizm@unah.hn)
+
+Catedratico:
+LIC. CLAUDIA REGINA NUÑEZ GALINDO
+Lic. GIANCARLO MARTINI SCALICI AGUILAR
+Lic. KARLA MELISA GARCIA PINEDA 
+
+----------------------------------------------------------------------
+
+Programa:          Buscador_Inventario
+Fecha:             16-jul-2022
+Programador:       Andrés
+descripcion:       Menu
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Andrés	        01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Allan		        01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Esperanza		    01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+José		        01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+----------------------------------------------------------------------- -->
+
 <?php
 include("../conexion.php");
 session_start();
@@ -24,19 +67,10 @@ if (!isset($_SESSION['rol'])) {
 $numero = 99999.99;
 ?>
 <?php include 'barralateralinicial.php'; ?><p></p>
-<?php
-$busqueda = strtolower($_REQUEST['busqueda']);
-if (empty($busqueda)) {
-    header("location: Gestion_Inventario.php");
-    mysqli_close($conn);
-}
-$_SESSION['busquedaX'] = $busqueda;
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
-<title>Gestión Inventario</title>
+<title>Gestión Insumos</title>
 
 <head>
     <meta charset="UTF-8">
@@ -51,14 +85,19 @@ $_SESSION['busquedaX'] = $busqueda;
     <div class="container-fluid">
         <div class="col-md-12">
             <div class="box-body table-responsive">
+            <?php
+            $busqueda = strtolower($_REQUEST['busqueda']);
+            if (empty($busqueda)) {
+                echo "<script> alert('Dejo En Blanco El Buscador');window.location= 'Gestion_Inventario.php' </script>";
+            }
+            $_SESSION['busquedaX'] = $busqueda;
+            ?>
                 <div class="reportes">
 
-                    <h2><strong>Gestión Inventario</strong> </h2>
+                    <h2><strong>Gestión  de Insumo</strong> </h2>
                     <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                     <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {
                     ?>
-                        
-                        
 
                     <?php } ?>
 
@@ -69,8 +108,7 @@ $_SESSION['busquedaX'] = $busqueda;
                         $mostrar_datos = 0;
                         ?>
                 </div>
-
-
+                
                 <br>
                 <table class="table ">
                     <thead class="table-primary">
@@ -97,7 +135,8 @@ $_SESSION['busquedaX'] = $busqueda;
                     <tbody>
                         <?php
                         //Paginador
-                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM product WHERE id_product= id_product");
+                        $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM product WHERE id_product LIKE '%$busqueda%' OR
+                        proname LIKE '%$busqueda%'");
                         $result_register = mysqli_fetch_array($sql_registe);
                         $total_registro = $result_register['total_registro'];
 
@@ -174,6 +213,8 @@ $_SESSION['busquedaX'] = $busqueda;
                                 </tr>
                         <?php
                             }
+                        }else {
+                            echo "<script> alert('No se encontro registros');window.location= 'Gestion_Inventario.php' </script>";
                         }
                         ?>
                     </tbody>

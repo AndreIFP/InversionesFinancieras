@@ -1,3 +1,46 @@
+<!-- -----------------------------------------------------------------------
+	    Universidad Nacional Autonoma de Honduras (UNAH)
+		           Facultad de Ciencias Economicas
+	        Departamento de Informatica administrativa
+        Analisis, Programacion y Evaluacion de Sistemas
+                    Primer Periodo 2016
+
+
+Equipo:
+Allan Mauricio Hernández ...... (mauricio.galindo@unah.hn)
+Andrés Isaías Flores .......... (aifloresp@unah.hn)
+Esperanza Lisseth Cartagena ... (esperanza.cartagena@unah.hn)
+Fanny Merari Ventura .......... (fmventura@unah.hn
+José David García ............. (jdgarciad@unah.hn)
+José Luis Martínez ............ (jlmartinezo@unah.hn)
+Luis Steven Vásquez ........... (Lsvasquez@unah.hn)
+Sara Raquel Ortiz ............. (Sortizm@unah.hn)
+
+Catedratico:
+LIC. CLAUDIA REGINA NUÑEZ GALINDO
+Lic. GIANCARLO MARTINI SCALICI AGUILAR
+Lic. KARLA MELISA GARCIA PINEDA 
+
+----------------------------------------------------------------------
+
+Programa:          facturacion
+Fecha:             16-jul-2022
+Programador:       José
+descripcion:       Pantalla facturacion 
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Luis	           01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+José		         01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Sara 	           01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Allan		         01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+----------------------------------------------------------------------- -->
+
 <?php
 ////////////////// CONEXION A LA BASE DE DATOS //////////////////
 session_start();
@@ -39,11 +82,7 @@ include 'barralateralinicial.php';
 </head>
 
 <body>
-  <div class="container">
-    <div class="row">
-    </div>
-    <!--.row-->
-  </div>
+
   <!--.container-->
   <p></p>
   <section style=" background-color:rgb(255, 255, 255);
@@ -53,165 +92,91 @@ include 'barralateralinicial.php';
 
     <a class="btn btn-primary" href="../gestiones/Gestion_inventario.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
     <hr>
-    <header class="row">
-
-      <form method="post">
-        <div class="me">
-          <div class="col-12">
-            <div class="periodo">
-              <h1 align="justify">Factura Inventario</h1>
-            </div>
-            <!--.col-->
+    <form method="post">
+      <div>
+        <div>
+          <div>
+            <h1 align="center">Facturación Insumos</h1>
           </div>
-          <!--.me-->
+          <!--.col-->
         </div>
-    </header>
-
-
-    <div class="row section">
-
-      <<div class="col-3">
-    </div>
-    <!--.col-->
-
-    <div class="col-2 text-center details">
-
-    </div>
-    <!--.col-->
-
-
-
-    <div class="col-2">
-
-
-      <p class="client">
-      <h5><strong>Datos</strong></h5>
-      </p>
-    </div>
-    <!--.col-->
-
-
-    <hr>
-
-    <div class="row section" style="margin-top:-1rem">
-      <div class="col-1">
-        <table style='width:100%'>
-          <thead>
-            <tr class="invoice_detail">
-              <th width="25%">
-                <center>Proveedor</center>
-              </th>
-              <th width="30%">
-                <center>Forma de pago</center>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="invoice_detail">
-              <td width="25%">
-                <center><input type="text" name="proveedor" style="width:350px;height:20px;border:0" maxlength="50" placeholder="Nombre de proveedor" size="30" oninput="this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/,'')" value="" required /></center>
-              </td>
-              <td width="30%">
-                <center><input type="text" name="Terminos" style="width:200px;height:20px;border:0" maxlength="30" placeholder="Forma de pago" size="30" oninput="this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/,'')" value="" required /></center>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <!--.me-->
       </div>
-    </div>
-    <!--.row-->
-    <center>
-      <div class="invoicelist-footer">
 
-        <center><button type="submit" name="insertar" class="btn btn-success btn-lg"><i class="fa fa-floppy-o"></i> Registrar Productos</button></center>
+
+
+      <div>
+        <hr>
+        <h5><strong>Datos</strong></h5>
+        <div class="form-group" style="width:250px" ;>
+
+          <div class="input-group">
+
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <input type="text" class="form-control pull-right" name="fech" readonly value="<?php
+                                                                                            date_default_timezone_set('America/Tegucigalpa');
+                                                                                            $DateAndTime2 = date('m-d-Y h:i:s a', time());
+                                                                                            echo $DateAndTime2;
+                                                                                            ?>">
+          </div>
+
+        </div>
+        </p>
       </div>
-      </form>
+      <!--.col-->
 
+
+      <hr>
+
+      <div class="row section" style="margin-top:-1rem">
+        <div class="col-1">
+          <table style='width:100%'>
+            <thead>
+              <tr class="invoice_detail">
+                <th width="25%">
+                  <center>Proveedor</center>
+                </th>
+                <th width="30%">
+                  <center>Forma de pago</center>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="invoice_detail">
+                <td width="25%">
+                  <center><input type="text" name="proveedor" style="width:350px;height:20px;border:0" maxlength="50" placeholder="Nombre de proveedor" size="30" oninput="this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/,'')" value="" required /></center>
+                </td>
+                <td width="30%">
+                  <center><input type="text" name="Terminos" style="width:200px;height:20px;border:0" maxlength="30" placeholder="Forma de pago" size="30" oninput="this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/,'')" value="" required /></center>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!--.row-->
       <center>
+        <div class="invoicelist-footer">
+          <br>
+          <hr>
 
-
-
-
-
-
-        </form>
-
-        <?php
-
-        //////////////////////// PRESIONAR EL BOTÓN //////////////////////////
-        if (isset($_POST['insertar'])) {
-
-
-
-
-          $_SESSION['productos']['nameProveedor'] = $_POST['nameProveedor'];
-          $_SESSION['productos']['Fecha'] = $_POST['Fecha'];
-          $_SESSION['productos']['factura'] = $_POST['factura'];
-          $_SESSION['productos']['CAI'] = $_POST['CAI'];
-          $_SESSION['productos']['Fechaven'] = $_POST['Fechaven'];
-          $_SESSION['productos']['dirProveedor'] = $_POST['dirProveedor'];
-          $_SESSION['productos']['telefono'] = $_POST['telefono'];
-          $_SESSION['productos']['proveedor'] = $_POST['proveedor'];
-          $_SESSION['productos']['Terminos'] = $_POST['Terminos'];
-
-
-
-
-          echo '<script type="text/javascript">window.location.href = "FacturacionProductos.php";</script>';
-          /* print_r('<pre>');
-        print_r($_POST);
-        print_r('</pre>');
-        exit;
-				$items1 = ($_POST['factura']);
-				$items2 = ($_POST['proveedor']);
-				$items3 = ($_POST['Descripcion']);
-				$items4 = ($_POST['cantidad']);
-				///////////// SEPARAR VALORES DE ARRAYS, EN ESTE CASO SON 4 ARRAYS UNO POR CADA INPUT (ID, NOMBRE, CARRERA Y GRUPO////////////////////)
-				while(true) {
-
-				    //// RECUPERAR LOS VALORES DE LOS ARREGLOS ////////
-				    $item1 = current($items1);
-				    $item2 = current($items2);
-				    $item3 = current($items3);
-				    $item4 = current($items4);
-				    
-				    ////// ASIGNARLOS A VARIABLES ///////////////////
-				    $id=(( $item1 !== false) ? $item1 : ", &nbsp;");
-				    $nom=(( $item2 !== false) ? $item2 : ", &nbsp;");
-				    $carr=(( $item3 !== false) ? $item3 : ", &nbsp;");
-				    $gru=(( $item4 !== false) ? $item4 : ", &nbsp;");
-
-				    //// CONCATENAR LOS VALORES EN ORDEN PARA SU FUTURA INSERCIÓN ////////
-				    $valores='('.$id.',"'.$nom.'","'.$carr.'","'.$gru.'"),';
-
-				    //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
-				    $valoresQ= substr($valores, 0, -1);
-				    
-				    ///////// QUERY DE INSERCIÓN ////////////////////////////
-				    $sql = "INSERT INTO product (Nfactura,Proveedor,proname,amount) 
-					VALUES $valoresQ";
-
-					
-					$sqlRes=$conexion->query($sql) or mysql_error();
-
-				    
-				    // Up! Next Value
-				    $item1 = next( $items1 );
-				    $item2 = next( $items2 );
-				    $item3 = next( $items3 );
-				    $item4 = next( $items4 );
-				    
-				    // Check terminator
-            if($item1 === false && $item2 === false && $item3 === false && $item4 === false) break;
-    
-				} */
-        }
-
-        ?>
-        <div class="note" contenteditable>
-          <h2>Nota:</h2>
+          <center><button type="submit" name="insertar" class="btn btn-success btn-lg"><i class="fa fa-floppy-o"></i> Registrar Productos</button></center>
         </div>
-        <!--.note-->
+    </form>
+
+
+    <?php
+    //////////////////////// PRESIONAR EL BOTÓN //////////////////////////
+    if (isset($_POST['insertar'])) {
+
+
+      $_SESSION['productos']['Fecha'] = $_POST['fech'];
+      $_SESSION['productos']['proveedor'] = $_POST['proveedor'];
+      $_SESSION['productos']['Terminos'] = $_POST['Terminos'];
+      echo '<script type="text/javascript">window.location.href = "FacturacionProductos.php";</script>';
+    }
+    ?>
+
   </section>
 
 

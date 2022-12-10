@@ -1,3 +1,46 @@
+<!-- -----------------------------------------------------------------------
+	    Universidad Nacional Autonoma de Honduras (UNAH)
+		           Facultad de Ciencias Economicas
+	        Departamento de Informatica administrativa
+        Analisis, Programacion y Evaluacion de Sistemas
+                    Primer Periodo 2022
+
+
+Equipo:
+Allan Mauricio Hernández ...... (mauricio.galindo@unah.hn)
+Andrés Isaías Flores .......... (aifloresp@unah.hn)
+Esperanza Lisseth Cartagena ... (esperanza.cartagena@unah.hn)
+Fanny Merari Ventura .......... (fmventura@unah.hn
+José David García ............. (jdgarciad@unah.hn)
+José Luis Martínez ............ (jlmartinezo@unah.hn)
+Luis Steven Vásquez ........... (Lsvasquez@unah.hn)
+Sara Raquel Ortiz ............. (Sortizm@unah.hn)
+
+Catedratico:
+LIC. CLAUDIA REGINA NUÑEZ GALINDO
+Lic. GIANCARLO MARTINI SCALICI AGUILAR
+Lic. KARLA MELISA GARCIA PINEDA 
+
+----------------------------------------------------------------------
+
+Programa:          barra
+Fecha:             16-jul-2022
+Programador:       Esperanza
+descripcion:       menu 
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Andrés	         01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+José		     01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Esperanza	     01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Allan		     01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+----------------------------------------------------------------------- -->
+
 <?php
 //validacion Login
 
@@ -462,16 +505,6 @@ $user = $_SESSION['user'];
 
                 </li>
 
-                <?php
-                if (isset($_SESSION['permisos'][M_FACTURACION]) and $_SESSION['permisos'][M_FACTURACION]['r'] == 1) {
-                ?>
-                    <li class="" style="height: 50px;">
-                        <a href="../demo1.php" style="align-items: center;">
-                            <i class='bx bx-detail icon'></i>
-                            <span class="text nav-text">Facturación</span>
-                        </a>
-                    </li>
-                <?php } ?>
 
                 <?php
                 if (isset($_SESSION['permisos'][M_INVENTARIOS]) and $_SESSION['permisos'][M_INVENTARIOS]['r'] == 1) {
@@ -479,7 +512,7 @@ $user = $_SESSION['user'];
                     <li class="" style="height: 50px;">
                         <a href="../gestiones/Gestion_Inventario.php" style="align-items: center;">
                             <i class='bx bx-pie-chart-alt icon'></i>
-                            <span class="text nav-text">Inventario</span>
+                            <span class="text nav-text">Insumos</span>
                         </a>
                     </li>
                 <?php } ?>
@@ -537,34 +570,6 @@ $user = $_SESSION['user'];
                     (isset($_SESSION['permisos'][M_GESTION_OBJETOS]) and $_SESSION['permisos'][M_GESTION_OBJETOS]['r']) == 1
                 ) {
                 ?>
-                    <li class="" class="fa fa-caret-down">
-
-                        <a href="../index.php" style="align-items: center; height: 50px;  ">
-                            <i class='bx bx-cog icon'></i>
-                            <span class="text nav-text">Gestiones</span>
-                        </a>
-                        <ul style="position: relative;  display: none; ">
-
-
-
-                            <?php
-                            if (isset($_SESSION['permisos'][M_GESTION_FACTURAS]) and $_SESSION['permisos'][M_GESTION_FACTURAS]['r'] == 1) {
-                            ?>
-                                <a href="../gestiones/Gestion_Factura.php" style="align-items: center; ">
-                                    <span class="text nav-text">Gestión Facturas</span>
-                                </a>
-                            <?php } ?>
-
-
-                            <?php
-                            if (isset($_SESSION['permisos'][M_GESTION_USUARIOS]) and $_SESSION['permisos'][M_GESTION_USUARIOS]['r'] == 1) {
-                            ?>
-                                <a href="../gestiones/Gestion_Usuarios.php" style="align-items: center;">
-                                    <span class="text nav-text">Gestión Usuarios </span>
-                                </a>
-                            <?php } ?>
-                        </ul>
-                    </li>
 
                     <li class="" class="fa fa-caret-down">
 
@@ -573,6 +578,15 @@ $user = $_SESSION['user'];
                             <span class="text nav-text">Seguridad</span>
                         </a>
                         <ul style="position: relative;  display: none; ">
+
+                            <?php
+                            if (isset($_SESSION['permisos'][M_GESTION_USUARIOS]) and $_SESSION['permisos'][M_GESTION_USUARIOS]['r'] == 1) {
+                            ?>
+                                <a href="../gestiones/Gestion_Usuarios.php" style="align-items: center;">
+                                    <span class="text nav-text">Gestión Usuarios </span>
+                                </a>
+                            <?php } ?>
+
                             <?php
                             if (isset($_SESSION['permisos'][M_GESTION_BITACORA]) and $_SESSION['permisos'][M_GESTION_BITACORA]['r'] == 1) {
                             ?>

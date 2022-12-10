@@ -1,3 +1,46 @@
+<!-- -----------------------------------------------------------------------
+	    Universidad Nacional Autonoma de Honduras (UNAH)
+		           Facultad de Ciencias Economicas
+	        Departamento de Informatica administrativa
+        Analisis, Programacion y Evaluacion de Sistemas
+                    Primer Periodo 2022
+
+
+Equipo:
+Allan Mauricio Hernández ...... (mauricio.galindo@unah.hn)
+Andrés Isaías Flores .......... (aifloresp@unah.hn)
+Esperanza Lisseth Cartagena ... (esperanza.cartagena@unah.hn)
+Fanny Merari Ventura .......... (fmventura@unah.hn
+José David García ............. (jdgarciad@unah.hn)
+José Luis Martínez ............ (jlmartinezo@unah.hn)
+Luis Steven Vásquez ........... (Lsvasquez@unah.hn)
+Sara Raquel Ortiz ............. (Sortizm@unah.hn)
+
+Catedratico:
+LIC. CLAUDIA REGINA NUÑEZ GALINDO
+Lic. GIANCARLO MARTINI SCALICI AGUILAR
+Lic. KARLA MELISA GARCIA PINEDA 
+
+----------------------------------------------------------------------
+
+Programa:          Gestion_Usuarios
+Fecha:             16-jul-2022
+Programador:       Esperanza
+descripcion:       salida 
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Andrés	         01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+José		     01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Esperanza	     01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Allan		     01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+----------------------------------------------------------------------- -->
+
 <?php
 include("../conexion.php");
 
@@ -117,7 +160,7 @@ $numero = 99999.99;
                 
                     $desde = ($pagina-1) * $por_pagina;
                                 $total_paginas = ceil($total_registro / $por_pagina);
-                                    $sql = mysqli_query($conn,"select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from tbl_usuario u inner join tbl_roles r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Activo' ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
+                                    $sql = mysqli_query($conn,"select u.Id_Usuario, u.Usuario, u.Nombre_Usuario, u.Estado_Usuario, u.Correo_Electronico, u.Fecha_Ultimo_Conexion, r.Rol from tbl_usuario u inner join tbl_roles r ON u.Rol = r.Id_Rol WHERE Estado_Usuario = 'Activo' or  Estado_Usuario = 'NUEVO' ORDER BY u.Id_Usuario DESC LIMIT $desde,$por_pagina ");
                                     mysqli_close($conn);
 
                     $result = mysqli_num_rows($sql);

@@ -1,3 +1,46 @@
+<!-- -----------------------------------------------------------------------
+	    Universidad Nacional Autonoma de Honduras (UNAH)
+		           Facultad de Ciencias Economicas
+	        Departamento de Informatica administrativa
+        Analisis, Programacion y Evaluacion de Sistemas
+                    Primer Periodo 2022
+
+
+Equipo:
+Allan Mauricio Hernández ...... (mauricio.galindo@unah.hn)
+Andrés Isaías Flores .......... (aifloresp@unah.hn)
+Esperanza Lisseth Cartagena ... (esperanza.cartagena@unah.hn)
+Fanny Merari Ventura .......... (fmventura@unah.hn
+José David García ............. (jdgarciad@unah.hn)
+José Luis Martínez ............ (jlmartinezo@unah.hn)
+Luis Steven Vásquez ........... (Lsvasquez@unah.hn)
+Sara Raquel Ortiz ............. (Sortizm@unah.hn)
+
+Catedratico:
+LIC. CLAUDIA REGINA NUÑEZ GALINDO
+Lic. GIANCARLO MARTINI SCALICI AGUILAR
+Lic. KARLA MELISA GARCIA PINEDA 
+
+----------------------------------------------------------------------
+
+Programa:          Nuevo_Parametro
+Fecha:             16-jul-2022
+Programador:       Fanny
+descripcion:       libro
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Fanny	         01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+José		       01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+David 	       01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Allan		       01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+----------------------------------------------------------------------- -->
+
 <?php
 
 include("../conexion.php");
@@ -9,17 +52,19 @@ if (!empty($_POST)) {
 	} else {
 		$nombre = $_POST['Parametro'];
 		$Valor  = $_POST['Valor'];
-		if (!is_numeric($Valor)) {
-			$alert = '<p class="msg_error">Error El Valor Solo Números.</p>';
-		} elseif (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $nombre)) {
+		if (!preg_match("/^[a-z A-Z \s  ñÑ+áéíóú]+$/", $nombre)) {
 			$alert = '<p class="msg_error"> El Nombre Del Parametro Solo Recibe Letras.</p>';
 		} else {
-			$query_insert = mysqli_query($conn, "INSERT INTO tbl_parametros (Parametro,Valor)
+			$queryparam = mysqli_query($conn, "SELECT * FROM tbl_parametros WHERE Parametro = '$nombre'");
+			$nr 			= mysqli_num_rows($queryparam);
+			if ($nr == 0) {
+				$query_insert = mysqli_query($conn, "INSERT INTO tbl_parametros (Parametro,Valor)
 																	VALUES('$nombre','$Valor')");
-			if ($query_insert) {
-				echo "<script> alert('Parametro Registrado Exitosamente');window.location= 'Gestion_parametros.php' </script>";
+				if ($query_insert) {
+					echo "<script> alert('Parámetro Registrado Exitosamente');window.location= 'Gestion_parametros.php' </script>";
+				}
 			} else {
-				$alert = '<p class="msg_error">Error al registrar el parametro.</p>';
+				echo "<script> alert('No se puede registrar este parámetro, ya que este existe');window.location= 'Gestion_parametros.php' </script>";
 			}
 		}
 	}

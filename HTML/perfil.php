@@ -1,8 +1,83 @@
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>CodePen - Nav-tabs</title>
+<!-- -----------------------------------------------------------------------
+	    Universidad Nacional Autonoma de Honduras (UNAH)
+		           Facultad de Ciencias Economicas
+	        Departamento de Informatica administrativa
+        Analisis, Programacion y Evaluacion de Sistemas
+                    Primer Periodo 2022
+
+
+Equipo:
+Allan Mauricio Hernández ...... (mauricio.galindo@unah.hn)
+Andrés Isaías Flores .......... (aifloresp@unah.hn)
+Esperanza Lisseth Cartagena ... (esperanza.cartagena@unah.hn)
+Fanny Merari Ventura .......... (fmventura@unah.hn
+José David García ............. (jdgarciad@unah.hn)
+José Luis Martínez ............ (jlmartinezo@unah.hn)
+Luis Steven Vásquez ........... (Lsvasquez@unah.hn)
+Sara Raquel Ortiz ............. (Sortizm@unah.hn)
+
+Catedratico:
+LIC. CLAUDIA REGINA NUÑEZ GALINDO
+Lic. GIANCARLO MARTINI SCALICI AGUILAR
+Lic. KARLA MELISA GARCIA PINEDA 
+
+----------------------------------------------------------------------
+
+Programa:          perfil
+Fecha:             16-jul-2022
+Programador:       Esperanza
+descripcion:       salida 
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Andrés	         01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+José		     01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Esperanza	     01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Allan		     01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+----------------------------------------------------------------------- -->
+
+<?php
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+
+include("conexion.php");
+
+session_start();
+$_SESSION['id'];
+$_SESSION['user'];
+
+?>
+<?php
+        $Id_Usuario         = $_SESSION['id'];
+        
+
+
+       $query_user = mysqli_query($conn, "SELECT * FROM tbl_usuario WHERE Id_Usuario = $Id_Usuario");
+       while ($row = mysqli_fetch_array($query_user)) {
+        $Usuario            = $row['Usuario'];
+        $Nombre_Usuario     = $row['Nombre_Usuario'];
+        $Correo_Electronico = $row['Correo_Electronico'];
+        $Id_Rol                = $row['Rol'];
+      }
+
+
+      $query_rol = mysqli_query($conn, "SELECT * FROM tbl_roles WHERE Id_Rol = $Id_Rol");
+       while ($row = mysqli_fetch_array($query_rol)) {
+        $Rol                = $row['Rol'];
+      }
+        ?>
+
+<?php include 'barralateralinicial.php'; ?>
+
+<p></p>
+<section style=" background-color:rgb(255, 255, 255); padding: 15px; color:black; font-size: 16px; ">
+
+  <title>Ajustes de usuario</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'><link rel="stylesheet" href="./cssperfil/style.css">
@@ -11,139 +86,11 @@
 <body>
 <!-- partial:index.partial.html -->
 <body>
+<h1>Ajustes de usuario</h1>    
+<br>
    <div class="container">
-      <div class="page-header">
          <ul class="nav">
-            <li class="settings-title">
-               <h1>User Settings</h1
-            </li>
-            <!-- notification dropdown -->      
-            <li class="message-nav dropdown">
-               <a href="#" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  <i class="fa fa-bell-o">
-                  <span class="badge">2</span>
-                  </i>
-                  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                     <li class="notification-title">
-                        <h4>Notification</h4>
-                     </li>
-                     <ul class="notification-list">
-                        <li class="notification-item">
-                           <a class="notification-anchor" href="#">
-                              <span class="notification-img">
-                                 <img src="http://lorempixel.com/output/nature-q-g-640-480-6.jpg"/>
-                               </span>
-                                 <p class="notification-user">
-                                 <strong>Anh Nguyen</strong> |
-                                 <span class="timestamp">15 mins ago</span>
-                                 </p>
-                                 <p class="notification-type">
-                                    Robert sent you a message
-                                 </p>
-                                 <p class="notification-project">
-                                    Project <span class="project-name">Videographer - Kickstarter</span>
-                                 </p>
-                           </a>
-                        </li>
-                        <li class="notification-item">
-                           <a class="notification-anchor" href="#">
-                              <span class="notification-img">
-                                 <img src="http://lorempixel.com/output/nature-q-g-640-480-6.jpg"/>
-                               </span>
-                                 <p class="notification-user">
-                                 <strong>Anh Nguyen</strong> |
-                                 <span class="timestamp">15 mins ago</span>
-                                 </p>
-                                 <p class="notification-type">
-                                    Robert hired you for the project
-                                 </p>
-                                 <p class="notification-project">
-                                    Project <span class="project-name">Videographer - Kickstarter</span>
-                                 </p>
-                           </a>
-                        </li>
-                        <li class="notification-item">
-                           <a class="notification-anchor" href="#">
-                              <span class="notification-img">
-                                 <img src="http://lorempixel.com/output/nature-q-g-640-480-6.jpg"/>
-                               </span>
-                                 <p class="notification-user">
-                                 <strong>Anh Nguyen</strong> |
-                                 <span class="timestamp">15 mins ago</span>
-                                 </p>
-                                 <p class="notification-type">
-                                    Robert marked project complete
-                                 </p>
-                                 <p class="notification-project">
-                                    Project <span class="project-name">Videographer - Kickstarter</span>
-                                 </p>
-                           </a>
-                        </li>
-                        <li class="notification-item">
-                           <a class="notification-anchor" href="#">
-                              <span class="notification-img">
-                                 <img src="http://lorempixel.com/output/nature-q-g-640-480-6.jpg"/>
-                               </span>
-                                 <p class="notification-user">
-                                 <strong>Anh Nguyen</strong> |
-                                 <span class="timestamp">15 mins ago</span>
-                                 </p>
-                                 <p class="notification-type">
-                                    Robert archived the project
-                                 </p>
-                                 <p class="notification-project">
-                                    Project <span class="project-name">Videographer - Kickstarter</span>
-                                 </p>
-                           </a>
-                        </li>
-                         <li class="notification-item">
-                           <a class="notification-anchor" href="#">
-                              <span class="notification-img">
-                                 <img src="http://lorempixel.com/output/nature-q-g-640-480-6.jpg"/>
-                               </span>
-                                 <p class="notification-user">
-                                 <strong>Anh Nguyen</strong> |
-                                 <span class="timestamp">15 mins ago</span>
-                                 </p>
-                                 <p class="notification-type">
-                                    Robert funded the project
-                                 </p>
-                                 <p class="notification-project">
-                                    Project <span class="project-name">Videographer - Kickstarter</span>
-                                 </p>
-                           </a>
-                        </li>
-                     </ul>
-                     <li class="notification-footer"><h4><a>View All</a></h4></li>
-                  </ul>
-               </a>
-            </li>
-            <!-- end -->
-            <!-- Filter -->      
-            <li class="dropdown filter-sort">
-                  <a id="filter-sort-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                   Sort by <i class="fa fa-caret-down">
-                  </i>
-                  </a>   
-                  <ul class="dropdown-menu sorting dropdown-menu-right" aria-labelledby="filter-sort-dropdown">
-                     <ul class="filter-sort-list">
-                        <li class="filter-sort-item">
-                           <a class="">Date - Most recent first</a>
-                        </li>
-                        <li class="filter-sort-item">
-                           <a class="">Date - Oldest first</a>
-                        </li>
-                        <li class="filter-sort-item">
-                           <a class="">Budget - Low to High</a>
-                        </li>
-                        <li class="filter-sort-item">
-                           <a class="">Budget - High to Low</a>
-                        </li>
-                     </ul>
-                  </ul>
-               </a>
-            </li>
-            <!-- end Filter -->      
+                       
          </ul> 
       </div>
       <div class="row">
@@ -152,126 +99,69 @@
                <div class="panel-heading single-project-nav">
                   <ul class="nav nav-tabs"> 
                    <li class="active">
-                      <a href="#user-profile-info" data-toggle="tab">Account Details</a>
+                   <a href="#user-profile-info" data-toggle="tab">detalles de la cuenta</a>
                    </li>
                    <li>
-                      <a href="#user-profile-payments" data-toggle="tab">Payment</a>
+                      <a href="#user-profile-payments" data-toggle="tab">SEGURIDAD</a>
                    </li>
                </ul>
             </div>
+            
                <div class="panel-body">
                  <div class="tab-content">
-                  <div class="tab-pane fade in active" id="user-profile-info">
-                     <div class="row">
-                        <div class="col-sm-4">
-                           <label>First Name</label>
-                           <input type="text" class="input-md form-control">
+                  <!-- modal -->
+                  <div class="tab-pane active" id="user-profile-info">
+
+                  <form class="" action="perfil_validacion.php" method="post">
+                    
+                      <div class="row">
+                        <div class="col-sm-6">
+                           <label>Usuario</label>
+                           <input type="text" readonly="true" class="input-md form-control " value="<?php echo $Usuario ?>">
                         </div>
-                        <div class="col-sm-4">
-                           <label>Last Name</label>
-                           <input type="text" class="input-md form-control">
+                        <div class="col-sm-6">
+                           <label>Rol</label>
+                           <input type="text" readonly="true" class="input-md form-control" value="<?php echo $Rol ?>">
                         </div>
-                        <div class="col-sm-4">
+                        <label></label> <label></label> <input type="hidden" class="input-md form-control" name="eleccion" value="1"> <label></label> <label></label>
+                        <div class="col-sm-6">
+                           <label>Nombre Completo</label>
+                           <input type="text" class="input-md form-control" name="Nombre_Usuario" value="<?php echo $Nombre_Usuario ?>" maxlength="40" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" required size="30">
+                        </div>
+                        <div class="col-sm-6">
                            <label>Email</label>
-                           <input type="text" class="input-md form-control">
+                           <input type="email" class="input-md form-control" name="Correo_Electronico" value="<?php echo $Correo_Electronico ?>" maxlength="50" required size="30">
+                        </div>
+                        <div class="col-sm-6">
+                           <label></label>
                         </div>
                      </div>
-                     <div class="row">
-                        <div class="col-sm-4">
-                           <label>Location</label>
-                           <input type="text" class="input-md form-control">
-                        </div>
-                        <div class="col-sm-4">
-                           <label>Website</label>
-                           <input type="text" class="input-md form-control">
-                        </div>
-                        <div class="col-sm-4">
-                           <label>Contact Number</label>
-                           <input type="text" class="input-md form-control">
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-sm-4">
-                           <label>Your Short Bio</label>
-                           <textarea type="text" row="10" class="input-md form-control"></textarea>
-                        </div>
-                        <div class="col-sm-4">
-                           <label>Profile Photo</label>
-                        </div>
-                        <div class="col-sm-4">
-                           <label>Background Image</label>
-                        </div>
-                     </div>
-                  </div>
+                     <button class="btn flat btn-create" id="daterange-btn" name="">Guardar <i aria-hidden="true"></i></button>
+                </form>
+                </div>
+
+                  <!-- modal -->
                   <div class="tab-pane fade" id="user-profile-payments">
-                     <p>
-                        We will take care of your payment process so you don’t need to worry about chasing up clients after every single project. We will do our best to ensure that you get paid fairly and on a timely basis.
-                      <br>
-                      <br>
-                       To set up the payment, please click on “Connect with Stripe” button below and follow the instructions. It shouldn’t take more than 15  minutes to do so.
-                      <br>
-                      <br>
-                      If you have any questions, please don’t hesitate to reach out to us at hello@kapcher.co.
-                     </p>  
-                     <p>
-                     <strong>Stripe Escrow Payment:
-                       <span class="stripe-status">
-                         Connected!
-                     </strong>
-                   </p>
-                   <a class="stripe-connect" href="/auth/stripe_connect"></a>     
-                  </div>
-                  <div class="tab-pane fade" id="user-profile-examples">
-                    <div class="btn-Upload-group">
-                        <a class="btn Upload flat btn-create btn-small"><i class="fa fa-camera"></i>  Upload Photo</a>
-                        <a href="#upload-video-url" data-toggle="modal" class="btn Upload flat btn-create btn-small"><i class="fa fa-video-camera"></i> Add Video URLs</a>
-                   </div>
-                    <ul class="asset-list" id="multi">
-                     <li class="photo">
-                       <div class="asset-loading">
-                         <img src="http://lorempixel.com/output/abstract-q-c-640-480-8.jpg">
-                       <div class="cta-delete"><i class="fa fa-trash-o"></i></div>
-                       </div>   
-                     </li>
-                     <li class="photo">
-                       <div class="asset-loading">
-                         <img src="http://lorempixel.com/output/people-q-g-640-480-10.jpg" />
-                         <div class="cta-delete video"><i class="fa fa-play"></i></div>
-                       </div>
-                     </li>
-                     <li class="photo">
-                       <div class="asset-loading">
-                         <img src="http://lorempixel.com/output/people-q-g-640-480-10.jpg" />
-                         <div class="cta-delete video"><i class="fa fa-play"></i></div>
-                       </div>
-                     </li> 
-                   </ul> 
-                  </div>
-                  <div class="tab-pane fade" id="user-profile-skills">
-                    <h4>
-                       What do you specialise in?
-                    </h4>
-                     <p>
-                      In a few keywords, tell us what your skills are. These tags will be displayed on your portfolio page so make sure you choose wisely.
-                     </p>
-                     <input class="long" id="skills" name="skill-input" type="text"></input>
-                     <a class="btn add-skills flat btn-create btn-small" href="#">
-                       Add
-                     </a>
-                     <div class="skill-zone" style="margin-top: 20px; height:50px">
-                        <span class="label label-info">
-                           Portrait
-                         <i class="fa fa-times remove-skill-profile"></i>
-                       </span>
-                        <span class="label label-info">
-                           Landscape
-                         <i class="fa fa-times remove-skill-profile"></i>
-                       </span>
+
+                  <form class="" action="perfil_validacion.php" method="post">
+                    
+                      <div class="row">
+                      <p>Para acceder al cambio de contraseña o cambio de pregunta, necesita ingresar su contraseña actual.</p>
+                      <div class="col-sm-12">
+                           <label> </label> <label> </label>
+                        </div>
+                        <div class="col-sm-3">
+                           <label>Contraseña Actual</label>
+                           <input type="password" name="Contraseña" class="input-md form-control " required placeholder="Ingrese su Contraseña" maxlength="16" required size="30">
+                        </div>
+                        <div class="col-sm-12">
+                           <label> </label> <input type="hidden" class="input-md form-control" name="eleccion" value="2"> <label> </label>
+                        </div>
                      </div>
-                  </div>
-              </div>
-              <div class="actions">
-                 <a class="btn flat btn-create">Save</a>
+                     <button class="btn flat btn-create" id="date-range-btn" name="">Continuar <i aria-hidden="true"></i></button>
+                </form>
+                </div>
+                  <!-- modal -->
               </div>
          </div>
          </div>
@@ -299,4 +189,5 @@
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.4.2/Sortable.min.js'></script>
 </body>
-</html>
+
+<?php include 'barralateralfinal.php'; ?>

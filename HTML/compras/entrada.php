@@ -1,3 +1,46 @@
+<!-- -----------------------------------------------------------------------
+	    Universidad Nacional Autonoma de Honduras (UNAH)
+		           Facultad de Ciencias Economicas
+	        Departamento de Informatica administrativa
+        Analisis, Programacion y Evaluacion de Sistemas
+                    Primer Periodo 2016
+
+
+Equipo:
+Allan Mauricio Hernández ...... (mauricio.galindo@unah.hn)
+Andrés Isaías Flores .......... (aifloresp@unah.hn)
+Esperanza Lisseth Cartagena ... (esperanza.cartagena@unah.hn)
+Fanny Merari Ventura .......... (fmventura@unah.hn
+José David García ............. (jdgarciad@unah.hn)
+José Luis Martínez ............ (jlmartinezo@unah.hn)
+Luis Steven Vásquez ........... (Lsvasquez@unah.hn)
+Sara Raquel Ortiz ............. (Sortizm@unah.hn)
+
+Catedratico:
+LIC. CLAUDIA REGINA NUÑEZ GALINDO
+Lic. GIANCARLO MARTINI SCALICI AGUILAR
+Lic. KARLA MELISA GARCIA PINEDA 
+
+----------------------------------------------------------------------
+
+Programa:          entrada
+Fecha:             16-jul-2022
+Programador:       Esperanza
+descripcion:       producto entrada 
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Andrés	         01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+José		     01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Esperanza	     01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Allan		     01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+----------------------------------------------------------------------- -->
+
 <?php
 
 //incluir las funciones de helpers
@@ -5,6 +48,7 @@ include_once("../helpers/helpers.php");
 
 //iniciar las sesiones
 session_start();
+$usuarios=$_SESSION['id'];
 // si no existe la variable rol, el usuario no esta logueado y redirige al Login
 if (!isset($_SESSION['rol'])) {
     header("Location: ../login.php");
@@ -36,6 +80,30 @@ $ext = $conn->query($sql2);
 $fila = $ext->fetch_array(MYSQLI_NUM);
 $param = $fila[0];
 
+if (!empty($_POST)) {
+    include('conexion.php');
+    $sql2 = "Select * from product where id_product = $id";
+    $esperancita = mysqli_query($conn,$sql2);
+    while ($fila = $esperancita->fetch_assoc()) {
+      $cantidad = $fila["amount"];
+  }
+   $suma = $_POST['cant'];
+   $fecha = $_POST['fech'];
+  
+    if($suma > 0){
+      $sum = $cantidad + $suma;
+      $sql5 = "UPDATE product SET amount=$sum where id_product='$id'";
+      $exito = mysqli_query($conn,$sql5);
+  
+      $sqlre = "INSERT INTO tbl_kardex (Id_Usuario, fecha, detalle, id_product, proname, cant_entrada, total_cante) VALUES ($usuarios,'$fecha','ENTRADA',$id,'$param',$suma,$sum)";
+      $exito2 = mysqli_query($conn,$sqlre);
+  
+  
+      echo "<script> alert('EL ARTÍCULO HA SIDO INGRESADO CORRECTAMENTE');window.location= '../gestiones/Gestion_Inventario.php' </script>";
+   }else{    
+      echo "<script> alert('ERROR AL INGRESAR LA CANTIDAD DEBE SER MAYOR A 0');window.location= '../gestiones/Gestion_Inventario.php' </script>";
+  }
+}
 
 ?>
 
@@ -50,7 +118,7 @@ $param = $fila[0];
 
     <br>
 
-    <form method="post" action="fichaEntrada.php">
+    <form method="post" action="">
         <div class="row">
             <div class="col-xs-14 pull-right">
 
@@ -87,7 +155,7 @@ $param = $fila[0];
                             <td style="width: 20%">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-                                    <input type="text" class="form-control pull-right" name="cant" oninput="this.value = this.value.replace(/[^0-9_-]/,'')" required>
+                                    <input type="text" class="form-control pull-right" name="cant" oninput="this.value = this.value.replace(/[^0-9]/,'')" required>
                                 </div>
                             </td>
 
@@ -110,7 +178,7 @@ $param = $fila[0];
 
             </div>
             <div class="col-md-12" align="right">
-                <button class="btn btn-lg btn-success btn-print" name="">Continuar </button>
+                <button type="submit" class="btn btn-lg btn-success btn-print" name="">Continuar </button>
             </div>
         </div>
     </form>

@@ -3,7 +3,7 @@
 		           Facultad de Ciencias Economicas
 	        Departamento de Informatica administrativa
         Analisis, Programacion y Evaluacion de Sistemas
-                    Primer Periodo 2016
+                    Primer Periodo 2022
 
 
 Equipo:
@@ -23,7 +23,7 @@ Lic. KARLA MELISA GARCIA PINEDA
 
 ----------------------------------------------------------------------
 
-Programa:          Barralateralfinal
+Programa:          perfil_validacion_pass
 Fecha:             16-jul-2022
 Programador:       Andrés
 descripcion:       Menu
@@ -41,42 +41,46 @@ Esperanza		    01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
 José		        01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
 ----------------------------------------------------------------------- -->
 
-</section>
-<!-- partial -->
-<script>
-  const body = document.querySelector('body'),
-sidebar = body.querySelector('nav'),
-toggle = body.querySelector(".toggle"),
-searchBtn = body.querySelector(".search-box"),
-modeSwitch = body.querySelector(".toggle-switch"),
-modeText = body.querySelector(".mode-text");
+<?php
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+
+include("conexion.php");
+
+session_start();
+$_SESSION['id'];
+$_SESSION['user'];
+
+$Id_Usuario=$_SESSION['id'];
+$eleccion=$_POST['eleccion'];
 
 
-toggle.addEventListener("click" , () =>{
-sidebar.classList.toggle("close");
-})
+    if ($eleccion == 1) {
+        $ipregunta=$_POST['txtpregunta'];
+        $trespuesta=$_POST['txtrespuesta'];
 
-searchBtn.addEventListener("click" , () =>{
-sidebar.classList.remove("close");
-})
+        $query_pr = mysqli_query($conn, "SELECT * FROM tbl_preguntas WHERE Id_Preguntas = $ipregunta");
+       while ($row = mysqli_fetch_array($query_pr)) {
+        $tpregunta = $row['Preguntas'];
+      }
 
-modeSwitch.addEventListener("click" , () =>{
-body.classList.toggle("dark");
+        $sql = "UPDATE tbl_preguntas_x_usuario SET Id_Preguntas='$ipregunta', Preguntas='$tpregunta', Respuestas='$trespuesta' WHERE Id_Usuario='$Id_Usuario'";
+        $query = mysqli_query($conn, $sql);
+        if ($query) {
+            echo "<script> alert('Actualizacion Exitosa');window.location= 'perfil.php' </script>";
+        }
 
-if(body.classList.contains("dark")){
-  modeText.innerText = "Light mode";
-}else{
-  modeText.innerText = "Dark mode";
-  
-}
-});
-  $("#menu a").click(function(event){
-    if($(this).next('ul').length){
-event.preventDefault();
-        $(this).next().toggle('fast');
-        $(this).children('i:last-child').toggleClass('fa-caret-down fa-caret-left');
-    }
-});
+    }else {
+        
+$passw=$_POST['txtpassword'];
 
-</script>
-</html>
+        $sql = "UPDATE tbl_usuario SET Contraseña='$passw' WHERE Id_Usuario='$Id_Usuario'";
+        $query = mysqli_query($conn, $sql);
+        if ($query) {
+            echo "<script> alert('Contraseña Actualizada Exitosamente');window.location= 'perfil.php' </script>";
+        }
+          }
+
+?>
+
+

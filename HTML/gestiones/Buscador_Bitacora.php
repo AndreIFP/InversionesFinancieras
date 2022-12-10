@@ -1,3 +1,46 @@
+<!-- -----------------------------------------------------------------------
+	    Universidad Nacional Autonoma de Honduras (UNAH)
+		           Facultad de Ciencias Economicas
+	        Departamento de Informatica administrativa
+        Analisis, Programacion y Evaluacion de Sistemas
+                    Primer Periodo 2022
+
+
+Equipo:
+Allan Mauricio Hernández ...... (mauricio.galindo@unah.hn)
+Andrés Isaías Flores .......... (aifloresp@unah.hn)
+Esperanza Lisseth Cartagena ... (esperanza.cartagena@unah.hn)
+Fanny Merari Ventura .......... (fmventura@unah.hn
+José David García ............. (jdgarciad@unah.hn)
+José Luis Martínez ............ (jlmartinezo@unah.hn)
+Luis Steven Vásquez ........... (Lsvasquez@unah.hn)
+Sara Raquel Ortiz ............. (Sortizm@unah.hn)
+
+Catedratico:
+LIC. CLAUDIA REGINA NUÑEZ GALINDO
+Lic. GIANCARLO MARTINI SCALICI AGUILAR
+Lic. KARLA MELISA GARCIA PINEDA 
+
+----------------------------------------------------------------------
+
+Programa:          Buscador_Bitacora
+Fecha:             16-jul-2022
+Programador:       Fanny
+descripcion:       libro
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Fanny	         01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+José		       01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+David 	       01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Allan		       01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+----------------------------------------------------------------------- -->
+
 <?php
 include("../conexion.php");
 session_start();
@@ -14,7 +57,7 @@ session_start();
                 <?php
                 $busqueda = strtolower($_REQUEST['busqueda']);
                 if (empty($busqueda)) {
-                    echo "<script> alert('Dejo En Blanco El Buscador');window.location= 'Gestion_Factura.php' </script>";
+                    echo "<script> alert('Dejo En Blanco El Buscador');window.location= 'Gestion_Bitacora.php' </script>";
                 }
                 ?>
                 <h2><strong>Gestion Bitacora</strong></h2>
@@ -29,11 +72,14 @@ session_start();
                     <table class="table">
                         <thead class="table-primary"><br><br>
                             <tr>
-                                <th><center>Id</center></th>
-                                <th><center>Fecha</center></th>
-                                <th><center>Acción</center></th>
-                                <th><center>Descripcion</center></th>
-                                <th><center> Usuario </center></th>
+                            <th><center> Id </center></th>
+                            <th><center> Fecha </center></th>
+                            <th><center> Acción </center></th>
+                            <th><center> Tabla </center></th>
+                            <th><center> Campo </center></th>
+                            <th><center> Valor Original </center></th>
+                            <th><center> Nuevo Valor </center></th>
+                            <th><center> Id Usuario </center></th>
 
                                
                             </tr>
@@ -43,7 +89,12 @@ session_start();
                             //Paginador
                             $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_ms_bitacora 
                                             WHERE ( Id_Bitacora LIKE '%$busqueda%' OR
-                                                    Accion LIKE '%$busqueda%' )");
+                                                                Accion LIKE '%$busqueda%' OR
+                                                                Tabla LIKE '%$busqueda%' OR
+                                                                Campo LIKE '%$busqueda%' OR
+                                                                Valor_Antes LIKE '%$busqueda%' OR
+                                                                Valor_Despues LIKE '%$busqueda%' OR
+                                                                Fecha LIKE '%$busqueda%' )");
                             $result_register = mysqli_fetch_array($sql_registe);
                             $total_registro = $result_register['total_registro'];
 
@@ -59,7 +110,10 @@ session_start();
                             $total_paginas = ceil($total_registro / $por_pagina);
                             $sql = mysqli_query($conn, "select * FROM tbl_ms_bitacora WHERE ( Id_Bitacora LIKE '%$busqueda%' OR
                                                                 Accion LIKE '%$busqueda%' OR
-                                                                Descripcion LIKE '%$busqueda%' OR
+                                                                Tabla LIKE '%$busqueda%' OR
+                                                                Campo LIKE '%$busqueda%' OR
+                                                                Valor_Antes LIKE '%$busqueda%' OR
+                                                                Valor_Despues LIKE '%$busqueda%' OR
                                                                 Fecha LIKE '%$busqueda%'  ) LIMIT $desde,$por_pagina ");
                             mysqli_close($conn);
 
@@ -68,12 +122,15 @@ session_start();
                                 while ($row = mysqli_fetch_array($sql)) {
                             ?>
                                     <tr>
-                                        <th><center><?php echo $row['Id_Bitacora'] ?></center></th>
-                                        <th><center><?php echo $row['Fecha'] ?></center></th>
+                                        <th><center> <?php echo $row['Id_Bitacora'] ?> </center></th>
+                                        <th><center> <?php echo $row['Fecha'] ?> </center></th>
                                         <th><center> <?php echo $row['Accion'] ?> </center></th>
-                                        <th><center><?php echo $row['Descripcion'] ?></center></th>
+                                        <th><center> <?php echo $row['Tabla'] ?> </center></th>
+                                        <th><center> <?php echo $row['Campo'] ?> </center></th>
+                                        <th><center> <?php echo $row['Valor_Antes'] ?> </center></th>
+                                        <th><center> <?php echo $row['Valor_Despues'] ?> </center></th>
                                         <th><center> <?php echo $row['Id_Usuario'] ?> </center></th>
-                                     
+                                            
 
                                     </tr>
                             <?php

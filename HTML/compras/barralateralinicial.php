@@ -364,9 +364,11 @@ $user = $_SESSION['user'];
         body.dark .home .text {
             color: var(--text-color);
         }
+
         #Hola {
             line-height: 100%;
         }
+
         /* 
 #menu ul{
 	list-style:none;
@@ -461,18 +463,6 @@ $user = $_SESSION['user'];
 
                 </li>
 
-                </li>
-                <?php
-
-                if (isset($_SESSION['permisos'][M_FACTURACION]) and $_SESSION['permisos'][M_FACTURACION]['r'] == 1) {
-                ?>
-                    <li class="" style="height: 50px;">
-                        <a href="../demo1.php" style="align-items: center;">
-                            <i class='bx bx-detail icon'></i>
-                            <span class="text nav-text">Facturación</span>
-                        </a>
-                    </li>
-                <?php } ?>
 
                 <?php
 
@@ -481,7 +471,7 @@ $user = $_SESSION['user'];
                     <li class="" style="height: 50px;">
                         <a href="../gestiones/Gestion_Inventario.php" style="align-items: center;">
                             <i class='bx bx-pie-chart-alt icon'></i>
-                            <span class="text nav-text">Inventario</span>
+                            <span class="text nav-text">Insumos</span>
                         </a>
                     </li>
                 <?php } ?>
@@ -541,32 +531,6 @@ $user = $_SESSION['user'];
                     (isset($_SESSION['permisos'][M_GESTION_OBJETOS]) and $_SESSION['permisos'][M_GESTION_OBJETOS]['r']) == 1
                 ) {
                 ?>
-                    <li class="" class="fa fa-caret-down">
-
-                        <a href="../index.php" style="align-items: center; height: 50px;  ">
-                            <i class='bx bx-cog icon'></i>
-                            <span class="text nav-text">Gestiones</span>
-                        </a>
-                        <ul style="position: relative;  display: none; ">
-
-                            <?php
-                            if (isset($_SESSION['permisos'][M_GESTION_FACTURAS]) and $_SESSION['permisos'][M_GESTION_FACTURAS]['r'] == 1) {
-                            ?>
-                                <a href="../gestiones/Gestion_Factura.php" style="align-items: center; ">
-                                    <span class="text nav-text">Gestión Facturas</span>
-                                </a>
-                            <?php } ?>
-
-                            <?php
-                            if (isset($_SESSION['permisos'][M_GESTION_USUARIOS]) and $_SESSION['permisos'][M_GESTION_USUARIOS]['r'] == 1) {
-                            ?>
-                                <a href="../gestiones/Gestion_Usuarios.php" style="align-items: center;">
-                                    <span class="text nav-text">Gestión Usuarios </span>
-                                </a>
-                            <?php } ?>
-
-                        </ul>
-                    </li>
 
                     <li class="" class="fa fa-caret-down">
 
@@ -575,6 +539,14 @@ $user = $_SESSION['user'];
                             <span class="text nav-text">Seguridad</span>
                         </a>
                         <ul style="position: relative;  display: none; ">
+                            <?php
+                            if (isset($_SESSION['permisos'][M_GESTION_USUARIOS]) and $_SESSION['permisos'][M_GESTION_USUARIOS]['r'] == 1) {
+                            ?>
+                                <a href="../gestiones/Gestion_Usuarios.php" style="align-items: center;">
+                                    <span class="text nav-text">Gestión Usuarios </span>
+                                </a>
+                            <?php } ?>
+
                             <?php
                             if (isset($_SESSION['permisos'][M_GESTION_BITACORA]) and $_SESSION['permisos'][M_GESTION_BITACORA]['r'] == 1) {
                             ?>

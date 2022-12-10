@@ -1,3 +1,46 @@
+<!-- -----------------------------------------------------------------------
+	    Universidad Nacional Autonoma de Honduras (UNAH)
+		           Facultad de Ciencias Economicas
+	        Departamento de Informatica administrativa
+        Analisis, Programacion y Evaluacion de Sistemas
+                    Primer Periodo 2022
+
+
+Equipo:
+Allan Mauricio Hernández ...... (mauricio.galindo@unah.hn)
+Andrés Isaías Flores .......... (aifloresp@unah.hn)
+Esperanza Lisseth Cartagena ... (esperanza.cartagena@unah.hn)
+Fanny Merari Ventura .......... (fmventura@unah.hn
+José David García ............. (jdgarciad@unah.hn)
+José Luis Martínez ............ (jlmartinezo@unah.hn)
+Luis Steven Vásquez ........... (Lsvasquez@unah.hn)
+Sara Raquel Ortiz ............. (Sortizm@unah.hn)
+
+Catedratico:
+LIC. CLAUDIA REGINA NUÑEZ GALINDO
+Lic. GIANCARLO MARTINI SCALICI AGUILAR
+Lic. KARLA MELISA GARCIA PINEDA 
+
+----------------------------------------------------------------------
+
+Programa:          Gestion_Inventario2
+Fecha:             16-jul-2022
+Programador:       Allan
+descripcion:       entrada
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Fanny	         01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+José		      01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Luis		      01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+Sara		      01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
+----------------------------------------------------------------------- -->
+
 <?php
 include("../conexion.php");
 
@@ -38,7 +81,7 @@ $numero = 99999.99;
 
 <!DOCTYPE html>
 <html lang="en">
-<title>Gestión Inventario</title>
+<title>Gestión Insumos</title>
 
 <head>
     <meta charset="UTF-8">
@@ -53,7 +96,7 @@ $numero = 99999.99;
         <div class="col-md-12">
             <div class="box-body table-responsive">
                 <div class="reportes">
-                    <h2><strong>Inventario</strong> </h2>
+                    <h2><strong>Gestión de Insumo</strong> </h2>
 
                     <a class="btn btn-primary" href="../index.php "><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
                     <?php if ($_SESSION['permisos'][M_INVENTARIOS] and $_SESSION['permisos'][M_INVENTARIOS]['w'] == 1) {
@@ -356,10 +399,10 @@ $numero = 99999.99;
                     <?php
                     if ($pagina != 1) {
                     ?>
-                        <li><a href="?pagina=<?php echo 1; ?>">|<< /a>
+                        <li><a href="?pagina=<?php echo 1; ?>">|<</a>
                         </li>
                         <li><a href="?pagina=<?php echo $pagina - 1; ?>">
-                                <<< /a>
+                                <<</a>
                         </li>
                     <?php
                     }
