@@ -27,7 +27,10 @@ $busqueda=$_GET['busqueda_filtro'];
 // Creación del objeto de la clase heredada
 $sql = mysqli_query($conn, "select * FROM tbl_ms_bitacora WHERE ( Id_Bitacora LIKE '%$busqueda%' OR
 Accion LIKE '%$busqueda%' OR
-Descripcion LIKE '%$busqueda%' OR
+Tabla LIKE '%$busqueda%' OR
+Campo LIKE '%$busqueda%' OR
+Valor_Antes LIKE '%$busqueda%' OR
+Valor_Despues LIKE '%$busqueda%' OR
 Fecha LIKE '%$busqueda%')");
 
 // Llamado del parametro dirección
@@ -68,20 +71,28 @@ while ($fila = $resultadocorreo->fetch_assoc()) {
 <table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
 <thead>
     <tr style="background: #B0E0E6;">
-    <th>Id</th>
-      <th>Fecha</th>
-      <th>Acción</th>
-      <th>Descripcion</th>
+        <th><center> Id </center></th>
+        <th><center> Fecha </center></th>
+        <th><center> Acción </center></th>
+        <th><center> Tabla </center></th>
+        <th><center> Campo </center></th>
+        <th><center> Valor Original </center></th>
+        <th><center> Nuevo Valor </center></th>
+        <th><center> Id Usuario </center></th>
     </tr>
 </thead>
 <?php
     while ($row = mysqli_fetch_array($sql)) { ?>
     <tbody>
         <tr>
-        <th><?php echo $row['Id_Bitacora'] ?></th>
-                                        <th><?php echo $row['Fecha'] ?></th>
-                                        <th><?php echo $row['Accion'] ?></th>
-                                        <th><?php echo $row['Descripcion'] ?></th>
+            <th> <?php echo $row['Id_Bitacora'] ?></th>
+            <th> <?php echo $row['Fecha'] ?> </th>
+            <th> <?php echo $row['Accion'] ?> </th>
+            <th> <?php echo $row['Tabla'] ?> </th>
+            <th> <?php echo $row['Campo'] ?> </th>
+            <th> <?php echo $row['Valor_Antes'] ?> </th>
+            <th> <?php echo $row['Valor_Despues'] ?> </th>
+            <th> <?php echo $row['Id_Usuario'] ?> </th>
         </tr>
     </tbody>
     
