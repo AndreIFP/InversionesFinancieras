@@ -193,10 +193,10 @@ $fecha = date('Y-m-d h:i:s');
             <center> <strong>Cuenta</strong></center>
           </th>
           <th>
-            <center><strong>Monto Haber</strong> </center>
+            <center><strong>Debe</strong> </center>
           </th>
           <th>
-            <center><strong>Monto Debe</strong> </center>
+            <center><strong>Haber</strong> </center>
           </th>
           <th>
             <center><strong>Saldo Debe </strong></center>
