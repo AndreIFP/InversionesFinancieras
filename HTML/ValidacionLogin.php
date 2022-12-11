@@ -110,8 +110,7 @@ if(isset($_REQUEST["btnrlogin"])){
                 $data = mysqli_fetch_array($query);
                 $_SESSION['rol']=$data["Rol"];
                 //header("Location: index.php");
-                echo "<script>alert('EL usuario esta identificado como Nuevo. PORFAVOR CONTACTE CON EL ADMINISTRADOR');window.location= 'index.php'</script>";  
-                header("Location: index_nuevo.php");
+                echo "<script>alert('EL usuario esta identificado como Nuevo. PORFAVOR CONTACTE CON EL ADMINISTRADOR');window.location= 'login.php'</script>";
 
             }elseif ($valor1 == 'ACTIVO') {
                 $data = mysqli_fetch_array($query);
