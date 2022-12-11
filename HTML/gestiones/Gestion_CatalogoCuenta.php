@@ -82,10 +82,10 @@ if (!isset($_SESSION['rol'])) {
                         <!--a href="Gestion_CatalogoCuentadiseñoboton.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Nueva cuenta</a-->
 
                     <?php } ?>
-                    <a class="btn btn-info" href="Gestion_CatalogoCuenta_Inactivas.php"><i class="fa fa-book"></i> Cuentas Inactivas</a>
+                    <a class="btn btn-secondary" href="Gestion_CatalogoCuenta_Inactivas.php"><i class="fa fa-book"></i> Cuentas Inactivas</a>
                     <a class="btn btn-warning" href="Reporte_Catalogo.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
-                    <a href="Nuevo_Catalogo3.php " class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Nuevos Grupos</a>
-                        <a href="Nuevo_Catalogo4.php " class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Cuentas</a>
+                    <a href="Nuevo_Catalogo3.php " class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Cuenta</a>
+                        <a href="Nuevo_Catalogo4.php " class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i>Nueva Sub-Cuenta</a>
                         <a class="btn btn-success" href="reporte_excel_catalogo.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
                 </div>
                 <?php

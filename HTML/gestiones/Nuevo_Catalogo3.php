@@ -58,13 +58,13 @@ if (!empty($_POST)) {
 	$CODIGO_CUENTA     = $_POST['cbx_calle'];
 	$CUENTA            = $_POST['CUENTA'];
 	$MAYOR            = $_POST['cbx_municipio'];
-	$MOVIMIENTO        = $_POST['Movimiento'];
+	//$MOVIMIENTO        = $_POST['Movimiento'];
 	//$CLASIFICACION     = $_POST['CLASIFICACION'];
 	$ESTADO_CUENTA     = $_POST['Estado_Cuenta'];
 
-	if (empty($MOVIMIENTO)) {
-		$MOVIMIENTO = "NULL";
-	}
+	// if (empty($MOVIMIENTO)) {
+	// 	$MOVIMIENTO = "NULL";
+	// }
 
 	$querycodigo 	= mysqli_query($conn, "SELECT * FROM tbl_catalago_cuentas WHERE CODIGO_CUENTA = '$CODIGO_CUENTA'");
 	$nr = mysqli_num_rows($querycodigo);
@@ -72,8 +72,8 @@ if (!empty($_POST)) {
 	$querynombre 	= mysqli_query($conn, "SELECT * FROM tbl_catalago_cuentas WHERE CUENTA = '$CUENTA'");
 	$nr1 = mysqli_num_rows($querynombre);
 	if ($nr == 0 and $nr1 == 0) {
-		$query_insert = mysqli_query($conn, "INSERT INTO tbl_catalago_cuentas (CODIGO_CUENTA,Id_Usuario,CUENTA,Mayor,Movimiento,Estado_Cuenta)
-																	VALUES('$CODIGO_CUENTA','$iduser','$CUENTA','NULL','$MOVIMIENTO','$ESTADO_CUENTA')");
+		$query_insert = mysqli_query($conn, "INSERT INTO tbl_catalago_cuentas (CODIGO_CUENTA,Id_Usuario,CUENTA,Estado_Cuenta)
+																	VALUES('$CODIGO_CUENTA','$iduser','$CUENTA','$ESTADO_CUENTA')");
 		if ($query_insert) {
 			echo "<script> alert('Cuenta Registrado Exitosamente');window.location= 'Gestion_CatalogoCuenta.php' </script>";
 		}
