@@ -94,7 +94,7 @@ $numero = 99999.99;
                     ?>
                         <a href="Nuevo_Cliente.php" input type="submit" class="btn btn-success" Value="Crear Nuevo Cliente"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Cliente</a>
                         <?php } ?>
-                        <a class="btn btn-warning" href="reporte_cliente.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                        <a class="btn btn-warning" href="reporte_cliente.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte pdf</a>
                         <a class="btn btn-success" href="reporte_excel_clientes.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
                         <a align="rigth" href="Gestion_Clientes_Inact.php"><button type="submit" class="btn btn-info"><i class="fa fa-times" aria-hidden="true"></i> Clientes Inactivos</button></a>
                 </div>
