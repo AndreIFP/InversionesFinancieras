@@ -37,7 +37,7 @@ function Header()
    }
   
   $this->SetFont('Arial','',8);
-  $this->Cell(89);
+  $this->Cell(60);
   $this->Cell(8,10, utf8_decode($Direccion),0,7, 45);
   $this->Ln(0);
 
@@ -49,7 +49,7 @@ function Header()
   }
 
   $this->SetFont('Arial','',8);
-  $this->Cell(86);
+  $this->Cell(78);
   $this->Cell(8,0, utf8_decode('Teléfono: ' .$Telefono ),0,7);
   $this->Ln(4);
 
@@ -73,7 +73,7 @@ function Header()
     $this->Ln(7);
 
     $this->SetFont('Arial','',14);
-    $this->Cell(40);
+    $this->Cell(80);
     $this->Cell(8,0, utf8_decode($empresa=$_SESSION['empresa'] ),0,7);
     $this->Ln(2);
 
@@ -139,13 +139,13 @@ $pdf->SetFont('Arial','',14);
   while ($fila = $resultado1->fetch_assoc()) {
     $pdf->setX(60);
     $pdf->Cell(50, 5, utf8_decode("Activo"), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['Activo']), 1, 1, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Activo']), 1, 1, "R",0);
     $pdf->setX(60);
     $pdf->Cell(50, 5, utf8_decode("Pasivo"), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['Pasivo']), 1, 1, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Pasivo']), 1, 1, "R",0);
     $pdf->setX(60);
     $pdf->Cell(50, 5, utf8_decode("Patrimonio"), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['Patrimonio']), 1, 1, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Patrimonio']), 1, 1, "R",0);
 }
 
 

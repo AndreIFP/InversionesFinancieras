@@ -74,7 +74,7 @@ function Header()
     $this->Ln(7);
 
     $this->SetFont('Arial','',14);
-    $this->Cell(70);
+    $this->Cell(100);
     $this->Cell(8,0, utf8_decode($empresa=$_SESSION['empresa'] ),0,7);
     $this->Ln(10);
     

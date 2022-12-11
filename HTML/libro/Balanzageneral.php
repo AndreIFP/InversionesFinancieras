@@ -160,11 +160,11 @@ WHERE Id_cliente=$cliente");
 
           
               <td >
-           Activos <center><?php echo    $Activo?></center>
+              <strong>Activos <center><?php echo    $Activo?></center></strong>
 
-         Pasivos <center><?php echo   $Pasivo  ?></center>
+              <strong> Pasivos <center><?php echo   $Pasivo  ?></center></strong>
               
-          Patrimonio <center><?php echo  $Patrimonio ?></center>
+              <strong>Patrimonio <center><?php echo  $Patrimonio ?></center></strong>
 
         
               </td>

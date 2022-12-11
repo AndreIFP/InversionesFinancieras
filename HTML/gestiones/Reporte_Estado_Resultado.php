@@ -39,7 +39,7 @@ function Header()
     }
     
     $this->SetFont('Arial','',8);
-    $this->Cell(90);
+    $this->Cell(60);
     $this->Cell(8,10, utf8_decode($Direccion),0,7, 45);
     $this->Ln(0);
 
@@ -51,7 +51,7 @@ function Header()
     }
     
     $this->SetFont('Arial','',8);
-    $this->Cell(86);
+    $this->Cell(78);
     $this->Cell(8,0, utf8_decode('Teléfono: ' .$Telefono ),0,7);
     $this->Ln(4);
 
@@ -73,7 +73,7 @@ function Header()
     $this->Ln(7);
 
     $this->SetFont('Arial','',14);
-    $this->Cell(40);
+    $this->Cell(75);
     $this->Cell(8,0, utf8_decode($empresa=$_SESSION['empresa'] ),0,7);
     $this->Ln(2);
 
@@ -140,56 +140,56 @@ $pdf->SetFont('Arial','',14);
   while ($fila = $resultado1->fetch_assoc()) {
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Ingresos"), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['Ingresos']), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Ingresos']), 1, 0, "R",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 1, "B",0);
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Costo Ventas"), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['CostoVentas']), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['CostoVentas']), 1, 0, "R",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 1, "B",0);
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Utilidad o pérdida bruta"), 1, 0, "B",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['UtilidadBruta']), 1, 1, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['UtilidadBruta']), 1, 1, "R",0);
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Gastos de ventas"), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['Gastosventas']), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Gastosventas']), 1, 0, "R",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 1, "B",0);
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Gastos de administracion"), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['Gastosadministracion']), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Gastosadministracion']), 1, 0, "R",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 1, "B",0);
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Gastos financieros"), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['Gastosfinancieros']), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Gastosfinancieros']), 1, 0, "R",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 1, "B",0);
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Otros gastos"), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['OtrosGastos']), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['OtrosGastos']), 1, 0, "R",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 1, "B",0);
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Gastos operacionales"), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['GastosOperacionales']), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['GastosOperacionales']), 1, 0, "R",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 1, "B",0);
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Utilidad o pérdida de operación"), 1, 0, "B",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['Up_capital']), 1, 1, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Up_capital']), 1, 1, "R",0);
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Otros ingresos"), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['Otrosingresos']), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Otrosingresos']), 1, 0, "R",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 1, "B",0);
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Utilidad o pérdida antes de impuesto"), 1, 0, "B",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['Up_isr']), 1, 1, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Up_isr']), 1, 1, "R",0);
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Impuesto sobre la renta"), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['ISV']), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['ISV']), 1, 0, "R",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 1, "B",0);
     $pdf->setX(15);
     $pdf->Cell(80, 5, utf8_decode("Utilidad o pérdida neta"), 1, 0, "B",0);
     $pdf->Cell(50, 5, utf8_decode(" "), 1, 0, "B",0);
-    $pdf->Cell(50, 5, utf8_decode($fila['UtilidadPerdida']), 1, 1, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['UtilidadPerdida']), 1, 1, "R",0);
     
 }
 
