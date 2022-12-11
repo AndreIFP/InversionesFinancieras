@@ -48,10 +48,9 @@ if (!empty($_POST)) {
 
 	$CODIGO_CUENTA  = $_POST['CODIGO_CUENTA'];
 	$CUENTA         = $_POST['CUENTA'];
-	$CLASIFICACION  = $_POST['CLASIFICACION'];
 	$ESTADO_CUENTA  = $_POST['Estado_Cuenta'];
 
-	$query = mysqli_query($conn, "UPDATE tbl_catalago_cuentas SET CODIGO_CUENTA='$CODIGO_CUENTA', CUENTA ='$CUENTA', CLASIFICACION ='$CLASIFICACION', Estado_Cuenta ='$ESTADO_CUENTA' WHERE CODIGO_CUENTA ='$CODIGO_CUENTA'");
+	$query = mysqli_query($conn, "UPDATE tbl_catalago_cuentas SET CODIGO_CUENTA='$CODIGO_CUENTA', CUENTA ='$CUENTA', Estado_Cuenta ='$ESTADO_CUENTA' WHERE CODIGO_CUENTA ='$CODIGO_CUENTA'");
 
 	if ($query) {
 		echo "<script> alert('Cuenta Actualizada Exitosamente');window.location= 'Gestion_CatalogoCuenta.php' </script>";
