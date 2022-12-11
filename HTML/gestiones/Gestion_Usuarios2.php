@@ -369,7 +369,7 @@ $numero = 99999.99;
 
                                                         <tr>
 
-                                                            <td style="width: 55%">
+                                                            <td style="width: 70%">
 
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon"><i class="fa fa-pencil-square"></i></span>
@@ -379,7 +379,7 @@ $numero = 99999.99;
 
                                                             </td>
 
-                                                            <td style="width: 45%">
+                                                            <td style="width: 30%">
 
                                                                 <div class="input-group">
 

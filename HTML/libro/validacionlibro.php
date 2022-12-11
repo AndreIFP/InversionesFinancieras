@@ -61,7 +61,7 @@ if (!isset($_SESSION['rol'])) {
                   <select class="form-control js-example-basic-single" name="Idcliente" id="Idcliente" required>
                     <option value="">Selecciona un cliente</option>
                     <?php
-                    $consulta = mysqli_query($conn, "SELECT * FROM tbl_clientes ;");
+                    $consulta = mysqli_query($conn, "SELECT * FROM tbl_clientes where Tipo_Cliente='ACTIVO';");
                     while ($row = mysqli_fetch_array($consulta)) {
                       $nombrepais = $row['Nombre_Empresa'];
                       $nombeid = $row['Id_Cliente'];
