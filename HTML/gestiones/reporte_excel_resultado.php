@@ -19,6 +19,8 @@ $_SESSION['fechai'];
 $_SESSION['fechaf'];
 $_SESSION['empresa'];
 $_SESSION['temporada'] = "10";
+$_SESSION['Idtemporada'];
+
 require ('../conexion.php');
 
 header("Content-Type: text/html;charset=utf-8");
@@ -32,6 +34,7 @@ $temporada = $_SESSION['temporada'];
 $fechai = $_SESSION['fechai'];
 $fechaf = $_SESSION['fechaf'];
 $empresa = $_SESSION['empresa'];
+$Idperiodo=$_SESSION['Idtemporada'];
 
 //Llanmado de total ingresos
 $sql = "SELECT ifnull(sum(tb.SAcreedor),0) as Ingresos  FROM tbl_catalago_cuentas tcc 
@@ -92,311 +95,86 @@ $fecha = date("d-m-Y h:i:s a");
 <label><center>Del <?php echo $fechai ?> AL <?php echo $fechaf ?></center></label>
 <br>
 
-<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-<?php
-      $sql1 = "SELECT tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2  
-      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where COD_CUENTA like '6401%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
-$resultado1 = mysqli_query($conn, $sql1);
+<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1 class="table">
+    <body>
 
-while ($rows = $resultado1->fetch_assoc()) {
-$Cod = $rows["CUENTA"];
-$cuen = $rows['SAcreedor'];
-
-      ?>
-        <tr>
-          <th></th>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo number_format($cuen,2) ?></th>
-        </tr>
       <?php
+      include("../conexion.php");
+      $sql = mysqli_query($conn, " select *  from tbl_eresultado te
+  where te.Id_Eresultado=(select MAX(Id_Eresultado) from tbl_eresultado te2 where Id_periodo='$Idperiodo' and Id_Cliente='$cliente')");
+      mysqli_close($conn);
+
+      $result = mysqli_num_rows($sql);
+      if ($result > 0) {
+        while ($rows = mysqli_fetch_array($sql)) {
+      ?>
+          <?php
+          $Ingresos = $rows["Ingresos"];
+          $CostoVentas = $rows["CostoVentas"];
+          $UtilidadBruta = $rows["UtilidadBruta"];
+          $Gastosventas = $rows["Gastosventas"];
+          $Gastosadministracion = $rows["Gastosadministracion"];
+          $Gastosfinancieros = $rows["Gastosfinancieros"];
+          $OtrosGastos = $rows["OtrosGastos"];
+          $GastosOperacionales = $rows["GastosOperacionales"];
+          $Up_capital = $rows["Up_capital"];
+          $Otrosingresos = $rows["Otrosingresos"];
+          $Up_isr = $rows["Up_isr"];
+          $ISV = $rows["ISV"];
+          $UtilidadPerdida = $rows["UtilidadPerdida"];
+          ?>
+          <tr>
+
+
+            <td>
+              <center> Ingresos <?php echo   $Ingresos ?></center>
+
+              <center> Costo Ventas <?php echo  $CostoVentas ?></center>
+
+              <center> Utilidad o pérdida bruta <?php echo $UtilidadBruta ?></center>
+
+              <center> Gastos de ventas <?php echo $Gastosventas ?></center>
+
+
+              <center> Gastos de administracion <?php echo $Gastosadministracion ?></center>
+
+
+              <center> Gastos financieros <?php echo $Gastosfinancieros ?></center>
+
+
+              <center> Otros gastos <?php echo $OtrosGastos ?></center>
+
+
+              <center> Gastos operacionales <?php echo  $GastosOperacionales ?></center>
+
+              <center> Utilidad o pérdida de operación <?php echo  $Up_capital ?></center>
+
+              <center> Otros ingresos <?php echo   $Otrosingresos ?></center>
+
+
+              <center> Utilidad o pérdida antes de impuesto <?php echo  $Up_isr ?></center>
+
+
+              <center> Impuesto sobre la renta <?php echo $ISV ?></center>
+
+
+
+              <center> Utilidad o pérdida neta <?php echo $UtilidadPerdida ?></center>
+            </td>
+
+          <?php
+        }
+          ?>
+
+
+          </tr>
+        <?php
       }
-      ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Total Ingresos</th>
-      <th><?php echo number_format($ingresos,2) ?></th>
-      </tr>
-</table>
-<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-<?php
-      $sqlcosto = "SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
-      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
-      where tcc.CODIGO_CUENTA  LIKE '6501%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
-      $costosv = mysqli_query($conn, $sqlcosto);
 
-      while ($rows = $costosv->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
+        ?>
+    </tbody>
+  </table>
 
-      ?>
-        <tr>
-          <th></th>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo number_format($cuen,2) ?></th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Total Costos De Ventas</th>
-      <th><?php echo number_format($Costos,2) ?></th>
-      </tr>
-</table>
-
-<!--UTILIDAD BRUTA-->
-<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>UTILIDAD BRUTA</th>
-      <th><?php echo number_format(($ingresos - $Costos),2) ?></th>
-      </tr>
-</table>
-
-<!--gastos operativos-->
-<?php
-  $sql3 = "SELECT ifnull(sum(tb.Sdebe),0) AS operativos   FROM tbl_catalago_cuentas tcc 
-  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6502%'";
-  $resultado3 = mysqli_query($conn, $sql3);
-  while ($rows = $resultado3->fetch_assoc()) {
-    $operativos  = $rows["operativos"];
-  }
-  ?>
-<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-<?php
-      $sqloperativos = "  SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
-      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
-      where tcc.CODIGO_CUENTA  LIKE '6502%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
-      $coperativos = mysqli_query($conn, $sqloperativos);
-
-      while ($rows = $coperativos->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
-
-      ?>
-        <tr>
-          <th></th>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo number_format($cuen,2) ?></th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Total Gastos Operativos</th>
-      <th><?php echo number_format($operativos,2) ?></th>
-      </tr>
-</table>
-<!--gastos ventas-->
-<?php
-  $sql4 = "SELECT ifnull(sum(tb.Sdebe),0) AS ventas  FROM tbl_catalago_cuentas tcc 
-  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6503%'";
-  $resultado4 = mysqli_query($conn, $sql4);
-  while ($rows = $resultado4->fetch_assoc()) {
-    $ventas  = $rows["ventas"];
-  }
-  ?>
-<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-<?php
-      $sqlventas = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
-      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
-      where tcc.CODIGO_CUENTA  LIKE '6503%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
-      $cventas = mysqli_query($conn, $sqlventas);
-
-      while ($rows = $cventas->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
-
-      ?>
-        <tr>
-          <th></th>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo number_format($cuen,2) ?></th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Total Gastos De Ventas</th>
-      <th><?php echo number_format($ventas,2) ?></th>
-      </tr>
-</table>
-
-<!--gastos financieros-->
-<?php
-  $sql5 = "SELECT ifnull(sum(tb.Sdebe),0) AS financieros   FROM tbl_catalago_cuentas tcc 
-  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6504%'";
-  $resultado5 = mysqli_query($conn, $sql5);
-  while ($rows = $resultado5->fetch_assoc()) {
-    $financieros = $rows["financieros"];
-  }
-  ?>
-<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-<?php
-      $sqlfinancieros = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
-      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
-      where tcc.CODIGO_CUENTA  LIKE '6504%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
-      $cfinancieros= mysqli_query($conn, $sqlfinancieros);
-
-      while ($rows =$cfinancieros->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
-
-      ?>
-        <tr>
-          <th></th>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo number_format($cuen,2) ?></th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Total Gastos Financieros</th>
-      <th><?php echo number_format($financieros,2) ?></th>
-      </tr>
-</table>
-
-<!--Otros gastos-->
-<?php
-  $sql6 = "SELECT ifnull(sum(tb.Sdebe),0) AS gastos  FROM tbl_catalago_cuentas tcc 
-  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6505%' ";
-  $resultado6 = mysqli_query($conn, $sql6);
-  while ($rows = $resultado6->fetch_assoc()) {
-    $gastos = $rows["gastos"];
-  }
-  ?>
-<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-<?php
-      $sqlotros = " SELECT tcc.CUENTA ,tb.Sdebe  from tbl_detallleasientos td 
-      join tbl_asientos ta on td.Id_asiento =ta.Id_asiento 
-      join tbl_catalago_cuentas tcc on tcc.CODIGO_CUENTA =td.descripcion 
-      join tbl_balanza tb  on tb.Id_detalle=td.Id_detalle 
-      where tcc.CODIGO_CUENTA  LIKE '6505%' and tb.Id_cliente=$cliente and tb.Sdebe!=0;";
-      $cotros= mysqli_query($conn, $sqlotros);
-
-      while ($rows =$cotros->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
-
-      ?>
-        <tr>
-          <th></th>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo number_format($cuen,2) ?></th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Total Otros Gastos</th>
-      <th><?php echo number_format($gastos,2) ?></th>
-      </tr>
-</table>
-
-<!--Otros INGRESOS-->
-<?php
-  $sqloingresos = "SELECT ifnull(sum(tb.SAcreedor),0) AS OINGRESOS  FROM tbl_catalago_cuentas tcc 
-  JOIN tbl_balanza tb on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-  where tb.Id_cliente=$cliente and  tcc.CODIGO_CUENTA LIKE  '6402%' ";
-  $resultadooingresos = mysqli_query($conn, $sqloingresos);
-  while ($rows = $resultadooingresos->fetch_assoc()) {
-    $OINGRESOS = $rows["OINGRESOS"];
-  }
-  ?>
-<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-<?php
-      $sqlotros = "SELECT tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2  
-      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where COD_CUENTA like '6402%' and Id_cliente=$cliente and tb2.SAcreedor!=0;";
-      $cotros= mysqli_query($conn, $sqlotros);
-
-      while ($rows =$cotros->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['SAcreedor'];
-
-      ?>
-        <tr>
-          <th></th>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo number_format($cuen,2) ?></th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Total Otros Ingresos</th>
-      <th><?php echo number_format($OINGRESOS,2) ?></th>
-      </tr>
-</table>
-
-<!--UTILIDAD -->
-<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-      <?php $UTILIDADANTESISV = ($ingresos+$OINGRESOS) - ($Costos + $operativos + $ventas + $financieros + $gastos) ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Utilidad Antes De Impuesto</th>
-      <th><?php echo number_format($UTILIDADANTESISV,2) ?></th>
-      </tr>
-</table>
-
-<!--IMPUESTO -->
-<?php
-  $sql7 = " SELECT valor as isv FROM tbl_parametros tp 
-  WHERE Parametro='Impuesto'";
-  $resultado7 = mysqli_query($conn, $sql7);
-  while ($rows = $resultado7->fetch_assoc()) {
-    $isv = $rows["isv"];
-  }
-  $ISV = $UTILIDADANTESISV  * ($isv / 100);
-  ?>
-  <table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-      <?php $UTILIDADANTESISV = ($ingresos+$OINGRESOS) - ($Costos + $operativos + $ventas + $financieros + $gastos) ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Impuesto</th>
-      <th><?php echo number_format($ISV,2) ?></th>
-      </tr>
-</table>
-
-  <!--IMPUESTO -->
-  <table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-      <?php $UTILIDADANTESISV = ($ingresos+$OINGRESOS) - ($Costos + $operativos + $ventas + $financieros + $gastos) ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Utilidad Neta</th>
-      <th><?php echo number_format(($UTILIDADANTESISV - $ISV),2) ?></th>
-      </tr>
-</table>
 <br>
 
 <label>Reporte creado por: <?php echo $user=$_SESSION['user'] ?></label>
