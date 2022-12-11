@@ -112,13 +112,14 @@ $_SESSION['Idtemporada'];
   <a class="btn btn-primary" href="BalanzaComp.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
   <br>
   <br>
-  <form method="post" action="proceresultado.php" enctype="multipart/form-data">
+  
     <div align="right">
-      <button type="submit" name="btnregistrarx" class="btn btn-info"><i class="fa fa-book"></i> Balance General</button>
+    <a class="btn btn-info" href="../libro/Balanzageneral.php"><i class="fa fa-book"> Estado de resultado</i> </a>
+      
       <a class="btn btn-warning" href="../gestiones/Reporte_Estado_Resultado.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
       <a class="btn btn-success" href="../gestiones/reporte_excel_resultado.php"><i class="fa fa-file-excel-o"></i> Excel</a>
     </div>
-  </form>
+    
   <hr>
   <center>
     <h4><strong><?php echo $empresa  ?></strong></h4>
@@ -126,18 +127,7 @@ $_SESSION['Idtemporada'];
     <h4><strong> del <?php echo $fechai  ?> al <?php echo $fechaf  ?></strong></h4>
   </center>
   <hr>
-  <?php
-  include("../conexion.php");
-
-  // INGRESOS
-  $sql = "select tcc.CUENTA ,tb2.Sdebe as ingresos from tbl_balanza tb2
-  join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-  where tb2.COD_CUENTA like '6401%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo";
-  $resultado = mysqli_query($conn, $sql);
-  while ($rows = $resultado->fetch_assoc()) {
-    $ingresos = $rows["ingresos"];
-  }
-  ?>
+  
 
   <!-- DESPLIEGUE DE INGRESOS-->
     <table class="table">
@@ -161,63 +151,34 @@ $_SESSION['Idtemporada'];
                 </tr>
             </thead>
             <tbody>
-      <?php
-      $sql1 = "select tcc.CUENTA,tb2.Sdebe from tbl_balanza tb2
-      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where tb2.COD_CUENTA like '6401%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo and tb2.Sdebe!=0";
-      $resultado1 = mysqli_query($conn, $sql1);
-
-      while ($rows = $resultado1->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
-
-      ?>
-        <tr>
-          <th> <?php echo  $Cod ?></th>
-          <th> <?php echo $cuen ?></th>
-          <th></th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tbody>
-    </table>
-    <?php
+      
+      
+            <?php
   include("../conexion.php");
 
-  // COSTOS
-  $sqlcosto = "select ifnull(sum(tb2.SAcreedor),0) as costo from tbl_balanza tb2 
-  where tb2.COD_CUENTA like '6501%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo";
-  $resultadocosto = mysqli_query($conn, $sqlcosto);
-  while ($rows = $resultadocosto->fetch_assoc()) {
-    $costo = $rows["costo"];
+  // INGRESOS
+  $sql = "select *  from tbl_eresultado te
+    where te.Id_Eresultado=(select MAX(Id_Eresultado) from tbl_eresultado te2 where Id_periodo='$Idperiodo' and Id_Cliente='$cliente');
+   
+  $resultado = mysqli_query($conn, $sql);
+  while ( $rows = $resultado->fetch_assoc()) {
+          $Ingresos = $rows["Ingresos"];
+          $CostoVentas = $rows["CostoVentas"];
+          $UtilidadBruta = $rows["UtilidadBruta"];
+          $Gastosventas = $rows["Gastosventas"];
+          $Gastosadministracion = $rows["Gastosadministracion"];
+          $Gastosfinancieros = $rows["Gastosfinancieros"];
+          $OtrosGastos = $rows["OtrosGastos"];
+          $GastosOperacionales = $rows["GastosOperacionales"];
+          $Up_capital = $rows["Up_capital"];
+          $GastosOperacionales = $rows["GastosOperacionales"];
+          $Up_isr = $rows["Up_isr"];
+          $ISV = $rows["ISV"];
+          $UtilidadPerdida = $rows["UtilidadPerdida"];
+
+
   }
-  ?>
-
-  <!-- DESPLIEGUE DE INGRESOS-->
-    <table class="table">
-    <thead >
-                <tr>
-                    <th>
-                        Costo De Venta 
-                    </th>
-                    <th style="width: 27%">
-                        <?php echo  $costo ?>
-                    </th>
-
-                </tr>
-            </thead>
-            <tbody>
-      <?php
-      $sql1 = "select tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2
-      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where tb2.COD_CUENTA like '6501%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo and tb2.Sdebe!=0";
-      $resultado1 = mysqli_query($conn, $sql1);
-
-      while ($rows = $resultado1->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['SAcreedor'];
-
+      
       ?>
         <tr>
           <th> <?php echo  $Cod ?></th>
@@ -228,380 +189,11 @@ $_SESSION['Idtemporada'];
       }
       ?>
       </tbody>
-    </table>
-
-    <!-- Utilidad-->
-    <table class="table">
-    <thead class="table-primary">
-                <tr>
-                    <th>
-                        Utilidad 
-                    </th>
-                    <th style="width: 15%">
-                        <?php echo  ($ingresos - $costo) ?>
-                    </th>
-
-                </tr>
-            </thead>
     </table>
     
-    <?php
-    // Gastos Operativos
-  $sqlopera = "select ifnull(sum(tb2.SAcreedor),0) as costo from tbl_balanza tb2 
-  where tb2.COD_CUENTA like '6502%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo";
-  $resultadoopera = mysqli_query($conn, $sqlopera);
-  while ($rows = $resultadoopera->fetch_assoc()) {
-    $opera = $rows["costo"];
-  }
-  ?>
 
   <!-- DESPLIEGUE DE INGRESOS-->
-    <table class="table">
-    <thead >
-                <tr>
-                    <th>
-                        Gastos Operativos 
-                    </th>
-                    <th style="width: 27%">
-                        <?php echo  $opera ?>
-                    </th>
-
-                </tr>
-            </thead>
-            <tbody>
-      <?php
-      $sql1 = "select tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2
-      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where tb2.COD_CUENTA like '6502%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo and tb2.Sdebe!=0";
-      $resultado1 = mysqli_query($conn, $sql1);
-
-      while ($rows = $resultado1->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['SAcreedor'];
-
-      ?>
-        <tr>
-          <th> <?php echo  $Cod ?></th>
-          <th> <?php echo $cuen ?></th>
-          <th></th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tbody>
-    </table>
-
-    <?php
-    // Gastos Venta
-  $sqlGV = "select ifnull(sum(tb2.SAcreedor),0) as costo from tbl_balanza tb2 
-  where tb2.COD_CUENTA like '6503%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo";
-  $resultadoGV = mysqli_query($conn, $sqlGV);
-  while ($rows = $resultadoGV->fetch_assoc()) {
-    $GV = $rows["costo"];
-  }
-  ?>
-
-  <!-- DESPLIEGUE DE INGRESOS-->
-    <table class="table">
-    <thead >
-                <tr>
-                    <th>
-                        Gastos De Venta 
-                    </th>
-                    <th style="width: 27%">
-                        <?php echo  $GV ?>
-                    </th>
-
-                </tr>
-            </thead>
-            <tbody>
-      <?php
-      $sql1 = "select tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2
-      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where tb2.COD_CUENTA like '6503%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo and tb2.Sdebe!=0";
-      $resultado1 = mysqli_query($conn, $sql1);
-
-      while ($rows = $resultado1->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['SAcreedor'];
-
-      ?>
-        <tr>
-          <th> <?php echo  $Cod ?></th>
-          <th> <?php echo $cuen ?></th>
-          <th> </th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tbody>
-    </table>
-
-    <?php
-    // Gastos Administración
-  $sqlGA = "select ifnull(sum(tb2.SAcreedor),0) as costo from tbl_balanza tb2 
-  where tb2.COD_CUENTA like '6504%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo";
-  $resultadoGA = mysqli_query($conn, $sqlGA);
-  while ($rows = $resultadoGA->fetch_assoc()) {
-    $GA = $rows["costo"];
-  }
-  ?>
-
-  <!-- DESPLIEGUE DE INGRESOS-->
-    <table class="table" >
-    <thead >
-                <tr>
-                    <th>
-                        Gastos De Administración 
-                    </th>
-                    <th style="width: 27%">
-                        <?php echo$GA ?>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-      <?php
-      $sql1 = "select tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2
-      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where tb2.COD_CUENTA like '6504%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo and tb2.Sdebe!=0";
-      $resultado1 = mysqli_query($conn, $sql1);
-
-      while ($rows = $resultado1->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['SAcreedor'];
-
-      ?>
-        <tr>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo $cuen ?></th>
-          <th> </th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tbody>
-    </table>
-
-    <?php
-    // Gastos Financieros
-  $sqlGF = "select ifnull(sum(tb2.SAcreedor),0) as costo from tbl_balanza tb2 
-  where tb2.COD_CUENTA like '6505%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo";
-  $resultadoGF = mysqli_query($conn, $sqlGF);
-  while ($rows = $resultadoGF->fetch_assoc()) {
-    $GF = $rows["costo"];
-  }
-  ?>
-
-  <!-- DESPLIEGUE DE INGRESOS-->
-    <table class="table">
-    <thead >
-                <tr>
-                    <th>
-                        Gastos Financieros
-                    </th>
-                    <th style="width: 27%">
-                        <?php echo  $GF ?>
-                    </th>
-
-                </tr>
-            </thead>
-            <tbody>
-      <?php
-      $sql1 = "select tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2
-      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where tb2.COD_CUENTA like '6505%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo and tb2.Sdebe!=0";
-      $resultado1 = mysqli_query($conn, $sql1);
-
-      while ($rows = $resultado1->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['SAcreedor'];
-
-      ?>
-        <tr>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo $cuen ?></th>
-          <th> </th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tbody>
-    </table>
-
-    <?php
-    // Otros Gastos
-  $sqlOG = "select ifnull(sum(tb2.SAcreedor),0) as costo from tbl_balanza tb2 
-  where tb2.COD_CUENTA like '6506%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo";
-  $resultadoOG = mysqli_query($conn, $sqlOG);
-  while ($rows = $resultadoOG->fetch_assoc()) {
-    $OG = $rows["costo"];
-  }
-  ?>
-
-  <!-- DESPLIEGUE DE INGRESOS-->
-    <table class="table">
-    <thead >
-                <tr>
-                    <th>
-                        Otros Gastos
-                    </th>
-                    <th style="width: 27%">
-                        <?php echo  $OG ?>
-                    </th>
-
-                </tr>
-            </thead>
-            <tbody>
-      <?php
-      $sql1 = "select tcc.CUENTA,tb2.SAcreedor  from tbl_balanza tb2
-      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where tb2.COD_CUENTA like '6506%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo and tb2.Sdebe!=0";
-      $resultado1 = mysqli_query($conn, $sql1);
-
-      while ($rows = $resultado1->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['SAcreedor'];
-
-      ?>
-        <tr>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo $cuen ?></th>
-          <th> </th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tbody>
-    </table>
-
-    <?php
-    // Otros Ingresos
-  $sqlOI = "select ifnull(sum(tb2.Sdebe),0) as costo from tbl_balanza tb2 
-  where tb2.COD_CUENTA like '6402%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo";
-  $resultadoOI = mysqli_query($conn, $sqlOI);
-  while ($rows = $resultadoOI->fetch_assoc()) {
-    $OI = $rows["costo"];
-  }
-  ?>
-
-  <!-- DESPLIEGUE DE INGRESOS-->
-    <table class="table">
-    <thead >
-                <tr>
-                    <th>
-                        Otros Ingresos
-                    </th>
-                    <th style="width: 27%">
-                        <?php echo  $OI ?>
-                    </th>
-
-                </tr>
-            </thead>
-            <tbody>
-      <?php
-      $sql1 = "select tcc.CUENTA,tb2.Sdebe  from tbl_balanza tb2
-      join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where tb2.COD_CUENTA like '6402%' and tb2.Id_cliente=$cliente and tb2.Id_periodo=$Idperiodo and tb2.Sdebe!=0";
-      $resultado1 = mysqli_query($conn, $sql1);
-
-      while ($rows = $resultado1->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
-
-      ?>
-        <tr>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo $cuen ?></th>
-          <th> </th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tbody>
-    </table>
-
-    <!-- Utilidad Antes De Impuesto-->
-    <?php $UTILIDADANTESISV = 0;
-    $UTILIDADANTESISV = ($ingresos + $OI) - ($costo + $opera + $GV + $GF + $OG) ?>
-    <table class="table">
-    <thead class="table-primary">
-                <tr>
-                    <th>
-                        Utilidad Antes De Impuesto 
-                    </th>
-                    <th style="width: 15%">
-                        <?php echo $UTILIDADANTESISV ?>
-                    </th>
-
-                </tr>
-            </thead>
-    </table>
-
-    <!--Impuesto-->
-    <?php
-  $sql7 = " SELECT valor as isv FROM tbl_parametros tp 
-  WHERE Parametro='Impuesto'";
-  $resultado7 = mysqli_query($conn, $sql7);
-  while ($rows = $resultado7->fetch_assoc()) {
-    $isv = $rows["isv"];
-  }
-  $ISV = $UTILIDADANTESISV  * ($isv / 100);
-?>
-    <table class="table">
-    <thead >
-                <tr>
-                    <th>
-                        Impuesto 
-                    </th>
-                    <th style="width: 27%">
-                        <?php echo $ISV ?>
-                    </th>
-
-                </tr>
-            </thead>
-    </table>
-
-    <!--Utilidad Neta-->
-    <?php
-  $UTILIDADNETA = 0;
-  $UTILIDADNETA = ($UTILIDADANTESISV - $ISV);
-?>
-    <table class="table">
-    <thead class="table-primary">
-                <tr>
-                    <th>
-                        UTILIDAD O PERDIDA DEL PERIODO
-                    </th>
-                    <th style="width: 15%">
-                        <?php echo $UTILIDADNETA ?>
-                    </th>
-
-                </tr>
-            </thead>
-    </table>
-
-    <?php
-    $_SESSION['impu'] = $ISV;
-    $_SESSION['neta'] = $UTILIDADNETA;
-    ?>
-
-
+   
   <!-- FUNCION-->
-  <script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-        } else {
-          panel.style.display = "block";
-        }
-      });
-    }
-  </script>
   </secction>
   <?php include 'barralateralfinal.php'; ?>

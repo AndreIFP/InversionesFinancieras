@@ -164,7 +164,13 @@ $fecha = date('Y-m-d h:i:s');
       <?php if ($_SESSION['permisos'][M_LIBRO_DIARIO] and $_SESSION['permisos'][M_LIBRO_DIARIO]['w'] == 1) {
 
       ?>
-          <a class="btn btn-info" href="../libro/Resultado.php"><i class="fa fa-book"> Estado de resultado</i> </a>
+          <form method="post" action="proceresultado.php" enctype="multipart/form-data">
+    <div align="right">
+      <button type="submit" name="btnregistrarx" class="btn btn-info"><i class="fa fa-book"></i> Estado de resultado</button>
+      <a class="btn btn-warning" href="../gestiones/Reporte_Estado_Resultado.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
+      <a class="btn btn-success" href="../gestiones/reporte_excel_resultado.php"><i class="fa fa-file-excel-o"></i> Excel</a>
+    </div>
+          </form>
 
       <?php } ?>
       <!--form method="post" action="cierrecontable.php" enctype="multipart/form-data">
