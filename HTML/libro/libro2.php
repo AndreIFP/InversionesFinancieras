@@ -313,8 +313,8 @@ $asiento2 = $_REQUEST['asiento'];
  </div>
 
                 <div class="col-md-12">
-                <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> CERRAR</button>
                   <button class="btn btn-primary" id="daterange-btn" name="insertar"><i class="fa fa-floppy-o" aria-hidden="true"></i> Agregar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> CERRAR</button>
                 </div>
 
               </div>
