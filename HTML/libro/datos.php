@@ -55,7 +55,7 @@ $cliente=$_POST['cliente'];
 	include('../conexion.php');
 	  
 	  #consulta de todos los paises
-	  $consulta2=mysqli_query($conn,"SELECT * FROM rangosdeperiodos where Id_Cliente=$cliente ;" );
+	  $consulta2=mysqli_query($conn,"SELECT * FROM rangosdeperiodos where Id_Cliente=$cliente order by Fechainicio desc;" );
 	  while($row=mysqli_fetch_array($consulta2)){
 		  $epais=$row['Fechainicio']; 
 		  $ecity=$row['Fechafinal'];
