@@ -71,16 +71,21 @@ if (!empty($_POST)) {
          Desencripta el texto recibido
          */
         
-         /*
-         Genera un valor para IV
-         */
-         $getIV = function () use ($method) {
-             return base64_encode(openssl_random_pseudo_bytes(openssl_cipher_iv_length($method)));
-         };
-        
+        $desencriptar = function ($valor) use ($method, $clave, $iv) {
+            $encrypted_data = base64_decode($valor);
+            return openssl_decrypt($valor, $method, $clave, false, $iv);
+        };
+        /*
+        Genera un valor para IV
+        */
+        $getIV = function () use ($method) {
+            return base64_encode(openssl_random_pseudo_bytes(openssl_cipher_iv_length($method)));
+        };
+
          $dato = $contra ;
          //Encripta informaciÃ³n:
             $dato_encriptado = $encriptar($dato);
+            $dato_desencriptado = $desencriptar( $dato_encriptado);
 
         if (!preg_match("/[a-zA-ZñÑáéíóúÁÉÍÓÚ ]/", $Nombre_Usuario)) {
             $alert = '<p class="msg_error"> El Nombre Solo Recibe Letras.</p>';
@@ -152,6 +157,38 @@ if (!isset($_SESSION['rol'])) {
         die();
     }
 }
+
+
+$clave  = 'Una cadena, muy, muy larga para mejorar la encriptacion';
+        //Metodo de encriptaciÃ³n
+        $method = 'aes-256-cbc';
+        // Puedes generar una diferente usando la funcion $getIV()
+        $iv = base64_decode("C9fBxl1EWtYTL1/M8jfstw");
+         /*
+         Encripta el contenido de la variable, enviada como parametro.
+          */
+         $encriptar = function ($valor) use ($method, $clave, $iv) {
+             return openssl_encrypt ($valor, $method, $clave, false, $iv);
+         };
+         /*
+         Desencripta el texto recibido
+         */
+        
+        $desencriptar = function ($valor) use ($method, $clave, $iv) {
+            $encrypted_data = base64_decode($valor);
+            return openssl_decrypt($valor, $method, $clave, false, $iv);
+        };
+        /*
+        Genera un valor para IV
+        */
+        $getIV = function () use ($method) {
+            return base64_encode(openssl_random_pseudo_bytes(openssl_cipher_iv_length($method)));
+        };
+
+         $dato = '$contra ';
+         //Encripta informaciÃ³n:
+        
+            $dato_desencriptado = $desencriptar( $contra);
 ?>
 
 
@@ -257,7 +294,7 @@ if (!isset($_SESSION['rol'])) {
 
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                            <input id="inpucontracon" type="password" Class="form-control" name="Contraseña" placeholder="Contraseña" value="<?php echo $contra ?>" maxlength="200" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}" title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. " />
+                                            <input id="inpucontracon" type="password" Class="form-control" name="Contraseña" placeholder="Contraseña" value="<?php echo $dato_desencriptado ?>" maxlength="200" required pattern="[A-Za-z0-9/@/`/!/#/$/%/^/~/&/*/_/-/=/+/|/;/:/'/,/./>/</?/¡/¿/]{8,30}" title="Letras Mayusculas y Minusculas , números. Incluir un caracter especial. Tamaño mínimo: 8. Tamaño máximo: 30. " />
 
                                         </div>
 

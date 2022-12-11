@@ -156,7 +156,7 @@ if (!isset($_SESSION['rol'])) {
 
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-check"></i></span>
-												<input type="text" class="form-control" name="Preguntas" maxlength="30" id="Preguntas" placeholder="Pregunta" value="<?php echo $Nombre ?>" size="40">
+												<input type="text" class="form-control" name="Preguntas" maxlength="60" id="Preguntas" placeholder="Pregunta" value="<?php echo $Nombre ?>" size="40">
 		
 											</div>
 

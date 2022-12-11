@@ -142,7 +142,7 @@ if ($result_sql == 0) {
 											<div class="input-group">
 
 												<span class="input-group-addon"><i class="fa fa-key"></i></span>
-												<input type="text" class="form-control" name="Valor" maxlength="40" id="Valor" placeholder="Valor Parametro" value="<?php echo $Valor ?>" size="40">
+												<input type="text" class="form-control" name="Valor" maxlength="120" id="Valor" placeholder="Valor Parametro" value="<?php echo $Valor ?>" size="40">
 
 											</div>
 
