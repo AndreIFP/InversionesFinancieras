@@ -481,7 +481,7 @@ $user = $_SESSION['user'];
                 if (isset($_SESSION['permisos'][M_INVENTARIOS]) and $_SESSION['permisos'][M_INVENTARIOS]['r'] == 1) {
                 ?>
                     <li class="" style="height: 50px;">
-                        <a href="gestiones/Gestion_Inventario.php" style="align-items: center;">
+                        <a href="gestiones/Gestion_Inventario.php" style="align-items: center; height: 50px;">
                             <i class='bx bx-pie-chart-alt icon'></i>
                             <span class="text nav-text">Insumos</span>
                         </a>
@@ -492,30 +492,18 @@ $user = $_SESSION['user'];
                 if (isset($_SESSION['permisos'][M_GESTION_CLIENTE]) and $_SESSION['permisos'][M_GESTION_CLIENTE]['r'] == 1) {
                 ?>
                     <li class="" style="height: 50px;">
-                        <a href="gestiones/Gestion_Clientes.php" style="align-items: center;">
+                        <a href="gestiones/Gestion_Clientes.php" style="align-items: center; height: 50px;">
                             <i class='bx bxs-user-account icon'></i>
                             <span class="text nav-text">Clientes</span>
                         </a>
                     </li>
                 <?php } ?>
 
-
-
-
-                <!-- DESPUES -->
+                <!-- Gestiones De Contabilidad -->
                 <?php
                 if ((isset($_SESSION['permisos'][M_GESTION_CAT_CUENTA]) and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_GESTION_FACTURAS]) and $_SESSION['permisos'][M_GESTION_FACTURAS]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_INVENTARIOS]) and $_SESSION['permisos'][M_INVENTARIOS]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_LIBRO_MAYOR]) and $_SESSION['permisos'][M_LIBRO_MAYOR]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_GESTION_BITACORA]) and $_SESSION['permisos'][M_GESTION_BITACORA]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_GESTION_PARAMETROS]) and $_SESSION['permisos'][M_GESTION_PARAMETROS]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_GESTION_PREGUNTAS]) and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_GESTION_PREG_USUARIOS]) and $_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_GESTION_USUARIOS]) and $_SESSION['permisos'][M_GESTION_USUARIOS]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_GESTION_ROLES]) and $_SESSION['permisos'][M_GESTION_ROLES]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_GESTION_OBJETOS]) and $_SESSION['permisos'][M_GESTION_OBJETOS]['r']) == 1
-                ) {
+                    (isset($_SESSION['permisos'][M_LIBRO_MAYOR]) and $_SESSION['permisos'][M_LIBRO_MAYOR]['r'] == 1) 
+                    ) {
                 ?>
 
                     <li class="" class="fa fa-caret-down">
@@ -544,6 +532,22 @@ $user = $_SESSION['user'];
 
                         </ul>
                     </li>
+                    <?php } ?>
+
+
+
+                <!-- Gestiones De Seguridad -->
+                <?php
+                if ((isset($_SESSION['permisos'][M_GESTION_FACTURAS]) and $_SESSION['permisos'][M_GESTION_FACTURAS]['r'] == 1) ||
+                    (isset($_SESSION['permisos'][M_GESTION_BITACORA]) and $_SESSION['permisos'][M_GESTION_BITACORA]['r'] == 1) ||
+                    (isset($_SESSION['permisos'][M_GESTION_PARAMETROS]) and $_SESSION['permisos'][M_GESTION_PARAMETROS]['r'] == 1) ||
+                    (isset($_SESSION['permisos'][M_GESTION_PREGUNTAS]) and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['r'] == 1) ||
+                    (isset($_SESSION['permisos'][M_GESTION_PREG_USUARIOS]) and $_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['r'] == 1) ||
+                    (isset($_SESSION['permisos'][M_GESTION_USUARIOS]) and $_SESSION['permisos'][M_GESTION_USUARIOS]['r'] == 1) ||
+                    (isset($_SESSION['permisos'][M_GESTION_ROLES]) and $_SESSION['permisos'][M_GESTION_ROLES]['r'] == 1) ||
+                    (isset($_SESSION['permisos'][M_GESTION_OBJETOS]) and $_SESSION['permisos'][M_GESTION_OBJETOS]['r']) == 1
+                ) {
+                ?>
 
                     <li class="" class="fa fa-caret-down">
 
@@ -625,7 +629,7 @@ $user = $_SESSION['user'];
 
 
                     <li class="" style="height: 50px; display: flex;">
-                        <a href="cerrarSesion.php" style="align-items: center;">
+                        <a href="cerrarSesion.php" style="align-items: center; height: 50px;">
                             <i class='bx bx-log-out icon'></i>
                             <span class="text nav-text">Cerra Sesión</span>
                         </a>
