@@ -141,7 +141,7 @@ $numero = 99999.99;
                 <tbody>
                     <?php
                     //Paginador
-                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_usuario WHERE Id_Usuario = Id_Usuario AND Estado_Usuario = 'Activo' ");
+                    $sql_registe = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM tbl_usuario WHERE Id_Usuario = Id_Usuario AND Estado_Usuario = 'Activo' or  Estado_Usuario = 'NUEVO' ");
                     $result_register = mysqli_fetch_array($sql_registe);
                     $total_registro = $result_register['total_registro'];
 
