@@ -120,17 +120,16 @@ $_SESSION['Idtemporada'];
     <a class="btn btn-success" href="../gestiones/reporte_excel_resultado.php"><i class="fa fa-file-excel-o"></i> Excel</a>
   </div>
 
-  <hr>
   <center>
     <h4><strong><?php echo $empresa  ?></strong></h4>
     <h4><strong>Estado De Resultado</strong></h4>
     <h4><strong> del <?php echo $fechai  ?> al <?php echo $fechaf  ?></strong></h4>
   </center>
-  <hr>
+
 
 
   <!-- DESPLIEGUE DE INGRESOS-->
-  <table class="table">
+  <table class="table"><center>
     <thead>
       <?php
       if (empty($ingresos)) {
@@ -176,12 +175,12 @@ $_SESSION['Idtemporada'];
           <tr>
 
 
-            <td>
-              Ingresos <center><?php echo   $Ingresos ?></center>
+         <td>
+             <strong>Ingresos <center><?php echo   $Ingresos ?></center></strong>
 
               Costo Ventas <center><?php echo  $CostoVentas ?></center>
 
-              Utilidad o pérdida bruta <center><?php echo $UtilidadBruta ?></center>
+              <strong> Utilidad o pérdida bruta <center><?php echo $UtilidadBruta ?></center></strong>
 
               Gastos de ventas <center><?php echo $Gastosventas ?></center>
 
@@ -195,9 +194,9 @@ $_SESSION['Idtemporada'];
               Otros gastos <center><?php echo $OtrosGastos ?></center>
 
 
-              Gastos operacionales <center><?php echo  $GastosOperacionales ?></center>
+              <strong> Gastos operacionales <center><?php echo  $GastosOperacionales ?></center></strong>
 
-              Utilidad o pérdida de operación <center><?php echo  $Up_capital ?></center>
+              <strong>Utilidad o pérdida de operación <center><?php echo  $Up_capital ?></center></strong>
 
               Otros ingresos <center><?php echo   $Otrosingresos ?></center>
 
@@ -209,7 +208,7 @@ $_SESSION['Idtemporada'];
 
 
 
-              Utilidad o pérdida neta <center><?php echo $UtilidadPerdida ?></center>
+             <strong>Utilidad o pérdida neta <center><?php echo $UtilidadPerdida ?></center></strong>
             </td>
 
           <?php
@@ -223,7 +222,7 @@ $_SESSION['Idtemporada'];
 
         ?>
     </tbody>
-  </table>
+    </center></table>
 
   <!-- FUNCION-->
   </secction>

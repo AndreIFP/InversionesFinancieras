@@ -138,7 +138,7 @@ font-size: 12px; ">
                                                                         </div>
                                                                         <div class="modal-body">
 
-                                                                            <h5>Espere mientras se restaura la base de Datos..</h5>
+                                                                            <h5>Espere mientras se restaura la base de datos, el sistema reiniciará la sesión.</h5>
 
                                                                             <script>
                                                                                 function editar(este) {
