@@ -121,174 +121,66 @@ WHERE Id_cliente=$cliente");
     <h4><strong> del <?php echo $fechai  ?> al <?php echo $fechaf  ?></strong></h4>
   </center>
   <hr>
-  <?php
-  include("../conexion.php");
-
- // Activos
- $sqlactivo = " select ifnull(sum(tb2.Sdebe),0) as Activos from tbl_balanza tb2 
- where tb2.COD_CUENTA like '1%' and tb2.Id_cliente='$cliente' and tb2.Id_periodo='$Idperiodo'";
- $resultadoactivo = mysqli_query($conn, $sqlactivo);
- while ($rows = $resultadoactivo->fetch_assoc()) {
-   $activo= $rows["Activos"];
- }
- ?>
-
- <!-- DESPLIEGUE DE INGRESOS-->
-   <table class="table">
-   <thead class="table-primary">
-               <tr>
-                   <th>
-                       Activos
-                   </th>
-                   <th>
-                    </th>
-                   <th style="width: 15%">
-                       <?php echo   $activo?>
-                   </th>
-
-               </tr>
-           </thead>
-           <tbody>
-     <?php
-     $sql1 = "select tcc.CUENTA,tb2.Sdebe  from tbl_balanza tb2
-     join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-     where tb2.COD_CUENTA like '1%' and tb2.Id_cliente='$cliente' and tb2.Id_periodo='$Idperiodo' and tb2.Sdebe!=0  ";
-     $resultado1 = mysqli_query($conn, $sql1);
-
-     while ($rows = $resultado1->fetch_assoc()) {
-       $Cod = $rows["CUENTA"];
-       $cuen = $rows['Sdebe'];
-
-     ?>
-       <tr>
-         <th> <?php echo  $Cod ?></th>
-         <th> <?php echo $cuen ?></th>
-         <th></th>
-       </tr>
-     <?php
-     }
-     ?>
-     </tbody>
-   </table>
-
-
+  <!-- DESPLIEGUE DE INGRESOS-->
+  <table class="table">
+    <thead  >
+      <?php
+      if(empty($ingresos)){
+        $ingresos = 0;
+      }
+      ?>
+                <tr>
+                   
+            
+                </tr>
+            </thead>
+            <tbody>
+      
+      
+            
+            
+ 
 <?php
-   // Pasivo
- $sqlpasivos = "select ifnull(sum(tb2.SAcreedor),0) as Pasivos from tbl_balanza tb2 
- where tb2.COD_CUENTA like '2%' and tb2.Id_cliente='$cliente' and tb2.Id_periodo='$Idperiodo'";
- $resultadopasivos = mysqli_query($conn, $sqlpasivos);
- while ($rows = $resultadopasivos->fetch_assoc()) {
-   $pasivos= $rows["Pasivos"];
- }
- ?>
+ include("../conexion.php");
+  $sql = mysqli_query($conn, " select *  from tbl_balanzageneral tb 
+  where tb.IdBalanzaG =(select MAX(IdBalanzaG) from tbl_balanzageneral te2 where te2.Id_periodo='$Idperiodo' and te2.Id_Cliente='$cliente')");
+  mysqli_close($conn);
 
- <!-- DESPLIEGUE DE INGRESOS-->
-   <table class="table">
-   <thead class="table-primary">
-               <tr>
-                   <th>
-                       Pasivos
-                   </th>
-                   <th>
-                    </th>
-                   <th style="width: 15%">
-                       <?php echo   $pasivos?>
-                   </th>
+  $result = mysqli_num_rows($sql);
+  if ($result > 0) {
+      while ($rows = mysqli_fetch_array($sql)) {
+  ?>
+  <?php
+          $Activo = $rows["Activo"];
+          $Pasivo = $rows["Pasivo"];
+          $Patrimonio = $rows["Patrimonio"];
+          
+          ?>
+          <tr>
 
-               </tr>
-           </thead>
-           <tbody>
-     <?php
-     $sql2 = "select tcc.CUENTA,tb2.SAcreedor from tbl_balanza tb2
-     join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-     where tb2.COD_CUENTA like '2%' and tb2.Id_cliente='$cliente' and tb2.Id_periodo='$Idperiodo' and tb2.SAcreedor!=0  ";
-     $resultado1 = mysqli_query($conn, $sql2);
+          
+              <td >
+           Activos <center><?php echo    $Activo?></center>
 
-     while ($rows = $resultado1->fetch_assoc()) {
-       $Cod = $rows["CUENTA"];
-       $cuen = $rows['SAcreedor'];
+         Pasivos <center><?php echo   $Pasivo  ?></center>
+              
+          Patrimonio <center><?php echo  $Patrimonio ?></center>
 
-     ?>
-       <tr>
-         <th> <?php echo  $Cod ?></th>
-         <th> <?php echo $cuen ?></th>
-         <th></th>
-       </tr>
-     <?php
-     }
-     ?>
-     </tbody>
-   </table>
+        
+              </td>
+              
+                  <?php
+              }
+                  ?>
 
 
-   <?php
-   // patrimonio
- $sqlpatrimonio = "select ifnull(sum(tb2.SAcreedor),0) as Capital from tbl_balanza tb2 
- where tb2.COD_CUENTA like '3%' and tb2.Id_cliente='$cliente' and tb2.Id_periodo='$Idperiodo'";
- $resultadopatrimonio = mysqli_query($conn, $sqlpatrimonio);
- while ($rows =$resultadopatrimonio ->fetch_assoc()) {
-   $patrimonio= $rows["Capital"];
- }
- ?>
-
- <!-- DESPLIEGUE DE INGRESOS-->
-   <table class="table">
-   <thead class="table-primary">
-               <tr>
-                   <th>
-                       Patrimonio
-                   </th>
-                   <th>
-                   </th>
-                   <th style="width: 15%">
-                       <?php echo  $patrimonio?>
-                   </th>
-
-               </tr>
-           </thead>
-           <tbody>
-     <?php
-     $sql2 = "select tcc.CUENTA,tb2.SAcreedor from tbl_balanza tb2
-     join tbl_catalago_cuentas tcc on tb2.COD_CUENTA=tcc.CODIGO_CUENTA 
-     where tb2.COD_CUENTA like '3%' and tb2.Id_cliente='$cliente' and tb2.Id_periodo='$Idperiodo' and tb2.SAcreedor!=0  ";
-     $resultado1 = mysqli_query($conn, $sql2);
-
-     while ($rows = $resultado1->fetch_assoc()) {
-       $Cod = $rows["CUENTA"];
-       $cuen = $rows['SAcreedor'];
-
-     ?>
-       <tr>
-         <th> <?php echo  $Cod ?></th>
-         <th> <?php echo $cuen ?></th>
-         <th></th>
-       </tr>
-     <?php
-     }
-     ?>
-     </tbody>
-   </table>
-
-
-
-
-
-  <!-- FUNCION-->
-  <script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-        } else {
-          panel.style.display = "block";
-        }
-      });
-    }
-  </script>
+          </tr>
+  <?php
+      }
+  
+  ?>
+</tbody>
+</table>
+   
   </secction>
   <?php include 'barralateralfinal.php'; ?>

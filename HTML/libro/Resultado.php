@@ -104,9 +104,9 @@ $_SESSION['Idtemporada'];
   $consulta = mysqli_query($conn, "select * from tbl_balanza
   WHERE Id_cliente=$cliente");
   $nr = mysqli_num_rows($consulta);
-  if ($nr == 0) {
-    echo "<script> alert('No hay datos');window.location= 'BalanzaComp.php' </script>";
-  }
+  //if ($nr == 0) {
+  //  echo "<script> alert('No hay datos');window.location= 'BalanzaComp.php' </script>";
+  //}
 
   ?>
   <a class="btn btn-primary" href="BalanzaComp.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
@@ -131,37 +131,34 @@ $_SESSION['Idtemporada'];
 
   <!-- DESPLIEGUE DE INGRESOS-->
     <table class="table">
-    <thead >
+    <thead  >
       <?php
       if(empty($ingresos)){
         $ingresos = 0;
       }
       ?>
                 <tr>
-                    <th>
-                        Ingresos 
-                    </th>
-                    <th>
-                    </th>
                    
-                    <th style="width: 29%" >
-                        <?php echo  $ingresos ?>
-                    </th>
-
+            
                 </tr>
             </thead>
             <tbody>
       
       
-            <?php
-  include("../conexion.php");
+            
+            
+ 
+<?php
+ include("../conexion.php");
+  $sql = mysqli_query($conn, " select *  from tbl_eresultado te
+  where te.Id_Eresultado=(select MAX(Id_Eresultado) from tbl_eresultado te2 where Id_periodo='$Idperiodo' and Id_Cliente='$cliente')");
+  mysqli_close($conn);
 
-  // INGRESOS
-  $sql = "select *  from tbl_eresultado te
-    where te.Id_Eresultado=(select MAX(Id_Eresultado) from tbl_eresultado te2 where Id_periodo='$Idperiodo' and Id_Cliente='$cliente');
-   
-  $resultado = mysqli_query($conn, $sql);
-  while ( $rows = $resultado->fetch_assoc()) {
+  $result = mysqli_num_rows($sql);
+  if ($result > 0) {
+      while ($rows = mysqli_fetch_array($sql)) {
+  ?>
+  <?php
           $Ingresos = $rows["Ingresos"];
           $CostoVentas = $rows["CostoVentas"];
           $UtilidadBruta = $rows["UtilidadBruta"];
@@ -170,29 +167,65 @@ $_SESSION['Idtemporada'];
           $Gastosfinancieros = $rows["Gastosfinancieros"];
           $OtrosGastos = $rows["OtrosGastos"];
           $GastosOperacionales = $rows["GastosOperacionales"];
+          $Otrosingresos = $rows["Otrosingresos"];
           $Up_capital = $rows["Up_capital"];
-          $GastosOperacionales = $rows["GastosOperacionales"];
-          $Up_isr = $rows["Up_isr"];
           $ISV = $rows["ISV"];
           $UtilidadPerdida = $rows["UtilidadPerdida"];
+          ?>
+          <tr>
+
+          
+              <td >
+           Ingresos <center><?php echo   $Ingresos ?></center>
+
+          CostoVentas <center><?php echo  $CostoVentas ?></center>
+              
+          UtilidadBruta <center><?php echo $UtilidadBruta ?></center>
+
+          Gastosventas <center><?php echo $Gastosventas ?></center>
+             
+
+          Gastosadministracion <center><?php echo $Gastosadministracion ?></center>
+              
+
+          Gastosfinancieros<center><?php echo $Gastosfinancieros?></center>
+          
+
+          OtrosGastos <center><?php echo $OtrosGastos ?></center>
+             
+
+          GastosOperacionales <center><?php echo  $GastosOperacionales ?></center>
+              
 
 
-  }
+          Otrosingresos   <center><?php echo   $Otrosingresos?></center>
+              
+
+               
       
-      ?>
-        <tr>
-          <th> <?php echo  $Cod ?></th>
-          <th> <?php echo $cuen ?></th>
-          <th></th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tbody>
-    </table>
-    
 
-  <!-- DESPLIEGUE DE INGRESOS-->
+          Up_capital <center><?php echo  $Up_capital ?></center>
+             
+      
+   ISV<center><?php echo $ISV ?></center>
+             
+
+              
+       UtilidadPerdida <center><?php echo $UtilidadPerdida?></center>  
+              </td>
+              
+                  <?php
+              }
+                  ?>
+
+
+          </tr>
+  <?php
+      }
+  
+  ?>
+</tbody>
+</table>
    
   <!-- FUNCION-->
   </secction>
