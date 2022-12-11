@@ -4,7 +4,7 @@
 	        Departamento de Informatica administrativa
         Analisis, Programacion y Evaluacion de Sistemas
                     Primer Periodo 2022
-
+..
 
 Equipo:
 Allan Mauricio Hernández ...... (mauricio.galindo@unah.hn)
