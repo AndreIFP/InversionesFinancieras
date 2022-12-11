@@ -411,11 +411,6 @@ $numero = 99999.99;
                                                                 <center>Rol de Usuario</center>
                                                             </th>
 
-
-                                                            <th>
-                                                                <center>Última Fecha de conexión</center>
-                                                            </th>
-
                                                         </tr>
                                                     </thead>
 
@@ -433,16 +428,7 @@ $numero = 99999.99;
 
                                                             </td>
 
-                                                            <td style="width: 55%">
-
-                                                                <div class="input-group">
-
-                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                                    <input type="text" class="form-control" Readonly id="recipient-name" value=" <?php echo $Fecha_Ultimo_Conexion ?> ">
-
-                                                                </div>
-
-                                                            </td>
+                                                            
 
                                                         </tr>
 
