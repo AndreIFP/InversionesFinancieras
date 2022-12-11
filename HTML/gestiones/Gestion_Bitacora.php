@@ -110,8 +110,8 @@ if (!isset($_SESSION['rol'])) {
                         <th><center> Acción </center></th>
                         <th><center> Tabla </center></th>
                         <th><center> Campo </center></th>
-                        <th><center> Valor Original </center></th>
-                        <th><center> Nuevo Valor </center></th>
+                        <th><center> Valor Antes </center></th>
+                        <th><center> Valor Después </center></th>
                         <th><center> Id Usuario </center></th>
                      
 
