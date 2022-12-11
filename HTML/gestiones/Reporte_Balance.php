@@ -7,6 +7,7 @@ $_SESSION['cliente'];
 $_SESSION['fechai'];
 $_SESSION['fechaf'];
 $empresa=$_SESSION['empresa'];
+$_SESSION['Idtemporada'];
 
 
 require('fpdf.php');
@@ -114,6 +115,7 @@ $id_usuario=$_SESSION['id'];
 $cliente=$_SESSION['cliente'];
 $fechai=$_SESSION['fechai'];
 $fechaf=$_SESSION['fechaf'];
+$Idperiodo=$_SESSION['Idtemporada'];
 $fecha = date('Y-m-d h:i:s');
 
 $pdf->SetFillColor(161, 174, 175  );
@@ -123,116 +125,29 @@ $pdf->SetFont('Arial','',14);
     $pdf->Write(5, utf8_decode(''),0,7);
     $pdf->Ln(7);
 
-    $sql = "SELECT ifnull(SUM(Sdebe),0) as Activos  FROM tbl_balanza tb 
-  where Id_cliente=$cliente and COD_CUENTA like '1%';";
-  $resultado = mysqli_query($conn, $sql);
-  while ($rows = $resultado->fetch_assoc()) {
-    $Activos  = $rows["Activos"];
-  }
-
-  $sql1 = "SELECT tcc.CUENTA ,tb.Sdebe  FROM tbl_balanza tb 
-  join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-  where Id_cliente=$cliente and COD_CUENTA like '1%'; ";
+  $sql1 = "select *  from tbl_balanzageneral tb 
+  where tb.IdBalanzaG =(select MAX(IdBalanzaG) from tbl_balanzageneral te2 where te2.Id_periodo='$Idperiodo' and te2.Id_Cliente='$cliente')";
   $resultado1 = mysqli_query($conn, $sql1);
 
+  $pdf->SetFillColor(108, 250, 254 );
   $pdf->SetFont('Arial','B',12);
   $pdf->Ln(5);
-  $pdf->setX(15);
-  $pdf->Cell (95, 5, utf8_decode("ACTIVO"), 1, 0, "C",0);
-  $pdf->setX(25);
-  $pdf->Ln(5);
+  $pdf->setX(60);
+  $pdf->Cell (50, 5, utf8_decode(""), 1, 0, "C",1);
+  $pdf->Cell (50, 5, utf8_decode("Total"), 1, 1, "C",1);
 
   while ($fila = $resultado1->fetch_assoc()) {
-    $pdf->setX(15);
-    $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Sdebe']), 1, 0, "C",0);
-    $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
+    $pdf->setX(60);
+    $pdf->Cell(50, 5, utf8_decode("Activo"), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Activo']), 1, 1, "B",0);
+    $pdf->setX(60);
+    $pdf->Cell(50, 5, utf8_decode("Pasivo"), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Pasivo']), 1, 1, "B",0);
+    $pdf->setX(60);
+    $pdf->Cell(50, 5, utf8_decode("Patrimonio"), 1, 0, "B",0);
+    $pdf->Cell(50, 5, utf8_decode($fila['Patrimonio']), 1, 1, "B",0);
 }
 
-$pdf->SetFont('Arial','',14);
-$pdf->setX(15);
-$pdf->Cell(95, 5, utf8_decode("Total Activo"), 1, 0, "L",1);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Activos), 1, 0, "C",1);
-$pdf->Ln(5);
-
-
-//PASIVOS CORRIENTE
-
-$sql2 = "SELECT ifnull(SUM(SAcreedor),0) AS pasivo  FROM tbl_balanza tb 
-  where Id_cliente=$cliente and COD_CUENTA like '2%';";
-  $resultado2 = mysqli_query($conn, $sql2);
-  while ($rows = $resultado2->fetch_assoc()) {
-    $Pasivo = $rows["pasivo"];
-  }
-
-  $sqlcosto = "SELECT tcc.CUENTA ,tb.SAcreedor   FROM tbl_balanza tb 
-  join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-  where Id_cliente=$cliente and COD_CUENTA like '2%'; ";
-  $costosv = mysqli_query($conn, $sqlcosto);
-
-  $pdf->SetFont('Arial','B',"12");
-  $pdf->Ln(5);
-  $pdf->setX(15);
-  $pdf->Cell(95, 5, utf8_decode("PASIVO "), 1, 1, "C",0);
-  $pdf->setX(25); 
-
-  while ($fila = $costosv->fetch_assoc()) {
-    $pdf->setX(15);
-    $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['SAcreedor']), 1, 0, "C",0);
-    $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-  }
-
-$pdf->SetFont('Arial','',14);
-$pdf->setX(15);
-$pdf->Cell(95, 5, utf8_decode("Total Pasivo "), 1, 0, "L",1);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($Pasivo), 1, 1, "C",1);
-
-
-//Patrimonio
-
-$sql3 = "SELECT ifnull(SUM(SAcreedor),0) as patrimonio  FROM tbl_balanza tb 
-  where Id_cliente=$cliente  and COD_CUENTA like '3%';";
-  $resultado3 = mysqli_query($conn, $sql3);
-  while ($rows = $resultado3->fetch_assoc()) {
-    $patrimonio  = $rows["patrimonio"];
-  }
-
-  $sqloperativos = "SELECT tcc.CUENTA ,tb.SAcreedor as Sdebe FROM tbl_balanza tb 
-  join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-  where Id_cliente=$cliente  and COD_CUENTA like '3%';";
-  $coperativos = mysqli_query($conn, $sqloperativos);
-
-  $pdf->SetFont('Arial','B',"12");
-  $pdf->Ln(5);
-  $pdf->setX(15);
-  $pdf->Cell(95, 5, utf8_decode("PATRIMONIO"), 1, 1, "C",0);
-  $pdf->setX(25); 
-
-  while ($fila = $coperativos->fetch_assoc()) {
-    $pdf->setX(15);
-    $pdf->Cell(95, 5, utf8_decode($fila['CUENTA']), 1, 0, "B",0);
-    $pdf->Cell(30, 5, utf8_decode($fila['Sdebe']), 1, 0, "C",0);
-    $pdf->Cell(30, 5, utf8_decode(""), 1, 1, "C",0);
-  }
-
-$pdf->SetFont('Arial','',14);
-$pdf->setX(15);
-$pdf->Cell(95, 5, utf8_decode("Total Patrimonio"), 1, 0, "L",1);
-$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-$pdf->Cell(30, 5, utf8_decode($patrimonio), 1, 1, "C",1);
-
-
-
-//$Total_Pasivo_Patrimonio = 0;
-//$Total_Pasivo_Patrimonio= $Total_Pasivo + $Total_Patrimonio ;
-//$pdf->SetFont('Arial','',14);
-//$pdf->setX(15);
-//$pdf->Cell(95, 5, utf8_decode("Total Pasivo Y Patrimonio"), 1, 0, "L",1);
-//$pdf->Cell(30, 5, utf8_decode(""), 1, 0, "C",0);
-//$pdf->Cell(30, 5, utf8_decode($Total_Pasivo_Patrimonio), 1, 1, "C",1);
 
 $pdf->Output();
 ?>
