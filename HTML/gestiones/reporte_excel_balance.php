@@ -19,6 +19,7 @@ $_SESSION['fechai'];
 $_SESSION['fechaf'];
 $_SESSION['empresa'];
 $_SESSION['temporada'] = "10";
+$_SESSION['Idtemporada'];
 require ('../conexion.php');
 
 header("Content-Type: text/html;charset=utf-8");
@@ -32,6 +33,7 @@ $temporada = $_SESSION['temporada'];
 $fechai = $_SESSION['fechai'];
 $fechaf = $_SESSION['fechaf'];
 $empresa = $_SESSION['empresa'];
+$Idperiodo=$_SESSION['Idtemporada'];
 
 //Llanmado de total activo
 $sql = "SELECT ifnull(SUM(Sdebe),0) as Activos  FROM tbl_balanza tb 
@@ -98,92 +100,54 @@ $fecha = date("d-m-Y h:i:s a");
 <label><center>Del <?php echo $fechai ?> AL <?php echo $fechaf ?></center></label>
 
 <br>
-<label>ACTIVOS</label>
-<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
+<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1 class="table">
+    <body>
+      
+            
+            
+ 
 <?php
-      $sql1 = "SELECT tcc.CUENTA ,tb.Sdebe  FROM tbl_balanza tb 
-      join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where Id_cliente=$cliente and COD_CUENTA like '1%'; ";
-      $resultado1 = mysqli_query($conn, $sql1);
+ include("../conexion.php");
+  $sql = mysqli_query($conn, " select *  from tbl_balanzageneral tb 
+  where tb.IdBalanzaG =(select MAX(IdBalanzaG) from tbl_balanzageneral te2 where te2.Id_periodo='$Idperiodo' and te2.Id_Cliente='$cliente')");
+  mysqli_close($conn);
 
-      while ($rows = $resultado1->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
+  $result = mysqli_num_rows($sql);
+  if ($result > 0) {
+      while ($rows = mysqli_fetch_array($sql)) {
+  ?>
+  <?php
+          $Activo = $rows["Activo"];
+          $Pasivo = $rows["Pasivo"];
+          $Patrimonio = $rows["Patrimonio"];
+          
+          ?>
+          <tr>
 
-      ?>
-        <tr>
-          <th></th>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo number_format($cuen,2) ?></th>
-        </tr>
-      <?php
+          
+              <td >
+            <center> Activos <?php echo    $Activo?></center>
+
+          <center> Pasivos <?php echo   $Pasivo  ?></center>
+              
+           <center> Patrimonio <?php echo  $Patrimonio ?></center>
+
+        
+              </td>
+              
+                  <?php
+              }
+                  ?>
+
+
+          </tr>
+  <?php
       }
-      ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Total Activos</th>
-      <th><?php echo number_format($Activos,2) ?></th>
-      </tr>
+  
+  ?>
+</tbody>
 </table>
-<br>
-<label>PASIVOS</label>
-<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-<?php
-      $sqlcosto = "SELECT tcc.CUENTA ,tb.SAcreedor   FROM tbl_balanza tb 
-      join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where Id_cliente=$cliente and COD_CUENTA like '2%'; ";
-      $costosv = mysqli_query($conn, $sqlcosto);
 
-      while ($rows = $costosv->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['SAcreedor'];
-
-      ?>
-        <tr>
-          <th></th>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo number_format($cuen,2) ?></th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Total Pasivos</th>
-      <th><?php echo number_format($Pasivo,2) ?></th>
-      </tr>
-</table>
-<br>
-<label>PATRIMONIO</label>
-<table style="text-align: center;" border='1' cellpadding=1 cellspacing=1>
-<?php
-      $sqloperativos = "SELECT tcc.CUENTA ,tb.SAcreedor as Sdebe FROM tbl_balanza tb 
-      join tbl_catalago_cuentas tcc on tb.COD_CUENTA=tcc.CODIGO_CUENTA 
-      where Id_cliente=$cliente  and COD_CUENTA like '3%';";
-      $coperativos = mysqli_query($conn, $sqloperativos);
-
-      while ($rows = $coperativos->fetch_assoc()) {
-        $Cod = $rows["CUENTA"];
-        $cuen = $rows['Sdebe'];
-
-      ?>
-        <tr>
-          <th></th>
-          <th> <?php echo $Cod ?></th>
-          <th> <?php echo number_format($cuen,2) ?></th>
-        </tr>
-      <?php
-      }
-      ?>
-      </tr>
-      <tr style="background: #B0E0E6;">
-      <th></th>
-      <th>Total Patrimonio</th>
-      <th><?php echo number_format($patrimonio,2) ?></th>
-      </tr>
-</table>
 <br>
 <label>Reporte creado por: <?php echo $user=$_SESSION['user'] ?></label>
 <label> <?php echo $fecha ?></strong></label>
