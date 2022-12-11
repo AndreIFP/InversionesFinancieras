@@ -485,40 +485,45 @@ $user = $_SESSION['user'];
                     </li>
                 <?php } ?>
 
-
-                <li class="" class="fa fa-caret-down">
-
-                    <a href="../index.php" style="align-items: center; height: 50px;  ">
-                        <i class='bx bx-money icon'></i>
-                        <span class="text nav-text">Contabilidad</span>
-                    </a>
-                    <ul style="position: relative;  display: none; ">
-
-                        <?php
-                        if (isset($_SESSION['permisos'][M_GESTION_CAT_CUENTA]) and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['r'] == 1) {
-                        ?>
-                            <a href="Gestion_CatalogoCuenta.php" style="align-items: center;">
-                                <span class="text nav-text">Catálogo Cuentas</span>
-                            </a>
-                        <?php } ?>
-
-                        <?php
-                        if (isset($_SESSION['permisos'][M_LIBRO_DIARIO]) and $_SESSION['permisos'][M_LIBRO_DIARIO]['r'] == 1) {
-                        ?>
-                            <a href="../libro/validacionlibro.php" style="align-items: center;">
-                                <span class="text nav-text">Libro Diario</span>
-                            </a>
-                        <?php } ?>
-
-                    </ul>
-                </li>
-
+                <!-- Gestiones De Contabilidad -->
                 <?php
-                if ((isset($_SESSION['permisos'][M_GESTION_BITACORA]) and $_SESSION['permisos'][M_GESTION_BITACORA]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_GESTION_CAT_CUENTA]) and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_GESTION_FACTURAS]) and $_SESSION['permisos'][M_GESTION_FACTURAS]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_INVENTARIOS]) and $_SESSION['permisos'][M_INVENTARIOS]['r'] == 1) ||
-                    (isset($_SESSION['permisos'][M_LIBRO_MAYOR]) and $_SESSION['permisos'][M_LIBRO_MAYOR]['r'] == 1) ||
+                if ((isset($_SESSION['permisos'][M_GESTION_CAT_CUENTA]) and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['r'] == 1) ||
+                    (isset($_SESSION['permisos'][M_LIBRO_MAYOR]) and $_SESSION['permisos'][M_LIBRO_MAYOR]['r'] == 1)
+                ) {
+                ?>
+
+                    <li class="" class="fa fa-caret-down">
+
+                        <a href="../index.php" style="align-items: center; height: 50px;  ">
+                            <i class='bx bx-money icon'></i>
+                            <span class="text nav-text">Contabilidad</span>
+                        </a>
+                        <ul style="position: relative;  display: none; ">
+
+                            <?php
+                            if (isset($_SESSION['permisos'][M_GESTION_CAT_CUENTA]) and $_SESSION['permisos'][M_GESTION_CAT_CUENTA]['r'] == 1) {
+                            ?>
+                                <a href="Gestion_CatalogoCuenta.php" style="align-items: center;">
+                                    <span class="text nav-text">Catálogo Cuentas</span>
+                                </a>
+                            <?php } ?>
+
+                            <?php
+                            if (isset($_SESSION['permisos'][M_LIBRO_DIARIO]) and $_SESSION['permisos'][M_LIBRO_DIARIO]['r'] == 1) {
+                            ?>
+                                <a href="../libro/validacionlibro.php" style="align-items: center;">
+                                    <span class="text nav-text">Libro Diario</span>
+                                </a>
+                            <?php } ?>
+
+                        </ul>
+                    </li>
+                <?php } ?>
+
+                <!-- Gestiones De Seguridad -->
+                <?php
+                if ((isset($_SESSION['permisos'][M_GESTION_FACTURAS]) and $_SESSION['permisos'][M_GESTION_FACTURAS]['r'] == 1) ||
+                    (isset($_SESSION['permisos'][M_GESTION_BITACORA]) and $_SESSION['permisos'][M_GESTION_BITACORA]['r'] == 1) ||
                     (isset($_SESSION['permisos'][M_GESTION_PARAMETROS]) and $_SESSION['permisos'][M_GESTION_PARAMETROS]['r'] == 1) ||
                     (isset($_SESSION['permisos'][M_GESTION_PREGUNTAS]) and $_SESSION['permisos'][M_GESTION_PREGUNTAS]['r'] == 1) ||
                     (isset($_SESSION['permisos'][M_GESTION_PREG_USUARIOS]) and $_SESSION['permisos'][M_GESTION_PREG_USUARIOS]['r'] == 1) ||
@@ -527,7 +532,7 @@ $user = $_SESSION['user'];
                     (isset($_SESSION['permisos'][M_GESTION_OBJETOS]) and $_SESSION['permisos'][M_GESTION_OBJETOS]['r']) == 1
                 ) {
                 ?>
-                
+
                     <li class="" class="fa fa-caret-down">
 
                         <a href="../index.php" style="align-items: center; height: 50px;  ">
