@@ -77,7 +77,7 @@ if (!isset($_SESSION['rol'])) {
             <div class="box-body table-responsive">
                 <div class="reportes">
                     <a class="btn btn-primary" href="Gestion_CatalogoCuenta.php"><i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
-                    <a class="btn btn-warning" href="Reporte_Catalogo_Inactivo.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                    <a class="btn btn-warning" href="Reporte_Catalogo_Inactivo.php" onclick="window.open(this.href,this.target, 'width=1000,height=600');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte pdf</a>
                 </div>
                 <?php
                 $mostrar_datos = 0;
