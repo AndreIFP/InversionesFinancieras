@@ -114,7 +114,7 @@ $_SESSION['Idtemporada'];
   <br>
 
   <div align="right">
-    <a class="btn btn-info" href="../libro/Balanzageneral.php"><i class="fa fa-book"> Estado de resultado</i> </a>
+    <a class="btn btn-info" href="../libro/Balanzageneral.php"><i class="fa fa-book"> Balance General</i> </a>
 
     <a class="btn btn-warning" href="../gestiones/Reporte_Estado_Resultado.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
     <a class="btn btn-success" href="../gestiones/reporte_excel_resultado.php"><i class="fa fa-file-excel-o"></i> Excel</a>
