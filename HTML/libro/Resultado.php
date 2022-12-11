@@ -167,8 +167,9 @@ $_SESSION['Idtemporada'];
           $Gastosfinancieros = $rows["Gastosfinancieros"];
           $OtrosGastos = $rows["OtrosGastos"];
           $GastosOperacionales = $rows["GastosOperacionales"];
-          $Otrosingresos = $rows["Otrosingresos"];
           $Up_capital = $rows["Up_capital"];
+          $Otrosingresos = $rows["Otrosingresos"];
+          $Up_isr = $rows["Up_isr"];
           $ISV = $rows["ISV"];
           $UtilidadPerdida = $rows["UtilidadPerdida"];
           ?>
@@ -196,16 +197,13 @@ $_SESSION['Idtemporada'];
 
           GastosOperacionales <center><?php echo  $GastosOperacionales ?></center>
               
-
+          Up_capital <center><?php echo  $Up_capital ?></center>
 
           Otrosingresos   <center><?php echo   $Otrosingresos?></center>
               
 
-               
+          Up_isr <center><?php echo  $Up_isr ?></center>             
       
-
-          Up_capital <center><?php echo  $Up_capital ?></center>
-             
       
    ISV<center><?php echo $ISV ?></center>
              
