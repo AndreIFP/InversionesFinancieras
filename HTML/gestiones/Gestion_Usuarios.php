@@ -99,7 +99,7 @@ $numero = 99999.99;
                 ?>
                     <a href="Nuevo_Usuario.php" input type="submit" class="btn btn-success" Value="Nuevo"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo usuario</a>
                 <?php } ?>
-                <a class="btn btn-warning" href="Reporte_Usuario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte</a>
+                <a class="btn btn-warning" href="Reporte_Usuario.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte pdf</a>
                  <a class="btn btn-success" href="reporte_excel_usuarios.php"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Reporte excel</a>
                  <a align="rigth" href="Gestion_Usuarios_Inactivos.php"><button type="submit" class="btn btn-info"><i class="fa fa-times" aria-hidden="true"></i> Usuarios Inactivos</button></a>
             </div>
