@@ -60,7 +60,7 @@ $_SESSION['Idtemporada'];
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     .accordion {
-      background-color:#ECFAF4  ;
+      background-color: #ECFAF4;
       color: #444;
       cursor: pointer;
       padding: 18px;
@@ -99,7 +99,7 @@ $_SESSION['Idtemporada'];
   $fechaf = $_SESSION['fechaf'];
   $empresa = $_SESSION['empresa'];
   $fecha = date('Y-m-d h:i:s');
-  $Idperiodo=$_SESSION['Idtemporada'];
+  $Idperiodo = $_SESSION['Idtemporada'];
 
   $consulta = mysqli_query($conn, "select * from tbl_balanza
   WHERE Id_cliente=$cliente");
@@ -112,14 +112,14 @@ $_SESSION['Idtemporada'];
   <a class="btn btn-primary" href="BalanzaComp.php "> <i class="fa fa-arrow-circle-left"></i> Volver Atrás</a>
   <br>
   <br>
-  
-    <div align="right">
+
+  <div align="right">
     <a class="btn btn-info" href="../libro/Balanzageneral.php"><i class="fa fa-book"> Estado de resultado</i> </a>
-      
-      <a class="btn btn-warning" href="../gestiones/Reporte_Estado_Resultado.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
-      <a class="btn btn-success" href="../gestiones/reporte_excel_resultado.php"><i class="fa fa-file-excel-o"></i> Excel</a>
-    </div>
-    
+
+    <a class="btn btn-warning" href="../gestiones/Reporte_Estado_Resultado.php" onclick="window.open(this.href,this.target, 'width=1000,height=700');return false;"><i class="fa fa-file-pdf-o"></i> Imprimir</a>
+    <a class="btn btn-success" href="../gestiones/reporte_excel_resultado.php"><i class="fa fa-file-excel-o"></i> Excel</a>
+  </div>
+
   <hr>
   <center>
     <h4><strong><?php echo $empresa  ?></strong></h4>
@@ -127,38 +127,38 @@ $_SESSION['Idtemporada'];
     <h4><strong> del <?php echo $fechai  ?> al <?php echo $fechaf  ?></strong></h4>
   </center>
   <hr>
-  
+
 
   <!-- DESPLIEGUE DE INGRESOS-->
-    <table class="table">
-    <thead  >
+  <table class="table">
+    <thead>
       <?php
-      if(empty($ingresos)){
+      if (empty($ingresos)) {
         $ingresos = 0;
       }
       ?>
-                <tr>
-                   
-            
-                </tr>
-            </thead>
-            <tbody>
-      
-      
-            
-            
- 
-<?php
- include("../conexion.php");
-  $sql = mysqli_query($conn, " select *  from tbl_eresultado te
-  where te.Id_Eresultado=(select MAX(Id_Eresultado) from tbl_eresultado te2 where Id_periodo='$Idperiodo' and Id_Cliente='$cliente')");
-  mysqli_close($conn);
+      <tr>
 
-  $result = mysqli_num_rows($sql);
-  if ($result > 0) {
-      while ($rows = mysqli_fetch_array($sql)) {
-  ?>
-  <?php
+
+      </tr>
+    </thead>
+    <tbody>
+
+
+
+
+
+      <?php
+      include("../conexion.php");
+      $sql = mysqli_query($conn, " select *  from tbl_eresultado te
+  where te.Id_Eresultado=(select MAX(Id_Eresultado) from tbl_eresultado te2 where Id_periodo='$Idperiodo' and Id_Cliente='$cliente')");
+      mysqli_close($conn);
+
+      $result = mysqli_num_rows($sql);
+      if ($result > 0) {
+        while ($rows = mysqli_fetch_array($sql)) {
+      ?>
+          <?php
           $Ingresos = $rows["Ingresos"];
           $CostoVentas = $rows["CostoVentas"];
           $UtilidadBruta = $rows["UtilidadBruta"];
@@ -175,56 +175,56 @@ $_SESSION['Idtemporada'];
           ?>
           <tr>
 
-          
-              <td >
-           Ingresos <center><?php echo   $Ingresos ?></center>
 
-          CostoVentas <center><?php echo  $CostoVentas ?></center>
-              
-          UtilidadBruta <center><?php echo $UtilidadBruta ?></center>
+            <td>
+              Ingresos <center><?php echo   $Ingresos ?></center>
 
-          Gastosventas <center><?php echo $Gastosventas ?></center>
-             
+              Costo Ventas <center><?php echo  $CostoVentas ?></center>
 
-          Gastosadministracion <center><?php echo $Gastosadministracion ?></center>
-              
+              Utilidad o pérdida bruta <center><?php echo $UtilidadBruta ?></center>
 
-          Gastosfinancieros<center><?php echo $Gastosfinancieros?></center>
-          
+              Gastos de ventas <center><?php echo $Gastosventas ?></center>
 
-          OtrosGastos <center><?php echo $OtrosGastos ?></center>
-             
 
-          GastosOperacionales <center><?php echo  $GastosOperacionales ?></center>
-              
-          Up_capital <center><?php echo  $Up_capital ?></center>
+              Gastos de administracion <center><?php echo $Gastosadministracion ?></center>
 
-          Otrosingresos   <center><?php echo   $Otrosingresos?></center>
-              
 
-          Up_isr <center><?php echo  $Up_isr ?></center>             
-      
-      
-   ISV<center><?php echo $ISV ?></center>
-             
+              Gastos financieros<center><?php echo $Gastosfinancieros ?></center>
 
-              
-       UtilidadPerdida <center><?php echo $UtilidadPerdida?></center>  
-              </td>
-              
-                  <?php
-              }
-                  ?>
+
+              Otros gastos <center><?php echo $OtrosGastos ?></center>
+
+
+              Gastos operacionales <center><?php echo  $GastosOperacionales ?></center>
+
+              Utilidad o pérdida de operación <center><?php echo  $Up_capital ?></center>
+
+              Otros ingresos <center><?php echo   $Otrosingresos ?></center>
+
+
+              Utilidad o pérdida antes de impuesto <center><?php echo  $Up_isr ?></center>
+
+
+              Impuesto sobre la renta<center><?php echo $ISV ?></center>
+
+
+
+              Utilidad o pérdida neta <center><?php echo $UtilidadPerdida ?></center>
+            </td>
+
+          <?php
+        }
+          ?>
 
 
           </tr>
-  <?php
+        <?php
       }
-  
-  ?>
-</tbody>
-</table>
-   
+
+        ?>
+    </tbody>
+  </table>
+
   <!-- FUNCION-->
   </secction>
   <?php include 'barralateralfinal.php'; ?>

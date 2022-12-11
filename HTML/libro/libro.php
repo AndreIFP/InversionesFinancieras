@@ -402,7 +402,7 @@ $fecha = date('Y-m-d h:i:s');
               <center><?php echo $row['Descripcion']; ?></center>
             </td>
             <td>
-              <center><?php echo $row['montoTotal']; ?></center>
+              <center><?php echo number_format($row['montoTotal'],2); ?></center>
             </td>
             <td class="btn-print">
               <center>
