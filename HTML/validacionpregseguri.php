@@ -56,6 +56,32 @@ if(isset($_REQUEST["btnregistrarx"])){
 
   try {
 
+    $clave  = 'Una cadena, muy, muy larga para mejorar la encriptacion';
+//Metodo de encriptaciÃ³n
+$method = 'aes-256-cbc';
+// Puedes generar una diferente usando la funcion $getIV()
+$iv = base64_decode("C9fBxl1EWtYTL1/M8jfstw");
+ /*
+ Encripta el contenido de la variable, enviada como parametro.
+  */
+ $encriptar = function ($valor) use ($method, $clave, $iv) {
+	 return openssl_encrypt ($valor, $method, $clave, false, $iv);
+ };
+ /*
+ Desencripta el texto recibido
+ */
+
+ /*
+ Genera un valor para IV
+ */
+ $getIV = function () use ($method) {
+	 return base64_encode(openssl_random_pseudo_bytes(openssl_cipher_iv_length($method)));
+ };
+
+ $dato =  $passw;
+ //Encripta informaciÃ³n:
+	$dato_encriptado = $encriptar($dato);
+
     $conecsul	= mysqli_query($conn,"SELECT Id_Usuario FROM tbl_usuario WHERE Usuario = '$user'");
 	while($row=mysqli_fetch_array($conecsul)){
 	$idusus=$row['Id_Usuario'];
@@ -137,14 +163,14 @@ if($nr == 1)
     
    
 
-    if($contras!=$passw){
+    if($contras!=$dato_encriptado){
     
         
         $consulta=mysqli_query($conn,"SELECT * FROM tbl_usuario WHERE Usuario");
         while($row=mysqli_fetch_array($consulta)){
           $tusuario=$row['Usuario'];
         }
-        $queryregistro = "UPDATE tbl_usuario SET Contraseña = '$passw' where Usuario='$tusuario'";
+        $queryregistro = "UPDATE tbl_usuario SET Contraseña = '$dato_encriptado' where Usuario='$tusuario'";
 
         if(mysqli_query($conn,$queryregistro))
        {

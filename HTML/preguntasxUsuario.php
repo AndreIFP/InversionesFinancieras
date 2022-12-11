@@ -152,6 +152,7 @@ Andrés		      01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
 
 <br>
 
+
 <body>
     <!-- partial:index.partial.html -->
     <!-- apply angular app and controller to body -->
@@ -185,7 +186,16 @@ Andrés		      01-oct-2022 al 01-dic-2022   	Etiqueta y validacion
                         while ($row = mysqli_fetch_array($query)) {
                             $idusrol = $row['Id_Usuario'];
                         }
-
+                        
+                        //validacion
+                        
+                        $pr = mysqli_query($conn, "SELECT * FROM tbl_preguntas_x_usuario WHERE Id_Usuario = $idusrol");
+                        $mr = mysqli_num_rows($pr);
+                        
+                        if ($mr == 0) {
+                            echo "<script> alert('Aún no tienes configurada tu pregunta de seguridad: $nombre');window.location= 'login.php' </script>";
+                        }
+                       //fin
 
                         if ($nr == 1) {
                             echo "<script> alert('Usuario Valido: $nombre') </script>";

@@ -65,12 +65,37 @@ $id_user = $tokenResult['Id_Usuario'];
 if($tok == $valor){
     if ($date < $fechaFinal ) {      
     if($contra1 == $contra2){
+        $clave  = 'Una cadena, muy, muy larga para mejorar la encriptacion';
+//Metodo de encriptaciÃ³n
+$method = 'aes-256-cbc';
+// Puedes generar una diferente usando la funcion $getIV()
+$iv = base64_decode("C9fBxl1EWtYTL1/M8jfstw");
+ /*
+ Encripta el contenido de la variable, enviada como parametro.
+  */
+ $encriptar = function ($valor) use ($method, $clave, $iv) {
+	 return openssl_encrypt ($valor, $method, $clave, false, $iv);
+ };
+ /*
+ Desencripta el texto recibido
+ */
+
+ /*
+ Genera un valor para IV
+ */
+ $getIV = function () use ($method) {
+	 return base64_encode(openssl_random_pseudo_bytes(openssl_cipher_iv_length($method)));
+ };
+
+ $dato = $contra2;
+ //Encripta informaciÃ³n:
+	$dato_encriptado = $encriptar($dato);
         /*$sql1 = "SELECT Id_Usuario FROM tbl_usuario WHERE Id_usuario = '$id_user'";
         $ext = $conn->query($sql);
         $fila = $ext->fetch_array(MYSQLI_NUM);
         $id_user = $fila[0];*/
         
-        $sql2 = "UPDATE tbl_usuario SET Contraseña='$contra2' WHERE Id_Usuario='$id_user'";
+        $sql2 = "UPDATE tbl_usuario SET Contraseña='$dato_encriptado' WHERE Id_Usuario='$id_user'";
         $con = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
         $exito = mysqli_query($con,$sql2);
 
